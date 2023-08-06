@@ -68,8 +68,7 @@ service Query {
   // SpotPrice defines a gRPC query handler that returns the spot price given
   // a base denomination and a quote denomination.
   rpc SpotPrice(SpotPriceRequest) returns (SpotPriceResponse) {
-    option (google.api.http).get =
-        "/merlin/poolmanager/pools/{pool_id}/prices";
+    option (google.api.http).get = "/merlin/poolmanager/pools/{pool_id}/prices";
   }
 
   // TotalPoolLiquidity returns the total liquidity of the specified pool.

@@ -298,12 +298,12 @@ func (m *QueryDenomsFromCreatorResponse) GetDenoms() []string {
 }
 
 func init() {
-	proto.RegisterType((*QueryParamsRequest)(nil), "merlin.tokenfactory.v1beta1.QueryParamsRequest")
-	proto.RegisterType((*QueryParamsResponse)(nil), "merlin.tokenfactory.v1beta1.QueryParamsResponse")
-	proto.RegisterType((*QueryDenomAuthorityMetadataRequest)(nil), "merlin.tokenfactory.v1beta1.QueryDenomAuthorityMetadataRequest")
-	proto.RegisterType((*QueryDenomAuthorityMetadataResponse)(nil), "merlin.tokenfactory.v1beta1.QueryDenomAuthorityMetadataResponse")
-	proto.RegisterType((*QueryDenomsFromCreatorRequest)(nil), "merlin.tokenfactory.v1beta1.QueryDenomsFromCreatorRequest")
-	proto.RegisterType((*QueryDenomsFromCreatorResponse)(nil), "merlin.tokenfactory.v1beta1.QueryDenomsFromCreatorResponse")
+	proto.RegisterType((*QueryParamsRequest)(nil), "osmosis.tokenfactory.v1beta1.QueryParamsRequest")
+	proto.RegisterType((*QueryParamsResponse)(nil), "osmosis.tokenfactory.v1beta1.QueryParamsResponse")
+	proto.RegisterType((*QueryDenomAuthorityMetadataRequest)(nil), "osmosis.tokenfactory.v1beta1.QueryDenomAuthorityMetadataRequest")
+	proto.RegisterType((*QueryDenomAuthorityMetadataResponse)(nil), "osmosis.tokenfactory.v1beta1.QueryDenomAuthorityMetadataResponse")
+	proto.RegisterType((*QueryDenomsFromCreatorRequest)(nil), "osmosis.tokenfactory.v1beta1.QueryDenomsFromCreatorRequest")
+	proto.RegisterType((*QueryDenomsFromCreatorResponse)(nil), "osmosis.tokenfactory.v1beta1.QueryDenomsFromCreatorResponse")
 }
 
 func init() {
@@ -383,7 +383,7 @@ func NewQueryClient(cc grpc1.ClientConn) QueryClient {
 
 func (c *queryClient) Params(ctx context.Context, in *QueryParamsRequest, opts ...grpc.CallOption) (*QueryParamsResponse, error) {
 	out := new(QueryParamsResponse)
-	err := c.cc.Invoke(ctx, "/merlin.tokenfactory.v1beta1.Query/Params", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/osmosis.tokenfactory.v1beta1.Query/Params", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -392,7 +392,7 @@ func (c *queryClient) Params(ctx context.Context, in *QueryParamsRequest, opts .
 
 func (c *queryClient) DenomAuthorityMetadata(ctx context.Context, in *QueryDenomAuthorityMetadataRequest, opts ...grpc.CallOption) (*QueryDenomAuthorityMetadataResponse, error) {
 	out := new(QueryDenomAuthorityMetadataResponse)
-	err := c.cc.Invoke(ctx, "/merlin.tokenfactory.v1beta1.Query/DenomAuthorityMetadata", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/osmosis.tokenfactory.v1beta1.Query/DenomAuthorityMetadata", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -401,7 +401,7 @@ func (c *queryClient) DenomAuthorityMetadata(ctx context.Context, in *QueryDenom
 
 func (c *queryClient) DenomsFromCreator(ctx context.Context, in *QueryDenomsFromCreatorRequest, opts ...grpc.CallOption) (*QueryDenomsFromCreatorResponse, error) {
 	out := new(QueryDenomsFromCreatorResponse)
-	err := c.cc.Invoke(ctx, "/merlin.tokenfactory.v1beta1.Query/DenomsFromCreator", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/osmosis.tokenfactory.v1beta1.Query/DenomsFromCreator", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -449,7 +449,7 @@ func _Query_Params_Handler(srv interface{}, ctx context.Context, dec func(interf
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/merlin.tokenfactory.v1beta1.Query/Params",
+		FullMethod: "/osmosis.tokenfactory.v1beta1.Query/Params",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(QueryServer).Params(ctx, req.(*QueryParamsRequest))
@@ -467,7 +467,7 @@ func _Query_DenomAuthorityMetadata_Handler(srv interface{}, ctx context.Context,
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/merlin.tokenfactory.v1beta1.Query/DenomAuthorityMetadata",
+		FullMethod: "/osmosis.tokenfactory.v1beta1.Query/DenomAuthorityMetadata",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(QueryServer).DenomAuthorityMetadata(ctx, req.(*QueryDenomAuthorityMetadataRequest))
@@ -485,7 +485,7 @@ func _Query_DenomsFromCreator_Handler(srv interface{}, ctx context.Context, dec 
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/merlin.tokenfactory.v1beta1.Query/DenomsFromCreator",
+		FullMethod: "/osmosis.tokenfactory.v1beta1.Query/DenomsFromCreator",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(QueryServer).DenomsFromCreator(ctx, req.(*QueryDenomsFromCreatorRequest))
@@ -494,7 +494,7 @@ func _Query_DenomsFromCreator_Handler(srv interface{}, ctx context.Context, dec 
 }
 
 var _Query_serviceDesc = grpc.ServiceDesc{
-	ServiceName: "merlin.tokenfactory.v1beta1.Query",
+	ServiceName: "osmosis.tokenfactory.v1beta1.Query",
 	HandlerType: (*QueryServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{

@@ -200,8 +200,8 @@ func (m *GenesisState) GetEpochs() []EpochInfo {
 }
 
 func init() {
-	proto.RegisterType((*EpochInfo)(nil), "merlin.epochs.v1beta1.EpochInfo")
-	proto.RegisterType((*GenesisState)(nil), "merlin.epochs.v1beta1.GenesisState")
+	proto.RegisterType((*EpochInfo)(nil), "osmosis.epochs.v1beta1.EpochInfo")
+	proto.RegisterType((*GenesisState)(nil), "osmosis.epochs.v1beta1.GenesisState")
 }
 
 func init() { proto.RegisterFile("merlin/epochs/genesis.proto", fileDescriptor_7ecf3e4d59074cbd) }

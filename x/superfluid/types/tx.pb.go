@@ -1022,24 +1022,24 @@ func (m *MsgAddToConcentratedLiquiditySuperfluidPositionResponse) GetLockId() ui
 }
 
 func init() {
-	proto.RegisterType((*MsgSuperfluidDelegate)(nil), "merlin.superfluid.MsgSuperfluidDelegate")
-	proto.RegisterType((*MsgSuperfluidDelegateResponse)(nil), "merlin.superfluid.MsgSuperfluidDelegateResponse")
-	proto.RegisterType((*MsgSuperfluidUndelegate)(nil), "merlin.superfluid.MsgSuperfluidUndelegate")
-	proto.RegisterType((*MsgSuperfluidUndelegateResponse)(nil), "merlin.superfluid.MsgSuperfluidUndelegateResponse")
-	proto.RegisterType((*MsgSuperfluidUnbondLock)(nil), "merlin.superfluid.MsgSuperfluidUnbondLock")
-	proto.RegisterType((*MsgSuperfluidUnbondLockResponse)(nil), "merlin.superfluid.MsgSuperfluidUnbondLockResponse")
-	proto.RegisterType((*MsgSuperfluidUndelegateAndUnbondLock)(nil), "merlin.superfluid.MsgSuperfluidUndelegateAndUnbondLock")
-	proto.RegisterType((*MsgSuperfluidUndelegateAndUnbondLockResponse)(nil), "merlin.superfluid.MsgSuperfluidUndelegateAndUnbondLockResponse")
-	proto.RegisterType((*MsgLockAndSuperfluidDelegate)(nil), "merlin.superfluid.MsgLockAndSuperfluidDelegate")
-	proto.RegisterType((*MsgLockAndSuperfluidDelegateResponse)(nil), "merlin.superfluid.MsgLockAndSuperfluidDelegateResponse")
-	proto.RegisterType((*MsgCreateFullRangePositionAndSuperfluidDelegate)(nil), "merlin.superfluid.MsgCreateFullRangePositionAndSuperfluidDelegate")
-	proto.RegisterType((*MsgCreateFullRangePositionAndSuperfluidDelegateResponse)(nil), "merlin.superfluid.MsgCreateFullRangePositionAndSuperfluidDelegateResponse")
-	proto.RegisterType((*MsgUnPoolWhitelistedPool)(nil), "merlin.superfluid.MsgUnPoolWhitelistedPool")
-	proto.RegisterType((*MsgUnPoolWhitelistedPoolResponse)(nil), "merlin.superfluid.MsgUnPoolWhitelistedPoolResponse")
-	proto.RegisterType((*MsgUnlockAndMigrateSharesToFullRangeConcentratedPosition)(nil), "merlin.superfluid.MsgUnlockAndMigrateSharesToFullRangeConcentratedPosition")
-	proto.RegisterType((*MsgUnlockAndMigrateSharesToFullRangeConcentratedPositionResponse)(nil), "merlin.superfluid.MsgUnlockAndMigrateSharesToFullRangeConcentratedPositionResponse")
-	proto.RegisterType((*MsgAddToConcentratedLiquiditySuperfluidPosition)(nil), "merlin.superfluid.MsgAddToConcentratedLiquiditySuperfluidPosition")
-	proto.RegisterType((*MsgAddToConcentratedLiquiditySuperfluidPositionResponse)(nil), "merlin.superfluid.MsgAddToConcentratedLiquiditySuperfluidPositionResponse")
+	proto.RegisterType((*MsgSuperfluidDelegate)(nil), "osmosis.superfluid.MsgSuperfluidDelegate")
+	proto.RegisterType((*MsgSuperfluidDelegateResponse)(nil), "osmosis.superfluid.MsgSuperfluidDelegateResponse")
+	proto.RegisterType((*MsgSuperfluidUndelegate)(nil), "osmosis.superfluid.MsgSuperfluidUndelegate")
+	proto.RegisterType((*MsgSuperfluidUndelegateResponse)(nil), "osmosis.superfluid.MsgSuperfluidUndelegateResponse")
+	proto.RegisterType((*MsgSuperfluidUnbondLock)(nil), "osmosis.superfluid.MsgSuperfluidUnbondLock")
+	proto.RegisterType((*MsgSuperfluidUnbondLockResponse)(nil), "osmosis.superfluid.MsgSuperfluidUnbondLockResponse")
+	proto.RegisterType((*MsgSuperfluidUndelegateAndUnbondLock)(nil), "osmosis.superfluid.MsgSuperfluidUndelegateAndUnbondLock")
+	proto.RegisterType((*MsgSuperfluidUndelegateAndUnbondLockResponse)(nil), "osmosis.superfluid.MsgSuperfluidUndelegateAndUnbondLockResponse")
+	proto.RegisterType((*MsgLockAndSuperfluidDelegate)(nil), "osmosis.superfluid.MsgLockAndSuperfluidDelegate")
+	proto.RegisterType((*MsgLockAndSuperfluidDelegateResponse)(nil), "osmosis.superfluid.MsgLockAndSuperfluidDelegateResponse")
+	proto.RegisterType((*MsgCreateFullRangePositionAndSuperfluidDelegate)(nil), "osmosis.superfluid.MsgCreateFullRangePositionAndSuperfluidDelegate")
+	proto.RegisterType((*MsgCreateFullRangePositionAndSuperfluidDelegateResponse)(nil), "osmosis.superfluid.MsgCreateFullRangePositionAndSuperfluidDelegateResponse")
+	proto.RegisterType((*MsgUnPoolWhitelistedPool)(nil), "osmosis.superfluid.MsgUnPoolWhitelistedPool")
+	proto.RegisterType((*MsgUnPoolWhitelistedPoolResponse)(nil), "osmosis.superfluid.MsgUnPoolWhitelistedPoolResponse")
+	proto.RegisterType((*MsgUnlockAndMigrateSharesToFullRangeConcentratedPosition)(nil), "osmosis.superfluid.MsgUnlockAndMigrateSharesToFullRangeConcentratedPosition")
+	proto.RegisterType((*MsgUnlockAndMigrateSharesToFullRangeConcentratedPositionResponse)(nil), "osmosis.superfluid.MsgUnlockAndMigrateSharesToFullRangeConcentratedPositionResponse")
+	proto.RegisterType((*MsgAddToConcentratedLiquiditySuperfluidPosition)(nil), "osmosis.superfluid.MsgAddToConcentratedLiquiditySuperfluidPosition")
+	proto.RegisterType((*MsgAddToConcentratedLiquiditySuperfluidPositionResponse)(nil), "osmosis.superfluid.MsgAddToConcentratedLiquiditySuperfluidPositionResponse")
 }
 
 func init() { proto.RegisterFile("merlin/superfluid/tx.proto", fileDescriptor_55b645f187d22814) }
@@ -1168,7 +1168,7 @@ func NewMsgClient(cc grpc1.ClientConn) MsgClient {
 
 func (c *msgClient) SuperfluidDelegate(ctx context.Context, in *MsgSuperfluidDelegate, opts ...grpc.CallOption) (*MsgSuperfluidDelegateResponse, error) {
 	out := new(MsgSuperfluidDelegateResponse)
-	err := c.cc.Invoke(ctx, "/merlin.superfluid.Msg/SuperfluidDelegate", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/osmosis.superfluid.Msg/SuperfluidDelegate", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1177,7 +1177,7 @@ func (c *msgClient) SuperfluidDelegate(ctx context.Context, in *MsgSuperfluidDel
 
 func (c *msgClient) SuperfluidUndelegate(ctx context.Context, in *MsgSuperfluidUndelegate, opts ...grpc.CallOption) (*MsgSuperfluidUndelegateResponse, error) {
 	out := new(MsgSuperfluidUndelegateResponse)
-	err := c.cc.Invoke(ctx, "/merlin.superfluid.Msg/SuperfluidUndelegate", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/osmosis.superfluid.Msg/SuperfluidUndelegate", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1186,7 +1186,7 @@ func (c *msgClient) SuperfluidUndelegate(ctx context.Context, in *MsgSuperfluidU
 
 func (c *msgClient) SuperfluidUnbondLock(ctx context.Context, in *MsgSuperfluidUnbondLock, opts ...grpc.CallOption) (*MsgSuperfluidUnbondLockResponse, error) {
 	out := new(MsgSuperfluidUnbondLockResponse)
-	err := c.cc.Invoke(ctx, "/merlin.superfluid.Msg/SuperfluidUnbondLock", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/osmosis.superfluid.Msg/SuperfluidUnbondLock", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1195,7 +1195,7 @@ func (c *msgClient) SuperfluidUnbondLock(ctx context.Context, in *MsgSuperfluidU
 
 func (c *msgClient) SuperfluidUndelegateAndUnbondLock(ctx context.Context, in *MsgSuperfluidUndelegateAndUnbondLock, opts ...grpc.CallOption) (*MsgSuperfluidUndelegateAndUnbondLockResponse, error) {
 	out := new(MsgSuperfluidUndelegateAndUnbondLockResponse)
-	err := c.cc.Invoke(ctx, "/merlin.superfluid.Msg/SuperfluidUndelegateAndUnbondLock", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/osmosis.superfluid.Msg/SuperfluidUndelegateAndUnbondLock", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1204,7 +1204,7 @@ func (c *msgClient) SuperfluidUndelegateAndUnbondLock(ctx context.Context, in *M
 
 func (c *msgClient) LockAndSuperfluidDelegate(ctx context.Context, in *MsgLockAndSuperfluidDelegate, opts ...grpc.CallOption) (*MsgLockAndSuperfluidDelegateResponse, error) {
 	out := new(MsgLockAndSuperfluidDelegateResponse)
-	err := c.cc.Invoke(ctx, "/merlin.superfluid.Msg/LockAndSuperfluidDelegate", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/osmosis.superfluid.Msg/LockAndSuperfluidDelegate", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1213,7 +1213,7 @@ func (c *msgClient) LockAndSuperfluidDelegate(ctx context.Context, in *MsgLockAn
 
 func (c *msgClient) CreateFullRangePositionAndSuperfluidDelegate(ctx context.Context, in *MsgCreateFullRangePositionAndSuperfluidDelegate, opts ...grpc.CallOption) (*MsgCreateFullRangePositionAndSuperfluidDelegateResponse, error) {
 	out := new(MsgCreateFullRangePositionAndSuperfluidDelegateResponse)
-	err := c.cc.Invoke(ctx, "/merlin.superfluid.Msg/CreateFullRangePositionAndSuperfluidDelegate", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/osmosis.superfluid.Msg/CreateFullRangePositionAndSuperfluidDelegate", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1222,7 +1222,7 @@ func (c *msgClient) CreateFullRangePositionAndSuperfluidDelegate(ctx context.Con
 
 func (c *msgClient) UnPoolWhitelistedPool(ctx context.Context, in *MsgUnPoolWhitelistedPool, opts ...grpc.CallOption) (*MsgUnPoolWhitelistedPoolResponse, error) {
 	out := new(MsgUnPoolWhitelistedPoolResponse)
-	err := c.cc.Invoke(ctx, "/merlin.superfluid.Msg/UnPoolWhitelistedPool", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/osmosis.superfluid.Msg/UnPoolWhitelistedPool", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1231,7 +1231,7 @@ func (c *msgClient) UnPoolWhitelistedPool(ctx context.Context, in *MsgUnPoolWhit
 
 func (c *msgClient) UnlockAndMigrateSharesToFullRangeConcentratedPosition(ctx context.Context, in *MsgUnlockAndMigrateSharesToFullRangeConcentratedPosition, opts ...grpc.CallOption) (*MsgUnlockAndMigrateSharesToFullRangeConcentratedPositionResponse, error) {
 	out := new(MsgUnlockAndMigrateSharesToFullRangeConcentratedPositionResponse)
-	err := c.cc.Invoke(ctx, "/merlin.superfluid.Msg/UnlockAndMigrateSharesToFullRangeConcentratedPosition", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/osmosis.superfluid.Msg/UnlockAndMigrateSharesToFullRangeConcentratedPosition", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1240,7 +1240,7 @@ func (c *msgClient) UnlockAndMigrateSharesToFullRangeConcentratedPosition(ctx co
 
 func (c *msgClient) AddToConcentratedLiquiditySuperfluidPosition(ctx context.Context, in *MsgAddToConcentratedLiquiditySuperfluidPosition, opts ...grpc.CallOption) (*MsgAddToConcentratedLiquiditySuperfluidPositionResponse, error) {
 	out := new(MsgAddToConcentratedLiquiditySuperfluidPositionResponse)
-	err := c.cc.Invoke(ctx, "/merlin.superfluid.Msg/AddToConcentratedLiquiditySuperfluidPosition", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/osmosis.superfluid.Msg/AddToConcentratedLiquiditySuperfluidPosition", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1312,7 +1312,7 @@ func _Msg_SuperfluidDelegate_Handler(srv interface{}, ctx context.Context, dec f
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/merlin.superfluid.Msg/SuperfluidDelegate",
+		FullMethod: "/osmosis.superfluid.Msg/SuperfluidDelegate",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(MsgServer).SuperfluidDelegate(ctx, req.(*MsgSuperfluidDelegate))
@@ -1330,7 +1330,7 @@ func _Msg_SuperfluidUndelegate_Handler(srv interface{}, ctx context.Context, dec
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/merlin.superfluid.Msg/SuperfluidUndelegate",
+		FullMethod: "/osmosis.superfluid.Msg/SuperfluidUndelegate",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(MsgServer).SuperfluidUndelegate(ctx, req.(*MsgSuperfluidUndelegate))
@@ -1348,7 +1348,7 @@ func _Msg_SuperfluidUnbondLock_Handler(srv interface{}, ctx context.Context, dec
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/merlin.superfluid.Msg/SuperfluidUnbondLock",
+		FullMethod: "/osmosis.superfluid.Msg/SuperfluidUnbondLock",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(MsgServer).SuperfluidUnbondLock(ctx, req.(*MsgSuperfluidUnbondLock))
@@ -1366,7 +1366,7 @@ func _Msg_SuperfluidUndelegateAndUnbondLock_Handler(srv interface{}, ctx context
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/merlin.superfluid.Msg/SuperfluidUndelegateAndUnbondLock",
+		FullMethod: "/osmosis.superfluid.Msg/SuperfluidUndelegateAndUnbondLock",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(MsgServer).SuperfluidUndelegateAndUnbondLock(ctx, req.(*MsgSuperfluidUndelegateAndUnbondLock))
@@ -1384,7 +1384,7 @@ func _Msg_LockAndSuperfluidDelegate_Handler(srv interface{}, ctx context.Context
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/merlin.superfluid.Msg/LockAndSuperfluidDelegate",
+		FullMethod: "/osmosis.superfluid.Msg/LockAndSuperfluidDelegate",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(MsgServer).LockAndSuperfluidDelegate(ctx, req.(*MsgLockAndSuperfluidDelegate))
@@ -1402,7 +1402,7 @@ func _Msg_CreateFullRangePositionAndSuperfluidDelegate_Handler(srv interface{}, 
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/merlin.superfluid.Msg/CreateFullRangePositionAndSuperfluidDelegate",
+		FullMethod: "/osmosis.superfluid.Msg/CreateFullRangePositionAndSuperfluidDelegate",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(MsgServer).CreateFullRangePositionAndSuperfluidDelegate(ctx, req.(*MsgCreateFullRangePositionAndSuperfluidDelegate))
@@ -1420,7 +1420,7 @@ func _Msg_UnPoolWhitelistedPool_Handler(srv interface{}, ctx context.Context, de
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/merlin.superfluid.Msg/UnPoolWhitelistedPool",
+		FullMethod: "/osmosis.superfluid.Msg/UnPoolWhitelistedPool",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(MsgServer).UnPoolWhitelistedPool(ctx, req.(*MsgUnPoolWhitelistedPool))
@@ -1438,7 +1438,7 @@ func _Msg_UnlockAndMigrateSharesToFullRangeConcentratedPosition_Handler(srv inte
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/merlin.superfluid.Msg/UnlockAndMigrateSharesToFullRangeConcentratedPosition",
+		FullMethod: "/osmosis.superfluid.Msg/UnlockAndMigrateSharesToFullRangeConcentratedPosition",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(MsgServer).UnlockAndMigrateSharesToFullRangeConcentratedPosition(ctx, req.(*MsgUnlockAndMigrateSharesToFullRangeConcentratedPosition))
@@ -1456,7 +1456,7 @@ func _Msg_AddToConcentratedLiquiditySuperfluidPosition_Handler(srv interface{}, 
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/merlin.superfluid.Msg/AddToConcentratedLiquiditySuperfluidPosition",
+		FullMethod: "/osmosis.superfluid.Msg/AddToConcentratedLiquiditySuperfluidPosition",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(MsgServer).AddToConcentratedLiquiditySuperfluidPosition(ctx, req.(*MsgAddToConcentratedLiquiditySuperfluidPosition))
@@ -1465,7 +1465,7 @@ func _Msg_AddToConcentratedLiquiditySuperfluidPosition_Handler(srv interface{}, 
 }
 
 var _Msg_serviceDesc = grpc.ServiceDesc{
-	ServiceName: "merlin.superfluid.Msg",
+	ServiceName: "osmosis.superfluid.Msg",
 	HandlerType: (*MsgServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{

@@ -68,7 +68,7 @@ func (m *Params) XXX_DiscardUnknown() {
 var xxx_messageInfo_Params proto.InternalMessageInfo
 
 func init() {
-	proto.RegisterType((*Params)(nil), "merlin.superfluid.Params")
+	proto.RegisterType((*Params)(nil), "osmosis.superfluid.Params")
 }
 
 func init() { proto.RegisterFile("merlin/superfluid/params.proto", fileDescriptor_0985261dfaf2a82e) }

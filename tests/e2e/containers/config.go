@@ -23,10 +23,10 @@ const (
 	// Pre-upgrade merlin repo/tag to pull.
 	// It should be uploaded to Docker Hub. MERLIN_E2E_SKIP_UPGRADE should be unset
 	// for this functionality to be used.
-	previousVersionFuryRepository = "furylabs/merlin-dev"
+	previousVersionFuryRepository = "fanfury/merlin-dev"
 	previousVersionFuryTag        = "v15.x-9fa047c2-1687827963"
 	// Pre-upgrade repo/tag for merlin initialization (this should be one version below upgradeVersion)
-	previousVersionInitRepository = "furylabs/merlin-e2e-init-chain"
+	previousVersionInitRepository = "fanfury/merlin-e2e-init-chain"
 	previousVersionInitTag        = "v15-fast-vote"
 	// Hermes repo/version for relayer
 	relayerRepository = "informalsystems/hermes"

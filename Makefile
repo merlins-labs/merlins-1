@@ -224,7 +224,7 @@ docs:
 .PHONY: docs
 
 protoVer=v0.9
-protoImageName=furylabs/fury-proto-gen:$(protoVer)
+protoImageName=fanfury/fury-proto-gen:$(protoVer)
 containerProtoGen=cosmos-sdk-proto-gen-$(protoVer)
 containerProtoFmt=cosmos-sdk-proto-fmt-$(protoVer)
 
@@ -325,7 +325,7 @@ docker-build-debug:
 	@DOCKER_BUILDKIT=1 docker tag merlin:${COMMIT} merlin:debug
 
 docker-build-e2e-init-chain:
-	@DOCKER_BUILDKIT=1 docker build -t furylabs/merlin-e2e-init-chain:debug --build-arg E2E_SCRIPT_NAME=chain --platform=linux/x86_64 -f tests/e2e/initialization/init.Dockerfile .
+	@DOCKER_BUILDKIT=1 docker build -t fanfury/merlin-e2e-init-chain:debug --build-arg E2E_SCRIPT_NAME=chain --platform=linux/x86_64 -f tests/e2e/initialization/init.Dockerfile .
 
 docker-build-e2e-init-node:
 	@DOCKER_BUILDKIT=1 docker build -t merlin-e2e-init-node:debug --build-arg E2E_SCRIPT_NAME=node --platform=linux/x86_64 -f tests/e2e/initialization/init.Dockerfile .

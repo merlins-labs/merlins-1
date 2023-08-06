@@ -5,7 +5,7 @@ go 1.20
 require (
 	github.com/cosmos/cosmos-sdk v0.47.3
 	github.com/ignite/cli v0.23.0
-	github.com/merlins-labs/merlin/v16 v16.0.0-20230623172200-24f580da1227
+	github.com/osmosis-labs/osmosis/v16 v16.0.0-20230623172200-24f580da1227
 	github.com/osmosis-labs/osmosis/x/epochs v0.0.1
 
 )

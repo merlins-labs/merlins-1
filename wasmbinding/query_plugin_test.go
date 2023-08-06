@@ -60,7 +60,7 @@ func (suite *StargateTestSuite) TestStargateQuerier() {
 	}{
 		{
 			name: "happy path",
-			path: "/merlin.epochs.v1beta1.Query/EpochInfos",
+			path: "/osmosis.epochs.v1beta1.Query/EpochInfos",
 			requestData: func() []byte {
 				epochrequest := epochtypes.QueryEpochsInfoRequest{}
 				bz, err := proto.Marshal(&epochrequest)
@@ -198,7 +198,7 @@ func (suite *StargateTestSuite) TestStargateQuerier() {
 		},
 		{
 			name: "unmatching path and data in request",
-			path: "/merlin.epochs.v1beta1.Query/EpochInfos",
+			path: "/osmosis.epochs.v1beta1.Query/EpochInfos",
 			requestData: func() []byte {
 				epochrequest := epochtypes.QueryCurrentEpochRequest{}
 				bz, err := proto.Marshal(&epochrequest)
@@ -212,10 +212,10 @@ func (suite *StargateTestSuite) TestStargateQuerier() {
 			name: "error in unmarshalling response",
 			// set up whitelist with wrong data
 			testSetup: func() {
-				wasmbinding.SetWhitelistedQuery("/merlin.epochs.v1beta1.Query/EpochInfos",
+				wasmbinding.SetWhitelistedQuery("/osmosis.epochs.v1beta1.Query/EpochInfos",
 					&banktypes.QueryAllBalancesResponse{})
 			},
-			path: "/merlin.epochs.v1beta1.Query/EpochInfos",
+			path: "/osmosis.epochs.v1beta1.Query/EpochInfos",
 			requestData: func() []byte {
 				return []byte{}
 			},

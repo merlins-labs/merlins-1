@@ -133,8 +133,8 @@ func (m *GenesisDenom) GetAuthorityMetadata() DenomAuthorityMetadata {
 }
 
 func init() {
-	proto.RegisterType((*GenesisState)(nil), "merlin.tokenfactory.v1beta1.GenesisState")
-	proto.RegisterType((*GenesisDenom)(nil), "merlin.tokenfactory.v1beta1.GenesisDenom")
+	proto.RegisterType((*GenesisState)(nil), "osmosis.tokenfactory.v1beta1.GenesisState")
+	proto.RegisterType((*GenesisDenom)(nil), "osmosis.tokenfactory.v1beta1.GenesisDenom")
 }
 
 func init() {

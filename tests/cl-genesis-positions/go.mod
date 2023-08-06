@@ -10,7 +10,7 @@ require (
 	github.com/tendermint/tendermint v0.37.0-rc1
 )
 
-require github.com/merlins-labs/merlin/v16 v16.0.0-20230623172200-24f580da1227
+require github.com/osmosis-labs/osmosis/v16 v16.0.0-20230623172200-24f580da1227
 
 require (
 	cosmossdk.io/errors v1.0.0-beta.7 // indirect

@@ -161,7 +161,7 @@ func (m *AssetTypeRequest) GetDenom() string {
 }
 
 type AssetTypeResponse struct {
-	AssetType SuperfluidAssetType `protobuf:"varint,1,opt,name=asset_type,json=assetType,proto3,enum=merlin.superfluid.SuperfluidAssetType" json:"asset_type,omitempty"`
+	AssetType SuperfluidAssetType `protobuf:"varint,1,opt,name=asset_type,json=assetType,proto3,enum=osmosis.superfluid.SuperfluidAssetType" json:"asset_type,omitempty"`
 }
 
 func (m *AssetTypeResponse) Reset()         { *m = AssetTypeResponse{} }
@@ -1768,42 +1768,42 @@ func (m *UserConcentratedSuperfluidPositionsUndelegatingResponse) GetClPoolUserP
 }
 
 func init() {
-	proto.RegisterType((*QueryParamsRequest)(nil), "merlin.superfluid.QueryParamsRequest")
-	proto.RegisterType((*QueryParamsResponse)(nil), "merlin.superfluid.QueryParamsResponse")
-	proto.RegisterType((*AssetTypeRequest)(nil), "merlin.superfluid.AssetTypeRequest")
-	proto.RegisterType((*AssetTypeResponse)(nil), "merlin.superfluid.AssetTypeResponse")
-	proto.RegisterType((*AllAssetsRequest)(nil), "merlin.superfluid.AllAssetsRequest")
-	proto.RegisterType((*AllAssetsResponse)(nil), "merlin.superfluid.AllAssetsResponse")
-	proto.RegisterType((*AssetMultiplierRequest)(nil), "merlin.superfluid.AssetMultiplierRequest")
-	proto.RegisterType((*AssetMultiplierResponse)(nil), "merlin.superfluid.AssetMultiplierResponse")
-	proto.RegisterType((*SuperfluidIntermediaryAccountInfo)(nil), "merlin.superfluid.SuperfluidIntermediaryAccountInfo")
-	proto.RegisterType((*AllIntermediaryAccountsRequest)(nil), "merlin.superfluid.AllIntermediaryAccountsRequest")
-	proto.RegisterType((*AllIntermediaryAccountsResponse)(nil), "merlin.superfluid.AllIntermediaryAccountsResponse")
-	proto.RegisterType((*ConnectedIntermediaryAccountRequest)(nil), "merlin.superfluid.ConnectedIntermediaryAccountRequest")
-	proto.RegisterType((*ConnectedIntermediaryAccountResponse)(nil), "merlin.superfluid.ConnectedIntermediaryAccountResponse")
-	proto.RegisterType((*QueryTotalDelegationByValidatorForDenomRequest)(nil), "merlin.superfluid.QueryTotalDelegationByValidatorForDenomRequest")
-	proto.RegisterType((*QueryTotalDelegationByValidatorForDenomResponse)(nil), "merlin.superfluid.QueryTotalDelegationByValidatorForDenomResponse")
-	proto.RegisterType((*Delegations)(nil), "merlin.superfluid.Delegations")
-	proto.RegisterType((*TotalSuperfluidDelegationsRequest)(nil), "merlin.superfluid.TotalSuperfluidDelegationsRequest")
-	proto.RegisterType((*TotalSuperfluidDelegationsResponse)(nil), "merlin.superfluid.TotalSuperfluidDelegationsResponse")
-	proto.RegisterType((*SuperfluidDelegationAmountRequest)(nil), "merlin.superfluid.SuperfluidDelegationAmountRequest")
-	proto.RegisterType((*SuperfluidDelegationAmountResponse)(nil), "merlin.superfluid.SuperfluidDelegationAmountResponse")
-	proto.RegisterType((*SuperfluidDelegationsByDelegatorRequest)(nil), "merlin.superfluid.SuperfluidDelegationsByDelegatorRequest")
-	proto.RegisterType((*SuperfluidDelegationsByDelegatorResponse)(nil), "merlin.superfluid.SuperfluidDelegationsByDelegatorResponse")
-	proto.RegisterType((*SuperfluidUndelegationsByDelegatorRequest)(nil), "merlin.superfluid.SuperfluidUndelegationsByDelegatorRequest")
-	proto.RegisterType((*SuperfluidUndelegationsByDelegatorResponse)(nil), "merlin.superfluid.SuperfluidUndelegationsByDelegatorResponse")
-	proto.RegisterType((*SuperfluidDelegationsByValidatorDenomRequest)(nil), "merlin.superfluid.SuperfluidDelegationsByValidatorDenomRequest")
-	proto.RegisterType((*SuperfluidDelegationsByValidatorDenomResponse)(nil), "merlin.superfluid.SuperfluidDelegationsByValidatorDenomResponse")
-	proto.RegisterType((*EstimateSuperfluidDelegatedAmountByValidatorDenomRequest)(nil), "merlin.superfluid.EstimateSuperfluidDelegatedAmountByValidatorDenomRequest")
-	proto.RegisterType((*EstimateSuperfluidDelegatedAmountByValidatorDenomResponse)(nil), "merlin.superfluid.EstimateSuperfluidDelegatedAmountByValidatorDenomResponse")
-	proto.RegisterType((*QueryTotalDelegationByDelegatorRequest)(nil), "merlin.superfluid.QueryTotalDelegationByDelegatorRequest")
-	proto.RegisterType((*QueryTotalDelegationByDelegatorResponse)(nil), "merlin.superfluid.QueryTotalDelegationByDelegatorResponse")
-	proto.RegisterType((*QueryUnpoolWhitelistRequest)(nil), "merlin.superfluid.QueryUnpoolWhitelistRequest")
-	proto.RegisterType((*QueryUnpoolWhitelistResponse)(nil), "merlin.superfluid.QueryUnpoolWhitelistResponse")
-	proto.RegisterType((*UserConcentratedSuperfluidPositionsDelegatedRequest)(nil), "merlin.superfluid.UserConcentratedSuperfluidPositionsDelegatedRequest")
-	proto.RegisterType((*UserConcentratedSuperfluidPositionsDelegatedResponse)(nil), "merlin.superfluid.UserConcentratedSuperfluidPositionsDelegatedResponse")
-	proto.RegisterType((*UserConcentratedSuperfluidPositionsUndelegatingRequest)(nil), "merlin.superfluid.UserConcentratedSuperfluidPositionsUndelegatingRequest")
-	proto.RegisterType((*UserConcentratedSuperfluidPositionsUndelegatingResponse)(nil), "merlin.superfluid.UserConcentratedSuperfluidPositionsUndelegatingResponse")
+	proto.RegisterType((*QueryParamsRequest)(nil), "osmosis.superfluid.QueryParamsRequest")
+	proto.RegisterType((*QueryParamsResponse)(nil), "osmosis.superfluid.QueryParamsResponse")
+	proto.RegisterType((*AssetTypeRequest)(nil), "osmosis.superfluid.AssetTypeRequest")
+	proto.RegisterType((*AssetTypeResponse)(nil), "osmosis.superfluid.AssetTypeResponse")
+	proto.RegisterType((*AllAssetsRequest)(nil), "osmosis.superfluid.AllAssetsRequest")
+	proto.RegisterType((*AllAssetsResponse)(nil), "osmosis.superfluid.AllAssetsResponse")
+	proto.RegisterType((*AssetMultiplierRequest)(nil), "osmosis.superfluid.AssetMultiplierRequest")
+	proto.RegisterType((*AssetMultiplierResponse)(nil), "osmosis.superfluid.AssetMultiplierResponse")
+	proto.RegisterType((*SuperfluidIntermediaryAccountInfo)(nil), "osmosis.superfluid.SuperfluidIntermediaryAccountInfo")
+	proto.RegisterType((*AllIntermediaryAccountsRequest)(nil), "osmosis.superfluid.AllIntermediaryAccountsRequest")
+	proto.RegisterType((*AllIntermediaryAccountsResponse)(nil), "osmosis.superfluid.AllIntermediaryAccountsResponse")
+	proto.RegisterType((*ConnectedIntermediaryAccountRequest)(nil), "osmosis.superfluid.ConnectedIntermediaryAccountRequest")
+	proto.RegisterType((*ConnectedIntermediaryAccountResponse)(nil), "osmosis.superfluid.ConnectedIntermediaryAccountResponse")
+	proto.RegisterType((*QueryTotalDelegationByValidatorForDenomRequest)(nil), "osmosis.superfluid.QueryTotalDelegationByValidatorForDenomRequest")
+	proto.RegisterType((*QueryTotalDelegationByValidatorForDenomResponse)(nil), "osmosis.superfluid.QueryTotalDelegationByValidatorForDenomResponse")
+	proto.RegisterType((*Delegations)(nil), "osmosis.superfluid.Delegations")
+	proto.RegisterType((*TotalSuperfluidDelegationsRequest)(nil), "osmosis.superfluid.TotalSuperfluidDelegationsRequest")
+	proto.RegisterType((*TotalSuperfluidDelegationsResponse)(nil), "osmosis.superfluid.TotalSuperfluidDelegationsResponse")
+	proto.RegisterType((*SuperfluidDelegationAmountRequest)(nil), "osmosis.superfluid.SuperfluidDelegationAmountRequest")
+	proto.RegisterType((*SuperfluidDelegationAmountResponse)(nil), "osmosis.superfluid.SuperfluidDelegationAmountResponse")
+	proto.RegisterType((*SuperfluidDelegationsByDelegatorRequest)(nil), "osmosis.superfluid.SuperfluidDelegationsByDelegatorRequest")
+	proto.RegisterType((*SuperfluidDelegationsByDelegatorResponse)(nil), "osmosis.superfluid.SuperfluidDelegationsByDelegatorResponse")
+	proto.RegisterType((*SuperfluidUndelegationsByDelegatorRequest)(nil), "osmosis.superfluid.SuperfluidUndelegationsByDelegatorRequest")
+	proto.RegisterType((*SuperfluidUndelegationsByDelegatorResponse)(nil), "osmosis.superfluid.SuperfluidUndelegationsByDelegatorResponse")
+	proto.RegisterType((*SuperfluidDelegationsByValidatorDenomRequest)(nil), "osmosis.superfluid.SuperfluidDelegationsByValidatorDenomRequest")
+	proto.RegisterType((*SuperfluidDelegationsByValidatorDenomResponse)(nil), "osmosis.superfluid.SuperfluidDelegationsByValidatorDenomResponse")
+	proto.RegisterType((*EstimateSuperfluidDelegatedAmountByValidatorDenomRequest)(nil), "osmosis.superfluid.EstimateSuperfluidDelegatedAmountByValidatorDenomRequest")
+	proto.RegisterType((*EstimateSuperfluidDelegatedAmountByValidatorDenomResponse)(nil), "osmosis.superfluid.EstimateSuperfluidDelegatedAmountByValidatorDenomResponse")
+	proto.RegisterType((*QueryTotalDelegationByDelegatorRequest)(nil), "osmosis.superfluid.QueryTotalDelegationByDelegatorRequest")
+	proto.RegisterType((*QueryTotalDelegationByDelegatorResponse)(nil), "osmosis.superfluid.QueryTotalDelegationByDelegatorResponse")
+	proto.RegisterType((*QueryUnpoolWhitelistRequest)(nil), "osmosis.superfluid.QueryUnpoolWhitelistRequest")
+	proto.RegisterType((*QueryUnpoolWhitelistResponse)(nil), "osmosis.superfluid.QueryUnpoolWhitelistResponse")
+	proto.RegisterType((*UserConcentratedSuperfluidPositionsDelegatedRequest)(nil), "osmosis.superfluid.UserConcentratedSuperfluidPositionsDelegatedRequest")
+	proto.RegisterType((*UserConcentratedSuperfluidPositionsDelegatedResponse)(nil), "osmosis.superfluid.UserConcentratedSuperfluidPositionsDelegatedResponse")
+	proto.RegisterType((*UserConcentratedSuperfluidPositionsUndelegatingRequest)(nil), "osmosis.superfluid.UserConcentratedSuperfluidPositionsUndelegatingRequest")
+	proto.RegisterType((*UserConcentratedSuperfluidPositionsUndelegatingResponse)(nil), "osmosis.superfluid.UserConcentratedSuperfluidPositionsUndelegatingResponse")
 }
 
 func init() { proto.RegisterFile("merlin/superfluid/query.proto", fileDescriptor_e3d9448e4ed3943f) }
@@ -2002,7 +2002,7 @@ func NewQueryClient(cc grpc1.ClientConn) QueryClient {
 
 func (c *queryClient) Params(ctx context.Context, in *QueryParamsRequest, opts ...grpc.CallOption) (*QueryParamsResponse, error) {
 	out := new(QueryParamsResponse)
-	err := c.cc.Invoke(ctx, "/merlin.superfluid.Query/Params", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/osmosis.superfluid.Query/Params", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -2011,7 +2011,7 @@ func (c *queryClient) Params(ctx context.Context, in *QueryParamsRequest, opts .
 
 func (c *queryClient) AssetType(ctx context.Context, in *AssetTypeRequest, opts ...grpc.CallOption) (*AssetTypeResponse, error) {
 	out := new(AssetTypeResponse)
-	err := c.cc.Invoke(ctx, "/merlin.superfluid.Query/AssetType", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/osmosis.superfluid.Query/AssetType", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -2020,7 +2020,7 @@ func (c *queryClient) AssetType(ctx context.Context, in *AssetTypeRequest, opts 
 
 func (c *queryClient) AllAssets(ctx context.Context, in *AllAssetsRequest, opts ...grpc.CallOption) (*AllAssetsResponse, error) {
 	out := new(AllAssetsResponse)
-	err := c.cc.Invoke(ctx, "/merlin.superfluid.Query/AllAssets", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/osmosis.superfluid.Query/AllAssets", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -2029,7 +2029,7 @@ func (c *queryClient) AllAssets(ctx context.Context, in *AllAssetsRequest, opts 
 
 func (c *queryClient) AssetMultiplier(ctx context.Context, in *AssetMultiplierRequest, opts ...grpc.CallOption) (*AssetMultiplierResponse, error) {
 	out := new(AssetMultiplierResponse)
-	err := c.cc.Invoke(ctx, "/merlin.superfluid.Query/AssetMultiplier", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/osmosis.superfluid.Query/AssetMultiplier", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -2038,7 +2038,7 @@ func (c *queryClient) AssetMultiplier(ctx context.Context, in *AssetMultiplierRe
 
 func (c *queryClient) AllIntermediaryAccounts(ctx context.Context, in *AllIntermediaryAccountsRequest, opts ...grpc.CallOption) (*AllIntermediaryAccountsResponse, error) {
 	out := new(AllIntermediaryAccountsResponse)
-	err := c.cc.Invoke(ctx, "/merlin.superfluid.Query/AllIntermediaryAccounts", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/osmosis.superfluid.Query/AllIntermediaryAccounts", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -2047,7 +2047,7 @@ func (c *queryClient) AllIntermediaryAccounts(ctx context.Context, in *AllInterm
 
 func (c *queryClient) ConnectedIntermediaryAccount(ctx context.Context, in *ConnectedIntermediaryAccountRequest, opts ...grpc.CallOption) (*ConnectedIntermediaryAccountResponse, error) {
 	out := new(ConnectedIntermediaryAccountResponse)
-	err := c.cc.Invoke(ctx, "/merlin.superfluid.Query/ConnectedIntermediaryAccount", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/osmosis.superfluid.Query/ConnectedIntermediaryAccount", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -2056,7 +2056,7 @@ func (c *queryClient) ConnectedIntermediaryAccount(ctx context.Context, in *Conn
 
 func (c *queryClient) TotalDelegationByValidatorForDenom(ctx context.Context, in *QueryTotalDelegationByValidatorForDenomRequest, opts ...grpc.CallOption) (*QueryTotalDelegationByValidatorForDenomResponse, error) {
 	out := new(QueryTotalDelegationByValidatorForDenomResponse)
-	err := c.cc.Invoke(ctx, "/merlin.superfluid.Query/TotalDelegationByValidatorForDenom", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/osmosis.superfluid.Query/TotalDelegationByValidatorForDenom", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -2065,7 +2065,7 @@ func (c *queryClient) TotalDelegationByValidatorForDenom(ctx context.Context, in
 
 func (c *queryClient) TotalSuperfluidDelegations(ctx context.Context, in *TotalSuperfluidDelegationsRequest, opts ...grpc.CallOption) (*TotalSuperfluidDelegationsResponse, error) {
 	out := new(TotalSuperfluidDelegationsResponse)
-	err := c.cc.Invoke(ctx, "/merlin.superfluid.Query/TotalSuperfluidDelegations", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/osmosis.superfluid.Query/TotalSuperfluidDelegations", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -2074,7 +2074,7 @@ func (c *queryClient) TotalSuperfluidDelegations(ctx context.Context, in *TotalS
 
 func (c *queryClient) SuperfluidDelegationAmount(ctx context.Context, in *SuperfluidDelegationAmountRequest, opts ...grpc.CallOption) (*SuperfluidDelegationAmountResponse, error) {
 	out := new(SuperfluidDelegationAmountResponse)
-	err := c.cc.Invoke(ctx, "/merlin.superfluid.Query/SuperfluidDelegationAmount", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/osmosis.superfluid.Query/SuperfluidDelegationAmount", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -2083,7 +2083,7 @@ func (c *queryClient) SuperfluidDelegationAmount(ctx context.Context, in *Superf
 
 func (c *queryClient) SuperfluidDelegationsByDelegator(ctx context.Context, in *SuperfluidDelegationsByDelegatorRequest, opts ...grpc.CallOption) (*SuperfluidDelegationsByDelegatorResponse, error) {
 	out := new(SuperfluidDelegationsByDelegatorResponse)
-	err := c.cc.Invoke(ctx, "/merlin.superfluid.Query/SuperfluidDelegationsByDelegator", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/osmosis.superfluid.Query/SuperfluidDelegationsByDelegator", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -2092,7 +2092,7 @@ func (c *queryClient) SuperfluidDelegationsByDelegator(ctx context.Context, in *
 
 func (c *queryClient) SuperfluidUndelegationsByDelegator(ctx context.Context, in *SuperfluidUndelegationsByDelegatorRequest, opts ...grpc.CallOption) (*SuperfluidUndelegationsByDelegatorResponse, error) {
 	out := new(SuperfluidUndelegationsByDelegatorResponse)
-	err := c.cc.Invoke(ctx, "/merlin.superfluid.Query/SuperfluidUndelegationsByDelegator", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/osmosis.superfluid.Query/SuperfluidUndelegationsByDelegator", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -2101,7 +2101,7 @@ func (c *queryClient) SuperfluidUndelegationsByDelegator(ctx context.Context, in
 
 func (c *queryClient) SuperfluidDelegationsByValidatorDenom(ctx context.Context, in *SuperfluidDelegationsByValidatorDenomRequest, opts ...grpc.CallOption) (*SuperfluidDelegationsByValidatorDenomResponse, error) {
 	out := new(SuperfluidDelegationsByValidatorDenomResponse)
-	err := c.cc.Invoke(ctx, "/merlin.superfluid.Query/SuperfluidDelegationsByValidatorDenom", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/osmosis.superfluid.Query/SuperfluidDelegationsByValidatorDenom", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -2110,7 +2110,7 @@ func (c *queryClient) SuperfluidDelegationsByValidatorDenom(ctx context.Context,
 
 func (c *queryClient) EstimateSuperfluidDelegatedAmountByValidatorDenom(ctx context.Context, in *EstimateSuperfluidDelegatedAmountByValidatorDenomRequest, opts ...grpc.CallOption) (*EstimateSuperfluidDelegatedAmountByValidatorDenomResponse, error) {
 	out := new(EstimateSuperfluidDelegatedAmountByValidatorDenomResponse)
-	err := c.cc.Invoke(ctx, "/merlin.superfluid.Query/EstimateSuperfluidDelegatedAmountByValidatorDenom", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/osmosis.superfluid.Query/EstimateSuperfluidDelegatedAmountByValidatorDenom", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -2119,7 +2119,7 @@ func (c *queryClient) EstimateSuperfluidDelegatedAmountByValidatorDenom(ctx cont
 
 func (c *queryClient) TotalDelegationByDelegator(ctx context.Context, in *QueryTotalDelegationByDelegatorRequest, opts ...grpc.CallOption) (*QueryTotalDelegationByDelegatorResponse, error) {
 	out := new(QueryTotalDelegationByDelegatorResponse)
-	err := c.cc.Invoke(ctx, "/merlin.superfluid.Query/TotalDelegationByDelegator", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/osmosis.superfluid.Query/TotalDelegationByDelegator", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -2128,7 +2128,7 @@ func (c *queryClient) TotalDelegationByDelegator(ctx context.Context, in *QueryT
 
 func (c *queryClient) UnpoolWhitelist(ctx context.Context, in *QueryUnpoolWhitelistRequest, opts ...grpc.CallOption) (*QueryUnpoolWhitelistResponse, error) {
 	out := new(QueryUnpoolWhitelistResponse)
-	err := c.cc.Invoke(ctx, "/merlin.superfluid.Query/UnpoolWhitelist", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/osmosis.superfluid.Query/UnpoolWhitelist", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -2137,7 +2137,7 @@ func (c *queryClient) UnpoolWhitelist(ctx context.Context, in *QueryUnpoolWhitel
 
 func (c *queryClient) UserConcentratedSuperfluidPositionsDelegated(ctx context.Context, in *UserConcentratedSuperfluidPositionsDelegatedRequest, opts ...grpc.CallOption) (*UserConcentratedSuperfluidPositionsDelegatedResponse, error) {
 	out := new(UserConcentratedSuperfluidPositionsDelegatedResponse)
-	err := c.cc.Invoke(ctx, "/merlin.superfluid.Query/UserConcentratedSuperfluidPositionsDelegated", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/osmosis.superfluid.Query/UserConcentratedSuperfluidPositionsDelegated", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -2146,7 +2146,7 @@ func (c *queryClient) UserConcentratedSuperfluidPositionsDelegated(ctx context.C
 
 func (c *queryClient) UserConcentratedSuperfluidPositionsUndelegating(ctx context.Context, in *UserConcentratedSuperfluidPositionsUndelegatingRequest, opts ...grpc.CallOption) (*UserConcentratedSuperfluidPositionsUndelegatingResponse, error) {
 	out := new(UserConcentratedSuperfluidPositionsUndelegatingResponse)
-	err := c.cc.Invoke(ctx, "/merlin.superfluid.Query/UserConcentratedSuperfluidPositionsUndelegating", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/osmosis.superfluid.Query/UserConcentratedSuperfluidPositionsUndelegating", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -2265,7 +2265,7 @@ func _Query_Params_Handler(srv interface{}, ctx context.Context, dec func(interf
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/merlin.superfluid.Query/Params",
+		FullMethod: "/osmosis.superfluid.Query/Params",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(QueryServer).Params(ctx, req.(*QueryParamsRequest))
@@ -2283,7 +2283,7 @@ func _Query_AssetType_Handler(srv interface{}, ctx context.Context, dec func(int
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/merlin.superfluid.Query/AssetType",
+		FullMethod: "/osmosis.superfluid.Query/AssetType",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(QueryServer).AssetType(ctx, req.(*AssetTypeRequest))
@@ -2301,7 +2301,7 @@ func _Query_AllAssets_Handler(srv interface{}, ctx context.Context, dec func(int
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/merlin.superfluid.Query/AllAssets",
+		FullMethod: "/osmosis.superfluid.Query/AllAssets",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(QueryServer).AllAssets(ctx, req.(*AllAssetsRequest))
@@ -2319,7 +2319,7 @@ func _Query_AssetMultiplier_Handler(srv interface{}, ctx context.Context, dec fu
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/merlin.superfluid.Query/AssetMultiplier",
+		FullMethod: "/osmosis.superfluid.Query/AssetMultiplier",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(QueryServer).AssetMultiplier(ctx, req.(*AssetMultiplierRequest))
@@ -2337,7 +2337,7 @@ func _Query_AllIntermediaryAccounts_Handler(srv interface{}, ctx context.Context
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/merlin.superfluid.Query/AllIntermediaryAccounts",
+		FullMethod: "/osmosis.superfluid.Query/AllIntermediaryAccounts",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(QueryServer).AllIntermediaryAccounts(ctx, req.(*AllIntermediaryAccountsRequest))
@@ -2355,7 +2355,7 @@ func _Query_ConnectedIntermediaryAccount_Handler(srv interface{}, ctx context.Co
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/merlin.superfluid.Query/ConnectedIntermediaryAccount",
+		FullMethod: "/osmosis.superfluid.Query/ConnectedIntermediaryAccount",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(QueryServer).ConnectedIntermediaryAccount(ctx, req.(*ConnectedIntermediaryAccountRequest))
@@ -2373,7 +2373,7 @@ func _Query_TotalDelegationByValidatorForDenom_Handler(srv interface{}, ctx cont
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/merlin.superfluid.Query/TotalDelegationByValidatorForDenom",
+		FullMethod: "/osmosis.superfluid.Query/TotalDelegationByValidatorForDenom",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(QueryServer).TotalDelegationByValidatorForDenom(ctx, req.(*QueryTotalDelegationByValidatorForDenomRequest))
@@ -2391,7 +2391,7 @@ func _Query_TotalSuperfluidDelegations_Handler(srv interface{}, ctx context.Cont
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/merlin.superfluid.Query/TotalSuperfluidDelegations",
+		FullMethod: "/osmosis.superfluid.Query/TotalSuperfluidDelegations",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(QueryServer).TotalSuperfluidDelegations(ctx, req.(*TotalSuperfluidDelegationsRequest))
@@ -2409,7 +2409,7 @@ func _Query_SuperfluidDelegationAmount_Handler(srv interface{}, ctx context.Cont
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/merlin.superfluid.Query/SuperfluidDelegationAmount",
+		FullMethod: "/osmosis.superfluid.Query/SuperfluidDelegationAmount",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(QueryServer).SuperfluidDelegationAmount(ctx, req.(*SuperfluidDelegationAmountRequest))
@@ -2427,7 +2427,7 @@ func _Query_SuperfluidDelegationsByDelegator_Handler(srv interface{}, ctx contex
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/merlin.superfluid.Query/SuperfluidDelegationsByDelegator",
+		FullMethod: "/osmosis.superfluid.Query/SuperfluidDelegationsByDelegator",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(QueryServer).SuperfluidDelegationsByDelegator(ctx, req.(*SuperfluidDelegationsByDelegatorRequest))
@@ -2445,7 +2445,7 @@ func _Query_SuperfluidUndelegationsByDelegator_Handler(srv interface{}, ctx cont
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/merlin.superfluid.Query/SuperfluidUndelegationsByDelegator",
+		FullMethod: "/osmosis.superfluid.Query/SuperfluidUndelegationsByDelegator",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(QueryServer).SuperfluidUndelegationsByDelegator(ctx, req.(*SuperfluidUndelegationsByDelegatorRequest))
@@ -2463,7 +2463,7 @@ func _Query_SuperfluidDelegationsByValidatorDenom_Handler(srv interface{}, ctx c
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/merlin.superfluid.Query/SuperfluidDelegationsByValidatorDenom",
+		FullMethod: "/osmosis.superfluid.Query/SuperfluidDelegationsByValidatorDenom",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(QueryServer).SuperfluidDelegationsByValidatorDenom(ctx, req.(*SuperfluidDelegationsByValidatorDenomRequest))
@@ -2481,7 +2481,7 @@ func _Query_EstimateSuperfluidDelegatedAmountByValidatorDenom_Handler(srv interf
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/merlin.superfluid.Query/EstimateSuperfluidDelegatedAmountByValidatorDenom",
+		FullMethod: "/osmosis.superfluid.Query/EstimateSuperfluidDelegatedAmountByValidatorDenom",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(QueryServer).EstimateSuperfluidDelegatedAmountByValidatorDenom(ctx, req.(*EstimateSuperfluidDelegatedAmountByValidatorDenomRequest))
@@ -2499,7 +2499,7 @@ func _Query_TotalDelegationByDelegator_Handler(srv interface{}, ctx context.Cont
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/merlin.superfluid.Query/TotalDelegationByDelegator",
+		FullMethod: "/osmosis.superfluid.Query/TotalDelegationByDelegator",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(QueryServer).TotalDelegationByDelegator(ctx, req.(*QueryTotalDelegationByDelegatorRequest))
@@ -2517,7 +2517,7 @@ func _Query_UnpoolWhitelist_Handler(srv interface{}, ctx context.Context, dec fu
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/merlin.superfluid.Query/UnpoolWhitelist",
+		FullMethod: "/osmosis.superfluid.Query/UnpoolWhitelist",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(QueryServer).UnpoolWhitelist(ctx, req.(*QueryUnpoolWhitelistRequest))
@@ -2535,7 +2535,7 @@ func _Query_UserConcentratedSuperfluidPositionsDelegated_Handler(srv interface{}
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/merlin.superfluid.Query/UserConcentratedSuperfluidPositionsDelegated",
+		FullMethod: "/osmosis.superfluid.Query/UserConcentratedSuperfluidPositionsDelegated",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(QueryServer).UserConcentratedSuperfluidPositionsDelegated(ctx, req.(*UserConcentratedSuperfluidPositionsDelegatedRequest))
@@ -2553,7 +2553,7 @@ func _Query_UserConcentratedSuperfluidPositionsUndelegating_Handler(srv interfac
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/merlin.superfluid.Query/UserConcentratedSuperfluidPositionsUndelegating",
+		FullMethod: "/osmosis.superfluid.Query/UserConcentratedSuperfluidPositionsUndelegating",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(QueryServer).UserConcentratedSuperfluidPositionsUndelegating(ctx, req.(*UserConcentratedSuperfluidPositionsUndelegatingRequest))
@@ -2562,7 +2562,7 @@ func _Query_UserConcentratedSuperfluidPositionsUndelegating_Handler(srv interfac
 }
 
 var _Query_serviceDesc = grpc.ServiceDesc{
-	ServiceName: "merlin.superfluid.Query",
+	ServiceName: "osmosis.superfluid.Query",
 	HandlerType: (*QueryServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{

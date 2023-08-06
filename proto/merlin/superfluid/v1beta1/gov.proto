@@ -1,5 +1,5 @@
 syntax = "proto3";
-package merlin.superfluid.v1beta1;
+package osmosis.superfluid.v1beta1;
 
 import "gogoproto/gogo.proto";
 import "amino/amino.proto";

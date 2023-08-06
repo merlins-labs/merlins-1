@@ -107,7 +107,7 @@ func (m *GenesisState) GetIntemediaryAccountConnections() []LockIdIntermediaryAc
 }
 
 func init() {
-	proto.RegisterType((*GenesisState)(nil), "merlin.superfluid.GenesisState")
+	proto.RegisterType((*GenesisState)(nil), "osmosis.superfluid.GenesisState")
 }
 
 func init() { proto.RegisterFile("merlin/superfluid/genesis.proto", fileDescriptor_d5256ebb7c83fff3) }

@@ -40,19 +40,19 @@ func (s *QueryTestSuite) TestQueriesNeverAlterState() {
 	}{
 		{
 			"Query denom authority metadata",
-			"/merlin.tokenfactory.v1beta1.Query/DenomAuthorityMetadata",
+			"/osmosis.tokenfactory.v1beta1.Query/DenomAuthorityMetadata",
 			&types.QueryDenomAuthorityMetadataRequest{Denom: "tokenfactory"},
 			&types.QueryDenomAuthorityMetadataResponse{},
 		},
 		{
 			"Query denoms by creator",
-			"/merlin.tokenfactory.v1beta1.Query/DenomsFromCreator",
+			"/osmosis.tokenfactory.v1beta1.Query/DenomsFromCreator",
 			&types.QueryDenomsFromCreatorRequest{Creator: s.TestAccs[0].String()},
 			&types.QueryDenomsFromCreatorResponse{},
 		},
 		{
 			"Query params",
-			"/merlin.tokenfactory.v1beta1.Query/Params",
+			"/osmosis.tokenfactory.v1beta1.Query/Params",
 			&types.QueryParamsRequest{},
 			&types.QueryParamsResponse{},
 		},

@@ -62,7 +62,7 @@ type SuperfluidAsset struct {
 	Denom string `protobuf:"bytes,1,opt,name=denom,proto3" json:"denom,omitempty"`
 	// AssetType indicates whether the superfluid asset is a native token or an lp
 	// share
-	AssetType SuperfluidAssetType `protobuf:"varint,2,opt,name=asset_type,json=assetType,proto3,enum=merlin.superfluid.SuperfluidAssetType" json:"asset_type,omitempty"`
+	AssetType SuperfluidAssetType `protobuf:"varint,2,opt,name=asset_type,json=assetType,proto3,enum=osmosis.superfluid.SuperfluidAssetType" json:"asset_type,omitempty"`
 }
 
 func (m *SuperfluidAsset) Reset()         { *m = SuperfluidAsset{} }
@@ -478,14 +478,14 @@ func (m *ConcentratedPoolUserPositionRecord) GetEquivalentStakedAmount() *types.
 }
 
 func init() {
-	proto.RegisterEnum("merlin.superfluid.SuperfluidAssetType", SuperfluidAssetType_name, SuperfluidAssetType_value)
-	proto.RegisterType((*SuperfluidAsset)(nil), "merlin.superfluid.SuperfluidAsset")
-	proto.RegisterType((*SuperfluidIntermediaryAccount)(nil), "merlin.superfluid.SuperfluidIntermediaryAccount")
-	proto.RegisterType((*FuryEquivalentMultiplierRecord)(nil), "merlin.superfluid.FuryEquivalentMultiplierRecord")
-	proto.RegisterType((*SuperfluidDelegationRecord)(nil), "merlin.superfluid.SuperfluidDelegationRecord")
-	proto.RegisterType((*LockIdIntermediaryAccountConnection)(nil), "merlin.superfluid.LockIdIntermediaryAccountConnection")
-	proto.RegisterType((*UnpoolWhitelistedPools)(nil), "merlin.superfluid.UnpoolWhitelistedPools")
-	proto.RegisterType((*ConcentratedPoolUserPositionRecord)(nil), "merlin.superfluid.ConcentratedPoolUserPositionRecord")
+	proto.RegisterEnum("osmosis.superfluid.SuperfluidAssetType", SuperfluidAssetType_name, SuperfluidAssetType_value)
+	proto.RegisterType((*SuperfluidAsset)(nil), "osmosis.superfluid.SuperfluidAsset")
+	proto.RegisterType((*SuperfluidIntermediaryAccount)(nil), "osmosis.superfluid.SuperfluidIntermediaryAccount")
+	proto.RegisterType((*FuryEquivalentMultiplierRecord)(nil), "osmosis.superfluid.FuryEquivalentMultiplierRecord")
+	proto.RegisterType((*SuperfluidDelegationRecord)(nil), "osmosis.superfluid.SuperfluidDelegationRecord")
+	proto.RegisterType((*LockIdIntermediaryAccountConnection)(nil), "osmosis.superfluid.LockIdIntermediaryAccountConnection")
+	proto.RegisterType((*UnpoolWhitelistedPools)(nil), "osmosis.superfluid.UnpoolWhitelistedPools")
+	proto.RegisterType((*ConcentratedPoolUserPositionRecord)(nil), "osmosis.superfluid.ConcentratedPoolUserPositionRecord")
 }
 
 func init() {

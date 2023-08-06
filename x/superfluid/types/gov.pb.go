@@ -147,9 +147,9 @@ func (m *UpdateUnpoolWhiteListProposal) XXX_DiscardUnknown() {
 var xxx_messageInfo_UpdateUnpoolWhiteListProposal proto.InternalMessageInfo
 
 func init() {
-	proto.RegisterType((*SetSuperfluidAssetsProposal)(nil), "merlin.superfluid.v1beta1.SetSuperfluidAssetsProposal")
-	proto.RegisterType((*RemoveSuperfluidAssetsProposal)(nil), "merlin.superfluid.v1beta1.RemoveSuperfluidAssetsProposal")
-	proto.RegisterType((*UpdateUnpoolWhiteListProposal)(nil), "merlin.superfluid.v1beta1.UpdateUnpoolWhiteListProposal")
+	proto.RegisterType((*SetSuperfluidAssetsProposal)(nil), "osmosis.superfluid.v1beta1.SetSuperfluidAssetsProposal")
+	proto.RegisterType((*RemoveSuperfluidAssetsProposal)(nil), "osmosis.superfluid.v1beta1.RemoveSuperfluidAssetsProposal")
+	proto.RegisterType((*UpdateUnpoolWhiteListProposal)(nil), "osmosis.superfluid.v1beta1.UpdateUnpoolWhiteListProposal")
 }
 
 func init() {

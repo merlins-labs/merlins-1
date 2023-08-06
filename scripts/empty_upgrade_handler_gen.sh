@@ -105,8 +105,8 @@ sed -i "s/E2E_UPGRADE_VERSION := ${bracks}v$latest_version$bracks/E2E_UPGRADE_VE
 
 # bumps up prev e2e version
 e2e_file=./tests/e2e/containers/config.go
-PREV_MERLIN_DEV_TAG=$(curl -L -s 'https://registry.hub.docker.com/v2/repositories/furylabs/merlin-dev/tags?page=1&page_size=100'            | jq -r '.results[] | .name | select(.|test("^(?:v|)[0-9]+\\.[0-9]+(?:$|\\.[0-9]+$)"))' | grep --max-count=1 "")
-PREV_MERLIN_E2E_TAG=$(curl -L -s 'https://registry.hub.docker.com/v2/repositories/furylabs/merlin-e2e-init-chain/tags?page=1&page_size=100' | jq -r '.results[] | .name | select(.|test("^(?:v|)[0-9]+\\.[0-9]+(?:$|\\.[0-9]+$)"))' | grep --max-count=1 "")
+PREV_MERLIN_DEV_TAG=$(curl -L -s 'https://registry.hub.docker.com/v2/repositories/fanfury/merlin-dev/tags?page=1&page_size=100'            | jq -r '.results[] | .name | select(.|test("^(?:v|)[0-9]+\\.[0-9]+(?:$|\\.[0-9]+$)"))' | grep --max-count=1 "")
+PREV_MERLIN_E2E_TAG=$(curl -L -s 'https://registry.hub.docker.com/v2/repositories/fanfury/merlin-e2e-init-chain/tags?page=1&page_size=100' | jq -r '.results[] | .name | select(.|test("^(?:v|)[0-9]+\\.[0-9]+(?:$|\\.[0-9]+$)"))' | grep --max-count=1 "")
 
 # previousVersionFuryTag  = PREV_MERLIN_DEV_TAG
 if [[ $version_create == v$(($(echo $PREV_MERLIN_DEV_TAG | awk -F . '{print $1}')+1)) ]]; then	

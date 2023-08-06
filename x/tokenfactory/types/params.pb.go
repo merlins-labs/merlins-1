@@ -87,7 +87,7 @@ func (m *Params) GetDenomCreationGasConsume() uint64 {
 }
 
 func init() {
-	proto.RegisterType((*Params)(nil), "merlin.tokenfactory.v1beta1.Params")
+	proto.RegisterType((*Params)(nil), "osmosis.tokenfactory.v1beta1.Params")
 }
 
 func init() {
