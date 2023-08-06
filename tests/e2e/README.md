@@ -113,7 +113,7 @@ Conceptually, we can split the e2e setup into 2 parts:
 
     This is done in `configurer/setup.go` via function decorator design pattern
     where we chain the desired setup components during configurer creation.
-    [Example](https://github.com/merlinslair/merlin/blob/c5d5c9f0c6b5c7fdf9688057eb78ec793f6dd580/tests/e2e/configurer/configurer.go#L166)
+    [Example](https://github.com/merlins-labs/merlin/blob/c5d5c9f0c6b5c7fdf9688057eb78ec793f6dd580/tests/e2e/configurer/configurer.go#L166)
 
 ## `initialization` Package
 

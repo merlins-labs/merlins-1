@@ -7,7 +7,7 @@ import (
 	"github.com/stretchr/testify/require"
 
 	"github.com/osmosis-labs/osmosis/osmoutils/accum"
-	"github.com/merlinslair/merlin/v16/x/concentrated-liquidity/types"
+	"github.com/merlins-labs/merlin/v16/x/concentrated-liquidity/types"
 )
 
 // TestReverseRelationTickIndexToBytes tests if TickIndexToBytes and TickIndexFromBytes

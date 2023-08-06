@@ -16,12 +16,12 @@ import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/cosmos/cosmos-sdk/types/module"
 
-	"github.com/merlinslair/merlin/v16/x/twap"
-	twapclient "github.com/merlinslair/merlin/v16/x/twap/client"
-	twapcli "github.com/merlinslair/merlin/v16/x/twap/client/cli"
-	"github.com/merlinslair/merlin/v16/x/twap/client/grpc"
-	"github.com/merlinslair/merlin/v16/x/twap/client/queryproto"
-	"github.com/merlinslair/merlin/v16/x/twap/types"
+	"github.com/merlins-labs/merlin/v16/x/twap"
+	twapclient "github.com/merlins-labs/merlin/v16/x/twap/client"
+	twapcli "github.com/merlins-labs/merlin/v16/x/twap/client/cli"
+	"github.com/merlins-labs/merlin/v16/x/twap/client/grpc"
+	"github.com/merlins-labs/merlin/v16/x/twap/client/queryproto"
+	"github.com/merlins-labs/merlin/v16/x/twap/types"
 )
 
 var (

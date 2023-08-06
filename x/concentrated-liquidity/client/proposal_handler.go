@@ -1,8 +1,8 @@
 package client
 
 import (
-	"github.com/merlinslair/merlin/v16/x/concentrated-liquidity/client/cli"
-	"github.com/merlinslair/merlin/v16/x/concentrated-liquidity/client/rest"
+	"github.com/merlins-labs/merlin/v16/x/concentrated-liquidity/client/cli"
+	"github.com/merlins-labs/merlin/v16/x/concentrated-liquidity/client/rest"
 
 	govclient "github.com/cosmos/cosmos-sdk/x/gov/client"
 )

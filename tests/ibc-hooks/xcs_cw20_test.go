@@ -9,7 +9,7 @@ import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	transfertypes "github.com/cosmos/ibc-go/v4/modules/apps/transfer/types"
 	ibctesting "github.com/cosmos/ibc-go/v4/testing"
-	"github.com/merlinslair/merlin/v16/tests/merlinibctesting"
+	"github.com/merlins-labs/merlin/v16/tests/merlinibctesting"
 )
 
 // Instantiate the cw20 and cw20-ics20 contract

@@ -11,9 +11,9 @@ import (
 
 	"github.com/osmosis-labs/osmosis/osmomath"
 	"github.com/osmosis-labs/osmosis/osmoutils"
-	appParams "github.com/merlinslair/merlin/v16/app/params"
-	lockuptypes "github.com/merlinslair/merlin/v16/x/lockup/types"
-	"github.com/merlinslair/merlin/v16/x/valset-pref/types"
+	appParams "github.com/merlins-labs/merlin/v16/app/params"
+	lockuptypes "github.com/merlins-labs/merlin/v16/x/lockup/types"
+	"github.com/merlins-labs/merlin/v16/x/valset-pref/types"
 )
 
 type valSet struct {

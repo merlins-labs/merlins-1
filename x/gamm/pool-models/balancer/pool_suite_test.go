@@ -12,10 +12,10 @@ import (
 	"github.com/stretchr/testify/suite"
 
 	"github.com/osmosis-labs/osmosis/osmoutils/osmoassert"
-	"github.com/merlinslair/merlin/v16/app/apptesting"
-	v10 "github.com/merlinslair/merlin/v16/app/upgrades/v10"
-	"github.com/merlinslair/merlin/v16/x/gamm/pool-models/balancer"
-	"github.com/merlinslair/merlin/v16/x/gamm/types"
+	"github.com/merlins-labs/merlin/v16/app/apptesting"
+	v10 "github.com/merlins-labs/merlin/v16/app/upgrades/v10"
+	"github.com/merlins-labs/merlin/v16/x/gamm/pool-models/balancer"
+	"github.com/merlins-labs/merlin/v16/x/gamm/types"
 )
 
 const (

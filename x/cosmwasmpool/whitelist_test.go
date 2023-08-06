@@ -5,7 +5,7 @@ import (
 
 	"github.com/stretchr/testify/suite"
 
-	"github.com/merlinslair/merlin/v16/app/apptesting"
+	"github.com/merlins-labs/merlin/v16/app/apptesting"
 )
 
 type WhitelistSuite struct {

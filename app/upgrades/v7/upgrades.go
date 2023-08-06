@@ -7,10 +7,10 @@ import (
 	"github.com/cosmos/cosmos-sdk/types/module"
 	upgradetypes "github.com/cosmos/cosmos-sdk/x/upgrade/types"
 
-	"github.com/merlinslair/merlin/v16/app/keepers"
-	"github.com/merlinslair/merlin/v16/app/upgrades"
-	lockupkeeper "github.com/merlinslair/merlin/v16/x/lockup/keeper"
-	superfluidtypes "github.com/merlinslair/merlin/v16/x/superfluid/types"
+	"github.com/merlins-labs/merlin/v16/app/keepers"
+	"github.com/merlins-labs/merlin/v16/app/upgrades"
+	lockupkeeper "github.com/merlins-labs/merlin/v16/x/lockup/keeper"
+	superfluidtypes "github.com/merlins-labs/merlin/v16/x/superfluid/types"
 )
 
 func CreateUpgradeHandler(

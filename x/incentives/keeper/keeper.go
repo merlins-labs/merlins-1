@@ -7,7 +7,7 @@ import (
 	"github.com/tendermint/tendermint/libs/log"
 
 	"github.com/osmosis-labs/osmosis/osmoutils"
-	"github.com/merlinslair/merlin/v16/x/incentives/types"
+	"github.com/merlins-labs/merlin/v16/x/incentives/types"
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	paramtypes "github.com/cosmos/cosmos-sdk/x/params/types"

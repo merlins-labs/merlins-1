@@ -10,12 +10,12 @@ import (
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
-	appparams "github.com/merlinslair/merlin/v16/app/params"
-	v16 "github.com/merlinslair/merlin/v16/app/upgrades/v16"
-	"github.com/merlinslair/merlin/v16/tests/e2e/configurer/chain"
-	"github.com/merlinslair/merlin/v16/tests/e2e/configurer/config"
-	"github.com/merlinslair/merlin/v16/tests/e2e/containers"
-	"github.com/merlinslair/merlin/v16/tests/e2e/initialization"
+	appparams "github.com/merlins-labs/merlin/v16/app/params"
+	v16 "github.com/merlins-labs/merlin/v16/app/upgrades/v16"
+	"github.com/merlins-labs/merlin/v16/tests/e2e/configurer/chain"
+	"github.com/merlins-labs/merlin/v16/tests/e2e/configurer/config"
+	"github.com/merlins-labs/merlin/v16/tests/e2e/containers"
+	"github.com/merlins-labs/merlin/v16/tests/e2e/initialization"
 )
 
 type UpgradeSettings struct {

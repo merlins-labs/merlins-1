@@ -7,9 +7,9 @@ import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/stretchr/testify/require"
 
-	appParams "github.com/merlinslair/merlin/v16/app/params"
-	stableswap "github.com/merlinslair/merlin/v16/x/gamm/pool-models/stableswap"
-	"github.com/merlinslair/merlin/v16/x/gamm/types"
+	appParams "github.com/merlins-labs/merlin/v16/app/params"
+	stableswap "github.com/merlins-labs/merlin/v16/x/gamm/pool-models/stableswap"
+	"github.com/merlins-labs/merlin/v16/x/gamm/types"
 )
 
 func baseCreatePoolMsgGen(sender sdk.AccAddress) *stableswap.MsgCreateStableswapPool {

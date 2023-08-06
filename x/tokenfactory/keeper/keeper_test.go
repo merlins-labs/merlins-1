@@ -13,9 +13,9 @@ import (
 	bankkeeper "github.com/cosmos/cosmos-sdk/x/bank/keeper"
 	banktypes "github.com/cosmos/cosmos-sdk/x/bank/types"
 
-	"github.com/merlinslair/merlin/v16/app/apptesting"
-	"github.com/merlinslair/merlin/v16/x/tokenfactory/keeper"
-	"github.com/merlinslair/merlin/v16/x/tokenfactory/types"
+	"github.com/merlins-labs/merlin/v16/app/apptesting"
+	"github.com/merlins-labs/merlin/v16/x/tokenfactory/keeper"
+	"github.com/merlins-labs/merlin/v16/x/tokenfactory/types"
 )
 
 type KeeperTestSuite struct {

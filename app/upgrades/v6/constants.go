@@ -1,6 +1,6 @@
 package v6
 
-import "github.com/merlinslair/merlin/v16/app/upgrades"
+import "github.com/merlins-labs/merlin/v16/app/upgrades"
 
 const (
 	// UpgradeName defines the on-chain upgrade name for the Merlin v6 upgrade.

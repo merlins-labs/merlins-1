@@ -27,7 +27,7 @@ import (
 	"github.com/cosmos/cosmos-sdk/types/module"
 	"github.com/cosmos/cosmos-sdk/x/genutil"
 
-	"github.com/merlinslair/merlin/v16/app"
+	"github.com/merlins-labs/merlin/v16/app"
 )
 
 const (

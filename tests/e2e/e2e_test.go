@@ -19,20 +19,20 @@ import (
 	"github.com/osmosis-labs/osmosis/osmomath"
 	ibchookskeeper "github.com/osmosis-labs/osmosis/x/ibc-hooks/keeper"
 
-	ibcratelimittypes "github.com/merlinslair/merlin/v16/x/ibc-rate-limit/types"
-	poolmanagertypes "github.com/merlinslair/merlin/v16/x/poolmanager/types"
+	ibcratelimittypes "github.com/merlins-labs/merlin/v16/x/ibc-rate-limit/types"
+	poolmanagertypes "github.com/merlins-labs/merlin/v16/x/poolmanager/types"
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	coretypes "github.com/tendermint/tendermint/rpc/core/types"
 
 	"github.com/osmosis-labs/osmosis/osmoutils/osmoassert"
-	appparams "github.com/merlinslair/merlin/v16/app/params"
-	v16 "github.com/merlinslair/merlin/v16/app/upgrades/v16"
-	"github.com/merlinslair/merlin/v16/tests/e2e/configurer/chain"
-	"github.com/merlinslair/merlin/v16/tests/e2e/configurer/config"
-	"github.com/merlinslair/merlin/v16/tests/e2e/initialization"
-	clmath "github.com/merlinslair/merlin/v16/x/concentrated-liquidity/math"
-	cltypes "github.com/merlinslair/merlin/v16/x/concentrated-liquidity/types"
+	appparams "github.com/merlins-labs/merlin/v16/app/params"
+	v16 "github.com/merlins-labs/merlin/v16/app/upgrades/v16"
+	"github.com/merlins-labs/merlin/v16/tests/e2e/configurer/chain"
+	"github.com/merlins-labs/merlin/v16/tests/e2e/configurer/config"
+	"github.com/merlins-labs/merlin/v16/tests/e2e/initialization"
+	clmath "github.com/merlins-labs/merlin/v16/x/concentrated-liquidity/math"
+	cltypes "github.com/merlins-labs/merlin/v16/x/concentrated-liquidity/types"
 )
 
 // TODO: Find more scalable way to do this
@@ -1361,7 +1361,7 @@ func (s *IntegrationTestSuite) AddToExistingLock() {
 // because twap keep time = epoch time / 4 and we use a timer
 // to wait for at least the twap keep time.
 func (s *IntegrationTestSuite) ArithmeticTWAP() {
-	s.T().Skip("TODO: investigate further: https://github.com/merlinslair/merlin/issues/4342")
+	s.T().Skip("TODO: investigate further: https://github.com/merlins-labs/merlin/issues/4342")
 
 	const (
 		poolFile   = "nativeDenomThreeAssetPool.json"

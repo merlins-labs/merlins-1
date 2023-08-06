@@ -10,9 +10,9 @@ import (
 	"github.com/cosmos/cosmos-sdk/store/prefix"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
-	incentivetypes "github.com/merlinslair/merlin/v16/x/incentives/types"
-	"github.com/merlinslair/merlin/v16/x/pool-incentives/types"
-	poolmanagertypes "github.com/merlinslair/merlin/v16/x/poolmanager/types"
+	incentivetypes "github.com/merlins-labs/merlin/v16/x/incentives/types"
+	"github.com/merlins-labs/merlin/v16/x/pool-incentives/types"
+	poolmanagertypes "github.com/merlins-labs/merlin/v16/x/poolmanager/types"
 )
 
 var _ types.QueryServer = Querier{}

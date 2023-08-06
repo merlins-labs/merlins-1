@@ -9,8 +9,8 @@ import (
 
 	"github.com/osmosis-labs/osmosis/osmoutils"
 	"github.com/osmosis-labs/osmosis/osmoutils/accum"
-	types "github.com/merlinslair/merlin/v16/x/concentrated-liquidity/types"
-	"github.com/merlinslair/merlin/v16/x/concentrated-liquidity/types/genesis"
+	types "github.com/merlins-labs/merlin/v16/x/concentrated-liquidity/types"
+	"github.com/merlins-labs/merlin/v16/x/concentrated-liquidity/types/genesis"
 )
 
 // InitGenesis initializes the concentrated-liquidity module with the provided genesis state.

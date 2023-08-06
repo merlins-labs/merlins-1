@@ -24,7 +24,7 @@ cd ..
 # move proto files to the right places
 #
 # Note: Proto files are suffixed with the current binary version.
-cp -r github.com/merlinslair/merlin/v16/* ./
+cp -r github.com/merlins-labs/merlin/v16/* ./
 cp -r github.com/osmosis-labs/osmosis/osmoutils ./
 rm -rf github.com
 
@@ -32,4 +32,4 @@ go mod tidy -compat=1.18
 
 # TODO: Uncomment once ORM/Pulsar support is needed.
 #
-# Ref: https://github.com/merlinslair/merlin/pull/1589
+# Ref: https://github.com/merlins-labs/merlin/pull/1589

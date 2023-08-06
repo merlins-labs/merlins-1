@@ -12,10 +12,10 @@ import (
 	errorsmod "cosmossdk.io/errors"
 
 	"github.com/osmosis-labs/osmosis/osmoutils"
-	"github.com/merlinslair/merlin/v16/x/concentrated-liquidity/model"
-	types "github.com/merlinslair/merlin/v16/x/concentrated-liquidity/types"
-	lockuptypes "github.com/merlinslair/merlin/v16/x/lockup/types"
-	poolmanagertypes "github.com/merlinslair/merlin/v16/x/poolmanager/types"
+	"github.com/merlins-labs/merlin/v16/x/concentrated-liquidity/model"
+	types "github.com/merlins-labs/merlin/v16/x/concentrated-liquidity/types"
+	lockuptypes "github.com/merlins-labs/merlin/v16/x/lockup/types"
+	poolmanagertypes "github.com/merlins-labs/merlin/v16/x/poolmanager/types"
 )
 
 // InitializePool initializes a new concentrated liquidity pool with the given PoolI interface and creator address.

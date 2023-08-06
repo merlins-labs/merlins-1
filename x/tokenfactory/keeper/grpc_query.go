@@ -5,7 +5,7 @@ import (
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
-	"github.com/merlinslair/merlin/v16/x/tokenfactory/types"
+	"github.com/merlins-labs/merlin/v16/x/tokenfactory/types"
 )
 
 var _ types.QueryServer = Keeper{}

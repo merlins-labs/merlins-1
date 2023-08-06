@@ -37,5 +37,5 @@ Mgoogle/protobuf/any.proto=github.com/cosmos/cosmos-sdk/codec/types:. \
   $(find "${dir}" -maxdepth 1 -name '*.proto')
 done
 
-cp -r ./github.com/merlinslair/merlin/* ./
+cp -r ./github.com/merlins-labs/merlin/* ./
 rm -rf ./github.com

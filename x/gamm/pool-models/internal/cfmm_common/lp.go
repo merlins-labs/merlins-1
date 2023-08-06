@@ -8,7 +8,7 @@ import (
 	errorsmod "cosmossdk.io/errors"
 
 	"github.com/osmosis-labs/osmosis/osmomath"
-	"github.com/merlinslair/merlin/v16/x/gamm/types"
+	"github.com/merlins-labs/merlin/v16/x/gamm/types"
 )
 
 const errMsgFormatSharesLargerThanMax = "cannot exit all shares in a pool. Attempted to exit %s shares, max allowed is %s"

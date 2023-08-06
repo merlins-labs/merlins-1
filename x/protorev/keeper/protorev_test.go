@@ -3,7 +3,7 @@ package keeper_test
 import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
-	"github.com/merlinslair/merlin/v16/x/protorev/types"
+	"github.com/merlins-labs/merlin/v16/x/protorev/types"
 )
 
 // TestGetTokenPairArbRoutes tests the GetTokenPairArbRoutes function.

@@ -10,13 +10,13 @@ import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	stakingtypes "github.com/cosmos/cosmos-sdk/x/staking/types"
 
-	"github.com/merlinslair/merlin/v16/app/apptesting"
-	"github.com/merlinslair/merlin/v16/x/gamm/pool-models/balancer"
-	gammtypes "github.com/merlinslair/merlin/v16/x/gamm/types"
-	lockuptypes "github.com/merlinslair/merlin/v16/x/lockup/types"
-	minttypes "github.com/merlinslair/merlin/v16/x/mint/types"
-	"github.com/merlinslair/merlin/v16/x/superfluid/keeper"
-	"github.com/merlinslair/merlin/v16/x/superfluid/types"
+	"github.com/merlins-labs/merlin/v16/app/apptesting"
+	"github.com/merlins-labs/merlin/v16/x/gamm/pool-models/balancer"
+	gammtypes "github.com/merlins-labs/merlin/v16/x/gamm/types"
+	lockuptypes "github.com/merlins-labs/merlin/v16/x/lockup/types"
+	minttypes "github.com/merlins-labs/merlin/v16/x/mint/types"
+	"github.com/merlins-labs/merlin/v16/x/superfluid/keeper"
+	"github.com/merlins-labs/merlin/v16/x/superfluid/types"
 	epochtypes "github.com/osmosis-labs/osmosis/x/epochs/types"
 )
 

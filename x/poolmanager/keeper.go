@@ -5,7 +5,7 @@ import (
 	gogotypes "github.com/gogo/protobuf/types"
 
 	"github.com/osmosis-labs/osmosis/osmoutils"
-	"github.com/merlinslair/merlin/v16/x/poolmanager/types"
+	"github.com/merlins-labs/merlin/v16/x/poolmanager/types"
 
 	paramtypes "github.com/cosmos/cosmos-sdk/x/params/types"
 )

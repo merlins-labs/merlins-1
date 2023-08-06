@@ -4,11 +4,11 @@ import (
 	"fmt"
 	"strings"
 
-	gammtypes "github.com/merlinslair/merlin/v16/x/gamm/types"
+	gammtypes "github.com/merlins-labs/merlin/v16/x/gamm/types"
 
 	govtypes "github.com/cosmos/cosmos-sdk/x/gov/types"
 
-	cltypes "github.com/merlinslair/merlin/v16/x/concentrated-liquidity/types"
+	cltypes "github.com/merlins-labs/merlin/v16/x/concentrated-liquidity/types"
 )
 
 const (

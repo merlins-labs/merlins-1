@@ -15,12 +15,12 @@ import (
 
 	"github.com/osmosis-labs/osmosis/osmomath"
 	"github.com/osmosis-labs/osmosis/osmoutils"
-	"github.com/merlinslair/merlin/v16/app/apptesting"
-	v16 "github.com/merlinslair/merlin/v16/app/upgrades/v16"
-	cltypes "github.com/merlinslair/merlin/v16/x/concentrated-liquidity/types"
-	cosmwasmpooltypes "github.com/merlinslair/merlin/v16/x/cosmwasmpool/types"
-	poolmanagertypes "github.com/merlinslair/merlin/v16/x/poolmanager/types"
-	protorevtypes "github.com/merlinslair/merlin/v16/x/protorev/types"
+	"github.com/merlins-labs/merlin/v16/app/apptesting"
+	v16 "github.com/merlins-labs/merlin/v16/app/upgrades/v16"
+	cltypes "github.com/merlins-labs/merlin/v16/x/concentrated-liquidity/types"
+	cosmwasmpooltypes "github.com/merlins-labs/merlin/v16/x/cosmwasmpool/types"
+	poolmanagertypes "github.com/merlins-labs/merlin/v16/x/poolmanager/types"
+	protorevtypes "github.com/merlins-labs/merlin/v16/x/protorev/types"
 )
 
 type UpgradeTestSuite struct {

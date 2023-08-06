@@ -9,7 +9,7 @@ import (
 
 	"github.com/tendermint/tendermint/crypto/tmhash"
 
-	"github.com/merlinslair/merlin/v16/x/protorev/types"
+	"github.com/merlins-labs/merlin/v16/x/protorev/types"
 )
 
 // EmitBackrunEvent updates and emits a backrunEvent

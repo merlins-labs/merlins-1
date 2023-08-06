@@ -12,11 +12,11 @@ import (
 	"github.com/osmosis-labs/osmosis/osmomath"
 	"github.com/osmosis-labs/osmosis/osmoutils"
 	"github.com/osmosis-labs/osmosis/osmoutils/osmoassert"
-	gammtypes "github.com/merlinslair/merlin/v16/x/gamm/types"
-	poolmanagertypes "github.com/merlinslair/merlin/v16/x/poolmanager/types"
-	"github.com/merlinslair/merlin/v16/x/twap"
-	"github.com/merlinslair/merlin/v16/x/twap/types"
-	"github.com/merlinslair/merlin/v16/x/twap/types/twapmock"
+	gammtypes "github.com/merlins-labs/merlin/v16/x/gamm/types"
+	poolmanagertypes "github.com/merlins-labs/merlin/v16/x/poolmanager/types"
+	"github.com/merlins-labs/merlin/v16/x/twap"
+	"github.com/merlins-labs/merlin/v16/x/twap/types"
+	"github.com/merlins-labs/merlin/v16/x/twap/types/twapmock"
 )
 
 var (

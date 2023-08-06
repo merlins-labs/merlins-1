@@ -18,7 +18,7 @@ go install -ldflags '-w -s -X github.com/cosmos/cosmos-sdk/types.DBBackend=pebbl
 
 # MAKE HOME FOLDER AND GET GENESIS
 merlin init test
-wget -O ~/.merlin/config/genesis.json https://github.com/merlinslair/merlin/raw/main/networks/merlin-1/genesis.json
+wget -O ~/.merlin/config/genesis.json https://github.com/merlins-labs/merlin/raw/main/networks/merlin-1/genesis.json
 
 
 INTERVAL=1500

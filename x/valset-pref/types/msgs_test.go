@@ -6,9 +6,9 @@ import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/stretchr/testify/require"
 
-	"github.com/merlinslair/merlin/v16/app/apptesting"
-	appParams "github.com/merlinslair/merlin/v16/app/params"
-	"github.com/merlinslair/merlin/v16/x/valset-pref/types"
+	"github.com/merlins-labs/merlin/v16/app/apptesting"
+	appParams "github.com/merlins-labs/merlin/v16/app/params"
+	"github.com/merlins-labs/merlin/v16/x/valset-pref/types"
 )
 
 func TestMsgSetValidatorSetPreference(t *testing.T) {

@@ -5,8 +5,8 @@ import (
 	authtypes "github.com/cosmos/cosmos-sdk/x/auth/types"
 
 	"github.com/osmosis-labs/osmosis/osmoutils/osmoassert"
-	"github.com/merlinslair/merlin/v16/x/mint/keeper"
-	"github.com/merlinslair/merlin/v16/x/mint/types"
+	"github.com/merlins-labs/merlin/v16/x/mint/keeper"
+	"github.com/merlins-labs/merlin/v16/x/mint/types"
 )
 
 var customGenesis = types.NewGenesisState(

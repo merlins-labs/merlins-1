@@ -4,12 +4,12 @@ import (
 	gocontext "context"
 	"testing"
 
-	"github.com/merlinslair/merlin/v16/x/poolmanager/types"
+	"github.com/merlins-labs/merlin/v16/x/poolmanager/types"
 
 	"github.com/stretchr/testify/suite"
 
-	"github.com/merlinslair/merlin/v16/app/apptesting"
-	poolmanagerqueryproto "github.com/merlinslair/merlin/v16/x/poolmanager/client/queryproto"
+	"github.com/merlins-labs/merlin/v16/app/apptesting"
+	poolmanagerqueryproto "github.com/merlins-labs/merlin/v16/x/poolmanager/client/queryproto"
 )
 
 type QueryTestSuite struct {

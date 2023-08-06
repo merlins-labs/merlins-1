@@ -8,17 +8,17 @@ import (
 	"github.com/cosmos/cosmos-sdk/types/module"
 	upgradetypes "github.com/cosmos/cosmos-sdk/x/upgrade/types"
 
-	"github.com/merlinslair/merlin/v16/app/keepers"
-	"github.com/merlinslair/merlin/v16/app/upgrades"
+	"github.com/merlins-labs/merlin/v16/app/keepers"
+	"github.com/merlins-labs/merlin/v16/app/upgrades"
 
 	cosmwasmtypes "github.com/CosmWasm/wasmd/x/wasm/types"
 	distrtypes "github.com/cosmos/cosmos-sdk/x/distribution/types"
 
-	cltypes "github.com/merlinslair/merlin/v16/x/concentrated-liquidity/types"
-	cosmwasmpooltypes "github.com/merlinslair/merlin/v16/x/cosmwasmpool/types"
-	superfluidtypes "github.com/merlinslair/merlin/v16/x/superfluid/types"
-	tokenfactorykeeper "github.com/merlinslair/merlin/v16/x/tokenfactory/keeper"
-	tokenfactorytypes "github.com/merlinslair/merlin/v16/x/tokenfactory/types"
+	cltypes "github.com/merlins-labs/merlin/v16/x/concentrated-liquidity/types"
+	cosmwasmpooltypes "github.com/merlins-labs/merlin/v16/x/cosmwasmpool/types"
+	superfluidtypes "github.com/merlins-labs/merlin/v16/x/superfluid/types"
+	tokenfactorykeeper "github.com/merlins-labs/merlin/v16/x/tokenfactory/keeper"
+	tokenfactorytypes "github.com/merlins-labs/merlin/v16/x/tokenfactory/types"
 )
 
 const (

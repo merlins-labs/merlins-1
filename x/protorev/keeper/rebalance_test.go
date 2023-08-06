@@ -3,10 +3,10 @@ package keeper_test
 import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
-	"github.com/merlinslair/merlin/v16/app/apptesting"
-	poolmanagertypes "github.com/merlinslair/merlin/v16/x/poolmanager/types"
-	protorevtypes "github.com/merlinslair/merlin/v16/x/protorev/keeper"
-	"github.com/merlinslair/merlin/v16/x/protorev/types"
+	"github.com/merlins-labs/merlin/v16/app/apptesting"
+	poolmanagertypes "github.com/merlins-labs/merlin/v16/x/poolmanager/types"
+	protorevtypes "github.com/merlins-labs/merlin/v16/x/protorev/keeper"
+	"github.com/merlins-labs/merlin/v16/x/protorev/types"
 )
 
 // Mainnet Arb Route - 2 Asset, Same Weights (Block: 5905150)

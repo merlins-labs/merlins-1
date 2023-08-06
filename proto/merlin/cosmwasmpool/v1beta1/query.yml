@@ -1,7 +1,7 @@
 keeper: 
-  path: "github.com/merlinslair/merlin/v16/x/cosmwasmpool"
+  path: "github.com/merlins-labs/merlin/v16/x/cosmwasmpool"
   struct: "Keeper"
-client_path: "github.com/merlinslair/merlin/v16/x/cosmwasmpool/client"
+client_path: "github.com/merlins-labs/merlin/v16/x/cosmwasmpool/client"
 queries:
   Params:
     proto_wrapper:

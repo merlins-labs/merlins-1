@@ -13,15 +13,15 @@ import (
 	transfertypes "github.com/cosmos/ibc-go/v4/modules/apps/transfer/types"
 
 	"github.com/osmosis-labs/osmosis/osmoutils/osmoassert"
-	ibcratelimittypes "github.com/merlinslair/merlin/v16/x/ibc-rate-limit/types"
+	ibcratelimittypes "github.com/merlins-labs/merlin/v16/x/ibc-rate-limit/types"
 
 	"github.com/stretchr/testify/suite"
 
-	"github.com/merlinslair/merlin/v16/app/apptesting"
-	v15 "github.com/merlinslair/merlin/v16/app/upgrades/v15"
-	gamm "github.com/merlinslair/merlin/v16/x/gamm/keeper"
-	balancer "github.com/merlinslair/merlin/v16/x/gamm/pool-models/balancer"
-	poolmanagertypes "github.com/merlinslair/merlin/v16/x/poolmanager/types"
+	"github.com/merlins-labs/merlin/v16/app/apptesting"
+	v15 "github.com/merlins-labs/merlin/v16/app/upgrades/v15"
+	gamm "github.com/merlins-labs/merlin/v16/x/gamm/keeper"
+	balancer "github.com/merlins-labs/merlin/v16/x/gamm/pool-models/balancer"
+	poolmanagertypes "github.com/merlins-labs/merlin/v16/x/poolmanager/types"
 )
 
 type UpgradeTestSuite struct {

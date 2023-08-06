@@ -6,13 +6,13 @@ import (
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
-	"github.com/merlinslair/merlin/v16/app/apptesting"
-	clmodel "github.com/merlinslair/merlin/v16/x/concentrated-liquidity/model"
-	cwmodel "github.com/merlinslair/merlin/v16/x/cosmwasmpool/model"
-	"github.com/merlinslair/merlin/v16/x/gamm/pool-models/balancer"
-	stableswap "github.com/merlinslair/merlin/v16/x/gamm/pool-models/stableswap"
-	gammtypes "github.com/merlinslair/merlin/v16/x/gamm/types"
-	"github.com/merlinslair/merlin/v16/x/poolmanager/types"
+	"github.com/merlins-labs/merlin/v16/app/apptesting"
+	clmodel "github.com/merlins-labs/merlin/v16/x/concentrated-liquidity/model"
+	cwmodel "github.com/merlins-labs/merlin/v16/x/cosmwasmpool/model"
+	"github.com/merlins-labs/merlin/v16/x/gamm/pool-models/balancer"
+	stableswap "github.com/merlins-labs/merlin/v16/x/gamm/pool-models/stableswap"
+	gammtypes "github.com/merlins-labs/merlin/v16/x/gamm/types"
+	"github.com/merlins-labs/merlin/v16/x/poolmanager/types"
 )
 
 func (s *KeeperTestSuite) TestPoolCreationFee() {

@@ -14,9 +14,9 @@ import (
 
 	"github.com/osmosis-labs/osmosis/osmoutils"
 	"github.com/osmosis-labs/osmosis/osmoutils/accum"
-	"github.com/merlinslair/merlin/v16/x/concentrated-liquidity/model"
-	"github.com/merlinslair/merlin/v16/x/concentrated-liquidity/types"
-	lockuptypes "github.com/merlinslair/merlin/v16/x/lockup/types"
+	"github.com/merlins-labs/merlin/v16/x/concentrated-liquidity/model"
+	"github.com/merlins-labs/merlin/v16/x/concentrated-liquidity/types"
+	lockuptypes "github.com/merlins-labs/merlin/v16/x/lockup/types"
 )
 
 const MinNumPositions = 2

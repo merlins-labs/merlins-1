@@ -1,8 +1,8 @@
 package v12
 
 import (
-	"github.com/merlinslair/merlin/v16/app/upgrades"
-	twaptypes "github.com/merlinslair/merlin/v16/x/twap/types"
+	"github.com/merlins-labs/merlin/v16/app/upgrades"
+	twaptypes "github.com/merlins-labs/merlin/v16/x/twap/types"
 
 	store "github.com/cosmos/cosmos-sdk/store/types"
 )

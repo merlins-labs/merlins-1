@@ -7,9 +7,9 @@ import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
 	"github.com/osmosis-labs/osmosis/osmomath"
-	"github.com/merlinslair/merlin/v16/app/apptesting"
-	"github.com/merlinslair/merlin/v16/x/concentrated-liquidity/math"
-	"github.com/merlinslair/merlin/v16/x/concentrated-liquidity/types"
+	"github.com/merlins-labs/merlin/v16/app/apptesting"
+	"github.com/merlins-labs/merlin/v16/x/concentrated-liquidity/math"
+	"github.com/merlins-labs/merlin/v16/x/concentrated-liquidity/types"
 )
 
 type RangeTestParams struct {

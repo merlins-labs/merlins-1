@@ -6,8 +6,8 @@ import (
 	"github.com/cosmos/cosmos-sdk/codec"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
-	"github.com/merlinslair/merlin/v16/x/cosmwasmpool/types"
-	poolmanagertypes "github.com/merlinslair/merlin/v16/x/poolmanager/types"
+	"github.com/merlins-labs/merlin/v16/x/cosmwasmpool/types"
+	poolmanagertypes "github.com/merlins-labs/merlin/v16/x/poolmanager/types"
 
 	paramtypes "github.com/cosmos/cosmos-sdk/x/params/types"
 )

@@ -26,12 +26,12 @@ import (
 	simtypes "github.com/cosmos/cosmos-sdk/types/simulation"
 	stakingtypes "github.com/cosmos/cosmos-sdk/x/staking/types"
 
-	furysimtypes "github.com/merlinslair/merlin/v16/simulation/simtypes"
-	"github.com/merlinslair/merlin/v16/x/mint/client/rest"
-	"github.com/merlinslair/merlin/v16/x/superfluid/client/cli"
-	"github.com/merlinslair/merlin/v16/x/superfluid/keeper"
-	"github.com/merlinslair/merlin/v16/x/superfluid/simulation"
-	"github.com/merlinslair/merlin/v16/x/superfluid/types"
+	furysimtypes "github.com/merlins-labs/merlin/v16/simulation/simtypes"
+	"github.com/merlins-labs/merlin/v16/x/mint/client/rest"
+	"github.com/merlins-labs/merlin/v16/x/superfluid/client/cli"
+	"github.com/merlins-labs/merlin/v16/x/superfluid/keeper"
+	"github.com/merlins-labs/merlin/v16/x/superfluid/simulation"
+	"github.com/merlins-labs/merlin/v16/x/superfluid/types"
 )
 
 var (

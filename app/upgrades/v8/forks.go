@@ -3,14 +3,14 @@ package v8
 import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
-	"github.com/merlinslair/merlin/v16/app/keepers"
+	"github.com/merlins-labs/merlin/v16/app/keepers"
 )
 
 // RunForkLogic executes height-gated on-chain fork logic for the Merlin v8
 // upgrade.
 func RunForkLogic(ctx sdk.Context, appKeepers *keepers.AppKeepers) {
 	// Only proceed with v8 for mainnet, testnets need not adjust their pool incentives or unbonding.
-	// https://github.com/merlinslair/merlin/issues/1609
+	// https://github.com/merlins-labs/merlin/issues/1609
 	if ctx.ChainID() != "merlin-1" {
 		return
 	}

@@ -8,7 +8,7 @@ import (
 
 	"github.com/prometheus/client_golang/prometheus"
 
-	"github.com/merlinslair/merlin/v16/app/params"
+	"github.com/merlins-labs/merlin/v16/app/params"
 
 	"github.com/spf13/cast"
 	"github.com/spf13/cobra"
@@ -44,7 +44,7 @@ import (
 
 	"github.com/cosmos/cosmos-sdk/client/config"
 
-	merlin "github.com/merlinslair/merlin/v16/app"
+	merlin "github.com/merlins-labs/merlin/v16/app"
 )
 
 // NewRootCmd creates a new root command for simd. It is called once in the

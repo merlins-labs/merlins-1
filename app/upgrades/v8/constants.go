@@ -1,8 +1,8 @@
 package v8
 
 import (
-	"github.com/merlinslair/merlin/v16/app/upgrades"
-	v8constants "github.com/merlinslair/merlin/v16/app/upgrades/v8/constants"
+	"github.com/merlins-labs/merlin/v16/app/upgrades"
+	v8constants "github.com/merlins-labs/merlin/v16/app/upgrades/v8/constants"
 )
 
 const (

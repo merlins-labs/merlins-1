@@ -7,7 +7,7 @@ import (
 
 	"github.com/cosmos/cosmos-sdk/types/module"
 
-	"github.com/merlinslair/merlin/v16/x/incentives/types"
+	"github.com/merlins-labs/merlin/v16/x/incentives/types"
 )
 
 // Simulation parameter constants.

@@ -7,9 +7,9 @@ import (
 	simtypes "github.com/cosmos/cosmos-sdk/types/simulation"
 	"github.com/cosmos/cosmos-sdk/x/simulation"
 
-	gammtypes "github.com/merlinslair/merlin/v16/x/gamm/types"
-	"github.com/merlinslair/merlin/v16/x/superfluid/keeper"
-	"github.com/merlinslair/merlin/v16/x/superfluid/types"
+	gammtypes "github.com/merlins-labs/merlin/v16/x/gamm/types"
+	"github.com/merlins-labs/merlin/v16/x/superfluid/keeper"
+	"github.com/merlins-labs/merlin/v16/x/superfluid/types"
 )
 
 const (

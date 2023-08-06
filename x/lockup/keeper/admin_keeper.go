@@ -2,7 +2,7 @@ package keeper
 
 import (
 	"github.com/gogo/protobuf/proto"
-	"github.com/merlinslair/merlin/v16/x/lockup/types"
+	"github.com/merlins-labs/merlin/v16/x/lockup/types"
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
 )

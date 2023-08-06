@@ -6,9 +6,9 @@ import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	stakingtypes "github.com/cosmos/cosmos-sdk/x/staking/types"
 
-	lockupkeeper "github.com/merlinslair/merlin/v16/x/lockup/keeper"
-	lockuptypes "github.com/merlinslair/merlin/v16/x/lockup/types"
-	"github.com/merlinslair/merlin/v16/x/superfluid/types"
+	lockupkeeper "github.com/merlins-labs/merlin/v16/x/lockup/keeper"
+	lockuptypes "github.com/merlins-labs/merlin/v16/x/lockup/types"
+	"github.com/merlins-labs/merlin/v16/x/superfluid/types"
 )
 
 func (s *KeeperTestSuite) TestSuperfluidAfterEpochEnd() {

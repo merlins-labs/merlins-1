@@ -1,7 +1,7 @@
 keeper:
-  path: "github.com/merlinslair/merlin/v16/x/concentrated-liquidity"
+  path: "github.com/merlins-labs/merlin/v16/x/concentrated-liquidity"
   struct: "Keeper"
-client_path: "github.com/merlinslair/merlin/v16/x/concentrated-liquidity/client"
+client_path: "github.com/merlins-labs/merlin/v16/x/concentrated-liquidity/client"
 queries:
   Pools:
     proto_wrapper:

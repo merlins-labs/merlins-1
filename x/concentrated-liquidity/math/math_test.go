@@ -7,8 +7,8 @@ import (
 	"github.com/stretchr/testify/require"
 
 	"github.com/osmosis-labs/osmosis/osmomath"
-	"github.com/merlinslair/merlin/v16/x/concentrated-liquidity/math"
-	cltypes "github.com/merlinslair/merlin/v16/x/concentrated-liquidity/types"
+	"github.com/merlins-labs/merlin/v16/x/concentrated-liquidity/math"
+	cltypes "github.com/merlins-labs/merlin/v16/x/concentrated-liquidity/types"
 )
 
 var (

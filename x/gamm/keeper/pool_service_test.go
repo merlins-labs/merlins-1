@@ -10,10 +10,10 @@ import (
 
 	_ "github.com/osmosis-labs/osmosis/osmoutils"
 	"github.com/osmosis-labs/osmosis/osmoutils/osmoassert"
-	"github.com/merlinslair/merlin/v16/x/gamm/pool-models/balancer"
-	"github.com/merlinslair/merlin/v16/x/gamm/pool-models/stableswap"
-	"github.com/merlinslair/merlin/v16/x/gamm/types"
-	poolmanagertypes "github.com/merlinslair/merlin/v16/x/poolmanager/types"
+	"github.com/merlins-labs/merlin/v16/x/gamm/pool-models/balancer"
+	"github.com/merlins-labs/merlin/v16/x/gamm/pool-models/stableswap"
+	"github.com/merlins-labs/merlin/v16/x/gamm/types"
+	poolmanagertypes "github.com/merlins-labs/merlin/v16/x/poolmanager/types"
 )
 
 var (
@@ -853,7 +853,7 @@ func (s *KeeperTestSuite) TestJoinSwapExactAmountInConsistency() {
 		// TODO: Uncomment or remove this following test case once the referenced
 		// issue is resolved.
 		//
-		// Ref: https://github.com/merlinslair/merlin/issues/1196
+		// Ref: https://github.com/merlins-labs/merlin/issues/1196
 		// {
 		// 	name:              "single coin with positive spread factor and zero exit fee",
 		// 	poolSpreadFactor:       sdk.NewDecWithPrec(1, 2),

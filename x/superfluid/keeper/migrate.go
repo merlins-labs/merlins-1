@@ -7,10 +7,10 @@ import (
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
-	cltypes "github.com/merlinslair/merlin/v16/x/concentrated-liquidity/types"
-	gammtypes "github.com/merlinslair/merlin/v16/x/gamm/types"
-	lockuptypes "github.com/merlinslair/merlin/v16/x/lockup/types"
-	"github.com/merlinslair/merlin/v16/x/superfluid/types"
+	cltypes "github.com/merlins-labs/merlin/v16/x/concentrated-liquidity/types"
+	gammtypes "github.com/merlins-labs/merlin/v16/x/gamm/types"
+	lockuptypes "github.com/merlins-labs/merlin/v16/x/lockup/types"
+	"github.com/merlins-labs/merlin/v16/x/superfluid/types"
 )
 
 type MigrationType int

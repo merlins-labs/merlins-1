@@ -12,12 +12,12 @@ import (
 	"github.com/osmosis-labs/osmosis/osmomath"
 	"github.com/osmosis-labs/osmosis/osmoutils"
 	"github.com/osmosis-labs/osmosis/osmoutils/accum"
-	"github.com/merlinslair/merlin/v16/x/concentrated-liquidity/client/queryproto"
-	"github.com/merlinslair/merlin/v16/x/concentrated-liquidity/math"
-	"github.com/merlinslair/merlin/v16/x/concentrated-liquidity/model"
-	"github.com/merlinslair/merlin/v16/x/concentrated-liquidity/swapstrategy"
-	"github.com/merlinslair/merlin/v16/x/concentrated-liquidity/types"
-	"github.com/merlinslair/merlin/v16/x/concentrated-liquidity/types/genesis"
+	"github.com/merlins-labs/merlin/v16/x/concentrated-liquidity/client/queryproto"
+	"github.com/merlins-labs/merlin/v16/x/concentrated-liquidity/math"
+	"github.com/merlins-labs/merlin/v16/x/concentrated-liquidity/model"
+	"github.com/merlins-labs/merlin/v16/x/concentrated-liquidity/swapstrategy"
+	"github.com/merlins-labs/merlin/v16/x/concentrated-liquidity/types"
+	"github.com/merlins-labs/merlin/v16/x/concentrated-liquidity/types/genesis"
 )
 
 // initOrUpdateTick retrieves the tickInfo from the specified tickIndex and updates both the liquidityNet and LiquidityGross.

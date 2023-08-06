@@ -6,15 +6,15 @@ import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	stakingtypes "github.com/cosmos/cosmos-sdk/x/staking/types"
 
-	v8constants "github.com/merlinslair/merlin/v16/app/upgrades/v8/constants"
-	cltypes "github.com/merlinslair/merlin/v16/x/concentrated-liquidity/types"
-	"github.com/merlinslair/merlin/v16/x/gamm/pool-models/balancer"
-	gammtypes "github.com/merlinslair/merlin/v16/x/gamm/types"
-	gammmigration "github.com/merlinslair/merlin/v16/x/gamm/types/migration"
-	lockupkeeper "github.com/merlinslair/merlin/v16/x/lockup/keeper"
-	lockuptypes "github.com/merlinslair/merlin/v16/x/lockup/types"
-	"github.com/merlinslair/merlin/v16/x/superfluid/keeper"
-	"github.com/merlinslair/merlin/v16/x/superfluid/types"
+	v8constants "github.com/merlins-labs/merlin/v16/app/upgrades/v8/constants"
+	cltypes "github.com/merlins-labs/merlin/v16/x/concentrated-liquidity/types"
+	"github.com/merlins-labs/merlin/v16/x/gamm/pool-models/balancer"
+	gammtypes "github.com/merlins-labs/merlin/v16/x/gamm/types"
+	gammmigration "github.com/merlins-labs/merlin/v16/x/gamm/types/migration"
+	lockupkeeper "github.com/merlins-labs/merlin/v16/x/lockup/keeper"
+	lockuptypes "github.com/merlins-labs/merlin/v16/x/lockup/types"
+	"github.com/merlins-labs/merlin/v16/x/superfluid/keeper"
+	"github.com/merlins-labs/merlin/v16/x/superfluid/types"
 )
 
 var defaultFunds = sdk.NewCoins(defaultPoolAssets[0].Token, sdk.NewCoin("stake", sdk.NewInt(5000000000)))

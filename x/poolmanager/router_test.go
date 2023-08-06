@@ -9,17 +9,17 @@ import (
 	"github.com/golang/mock/gomock"
 
 	"github.com/osmosis-labs/osmosis/osmomath"
-	"github.com/merlinslair/merlin/v16/app/apptesting"
-	"github.com/merlinslair/merlin/v16/tests/mocks"
-	cl "github.com/merlinslair/merlin/v16/x/concentrated-liquidity"
-	cltypes "github.com/merlinslair/merlin/v16/x/concentrated-liquidity/types"
-	cwpool "github.com/merlinslair/merlin/v16/x/cosmwasmpool"
-	cwmodel "github.com/merlinslair/merlin/v16/x/cosmwasmpool/model"
-	gamm "github.com/merlinslair/merlin/v16/x/gamm/keeper"
-	"github.com/merlinslair/merlin/v16/x/gamm/pool-models/balancer"
-	poolincentivestypes "github.com/merlinslair/merlin/v16/x/pool-incentives/types"
-	"github.com/merlinslair/merlin/v16/x/poolmanager"
-	"github.com/merlinslair/merlin/v16/x/poolmanager/types"
+	"github.com/merlins-labs/merlin/v16/app/apptesting"
+	"github.com/merlins-labs/merlin/v16/tests/mocks"
+	cl "github.com/merlins-labs/merlin/v16/x/concentrated-liquidity"
+	cltypes "github.com/merlins-labs/merlin/v16/x/concentrated-liquidity/types"
+	cwpool "github.com/merlins-labs/merlin/v16/x/cosmwasmpool"
+	cwmodel "github.com/merlins-labs/merlin/v16/x/cosmwasmpool/model"
+	gamm "github.com/merlins-labs/merlin/v16/x/gamm/keeper"
+	"github.com/merlins-labs/merlin/v16/x/gamm/pool-models/balancer"
+	poolincentivestypes "github.com/merlins-labs/merlin/v16/x/pool-incentives/types"
+	"github.com/merlins-labs/merlin/v16/x/poolmanager"
+	"github.com/merlins-labs/merlin/v16/x/poolmanager/types"
 )
 
 type poolSetup struct {

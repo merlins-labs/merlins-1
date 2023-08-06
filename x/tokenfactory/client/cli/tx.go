@@ -5,7 +5,7 @@ import (
 
 	// "github.com/cosmos/cosmos-sdk/client/flags"
 	"github.com/osmosis-labs/osmosis/osmoutils/osmocli"
-	"github.com/merlinslair/merlin/v16/x/tokenfactory/types"
+	"github.com/merlins-labs/merlin/v16/x/tokenfactory/types"
 )
 
 // GetTxCmd returns the transaction commands for this module

@@ -9,15 +9,15 @@ import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/stretchr/testify/suite"
 
-	"github.com/merlinslair/merlin/v16/app/apptesting"
-	"github.com/merlinslair/merlin/v16/x/protorev"
-	protorevkeeper "github.com/merlinslair/merlin/v16/x/protorev/keeper"
-	"github.com/merlinslair/merlin/v16/x/protorev/types"
+	"github.com/merlins-labs/merlin/v16/app/apptesting"
+	"github.com/merlins-labs/merlin/v16/x/protorev"
+	protorevkeeper "github.com/merlins-labs/merlin/v16/x/protorev/keeper"
+	"github.com/merlins-labs/merlin/v16/x/protorev/types"
 
-	"github.com/merlinslair/merlin/v16/x/gamm/pool-models/balancer"
-	"github.com/merlinslair/merlin/v16/x/gamm/pool-models/stableswap"
+	"github.com/merlins-labs/merlin/v16/x/gamm/pool-models/balancer"
+	"github.com/merlins-labs/merlin/v16/x/gamm/pool-models/stableswap"
 
-	merlinapp "github.com/merlinslair/merlin/v16/app"
+	merlinapp "github.com/merlins-labs/merlin/v16/app"
 )
 
 type KeeperTestSuite struct {

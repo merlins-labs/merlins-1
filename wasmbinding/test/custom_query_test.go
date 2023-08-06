@@ -15,9 +15,9 @@ import (
 	"github.com/cosmos/cosmos-sdk/simapp"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
-	"github.com/merlinslair/merlin/v16/app"
-	"github.com/merlinslair/merlin/v16/app/apptesting"
-	"github.com/merlinslair/merlin/v16/wasmbinding/bindings"
+	"github.com/merlins-labs/merlin/v16/app"
+	"github.com/merlins-labs/merlin/v16/app/apptesting"
+	"github.com/merlins-labs/merlin/v16/wasmbinding/bindings"
 )
 
 func SetupCustomApp(t *testing.T, addr sdk.AccAddress) (*app.MerlinApp, sdk.Context) {

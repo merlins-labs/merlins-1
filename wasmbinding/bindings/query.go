@@ -1,7 +1,7 @@
 package bindings
 
 // MerlinQuery contains merlin custom queries.
-// See https://github.com/merlinslair/merlin-bindings/blob/main/packages/bindings/src/query.rs
+// See https://github.com/merlins-labs/merlin-bindings/blob/main/packages/bindings/src/query.rs
 type MerlinQuery struct {
 	/// Given a subdenom minted by a contract via `MerlinMsg::MintTokens`,
 	/// returns the full denom as used by `BankMsg::Send`.

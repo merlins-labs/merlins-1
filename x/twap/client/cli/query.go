@@ -11,9 +11,9 @@ import (
 	"github.com/spf13/cobra"
 
 	"github.com/osmosis-labs/osmosis/osmoutils/osmocli"
-	poolmanager "github.com/merlinslair/merlin/v16/x/poolmanager/client/queryproto"
-	"github.com/merlinslair/merlin/v16/x/twap/client/queryproto"
-	"github.com/merlinslair/merlin/v16/x/twap/types"
+	poolmanager "github.com/merlins-labs/merlin/v16/x/poolmanager/client/queryproto"
+	"github.com/merlins-labs/merlin/v16/x/twap/client/queryproto"
+	"github.com/merlins-labs/merlin/v16/x/twap/types"
 )
 
 // GetQueryCmd returns the cli query commands for this module.

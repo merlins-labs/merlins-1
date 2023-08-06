@@ -7,7 +7,7 @@ import (
 	proto "github.com/gogo/protobuf/proto"
 	"github.com/stretchr/testify/require"
 
-	"github.com/merlinslair/merlin/v16/x/concentrated-liquidity/types"
+	"github.com/merlins-labs/merlin/v16/x/concentrated-liquidity/types"
 )
 
 func TestCreateConcentratedLiquidityPoolsProposalMarshalUnmarshal(t *testing.T) {

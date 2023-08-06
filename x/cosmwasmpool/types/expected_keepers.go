@@ -5,7 +5,7 @@ import (
 
 	wasmtypes "github.com/CosmWasm/wasmd/x/wasm/types"
 
-	poolmanagertypes "github.com/merlinslair/merlin/v16/x/poolmanager/types"
+	poolmanagertypes "github.com/merlins-labs/merlin/v16/x/poolmanager/types"
 )
 
 // AccountKeeper defines the contract needed for AccountKeeper related APIs.

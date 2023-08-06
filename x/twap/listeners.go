@@ -3,8 +3,8 @@ package twap
 import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
-	concentratedliquiditytypes "github.com/merlinslair/merlin/v16/x/concentrated-liquidity/types"
-	gammtypes "github.com/merlinslair/merlin/v16/x/gamm/types"
+	concentratedliquiditytypes "github.com/merlins-labs/merlin/v16/x/concentrated-liquidity/types"
+	gammtypes "github.com/merlins-labs/merlin/v16/x/gamm/types"
 	epochtypes "github.com/osmosis-labs/osmosis/x/epochs/types"
 )
 

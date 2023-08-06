@@ -7,10 +7,10 @@ import (
 	"github.com/golang/mock/gomock"
 	"github.com/stretchr/testify/suite"
 
-	"github.com/merlinslair/merlin/v16/tests/mocks"
-	"github.com/merlinslair/merlin/v16/x/gamm/pool-models/balancer"
-	"github.com/merlinslair/merlin/v16/x/gamm/types"
-	poolmanagertypes "github.com/merlinslair/merlin/v16/x/poolmanager/types"
+	"github.com/merlins-labs/merlin/v16/tests/mocks"
+	"github.com/merlins-labs/merlin/v16/x/gamm/pool-models/balancer"
+	"github.com/merlins-labs/merlin/v16/x/gamm/types"
+	poolmanagertypes "github.com/merlins-labs/merlin/v16/x/poolmanager/types"
 )
 
 var _ = suite.TestingSuite(nil)

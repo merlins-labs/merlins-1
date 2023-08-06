@@ -5,8 +5,8 @@ import (
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
-	cltypes "github.com/merlinslair/merlin/v16/x/concentrated-liquidity/types"
-	"github.com/merlinslair/merlin/v16/x/superfluid/types"
+	cltypes "github.com/merlins-labs/merlin/v16/x/concentrated-liquidity/types"
+	"github.com/merlins-labs/merlin/v16/x/superfluid/types"
 )
 
 // addToConcentratedLiquiditySuperfluidPosition adds the specified amounts of tokens to an existing superfluid staked

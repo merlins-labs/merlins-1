@@ -12,14 +12,14 @@ import (
 	distributiontypes "github.com/cosmos/cosmos-sdk/x/distribution/types"
 
 	"github.com/osmosis-labs/osmosis/osmoutils/accum"
-	cl "github.com/merlinslair/merlin/v16/x/concentrated-liquidity"
-	"github.com/merlinslair/merlin/v16/x/concentrated-liquidity/math"
-	"github.com/merlinslair/merlin/v16/x/concentrated-liquidity/model"
-	"github.com/merlinslair/merlin/v16/x/concentrated-liquidity/types"
-	"github.com/merlinslair/merlin/v16/x/gamm/pool-models/balancer"
-	gammtypes "github.com/merlinslair/merlin/v16/x/gamm/types"
-	gammmigration "github.com/merlinslair/merlin/v16/x/gamm/types/migration"
-	poolincentivestypes "github.com/merlinslair/merlin/v16/x/pool-incentives/types"
+	cl "github.com/merlins-labs/merlin/v16/x/concentrated-liquidity"
+	"github.com/merlins-labs/merlin/v16/x/concentrated-liquidity/math"
+	"github.com/merlins-labs/merlin/v16/x/concentrated-liquidity/model"
+	"github.com/merlins-labs/merlin/v16/x/concentrated-liquidity/types"
+	"github.com/merlins-labs/merlin/v16/x/gamm/pool-models/balancer"
+	gammtypes "github.com/merlins-labs/merlin/v16/x/gamm/types"
+	gammmigration "github.com/merlins-labs/merlin/v16/x/gamm/types/migration"
+	poolincentivestypes "github.com/merlins-labs/merlin/v16/x/pool-incentives/types"
 )
 
 var (

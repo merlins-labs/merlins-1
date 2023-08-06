@@ -11,8 +11,8 @@ import (
 
 	authsigning "github.com/cosmos/cosmos-sdk/x/auth/signing"
 
-	"github.com/merlinslair/merlin/v16/x/txfees/keeper"
-	"github.com/merlinslair/merlin/v16/x/txfees/types"
+	"github.com/merlins-labs/merlin/v16/x/txfees/keeper"
+	"github.com/merlins-labs/merlin/v16/x/txfees/types"
 )
 
 func (s *KeeperTestSuite) TestFeeDecorator() {

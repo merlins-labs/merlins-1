@@ -6,8 +6,8 @@ import (
 	errorsmod "cosmossdk.io/errors"
 
 	"github.com/osmosis-labs/osmosis/osmoutils"
-	lockuptypes "github.com/merlinslair/merlin/v16/x/lockup/types"
-	"github.com/merlinslair/merlin/v16/x/superfluid/types"
+	lockuptypes "github.com/merlins-labs/merlin/v16/x/lockup/types"
+	"github.com/merlins-labs/merlin/v16/x/superfluid/types"
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	stakingtypes "github.com/cosmos/cosmos-sdk/x/staking/types"

@@ -1,7 +1,7 @@
 keeper: 
-  path: "github.com/merlinslair/merlin/v16/x/downtime-detector"
+  path: "github.com/merlins-labs/merlin/v16/x/downtime-detector"
   struct: "Keeper"
-client_path: "github.com/merlinslair/merlin/v16/x/downtime-detector/client"
+client_path: "github.com/merlins-labs/merlin/v16/x/downtime-detector/client"
 queries:
   RecoveredSinceDowntimeOfLength:
     proto_wrapper:

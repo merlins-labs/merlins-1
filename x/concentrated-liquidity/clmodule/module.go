@@ -16,17 +16,17 @@ import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/cosmos/cosmos-sdk/types/module"
 
-	"github.com/merlinslair/merlin/v16/simulation/simtypes"
-	"github.com/merlinslair/merlin/v16/x/concentrated-liquidity/client/cli"
-	"github.com/merlinslair/merlin/v16/x/concentrated-liquidity/client/queryproto"
-	clmodel "github.com/merlinslair/merlin/v16/x/concentrated-liquidity/model"
-	"github.com/merlinslair/merlin/v16/x/concentrated-liquidity/simulation"
+	"github.com/merlins-labs/merlin/v16/simulation/simtypes"
+	"github.com/merlins-labs/merlin/v16/x/concentrated-liquidity/client/cli"
+	"github.com/merlins-labs/merlin/v16/x/concentrated-liquidity/client/queryproto"
+	clmodel "github.com/merlins-labs/merlin/v16/x/concentrated-liquidity/model"
+	"github.com/merlins-labs/merlin/v16/x/concentrated-liquidity/simulation"
 
-	clkeeper "github.com/merlinslair/merlin/v16/x/concentrated-liquidity"
-	clclient "github.com/merlinslair/merlin/v16/x/concentrated-liquidity/client"
-	"github.com/merlinslair/merlin/v16/x/concentrated-liquidity/client/grpc"
-	"github.com/merlinslair/merlin/v16/x/concentrated-liquidity/types"
-	"github.com/merlinslair/merlin/v16/x/concentrated-liquidity/types/genesis"
+	clkeeper "github.com/merlins-labs/merlin/v16/x/concentrated-liquidity"
+	clclient "github.com/merlins-labs/merlin/v16/x/concentrated-liquidity/client"
+	"github.com/merlins-labs/merlin/v16/x/concentrated-liquidity/client/grpc"
+	"github.com/merlins-labs/merlin/v16/x/concentrated-liquidity/types"
+	"github.com/merlins-labs/merlin/v16/x/concentrated-liquidity/types/genesis"
 )
 
 var (

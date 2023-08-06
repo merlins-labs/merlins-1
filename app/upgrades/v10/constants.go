@@ -1,7 +1,7 @@
 package v10
 
 import (
-	"github.com/merlinslair/merlin/v16/app/upgrades"
+	"github.com/merlins-labs/merlin/v16/app/upgrades"
 )
 
 // Last executed block on the v9 code was 4713064.

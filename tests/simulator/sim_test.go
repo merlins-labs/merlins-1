@@ -13,13 +13,13 @@ import (
 	"github.com/cosmos/cosmos-sdk/simapp/helpers"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
-	furysim "github.com/merlinslair/merlin/v16/simulation/executor"
-	"github.com/merlinslair/merlin/v16/simulation/simtypes/simlogger"
-	txfeetypes "github.com/merlinslair/merlin/v16/x/txfees/types"
+	furysim "github.com/merlins-labs/merlin/v16/simulation/executor"
+	"github.com/merlins-labs/merlin/v16/simulation/simtypes/simlogger"
+	txfeetypes "github.com/merlins-labs/merlin/v16/x/txfees/types"
 )
 
 // Profile with:
-// /usr/local/go/bin/go test -benchmem -run=^$ github.com/merlinslair/merlin/simapp -bench ^BenchmarkFullAppSimulation$ -Commit=true -cpuprofile cpu.out
+// /usr/local/go/bin/go test -benchmem -run=^$ github.com/merlins-labs/merlin/simapp -bench ^BenchmarkFullAppSimulation$ -Commit=true -cpuprofile cpu.out
 func BenchmarkFullAppSimulation(b *testing.B) {
 	// -Enabled=true -NumBlocks=1000 -BlockSize=200 \
 	// -Period=1 -Commit=true -Seed=57 -v -timeout 24h

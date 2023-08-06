@@ -8,12 +8,12 @@ import (
 	"github.com/stretchr/testify/suite"
 
 	furyutils "github.com/osmosis-labs/osmosis/osmoutils"
-	appParams "github.com/merlinslair/merlin/v16/app/params"
-	"github.com/merlinslair/merlin/v16/x/incentives/types"
-	incentivetypes "github.com/merlinslair/merlin/v16/x/incentives/types"
-	lockuptypes "github.com/merlinslair/merlin/v16/x/lockup/types"
-	poolincentivetypes "github.com/merlinslair/merlin/v16/x/pool-incentives/types"
-	poolmanagertypes "github.com/merlinslair/merlin/v16/x/poolmanager/types"
+	appParams "github.com/merlins-labs/merlin/v16/app/params"
+	"github.com/merlins-labs/merlin/v16/x/incentives/types"
+	incentivetypes "github.com/merlins-labs/merlin/v16/x/incentives/types"
+	lockuptypes "github.com/merlins-labs/merlin/v16/x/lockup/types"
+	poolincentivetypes "github.com/merlins-labs/merlin/v16/x/pool-incentives/types"
+	poolmanagertypes "github.com/merlins-labs/merlin/v16/x/poolmanager/types"
 )
 
 var _ = suite.TestingSuite(nil)

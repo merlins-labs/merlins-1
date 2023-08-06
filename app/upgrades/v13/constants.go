@@ -3,7 +3,7 @@ package v13
 import (
 	store "github.com/cosmos/cosmos-sdk/store/types"
 
-	"github.com/merlinslair/merlin/v16/app/upgrades"
+	"github.com/merlins-labs/merlin/v16/app/upgrades"
 )
 
 // UpgradeName defines the on-chain upgrade name for the Merlin v13 upgrade.

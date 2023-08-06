@@ -5,9 +5,9 @@ import (
 	"fmt"
 	"testing"
 
-	"github.com/merlinslair/merlin/v16/app"
-	poolmanagercli "github.com/merlinslair/merlin/v16/x/poolmanager/client/cli"
-	poolmanagertypes "github.com/merlinslair/merlin/v16/x/poolmanager/types"
+	"github.com/merlins-labs/merlin/v16/app"
+	poolmanagercli "github.com/merlins-labs/merlin/v16/x/poolmanager/client/cli"
+	poolmanagertypes "github.com/merlins-labs/merlin/v16/x/poolmanager/types"
 
 	"github.com/cosmos/cosmos-sdk/client"
 	"github.com/cosmos/cosmos-sdk/client/flags"

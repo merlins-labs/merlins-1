@@ -8,8 +8,8 @@ import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
 	"github.com/osmosis-labs/osmosis/osmoutils"
-	appparams "github.com/merlinslair/merlin/v16/app/params"
-	"github.com/merlinslair/merlin/v16/x/poolmanager/types"
+	appparams "github.com/merlins-labs/merlin/v16/app/params"
+	"github.com/merlins-labs/merlin/v16/x/poolmanager/types"
 )
 
 // 1 << 256 - 1 where 256 is the max bit length defined for sdk.Int

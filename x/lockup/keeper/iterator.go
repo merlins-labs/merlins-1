@@ -5,7 +5,7 @@ import (
 
 	db "github.com/tendermint/tm-db"
 
-	"github.com/merlinslair/merlin/v16/x/lockup/types"
+	"github.com/merlins-labs/merlin/v16/x/lockup/types"
 
 	storetypes "github.com/cosmos/cosmos-sdk/store/types"
 	sdk "github.com/cosmos/cosmos-sdk/types"

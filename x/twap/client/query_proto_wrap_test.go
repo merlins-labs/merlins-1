@@ -8,9 +8,9 @@ import (
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
-	"github.com/merlinslair/merlin/v16/app/apptesting"
-	"github.com/merlinslair/merlin/v16/x/twap/client"
-	"github.com/merlinslair/merlin/v16/x/twap/client/queryproto"
+	"github.com/merlins-labs/merlin/v16/app/apptesting"
+	"github.com/merlins-labs/merlin/v16/x/twap/client"
+	"github.com/merlins-labs/merlin/v16/x/twap/client/queryproto"
 )
 
 type QueryTestSuite struct {

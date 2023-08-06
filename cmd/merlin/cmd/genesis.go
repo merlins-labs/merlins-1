@@ -25,11 +25,11 @@ import (
 	slashingtypes "github.com/cosmos/cosmos-sdk/x/slashing/types"
 	stakingtypes "github.com/cosmos/cosmos-sdk/x/staking/types"
 
-	appParams "github.com/merlinslair/merlin/v16/app/params"
+	appParams "github.com/merlins-labs/merlin/v16/app/params"
 
-	incentivestypes "github.com/merlinslair/merlin/v16/x/incentives/types"
-	minttypes "github.com/merlinslair/merlin/v16/x/mint/types"
-	poolincentivestypes "github.com/merlinslair/merlin/v16/x/pool-incentives/types"
+	incentivestypes "github.com/merlins-labs/merlin/v16/x/incentives/types"
+	minttypes "github.com/merlins-labs/merlin/v16/x/mint/types"
+	poolincentivestypes "github.com/merlins-labs/merlin/v16/x/pool-incentives/types"
 	epochstypes "github.com/osmosis-labs/osmosis/x/epochs/types"
 )
 

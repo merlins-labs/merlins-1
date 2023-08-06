@@ -41,7 +41,7 @@ storage, assign it to the new pool, and propagate the execution to either `gamm`
 or `concentrated-liquidity` modules.
 
 Note that we define a `CreatePoolMsg` interface:
-<https://github.com/merlinslair/merlin/blob/f26ceb958adaaf31510e17ed88f5eab47e2bac03/x/poolmanager/types/msg_create_pool.go#L9>
+<https://github.com/merlins-labs/merlin/blob/f26ceb958adaaf31510e17ed88f5eab47e2bac03/x/poolmanager/types/msg_create_pool.go#L9>
 
 Each `balancer`, `stableswap` and `concentrated-liquidity` pool has its own implementation of `CreatePoolMsg`.
 
@@ -277,19 +277,19 @@ Existing Swap types:
 
 ### MsgSwapExactAmountIn
 
-[MsgSwapExactAmountIn](https://github.com/merlinslair/merlin/blob/f26ceb958adaaf31510e17ed88f5eab47e2bac03/proto/merlin/gamm/v1beta1/tx.proto#L79)
+[MsgSwapExactAmountIn](https://github.com/merlins-labs/merlin/blob/f26ceb958adaaf31510e17ed88f5eab47e2bac03/proto/merlin/gamm/v1beta1/tx.proto#L79)
 
 ### MsgSwapExactAmountOut
 
-[MsgSwapExactAmountOut](https://github.com/merlinslair/merlin/blob/f26ceb958adaaf31510e17ed88f5eab47e2bac03/proto/merlin/gamm/v1beta1/tx.proto#L102)
+[MsgSwapExactAmountOut](https://github.com/merlins-labs/merlin/blob/f26ceb958adaaf31510e17ed88f5eab47e2bac03/proto/merlin/gamm/v1beta1/tx.proto#L102)
 
 ### MsgSplitRouteSwapExactAmountIn
 
-[MsgSplitRouteSwapExactAmountIn](https://github.com/merlinslair/merlin/blob/46e6a0c2051a3a5ef8cdd4ecebfff7305b13ab98/proto/merlin/poolmanager/v1beta1/tx.proto#L41)
+[MsgSplitRouteSwapExactAmountIn](https://github.com/merlins-labs/merlin/blob/46e6a0c2051a3a5ef8cdd4ecebfff7305b13ab98/proto/merlin/poolmanager/v1beta1/tx.proto#L41)
 
 ## MsgSplitRouteSwapExactAmountOut
 
-[MsgSplitRouteSwapExactAmountOut](https://github.com/merlinslair/merlin/blob/46e6a0c2051a3a5ef8cdd4ecebfff7305b13ab98/proto/merlin/poolmanager/v1beta1/tx.proto#L85)
+[MsgSplitRouteSwapExactAmountOut](https://github.com/merlins-labs/merlin/blob/46e6a0c2051a3a5ef8cdd4ecebfff7305b13ab98/proto/merlin/poolmanager/v1beta1/tx.proto#L85)
 
 ## Multi-Hop
 
@@ -304,7 +304,7 @@ the spread factors on each hop would be automatically halved.
 Example: for converting `ATOM -> FURY -> LUNA` using two pools with spread factors `0.3% + 0.2%`,
 instead `0.15% + 0.1%` spread factors will be applied.
 
-[Multi-Hop](https://github.com/merlinslair/merlin/blob/f26ceb958adaaf31510e17ed88f5eab47e2bac03/x/poolmanager/router.go#L16)
+[Multi-Hop](https://github.com/merlins-labs/merlin/blob/f26ceb958adaaf31510e17ed88f5eab47e2bac03/x/poolmanager/router.go#L16)
 
 ## Route Splitting
 

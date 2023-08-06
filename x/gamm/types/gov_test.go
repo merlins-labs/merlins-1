@@ -6,8 +6,8 @@ import (
 	proto "github.com/gogo/protobuf/proto"
 	"github.com/stretchr/testify/require"
 
-	"github.com/merlinslair/merlin/v16/x/gamm/types"
-	gammmigration "github.com/merlinslair/merlin/v16/x/gamm/types/migration"
+	"github.com/merlins-labs/merlin/v16/x/gamm/types"
+	gammmigration "github.com/merlins-labs/merlin/v16/x/gamm/types/migration"
 )
 
 func TestUpdateMigrationRecordsProposalMarshalUnmarshal(t *testing.T) {

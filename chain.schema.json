@@ -1,15 +1,15 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
   "codebase":{
-    "git_repo": "https://github.com/merlinslair/merlin",
+    "git_repo": "https://github.com/merlins-labs/merlin",
     "recommended_version": "v15.1.0",
     "compatible_versions": [
       "v15.1.0",
       "v15.0.0"
     ],
     "binaries": {
-      "linux/amd64": "https://github.com/merlinslair/merlin/releases/download/v15.1.0/merlin-15.1.0-linux-amd64?checksum=sha256:f16f901dfd47426caced8436c507e2950a4e2452b6cc6efc7845ab3b43a5c5d5",
-      "linux/arm64": "https://github.com/merlinslair/merlin/releases/download/v15.1.0/merlin-15.1.0-linux-arm64?checksum=sha256:08b20f0753b6b0bafa3a6ca7e4bb6807baf72754dfb69d6db7b1fb2b4b55ffc0"
+      "linux/amd64": "https://github.com/merlins-labs/merlin/releases/download/v15.1.0/merlin-15.1.0-linux-amd64?checksum=sha256:f16f901dfd47426caced8436c507e2950a4e2452b6cc6efc7845ab3b43a5c5d5",
+      "linux/arm64": "https://github.com/merlins-labs/merlin/releases/download/v15.1.0/merlin-15.1.0-linux-arm64?checksum=sha256:08b20f0753b6b0bafa3a6ca7e4bb6807baf72754dfb69d6db7b1fb2b4b55ffc0"
     },
     "cosmos_sdk_version": "0.45",
     "consensus": {
@@ -102,8 +102,8 @@
           "ics20-1"
         ],
         "binaries": {
-          "linux/amd64": "https://github.com/merlinslair/merlin/releases/download/v15.1.0/merlin-15.1.0-linux-amd64?checksum=sha256:f16f901dfd47426caced8436c507e2950a4e2452b6cc6efc7845ab3b43a5c5d5",
-          "linux/arm64": "https://github.com/merlinslair/merlin/releases/download/v15.1.0/merlin-15.1.0-linux-arm64?checksum=sha256:08b20f0753b6b0bafa3a6ca7e4bb6807baf72754dfb69d6db7b1fb2b4b55ffc0"
+          "linux/amd64": "https://github.com/merlins-labs/merlin/releases/download/v15.1.0/merlin-15.1.0-linux-amd64?checksum=sha256:f16f901dfd47426caced8436c507e2950a4e2452b6cc6efc7845ab3b43a5c5d5",
+          "linux/arm64": "https://github.com/merlins-labs/merlin/releases/download/v15.1.0/merlin-15.1.0-linux-arm64?checksum=sha256:08b20f0753b6b0bafa3a6ca7e4bb6807baf72754dfb69d6db7b1fb2b4b55ffc0"
         }
       }
     ]

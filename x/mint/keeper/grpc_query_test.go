@@ -3,7 +3,7 @@ package keeper_test
 import (
 	"context"
 
-	"github.com/merlinslair/merlin/v16/x/mint/types"
+	"github.com/merlins-labs/merlin/v16/x/mint/types"
 )
 
 func (s *KeeperTestSuite) TestGRPCParams() {

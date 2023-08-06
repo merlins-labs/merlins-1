@@ -20,7 +20,7 @@
     }
   },
   "gopls": {
-    "local": "github.com/merlinslair/merlin"
+    "local": "github.com/merlins-labs/merlin"
   },
   "files.eol": "\n",
   "[proto3]": {

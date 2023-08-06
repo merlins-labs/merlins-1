@@ -7,12 +7,12 @@ import (
 	"github.com/stretchr/testify/suite"
 
 	"github.com/osmosis-labs/osmosis/osmomath"
-	"github.com/merlinslair/merlin/v16/app/apptesting"
-	cl "github.com/merlinslair/merlin/v16/x/concentrated-liquidity"
-	"github.com/merlinslair/merlin/v16/x/concentrated-liquidity/math"
-	clmath "github.com/merlinslair/merlin/v16/x/concentrated-liquidity/math"
-	"github.com/merlinslair/merlin/v16/x/concentrated-liquidity/types"
-	poolmanagertypes "github.com/merlinslair/merlin/v16/x/poolmanager/types"
+	"github.com/merlins-labs/merlin/v16/app/apptesting"
+	cl "github.com/merlins-labs/merlin/v16/x/concentrated-liquidity"
+	"github.com/merlins-labs/merlin/v16/x/concentrated-liquidity/math"
+	clmath "github.com/merlins-labs/merlin/v16/x/concentrated-liquidity/math"
+	"github.com/merlins-labs/merlin/v16/x/concentrated-liquidity/types"
+	poolmanagertypes "github.com/merlins-labs/merlin/v16/x/poolmanager/types"
 )
 
 var _ = suite.TestingSuite(nil)
@@ -3092,7 +3092,7 @@ func (s *KeeperTestSuite) inverseRelationshipInvariants(firstTokenIn, firstToken
 
 	// Assure that user balance now as it was before both swaps.
 	// TODO: Come back to this choice after deciding if we are using BigDec for swaps
-	// https://github.com/merlinslair/merlin/issues/4475
+	// https://github.com/merlins-labs/merlin/issues/4475
 	userBalanceAfterSwap := s.App.BankKeeper.GetAllBalances(s.Ctx, s.TestAccs[0])
 	poolBalanceAfterSwap := s.App.BankKeeper.GetAllBalances(s.Ctx, poolBefore.GetAddress())
 	for _, coin := range userBalanceBeforeSwap {

@@ -9,13 +9,13 @@ import (
 	distributiontypes "github.com/cosmos/cosmos-sdk/x/distribution/types"
 
 	"github.com/osmosis-labs/osmosis/osmoutils"
-	cl "github.com/merlinslair/merlin/v16/x/concentrated-liquidity"
-	"github.com/merlinslair/merlin/v16/x/concentrated-liquidity/model"
-	cltypes "github.com/merlinslair/merlin/v16/x/concentrated-liquidity/types"
-	gammtypes "github.com/merlinslair/merlin/v16/x/gamm/types"
-	incentivestypes "github.com/merlinslair/merlin/v16/x/incentives/types"
-	lockuptypes "github.com/merlinslair/merlin/v16/x/lockup/types"
-	"github.com/merlinslair/merlin/v16/x/superfluid/types"
+	cl "github.com/merlins-labs/merlin/v16/x/concentrated-liquidity"
+	"github.com/merlins-labs/merlin/v16/x/concentrated-liquidity/model"
+	cltypes "github.com/merlins-labs/merlin/v16/x/concentrated-liquidity/types"
+	gammtypes "github.com/merlins-labs/merlin/v16/x/gamm/types"
+	incentivestypes "github.com/merlins-labs/merlin/v16/x/incentives/types"
+	lockuptypes "github.com/merlins-labs/merlin/v16/x/lockup/types"
+	"github.com/merlins-labs/merlin/v16/x/superfluid/types"
 )
 
 func (k Keeper) AfterEpochEnd(ctx sdk.Context, epochIdentifier string, _ int64) error {
@@ -23,7 +23,7 @@ func (k Keeper) AfterEpochEnd(ctx sdk.Context, epochIdentifier string, _ int64) 
 }
 
 func (k Keeper) AfterEpochStartBeginBlock(ctx sdk.Context) {
-	// cref [#830](https://github.com/merlinslair/merlin/issues/830),
+	// cref [#830](https://github.com/merlins-labs/merlin/issues/830),
 	// the supplied epoch number is wrong at time of commit. hence we get from the info.
 	curEpoch := k.ek.GetEpochInfo(ctx, k.GetEpochIdentifier(ctx)).CurrentEpoch
 

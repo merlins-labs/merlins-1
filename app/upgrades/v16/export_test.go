@@ -4,11 +4,11 @@ import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	authkeeper "github.com/cosmos/cosmos-sdk/x/auth/keeper"
 
-	"github.com/merlinslair/merlin/v16/app/keepers"
-	gammkeeper "github.com/merlinslair/merlin/v16/x/gamm/keeper"
-	"github.com/merlinslair/merlin/v16/x/poolmanager"
-	poolmanagertypes "github.com/merlinslair/merlin/v16/x/poolmanager/types"
-	tokenfactorykeeper "github.com/merlinslair/merlin/v16/x/tokenfactory/keeper"
+	"github.com/merlins-labs/merlin/v16/app/keepers"
+	gammkeeper "github.com/merlins-labs/merlin/v16/x/gamm/keeper"
+	"github.com/merlins-labs/merlin/v16/x/poolmanager"
+	poolmanagertypes "github.com/merlins-labs/merlin/v16/x/poolmanager/types"
+	tokenfactorykeeper "github.com/merlins-labs/merlin/v16/x/tokenfactory/keeper"
 )
 
 var (

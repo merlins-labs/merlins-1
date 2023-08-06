@@ -31,15 +31,15 @@ import (
 	tmtypes "github.com/tendermint/tendermint/proto/tendermint/types"
 	dbm "github.com/tendermint/tm-db"
 
-	"github.com/merlinslair/merlin/v16/app"
+	"github.com/merlins-labs/merlin/v16/app"
 
-	"github.com/merlinslair/merlin/v16/x/gamm/pool-models/balancer"
-	gammtypes "github.com/merlinslair/merlin/v16/x/gamm/types"
+	"github.com/merlins-labs/merlin/v16/x/gamm/pool-models/balancer"
+	gammtypes "github.com/merlins-labs/merlin/v16/x/gamm/types"
 
-	lockupkeeper "github.com/merlinslair/merlin/v16/x/lockup/keeper"
-	lockuptypes "github.com/merlinslair/merlin/v16/x/lockup/types"
-	minttypes "github.com/merlinslair/merlin/v16/x/mint/types"
-	poolmanagertypes "github.com/merlinslair/merlin/v16/x/poolmanager/types"
+	lockupkeeper "github.com/merlins-labs/merlin/v16/x/lockup/keeper"
+	lockuptypes "github.com/merlins-labs/merlin/v16/x/lockup/types"
+	minttypes "github.com/merlins-labs/merlin/v16/x/mint/types"
+	poolmanagertypes "github.com/merlins-labs/merlin/v16/x/poolmanager/types"
 )
 
 type KeeperTestHelper struct {

@@ -8,7 +8,7 @@ import (
 	"github.com/joho/godotenv"
 	"github.com/spf13/cobra"
 
-	"github.com/merlinslair/merlin/v16/app"
+	"github.com/merlins-labs/merlin/v16/app"
 )
 
 const (

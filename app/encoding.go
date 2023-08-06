@@ -1,7 +1,7 @@
 package app
 
 import (
-	"github.com/merlinslair/merlin/v16/app/params"
+	"github.com/merlins-labs/merlin/v16/app/params"
 
 	"github.com/cosmos/cosmos-sdk/std"
 )

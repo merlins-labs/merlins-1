@@ -9,11 +9,11 @@ import (
 
 	"github.com/osmosis-labs/osmosis/osmoutils"
 	"github.com/osmosis-labs/osmosis/osmoutils/osmocli"
-	"github.com/merlinslair/merlin/v16/app"
-	"github.com/merlinslair/merlin/v16/x/poolmanager/client/cli"
-	"github.com/merlinslair/merlin/v16/x/poolmanager/client/queryproto"
-	poolmanagertestutil "github.com/merlinslair/merlin/v16/x/poolmanager/client/testutil"
-	"github.com/merlinslair/merlin/v16/x/poolmanager/types"
+	"github.com/merlins-labs/merlin/v16/app"
+	"github.com/merlins-labs/merlin/v16/x/poolmanager/client/cli"
+	"github.com/merlins-labs/merlin/v16/x/poolmanager/client/queryproto"
+	poolmanagertestutil "github.com/merlins-labs/merlin/v16/x/poolmanager/client/testutil"
+	"github.com/merlins-labs/merlin/v16/x/poolmanager/types"
 
 	"github.com/cosmos/cosmos-sdk/client/flags"
 	"github.com/cosmos/cosmos-sdk/crypto/hd"

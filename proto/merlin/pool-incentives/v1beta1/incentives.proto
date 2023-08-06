@@ -4,7 +4,7 @@ package merlin.poolincentives.v1beta1;
 import "gogoproto/gogo.proto";
 import "google/protobuf/duration.proto";
 
-option go_package = "github.com/merlinslair/merlin/v16/x/pool-incentives/types";
+option go_package = "github.com/merlins-labs/merlin/v16/x/pool-incentives/types";
 
 message Params {
   option (gogoproto.goproto_stringer) = false;

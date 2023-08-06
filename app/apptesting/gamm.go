@@ -4,11 +4,11 @@ import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
 	"github.com/osmosis-labs/osmosis/osmomath"
-	gammkeeper "github.com/merlinslair/merlin/v16/x/gamm/keeper"
-	"github.com/merlinslair/merlin/v16/x/gamm/pool-models/balancer"
-	"github.com/merlinslair/merlin/v16/x/gamm/pool-models/stableswap"
-	gammtypes "github.com/merlinslair/merlin/v16/x/gamm/types"
-	poolmanagertypes "github.com/merlinslair/merlin/v16/x/poolmanager/types"
+	gammkeeper "github.com/merlins-labs/merlin/v16/x/gamm/keeper"
+	"github.com/merlins-labs/merlin/v16/x/gamm/pool-models/balancer"
+	"github.com/merlins-labs/merlin/v16/x/gamm/pool-models/stableswap"
+	gammtypes "github.com/merlins-labs/merlin/v16/x/gamm/types"
+	poolmanagertypes "github.com/merlins-labs/merlin/v16/x/poolmanager/types"
 )
 
 const (

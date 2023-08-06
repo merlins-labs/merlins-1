@@ -7,10 +7,10 @@ import (
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
-	"github.com/merlinslair/merlin/v16/app/apptesting"
-	"github.com/merlinslair/merlin/v16/x/gamm/pool-models/balancer"
-	"github.com/merlinslair/merlin/v16/x/gamm/pool-models/stableswap"
-	"github.com/merlinslair/merlin/v16/x/gamm/types"
+	"github.com/merlins-labs/merlin/v16/app/apptesting"
+	"github.com/merlins-labs/merlin/v16/x/gamm/pool-models/balancer"
+	"github.com/merlins-labs/merlin/v16/x/gamm/pool-models/stableswap"
+	"github.com/merlins-labs/merlin/v16/x/gamm/types"
 )
 
 type KeeperTestSuite struct {

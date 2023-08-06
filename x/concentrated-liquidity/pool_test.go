@@ -8,13 +8,13 @@ import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
 	"github.com/osmosis-labs/osmosis/osmomath"
-	cl "github.com/merlinslair/merlin/v16/x/concentrated-liquidity"
-	clmodel "github.com/merlinslair/merlin/v16/x/concentrated-liquidity/model"
-	"github.com/merlinslair/merlin/v16/x/concentrated-liquidity/types"
-	"github.com/merlinslair/merlin/v16/x/gamm/pool-models/balancer"
-	lockuptypes "github.com/merlinslair/merlin/v16/x/lockup/types"
-	poolmanagertypes "github.com/merlinslair/merlin/v16/x/poolmanager/types"
-	sftypes "github.com/merlinslair/merlin/v16/x/superfluid/types"
+	cl "github.com/merlins-labs/merlin/v16/x/concentrated-liquidity"
+	clmodel "github.com/merlins-labs/merlin/v16/x/concentrated-liquidity/model"
+	"github.com/merlins-labs/merlin/v16/x/concentrated-liquidity/types"
+	"github.com/merlins-labs/merlin/v16/x/gamm/pool-models/balancer"
+	lockuptypes "github.com/merlins-labs/merlin/v16/x/lockup/types"
+	poolmanagertypes "github.com/merlins-labs/merlin/v16/x/poolmanager/types"
+	sftypes "github.com/merlins-labs/merlin/v16/x/superfluid/types"
 )
 
 func (s *KeeperTestSuite) TestInitializePool() {

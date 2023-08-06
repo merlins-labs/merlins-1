@@ -8,11 +8,11 @@ Contributions come in the form of writing documentation, raising issues / PRs, a
 
 ## First steps
 
-The first step is to find an issue you want to fix. To identify issues we think are good for first-time contributors, we add the **good first issue** label. [You can see a list of issues to contribute here](https://github.com/merlinslair/merlin/contribute).
+The first step is to find an issue you want to fix. To identify issues we think are good for first-time contributors, we add the **good first issue** label. [You can see a list of issues to contribute here](https://github.com/merlins-labs/merlin/contribute).
 
 We recommend setting up your IDE as per our [recommended IDE setup](https://docs.merlin.zone/merlin-core/ide-guide) before proceeding.
 
-If you have a feature request, please use the [feature-request repo](https://github.com/osmosis-labs/feature-requests). We also welcome you to [make an issue](https://github.com/merlinslair/merlin/issues/new/choose) for anything of substance, or posting an issue if you want to work on it.
+If you have a feature request, please use the [feature-request repo](https://github.com/osmosis-labs/feature-requests). We also welcome you to [make an issue](https://github.com/merlins-labs/merlin/issues/new/choose) for anything of substance, or posting an issue if you want to work on it.
 
 Once you find an existing issue that you want to work on or if you have a new issue to create, continue below.
 
@@ -20,7 +20,7 @@ Once you find an existing issue that you want to work on or if you have a new is
 
 To contribute a change proposal, use the following workflow:
 
-1. [Fork the repository](https://github.com/merlinslair/merlin).
+1. [Fork the repository](https://github.com/merlins-labs/merlin).
 2. [Add an upstream](https://docs.github.com/en/github/collaborating-with-pull-requests/working-with-forks/syncing-a-fork) so that you can update your fork.
 3. Clone your fork to your computer.
 4. Create a branch and name it appropriately.
@@ -92,7 +92,7 @@ To simplify (and speed up) the process of writing unit tests that fit our standa
 
 Note: this section assumes you already have the Go plugin for Vscode installed. Please refer to our [IDE setup docs](https:/docs.merlin.zone/merlin-core/ide-guide) if you haven't done any IDE setup yet.
 
-Copy the `templates` folder into your `.vscode` folder from our main repo [here](https://github.com/merlinslair/merlin/tree/main/.vscode). This folder has our custom templates for generating tests that fit our testing standards as accurately as possible.
+Copy the `templates` folder into your `.vscode` folder from our main repo [here](https://github.com/merlins-labs/merlin/tree/main/.vscode). This folder has our custom templates for generating tests that fit our testing standards as accurately as possible.
 
 Then, go to your `settings.json` file in your `.vscode` folder and add the following to it:
 
@@ -270,7 +270,7 @@ The file `e2e_setup_test.go` defines the testing suite and contains the core boo
 
 The file `e2e_test.go` contains the actual end-to-end integration tests that utilize the testing suite.
 
-Additionally, there is an ability to disable certain components of the e2e suite. This can be done by setting the environment variables. See the [E2E test docs](https://github.com/merlinslair/merlin/blob/main/tests/e2e/README.md)  or more details.
+Additionally, there is an ability to disable certain components of the e2e suite. This can be done by setting the environment variables. See the [E2E test docs](https://github.com/merlins-labs/merlin/blob/main/tests/e2e/README.md)  or more details.
 
 To get started:
 
@@ -343,7 +343,7 @@ You can also feel free to do `make format` if you're getting errors related to `
 
 There are several steps that go into a major release
 
-- The GitHub release is created in our private repo via this [GitHub workflow](https://github.com/merlinslair/merlin-ci/blob/main/.github/workflows/create-release.yaml). The workflow is manually triggered from the [merlin-ci repository](https://github.com/merlinslair/merlin-ci). The workflow uses the `make build-reproducible` command to create the `merlin` binaries using the default [Makefile](https://github.com/merlinslair/merlin/blob/main/Makefile#L99).
+- The GitHub release is created in our private repo via this [GitHub workflow](https://github.com/merlins-labs/merlin-ci/blob/main/.github/workflows/create-release.yaml). The workflow is manually triggered from the [merlin-ci repository](https://github.com/merlins-labs/merlin-ci). The workflow uses the `make build-reproducible` command to create the `merlin` binaries using the default [Makefile](https://github.com/merlins-labs/merlin/blob/main/Makefile#L99).
 
 - Make a PR to main, with a cosmovisor config, generated in tandem with the binaries from tool.
   - Should be its own PR, as it may get denied for Fork upgrades.
@@ -355,7 +355,7 @@ There are several steps that go into a major release
 - Do a PR if that commit has conflicts
 
 - (Eventually) Make a PR that adds a version handler for the next upgrade
-  - [Add v10 upgrade boilerplate #1649](https://github.com/merlinslair/merlin/pull/1649/files)
+  - [Add v10 upgrade boilerplate #1649](https://github.com/merlins-labs/merlin/pull/1649/files)
 
 - Update chain JSON schema's recommended versions in `chain.schema.json` located in the root directory.
 
@@ -462,7 +462,7 @@ This is an error code that is returned by the transaction flow. In the case of
 success, it is `0`. On a general error, it is `1`. Additionally, each module
 defines its custom error codes. For example, `x/mint` currently has the
 following:
-<https://github.com/merlinslair/merlin/blob/8ef2f1845d9c7dd3f422d3f1953e36e5cf112e73/x/mint/types/errors.go#L8-L10>
+<https://github.com/merlins-labs/merlin/blob/8ef2f1845d9c7dd3f422d3f1953e36e5cf112e73/x/mint/types/errors.go#L8-L10>
 
 As a result, it is important to avoid changing custom error codes or change
 the semantics of what is valid logic in thransaction flows.

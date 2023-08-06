@@ -5,7 +5,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/merlinslair/merlin/v16/x/superfluid/types"
+	"github.com/merlins-labs/merlin/v16/x/superfluid/types"
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
 )

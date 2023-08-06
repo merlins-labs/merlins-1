@@ -5,16 +5,16 @@
 [![Project Status: Active -- The project has reached a stable, usable
 state and is being actively
 developed.](https://img.shields.io/badge/repo%20status-Active-green.svg?style=flat-square)](https://www.repostatus.org/#active)
-[![GoDoc](https://img.shields.io/badge/godoc-reference-blue?style=flat-square&logo=go)](https://pkg.go.dev/github.com/merlinslair/merlin/v11)
+[![GoDoc](https://img.shields.io/badge/godoc-reference-blue?style=flat-square&logo=go)](https://pkg.go.dev/github.com/merlins-labs/merlin/v11)
 [![Go Report
-Card](https://goreportcard.com/badge/github.com/merlinslair/merlin?style=flat-square)](https://goreportcard.com/report/github.com/merlinslair/merlin/v11)
-[![Version](https://img.shields.io/github/tag/merlinslair/merlin.svg?style=flat-square)](https://github.com/merlinslair/merlin/releases/latest)
+Card](https://goreportcard.com/badge/github.com/merlins-labs/merlin?style=flat-square)](https://goreportcard.com/report/github.com/merlins-labs/merlin/v11)
+[![Version](https://img.shields.io/github/tag/merlins-labs/merlin.svg?style=flat-square)](https://github.com/merlins-labs/merlin/releases/latest)
 [![License:
-Apache-2.0](https://img.shields.io/github/license/merlinslair/merlin.svg?style=flat-square)](https://github.com/merlinslair/merlin/blob/main/LICENSE)
+Apache-2.0](https://img.shields.io/github/license/merlins-labs/merlin.svg?style=flat-square)](https://github.com/merlins-labs/merlin/blob/main/LICENSE)
 [![Lines Of
-Code](https://img.shields.io/tokei/lines/github/merlinslair/merlin?style=flat-square)](https://github.com/merlinslair/merlin)
+Code](https://img.shields.io/tokei/lines/github/merlins-labs/merlin?style=flat-square)](https://github.com/merlins-labs/merlin)
 [![GitHub
-Super-Linter](https://img.shields.io/github/actions/workflow/status/merlinslair/merlin/lint.yml?style=flat-square&label=Lint)](https://github.com/marketplace/actions/super-linter)
+Super-Linter](https://img.shields.io/github/actions/workflow/status/merlins-labs/merlin/lint.yml?style=flat-square&label=Lint)](https://github.com/marketplace/actions/super-linter)
 [![Discord](https://badgen.net/badge/icon/discord?icon=discord&label)](https://discord.gg/merlin)
 
 Merlin is a fair-launched, customizable automated market maker for
@@ -82,4 +82,4 @@ to use the SDK fork, and how to make / test updates to SDK branches.
 ## LocalMerlin
 
 LocalMerlin is a containerized local Merlin testnet used for trying out new features locally. 
-LocalMerlin documentation can be found [here](https://github.com/merlinslair/merlin/tree/main/tests/localmerlin)
+LocalMerlin documentation can be found [here](https://github.com/merlins-labs/merlin/tree/main/tests/localmerlin)

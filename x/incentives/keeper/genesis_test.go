@@ -9,10 +9,10 @@ import (
 	"github.com/stretchr/testify/require"
 	tmproto "github.com/tendermint/tendermint/proto/tendermint/types"
 
-	furyapp "github.com/merlinslair/merlin/v16/app"
+	furyapp "github.com/merlins-labs/merlin/v16/app"
 
-	"github.com/merlinslair/merlin/v16/x/incentives/types"
-	lockuptypes "github.com/merlinslair/merlin/v16/x/lockup/types"
+	"github.com/merlins-labs/merlin/v16/x/incentives/types"
+	lockuptypes "github.com/merlins-labs/merlin/v16/x/lockup/types"
 )
 
 // TestIncentivesExportGenesis tests export genesis command for the incentives module.

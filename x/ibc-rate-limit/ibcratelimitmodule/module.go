@@ -17,12 +17,12 @@ import (
 	"github.com/cosmos/cosmos-sdk/client"
 	"github.com/cosmos/cosmos-sdk/codec"
 
-	ibcratelimit "github.com/merlinslair/merlin/v16/x/ibc-rate-limit"
-	ibcratelimitclient "github.com/merlinslair/merlin/v16/x/ibc-rate-limit/client"
-	ibcratelimitcli "github.com/merlinslair/merlin/v16/x/ibc-rate-limit/client/cli"
-	"github.com/merlinslair/merlin/v16/x/ibc-rate-limit/client/grpc"
-	"github.com/merlinslair/merlin/v16/x/ibc-rate-limit/client/queryproto"
-	"github.com/merlinslair/merlin/v16/x/ibc-rate-limit/types"
+	ibcratelimit "github.com/merlins-labs/merlin/v16/x/ibc-rate-limit"
+	ibcratelimitclient "github.com/merlins-labs/merlin/v16/x/ibc-rate-limit/client"
+	ibcratelimitcli "github.com/merlins-labs/merlin/v16/x/ibc-rate-limit/client/cli"
+	"github.com/merlins-labs/merlin/v16/x/ibc-rate-limit/client/grpc"
+	"github.com/merlins-labs/merlin/v16/x/ibc-rate-limit/client/queryproto"
+	"github.com/merlins-labs/merlin/v16/x/ibc-rate-limit/types"
 )
 
 var (

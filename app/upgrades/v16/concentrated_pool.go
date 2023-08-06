@@ -4,12 +4,12 @@ import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	authkeeper "github.com/cosmos/cosmos-sdk/x/auth/keeper"
 
-	"github.com/merlinslair/merlin/v16/app/keepers"
-	clmodel "github.com/merlinslair/merlin/v16/x/concentrated-liquidity/model"
-	gammkeeper "github.com/merlinslair/merlin/v16/x/gamm/keeper"
-	gammmigration "github.com/merlinslair/merlin/v16/x/gamm/types/migration"
-	"github.com/merlinslair/merlin/v16/x/poolmanager"
-	poolmanagertypes "github.com/merlinslair/merlin/v16/x/poolmanager/types"
+	"github.com/merlins-labs/merlin/v16/app/keepers"
+	clmodel "github.com/merlins-labs/merlin/v16/x/concentrated-liquidity/model"
+	gammkeeper "github.com/merlins-labs/merlin/v16/x/gamm/keeper"
+	gammmigration "github.com/merlins-labs/merlin/v16/x/gamm/types/migration"
+	"github.com/merlins-labs/merlin/v16/x/poolmanager"
+	poolmanagertypes "github.com/merlins-labs/merlin/v16/x/poolmanager/types"
 )
 
 // createConcentratedPoolFromCFMM creates a new concentrated liquidity pool with the desiredDenom0 token as the

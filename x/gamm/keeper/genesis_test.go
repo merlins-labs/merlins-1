@@ -5,9 +5,9 @@ import (
 	"github.com/cosmos/cosmos-sdk/simapp"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
-	"github.com/merlinslair/merlin/v16/x/gamm/pool-models/balancer"
-	"github.com/merlinslair/merlin/v16/x/gamm/types"
-	gammmigration "github.com/merlinslair/merlin/v16/x/gamm/types/migration"
+	"github.com/merlins-labs/merlin/v16/x/gamm/pool-models/balancer"
+	"github.com/merlins-labs/merlin/v16/x/gamm/types"
+	gammmigration "github.com/merlins-labs/merlin/v16/x/gamm/types/migration"
 )
 
 var DefaultMigrationRecords = gammmigration.MigrationRecords{BalancerToConcentratedPoolLinks: []gammmigration.BalancerToConcentratedPoolLink{

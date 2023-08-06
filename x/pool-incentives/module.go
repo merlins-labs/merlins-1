@@ -29,9 +29,9 @@ import (
 	simtypes "github.com/cosmos/cosmos-sdk/types/simulation"
 	"github.com/cosmos/cosmos-sdk/x/gov/simulation"
 
-	"github.com/merlinslair/merlin/v16/x/pool-incentives/client/cli"
-	"github.com/merlinslair/merlin/v16/x/pool-incentives/keeper"
-	"github.com/merlinslair/merlin/v16/x/pool-incentives/types"
+	"github.com/merlins-labs/merlin/v16/x/pool-incentives/client/cli"
+	"github.com/merlins-labs/merlin/v16/x/pool-incentives/keeper"
+	"github.com/merlins-labs/merlin/v16/x/pool-incentives/types"
 )
 
 var (

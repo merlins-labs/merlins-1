@@ -17,13 +17,13 @@ import (
 	"github.com/ignite/cli/ignite/pkg/cosmosaccount"
 	"github.com/ignite/cli/ignite/pkg/cosmosclient"
 
-	clqueryproto "github.com/merlinslair/merlin/v16/x/concentrated-liquidity/client/queryproto"
-	"github.com/merlinslair/merlin/v16/x/concentrated-liquidity/model"
-	cltypes "github.com/merlinslair/merlin/v16/x/concentrated-liquidity/types"
-	incentivestypes "github.com/merlinslair/merlin/v16/x/incentives/types"
-	lockuptypes "github.com/merlinslair/merlin/v16/x/lockup/types"
-	poolmanagerqueryproto "github.com/merlinslair/merlin/v16/x/poolmanager/client/queryproto"
-	poolmanagertypes "github.com/merlinslair/merlin/v16/x/poolmanager/types"
+	clqueryproto "github.com/merlins-labs/merlin/v16/x/concentrated-liquidity/client/queryproto"
+	"github.com/merlins-labs/merlin/v16/x/concentrated-liquidity/model"
+	cltypes "github.com/merlins-labs/merlin/v16/x/concentrated-liquidity/types"
+	incentivestypes "github.com/merlins-labs/merlin/v16/x/incentives/types"
+	lockuptypes "github.com/merlins-labs/merlin/v16/x/lockup/types"
+	poolmanagerqueryproto "github.com/merlins-labs/merlin/v16/x/poolmanager/client/queryproto"
+	poolmanagertypes "github.com/merlins-labs/merlin/v16/x/poolmanager/types"
 	epochstypes "github.com/osmosis-labs/osmosis/x/epochs/types"
 )
 

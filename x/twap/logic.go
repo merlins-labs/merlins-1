@@ -8,7 +8,7 @@ import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
 	"github.com/osmosis-labs/osmosis/osmomath"
-	"github.com/merlinslair/merlin/v16/x/twap/types"
+	"github.com/merlins-labs/merlin/v16/x/twap/types"
 )
 
 func newTwapRecord(k types.PoolManagerInterface, ctx sdk.Context, poolId uint64, denom0, denom1 string) (types.TwapRecord, error) {

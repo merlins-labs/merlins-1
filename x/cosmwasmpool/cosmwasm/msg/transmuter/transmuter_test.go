@@ -8,10 +8,10 @@ import (
 
 	"github.com/stretchr/testify/suite"
 
-	"github.com/merlinslair/merlin/v16/app/apptesting"
-	incentivetypes "github.com/merlinslair/merlin/v16/x/incentives/types"
-	lockuptypes "github.com/merlinslair/merlin/v16/x/lockup/types"
-	tokenfactorytypes "github.com/merlinslair/merlin/v16/x/tokenfactory/types"
+	"github.com/merlins-labs/merlin/v16/app/apptesting"
+	incentivetypes "github.com/merlins-labs/merlin/v16/x/incentives/types"
+	lockuptypes "github.com/merlins-labs/merlin/v16/x/lockup/types"
+	tokenfactorytypes "github.com/merlins-labs/merlin/v16/x/tokenfactory/types"
 )
 
 const (

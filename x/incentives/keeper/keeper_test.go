@@ -7,10 +7,10 @@ import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/stretchr/testify/suite"
 
-	"github.com/merlinslair/merlin/v16/app/apptesting"
-	cltypes "github.com/merlinslair/merlin/v16/x/concentrated-liquidity/types"
-	"github.com/merlinslair/merlin/v16/x/incentives/keeper"
-	"github.com/merlinslair/merlin/v16/x/incentives/types"
+	"github.com/merlins-labs/merlin/v16/app/apptesting"
+	cltypes "github.com/merlins-labs/merlin/v16/x/concentrated-liquidity/types"
+	"github.com/merlins-labs/merlin/v16/x/incentives/keeper"
+	"github.com/merlins-labs/merlin/v16/x/incentives/types"
 )
 
 type KeeperTestSuite struct {

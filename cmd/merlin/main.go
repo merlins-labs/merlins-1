@@ -5,9 +5,9 @@ import (
 
 	svrcmd "github.com/cosmos/cosmos-sdk/server/cmd"
 
-	merlin "github.com/merlinslair/merlin/v16/app"
-	"github.com/merlinslair/merlin/v16/app/params"
-	"github.com/merlinslair/merlin/v16/cmd/merlin/cmd"
+	merlin "github.com/merlins-labs/merlin/v16/app"
+	"github.com/merlins-labs/merlin/v16/app/params"
+	"github.com/merlins-labs/merlin/v16/cmd/merlin/cmd"
 )
 
 func main() {

@@ -3,8 +3,8 @@ package keeper_test
 import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
-	poolmanagertypes "github.com/merlinslair/merlin/v16/x/poolmanager/types"
-	"github.com/merlinslair/merlin/v16/x/protorev/types"
+	poolmanagertypes "github.com/merlins-labs/merlin/v16/x/poolmanager/types"
+	"github.com/merlins-labs/merlin/v16/x/protorev/types"
 )
 
 type TestRoute struct {

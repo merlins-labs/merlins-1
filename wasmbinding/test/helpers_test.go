@@ -13,7 +13,7 @@ import (
 	"github.com/cosmos/cosmos-sdk/simapp"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
-	"github.com/merlinslair/merlin/v16/app"
+	"github.com/merlins-labs/merlin/v16/app"
 )
 
 func CreateTestInput() (*app.MerlinApp, sdk.Context) {

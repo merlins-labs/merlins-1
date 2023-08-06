@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-export REPO=https://github.com/merlinslair/merlin.git
+export REPO=https://github.com/merlins-labs/merlin.git
 export BRANCH=main
 export NODE=merlin
 export CLI=merlin

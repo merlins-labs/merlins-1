@@ -3,7 +3,7 @@ package merlin.lockup;
 
 import "gogoproto/gogo.proto";
 
-option go_package = "github.com/merlinslair/merlin/v16/x/lockup/types";
+option go_package = "github.com/merlins-labs/merlin/v16/x/lockup/types";
 
 message Params {
   repeated string force_unlock_allowed_addresses = 1

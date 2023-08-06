@@ -8,8 +8,8 @@ import (
 	"github.com/stretchr/testify/require"
 
 	"github.com/osmosis-labs/osmosis/osmomath"
-	"github.com/merlinslair/merlin/v16/x/concentrated-liquidity/math"
-	"github.com/merlinslair/merlin/v16/x/concentrated-liquidity/types"
+	"github.com/merlins-labs/merlin/v16/x/concentrated-liquidity/math"
+	"github.com/merlins-labs/merlin/v16/x/concentrated-liquidity/types"
 )
 
 const (
@@ -616,7 +616,7 @@ func TestTickToSqrtPricePriceToTick_InverseRelationship(t *testing.T) {
 			require.NoError(t, err)
 
 			// TODO: investigate this separately
-			// https://github.com/merlinslair/merlin/issues/4925
+			// https://github.com/merlins-labs/merlin/issues/4925
 			// require.Equal(t, expectedPrice.String(), priceFromSqrtPrice.String())
 
 			// 5. Compute tick from sqrt price from the original tick.

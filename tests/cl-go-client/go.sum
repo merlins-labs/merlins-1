@@ -700,8 +700,8 @@ github.com/osmosis-labs/osmosis/osmomath v0.0.5 h1:veOu4VvnqMbJyjx2MEEFW53I9h3m8
 github.com/osmosis-labs/osmosis/osmomath v0.0.5/go.mod h1:UlftwozB+QObT3o0YfkuuyL9fsVdgoWt0dm6J7MLYnU=
 github.com/osmosis-labs/osmosis/osmoutils v0.0.5 h1:OUkq/Z5qa7JO201pAJXsfSNAlc0KfCgyAFqGLRqkXHU=
 github.com/osmosis-labs/osmosis/osmoutils v0.0.5/go.mod h1:Pl8Nzx6O6ow/+aqfMoMSz4hX+zz6RrnDYsooptECGxM=
-github.com/merlinslair/merlin/v16 v16.0.0-20230623172200-24f580da1227 h1:le9TfZRH0rZzZhB03XcesysY9KWw8yXXrKlH+A3sMxc=
-github.com/merlinslair/merlin/v16 v16.0.0-20230623172200-24f580da1227/go.mod h1:WRwalHshDSA+Bs53hp3j4P8WqhOTz0d0KBqlB9ihLWg=
+github.com/merlins-labs/merlin/v16 v16.0.0-20230623172200-24f580da1227 h1:le9TfZRH0rZzZhB03XcesysY9KWw8yXXrKlH+A3sMxc=
+github.com/merlins-labs/merlin/v16 v16.0.0-20230623172200-24f580da1227/go.mod h1:WRwalHshDSA+Bs53hp3j4P8WqhOTz0d0KBqlB9ihLWg=
 github.com/osmosis-labs/osmosis/x/epochs v0.0.1 h1:RCL3+W2s712dgtaKGgUHVt/6iJKfuPH63tkd3eiJeRo=
 github.com/osmosis-labs/osmosis/x/epochs v0.0.1/go.mod h1:8dvJFHTpu6SIxmOaSaEw0tHnQ/Z9blf5qsF/ZJnMVHo=
 github.com/osmosis-labs/osmosis/x/ibc-hooks v0.0.0-20230602130523-f9a94d8bbd10 h1:XrES5AHZMZ/Y78boW35PTignkhN9h8VvJ1sP8EJDIu8=

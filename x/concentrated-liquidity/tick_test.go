@@ -9,12 +9,12 @@ import (
 
 	"github.com/osmosis-labs/osmosis/osmomath"
 	"github.com/osmosis-labs/osmosis/osmoutils/accum"
-	cl "github.com/merlinslair/merlin/v16/x/concentrated-liquidity"
-	"github.com/merlinslair/merlin/v16/x/concentrated-liquidity/client/queryproto"
-	"github.com/merlinslair/merlin/v16/x/concentrated-liquidity/math"
-	"github.com/merlinslair/merlin/v16/x/concentrated-liquidity/model"
-	"github.com/merlinslair/merlin/v16/x/concentrated-liquidity/types"
-	"github.com/merlinslair/merlin/v16/x/concentrated-liquidity/types/genesis"
+	cl "github.com/merlins-labs/merlin/v16/x/concentrated-liquidity"
+	"github.com/merlins-labs/merlin/v16/x/concentrated-liquidity/client/queryproto"
+	"github.com/merlins-labs/merlin/v16/x/concentrated-liquidity/math"
+	"github.com/merlins-labs/merlin/v16/x/concentrated-liquidity/model"
+	"github.com/merlins-labs/merlin/v16/x/concentrated-liquidity/types"
+	"github.com/merlins-labs/merlin/v16/x/concentrated-liquidity/types/genesis"
 )
 
 const validPoolId = 1

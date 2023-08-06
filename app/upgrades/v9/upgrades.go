@@ -10,15 +10,15 @@ import (
 	stakingtypes "github.com/cosmos/cosmos-sdk/x/staking/types"
 	upgradetypes "github.com/cosmos/cosmos-sdk/x/upgrade/types"
 
-	gammtypes "github.com/merlinslair/merlin/v16/x/gamm/types"
+	gammtypes "github.com/merlins-labs/merlin/v16/x/gamm/types"
 
 	ica "github.com/cosmos/ibc-go/v4/modules/apps/27-interchain-accounts"
 	icacontrollertypes "github.com/cosmos/ibc-go/v4/modules/apps/27-interchain-accounts/controller/types"
 	icahosttypes "github.com/cosmos/ibc-go/v4/modules/apps/27-interchain-accounts/host/types"
 	icatypes "github.com/cosmos/ibc-go/v4/modules/apps/27-interchain-accounts/types"
 
-	"github.com/merlinslair/merlin/v16/app/keepers"
-	"github.com/merlinslair/merlin/v16/app/upgrades"
+	"github.com/merlins-labs/merlin/v16/app/keepers"
+	"github.com/merlins-labs/merlin/v16/app/upgrades"
 )
 
 const preUpgradeAppVersion = 8

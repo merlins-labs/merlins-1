@@ -7,9 +7,9 @@ import (
 	tmproto "github.com/tendermint/tendermint/proto/tendermint/types"
 
 	"github.com/osmosis-labs/osmosis/osmoutils/osmoassert"
-	furyapp "github.com/merlinslair/merlin/v16/app"
-	"github.com/merlinslair/merlin/v16/x/mint/keeper"
-	"github.com/merlinslair/merlin/v16/x/mint/types"
+	furyapp "github.com/merlins-labs/merlin/v16/app"
+	"github.com/merlins-labs/merlin/v16/x/mint/keeper"
+	"github.com/merlins-labs/merlin/v16/x/mint/types"
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
 )
@@ -429,7 +429,7 @@ func (s *KeeperTestSuite) TestAfterEpochEnd() {
 // Make sure that more specific test specs are added to validate the expected
 // supply for correctness.
 //
-// Ref: https://github.com/merlinslair/merlin/issues/1917
+// Ref: https://github.com/merlins-labs/merlin/issues/1917
 func (s *KeeperTestSuite) TestAfterEpochEnd_FirstYearThirdening_RealParameters() {
 	app := furyapp.Setup(false)
 	ctx := app.BaseApp.NewContext(false, tmproto.Header{})

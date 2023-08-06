@@ -3,7 +3,7 @@ package cli
 import (
 	flag "github.com/spf13/pflag"
 
-	"github.com/merlinslair/merlin/v16/x/poolmanager/types"
+	"github.com/merlins-labs/merlin/v16/x/poolmanager/types"
 )
 
 const (

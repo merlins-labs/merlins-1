@@ -10,8 +10,8 @@ import (
 	"google.golang.org/grpc/status"
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
-	"github.com/merlinslair/merlin/v16/x/ibc-rate-limit/client"
-	"github.com/merlinslair/merlin/v16/x/ibc-rate-limit/client/queryproto"
+	"github.com/merlins-labs/merlin/v16/x/ibc-rate-limit/client"
+	"github.com/merlins-labs/merlin/v16/x/ibc-rate-limit/client/queryproto"
 )
 
 type Querier struct {

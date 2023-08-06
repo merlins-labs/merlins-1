@@ -3,7 +3,7 @@ package keeper
 import (
 	"fmt"
 
-	"github.com/merlinslair/merlin/v16/x/mint/types"
+	"github.com/merlins-labs/merlin/v16/x/mint/types"
 	epochstypes "github.com/osmosis-labs/osmosis/x/epochs/types"
 
 	"github.com/cosmos/cosmos-sdk/telemetry"

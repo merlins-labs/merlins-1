@@ -6,11 +6,11 @@ import (
 
 	"github.com/stretchr/testify/require"
 
-	"github.com/merlinslair/merlin/v16/x/gamm/pool-models/balancer"
-	"github.com/merlinslair/merlin/v16/x/gamm/pool-models/internal/cfmm_common"
-	"github.com/merlinslair/merlin/v16/x/gamm/pool-models/stableswap"
-	gammtypes "github.com/merlinslair/merlin/v16/x/gamm/types"
-	poolmanagertypes "github.com/merlinslair/merlin/v16/x/poolmanager/types"
+	"github.com/merlins-labs/merlin/v16/x/gamm/pool-models/balancer"
+	"github.com/merlins-labs/merlin/v16/x/gamm/pool-models/internal/cfmm_common"
+	"github.com/merlins-labs/merlin/v16/x/gamm/pool-models/stableswap"
+	gammtypes "github.com/merlins-labs/merlin/v16/x/gamm/types"
+	poolmanagertypes "github.com/merlins-labs/merlin/v16/x/poolmanager/types"
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
 )

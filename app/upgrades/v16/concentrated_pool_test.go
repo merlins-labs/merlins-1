@@ -7,10 +7,10 @@ import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/stretchr/testify/suite"
 
-	"github.com/merlinslair/merlin/v16/app/apptesting"
-	v16 "github.com/merlinslair/merlin/v16/app/upgrades/v16"
-	gammmigration "github.com/merlinslair/merlin/v16/x/gamm/types/migration"
-	poolincentivestypes "github.com/merlinslair/merlin/v16/x/pool-incentives/types"
+	"github.com/merlins-labs/merlin/v16/app/apptesting"
+	v16 "github.com/merlins-labs/merlin/v16/app/upgrades/v16"
+	gammmigration "github.com/merlins-labs/merlin/v16/x/gamm/types/migration"
+	poolincentivestypes "github.com/merlins-labs/merlin/v16/x/pool-incentives/types"
 )
 
 type ConcentratedUpgradeTestSuite struct {

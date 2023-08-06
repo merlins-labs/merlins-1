@@ -6,7 +6,7 @@ import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/stretchr/testify/require"
 
-	"github.com/merlinslair/merlin/v16/x/mint/types"
+	"github.com/merlins-labs/merlin/v16/x/mint/types"
 )
 
 // TestGetInflationProportion sanity checks that inflation

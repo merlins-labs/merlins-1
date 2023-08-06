@@ -8,7 +8,7 @@ import (
 
 	"github.com/osmosis-labs/osmosis/osmoutils"
 	"github.com/osmosis-labs/osmosis/osmoutils/osmocli"
-	"github.com/merlinslair/merlin/v16/x/lockup/types"
+	"github.com/merlins-labs/merlin/v16/x/lockup/types"
 )
 
 var testAddresses = furyutils.CreateRandomAccounts(3)

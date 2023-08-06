@@ -12,8 +12,8 @@ import (
 	rpchttp "github.com/tendermint/tendermint/rpc/client/http"
 	coretypes "github.com/tendermint/tendermint/rpc/core/types"
 
-	"github.com/merlinslair/merlin/v16/tests/e2e/containers"
-	"github.com/merlinslair/merlin/v16/tests/e2e/initialization"
+	"github.com/merlins-labs/merlin/v16/tests/e2e/containers"
+	"github.com/merlins-labs/merlin/v16/tests/e2e/initialization"
 )
 
 type NodeConfig struct {

@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"time"
 
-	lockuptypes "github.com/merlinslair/merlin/v16/x/lockup/types"
+	lockuptypes "github.com/merlins-labs/merlin/v16/x/lockup/types"
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
 )

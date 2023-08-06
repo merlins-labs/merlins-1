@@ -5,9 +5,9 @@ import (
 	"testing"
 	"time"
 
-	"github.com/merlinslair/merlin/v16/tests/e2e/configurer/chain"
-	"github.com/merlinslair/merlin/v16/tests/e2e/containers"
-	"github.com/merlinslair/merlin/v16/tests/e2e/initialization"
+	"github.com/merlins-labs/merlin/v16/tests/e2e/configurer/chain"
+	"github.com/merlins-labs/merlin/v16/tests/e2e/containers"
+	"github.com/merlins-labs/merlin/v16/tests/e2e/initialization"
 )
 
 type CurrentBranchConfigurer struct {

@@ -10,12 +10,12 @@ import (
 
 	"github.com/stretchr/testify/suite"
 
-	"github.com/merlinslair/merlin/v16/app/apptesting"
-	appParams "github.com/merlinslair/merlin/v16/app/params"
-	lockuptypes "github.com/merlinslair/merlin/v16/x/lockup/types"
-	"github.com/merlinslair/merlin/v16/x/valset-pref/types"
+	"github.com/merlins-labs/merlin/v16/app/apptesting"
+	appParams "github.com/merlins-labs/merlin/v16/app/params"
+	lockuptypes "github.com/merlins-labs/merlin/v16/x/lockup/types"
+	"github.com/merlins-labs/merlin/v16/x/valset-pref/types"
 
-	valPref "github.com/merlinslair/merlin/v16/x/valset-pref"
+	valPref "github.com/merlins-labs/merlin/v16/x/valset-pref"
 )
 
 type KeeperTestSuite struct {
