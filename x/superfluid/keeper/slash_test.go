@@ -3,11 +3,11 @@ package keeper_test
 import (
 	"github.com/osmosis-labs/osmosis/osmomath"
 	"github.com/osmosis-labs/osmosis/osmoutils/accum"
-	"github.com/osmosis-labs/osmosis/v16/app/apptesting"
-	cl "github.com/osmosis-labs/osmosis/v16/x/concentrated-liquidity"
-	cltypes "github.com/osmosis-labs/osmosis/v16/x/concentrated-liquidity/types"
-	lockuptypes "github.com/osmosis-labs/osmosis/v16/x/lockup/types"
-	"github.com/osmosis-labs/osmosis/v16/x/superfluid/keeper"
+	"github.com/merlinslair/merlin/v16/app/apptesting"
+	cl "github.com/merlinslair/merlin/v16/x/concentrated-liquidity"
+	cltypes "github.com/merlinslair/merlin/v16/x/concentrated-liquidity/types"
+	lockuptypes "github.com/merlinslair/merlin/v16/x/lockup/types"
+	"github.com/merlinslair/merlin/v16/x/superfluid/keeper"
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	stakingtypes "github.com/cosmos/cosmos-sdk/x/staking/types"
@@ -238,7 +238,7 @@ func (s *KeeperTestSuite) TestPrepareConcentratedLockForSlash() {
 		s.Run(tc.name, func() {
 			s.SetupTest()
 
-			clPool, concentratedLockId, positionId := s.PrepareConcentratedPoolWithCoinsAndLockedFullRangePosition("uosmo", apptesting.USDC)
+			clPool, concentratedLockId, positionId := s.PrepareConcentratedPoolWithCoinsAndLockedFullRangePosition("ufury", apptesting.USDC)
 			clPoolId := clPool.GetId()
 
 			lock, err := s.App.LockupKeeper.GetLockByID(s.Ctx, concentratedLockId)
@@ -327,10 +327,10 @@ func (s *KeeperTestSuite) TestPrepareConcentratedLockForSlash() {
 				asset0PostSlash, asset1PostSlash, err := cl.CalculateUnderlyingAssetsFromPosition(s.Ctx, positionPostSlash, clPool)
 				s.Require().NoError(err)
 
-				errTolerance := osmomath.ErrTolerance{
+				errTolerance := furymath.ErrTolerance{
 					AdditiveTolerance: sdk.NewDec(1),
 					// Actual should be greater than expected, so we round up
-					RoundingDir: osmomath.RoundUp,
+					RoundingDir: furymath.RoundUp,
 				}
 
 				s.Require().Equal(0, errTolerance.Compare(asset0PreSlash.Sub(asset0PostSlash).Amount, underlyingAssetsToSlash[0].Amount))

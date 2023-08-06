@@ -7,15 +7,15 @@ import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/stretchr/testify/require"
 
-	appParams "github.com/osmosis-labs/osmosis/v16/app/params"
-	stableswap "github.com/osmosis-labs/osmosis/v16/x/gamm/pool-models/stableswap"
-	"github.com/osmosis-labs/osmosis/v16/x/gamm/types"
+	appParams "github.com/merlinslair/merlin/v16/app/params"
+	stableswap "github.com/merlinslair/merlin/v16/x/gamm/pool-models/stableswap"
+	"github.com/merlinslair/merlin/v16/x/gamm/types"
 )
 
 func baseCreatePoolMsgGen(sender sdk.AccAddress) *stableswap.MsgCreateStableswapPool {
 	testPoolAsset := sdk.Coins{
 		sdk.NewCoin("atom", sdk.NewInt(100)),
-		sdk.NewCoin("osmo", sdk.NewInt(100)),
+		sdk.NewCoin("fury", sdk.NewInt(100)),
 	}
 
 	poolParams := &stableswap.PoolParams{
@@ -93,7 +93,7 @@ func TestMsgCreateStableswapPoolValidateBasic(t *testing.T) {
 			name: "has one coin in InitialPoolLiquidity",
 			msg: updateMsg(func(msg stableswap.MsgCreateStableswapPool) stableswap.MsgCreateStableswapPool {
 				msg.InitialPoolLiquidity = sdk.Coins{
-					sdk.NewCoin("osmo", sdk.NewInt(100)),
+					sdk.NewCoin("fury", sdk.NewInt(100)),
 				}
 				return msg
 			}),
@@ -108,7 +108,7 @@ func TestMsgCreateStableswapPoolValidateBasic(t *testing.T) {
 					sdk.NewCoin("band", sdk.NewInt(100)),
 					sdk.NewCoin("evmos", sdk.NewInt(100)),
 					sdk.NewCoin("juno", sdk.NewInt(100)),
-					sdk.NewCoin("osmo", sdk.NewInt(100)),
+					sdk.NewCoin("fury", sdk.NewInt(100)),
 					sdk.NewCoin("regen", sdk.NewInt(100)),
 					sdk.NewCoin("usdt", sdk.NewInt(100)),
 					sdk.NewCoin("usdc", sdk.NewInt(100)),
@@ -179,7 +179,7 @@ func TestMsgCreateStableswapPoolValidateBasic(t *testing.T) {
 		{
 			name: "valid governor: address",
 			msg: updateMsg(func(msg stableswap.MsgCreateStableswapPool) stableswap.MsgCreateStableswapPool {
-				msg.FuturePoolGovernor = "osmo1fqlr98d45v5ysqgp6h56kpujcj4cvsjnjq9nck"
+				msg.FuturePoolGovernor = "fury1fqlr98d45v5ysqgp6h56kpujcj4cvsjnjq9nck"
 				return msg
 			}),
 			expectPass: true,
@@ -208,7 +208,7 @@ func TestMsgCreateStableswapPoolValidateBasic(t *testing.T) {
 			msg: updateMsg(func(msg stableswap.MsgCreateStableswapPool) stableswap.MsgCreateStableswapPool {
 				msg.InitialPoolLiquidity = sdk.Coins{
 					sdk.NewCoin("atom", sdk.NewInt(100)),
-					sdk.NewCoin("osmo", sdk.NewInt(100)),
+					sdk.NewCoin("fury", sdk.NewInt(100)),
 					sdk.NewCoin("usdc", sdk.NewInt(100)),
 					sdk.NewCoin("usdt", sdk.NewInt(100)),
 				}
@@ -221,7 +221,7 @@ func TestMsgCreateStableswapPoolValidateBasic(t *testing.T) {
 			name: "post-scaled asset amount less than 1",
 			msg: updateMsg(func(msg stableswap.MsgCreateStableswapPool) stableswap.MsgCreateStableswapPool {
 				msg.InitialPoolLiquidity = sdk.Coins{
-					sdk.NewCoin("osmo", sdk.NewInt(100)),
+					sdk.NewCoin("fury", sdk.NewInt(100)),
 					sdk.NewCoin("atom", sdk.NewInt(100)),
 					sdk.NewCoin("usdt", sdk.NewInt(100)),
 					sdk.NewCoin("usdc", sdk.NewInt(100)),
@@ -239,7 +239,7 @@ func TestMsgCreateStableswapPoolValidateBasic(t *testing.T) {
 					sdk.NewCoin("atom", types.StableswapMaxScaledAmtPerAsset),
 					sdk.NewCoin("band", types.StableswapMaxScaledAmtPerAsset),
 					sdk.NewCoin("juno", types.StableswapMaxScaledAmtPerAsset),
-					sdk.NewCoin("osmo", types.StableswapMaxScaledAmtPerAsset),
+					sdk.NewCoin("fury", types.StableswapMaxScaledAmtPerAsset),
 					sdk.NewCoin("regen", types.StableswapMaxScaledAmtPerAsset),
 					sdk.NewCoin("usdc", types.StableswapMaxScaledAmtPerAsset),
 					sdk.NewCoin("usdt", types.StableswapMaxScaledAmtPerAsset),
@@ -253,7 +253,7 @@ func TestMsgCreateStableswapPoolValidateBasic(t *testing.T) {
 			name: "greater than max post-scaled amount with regular scaling factors",
 			msg: updateMsg(func(msg stableswap.MsgCreateStableswapPool) stableswap.MsgCreateStableswapPool {
 				msg.InitialPoolLiquidity = sdk.Coins{
-					sdk.NewCoin("osmo", types.StableswapMaxScaledAmtPerAsset.Add(sdk.OneInt())),
+					sdk.NewCoin("fury", types.StableswapMaxScaledAmtPerAsset.Add(sdk.OneInt())),
 					sdk.NewCoin("atom", types.StableswapMaxScaledAmtPerAsset),
 					sdk.NewCoin("usdt", types.StableswapMaxScaledAmtPerAsset),
 					sdk.NewCoin("usdc", types.StableswapMaxScaledAmtPerAsset),
@@ -275,7 +275,7 @@ func TestMsgCreateStableswapPoolValidateBasic(t *testing.T) {
 					sdk.NewCoin("atom", sdk.NewInt(100_000_000_000_000_000)),
 					sdk.NewCoin("band", sdk.NewInt(100_000_000_000_000_000)),
 					sdk.NewCoin("juno", sdk.NewInt(100_000_000_000_000_000)),
-					sdk.NewCoin("osmo", sdk.NewInt(100_000_000_000_000_000)),
+					sdk.NewCoin("fury", sdk.NewInt(100_000_000_000_000_000)),
 					sdk.NewCoin("regen", sdk.NewInt(100_000_000_000_000_000)),
 					sdk.NewCoin("usdc", sdk.NewInt(100_000_000_000_000_000)),
 					sdk.NewCoin("usdt", sdk.NewInt(100_000_000_000_000_000)),

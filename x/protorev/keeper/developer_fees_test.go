@@ -3,8 +3,8 @@ package keeper_test
 import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
-	"github.com/osmosis-labs/osmosis/v16/app/apptesting"
-	"github.com/osmosis-labs/osmosis/v16/x/protorev/types"
+	"github.com/merlinslair/merlin/v16/app/apptesting"
+	"github.com/merlinslair/merlin/v16/x/protorev/types"
 )
 
 // TestSendDeveloperFee tests the SendDeveloperFee function
@@ -27,11 +27,11 @@ func (suite *KeeperTestSuite) TestSendDeveloperFee() {
 				account := apptesting.CreateRandomAccounts(1)[0]
 				suite.App.ProtoRevKeeper.SetDeveloperAccount(suite.Ctx, account)
 
-				err := suite.pseudoExecuteTrade(types.OsmosisDenomination, sdk.NewInt(1000), 100)
+				err := suite.pseudoExecuteTrade(types.MerlinDenomination, sdk.NewInt(1000), 100)
 				suite.Require().NoError(err)
 			},
 			expectedErr:       false,
-			expectedDevProfit: sdk.NewCoin(types.OsmosisDenomination, sdk.NewInt(20)),
+			expectedDevProfit: sdk.NewCoin(types.MerlinDenomination, sdk.NewInt(20)),
 		},
 		{
 			description: "Send with set developer account in second phase",
@@ -39,11 +39,11 @@ func (suite *KeeperTestSuite) TestSendDeveloperFee() {
 				account := apptesting.CreateRandomAccounts(1)[0]
 				suite.App.ProtoRevKeeper.SetDeveloperAccount(suite.Ctx, account)
 
-				err := suite.pseudoExecuteTrade(types.OsmosisDenomination, sdk.NewInt(1000), 500)
+				err := suite.pseudoExecuteTrade(types.MerlinDenomination, sdk.NewInt(1000), 500)
 				suite.Require().NoError(err)
 			},
 			expectedErr:       false,
-			expectedDevProfit: sdk.NewCoin(types.OsmosisDenomination, sdk.NewInt(10)),
+			expectedDevProfit: sdk.NewCoin(types.MerlinDenomination, sdk.NewInt(10)),
 		},
 		{
 			description: "Send with set developer account in third (final) phase",
@@ -51,11 +51,11 @@ func (suite *KeeperTestSuite) TestSendDeveloperFee() {
 				account := apptesting.CreateRandomAccounts(1)[0]
 				suite.App.ProtoRevKeeper.SetDeveloperAccount(suite.Ctx, account)
 
-				err := suite.pseudoExecuteTrade(types.OsmosisDenomination, sdk.NewInt(1000), 1000)
+				err := suite.pseudoExecuteTrade(types.MerlinDenomination, sdk.NewInt(1000), 1000)
 				suite.Require().NoError(err)
 			},
 			expectedErr:       false,
-			expectedDevProfit: sdk.NewCoin(types.OsmosisDenomination, sdk.NewInt(5)),
+			expectedDevProfit: sdk.NewCoin(types.MerlinDenomination, sdk.NewInt(5)),
 		},
 	}
 
@@ -64,7 +64,7 @@ func (suite *KeeperTestSuite) TestSendDeveloperFee() {
 			suite.SetupTest()
 			tc.alterState()
 
-			err := suite.App.ProtoRevKeeper.SendDeveloperFee(suite.Ctx, sdk.NewCoin(types.OsmosisDenomination, sdk.NewInt(100)))
+			err := suite.App.ProtoRevKeeper.SendDeveloperFee(suite.Ctx, sdk.NewCoin(types.MerlinDenomination, sdk.NewInt(100)))
 			if tc.expectedErr {
 				suite.Require().Error(err)
 			} else {
@@ -73,7 +73,7 @@ func (suite *KeeperTestSuite) TestSendDeveloperFee() {
 
 			developerAccount, err := suite.App.ProtoRevKeeper.GetDeveloperAccount(suite.Ctx)
 			if !tc.expectedErr {
-				developerFee := suite.App.AppKeepers.BankKeeper.GetBalance(suite.Ctx, developerAccount, types.OsmosisDenomination)
+				developerFee := suite.App.AppKeepers.BankKeeper.GetBalance(suite.Ctx, developerAccount, types.MerlinDenomination)
 				suite.Require().Equal(tc.expectedDevProfit, developerFee)
 			} else {
 				suite.Require().Error(err)

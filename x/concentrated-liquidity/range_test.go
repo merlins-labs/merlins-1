@@ -7,9 +7,9 @@ import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
 	"github.com/osmosis-labs/osmosis/osmomath"
-	"github.com/osmosis-labs/osmosis/v16/app/apptesting"
-	"github.com/osmosis-labs/osmosis/v16/x/concentrated-liquidity/math"
-	"github.com/osmosis-labs/osmosis/v16/x/concentrated-liquidity/types"
+	"github.com/merlinslair/merlin/v16/app/apptesting"
+	"github.com/merlinslair/merlin/v16/x/concentrated-liquidity/math"
+	"github.com/merlinslair/merlin/v16/x/concentrated-liquidity/types"
 )
 
 type RangeTestParams struct {
@@ -337,7 +337,7 @@ func (s *KeeperTestSuite) executeRandomizedSwap(pool types.ConcentratedPoolExten
 		s.Require().NoError(err)
 
 		poolSpotPrice := pool.GetCurrentSqrtPrice().PowerInteger(2)
-		minSwapOutAmount := poolSpotPrice.Mul(osmomath.SmallestDec()).TruncateDec().SDKDec().TruncateInt()
+		minSwapOutAmount := poolSpotPrice.Mul(furymath.SmallestDec()).TruncateDec().SDKDec().TruncateInt()
 		poolBalances := s.App.BankKeeper.GetAllBalances(s.Ctx, pool.GetAddress())
 		if poolBalances.AmountOf(swapOutDenom).LTE(minSwapOutAmount) {
 			return sdk.Coin{}, sdk.Coin{}

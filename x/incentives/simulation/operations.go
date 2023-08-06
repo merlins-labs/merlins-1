@@ -4,13 +4,13 @@ import (
 	"math/rand"
 	"time"
 
-	osmosimtypes "github.com/osmosis-labs/osmosis/v16/simulation/simtypes"
+	furysimtypes "github.com/merlinslair/merlin/v16/simulation/simtypes"
 
 	"github.com/cosmos/cosmos-sdk/baseapp"
 
-	"github.com/osmosis-labs/osmosis/v16/x/incentives/keeper"
-	"github.com/osmosis-labs/osmosis/v16/x/incentives/types"
-	lockuptypes "github.com/osmosis-labs/osmosis/v16/x/lockup/types"
+	"github.com/merlinslair/merlin/v16/x/incentives/keeper"
+	"github.com/merlinslair/merlin/v16/x/incentives/types"
+	lockuptypes "github.com/merlinslair/merlin/v16/x/lockup/types"
 
 	"github.com/cosmos/cosmos-sdk/codec"
 	simappparams "github.com/cosmos/cosmos-sdk/simapp/params"
@@ -31,7 +31,7 @@ const (
 // WeightedOperations returns all the operations from the module with their respective weights.
 func WeightedOperations(
 	appParams simtypes.AppParams, cdc codec.JSONCodec, ak stakingTypes.AccountKeeper,
-	bk osmosimtypes.BankKeeper, ek types.EpochKeeper, k keeper.Keeper,
+	bk furysimtypes.BankKeeper, ek types.EpochKeeper, k keeper.Keeper,
 ) simulation.WeightedOperations {
 	var (
 		weightMsgCreateGauge int
@@ -120,7 +120,7 @@ func Max(x, y int) int {
 }
 
 // SimulateMsgCreateGauge generates and executes a MsgCreateGauge with random parameters
-func SimulateMsgCreateGauge(ak stakingTypes.AccountKeeper, bk osmosimtypes.BankKeeper, ek types.EpochKeeper, k keeper.Keeper) simtypes.Operation {
+func SimulateMsgCreateGauge(ak stakingTypes.AccountKeeper, bk furysimtypes.BankKeeper, ek types.EpochKeeper, k keeper.Keeper) simtypes.Operation {
 	return func(
 		r *rand.Rand, app *baseapp.BaseApp, ctx sdk.Context, accs []simtypes.Account, chainID string,
 	) (simtypes.OperationMsg, []simtypes.FutureOperation, error) {
@@ -153,13 +153,13 @@ func SimulateMsgCreateGauge(ak stakingTypes.AccountKeeper, bk osmosimtypes.BankK
 		}
 
 		txGen := simappparams.MakeTestEncodingConfig().TxConfig
-		return osmosimtypes.GenAndDeliverTxWithRandFees(
+		return furysimtypes.GenAndDeliverTxWithRandFees(
 			r, app, txGen, &msg, rewards, ctx, simAccount, ak, bk, types.ModuleName)
 	}
 }
 
 // SimulateMsgAddToGauge generates and executes a MsgAddToGauge with random parameters
-func SimulateMsgAddToGauge(ak stakingTypes.AccountKeeper, bk osmosimtypes.BankKeeper, k keeper.Keeper) simtypes.Operation {
+func SimulateMsgAddToGauge(ak stakingTypes.AccountKeeper, bk furysimtypes.BankKeeper, k keeper.Keeper) simtypes.Operation {
 	return func(
 		r *rand.Rand, app *baseapp.BaseApp, ctx sdk.Context, accs []simtypes.Account, chainID string,
 	) (simtypes.OperationMsg, []simtypes.FutureOperation, error) {
@@ -188,7 +188,7 @@ func SimulateMsgAddToGauge(ak stakingTypes.AccountKeeper, bk osmosimtypes.BankKe
 		}
 
 		txGen := simappparams.MakeTestEncodingConfig().TxConfig
-		return osmosimtypes.GenAndDeliverTxWithRandFees(
+		return furysimtypes.GenAndDeliverTxWithRandFees(
 			r, app, txGen, &msg, rewards, ctx, simAccount, ak, bk, types.ModuleName,
 		)
 	}

@@ -1,4 +1,4 @@
-package osmoutils_test
+package furyutils_test
 
 import (
 	"github.com/cosmos/cosmos-sdk/store/types"
@@ -43,7 +43,7 @@ func (s *TestSuite) TestCacheCtxConsumeGas() {
 			ctx.GasMeter().ConsumeGas(tc.gasUsedPreCtx, "pre ctx")
 			var err error
 			f := func() {
-				osmoutils.ApplyFuncIfNoError(ctx, func(c sdk.Context) error {
+				furyutils.ApplyFuncIfNoError(ctx, func(c sdk.Context) error {
 					return consumeGas(c, 1000, 10)
 				})
 			}

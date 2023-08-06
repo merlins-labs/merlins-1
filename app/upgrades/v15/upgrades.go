@@ -3,7 +3,7 @@ package v15
 import (
 	packetforwardtypes "github.com/strangelove-ventures/packet-forward-middleware/v4/router/types"
 
-	poolmanagertypes "github.com/osmosis-labs/osmosis/v16/x/poolmanager/types"
+	poolmanagertypes "github.com/merlinslair/merlin/v16/x/poolmanager/types"
 
 	wasmkeeper "github.com/CosmWasm/wasmd/x/wasm/keeper"
 	sdk "github.com/cosmos/cosmos-sdk/types"
@@ -15,19 +15,19 @@ import (
 	icqkeeper "github.com/cosmos/ibc-apps/modules/async-icq/v4/keeper"
 	icqtypes "github.com/cosmos/ibc-apps/modules/async-icq/v4/types"
 
-	"github.com/osmosis-labs/osmosis/v16/wasmbinding"
-	ibcratelimit "github.com/osmosis-labs/osmosis/v16/x/ibc-rate-limit"
-	ibcratelimittypes "github.com/osmosis-labs/osmosis/v16/x/ibc-rate-limit/types"
+	"github.com/merlinslair/merlin/v16/wasmbinding"
+	ibcratelimit "github.com/merlinslair/merlin/v16/x/ibc-rate-limit"
+	ibcratelimittypes "github.com/merlinslair/merlin/v16/x/ibc-rate-limit/types"
 
 	bankkeeper "github.com/cosmos/cosmos-sdk/x/bank/keeper"
 
-	"github.com/osmosis-labs/osmosis/v16/app/keepers"
-	appParams "github.com/osmosis-labs/osmosis/v16/app/params"
-	"github.com/osmosis-labs/osmosis/v16/app/upgrades"
-	gammkeeper "github.com/osmosis-labs/osmosis/v16/x/gamm/keeper"
-	"github.com/osmosis-labs/osmosis/v16/x/gamm/pool-models/stableswap"
-	gammtypes "github.com/osmosis-labs/osmosis/v16/x/gamm/types"
-	"github.com/osmosis-labs/osmosis/v16/x/poolmanager"
+	"github.com/merlinslair/merlin/v16/app/keepers"
+	appParams "github.com/merlinslair/merlin/v16/app/params"
+	"github.com/merlinslair/merlin/v16/app/upgrades"
+	gammkeeper "github.com/merlinslair/merlin/v16/x/gamm/keeper"
+	"github.com/merlinslair/merlin/v16/x/gamm/pool-models/stableswap"
+	gammtypes "github.com/merlinslair/merlin/v16/x/gamm/types"
+	"github.com/merlinslair/merlin/v16/x/poolmanager"
 )
 
 func CreateUpgradeHandler(
@@ -57,9 +57,9 @@ func CreateUpgradeHandler(
 		// See RunMigrations() for details.
 		fromVM[ibcratelimittypes.ModuleName] = 0
 
-		// Metadata for uosmo and uion were missing prior to this upgrade.
+		// Metadata for ufury and uion were missing prior to this upgrade.
 		// They are added in this upgrade.
-		registerOsmoIonMetadata(ctx, keepers.BankKeeper)
+		registerFuryIonMetadata(ctx, keepers.BankKeeper)
 
 		// Stride stXXX/XXX pools are being migrated from the standard balancer curve to the
 		// solidly stable curve.
@@ -80,8 +80,8 @@ func setICQParams(ctx sdk.Context, icqKeeper *icqkeeper.Keeper) {
 }
 
 func migrateBalancerPoolsToSolidlyStable(ctx sdk.Context, gammKeeper *gammkeeper.Keeper, poolmanagerKeeper *poolmanager.Keeper, bankKeeper bankkeeper.Keeper) {
-	// migrate stOSMO_OSMOPoolId, stJUNO_JUNOPoolId, stSTARS_STARSPoolId
-	pools := []uint64{stOSMO_OSMOPoolId, stJUNO_JUNOPoolId, stSTARS_STARSPoolId}
+	// migrate stFURY_FURYPoolId, stJUNO_JUNOPoolId, stSTARS_STARSPoolId
+	pools := []uint64{stFURY_FURYPoolId, stJUNO_JUNOPoolId, stSTARS_STARSPoolId}
 	for _, poolId := range pools {
 		migrateBalancerPoolToSolidlyStable(ctx, gammKeeper, poolmanagerKeeper, bankKeeper, poolId)
 	}
@@ -105,7 +105,7 @@ func migrateBalancerPoolToSolidlyStable(ctx sdk.Context, gammKeeper *gammkeeper.
 		stableswap.PoolParams{SwapFee: balancerPool.GetSpreadFactor(ctx), ExitFee: balancerPool.GetExitFee(ctx)},
 		balancerPoolLiquidity,
 		[]uint64{1, 1},
-		"osmo1k8c2m5cn322akk5wy8lpt87dd2f4yh9afcd7af", // Stride Foundation 2/3 multisig
+		"fury1k8c2m5cn322akk5wy8lpt87dd2f4yh9afcd7af", // Stride Foundation 2/3 multisig
 		"",
 	)
 	if err != nil {
@@ -252,9 +252,9 @@ func migrateNextPoolId(ctx sdk.Context, gammKeeper *gammkeeper.Keeper, poolmanag
 	}
 }
 
-func registerOsmoIonMetadata(ctx sdk.Context, bankKeeper bankkeeper.Keeper) {
-	uosmoMetadata := banktypes.Metadata{
-		Description: "The native token of Osmosis",
+func registerFuryIonMetadata(ctx sdk.Context, bankKeeper bankkeeper.Keeper) {
+	ufuryMetadata := banktypes.Metadata{
+		Description: "The native token of Merlin",
 		DenomUnits: []*banktypes.DenomUnit{
 			{
 				Denom:    appParams.BaseCoinUnit,
@@ -263,7 +263,7 @@ func registerOsmoIonMetadata(ctx sdk.Context, bankKeeper bankkeeper.Keeper) {
 			},
 			{
 				Denom:    appParams.HumanCoinUnit,
-				Exponent: appParams.OsmoExponent,
+				Exponent: appParams.FuryExponent,
 				Aliases:  nil,
 			},
 		},
@@ -288,6 +288,6 @@ func registerOsmoIonMetadata(ctx sdk.Context, bankKeeper bankkeeper.Keeper) {
 		Display: "ion",
 	}
 
-	bankKeeper.SetDenomMetaData(ctx, uosmoMetadata)
+	bankKeeper.SetDenomMetaData(ctx, ufuryMetadata)
 	bankKeeper.SetDenomMetaData(ctx, uionMetadata)
 }

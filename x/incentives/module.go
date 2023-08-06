@@ -27,12 +27,12 @@ import (
 	simtypes "github.com/cosmos/cosmos-sdk/types/simulation"
 	stakingtypes "github.com/cosmos/cosmos-sdk/x/staking/types"
 
-	osmosimtypes "github.com/osmosis-labs/osmosis/v16/simulation/simtypes"
-	"github.com/osmosis-labs/osmosis/v16/x/incentives/client/cli"
-	"github.com/osmosis-labs/osmosis/v16/x/incentives/keeper"
-	"github.com/osmosis-labs/osmosis/v16/x/incentives/simulation"
-	"github.com/osmosis-labs/osmosis/v16/x/incentives/types"
-	"github.com/osmosis-labs/osmosis/v16/x/mint/client/rest"
+	furysimtypes "github.com/merlinslair/merlin/v16/simulation/simtypes"
+	"github.com/merlinslair/merlin/v16/x/incentives/client/cli"
+	"github.com/merlinslair/merlin/v16/x/incentives/keeper"
+	"github.com/merlinslair/merlin/v16/x/incentives/simulation"
+	"github.com/merlinslair/merlin/v16/x/incentives/types"
+	"github.com/merlinslair/merlin/v16/x/mint/client/rest"
 )
 
 var (
@@ -114,13 +114,13 @@ type AppModule struct {
 	keeper keeper.Keeper
 
 	accountKeeper stakingtypes.AccountKeeper
-	bankKeeper    osmosimtypes.BankKeeper
+	bankKeeper    furysimtypes.BankKeeper
 	epochKeeper   types.EpochKeeper
 }
 
 // NewAppModule creates a new AppModule struct.
 func NewAppModule(keeper keeper.Keeper,
-	accountKeeper stakingtypes.AccountKeeper, bankKeeper osmosimtypes.BankKeeper,
+	accountKeeper stakingtypes.AccountKeeper, bankKeeper furysimtypes.BankKeeper,
 	epochKeeper types.EpochKeeper,
 ) AppModule {
 	return AppModule{

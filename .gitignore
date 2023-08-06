@@ -200,15 +200,15 @@ $RECYCLE.BIN/
 
 # End of https://www.toptal.com/developers/gitignore/api/intellij,vscode,macos,windows
 
-/osmosisd
+/merlin
 /.idea/
 /artifacts/
 /.vscode/
 /.VSCodeCounter/
 /scripts/local/
-/x/incentives/keeper/osmosis_testing/
+/x/incentives/keeper/merlin_testing/
 tools-stamp
-/tests/localosmosis/.osmosisd/*
+/tests/localmerlin/.merlin/*
 *.save
 *.save.*
 
@@ -246,6 +246,6 @@ blocks.db
 **/venv/*
 **/*.pyc
 
-# Ignore binary created from localosmosis scripts
+# Ignore binary created from localmerlin scripts
 tests/cl-genesis-positions/script
 tests/cl-genesis-positions/*.json

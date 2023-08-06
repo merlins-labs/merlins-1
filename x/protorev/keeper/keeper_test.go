@@ -9,15 +9,15 @@ import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/stretchr/testify/suite"
 
-	"github.com/osmosis-labs/osmosis/v16/app/apptesting"
-	"github.com/osmosis-labs/osmosis/v16/x/protorev"
-	protorevkeeper "github.com/osmosis-labs/osmosis/v16/x/protorev/keeper"
-	"github.com/osmosis-labs/osmosis/v16/x/protorev/types"
+	"github.com/merlinslair/merlin/v16/app/apptesting"
+	"github.com/merlinslair/merlin/v16/x/protorev"
+	protorevkeeper "github.com/merlinslair/merlin/v16/x/protorev/keeper"
+	"github.com/merlinslair/merlin/v16/x/protorev/types"
 
-	"github.com/osmosis-labs/osmosis/v16/x/gamm/pool-models/balancer"
-	"github.com/osmosis-labs/osmosis/v16/x/gamm/pool-models/stableswap"
+	"github.com/merlinslair/merlin/v16/x/gamm/pool-models/balancer"
+	"github.com/merlinslair/merlin/v16/x/gamm/pool-models/stableswap"
 
-	osmosisapp "github.com/osmosis-labs/osmosis/v16/app"
+	merlinapp "github.com/merlinslair/merlin/v16/app"
 )
 
 type KeeperTestSuite struct {
@@ -88,7 +88,7 @@ func (s *KeeperTestSuite) SetupTest() {
 	// Configure the initial base denoms used for cyclic route building
 	baseDenomPriorities := []types.BaseDenom{
 		{
-			Denom:    types.OsmosisDenomination,
+			Denom:    types.MerlinDenomination,
 			StepSize: sdk.NewInt(1_000_000),
 		},
 		{
@@ -103,7 +103,7 @@ func (s *KeeperTestSuite) SetupTest() {
 	err := s.App.ProtoRevKeeper.SetBaseDenoms(s.Ctx, baseDenomPriorities)
 	s.Require().NoError(err)
 
-	encodingConfig := osmosisapp.MakeEncodingConfig()
+	encodingConfig := merlinapp.MakeEncodingConfig()
 	s.clientCtx = client.Context{}.
 		WithInterfaceRegistry(encodingConfig.InterfaceRegistry).
 		WithTxConfig(encodingConfig.TxConfig).
@@ -112,7 +112,7 @@ func (s *KeeperTestSuite) SetupTest() {
 
 	// Set default configuration for testing
 	s.balances = sdk.NewCoins(
-		sdk.NewCoin(types.OsmosisDenomination, sdk.NewInt(9000000000000000000)),
+		sdk.NewCoin(types.MerlinDenomination, sdk.NewInt(9000000000000000000)),
 		sdk.NewCoin("Atom", sdk.NewInt(9000000000000000000)),
 		sdk.NewCoin("akash", sdk.NewInt(9000000000000000000)),
 		sdk.NewCoin("bitcoin", sdk.NewInt(9000000000000000000)),
@@ -164,11 +164,11 @@ func (s *KeeperTestSuite) SetupTest() {
 
 // setUpPools sets up the pools needed for testing
 // This creates several assets and pools between most of them (used in testing throughout the module)
-// akash <-> types.OsmosisDenomination
-// juno <-> types.OsmosisDenomination
-// ethereum <-> types.OsmosisDenomination
-// bitcoin <-> types.OsmosisDenomination
-// canto <-> types.OsmosisDenomination
+// akash <-> types.MerlinDenomination
+// juno <-> types.MerlinDenomination
+// ethereum <-> types.MerlinDenomination
+// bitcoin <-> types.MerlinDenomination
+// canto <-> types.MerlinDenomination
 // and so on....
 func (s *KeeperTestSuite) setUpPools() {
 	// Create any necessary sdk.Ints that require string conversion
@@ -255,7 +255,7 @@ func (s *KeeperTestSuite) setUpPools() {
 		{ // Pool 6
 			PoolAssets: []balancer.PoolAsset{
 				{
-					Token:  sdk.NewCoin(types.OsmosisDenomination, sdk.NewInt(1000)),
+					Token:  sdk.NewCoin(types.MerlinDenomination, sdk.NewInt(1000)),
 					Weight: sdk.NewInt(1),
 				},
 				{
@@ -274,7 +274,7 @@ func (s *KeeperTestSuite) setUpPools() {
 					Weight: sdk.NewInt(1),
 				},
 				{
-					Token:  sdk.NewCoin(types.OsmosisDenomination, sdk.NewInt(1000)),
+					Token:  sdk.NewCoin(types.MerlinDenomination, sdk.NewInt(1000)),
 					Weight: sdk.NewInt(1),
 				},
 			},
@@ -289,7 +289,7 @@ func (s *KeeperTestSuite) setUpPools() {
 					Weight: sdk.NewInt(1),
 				},
 				{
-					Token:  sdk.NewCoin(types.OsmosisDenomination, sdk.NewInt(1000)),
+					Token:  sdk.NewCoin(types.MerlinDenomination, sdk.NewInt(1000)),
 					Weight: sdk.NewInt(1),
 				},
 			},
@@ -304,7 +304,7 @@ func (s *KeeperTestSuite) setUpPools() {
 					Weight: sdk.NewInt(1),
 				},
 				{
-					Token:  sdk.NewCoin(types.OsmosisDenomination, sdk.NewInt(1000)),
+					Token:  sdk.NewCoin(types.MerlinDenomination, sdk.NewInt(1000)),
 					Weight: sdk.NewInt(1),
 				},
 			},
@@ -319,7 +319,7 @@ func (s *KeeperTestSuite) setUpPools() {
 					Weight: sdk.NewInt(1),
 				},
 				{
-					Token:  sdk.NewCoin(types.OsmosisDenomination, sdk.NewInt(1000)),
+					Token:  sdk.NewCoin(types.MerlinDenomination, sdk.NewInt(1000)),
 					Weight: sdk.NewInt(1),
 				},
 			},
@@ -334,7 +334,7 @@ func (s *KeeperTestSuite) setUpPools() {
 					Weight: sdk.NewInt(1),
 				},
 				{
-					Token:  sdk.NewCoin(types.OsmosisDenomination, sdk.NewInt(1000)),
+					Token:  sdk.NewCoin(types.MerlinDenomination, sdk.NewInt(1000)),
 					Weight: sdk.NewInt(1),
 				},
 			},
@@ -499,7 +499,7 @@ func (s *KeeperTestSuite) setUpPools() {
 					Weight: sdk.NewInt(1),
 				},
 				{
-					Token:  sdk.NewCoin(types.OsmosisDenomination, sdk.NewInt(191801648570)),
+					Token:  sdk.NewCoin(types.MerlinDenomination, sdk.NewInt(191801648570)),
 					Weight: sdk.NewInt(1),
 				},
 			},
@@ -529,7 +529,7 @@ func (s *KeeperTestSuite) setUpPools() {
 					Weight: sdk.NewInt(1),
 				},
 				{
-					Token:  sdk.NewCoin(types.OsmosisDenomination, sdk.NewInt(13901565323)),
+					Token:  sdk.NewCoin(types.MerlinDenomination, sdk.NewInt(13901565323)),
 					Weight: sdk.NewInt(1),
 				},
 			},
@@ -544,7 +544,7 @@ func (s *KeeperTestSuite) setUpPools() {
 					Weight: sdk.NewInt(1),
 				},
 				{
-					Token:  sdk.NewCoin(types.OsmosisDenomination, sdk.NewInt(139015653231902)),
+					Token:  sdk.NewCoin(types.MerlinDenomination, sdk.NewInt(139015653231902)),
 					Weight: sdk.NewInt(1),
 				},
 			},
@@ -559,7 +559,7 @@ func (s *KeeperTestSuite) setUpPools() {
 					Weight: sdk.NewInt(50),
 				},
 				{
-					Token:  sdk.NewCoin(types.OsmosisDenomination, sdk.NewInt(171274446980)),
+					Token:  sdk.NewCoin(types.MerlinDenomination, sdk.NewInt(171274446980)),
 					Weight: sdk.NewInt(50),
 				},
 			},
@@ -574,7 +574,7 @@ func (s *KeeperTestSuite) setUpPools() {
 					Weight: sdk.NewInt(50),
 				},
 				{
-					Token:  sdk.NewCoin(types.OsmosisDenomination, sdk.NewInt(13466662920841)),
+					Token:  sdk.NewCoin(types.MerlinDenomination, sdk.NewInt(13466662920841)),
 					Weight: sdk.NewInt(50),
 				},
 			},
@@ -608,7 +608,7 @@ func (s *KeeperTestSuite) setUpPools() {
 		{ // Pool 29
 			PoolAssets: []balancer.PoolAsset{
 				{
-					Token:  sdk.NewCoin("uosmo", sdk.NewInt(1000000000)),
+					Token:  sdk.NewCoin("ufury", sdk.NewInt(1000000000)),
 					Weight: sdk.NewInt(1),
 				},
 				{
@@ -623,7 +623,7 @@ func (s *KeeperTestSuite) setUpPools() {
 		{ // Pool 30
 			PoolAssets: []balancer.PoolAsset{
 				{
-					Token:  sdk.NewCoin("uosmo", sdk.NewInt(1000000000)),
+					Token:  sdk.NewCoin("ufury", sdk.NewInt(1000000000)),
 					Weight: sdk.NewInt(1),
 				},
 				{
@@ -710,7 +710,7 @@ func (s *KeeperTestSuite) setUpPools() {
 					Weight: sdk.NewInt(1),
 				},
 				{
-					Token:  sdk.NewCoin(types.OsmosisDenomination, sdk.NewInt(1694086377216)),
+					Token:  sdk.NewCoin(types.MerlinDenomination, sdk.NewInt(1694086377216)),
 					Weight: sdk.NewInt(1),
 				},
 			},
@@ -721,7 +721,7 @@ func (s *KeeperTestSuite) setUpPools() {
 		{ // Pool 36
 			PoolAssets: []balancer.PoolAsset{
 				{
-					Token:  sdk.NewCoin(types.OsmosisDenomination, sdk.NewInt(2774812791932)),
+					Token:  sdk.NewCoin(types.MerlinDenomination, sdk.NewInt(2774812791932)),
 					Weight: sdk.NewInt(1),
 				},
 				{
@@ -751,7 +751,7 @@ func (s *KeeperTestSuite) setUpPools() {
 		{ // Pool 38
 			PoolAssets: []balancer.PoolAsset{
 				{
-					Token:  sdk.NewCoin(types.OsmosisDenomination, sdk.NewInt(6111815027)),
+					Token:  sdk.NewCoin(types.MerlinDenomination, sdk.NewInt(6111815027)),
 					Weight: sdk.NewInt(1),
 				},
 				{
@@ -770,7 +770,7 @@ func (s *KeeperTestSuite) setUpPools() {
 					Weight: sdk.NewInt(1),
 				},
 				{
-					Token:  sdk.NewCoin(types.OsmosisDenomination, sdk.NewInt(17000185817963)),
+					Token:  sdk.NewCoin(types.MerlinDenomination, sdk.NewInt(17000185817963)),
 					Weight: sdk.NewInt(1),
 				},
 			},
@@ -856,7 +856,7 @@ func (s *KeeperTestSuite) setUpPools() {
 		{ // Pool 46 - Used for epoch_hook UpdateHighestLiquidityPool testing
 			initialLiquidity: sdk.NewCoins(
 				sdk.NewCoin("epochOne", sdk.NewInt(1000)),
-				sdk.NewCoin("uosmo", sdk.NewInt(1000)),
+				sdk.NewCoin("ufury", sdk.NewInt(1000)),
 			),
 			poolParams: stableswap.PoolParams{
 				SwapFee: sdk.NewDecWithPrec(1, 4),
@@ -867,7 +867,7 @@ func (s *KeeperTestSuite) setUpPools() {
 		{ // Pool 47 - Used for epoch_hook UpdateHighestLiquidityPool testing
 			initialLiquidity: sdk.NewCoins(
 				sdk.NewCoin("epochOne", sdk.NewInt(1000)),
-				sdk.NewCoin("uosmo", sdk.NewInt(2000)),
+				sdk.NewCoin("ufury", sdk.NewInt(2000)),
 			),
 			poolParams: stableswap.PoolParams{
 				SwapFee: sdk.NewDecWithPrec(1, 4),
@@ -878,7 +878,7 @@ func (s *KeeperTestSuite) setUpPools() {
 		{ // Pool 48 - Used for epoch_hook UpdateHighestLiquidityPool testing
 			initialLiquidity: sdk.NewCoins(
 				sdk.NewCoin("epochTwo", sdk.NewInt(1000)),
-				sdk.NewCoin("uosmo", sdk.NewInt(1000)),
+				sdk.NewCoin("ufury", sdk.NewInt(1000)),
 			),
 			poolParams: stableswap.PoolParams{
 				SwapFee: sdk.NewDecWithPrec(1, 4),
@@ -894,7 +894,7 @@ func (s *KeeperTestSuite) setUpPools() {
 
 	// Create a concentrated liquidity pool for epoch_hook testing
 	// Pool 49
-	s.PrepareConcentratedPoolWithCoinsAndFullRangePosition("epochTwo", "uosmo")
+	s.PrepareConcentratedPoolWithCoinsAndFullRangePosition("epochTwo", "ufury")
 
 	// Set all of the pool info into the stores
 	err := s.App.ProtoRevKeeper.UpdatePools(s.Ctx)
@@ -949,9 +949,9 @@ func (s *KeeperTestSuite) setUpTokenPairRoutes() {
 	atomBitcoin := types.NewTrade(4, "bitcoin", "Atom")
 
 	// Stableswap Route
-	uosmoUSDC := types.NewTrade(0, types.OsmosisDenomination, "usdc")
+	ufuryUSDC := types.NewTrade(0, types.MerlinDenomination, "usdc")
 	usdcBUSD := types.NewTrade(40, "usdc", "busd")
-	busdUOSMO := types.NewTrade(30, "busd", types.OsmosisDenomination)
+	busdUFURY := types.NewTrade(30, "busd", types.MerlinDenomination)
 
 	// Atom Route
 	atomIBC1 := types.NewTrade(31, "Atom", "ibc/BE1BB42D4BE3C30D50B68D7C41DB4DFCE9678E8EF8C539F6E6A9345048894FCC")
@@ -960,18 +960,18 @@ func (s *KeeperTestSuite) setUpTokenPairRoutes() {
 
 	// Four-Pool Route
 	fourPool0 := types.NewTrade(34, "Atom", "test/1")
-	fourPool1 := types.NewTrade(35, "test/1", types.OsmosisDenomination)
-	fourPool2 := types.NewTrade(36, types.OsmosisDenomination, "test/2")
+	fourPool1 := types.NewTrade(35, "test/1", types.MerlinDenomination)
+	fourPool2 := types.NewTrade(36, types.MerlinDenomination, "test/2")
 	fourPool3 := types.NewTrade(0, "test/2", "Atom")
 
 	// Two-Pool Route
-	twoPool0 := types.NewTrade(0, "test/3", types.OsmosisDenomination)
-	twoPool1 := types.NewTrade(39, types.OsmosisDenomination, "test/3")
+	twoPool0 := types.NewTrade(0, "test/3", types.MerlinDenomination)
+	twoPool1 := types.NewTrade(39, types.MerlinDenomination, "test/3")
 
 	// Doomsday Route - Stableswap
-	doomsdayStable0 := types.NewTrade(29, types.OsmosisDenomination, "usdc")
+	doomsdayStable0 := types.NewTrade(29, types.MerlinDenomination, "usdc")
 	doomsdayStable1 := types.NewTrade(0, "usdc", "busd")
-	doomsdayStable2 := types.NewTrade(30, "busd", types.OsmosisDenomination)
+	doomsdayStable2 := types.NewTrade(30, "busd", types.MerlinDenomination)
 
 	standardStepSize := sdk.NewInt(1_000_000)
 
@@ -988,11 +988,11 @@ func (s *KeeperTestSuite) setUpTokenPairRoutes() {
 		},
 		{
 			TokenIn:  "usdc",
-			TokenOut: types.OsmosisDenomination,
+			TokenOut: types.MerlinDenomination,
 			ArbRoutes: []types.Route{
 				{
 					StepSize: standardStepSize,
-					Trades:   []types.Trade{uosmoUSDC, usdcBUSD, busdUOSMO},
+					Trades:   []types.Trade{ufuryUSDC, usdcBUSD, busdUFURY},
 				},
 			},
 		},
@@ -1017,7 +1017,7 @@ func (s *KeeperTestSuite) setUpTokenPairRoutes() {
 			},
 		},
 		{
-			TokenIn:  types.OsmosisDenomination,
+			TokenIn:  types.MerlinDenomination,
 			TokenOut: "test/3",
 			ArbRoutes: []types.Route{
 				{

@@ -10,7 +10,7 @@ import (
 
 	"github.com/stretchr/testify/require"
 
-	"github.com/osmosis-labs/osmosis/v16/tests/e2e/initialization"
+	"github.com/merlinslair/merlin/v16/tests/e2e/initialization"
 )
 
 const forkHeight = 10
@@ -45,7 +45,7 @@ func TestChainInit(t *testing.T) {
 				IsValidator:        false,
 			},
 		}
-		dataDir, err = os.MkdirTemp("", "osmosis-e2e-testnet-test")
+		dataDir, err = os.MkdirTemp("", "merlin-e2e-testnet-test")
 	)
 	require.NoError(t, err)
 
@@ -103,7 +103,7 @@ func TestSingleNodeInit(t *testing.T) {
 			SnapshotKeepRecent: 1,
 			IsValidator:        false,
 		}
-		dataDir, err = os.MkdirTemp("", "osmosis-e2e-testnet-test")
+		dataDir, err = os.MkdirTemp("", "merlin-e2e-testnet-test")
 	)
 	require.NoError(t, err)
 

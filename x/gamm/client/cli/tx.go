@@ -11,11 +11,11 @@ import (
 	flag "github.com/spf13/pflag"
 
 	"github.com/osmosis-labs/osmosis/osmoutils/osmocli"
-	"github.com/osmosis-labs/osmosis/v16/x/gamm/pool-models/balancer"
-	"github.com/osmosis-labs/osmosis/v16/x/gamm/pool-models/stableswap"
-	"github.com/osmosis-labs/osmosis/v16/x/gamm/types"
-	gammmigration "github.com/osmosis-labs/osmosis/v16/x/gamm/types/migration"
-	poolmanagertypes "github.com/osmosis-labs/osmosis/v16/x/poolmanager/types"
+	"github.com/merlinslair/merlin/v16/x/gamm/pool-models/balancer"
+	"github.com/merlinslair/merlin/v16/x/gamm/pool-models/stableswap"
+	"github.com/merlinslair/merlin/v16/x/gamm/types"
+	gammmigration "github.com/merlinslair/merlin/v16/x/gamm/types/migration"
+	poolmanagertypes "github.com/merlinslair/merlin/v16/x/poolmanager/types"
 
 	"github.com/cosmos/cosmos-sdk/client"
 	"github.com/cosmos/cosmos-sdk/client/tx"
@@ -52,8 +52,8 @@ func NewCreatePoolCmd() *osmocli.TxCliDesc {
 		Long: `Must provide path to a pool JSON file (--pool-file) describing the pool to be created
 Sample pool JSON file contents for balancer:
 {
-	"weights": "4uatom,4osmo,2uakt",
-	"initial-deposit": "100uatom,5osmo,20uakt",
+	"weights": "4uatom,4fury,2uakt",
+	"initial-deposit": "100uatom,5fury,20uakt",
 	"swap-fee": "0.01",
 	"exit-fee": "0.01",
 	"future-governor": "168h"
@@ -171,7 +171,7 @@ func NewStableSwapAdjustScalingFactorsCmd() *cobra.Command {
 	cmd := osmocli.TxCliDesc{
 		Use:              "adjust-scaling-factors --pool-id=[pool-id] --scaling-factors=[scaling-factors]",
 		Short:            "adjust scaling factors",
-		Example:          "osmosisd adjust-scaling-factors --pool-id=1 --scaling-factors=\"100, 100\"",
+		Example:          "merlin adjust-scaling-factors --pool-id=1 --scaling-factors=\"100, 100\"",
 		NumArgs:          0,
 		ParseAndBuildMsg: NewStableSwapAdjustScalingFactorsMsg,
 	}.BuildCommandCustomFn()

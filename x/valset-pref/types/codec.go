@@ -10,10 +10,10 @@ import (
 )
 
 func RegisterCodec(cdc *codec.LegacyAmino) {
-	cdc.RegisterConcrete(&MsgSetValidatorSetPreference{}, "osmosis/MsgSetValidatorSetPreference", nil)
-	cdc.RegisterConcrete(&MsgDelegateToValidatorSet{}, "osmosis/MsgDelegateToValidatorSet", nil)
-	cdc.RegisterConcrete(&MsgUndelegateFromValidatorSet{}, "osmosis/MsgUndelegateFromValidatorSet", nil)
-	cdc.RegisterConcrete(&MsgWithdrawDelegationRewards{}, "osmosis/MsgWithdrawDelegationRewards", nil)
+	cdc.RegisterConcrete(&MsgSetValidatorSetPreference{}, "merlin/MsgSetValidatorSetPreference", nil)
+	cdc.RegisterConcrete(&MsgDelegateToValidatorSet{}, "merlin/MsgDelegateToValidatorSet", nil)
+	cdc.RegisterConcrete(&MsgUndelegateFromValidatorSet{}, "merlin/MsgUndelegateFromValidatorSet", nil)
+	cdc.RegisterConcrete(&MsgWithdrawDelegationRewards{}, "merlin/MsgWithdrawDelegationRewards", nil)
 }
 
 func RegisterInterfaces(registry cdctypes.InterfaceRegistry) {

@@ -3,9 +3,9 @@ package keeper_test
 import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
-	"github.com/osmosis-labs/osmosis/v16/app/apptesting"
-	"github.com/osmosis-labs/osmosis/v16/x/protorev/keeper"
-	"github.com/osmosis-labs/osmosis/v16/x/protorev/types"
+	"github.com/merlinslair/merlin/v16/app/apptesting"
+	"github.com/merlinslair/merlin/v16/x/protorev/keeper"
+	"github.com/merlinslair/merlin/v16/x/protorev/types"
 )
 
 // TestMsgSetHotRoutes tests the MsgSetHotRoutes message.
@@ -50,18 +50,18 @@ func (s *KeeperTestSuite) TestMsgSetHotRoutes() {
 								{
 									Pool:     0,
 									TokenIn:  "Juno",
-									TokenOut: types.OsmosisDenomination,
+									TokenOut: types.MerlinDenomination,
 								},
 								{
 									Pool:     3,
-									TokenIn:  types.OsmosisDenomination,
+									TokenIn:  types.MerlinDenomination,
 									TokenOut: "Atom",
 								},
 							},
 							StepSize: validStepSize,
 						},
 					},
-					TokenIn:  types.OsmosisDenomination,
+					TokenIn:  types.MerlinDenomination,
 					TokenOut: "Juno",
 				},
 			},
@@ -84,18 +84,18 @@ func (s *KeeperTestSuite) TestMsgSetHotRoutes() {
 								{
 									Pool:     0,
 									TokenIn:  "Juno",
-									TokenOut: types.OsmosisDenomination,
+									TokenOut: types.MerlinDenomination,
 								},
 								{
 									Pool:     3,
-									TokenIn:  types.OsmosisDenomination,
+									TokenIn:  types.MerlinDenomination,
 									TokenOut: "Atom",
 								},
 							},
 							StepSize: validStepSize,
 						},
 					},
-					TokenIn:  types.OsmosisDenomination,
+					TokenIn:  types.MerlinDenomination,
 					TokenOut: "Juno",
 				},
 				{
@@ -110,18 +110,18 @@ func (s *KeeperTestSuite) TestMsgSetHotRoutes() {
 								{
 									Pool:     0,
 									TokenIn:  "Juno",
-									TokenOut: types.OsmosisDenomination,
+									TokenOut: types.MerlinDenomination,
 								},
 								{
 									Pool:     3,
-									TokenIn:  types.OsmosisDenomination,
+									TokenIn:  types.MerlinDenomination,
 									TokenOut: "Atom",
 								},
 							},
 							StepSize: validStepSize,
 						},
 					},
-					TokenIn:  types.OsmosisDenomination,
+					TokenIn:  types.MerlinDenomination,
 					TokenOut: "Juno",
 				},
 			},
@@ -144,18 +144,18 @@ func (s *KeeperTestSuite) TestMsgSetHotRoutes() {
 								{
 									Pool:     0,
 									TokenIn:  "Juno",
-									TokenOut: types.OsmosisDenomination,
+									TokenOut: types.MerlinDenomination,
 								},
 								{
 									Pool:     3,
-									TokenIn:  types.OsmosisDenomination,
+									TokenIn:  types.MerlinDenomination,
 									TokenOut: "Atom",
 								},
 							},
 							StepSize: invalidStepSize,
 						},
 					},
-					TokenIn:  types.OsmosisDenomination,
+					TokenIn:  types.MerlinDenomination,
 					TokenOut: "Juno",
 				},
 			},
@@ -178,17 +178,17 @@ func (s *KeeperTestSuite) TestMsgSetHotRoutes() {
 								{
 									Pool:     0,
 									TokenIn:  "Juno",
-									TokenOut: types.OsmosisDenomination,
+									TokenOut: types.MerlinDenomination,
 								},
 								{
 									Pool:     3,
-									TokenIn:  types.OsmosisDenomination,
+									TokenIn:  types.MerlinDenomination,
 									TokenOut: "Atom",
 								},
 							},
 						},
 					},
-					TokenIn:  types.OsmosisDenomination,
+					TokenIn:  types.MerlinDenomination,
 					TokenOut: "Juno",
 				},
 			},
@@ -572,7 +572,7 @@ func (s *KeeperTestSuite) TestMsgSetBaseDenoms() {
 			"admin",
 			[]types.BaseDenom{
 				{
-					Denom:    types.OsmosisDenomination,
+					Denom:    types.MerlinDenomination,
 					StepSize: sdk.NewInt(1_000_000),
 				},
 			},
@@ -580,7 +580,7 @@ func (s *KeeperTestSuite) TestMsgSetBaseDenoms() {
 			false,
 		},
 		{
-			"Invalid message (invalid base denoms must start with osmo)",
+			"Invalid message (invalid base denoms must start with fury)",
 			s.adminAccount.String(),
 			[]types.BaseDenom{
 				{
@@ -596,7 +596,7 @@ func (s *KeeperTestSuite) TestMsgSetBaseDenoms() {
 			s.adminAccount.String(),
 			[]types.BaseDenom{
 				{
-					Denom:    types.OsmosisDenomination,
+					Denom:    types.MerlinDenomination,
 					StepSize: sdk.NewInt(0),
 				},
 			},
@@ -608,7 +608,7 @@ func (s *KeeperTestSuite) TestMsgSetBaseDenoms() {
 			apptesting.CreateRandomAccounts(1)[0].String(),
 			[]types.BaseDenom{
 				{
-					Denom:    types.OsmosisDenomination,
+					Denom:    types.MerlinDenomination,
 					StepSize: sdk.NewInt(1_000_000),
 				},
 			},
@@ -620,7 +620,7 @@ func (s *KeeperTestSuite) TestMsgSetBaseDenoms() {
 			s.adminAccount.String(),
 			[]types.BaseDenom{
 				{
-					Denom:    types.OsmosisDenomination,
+					Denom:    types.MerlinDenomination,
 					StepSize: sdk.NewInt(1_000_000),
 				},
 			},

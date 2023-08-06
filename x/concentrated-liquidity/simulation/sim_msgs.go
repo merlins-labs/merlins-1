@@ -8,18 +8,18 @@ import (
 	legacysimulationtype "github.com/cosmos/cosmos-sdk/types/simulation"
 	banktypes "github.com/cosmos/cosmos-sdk/x/bank/types"
 
-	appParams "github.com/osmosis-labs/osmosis/v16/app/params"
-	osmosimtypes "github.com/osmosis-labs/osmosis/v16/simulation/simtypes"
-	sdkrand "github.com/osmosis-labs/osmosis/v16/simulation/simtypes/random"
-	clkeeper "github.com/osmosis-labs/osmosis/v16/x/concentrated-liquidity"
-	clmodeltypes "github.com/osmosis-labs/osmosis/v16/x/concentrated-liquidity/model"
-	cltypes "github.com/osmosis-labs/osmosis/v16/x/concentrated-liquidity/types"
-	minttypes "github.com/osmosis-labs/osmosis/v16/x/mint/types"
+	appParams "github.com/merlinslair/merlin/v16/app/params"
+	furysimtypes "github.com/merlinslair/merlin/v16/simulation/simtypes"
+	sdkrand "github.com/merlinslair/merlin/v16/simulation/simtypes/random"
+	clkeeper "github.com/merlinslair/merlin/v16/x/concentrated-liquidity"
+	clmodeltypes "github.com/merlinslair/merlin/v16/x/concentrated-liquidity/model"
+	cltypes "github.com/merlinslair/merlin/v16/x/concentrated-liquidity/types"
+	minttypes "github.com/merlinslair/merlin/v16/x/mint/types"
 )
 
 var PoolCreationFee = sdk.NewInt64Coin("stake", 10_000_000)
 
-func RandomMsgCreateConcentratedPool(k clkeeper.Keeper, sim *osmosimtypes.SimCtx, ctx sdk.Context) (*clmodeltypes.MsgCreateConcentratedPool, error) {
+func RandomMsgCreateConcentratedPool(k clkeeper.Keeper, sim *furysimtypes.SimCtx, ctx sdk.Context) (*clmodeltypes.MsgCreateConcentratedPool, error) {
 	poolCreator, coin0, coin1, tickSpacing, spreadFactor, err := RandomPreparePoolFunc(sim, ctx, k)
 	if err != nil {
 		return nil, err
@@ -55,7 +55,7 @@ func RandomMsgCreateConcentratedPool(k clkeeper.Keeper, sim *osmosimtypes.SimCtx
 	}, nil
 }
 
-func RandMsgCreatePosition(k clkeeper.Keeper, sim *osmosimtypes.SimCtx, ctx sdk.Context) (*cltypes.MsgCreatePosition, error) {
+func RandMsgCreatePosition(k clkeeper.Keeper, sim *furysimtypes.SimCtx, ctx sdk.Context) (*cltypes.MsgCreatePosition, error) {
 	// get random pool
 	clPool, poolDenoms, err := getRandCLPool(k, sim, ctx)
 	if err != nil {
@@ -89,7 +89,7 @@ func RandMsgCreatePosition(k clkeeper.Keeper, sim *osmosimtypes.SimCtx, ctx sdk.
 	}, nil
 }
 
-func RandMsgWithdrawPosition(k clkeeper.Keeper, sim *osmosimtypes.SimCtx, ctx sdk.Context) (*cltypes.MsgWithdrawPosition, error) {
+func RandMsgWithdrawPosition(k clkeeper.Keeper, sim *furysimtypes.SimCtx, ctx sdk.Context) (*cltypes.MsgWithdrawPosition, error) {
 	rand := sim.GetRand()
 	// get random pool
 	clPool, _, err := getRandCLPool(k, sim, ctx)
@@ -129,7 +129,7 @@ func RandMsgWithdrawPosition(k clkeeper.Keeper, sim *osmosimtypes.SimCtx, ctx sd
 	}, nil
 }
 
-func RandMsgCollectSpreadRewards(k clkeeper.Keeper, sim *osmosimtypes.SimCtx, ctx sdk.Context) (*cltypes.MsgCollectSpreadRewards, error) {
+func RandMsgCollectSpreadRewards(k clkeeper.Keeper, sim *furysimtypes.SimCtx, ctx sdk.Context) (*cltypes.MsgCollectSpreadRewards, error) {
 	// get random pool
 	clPool, poolDenoms, err := getRandCLPool(k, sim, ctx)
 	if err != nil {
@@ -199,7 +199,7 @@ func RandMsgCollectSpreadRewards(k clkeeper.Keeper, sim *osmosimtypes.SimCtx, ct
 	}, nil
 }
 
-func RandMsgCollectIncentives(k clkeeper.Keeper, sim *osmosimtypes.SimCtx, ctx sdk.Context) (*cltypes.MsgCollectIncentives, error) {
+func RandMsgCollectIncentives(k clkeeper.Keeper, sim *furysimtypes.SimCtx, ctx sdk.Context) (*cltypes.MsgCollectIncentives, error) {
 	// get random pool
 	clPool, poolDenoms, err := getRandCLPool(k, sim, ctx)
 	if err != nil {
@@ -233,7 +233,7 @@ func RandMsgCollectIncentives(k clkeeper.Keeper, sim *osmosimtypes.SimCtx, ctx s
 }
 
 // createPoolRestriction creates specific restriction for the creation of a pool.
-func createPoolRestriction(k clkeeper.Keeper, sim *osmosimtypes.SimCtx, ctx sdk.Context) osmosimtypes.SimAccountConstraint {
+func createPoolRestriction(k clkeeper.Keeper, sim *furysimtypes.SimCtx, ctx sdk.Context) furysimtypes.SimAccountConstraint {
 	return func(acc legacysimulationtype.Account) bool {
 		accCoins := sim.BankKeeper().SpendableCoins(ctx, acc.Address)
 		hasTwoCoins := len(accCoins) >= 3
@@ -243,7 +243,7 @@ func createPoolRestriction(k clkeeper.Keeper, sim *osmosimtypes.SimCtx, ctx sdk.
 }
 
 // getRandCLPool gets a concentrated liquidity pool with its pool denoms.
-func getRandCLPool(k clkeeper.Keeper, sim *osmosimtypes.SimCtx, ctx sdk.Context) (cltypes.ConcentratedPoolExtension, []string, error) {
+func getRandCLPool(k clkeeper.Keeper, sim *furysimtypes.SimCtx, ctx sdk.Context) (cltypes.ConcentratedPoolExtension, []string, error) {
 	rand := sim.GetRand()
 
 	// get all pools
@@ -269,7 +269,7 @@ func getRandCLPool(k clkeeper.Keeper, sim *osmosimtypes.SimCtx, ctx sdk.Context)
 }
 
 // getRandomTickPositions returns random lowerTick and upperTick divisible by tickSpacing value.
-func getRandomTickPositions(sim *osmosimtypes.SimCtx, minTick, maxTick int64, tickSpacing uint64) (int64, int64, error) {
+func getRandomTickPositions(sim *furysimtypes.SimCtx, minTick, maxTick int64, tickSpacing uint64) (int64, int64, error) {
 	lowerTick, err := RandomTickDivisibility(sim, minTick, maxTick, tickSpacing)
 	if err != nil {
 		return 0, 0, err
@@ -295,7 +295,7 @@ func getRandomTickPositions(sim *osmosimtypes.SimCtx, minTick, maxTick int64, ti
 	return lowerTick, upperTick, nil
 }
 
-func RandomMinAmount(sim *osmosimtypes.SimCtx, token0Desired, token1Desired sdk.Int) (sdk.Int, sdk.Int) {
+func RandomMinAmount(sim *furysimtypes.SimCtx, token0Desired, token1Desired sdk.Int) (sdk.Int, sdk.Int) {
 	rand := sim.GetRand()
 	percent := sdk.NewDec(int64(sdkrand.RandIntBetween(rand, 0, 100) / 100))
 	minAmount0 := sdk.NewDecFromInt(token0Desired).Mul(percent).TruncateInt()
@@ -304,7 +304,7 @@ func RandomMinAmount(sim *osmosimtypes.SimCtx, token0Desired, token1Desired sdk.
 }
 
 // RandomTickDivisibility calculates a random number between minTick - maxTick (inclusive) that is divisible by tickSpacing
-func RandomTickDivisibility(sim *osmosimtypes.SimCtx, minTick int64, maxTick int64, tickSpacing uint64) (int64, error) {
+func RandomTickDivisibility(sim *furysimtypes.SimCtx, minTick int64, maxTick int64, tickSpacing uint64) (int64, error) {
 	rand := sim.GetRand()
 
 	// Generate a random number in the range [minTick, maxTick]
@@ -322,7 +322,7 @@ func RandomTickDivisibility(sim *osmosimtypes.SimCtx, minTick int64, maxTick int
 	return int64(-1), nil
 }
 
-func RandomPreparePoolFunc(sim *osmosimtypes.SimCtx, ctx sdk.Context, k clkeeper.Keeper) (sdk.AccAddress, sdk.Coin, sdk.Coin, uint64, sdk.Dec, error) {
+func RandomPreparePoolFunc(sim *furysimtypes.SimCtx, ctx sdk.Context, k clkeeper.Keeper) (sdk.AccAddress, sdk.Coin, sdk.Coin, uint64, sdk.Dec, error) {
 	rand := sim.GetRand()
 
 	authorizedTickSpacing := cltypes.AuthorizedTickSpacing
@@ -357,7 +357,7 @@ func RandomPreparePoolFunc(sim *osmosimtypes.SimCtx, ctx sdk.Context, k clkeeper
 	return sender.Address, coin0, coin1, tickSpacing, spreadFactor, nil
 }
 
-func RandomPrepareCreatePositionFunc(sim *osmosimtypes.SimCtx, ctx sdk.Context, clPool cltypes.ConcentratedPoolExtension, poolDenoms []string) (sdk.AccAddress, sdk.Coins, int64, int64, error) {
+func RandomPrepareCreatePositionFunc(sim *furysimtypes.SimCtx, ctx sdk.Context, clPool cltypes.ConcentratedPoolExtension, poolDenoms []string) (sdk.AccAddress, sdk.Coins, int64, int64, error) {
 	// make sure that the position creator has the poolTokens
 	positionCreator, tokens, senderExists := sim.SelAddrWithDenoms(ctx, poolDenoms)
 	if !senderExists {

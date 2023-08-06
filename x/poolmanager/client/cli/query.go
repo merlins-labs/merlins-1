@@ -8,8 +8,8 @@ import (
 	flag "github.com/spf13/pflag"
 
 	"github.com/osmosis-labs/osmosis/osmoutils/osmocli"
-	"github.com/osmosis-labs/osmosis/v16/x/poolmanager/client/queryproto"
-	"github.com/osmosis-labs/osmosis/v16/x/poolmanager/types"
+	"github.com/merlinslair/merlin/v16/x/poolmanager/client/queryproto"
+	"github.com/merlinslair/merlin/v16/x/poolmanager/types"
 )
 
 var customRouterFlagOverride = map[string]string{
@@ -70,11 +70,11 @@ func GetCmdNumPools() (*osmocli.QueryDescriptor, *queryproto.NumPoolsRequest) {
 	}, &queryproto.NumPoolsRequest{}
 }
 
-// GetCmdAllPools return all pools available across Osmosis modules.
+// GetCmdAllPools return all pools available across Merlin modules.
 func GetCmdAllPools() (*osmocli.QueryDescriptor, *queryproto.AllPoolsRequest) {
 	return &osmocli.QueryDescriptor{
 		Use:   "all-pools",
-		Short: "Query all pools on the Osmosis chain",
+		Short: "Query all pools on the Merlin chain",
 		Long:  "{{.Short}}",
 	}, &queryproto.AllPoolsRequest{}
 }
@@ -94,7 +94,7 @@ func GetCmdSpotPrice() (*osmocli.QueryDescriptor, *queryproto.SpotPriceRequest) 
 		Use:   "spot-price <pool-ID> [quote-asset-denom] [base-asset-denom]",
 		Short: "Query spot-price",
 		Long: `Query spot-price
-{{.CommandPrefix}} spot-price 1 uosmo ibc/27394FB092D2ECCD56123C74F36E4C1F926001CEADA9CA97EA622B25F41E5EB2
+{{.CommandPrefix}} spot-price 1 ufury ibc/27394FB092D2ECCD56123C74F36E4C1F926001CEADA9CA97EA622B25F41E5EB2
 `,
 	}, &queryproto.SpotPriceRequest{}
 }
@@ -141,7 +141,7 @@ func GetCmdEstimateSinglePoolSwapExactAmountIn() (*osmocli.QueryDescriptor, *que
 		Use:   "estimate-single-pool-swap-exact-amount-in <poolID> <tokenIn> <tokenOutDenom>",
 		Short: "Query estimate-single-pool-swap-exact-amount-in",
 		Long: `Query estimate-single-pool-swap-exact-amount-in.{{.ExampleHeader}}
-{{.CommandPrefix}} estimate-single-pool-swap-exact-amount-in 1 1000stake uosmo`,
+{{.CommandPrefix}} estimate-single-pool-swap-exact-amount-in 1 1000stake ufury`,
 		QueryFnName: "EstimateSinglePoolSwapExactAmountIn",
 	}, &queryproto.EstimateSinglePoolSwapExactAmountInRequest{}
 }
@@ -152,7 +152,7 @@ func GetCmdEstimateSinglePoolSwapExactAmountOut() (*osmocli.QueryDescriptor, *qu
 		Use:   "estimate-single-pool-swap-exact-amount-out <poolID> <tokenInDenom> <tokenOut>",
 		Short: "Query estimate-single-pool-swap-exact-amount-out",
 		Long: `Query estimate-single-pool-swap-exact-amount-out.{{.ExampleHeader}}
-{{.CommandPrefix}} estimate-single-pool-swap-exact-amount-out 1 uosmo 1000stake`,
+{{.CommandPrefix}} estimate-single-pool-swap-exact-amount-out 1 ufury 1000stake`,
 		QueryFnName: "EstimateSinglePoolSwapExactAmountOut",
 	}, &queryproto.EstimateSinglePoolSwapExactAmountOutRequest{}
 }

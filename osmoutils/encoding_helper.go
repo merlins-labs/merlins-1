@@ -1,4 +1,4 @@
-package osmoutils
+package furyutils
 
 import (
 	"fmt"

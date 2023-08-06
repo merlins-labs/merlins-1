@@ -4,7 +4,7 @@ import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
 	"github.com/osmosis-labs/osmosis/osmomath"
-	"github.com/osmosis-labs/osmosis/v16/x/concentrated-liquidity/types"
+	"github.com/merlinslair/merlin/v16/x/concentrated-liquidity/types"
 )
 
 var (
@@ -14,10 +14,10 @@ var (
 	powersOfTen    []sdk.Dec
 	negPowersOfTen []sdk.Dec
 
-	osmomathBigOneDec = osmomath.NewBigDec(1)
-	osmomathBigTenDec = osmomath.NewBigDec(10)
-	bigPowersOfTen    []osmomath.BigDec
-	bigNegPowersOfTen []osmomath.BigDec
+	furymathBigOneDec = furymath.NewBigDec(1)
+	furymathBigTenDec = furymath.NewBigDec(10)
+	bigPowersOfTen    []furymath.BigDec
+	bigNegPowersOfTen []furymath.BigDec
 
 	// 9 * 10^(-types.ExponentAtPriceOne), where types.ExponentAtPriceOne is non-positive and is s.t.
 	// this answer fits well within an int64.
@@ -41,7 +41,7 @@ type tickExpIndexData struct {
 	maxPrice sdk.Dec
 	// TODO: Change to normal Dec, if min spot price increases.
 	// additive increment per tick here.
-	additiveIncrementPerTick osmomath.BigDec
+	additiveIncrementPerTick furymath.BigDec
 	// the tick that corresponds to initial price
 	initialTick int64
 }
@@ -91,14 +91,14 @@ func init() {
 		powersOfTen[i] = sdkTenDec.Power(uint64(i))
 	}
 
-	bigNegPowersOfTen = make([]osmomath.BigDec, osmomath.Precision+1)
-	for i := 0; i <= osmomath.Precision; i++ {
-		bigNegPowersOfTen[i] = osmomathBigOneDec.Quo(osmomathBigTenDec.PowerInteger(uint64(i)))
+	bigNegPowersOfTen = make([]furymath.BigDec, furymath.Precision+1)
+	for i := 0; i <= furymath.Precision; i++ {
+		bigNegPowersOfTen[i] = furymathBigOneDec.Quo(furymathBigTenDec.PowerInteger(uint64(i)))
 	}
-	// 10^308 < osmomath.MaxInt < 10^309
-	bigPowersOfTen = make([]osmomath.BigDec, 309)
+	// 10^308 < furymath.MaxInt < 10^309
+	bigPowersOfTen = make([]furymath.BigDec, 309)
 	for i := 0; i <= 308; i++ {
-		bigPowersOfTen[i] = osmomathBigTenDec.PowerInteger(uint64(i))
+		bigPowersOfTen[i] = furymathBigTenDec.PowerInteger(uint64(i))
 	}
 
 	buildTickExpCache()

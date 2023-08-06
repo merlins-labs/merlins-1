@@ -88,7 +88,7 @@ func (suite KeeperTestSuite) TestEpochInfoBeginBlockChanges() {
 
 			// get sorted heights
 			heights := maps.Keys(test.blockHeightTimePairs)
-			osmoutils.SortSlice(heights)
+			furyutils.SortSlice(heights)
 			for _, h := range heights {
 				// for each height in order, run begin block
 				suite.Ctx = suite.Ctx.WithBlockHeight(int64(h)).WithBlockTime(test.blockHeightTimePairs[h])

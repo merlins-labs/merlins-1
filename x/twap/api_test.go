@@ -9,10 +9,10 @@ import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
 	"github.com/osmosis-labs/osmosis/osmomath"
-	sdkrand "github.com/osmosis-labs/osmosis/v16/simulation/simtypes/random"
-	"github.com/osmosis-labs/osmosis/v16/x/gamm/pool-models/balancer"
-	"github.com/osmosis-labs/osmosis/v16/x/twap"
-	"github.com/osmosis-labs/osmosis/v16/x/twap/types"
+	sdkrand "github.com/merlinslair/merlin/v16/simulation/simtypes/random"
+	"github.com/merlinslair/merlin/v16/x/gamm/pool-models/balancer"
+	"github.com/merlinslair/merlin/v16/x/twap"
+	"github.com/merlinslair/merlin/v16/x/twap/types"
 )
 
 var (
@@ -896,11 +896,11 @@ func (s *TestSuite) TestGeometricTwapToNow_BalancerPool_Randomized() {
 			twap, err := app.TwapKeeper.GetGeometricTwapToNow(ctx, 1, denom0, denom1, oldTime)
 			s.Require().NoError(err)
 
-			osmomath.ErrTolerance{
+			furymath.ErrTolerance{
 				MultiplicativeTolerance: sdk.SmallestDec(),
 			}.CompareBigDec(
-				osmomath.BigDecFromSDKDec(spotPrice),
-				osmomath.BigDecFromSDKDec(twap),
+				furymath.BigDecFromSDKDec(spotPrice),
+				furymath.BigDecFromSDKDec(twap),
 			)
 		})
 	}

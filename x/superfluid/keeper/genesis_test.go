@@ -8,9 +8,9 @@ import (
 	"github.com/stretchr/testify/require"
 	tmproto "github.com/tendermint/tendermint/proto/tendermint/types"
 
-	simapp "github.com/osmosis-labs/osmosis/v16/app"
-	"github.com/osmosis-labs/osmosis/v16/x/superfluid"
-	"github.com/osmosis-labs/osmosis/v16/x/superfluid/types"
+	simapp "github.com/merlinslair/merlin/v16/app"
+	"github.com/merlinslair/merlin/v16/x/superfluid"
+	"github.com/merlinslair/merlin/v16/x/superfluid/types"
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
 )
@@ -27,7 +27,7 @@ var testGenesis = types.GenesisState{
 			AssetType: types.SuperfluidAssetTypeLPShare,
 		},
 	},
-	OsmoEquivalentMultipliers: []types.OsmoEquivalentMultiplierRecord{
+	FuryEquivalentMultipliers: []types.FuryEquivalentMultiplierRecord{
 		{
 			EpochNumber: 1,
 			Denom:       DefaultGammAsset,
@@ -37,14 +37,14 @@ var testGenesis = types.GenesisState{
 	IntermediaryAccounts: []types.SuperfluidIntermediaryAccount{
 		{
 			Denom:   DefaultGammAsset,
-			ValAddr: "osmovaloper1cyw4vw20el8e7ez8080md0r8psg25n0cq98a9n",
+			ValAddr: "furyvaloper1cyw4vw20el8e7ez8080md0r8psg25n0cq98a9n",
 			GaugeId: 1,
 		},
 	},
 	IntemediaryAccountConnections: []types.LockIdIntermediaryAccountConnection{
 		{
 			LockId:              1,
-			IntermediaryAccount: "osmo1hpgapnfl3thkevvl0jp3wqtk8jw7mpqumuuc2f",
+			IntermediaryAccount: "fury1hpgapnfl3thkevvl0jp3wqtk8jw7mpqumuuc2f",
 		},
 	},
 }
@@ -83,8 +83,8 @@ func TestInitGenesis(t *testing.T) {
 	assets := app.SuperfluidKeeper.GetAllSuperfluidAssets(ctx)
 	require.Equal(t, assets, genesis.SuperfluidAssets)
 
-	multipliers := app.SuperfluidKeeper.GetAllOsmoEquivalentMultipliers(ctx)
-	require.Equal(t, multipliers, genesis.OsmoEquivalentMultipliers)
+	multipliers := app.SuperfluidKeeper.GetAllFuryEquivalentMultipliers(ctx)
+	require.Equal(t, multipliers, genesis.FuryEquivalentMultipliers)
 
 	accounts := app.SuperfluidKeeper.GetAllIntermediaryAccounts(ctx)
 	require.Equal(t, accounts, genesis.IntermediaryAccounts)
@@ -112,7 +112,7 @@ func TestExportGenesis(t *testing.T) {
 	genesisExported := app.SuperfluidKeeper.ExportGenesis(ctx)
 	require.Equal(t, genesisExported.Params, genesis.Params)
 	require.Equal(t, genesisExported.SuperfluidAssets, append(genesis.SuperfluidAssets, asset))
-	require.Equal(t, genesis.OsmoEquivalentMultipliers, genesis.OsmoEquivalentMultipliers)
+	require.Equal(t, genesis.FuryEquivalentMultipliers, genesis.FuryEquivalentMultipliers)
 	require.Equal(t, genesis.IntermediaryAccounts, genesis.IntermediaryAccounts)
 	require.Equal(t, genesis.IntemediaryAccountConnections, genesis.IntemediaryAccountConnections)
 }

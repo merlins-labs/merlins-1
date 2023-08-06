@@ -1,11 +1,11 @@
 use std::ops::{Div, Mul};
 
 use cosmwasm_std::{Addr, Coin, Decimal, Deps, Timestamp, Uint128};
-use osmosis_std::shim::Timestamp as OsmosisTimestamp;
-use osmosis_std::types::osmosis::gamm::v1beta1::{
+use merlin_std::shim::Timestamp as MerlinTimestamp;
+use merlin_std::types::merlin::gamm::v1beta1::{
     MsgSwapExactAmountIn, QueryTotalPoolLiquidityRequest, SwapAmountInRoute,
 };
-use osmosis_std::types::osmosis::twap::v1beta1::TwapQuerier;
+use merlin_std::types::merlin::twap::v1beta1::TwapQuerier;
 
 use crate::{
     state::{ROUTING_TABLE, STATE},
@@ -115,18 +115,18 @@ pub fn calculate_min_output_from_twap(
     let mut twap_price: Decimal = Decimal::one();
 
     // When swapping from input to output, we need to quote the price in the input token
-    // For example when seling osmo to buy atom:
-    //  price of <out> is X<in> (i.e.: price of atom is Xosmo)
+    // For example when seling fury to buy atom:
+    //  price of <out> is X<in> (i.e.: price of atom is Xfury)
     let mut sell_denom = input_token.denom;
 
     // if duration is not provided, default to 1h
     let start_time = now.minus_seconds(window.unwrap_or(3600));
-    let start_time = OsmosisTimestamp {
+    let start_time = MerlinTimestamp {
         seconds: start_time.seconds() as i64,
         nanos: 0_i32,
     };
 
-    let end_time = OsmosisTimestamp {
+    let end_time = MerlinTimestamp {
         seconds: now.seconds() as i64,
         nanos: 0_i32,
     };

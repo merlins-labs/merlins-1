@@ -32,10 +32,10 @@ def round_sdk_prec_down(number: Decimal):
 def round_sdk_prec_up(number: Decimal):
     return round_decimal(number, 18, ROUND_CEILING)
 
-def round_osmo_prec_down(number: Decimal):
+def round_fury_prec_down(number: Decimal):
     return round_decimal(number, 36, ROUND_FLOOR)
 
-def round_osmo_prec_up(number: Decimal):
+def round_fury_prec_up(number: Decimal):
     return round_decimal(number, 36, ROUND_CEILING)
 
 # --- CL liquidity functions ---
@@ -93,19 +93,19 @@ def get_liquidity_from_amounts(sqrt_price, sqrt_price_a, sqrt_price_b, amount0, 
 
 def get_next_sqrt_price_from_amount0_out_round_up(liquidity, sqrtPriceCurrent, tokenOut):
     product_num = liquidity * sqrtPriceCurrent
-    product_num = round_osmo_prec_up(product_num)
+    product_num = round_fury_prec_up(product_num)
     product_den =  tokenOut * sqrtPriceCurrent
-    product_den = round_osmo_prec_up(product_den)
-    return round_osmo_prec_up(product_num / (liquidity - product_den))
+    product_den = round_fury_prec_up(product_den)
+    return round_fury_prec_up(product_num / (liquidity - product_den))
 
 def get_next_sqrt_price_from_amount0_in_round_up(liquidity, sqrtPriceCurrent, tokenIn):
-    return round_osmo_prec_up(round_osmo_prec_up(liquidity * sqrtPriceCurrent) / (liquidity + round_osmo_prec_down(tokenIn * sqrtPriceCurrent)))
+    return round_fury_prec_up(round_fury_prec_up(liquidity * sqrtPriceCurrent) / (liquidity + round_fury_prec_down(tokenIn * sqrtPriceCurrent)))
 
 def get_next_sqrt_price_from_amount1_out_round_down(liquidity, sqrtPriceCurrent, tokenOut):
-    return round_osmo_prec_down(sqrtPriceCurrent - round_osmo_prec_up(tokenOut / liquidity))
+    return round_fury_prec_down(sqrtPriceCurrent - round_fury_prec_up(tokenOut / liquidity))
 
 def get_next_sqrt_price_from_amount1_in_round_down(liquidity, sqrtPriceCurrent, tokenIn):
-    return sqrtPriceCurrent + round_osmo_prec_down(tokenIn / liquidity)
+    return sqrtPriceCurrent + round_fury_prec_down(tokenIn / liquidity)
 
 def calc_amount_zero_delta(liquidity, sqrtPriceA, sqrtPriceB, roundUp):
     if sqrtPriceB > sqrtPriceA:
@@ -117,9 +117,9 @@ def calc_amount_zero_delta(liquidity, sqrtPriceA, sqrtPriceB, roundUp):
     product_denom = sqrtPriceA * sqrtPriceB
 
     if roundUp:
-        return round_osmo_prec_up(round_osmo_prec_up(product_num) / round_osmo_prec_down(product_denom))
+        return round_fury_prec_up(round_fury_prec_up(product_num) / round_fury_prec_down(product_denom))
 
-    return round_osmo_prec_down(round_osmo_prec_down(product_num) / round_osmo_prec_up(product_denom))
+    return round_fury_prec_down(round_fury_prec_down(product_num) / round_fury_prec_up(product_denom))
 
 def calc_amount_one_delta(liquidity, sqrtPriceA, sqrtPriceB, roundUp):
     if sqrtPriceB > sqrtPriceA:
@@ -128,6 +128,6 @@ def calc_amount_one_delta(liquidity, sqrtPriceA, sqrtPriceB, roundUp):
     diff = sqrtPriceA - sqrtPriceB
 
     if roundUp:
-        return round_osmo_prec_up(liquidity * diff) 
+        return round_fury_prec_up(liquidity * diff) 
 
-    return round_osmo_prec_down(liquidity * diff) 
+    return round_fury_prec_down(liquidity * diff) 

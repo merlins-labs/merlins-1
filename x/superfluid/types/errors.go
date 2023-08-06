@@ -6,7 +6,7 @@ import (
 
 	errorsmod "cosmossdk.io/errors"
 
-	cltypes "github.com/osmosis-labs/osmosis/v16/x/concentrated-liquidity/types"
+	cltypes "github.com/merlinslair/merlin/v16/x/concentrated-liquidity/types"
 )
 
 // x/superfluid module errors.
@@ -14,7 +14,7 @@ var (
 	ErrMultipleCoinsLockupNotSupported = errorsmod.Register(ModuleName, 1, "multiple coins lockup is not supported")
 	ErrUnbondingLockupNotSupported     = errorsmod.Register(ModuleName, 2, "unbonding lockup is not allowed to participate in superfluid staking")
 	ErrNotEnoughLockupDuration         = errorsmod.Register(ModuleName, 3, "lockup does not have enough lock duration")
-	ErrOsmoEquivalentZeroNotAllowed    = errorsmod.Register(ModuleName, 4, "not able to do superfluid staking for zero osmo equivalent")
+	ErrFuryEquivalentZeroNotAllowed    = errorsmod.Register(ModuleName, 4, "not able to do superfluid staking for zero fury equivalent")
 	ErrNotSuperfluidUsedLockup         = errorsmod.Register(ModuleName, 5, "lockup is not used for superfluid staking")
 	ErrSameValidatorRedelegation       = errorsmod.Register(ModuleName, 6, "redelegation to the same validator is not allowed")
 	ErrAlreadyUsedSuperfluidLockup     = errorsmod.Register(ModuleName, 7, "lockup is already being used for superfluid staking")

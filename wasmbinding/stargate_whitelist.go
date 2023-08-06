@@ -14,20 +14,20 @@ import (
 	stakingtypes "github.com/cosmos/cosmos-sdk/x/staking/types"
 	ibctransfertypes "github.com/cosmos/ibc-go/v4/modules/apps/transfer/types"
 
-	gammv2types "github.com/osmosis-labs/osmosis/v16/x/gamm/v2types"
+	gammv2types "github.com/merlinslair/merlin/v16/x/gamm/v2types"
 
-	concentratedliquidityquery "github.com/osmosis-labs/osmosis/v16/x/concentrated-liquidity/client/queryproto"
-	downtimequerytypes "github.com/osmosis-labs/osmosis/v16/x/downtime-detector/client/queryproto"
-	gammtypes "github.com/osmosis-labs/osmosis/v16/x/gamm/types"
-	incentivestypes "github.com/osmosis-labs/osmosis/v16/x/incentives/types"
-	lockuptypes "github.com/osmosis-labs/osmosis/v16/x/lockup/types"
-	minttypes "github.com/osmosis-labs/osmosis/v16/x/mint/types"
-	poolincentivestypes "github.com/osmosis-labs/osmosis/v16/x/pool-incentives/types"
-	poolmanagerqueryproto "github.com/osmosis-labs/osmosis/v16/x/poolmanager/client/queryproto"
-	superfluidtypes "github.com/osmosis-labs/osmosis/v16/x/superfluid/types"
-	tokenfactorytypes "github.com/osmosis-labs/osmosis/v16/x/tokenfactory/types"
-	twapquerytypes "github.com/osmosis-labs/osmosis/v16/x/twap/client/queryproto"
-	txfeestypes "github.com/osmosis-labs/osmosis/v16/x/txfees/types"
+	concentratedliquidityquery "github.com/merlinslair/merlin/v16/x/concentrated-liquidity/client/queryproto"
+	downtimequerytypes "github.com/merlinslair/merlin/v16/x/downtime-detector/client/queryproto"
+	gammtypes "github.com/merlinslair/merlin/v16/x/gamm/types"
+	incentivestypes "github.com/merlinslair/merlin/v16/x/incentives/types"
+	lockuptypes "github.com/merlinslair/merlin/v16/x/lockup/types"
+	minttypes "github.com/merlinslair/merlin/v16/x/mint/types"
+	poolincentivestypes "github.com/merlinslair/merlin/v16/x/pool-incentives/types"
+	poolmanagerqueryproto "github.com/merlinslair/merlin/v16/x/poolmanager/client/queryproto"
+	superfluidtypes "github.com/merlinslair/merlin/v16/x/superfluid/types"
+	tokenfactorytypes "github.com/merlinslair/merlin/v16/x/tokenfactory/types"
+	twapquerytypes "github.com/merlinslair/merlin/v16/x/twap/client/queryproto"
+	txfeestypes "github.com/merlinslair/merlin/v16/x/txfees/types"
 	epochtypes "github.com/osmosis-labs/osmosis/x/epochs/types"
 )
 
@@ -77,95 +77,95 @@ func init() {
 	setWhitelistedQuery("/cosmos.staking.v1beta1.Query/Params", &stakingtypes.QueryParamsResponse{})
 	setWhitelistedQuery("/cosmos.staking.v1beta1.Query/Validator", &stakingtypes.QueryValidatorResponse{})
 
-	// osmosis queries
+	// merlin queries
 
 	// epochs
-	setWhitelistedQuery("/osmosis.epochs.v1beta1.Query/EpochInfos", &epochtypes.QueryEpochsInfoResponse{})
-	setWhitelistedQuery("/osmosis.epochs.v1beta1.Query/CurrentEpoch", &epochtypes.QueryCurrentEpochResponse{})
+	setWhitelistedQuery("/merlin.epochs.v1beta1.Query/EpochInfos", &epochtypes.QueryEpochsInfoResponse{})
+	setWhitelistedQuery("/merlin.epochs.v1beta1.Query/CurrentEpoch", &epochtypes.QueryCurrentEpochResponse{})
 
 	// gamm
-	setWhitelistedQuery("/osmosis.gamm.v1beta1.Query/NumPools", &gammtypes.QueryNumPoolsResponse{})
-	setWhitelistedQuery("/osmosis.gamm.v1beta1.Query/TotalLiquidity", &gammtypes.QueryTotalLiquidityResponse{})
-	setWhitelistedQuery("/osmosis.gamm.v1beta1.Query/Pool", &gammtypes.QueryPoolResponse{})
-	setWhitelistedQuery("/osmosis.gamm.v1beta1.Query/PoolParams", &gammtypes.QueryPoolParamsResponse{})
-	setWhitelistedQuery("/osmosis.gamm.v1beta1.Query/TotalPoolLiquidity", &gammtypes.QueryTotalPoolLiquidityResponse{})
-	setWhitelistedQuery("/osmosis.gamm.v1beta1.Query/TotalShares", &gammtypes.QueryTotalSharesResponse{})
-	setWhitelistedQuery("/osmosis.gamm.v1beta1.Query/CalcJoinPoolShares", &gammtypes.QueryCalcJoinPoolSharesResponse{})
-	setWhitelistedQuery("/osmosis.gamm.v1beta1.Query/CalcExitPoolCoinsFromShares", &gammtypes.QueryCalcExitPoolCoinsFromSharesResponse{})
-	setWhitelistedQuery("/osmosis.gamm.v1beta1.Query/CalcJoinPoolNoSwapShares", &gammtypes.QueryCalcJoinPoolNoSwapSharesResponse{})
-	setWhitelistedQuery("/osmosis.gamm.v1beta1.Query/PoolType", &gammtypes.QueryPoolTypeResponse{})
-	setWhitelistedQuery("/osmosis.gamm.v2.Query/SpotPrice", &gammv2types.QuerySpotPriceResponse{})
-	setWhitelistedQuery("/osmosis.gamm.v1beta1.Query/EstimateSwapExactAmountIn", &gammtypes.QuerySwapExactAmountInResponse{})
-	setWhitelistedQuery("/osmosis.gamm.v1beta1.Query/EstimateSwapExactAmountOut", &gammtypes.QuerySwapExactAmountOutResponse{})
+	setWhitelistedQuery("/merlin.gamm.v1beta1.Query/NumPools", &gammtypes.QueryNumPoolsResponse{})
+	setWhitelistedQuery("/merlin.gamm.v1beta1.Query/TotalLiquidity", &gammtypes.QueryTotalLiquidityResponse{})
+	setWhitelistedQuery("/merlin.gamm.v1beta1.Query/Pool", &gammtypes.QueryPoolResponse{})
+	setWhitelistedQuery("/merlin.gamm.v1beta1.Query/PoolParams", &gammtypes.QueryPoolParamsResponse{})
+	setWhitelistedQuery("/merlin.gamm.v1beta1.Query/TotalPoolLiquidity", &gammtypes.QueryTotalPoolLiquidityResponse{})
+	setWhitelistedQuery("/merlin.gamm.v1beta1.Query/TotalShares", &gammtypes.QueryTotalSharesResponse{})
+	setWhitelistedQuery("/merlin.gamm.v1beta1.Query/CalcJoinPoolShares", &gammtypes.QueryCalcJoinPoolSharesResponse{})
+	setWhitelistedQuery("/merlin.gamm.v1beta1.Query/CalcExitPoolCoinsFromShares", &gammtypes.QueryCalcExitPoolCoinsFromSharesResponse{})
+	setWhitelistedQuery("/merlin.gamm.v1beta1.Query/CalcJoinPoolNoSwapShares", &gammtypes.QueryCalcJoinPoolNoSwapSharesResponse{})
+	setWhitelistedQuery("/merlin.gamm.v1beta1.Query/PoolType", &gammtypes.QueryPoolTypeResponse{})
+	setWhitelistedQuery("/merlin.gamm.v2.Query/SpotPrice", &gammv2types.QuerySpotPriceResponse{})
+	setWhitelistedQuery("/merlin.gamm.v1beta1.Query/EstimateSwapExactAmountIn", &gammtypes.QuerySwapExactAmountInResponse{})
+	setWhitelistedQuery("/merlin.gamm.v1beta1.Query/EstimateSwapExactAmountOut", &gammtypes.QuerySwapExactAmountOutResponse{})
 
 	// incentives
-	setWhitelistedQuery("/osmosis.incentives.Query/ModuleToDistributeCoins", &incentivestypes.ModuleToDistributeCoinsResponse{})
-	setWhitelistedQuery("/osmosis.incentives.Query/LockableDurations", &incentivestypes.QueryLockableDurationsResponse{})
+	setWhitelistedQuery("/merlin.incentives.Query/ModuleToDistributeCoins", &incentivestypes.ModuleToDistributeCoinsResponse{})
+	setWhitelistedQuery("/merlin.incentives.Query/LockableDurations", &incentivestypes.QueryLockableDurationsResponse{})
 
 	// lockup
-	setWhitelistedQuery("/osmosis.lockup.Query/ModuleBalance", &lockuptypes.ModuleBalanceResponse{})
-	setWhitelistedQuery("/osmosis.lockup.Query/ModuleLockedAmount", &lockuptypes.ModuleLockedAmountResponse{})
-	setWhitelistedQuery("/osmosis.lockup.Query/AccountUnlockableCoins", &lockuptypes.AccountUnlockableCoinsResponse{})
-	setWhitelistedQuery("/osmosis.lockup.Query/AccountUnlockingCoins", &lockuptypes.AccountUnlockingCoinsResponse{})
-	setWhitelistedQuery("/osmosis.lockup.Query/LockedDenom", &lockuptypes.LockedDenomResponse{})
-	setWhitelistedQuery("/osmosis.lockup.Query/LockedByID", &lockuptypes.LockedResponse{})
-	setWhitelistedQuery("/osmosis.lockup.Query/NextLockID", &lockuptypes.NextLockIDResponse{})
-	setWhitelistedQuery("/osmosis.lockup.Query/LockRewardReceiver", &lockuptypes.LockRewardReceiverResponse{})
+	setWhitelistedQuery("/merlin.lockup.Query/ModuleBalance", &lockuptypes.ModuleBalanceResponse{})
+	setWhitelistedQuery("/merlin.lockup.Query/ModuleLockedAmount", &lockuptypes.ModuleLockedAmountResponse{})
+	setWhitelistedQuery("/merlin.lockup.Query/AccountUnlockableCoins", &lockuptypes.AccountUnlockableCoinsResponse{})
+	setWhitelistedQuery("/merlin.lockup.Query/AccountUnlockingCoins", &lockuptypes.AccountUnlockingCoinsResponse{})
+	setWhitelistedQuery("/merlin.lockup.Query/LockedDenom", &lockuptypes.LockedDenomResponse{})
+	setWhitelistedQuery("/merlin.lockup.Query/LockedByID", &lockuptypes.LockedResponse{})
+	setWhitelistedQuery("/merlin.lockup.Query/NextLockID", &lockuptypes.NextLockIDResponse{})
+	setWhitelistedQuery("/merlin.lockup.Query/LockRewardReceiver", &lockuptypes.LockRewardReceiverResponse{})
 
 	// mint
-	setWhitelistedQuery("/osmosis.mint.v1beta1.Query/EpochProvisions", &minttypes.QueryEpochProvisionsResponse{})
-	setWhitelistedQuery("/osmosis.mint.v1beta1.Query/Params", &minttypes.QueryParamsResponse{})
+	setWhitelistedQuery("/merlin.mint.v1beta1.Query/EpochProvisions", &minttypes.QueryEpochProvisionsResponse{})
+	setWhitelistedQuery("/merlin.mint.v1beta1.Query/Params", &minttypes.QueryParamsResponse{})
 
 	// pool-incentives
-	setWhitelistedQuery("/osmosis.poolincentives.v1beta1.Query/GaugeIds", &poolincentivestypes.QueryGaugeIdsResponse{})
+	setWhitelistedQuery("/merlin.poolincentives.v1beta1.Query/GaugeIds", &poolincentivestypes.QueryGaugeIdsResponse{})
 
 	// superfluid
-	setWhitelistedQuery("/osmosis.superfluid.Query/Params", &superfluidtypes.QueryParamsResponse{})
-	setWhitelistedQuery("/osmosis.superfluid.Query/AssetType", &superfluidtypes.AssetTypeResponse{})
-	setWhitelistedQuery("/osmosis.superfluid.Query/AllAssets", &superfluidtypes.AllAssetsResponse{})
-	setWhitelistedQuery("/osmosis.superfluid.Query/AssetMultiplier", &superfluidtypes.AssetMultiplierResponse{})
+	setWhitelistedQuery("/merlin.superfluid.Query/Params", &superfluidtypes.QueryParamsResponse{})
+	setWhitelistedQuery("/merlin.superfluid.Query/AssetType", &superfluidtypes.AssetTypeResponse{})
+	setWhitelistedQuery("/merlin.superfluid.Query/AllAssets", &superfluidtypes.AllAssetsResponse{})
+	setWhitelistedQuery("/merlin.superfluid.Query/AssetMultiplier", &superfluidtypes.AssetMultiplierResponse{})
 
 	// poolmanager
-	setWhitelistedQuery("/osmosis.poolmanager.v1beta1.Query/NumPools", &poolmanagerqueryproto.NumPoolsResponse{})
-	setWhitelistedQuery("/osmosis.poolmanager.v1beta1.Query/EstimateSwapExactAmountIn", &poolmanagerqueryproto.EstimateSwapExactAmountInResponse{})
-	setWhitelistedQuery("/osmosis.poolmanager.v1beta1.Query/EstimateSwapExactAmountOut", &poolmanagerqueryproto.EstimateSwapExactAmountOutResponse{})
-	setWhitelistedQuery("/osmosis.poolmanager.v1beta1.Query/EstimateSinglePoolSwapExactAmountIn", &poolmanagerqueryproto.EstimateSwapExactAmountInResponse{})
-	setWhitelistedQuery("/osmosis.poolmanager.v1beta1.Query/EstimateSinglePoolSwapExactAmountOut", &poolmanagerqueryproto.EstimateSwapExactAmountOutResponse{})
-	setWhitelistedQuery("/osmosis.poolmanager.v1beta1.Query/Pool", &poolmanagerqueryproto.PoolResponse{})
-	setWhitelistedQuery("/osmosis.poolmanager.v1beta1.Query/SpotPrice", &poolmanagerqueryproto.SpotPriceResponse{})
+	setWhitelistedQuery("/merlin.poolmanager.v1beta1.Query/NumPools", &poolmanagerqueryproto.NumPoolsResponse{})
+	setWhitelistedQuery("/merlin.poolmanager.v1beta1.Query/EstimateSwapExactAmountIn", &poolmanagerqueryproto.EstimateSwapExactAmountInResponse{})
+	setWhitelistedQuery("/merlin.poolmanager.v1beta1.Query/EstimateSwapExactAmountOut", &poolmanagerqueryproto.EstimateSwapExactAmountOutResponse{})
+	setWhitelistedQuery("/merlin.poolmanager.v1beta1.Query/EstimateSinglePoolSwapExactAmountIn", &poolmanagerqueryproto.EstimateSwapExactAmountInResponse{})
+	setWhitelistedQuery("/merlin.poolmanager.v1beta1.Query/EstimateSinglePoolSwapExactAmountOut", &poolmanagerqueryproto.EstimateSwapExactAmountOutResponse{})
+	setWhitelistedQuery("/merlin.poolmanager.v1beta1.Query/Pool", &poolmanagerqueryproto.PoolResponse{})
+	setWhitelistedQuery("/merlin.poolmanager.v1beta1.Query/SpotPrice", &poolmanagerqueryproto.SpotPriceResponse{})
 
 	// txfees
-	setWhitelistedQuery("/osmosis.txfees.v1beta1.Query/FeeTokens", &txfeestypes.QueryFeeTokensResponse{})
-	setWhitelistedQuery("/osmosis.txfees.v1beta1.Query/DenomSpotPrice", &txfeestypes.QueryDenomSpotPriceResponse{})
-	setWhitelistedQuery("/osmosis.txfees.v1beta1.Query/DenomPoolId", &txfeestypes.QueryDenomPoolIdResponse{})
-	setWhitelistedQuery("/osmosis.txfees.v1beta1.Query/BaseDenom", &txfeestypes.QueryBaseDenomResponse{})
+	setWhitelistedQuery("/merlin.txfees.v1beta1.Query/FeeTokens", &txfeestypes.QueryFeeTokensResponse{})
+	setWhitelistedQuery("/merlin.txfees.v1beta1.Query/DenomSpotPrice", &txfeestypes.QueryDenomSpotPriceResponse{})
+	setWhitelistedQuery("/merlin.txfees.v1beta1.Query/DenomPoolId", &txfeestypes.QueryDenomPoolIdResponse{})
+	setWhitelistedQuery("/merlin.txfees.v1beta1.Query/BaseDenom", &txfeestypes.QueryBaseDenomResponse{})
 
 	// tokenfactory
-	setWhitelistedQuery("/osmosis.tokenfactory.v1beta1.Query/Params", &tokenfactorytypes.QueryParamsResponse{})
-	setWhitelistedQuery("/osmosis.tokenfactory.v1beta1.Query/DenomAuthorityMetadata", &tokenfactorytypes.QueryDenomAuthorityMetadataResponse{})
+	setWhitelistedQuery("/merlin.tokenfactory.v1beta1.Query/Params", &tokenfactorytypes.QueryParamsResponse{})
+	setWhitelistedQuery("/merlin.tokenfactory.v1beta1.Query/DenomAuthorityMetadata", &tokenfactorytypes.QueryDenomAuthorityMetadataResponse{})
 	// Does not include denoms_from_creator, TBD if this is the index we want contracts to use instead of admin
 
 	// twap
-	setWhitelistedQuery("/osmosis.twap.v1beta1.Query/ArithmeticTwap", &twapquerytypes.ArithmeticTwapResponse{})
-	setWhitelistedQuery("/osmosis.twap.v1beta1.Query/ArithmeticTwapToNow", &twapquerytypes.ArithmeticTwapToNowResponse{})
-	setWhitelistedQuery("/osmosis.twap.v1beta1.Query/GeometricTwap", &twapquerytypes.GeometricTwapResponse{})
-	setWhitelistedQuery("/osmosis.twap.v1beta1.Query/GeometricTwapToNow", &twapquerytypes.GeometricTwapToNowResponse{})
-	setWhitelistedQuery("/osmosis.twap.v1beta1.Query/Params", &twapquerytypes.ParamsResponse{})
+	setWhitelistedQuery("/merlin.twap.v1beta1.Query/ArithmeticTwap", &twapquerytypes.ArithmeticTwapResponse{})
+	setWhitelistedQuery("/merlin.twap.v1beta1.Query/ArithmeticTwapToNow", &twapquerytypes.ArithmeticTwapToNowResponse{})
+	setWhitelistedQuery("/merlin.twap.v1beta1.Query/GeometricTwap", &twapquerytypes.GeometricTwapResponse{})
+	setWhitelistedQuery("/merlin.twap.v1beta1.Query/GeometricTwapToNow", &twapquerytypes.GeometricTwapToNowResponse{})
+	setWhitelistedQuery("/merlin.twap.v1beta1.Query/Params", &twapquerytypes.ParamsResponse{})
 
 	// downtime-detector
-	setWhitelistedQuery("/osmosis.downtimedetector.v1beta1.Query/RecoveredSinceDowntimeOfLength", &downtimequerytypes.RecoveredSinceDowntimeOfLengthResponse{})
+	setWhitelistedQuery("/merlin.downtimedetector.v1beta1.Query/RecoveredSinceDowntimeOfLength", &downtimequerytypes.RecoveredSinceDowntimeOfLengthResponse{})
 
 	// concentrated-liquidity
-	setWhitelistedQuery("/osmosis.concentratedliquidity.v1beta1.Query/UserPositions", &concentratedliquidityquery.UserPositionsResponse{})
-	setWhitelistedQuery("/osmosis.concentratedliquidity.v1beta1.Query/LiquidityPerTickRange", &concentratedliquidityquery.LiquidityPerTickRangeResponse{})
-	setWhitelistedQuery("/osmosis.concentratedliquidity.v1beta1.Query/ClaimableSpreadRewards", &concentratedliquidityquery.ClaimableSpreadRewardsResponse{})
-	setWhitelistedQuery("/osmosis.concentratedliquidity.v1beta1.Query/ClaimableIncentives", &concentratedliquidityquery.ClaimableIncentivesResponse{})
-	setWhitelistedQuery("/osmosis.concentratedliquidity.v1beta1.Query/PositionById", &concentratedliquidityquery.PositionByIdResponse{})
-	setWhitelistedQuery("/osmosis.concentratedliquidity.v1beta1.Query/Params", &concentratedliquidityquery.ParamsResponse{})
-	setWhitelistedQuery("/osmosis.concentratedliquidity.v1beta1.Query/PoolAccumulatorRewards", &concentratedliquidityquery.PoolAccumulatorRewardsResponse{})
-	setWhitelistedQuery("/osmosis.concentratedliquidity.v1beta1.Query/IncentiveRecords", &concentratedliquidityquery.IncentiveRecordsResponse{})
-	setWhitelistedQuery("/osmosis.concentratedliquidity.v1beta1.Query/TickAccumulatorTrackers", &concentratedliquidityquery.TickAccumulatorTrackersResponse{})
-	setWhitelistedQuery("/osmosis.concentratedliquidity.v1beta1.Query/CFMMPoolIdLinkFromConcentratedPoolId", &concentratedliquidityquery.CFMMPoolIdLinkFromConcentratedPoolIdResponse{})
+	setWhitelistedQuery("/merlin.concentratedliquidity.v1beta1.Query/UserPositions", &concentratedliquidityquery.UserPositionsResponse{})
+	setWhitelistedQuery("/merlin.concentratedliquidity.v1beta1.Query/LiquidityPerTickRange", &concentratedliquidityquery.LiquidityPerTickRangeResponse{})
+	setWhitelistedQuery("/merlin.concentratedliquidity.v1beta1.Query/ClaimableSpreadRewards", &concentratedliquidityquery.ClaimableSpreadRewardsResponse{})
+	setWhitelistedQuery("/merlin.concentratedliquidity.v1beta1.Query/ClaimableIncentives", &concentratedliquidityquery.ClaimableIncentivesResponse{})
+	setWhitelistedQuery("/merlin.concentratedliquidity.v1beta1.Query/PositionById", &concentratedliquidityquery.PositionByIdResponse{})
+	setWhitelistedQuery("/merlin.concentratedliquidity.v1beta1.Query/Params", &concentratedliquidityquery.ParamsResponse{})
+	setWhitelistedQuery("/merlin.concentratedliquidity.v1beta1.Query/PoolAccumulatorRewards", &concentratedliquidityquery.PoolAccumulatorRewardsResponse{})
+	setWhitelistedQuery("/merlin.concentratedliquidity.v1beta1.Query/IncentiveRecords", &concentratedliquidityquery.IncentiveRecordsResponse{})
+	setWhitelistedQuery("/merlin.concentratedliquidity.v1beta1.Query/TickAccumulatorTrackers", &concentratedliquidityquery.TickAccumulatorTrackersResponse{})
+	setWhitelistedQuery("/merlin.concentratedliquidity.v1beta1.Query/CFMMPoolIdLinkFromConcentratedPoolId", &concentratedliquidityquery.CFMMPoolIdLinkFromConcentratedPoolIdResponse{})
 }
 
 // GetWhitelistedQuery returns the whitelisted query at the provided path.

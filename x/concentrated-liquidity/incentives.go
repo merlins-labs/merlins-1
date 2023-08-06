@@ -13,10 +13,10 @@ import (
 
 	"github.com/osmosis-labs/osmosis/osmoutils"
 	"github.com/osmosis-labs/osmosis/osmoutils/accum"
-	"github.com/osmosis-labs/osmosis/v16/x/concentrated-liquidity/math"
-	"github.com/osmosis-labs/osmosis/v16/x/concentrated-liquidity/model"
-	"github.com/osmosis-labs/osmosis/v16/x/concentrated-liquidity/types"
-	gammtypes "github.com/osmosis-labs/osmosis/v16/x/gamm/types"
+	"github.com/merlinslair/merlin/v16/x/concentrated-liquidity/math"
+	"github.com/merlinslair/merlin/v16/x/concentrated-liquidity/model"
+	"github.com/merlinslair/merlin/v16/x/concentrated-liquidity/types"
+	gammtypes "github.com/merlinslair/merlin/v16/x/gamm/types"
 )
 
 // createUptimeAccumulators creates accumulator objects in store for each supported uptime for the given poolId.
@@ -534,7 +534,7 @@ func (k Keeper) setIncentiveRecord(ctx sdk.Context, incentiveRecord types.Incent
 	if store.Has(key) && incentiveRecordBody.RemainingCoin.IsZero() {
 		store.Delete(key)
 	} else if incentiveRecordBody.RemainingCoin.Amount.IsPositive() {
-		osmoutils.MustSet(store, key, &incentiveRecordBody)
+		furyutils.MustSet(store, key, &incentiveRecordBody)
 	}
 
 	return nil
@@ -563,7 +563,7 @@ func (k Keeper) GetIncentiveRecord(ctx sdk.Context, poolId uint64, minUptime tim
 
 	key := types.KeyIncentiveRecord(poolId, uptimeIndex, incentiveRecordId)
 
-	found, err := osmoutils.Get(store, key, &incentiveBodyStruct)
+	found, err := furyutils.Get(store, key, &incentiveBodyStruct)
 	if err != nil {
 		return types.IncentiveRecord{}, err
 	}
@@ -583,7 +583,7 @@ func (k Keeper) GetIncentiveRecord(ctx sdk.Context, poolId uint64, minUptime tim
 // GetAllIncentiveRecordsForPool gets all the incentive records for poolId
 // Returns error if it is unable to retrieve records.
 func (k Keeper) GetAllIncentiveRecordsForPool(ctx sdk.Context, poolId uint64) ([]types.IncentiveRecord, error) {
-	return osmoutils.GatherValuesFromStorePrefixWithKeyParser(ctx.KVStore(k.storeKey), types.KeyPoolIncentiveRecords(poolId), ParseFullIncentiveRecordFromBz)
+	return furyutils.GatherValuesFromStorePrefixWithKeyParser(ctx.KVStore(k.storeKey), types.KeyPoolIncentiveRecords(poolId), ParseFullIncentiveRecordFromBz)
 }
 
 // GetIncentiveRecordSerialized gets incentive records based on limit set by pagination request.
@@ -633,7 +633,7 @@ func (k Keeper) getAllIncentiveRecordsForUptime(ctx sdk.Context, poolId uint64, 
 		return []types.IncentiveRecord{}, err
 	}
 
-	return osmoutils.GatherValuesFromStorePrefixWithKeyParser(ctx.KVStore(k.storeKey), types.KeyUptimeIncentiveRecords(poolId, uptimeIndex), ParseFullIncentiveRecordFromBz)
+	return furyutils.GatherValuesFromStorePrefixWithKeyParser(ctx.KVStore(k.storeKey), types.KeyUptimeIncentiveRecords(poolId, uptimeIndex), ParseFullIncentiveRecordFromBz)
 }
 
 // GetUptimeGrowthInsideRange returns the uptime growth within the given tick range for all supported uptimes.
@@ -672,18 +672,18 @@ func (k Keeper) GetUptimeGrowthInsideRange(ctx sdk.Context, poolId uint64, lower
 	upperTickUptimeValues := getUptimeTrackerValues(upperTickInfo.UptimeTrackers.List)
 	// If current tick is below range, we subtract uptime growth of upper tick from that of lower tick
 	if currentTick < lowerTick {
-		return osmoutils.SubDecCoinArrays(lowerTickUptimeValues, upperTickUptimeValues)
+		return furyutils.SubDecCoinArrays(lowerTickUptimeValues, upperTickUptimeValues)
 	} else if currentTick < upperTick {
 		// If current tick is within range, we subtract uptime growth of lower and upper tick from global growth
-		globalMinusUpper, err := osmoutils.SubDecCoinArrays(globalUptimeValues, upperTickUptimeValues)
+		globalMinusUpper, err := furyutils.SubDecCoinArrays(globalUptimeValues, upperTickUptimeValues)
 		if err != nil {
 			return []sdk.DecCoins{}, err
 		}
 
-		return osmoutils.SubDecCoinArrays(globalMinusUpper, lowerTickUptimeValues)
+		return furyutils.SubDecCoinArrays(globalMinusUpper, lowerTickUptimeValues)
 	} else {
 		// If current tick is above range, we subtract uptime growth of lower tick from that of upper tick
-		return osmoutils.SubDecCoinArrays(upperTickUptimeValues, lowerTickUptimeValues)
+		return furyutils.SubDecCoinArrays(upperTickUptimeValues, lowerTickUptimeValues)
 	}
 }
 
@@ -704,7 +704,7 @@ func (k Keeper) GetUptimeGrowthOutsideRange(ctx sdk.Context, poolId uint64, lowe
 		return []sdk.DecCoins{}, err
 	}
 
-	return osmoutils.SubDecCoinArrays(globalUptimeValues, uptimeGrowthInside)
+	return furyutils.SubDecCoinArrays(globalUptimeValues, uptimeGrowthInside)
 }
 
 // initOrUpdatePositionUptimeAccumulators either initializes or updates liquidity for uptime position accumulators for every supported uptime.
@@ -1041,7 +1041,7 @@ func (k Keeper) CreateIncentive(ctx sdk.Context, poolId uint64, sender sdk.AccAd
 	// accommodate all supported uptimes, we only allow incentives to be created for uptimes that are
 	// authorized by governance.
 	authorizedUptimes := k.GetParams(ctx).AuthorizedUptimes
-	osmoutils.SortSlice(authorizedUptimes)
+	furyutils.SortSlice(authorizedUptimes)
 
 	validUptime := false
 	for _, authorizedUptime := range authorizedUptimes {

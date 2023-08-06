@@ -32,19 +32,19 @@ type MsgExecuteContract struct {
 So we detail where we want to get each of these fields from:
 
 * Sender: We cannot trust the sender of an IBC packet, the counterparty chain has full ability to lie about it. 
-We cannot risk this sender being confused for a particular user or module address on Osmosis.
+We cannot risk this sender being confused for a particular user or module address on Merlin.
 So we replace the sender with an account to represent the sender prefixed by the channel and a wasm module prefix.
 This is done by setting the sender to `Bech32(Hash("ibc-wasm-hook-intermediary" || channelID || sender))`, where the channelId is the channel id on the local chain. 
 * Contract: This field should be directly obtained from the ICS-20 packet metadata
 * Msg: This field should be directly obtained from the ICS-20 packet metadata.
-* Funds: This field is set to the amount of funds being sent over in the ICS 20 packet. One detail is that the denom in the packet is the counterparty chains representation of the denom, so we have to translate it to Osmosis' representation.
+* Funds: This field is set to the amount of funds being sent over in the ICS 20 packet. One detail is that the denom in the packet is the counterparty chains representation of the denom, so we have to translate it to Merlin' representation.
 
 So our constructed cosmwasm message that we execute will look like:
 
 ```go
 msg := MsgExecuteContract{
 	// Sender is the that actor that signed the messages
-	Sender: "osmo1-hash-of-channel-and-sender",
+	Sender: "fury1-hash-of-channel-and-sender",
 	// Contract is the address of the smart contract
 	Contract: packet.data.memo["wasm"]["ContractAddress"],
 	// Msg json encoded message to be passed to the contract
@@ -68,7 +68,7 @@ ICS20 is JSON native, so we use JSON for the memo format.
         "receiver": "contract addr or blank",
     	"memo": {
            "wasm": {
-              "contract": "osmo1contractAddr",
+              "contract": "fury1contractAddr",
               "msg": {
                 "raw_message_fields": "raw_message_data",
               }
@@ -140,7 +140,7 @@ hasn't failed (i.e.: returned an error ack notifying that the receiving change d
 
 For the callback to be processed, the transfer packet's memo should contain the following in its JSON:
 
-`{"ibc_callback": "osmo1contractAddr"}`
+`{"ibc_callback": "fury1contractAddr"}`
 
 The wasm hooks will keep the mapping from the packet's channel and sequence to the contract in storage. When an ack is
 received, it will notify the specified contract via a sudo message.
@@ -154,7 +154,7 @@ The contract that awaits the callback should implement the following interface f
 pub enum IBCLifecycleComplete {
     #[serde(rename = "ibc_ack")]
     IBCAck {
-        /// The source channel (osmosis side) of the IBC packet
+        /// The source channel (merlin side) of the IBC packet
         channel: String,
         /// The sequence number that the packet was sent with
         sequence: u64,
@@ -165,7 +165,7 @@ pub enum IBCLifecycleComplete {
     },
     #[serde(rename = "ibc_timeout")]
     IBCTimeout {
-        /// The source channel (osmosis side) of the IBC packet
+        /// The source channel (merlin side) of the IBC packet
         channel: String,
         /// The sequence number that the packet was sent with
         sequence: u64,

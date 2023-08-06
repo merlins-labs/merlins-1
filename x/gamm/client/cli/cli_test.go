@@ -8,17 +8,17 @@ import (
 
 	"github.com/osmosis-labs/osmosis/osmoutils"
 	"github.com/osmosis-labs/osmosis/osmoutils/osmocli"
-	"github.com/osmosis-labs/osmosis/v16/x/gamm/client/cli"
-	"github.com/osmosis-labs/osmosis/v16/x/gamm/pool-models/balancer"
-	"github.com/osmosis-labs/osmosis/v16/x/gamm/types"
-	poolmanagertypes "github.com/osmosis-labs/osmosis/v16/x/poolmanager/types"
+	"github.com/merlinslair/merlin/v16/x/gamm/client/cli"
+	"github.com/merlinslair/merlin/v16/x/gamm/pool-models/balancer"
+	"github.com/merlinslair/merlin/v16/x/gamm/types"
+	poolmanagertypes "github.com/merlinslair/merlin/v16/x/poolmanager/types"
 
 	"github.com/cosmos/cosmos-sdk/testutil"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/cosmos/cosmos-sdk/types/query"
 )
 
-var testAddresses = osmoutils.CreateRandomAccounts(3)
+var testAddresses = furyutils.CreateRandomAccounts(3)
 
 type IntegrationTestSuite struct {
 	suite.Suite
@@ -45,7 +45,7 @@ func TestNewCreatePoolCmd(t *testing.T) {
 			  "%s": "100node0token,100stake",
 			  "%s": "0.001",
 			  "%s": "0.001",
-			  "%s": "osmo1fqlr98d45v5ysqgp6h56kpujcj4cvsjnjq9nck"
+			  "%s": "fury1fqlr98d45v5ysqgp6h56kpujcj4cvsjnjq9nck"
 			}
 			`, cli.PoolFileWeights, cli.PoolFileInitialDeposit, cli.PoolFileSwapFee, cli.PoolFileExitFee, cli.PoolFileFutureGovernor),
 			false,
@@ -331,10 +331,10 @@ func TestGetCmdSpotPrice(t *testing.T) {
 	desc, _ := cli.GetCmdSpotPrice()
 	tcs := map[string]osmocli.QueryCliTestCase[*types.QuerySpotPriceRequest]{
 		"basic test": {
-			Cmd: "1 uosmo ibc/111",
+			Cmd: "1 ufury ibc/111",
 			ExpectedQuery: &types.QuerySpotPriceRequest{
 				PoolId:          1,
-				BaseAssetDenom:  "uosmo",
+				BaseAssetDenom:  "ufury",
 				QuoteAssetDenom: "ibc/111",
 			},
 		},

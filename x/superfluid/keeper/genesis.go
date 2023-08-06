@@ -3,7 +3,7 @@ package keeper
 import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
-	"github.com/osmosis-labs/osmosis/v16/x/superfluid/types"
+	"github.com/merlinslair/merlin/v16/x/superfluid/types"
 )
 
 // InitGenesis initializes the capability module's state from a provided genesis
@@ -16,9 +16,9 @@ func (k Keeper) InitGenesis(ctx sdk.Context, genState types.GenesisState) {
 		k.SetSuperfluidAsset(ctx, asset)
 	}
 
-	// initialize osmo equivalent multipliers
-	for _, multiplierRecord := range genState.OsmoEquivalentMultipliers {
-		k.SetOsmoEquivalentMultiplier(ctx, multiplierRecord.EpochNumber, multiplierRecord.Denom, multiplierRecord.Multiplier)
+	// initialize fury equivalent multipliers
+	for _, multiplierRecord := range genState.FuryEquivalentMultipliers {
+		k.SetFuryEquivalentMultiplier(ctx, multiplierRecord.EpochNumber, multiplierRecord.Denom, multiplierRecord.Multiplier)
 	}
 
 	for _, intermediaryAcc := range genState.IntermediaryAccounts {
@@ -44,7 +44,7 @@ func (k Keeper) ExportGenesis(ctx sdk.Context) *types.GenesisState {
 	return &types.GenesisState{
 		Params:                        k.GetParams(ctx),
 		SuperfluidAssets:              k.GetAllSuperfluidAssets(ctx),
-		OsmoEquivalentMultipliers:     k.GetAllOsmoEquivalentMultipliers(ctx),
+		FuryEquivalentMultipliers:     k.GetAllFuryEquivalentMultipliers(ctx),
 		IntermediaryAccounts:          k.GetAllIntermediaryAccounts(ctx),
 		IntemediaryAccountConnections: k.GetAllLockIdIntermediaryAccountConnections(ctx),
 	}

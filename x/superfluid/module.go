@@ -1,8 +1,8 @@
 /*
 The superfluid module handles all logic in relation to
-the superfluid staking feature on Osmosis. Namely:
-- Methods to lock funds and mint synthetic osmo for staking
-- Daily minting and burning of the purpose of adjusting synthetic osmo lockups.
+the superfluid staking feature on Merlin. Namely:
+- Methods to lock funds and mint synthetic fury for staking
+- Daily minting and burning of the purpose of adjusting synthetic fury lockups.
 - Staking reward distribution via the intermediary account.
 */
 package superfluid
@@ -26,12 +26,12 @@ import (
 	simtypes "github.com/cosmos/cosmos-sdk/types/simulation"
 	stakingtypes "github.com/cosmos/cosmos-sdk/x/staking/types"
 
-	osmosimtypes "github.com/osmosis-labs/osmosis/v16/simulation/simtypes"
-	"github.com/osmosis-labs/osmosis/v16/x/mint/client/rest"
-	"github.com/osmosis-labs/osmosis/v16/x/superfluid/client/cli"
-	"github.com/osmosis-labs/osmosis/v16/x/superfluid/keeper"
-	"github.com/osmosis-labs/osmosis/v16/x/superfluid/simulation"
-	"github.com/osmosis-labs/osmosis/v16/x/superfluid/types"
+	furysimtypes "github.com/merlinslair/merlin/v16/simulation/simtypes"
+	"github.com/merlinslair/merlin/v16/x/mint/client/rest"
+	"github.com/merlinslair/merlin/v16/x/superfluid/client/cli"
+	"github.com/merlinslair/merlin/v16/x/superfluid/keeper"
+	"github.com/merlinslair/merlin/v16/x/superfluid/simulation"
+	"github.com/merlinslair/merlin/v16/x/superfluid/types"
 )
 
 var (
@@ -109,7 +109,7 @@ type AppModule struct {
 
 	keeper             keeper.Keeper
 	accountKeeper      stakingtypes.AccountKeeper
-	bankKeeper         osmosimtypes.BankKeeper
+	bankKeeper         furysimtypes.BankKeeper
 	stakingKeeper      types.StakingKeeper
 	lockupKeeper       types.LockupKeeper
 	gammKeeper         types.GammKeeper
@@ -118,7 +118,7 @@ type AppModule struct {
 }
 
 func NewAppModule(keeper keeper.Keeper,
-	accountKeeper stakingtypes.AccountKeeper, bankKeeper osmosimtypes.BankKeeper,
+	accountKeeper stakingtypes.AccountKeeper, bankKeeper furysimtypes.BankKeeper,
 	stakingKeeper types.StakingKeeper,
 	lockupKeeper types.LockupKeeper,
 	gammKeeper types.GammKeeper,

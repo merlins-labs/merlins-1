@@ -3,7 +3,7 @@ package types
 import (
 	"fmt"
 
-	appparams "github.com/osmosis-labs/osmosis/v16/app/params"
+	appparams "github.com/merlinslair/merlin/v16/app/params"
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	paramtypes "github.com/cosmos/cosmos-sdk/x/params/types"
@@ -28,7 +28,7 @@ func NewParams(poolCreationFee sdk.Coins) Params {
 // DefaultParams are the default poolmanager module parameters.
 func DefaultParams() Params {
 	return Params{
-		PoolCreationFee: sdk.Coins{sdk.NewInt64Coin(appparams.BaseCoinUnit, 1000_000_000)}, // 1000 OSMO
+		PoolCreationFee: sdk.Coins{sdk.NewInt64Coin(appparams.BaseCoinUnit, 1000_000_000)}, // 1000 FURY
 	}
 }
 

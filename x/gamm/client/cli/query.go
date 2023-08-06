@@ -16,8 +16,8 @@ import (
 	"gopkg.in/yaml.v2"
 
 	"github.com/osmosis-labs/osmosis/osmoutils/osmocli"
-	"github.com/osmosis-labs/osmosis/v16/x/gamm/pool-models/balancer"
-	"github.com/osmosis-labs/osmosis/v16/x/gamm/types"
+	"github.com/merlinslair/merlin/v16/x/gamm/pool-models/balancer"
+	"github.com/merlinslair/merlin/v16/x/gamm/types"
 )
 
 // GetQueryCmd returns the cli query commands for this module.
@@ -191,7 +191,7 @@ func GetCmdSpotPrice() (*osmocli.QueryDescriptor, *types.QuerySpotPriceRequest) 
 		Use:   "spot-price <pool-ID> [quote-asset-denom] [base-asset-denom]",
 		Short: "Query spot-price (LEGACY, arguments are reversed!!)",
 		Long: `Query spot price (Legacy).{{.ExampleHeader}}
-{{.CommandPrefix}} spot-price 1 uosmo ibc/27394FB092D2ECCD56123C74F36E4C1F926001CEADA9CA97EA622B25F41E5EB2
+{{.CommandPrefix}} spot-price 1 ufury ibc/27394FB092D2ECCD56123C74F36E4C1F926001CEADA9CA97EA622B25F41E5EB2
 `,
 	}, &types.QuerySpotPriceRequest{}
 }

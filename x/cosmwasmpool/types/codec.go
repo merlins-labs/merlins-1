@@ -13,13 +13,13 @@ func RegisterCodec(cdc *codec.LegacyAmino) {
 	cdc.RegisterInterface((*CosmWasmExtension)(nil), nil)
 
 	// gov proposals
-	cdc.RegisterConcrete(&UploadCosmWasmPoolCodeAndWhiteListProposal{}, "osmosis/upload-cw-pool-code", nil)
-	cdc.RegisterConcrete(&MigratePoolContractsProposal{}, "osmosis/migrate-pool-contracts", nil)
+	cdc.RegisterConcrete(&UploadCosmWasmPoolCodeAndWhiteListProposal{}, "merlin/upload-cw-pool-code", nil)
+	cdc.RegisterConcrete(&MigratePoolContractsProposal{}, "merlin/migrate-pool-contracts", nil)
 }
 
 func RegisterInterfaces(registry types.InterfaceRegistry) {
 	registry.RegisterInterface(
-		"osmosis.cosmwasmpool.v1beta1.CosmWasmExtension",
+		"merlin.cosmwasmpool.v1beta1.CosmWasmExtension",
 		(*CosmWasmExtension)(nil),
 	)
 

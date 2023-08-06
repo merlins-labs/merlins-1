@@ -9,11 +9,11 @@ import (
 
 	"github.com/osmosis-labs/osmosis/osmoutils"
 	"github.com/osmosis-labs/osmosis/osmoutils/osmocli"
-	"github.com/osmosis-labs/osmosis/v16/app"
-	"github.com/osmosis-labs/osmosis/v16/x/poolmanager/client/cli"
-	"github.com/osmosis-labs/osmosis/v16/x/poolmanager/client/queryproto"
-	poolmanagertestutil "github.com/osmosis-labs/osmosis/v16/x/poolmanager/client/testutil"
-	"github.com/osmosis-labs/osmosis/v16/x/poolmanager/types"
+	"github.com/merlinslair/merlin/v16/app"
+	"github.com/merlinslair/merlin/v16/x/poolmanager/client/cli"
+	"github.com/merlinslair/merlin/v16/x/poolmanager/client/queryproto"
+	poolmanagertestutil "github.com/merlinslair/merlin/v16/x/poolmanager/client/testutil"
+	"github.com/merlinslair/merlin/v16/x/poolmanager/types"
 
 	"github.com/cosmos/cosmos-sdk/client/flags"
 	"github.com/cosmos/cosmos-sdk/crypto/hd"
@@ -32,7 +32,7 @@ type IntegrationTestSuite struct {
 	network *network.Network
 }
 
-var testAddresses = osmoutils.CreateRandomAccounts(3)
+var testAddresses = furyutils.CreateRandomAccounts(3)
 
 func (s *IntegrationTestSuite) SetupSuite() {
 	s.T().Log("setting up integration test suite")
@@ -94,7 +94,7 @@ func TestNewSwapExactAmountOutCmd(t *testing.T) {
 // 		expectErr bool
 // 	}{
 // 		{
-// 			"query pool estimate swap exact amount in", // osmosisd query poolmanager estimate-swap-exact-amount-in 1 cosmos1n8skk06h3kyh550ad9qketlfhc2l5dsdevd3hq 10.0stake --swap-route-pool-ids=1 --swap-route-denoms=node0token
+// 			"query pool estimate swap exact amount in", // merlin query poolmanager estimate-swap-exact-amount-in 1 cosmos1n8skk06h3kyh550ad9qketlfhc2l5dsdevd3hq 10.0stake --swap-route-pool-ids=1 --swap-route-denoms=node0token
 // 			[]string{
 // 				"1",
 // 				"cosmos1n8skk06h3kyh550ad9qketlfhc2l5dsdevd3hq",
@@ -135,7 +135,7 @@ func TestNewSwapExactAmountOutCmd(t *testing.T) {
 // 		expectErr bool
 // 	}{
 // 		{
-// 			"query pool estimate swap exact amount in", // osmosisd query poolmanager estimate-swap-exact-amount-in 1 cosmos1n8skk06h3kyh550ad9qketlfhc2l5dsdevd3hq 10.0stake --swap-route-pool-ids=1 --swap-route-denoms=node0token
+// 			"query pool estimate swap exact amount in", // merlin query poolmanager estimate-swap-exact-amount-in 1 cosmos1n8skk06h3kyh550ad9qketlfhc2l5dsdevd3hq 10.0stake --swap-route-pool-ids=1 --swap-route-denoms=node0token
 // 			[]string{
 // 				"1",
 // 				val.Address.String(),
@@ -269,7 +269,7 @@ func (s *IntegrationTestSuite) TestNewCreatePoolCmd() {
 		newAddr,
 		sdk.NewCoins(sdk.NewInt64Coin(s.cfg.BondDenom, 200000000), sdk.NewInt64Coin("node0token", 20000)), fmt.Sprintf("--%s=true", flags.FlagSkipConfirmation),
 		fmt.Sprintf("--%s=%s", flags.FlagBroadcastMode, flags.BroadcastBlock),
-		osmoutils.DefaultFeeString(s.cfg),
+		furyutils.DefaultFeeString(s.cfg),
 	)
 	s.Require().NoError(err)
 
@@ -336,7 +336,7 @@ func (s *IntegrationTestSuite) TestNewCreatePoolCmd() {
 			  "%s": "100node0token,100stake",
 			  "%s": "0.001",
 			  "%s": "0.001",
-			  "%s": "osmo1fqlr98d45v5ysqgp6h56kpujcj4cvsjnjq9nck"
+			  "%s": "fury1fqlr98d45v5ysqgp6h56kpujcj4cvsjnjq9nck"
 			}
 			`, cli.PoolFileWeights, cli.PoolFileInitialDeposit, cli.PoolFileSwapFee, cli.PoolFileExitFee, cli.PoolFileFutureGovernor),
 			false, &sdk.TxResponse{}, 0,
@@ -517,7 +517,7 @@ func (s *IntegrationTestSuite) TestNewCreatePoolCmd() {
 				// common args
 				fmt.Sprintf("--%s=true", flags.FlagSkipConfirmation),
 				fmt.Sprintf("--%s=%s", flags.FlagBroadcastMode, flags.BroadcastBlock),
-				osmoutils.DefaultFeeString(s.cfg),
+				furyutils.DefaultFeeString(s.cfg),
 				fmt.Sprintf("--%s=%s", flags.FlagGas, fmt.Sprint(400000)),
 			}
 

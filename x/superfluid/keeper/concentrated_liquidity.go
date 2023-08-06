@@ -5,8 +5,8 @@ import (
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
-	cltypes "github.com/osmosis-labs/osmosis/v16/x/concentrated-liquidity/types"
-	"github.com/osmosis-labs/osmosis/v16/x/superfluid/types"
+	cltypes "github.com/merlinslair/merlin/v16/x/concentrated-liquidity/types"
+	"github.com/merlinslair/merlin/v16/x/superfluid/types"
 )
 
 // addToConcentratedLiquiditySuperfluidPosition adds the specified amounts of tokens to an existing superfluid staked
@@ -75,7 +75,7 @@ func (k Keeper) addToConcentratedLiquiditySuperfluidPosition(ctx sdk.Context, se
 	}
 
 	// Superfluid undelegate the superfluid delegated position.
-	// This deletes the connection between the lock and the intermediate account, deletes the synthetic lock, and burns the synthetic osmo.
+	// This deletes the connection between the lock and the intermediate account, deletes the synthetic lock, and burns the synthetic fury.
 	intermediateAccount, err := k.SuperfluidUndelegateToConcentratedPosition(ctx, sender.String(), lockId)
 	if err != nil {
 		return 0, sdk.Int{}, sdk.Int{}, sdk.Dec{}, 0, err

@@ -8,20 +8,20 @@ import (
 
 	"github.com/osmosis-labs/osmosis/osmoutils"
 	"github.com/osmosis-labs/osmosis/osmoutils/osmocli"
-	"github.com/osmosis-labs/osmosis/v16/x/lockup/types"
+	"github.com/merlinslair/merlin/v16/x/lockup/types"
 )
 
-var testAddresses = osmoutils.CreateRandomAccounts(3)
+var testAddresses = furyutils.CreateRandomAccounts(3)
 
 func TestLockTokensCmd(t *testing.T) {
 	desc, _ := NewLockTokensCmd()
 	tcs := map[string]osmocli.TxCliTestCase[*types.MsgLockTokens]{
 		"lock 201stake tokens for 1 day": {
-			Cmd: "201uosmo --duration=24h --from=" + testAddresses[0].String(),
+			Cmd: "201ufury --duration=24h --from=" + testAddresses[0].String(),
 			ExpectedMsg: &types.MsgLockTokens{
 				Owner:    testAddresses[0].String(),
 				Duration: time.Hour * 24,
-				Coins:    sdk.NewCoins(sdk.NewInt64Coin("uosmo", 201)),
+				Coins:    sdk.NewCoins(sdk.NewInt64Coin("ufury", 201)),
 			},
 		},
 	}
@@ -53,11 +53,11 @@ func TestBeginUnlockingByIDCmd(t *testing.T) {
 			},
 		},
 		"basic test w/ coins": {
-			Cmd: "10 --amount=5uosmo --from=" + testAddresses[0].String(),
+			Cmd: "10 --amount=5ufury --from=" + testAddresses[0].String(),
 			ExpectedMsg: &types.MsgBeginUnlocking{
 				Owner: testAddresses[0].String(),
 				ID:    10,
-				Coins: sdk.NewCoins(sdk.NewInt64Coin("uosmo", 5)),
+				Coins: sdk.NewCoins(sdk.NewInt64Coin("ufury", 5)),
 			},
 		},
 	}
@@ -120,9 +120,9 @@ func TestCmdTotalLockedByDenom(t *testing.T) {
 	desc, _ := GetCmdTotalLockedByDenom()
 	tcs := map[string]osmocli.QueryCliTestCase[*types.LockedDenomRequest]{
 		"basic test": {
-			Cmd: "uosmo --min-duration=1s",
+			Cmd: "ufury --min-duration=1s",
 			ExpectedQuery: &types.LockedDenomRequest{
-				Denom:    "uosmo",
+				Denom:    "ufury",
 				Duration: time.Second,
 			},
 		},

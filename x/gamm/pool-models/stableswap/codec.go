@@ -8,27 +8,27 @@ import (
 
 	authzcodec "github.com/cosmos/cosmos-sdk/x/authz/codec"
 
-	types "github.com/osmosis-labs/osmosis/v16/x/gamm/types"
-	poolmanagertypes "github.com/osmosis-labs/osmosis/v16/x/poolmanager/types"
+	types "github.com/merlinslair/merlin/v16/x/gamm/types"
+	poolmanagertypes "github.com/merlinslair/merlin/v16/x/poolmanager/types"
 )
 
 // RegisterLegacyAminoCodec registers the necessary x/gamm interfaces and concrete types
 // on the provided LegacyAmino codec. These types are used for Amino JSON serialization.
 func RegisterLegacyAminoCodec(cdc *codec.LegacyAmino) {
-	cdc.RegisterConcrete(&Pool{}, "osmosis/gamm/StableswapPool", nil)
-	cdc.RegisterConcrete(&MsgCreateStableswapPool{}, "osmosis/gamm/create-stableswap-pool", nil)
-	cdc.RegisterConcrete(&MsgStableSwapAdjustScalingFactors{}, "osmosis/gamm/stableswap-adjust-scaling-factors", nil)
-	cdc.RegisterConcrete(&PoolParams{}, "osmosis/gamm/StableswapPoolParams", nil)
+	cdc.RegisterConcrete(&Pool{}, "merlin/gamm/StableswapPool", nil)
+	cdc.RegisterConcrete(&MsgCreateStableswapPool{}, "merlin/gamm/create-stableswap-pool", nil)
+	cdc.RegisterConcrete(&MsgStableSwapAdjustScalingFactors{}, "merlin/gamm/stableswap-adjust-scaling-factors", nil)
+	cdc.RegisterConcrete(&PoolParams{}, "merlin/gamm/StableswapPoolParams", nil)
 }
 
 func RegisterInterfaces(registry codectypes.InterfaceRegistry) {
 	registry.RegisterInterface(
-		"osmosis.poolmanager.v1beta1.PoolI",
+		"merlin.poolmanager.v1beta1.PoolI",
 		(*poolmanagertypes.PoolI)(nil),
 		&Pool{},
 	)
 	registry.RegisterInterface(
-		"osmosis.gamm.v1beta1.PoolI", // N.B.: the old proto-path is preserved for backwards-compatibility.
+		"merlin.gamm.v1beta1.PoolI", // N.B.: the old proto-path is preserved for backwards-compatibility.
 		(*types.CFMMPoolI)(nil),
 		&Pool{},
 	)

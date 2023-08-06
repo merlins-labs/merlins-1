@@ -17,13 +17,13 @@ This package provides first class support for:
 - Commands
 
 ```sh
-  osmosisd tx wasm -h
+  merlin tx wasm -h
 ```
 
 - Query
 
 ```sh
-  osmosisd query wasm -h
+  merlin query wasm -h
 ```
 
 ## Tests

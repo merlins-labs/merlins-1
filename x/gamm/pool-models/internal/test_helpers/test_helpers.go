@@ -13,8 +13,8 @@ import (
 	dbm "github.com/tendermint/tm-db"
 
 	"github.com/osmosis-labs/osmosis/osmomath"
-	sdkrand "github.com/osmosis-labs/osmosis/v16/simulation/simtypes/random"
-	"github.com/osmosis-labs/osmosis/v16/x/gamm/types"
+	sdkrand "github.com/merlinslair/merlin/v16/simulation/simtypes/random"
+	"github.com/merlinslair/merlin/v16/x/gamm/types"
 )
 
 // CfmmCommonTestSuite is the common test suite struct of Constant Function Market Maker,
@@ -40,7 +40,7 @@ func TestCalculateAmountOutAndIn_InverseRelationship(
 	assetOutDenom string,
 	initialCalcOut int64,
 	spreadFactor sdk.Dec,
-	errTolerance osmomath.ErrTolerance,
+	errTolerance furymath.ErrTolerance,
 ) {
 	initialOut := sdk.NewInt64Coin(assetOutDenom, initialCalcOut)
 	initialOutCoins := sdk.NewCoins(initialOut)
@@ -68,7 +68,7 @@ func TestCalculateAmountOutAndIn_InverseRelationship(
 		require.True(t, actual.GT(expected))
 	} else {
 		if expected.Sub(actual).Abs().GT(sdk.OneDec()) {
-			compRes := errTolerance.CompareBigDec(osmomath.BigDecFromSDKDec(expected), osmomath.BigDecFromSDKDec(actual))
+			compRes := errTolerance.CompareBigDec(furymath.BigDecFromSDKDec(expected), furymath.BigDecFromSDKDec(actual))
 			require.True(t, compRes == 0, "expected %s, actual %s, not within error tolerance %v",
 				expected, actual, errTolerance)
 		}

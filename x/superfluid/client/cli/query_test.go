@@ -11,8 +11,8 @@ import (
 
 	stakingtypes "github.com/cosmos/cosmos-sdk/x/staking/types"
 
-	"github.com/osmosis-labs/osmosis/v16/app/apptesting"
-	"github.com/osmosis-labs/osmosis/v16/x/superfluid/types"
+	"github.com/merlinslair/merlin/v16/app/apptesting"
+	"github.com/merlinslair/merlin/v16/x/superfluid/types"
 )
 
 type QueryTestSuite struct {
@@ -62,31 +62,31 @@ func (s *QueryTestSuite) TestQueriesNeverAlterState() {
 	}{
 		{
 			"Query all superfluild assets",
-			"/osmosis.superfluid.Query/AllAssets",
+			"/merlin.superfluid.Query/AllAssets",
 			&types.AllAssetsRequest{},
 			&types.AllAssetsResponse{},
 		},
 		{
 			"Query all intermediary accounts",
-			"/osmosis.superfluid.Query/AllIntermediaryAccounts",
+			"/merlin.superfluid.Query/AllIntermediaryAccounts",
 			&types.AllIntermediaryAccountsRequest{},
 			&types.AllIntermediaryAccountsResponse{},
 		},
 		{
-			"Query osmo equivalent multiplier of an asset",
-			"/osmosis.superfluid.Query/AssetMultiplier",
+			"Query fury equivalent multiplier of an asset",
+			"/merlin.superfluid.Query/AssetMultiplier",
 			&types.AssetMultiplierRequest{Denom: "gamm/pool/1"},
 			&types.AssetMultiplierResponse{},
 		},
 		{
 			"Query asset type",
-			"/osmosis.superfluid.Query/AssetType",
+			"/merlin.superfluid.Query/AssetType",
 			&types.AssetTypeRequest{Denom: "gamm/pool/1"},
 			&types.AssetTypeResponse{},
 		},
 		{
 			"Query connected intermediary account",
-			"/osmosis.superfluid.Query/ConnectedIntermediaryAccount",
+			"/merlin.superfluid.Query/ConnectedIntermediaryAccount",
 			&types.ConnectedIntermediaryAccountRequest{LockId: 1},
 			&types.ConnectedIntermediaryAccountResponse{},
 		},
@@ -94,49 +94,49 @@ func (s *QueryTestSuite) TestQueriesNeverAlterState() {
 		// else the response is nil and theres a panic internally.
 		// {
 		// 	"Query estimate sfs delegated amount by validator & denom",
-		// 	"/osmosis.superfluid.Query/EstimateSuperfluidDelegatedAmountByValidatorDenom",
+		// 	"/merlin.superfluid.Query/EstimateSuperfluidDelegatedAmountByValidatorDenom",
 		// 	&types.EstimateSuperfluidDelegatedAmountByValidatorDenomRequest{ValidatorAddress: s.val.String(), Denom: "gamm/pool/1"},
 		// 	&types.EstimateSuperfluidDelegatedAmountByValidatorDenomResponse{},
 		// },
 		{
 			"Query params",
-			"/osmosis.superfluid.Query/Params",
+			"/merlin.superfluid.Query/Params",
 			&types.QueryParamsRequest{},
 			&types.QueryParamsResponse{},
 		},
 		{
 			"Query sfs delegation amount",
-			"/osmosis.superfluid.Query/SuperfluidDelegationAmount",
+			"/merlin.superfluid.Query/SuperfluidDelegationAmount",
 			&types.SuperfluidDelegationAmountRequest{ValidatorAddress: s.val.String(), Denom: "gamm/pool/1", DelegatorAddress: s.TestAccs[0].String()},
 			&types.SuperfluidDelegationAmountResponse{},
 		},
 		{
 			"Query sfs delegation by delegator",
-			"/osmosis.superfluid.Query/SuperfluidDelegationsByDelegator",
+			"/merlin.superfluid.Query/SuperfluidDelegationsByDelegator",
 			&types.SuperfluidDelegationsByDelegatorRequest{DelegatorAddress: s.TestAccs[0].String()},
 			&types.SuperfluidDelegationsByDelegatorResponse{},
 		},
 		{
 			"Query sfs delegation by validator & denom",
-			"/osmosis.superfluid.Query/SuperfluidDelegationsByValidatorDenom",
+			"/merlin.superfluid.Query/SuperfluidDelegationsByValidatorDenom",
 			&types.SuperfluidDelegationsByValidatorDenomRequest{ValidatorAddress: s.val.String(), Denom: "gamm/pool/1"},
 			&types.SuperfluidDelegationsByValidatorDenomResponse{},
 		},
 		{
 			"Query sfs undelegation by delegator",
-			"/osmosis.superfluid.Query/SuperfluidUndelegationsByDelegator",
+			"/merlin.superfluid.Query/SuperfluidUndelegationsByDelegator",
 			&types.SuperfluidUndelegationsByDelegatorRequest{DelegatorAddress: s.TestAccs[0].String(), Denom: "gamm/pool/1"},
 			&types.SuperfluidUndelegationsByDelegatorResponse{},
 		},
 		{
 			"Query total sfs delegation by delegator",
-			"/osmosis.superfluid.Query/TotalDelegationByDelegator",
+			"/merlin.superfluid.Query/TotalDelegationByDelegator",
 			&types.QueryTotalDelegationByDelegatorRequest{DelegatorAddress: s.TestAccs[0].String()},
 			&types.QueryTotalDelegationByDelegatorResponse{},
 		},
 		{
 			"Query total sfs delegations",
-			"/osmosis.superfluid.Query/TotalSuperfluidDelegations",
+			"/merlin.superfluid.Query/TotalSuperfluidDelegations",
 			&types.TotalSuperfluidDelegationsRequest{},
 			&types.TotalSuperfluidDelegationsResponse{},
 		},

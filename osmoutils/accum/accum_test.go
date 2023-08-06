@@ -664,7 +664,7 @@ func (suite *AccumTestSuite) TestAddToPosition() {
 		suite.Run(name, func() {
 			// We reset the store for each test
 			suite.SetupTest()
-			positionName := osmoutils.CreateRandomAccounts(1)[0].String()
+			positionName := furyutils.CreateRandomAccounts(1)[0].String()
 
 			// Create a new accumulator with initial value specified by test case
 			curAccum := accumPackage.MakeTestAccumulator(suite.store, testNameOne, tc.accumInit, emptyDec)
@@ -941,7 +941,7 @@ func (suite *AccumTestSuite) TestRemoveFromPosition() {
 		suite.Run(name, func() {
 			// We reset the store for each test
 			suite.SetupTest()
-			positionName := osmoutils.CreateRandomAccounts(1)[0].String()
+			positionName := furyutils.CreateRandomAccounts(1)[0].String()
 
 			// Create a new accumulator with initial value specified by test case
 			curAccum := accumPackage.MakeTestAccumulator(suite.store, testNameOne, tc.accumInit, emptyDec)
@@ -1147,7 +1147,7 @@ func (suite *AccumTestSuite) TestGetPositionSize() {
 		suite.Run(name, func() {
 			// We reset the store for each test
 			suite.SetupTest()
-			positionName := osmoutils.CreateRandomAccounts(1)[0].String()
+			positionName := furyutils.CreateRandomAccounts(1)[0].String()
 
 			// Create a new accumulator with initial value specified by test case
 			curAccum := accumPackage.MakeTestAccumulator(suite.store, testNameOne, tc.accumInit, emptyDec)

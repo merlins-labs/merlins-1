@@ -35,7 +35,7 @@
         "type": "string"
       },
       "swap_contract": {
-        "description": "This should be an instance of the Osmosis swaprouter contract",
+        "description": "This should be an instance of the Merlin swaprouter contract",
         "type": "string"
       }
     },
@@ -50,10 +50,10 @@
         "description": "Execute a swap and forward it to the receiver address on the specified ibc channel",
         "type": "object",
         "required": [
-          "osmosis_swap"
+          "merlin_swap"
         ],
         "properties": {
-          "osmosis_swap": {
+          "merlin_swap": {
             "type": "object",
             "required": [
               "on_failed_delivery",
@@ -74,7 +74,7 @@
                 ]
               },
               "on_failed_delivery": {
-                "description": "If for any reason the swap were to fail, users can specify a \"recovery address\" that can clain the funds on osmosis after a confirmed failure.",
+                "description": "If for any reason the swap were to fail, users can specify a \"recovery address\" that can clain the funds on merlin after a confirmed failure.",
                 "allOf": [
                   {
                     "$ref": "#/definitions/FailedDeliveryAction"
@@ -82,7 +82,7 @@
                 ]
               },
               "output_denom": {
-                "description": "The final denom to be received (as represented on osmosis)",
+                "description": "The final denom to be received (as represented on merlin)",
                 "type": "string"
               },
               "receiver": {
@@ -246,7 +246,7 @@
             ]
           },
           {
-            "description": "An osmosis addres used to recover any tokens that get stuck in the contract due to IBC failures",
+            "description": "An merlin addres used to recover any tokens that get stuck in the contract due to IBC failures",
             "type": "object",
             "required": [
               "local_recovery_addr"

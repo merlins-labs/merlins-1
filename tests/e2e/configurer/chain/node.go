@@ -12,8 +12,8 @@ import (
 	rpchttp "github.com/tendermint/tendermint/rpc/client/http"
 	coretypes "github.com/tendermint/tendermint/rpc/core/types"
 
-	"github.com/osmosis-labs/osmosis/v16/tests/e2e/containers"
-	"github.com/osmosis-labs/osmosis/v16/tests/e2e/initialization"
+	"github.com/merlinslair/merlin/v16/tests/e2e/containers"
+	"github.com/merlinslair/merlin/v16/tests/e2e/initialization"
 )
 
 type NodeConfig struct {
@@ -74,7 +74,7 @@ func (n *NodeConfig) Run() error {
 		},
 		2*time.Minute,
 		time.Second,
-		"Osmosis node failed to produce blocks",
+		"Merlin node failed to produce blocks",
 	)
 
 	if err := n.extractOperatorAddressIfValidator(); err != nil {
@@ -118,13 +118,13 @@ func (n *NodeConfig) extractOperatorAddressIfValidator() error {
 		return nil
 	}
 
-	cmd := []string{"osmosisd", "debug", "addr", n.PublicKey}
+	cmd := []string{"merlin", "debug", "addr", n.PublicKey}
 	n.t.Logf("extracting validator operator addresses for validator: %s", n.Name)
 	_, errBuf, err := n.containerManager.ExecCmd(n.t, n.Name, cmd, "")
 	if err != nil {
 		return err
 	}
-	re := regexp.MustCompile("osmovaloper(.{39})")
+	re := regexp.MustCompile("furyvaloper(.{39})")
 	operAddr := fmt.Sprintf("%s\n", re.FindString(errBuf.String()))
 	n.OperatorAddress = strings.TrimSuffix(operAddr, "\n")
 	return nil

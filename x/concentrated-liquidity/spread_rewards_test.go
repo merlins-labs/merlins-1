@@ -8,11 +8,11 @@ import (
 
 	"github.com/osmosis-labs/osmosis/osmomath"
 	"github.com/osmosis-labs/osmosis/osmoutils/accum"
-	"github.com/osmosis-labs/osmosis/v16/app/apptesting"
-	cl "github.com/osmosis-labs/osmosis/v16/x/concentrated-liquidity"
-	clmath "github.com/osmosis-labs/osmosis/v16/x/concentrated-liquidity/math"
-	clmodel "github.com/osmosis-labs/osmosis/v16/x/concentrated-liquidity/model"
-	"github.com/osmosis-labs/osmosis/v16/x/concentrated-liquidity/types"
+	"github.com/merlinslair/merlin/v16/app/apptesting"
+	cl "github.com/merlinslair/merlin/v16/x/concentrated-liquidity"
+	clmath "github.com/merlinslair/merlin/v16/x/concentrated-liquidity/math"
+	clmodel "github.com/merlinslair/merlin/v16/x/concentrated-liquidity/model"
+	"github.com/merlinslair/merlin/v16/x/concentrated-liquidity/types"
 )
 
 const (
@@ -427,8 +427,8 @@ func (s *KeeperTestSuite) TestGetSpreadRewardGrowthOutside() {
 }
 
 func (s *KeeperTestSuite) TestCalculateSpreadRewardGrowth() {
-	defaultGeeFrowthGlobal := sdk.NewDecCoins(sdk.NewDecCoin("uosmo", sdk.NewInt(10)))
-	defaultGeeFrowthOutside := sdk.NewDecCoins(sdk.NewDecCoin("uosmo", sdk.NewInt(3)))
+	defaultGeeFrowthGlobal := sdk.NewDecCoins(sdk.NewDecCoin("ufury", sdk.NewInt(10)))
+	defaultGeeFrowthOutside := sdk.NewDecCoins(sdk.NewDecCoin("ufury", sdk.NewInt(3)))
 
 	defaultSmallerTargetTick := int64(1)
 	defaultCurrentTick := int64(2)
@@ -489,7 +489,7 @@ func (s *KeeperTestSuite) TestGetInitialSpreadRewardGrowthOppositeDirectionOfLas
 		validPoolId = 1
 	)
 
-	sqrtPrice := osmomath.MustMonotonicSqrt(DefaultAmt1.ToDec().Quo(DefaultAmt0.ToDec()))
+	sqrtPrice := furymath.MustMonotonicSqrt(DefaultAmt1.ToDec().Quo(DefaultAmt0.ToDec()))
 	initialPoolTick, err := clmath.SqrtPriceToTickRoundDownSpacing(sqrtPrice, DefaultTickSpacing)
 	s.Require().NoError(err)
 
@@ -1546,9 +1546,9 @@ func (s *KeeperTestSuite) CollectAndAssertSpreadRewards(ctx sdk.Context, poolId 
 	}
 
 	// Define error tolerance
-	var errTolerance osmomath.ErrTolerance
+	var errTolerance furymath.ErrTolerance
 	errTolerance.AdditiveTolerance = sdk.NewDec(10)
-	errTolerance.RoundingDir = osmomath.RoundDown
+	errTolerance.RoundingDir = furymath.RoundDown
 
 	// Check that the total spread rewards collected is equal to the total spread rewards (within a tolerance)
 	for _, coin := range totalSpreadRewardsCollected {

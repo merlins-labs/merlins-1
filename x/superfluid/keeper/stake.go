@@ -6,8 +6,8 @@ import (
 	errorsmod "cosmossdk.io/errors"
 
 	"github.com/osmosis-labs/osmosis/osmoutils"
-	lockuptypes "github.com/osmosis-labs/osmosis/v16/x/lockup/types"
-	"github.com/osmosis-labs/osmosis/v16/x/superfluid/types"
+	lockuptypes "github.com/merlinslair/merlin/v16/x/lockup/types"
+	"github.com/merlinslair/merlin/v16/x/superfluid/types"
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	stakingtypes "github.com/cosmos/cosmos-sdk/x/staking/types"
@@ -22,16 +22,16 @@ func (k Keeper) GetTotalSyntheticAssetsLocked(ctx sdk.Context, denom string) sdk
 	})
 }
 
-// GetExpectedDelegationAmount returns the total number of osmo the intermediary account
-// has delegated using the most recent osmo equivalent multiplier.
+// GetExpectedDelegationAmount returns the total number of fury the intermediary account
+// has delegated using the most recent fury equivalent multiplier.
 // This is labeled as expected because the way it calculates the amount can
 // lead rounding errors from the true delegated amount.
 func (k Keeper) GetExpectedDelegationAmount(ctx sdk.Context, acc types.SuperfluidIntermediaryAccount) (sdk.Int, error) {
 	// (1) Find how many tokens total T are locked for (denom, validator) pair
 	totalSuperfluidDelegation := k.GetTotalSyntheticAssetsLocked(ctx, stakingSyntheticDenom(acc.Denom, acc.ValAddr))
-	// (2) Multiply the T tokens, by the number of superfluid osmo per token, to get the total amount
-	// of osmo we expect.
-	refreshedAmount, err := k.GetSuperfluidOSMOTokens(ctx, acc.Denom, totalSuperfluidDelegation)
+	// (2) Multiply the T tokens, by the number of superfluid fury per token, to get the total amount
+	// of fury we expect.
+	refreshedAmount, err := k.GetSuperfluidFURYTokens(ctx, acc.Denom, totalSuperfluidDelegation)
 	if err != nil {
 		return sdk.Int{}, err
 	}
@@ -39,7 +39,7 @@ func (k Keeper) GetExpectedDelegationAmount(ctx sdk.Context, acc types.Superflui
 }
 
 // RefreshIntermediaryDelegationAmounts refreshes the amount of delegation for all intermediary accounts.
-// This method includes minting new osmo if the refreshed delegation amount has increased, and
+// This method includes minting new fury if the refreshed delegation amount has increased, and
 // instantly undelegating and burning if the refreshed delgation has decreased.
 func (k Keeper) RefreshIntermediaryDelegationAmounts(ctx sdk.Context) {
 	// iterate over all intermedairy accounts - every (denom, validator) pair
@@ -76,9 +76,9 @@ func (k Keeper) RefreshIntermediaryDelegationAmounts(ctx sdk.Context) {
 
 		if refreshedAmount.GT(currentAmount) {
 			adjustment := refreshedAmount.Sub(currentAmount)
-			err = k.mintOsmoTokensAndDelegate(ctx, adjustment, acc)
+			err = k.mintFuryTokensAndDelegate(ctx, adjustment, acc)
 			if err != nil {
-				ctx.Logger().Error("Error in forceUndelegateAndBurnOsmoTokens, state update reverted", err)
+				ctx.Logger().Error("Error in forceUndelegateAndBurnFuryTokens, state update reverted", err)
 			}
 		} else if currentAmount.GT(refreshedAmount) {
 			// In this case, we want to change the IA's delegated balance to be refreshed Amount
@@ -87,9 +87,9 @@ func (k Keeper) RefreshIntermediaryDelegationAmounts(ctx sdk.Context) {
 			// and then burn that excessly delegated bits.
 			adjustment := currentAmount.Sub(refreshedAmount)
 
-			err := k.forceUndelegateAndBurnOsmoTokens(ctx, adjustment, acc)
+			err := k.forceUndelegateAndBurnFuryTokens(ctx, adjustment, acc)
 			if err != nil {
-				ctx.Logger().Error("Error in forceUndelegateAndBurnOsmoTokens, state update reverted", err)
+				ctx.Logger().Error("Error in forceUndelegateAndBurnFuryTokens, state update reverted", err)
 			}
 		} else {
 			ctx.Logger().Info("Intermediary account already has correct delegation amount?" +
@@ -107,17 +107,17 @@ func (k Keeper) IncreaseSuperfluidDelegation(ctx sdk.Context, lockID uint64, amo
 		return nil
 	}
 
-	// mint OSMO token based on the most recent osmo equivalent multiplier
+	// mint FURY token based on the most recent fury equivalent multiplier
 	// of locked denom to denom module account
-	osmoAmt, err := k.GetSuperfluidOSMOTokens(ctx, acc.Denom, amount.AmountOf(acc.Denom))
+	furyAmt, err := k.GetSuperfluidFURYTokens(ctx, acc.Denom, amount.AmountOf(acc.Denom))
 	if err != nil {
 		return err
 	}
-	if osmoAmt.IsZero() {
+	if furyAmt.IsZero() {
 		return nil
 	}
 
-	err = k.mintOsmoTokensAndDelegate(ctx, osmoAmt, acc)
+	err = k.mintFuryTokensAndDelegate(ctx, furyAmt, acc)
 	if err != nil {
 		return err
 	}
@@ -191,13 +191,13 @@ func (k Keeper) validateValAddrForDelegate(ctx sdk.Context, valAddr string) (sta
 	return validator, nil
 }
 
-// SuperfluidDelegate superfluid delegates osmo equivalent amount the given lock holds.
+// SuperfluidDelegate superfluid delegates fury equivalent amount the given lock holds.
 // The actual delegation is done by using/creating an intermediary account for the (denom, validator) pair
 // and having the intermediary account delegate to the designated validator, not by the sender themselves.
 // A state entry of IntermediaryAccountConnection is stored to store the connection between the lock ID
 // and the intermediary account, as an intermediary account does not serve for delegations from a single delegator.
-// The actual amount of delegation is not equal to the equivalent amount of osmo the lock has. That is,
-// the actual amount of delegation is amount * osmo equivalent multiplier * (1 - k.RiskFactor(asset)).
+// The actual amount of delegation is not equal to the equivalent amount of fury the lock has. That is,
+// the actual amount of delegation is amount * fury equivalent multiplier * (1 - k.RiskFactor(asset)).
 func (k Keeper) SuperfluidDelegate(ctx sdk.Context, sender string, lockID uint64, valAddr string) error {
 	lock, err := k.lk.GetLockByID(ctx, lockID)
 	if err != nil {
@@ -214,7 +214,7 @@ func (k Keeper) SuperfluidDelegate(ctx sdk.Context, sender string, lockID uint64
 	lockedCoin := lock.Coins[0]
 
 	// get the intermediate account for this (denom, validator) pair.
-	// This account tracks the amount of osmo being considered as staked.
+	// This account tracks the amount of fury being considered as staked.
 	// If an intermediary account doesn't exist, then create it + a perpetual gauge.
 	acc, err := k.GetOrCreateIntermediaryAccount(ctx, lockedCoin.Denom, valAddr)
 	if err != nil {
@@ -229,17 +229,17 @@ func (k Keeper) SuperfluidDelegate(ctx sdk.Context, sender string, lockID uint64
 		return err
 	}
 
-	// Find how many new osmo tokens this delegation is worth at superfluids current risk adjustment
+	// Find how many new fury tokens this delegation is worth at superfluids current risk adjustment
 	// and twap of the denom.
-	amount, err := k.GetSuperfluidOSMOTokens(ctx, acc.Denom, lockedCoin.Amount)
+	amount, err := k.GetSuperfluidFURYTokens(ctx, acc.Denom, lockedCoin.Amount)
 	if err != nil {
 		return err
 	}
 	if amount.IsZero() {
-		return types.ErrOsmoEquivalentZeroNotAllowed
+		return types.ErrFuryEquivalentZeroNotAllowed
 	}
 
-	return k.mintOsmoTokensAndDelegate(ctx, amount, acc)
+	return k.mintFuryTokensAndDelegate(ctx, amount, acc)
 }
 
 // undelegateCommon is a helper function for SuperfluidUndelegate and superfluidUndelegateToConcentratedPosition.
@@ -248,7 +248,7 @@ func (k Keeper) SuperfluidDelegate(ctx sdk.Context, sender string, lockID uint64
 // - gets the intermediary account associated with the lock id
 // - deletes the connection between the lock id and the intermediary account
 // - deletes the synthetic lockup associated with the lock id
-// - undelegates the superfluid staking position associated with the lock id and burns the underlying osmo tokens
+// - undelegates the superfluid staking position associated with the lock id and burns the underlying fury tokens
 // - returns the intermediary account
 func (k Keeper) undelegateCommon(ctx sdk.Context, sender string, lockID uint64) (types.SuperfluidIntermediaryAccount, error) {
 	lock, err := k.lk.GetLockByID(ctx, lockID)
@@ -275,12 +275,12 @@ func (k Keeper) undelegateCommon(ctx sdk.Context, sender string, lockID uint64) 
 		return types.SuperfluidIntermediaryAccount{}, err
 	}
 
-	// undelegate this lock's delegation amount, and burn the minted osmo.
-	amount, err := k.GetSuperfluidOSMOTokens(ctx, intermediaryAcc.Denom, lockedCoin.Amount)
+	// undelegate this lock's delegation amount, and burn the minted fury.
+	amount, err := k.GetSuperfluidFURYTokens(ctx, intermediaryAcc.Denom, lockedCoin.Amount)
 	if err != nil {
 		return types.SuperfluidIntermediaryAccount{}, err
 	}
-	err = k.forceUndelegateAndBurnOsmoTokens(ctx, amount, intermediaryAcc)
+	err = k.forceUndelegateAndBurnFuryTokens(ctx, amount, intermediaryAcc)
 	if err != nil {
 		return types.SuperfluidIntermediaryAccount{}, err
 	}
@@ -331,12 +331,12 @@ func (k Keeper) partialUndelegateCommon(ctx sdk.Context, sender string, lockID u
 		return types.SuperfluidIntermediaryAccount{}, &lockuptypes.PeriodLock{}, types.ErrNotSuperfluidUsedLockup
 	}
 
-	// undelegate the desired lock amount, and burn the minted osmo.
-	amount, err := k.GetSuperfluidOSMOTokens(ctx, intermediaryAcc.Denom, amountToUndelegate.Amount)
+	// undelegate the desired lock amount, and burn the minted fury.
+	amount, err := k.GetSuperfluidFURYTokens(ctx, intermediaryAcc.Denom, amountToUndelegate.Amount)
 	if err != nil {
 		return types.SuperfluidIntermediaryAccount{}, &lockuptypes.PeriodLock{}, err
 	}
-	err = k.forceUndelegateAndBurnOsmoTokens(ctx, amount, intermediaryAcc)
+	err = k.forceUndelegateAndBurnFuryTokens(ctx, amount, intermediaryAcc)
 	if err != nil {
 		return types.SuperfluidIntermediaryAccount{}, &lockuptypes.PeriodLock{}, err
 	}
@@ -503,21 +503,21 @@ func (k Keeper) alreadySuperfluidStaking(ctx sdk.Context, lockID uint64) bool {
 	return synthLock != (lockuptypes.SyntheticLock{})
 }
 
-// mintOsmoTokensAndDelegate mints osmoAmount of OSMO tokens, and immediately delegate them to validator on behalf of intermediary account.
-func (k Keeper) mintOsmoTokensAndDelegate(ctx sdk.Context, osmoAmount sdk.Int, intermediaryAccount types.SuperfluidIntermediaryAccount) error {
+// mintFuryTokensAndDelegate mints furyAmount of FURY tokens, and immediately delegate them to validator on behalf of intermediary account.
+func (k Keeper) mintFuryTokensAndDelegate(ctx sdk.Context, furyAmount sdk.Int, intermediaryAccount types.SuperfluidIntermediaryAccount) error {
 	validator, err := k.validateValAddrForDelegate(ctx, intermediaryAccount.ValAddr)
 	if err != nil {
 		return err
 	}
 
-	err = osmoutils.ApplyFuncIfNoError(ctx, func(cacheCtx sdk.Context) error {
+	err = furyutils.ApplyFuncIfNoError(ctx, func(cacheCtx sdk.Context) error {
 		bondDenom := k.sk.BondDenom(cacheCtx)
-		coins := sdk.Coins{sdk.NewCoin(bondDenom, osmoAmount)}
+		coins := sdk.Coins{sdk.NewCoin(bondDenom, furyAmount)}
 		err = k.bk.MintCoins(cacheCtx, types.ModuleName, coins)
 		if err != nil {
 			return err
 		}
-		k.bk.AddSupplyOffset(cacheCtx, bondDenom, osmoAmount.Neg())
+		k.bk.AddSupplyOffset(cacheCtx, bondDenom, furyAmount.Neg())
 		err = k.bk.SendCoinsFromModuleToAccount(cacheCtx, types.ModuleName, intermediaryAccount.GetAccAddress(), coins)
 		if err != nil {
 			return err
@@ -528,17 +528,17 @@ func (k Keeper) mintOsmoTokensAndDelegate(ctx sdk.Context, osmoAmount sdk.Int, i
 		// For now, we don't worry since worst case it errors, in which case we revert mint.
 		_, err = k.sk.Delegate(cacheCtx,
 			intermediaryAccount.GetAccAddress(),
-			osmoAmount, stakingtypes.Unbonded, validator, true)
+			furyAmount, stakingtypes.Unbonded, validator, true)
 		return err
 	})
 	return err
 }
 
-// forceUndelegateAndBurnOsmoTokens force undelegates osmoAmount worth of delegation shares
+// forceUndelegateAndBurnFuryTokens force undelegates furyAmount worth of delegation shares
 // from delegations between intermediary account and valAddr.
 // We take the returned tokens, and then immediately burn them.
-func (k Keeper) forceUndelegateAndBurnOsmoTokens(ctx sdk.Context,
-	osmoAmount sdk.Int, intermediaryAcc types.SuperfluidIntermediaryAccount,
+func (k Keeper) forceUndelegateAndBurnFuryTokens(ctx sdk.Context,
+	furyAmount sdk.Int, intermediaryAcc types.SuperfluidIntermediaryAccount,
 ) error {
 	valAddr, err := sdk.ValAddressFromBech32(intermediaryAcc.ValAddr)
 	if err != nil {
@@ -546,22 +546,22 @@ func (k Keeper) forceUndelegateAndBurnOsmoTokens(ctx sdk.Context,
 	}
 	// TODO: Better understand and decide between ValidateUnbondAmount and SharesFromTokens
 	// briefly looked into it, did not understand whats correct.
-	// TODO: ensure that intermediate account has at least osmoAmount staked.
+	// TODO: ensure that intermediate account has at least furyAmount staked.
 	shares, err := k.sk.ValidateUnbondAmount(
-		ctx, intermediaryAcc.GetAccAddress(), valAddr, osmoAmount,
+		ctx, intermediaryAcc.GetAccAddress(), valAddr, furyAmount,
 	)
 	if err == stakingtypes.ErrNoDelegation {
 		return nil
 	} else if err != nil {
 		return err
 	}
-	err = osmoutils.ApplyFuncIfNoError(ctx, func(cacheCtx sdk.Context) error {
+	err = furyutils.ApplyFuncIfNoError(ctx, func(cacheCtx sdk.Context) error {
 		undelegatedCoins, err := k.sk.InstantUndelegate(cacheCtx, intermediaryAcc.GetAccAddress(), valAddr, shares)
 		if err != nil {
 			return err
 		}
 
-		// TODO: Should we compare undelegatedCoins vs osmoAmount?
+		// TODO: Should we compare undelegatedCoins vs furyAmount?
 		err = k.bk.SendCoinsFromAccountToModule(cacheCtx, intermediaryAcc.GetAccAddress(), types.ModuleName, undelegatedCoins)
 		if err != nil {
 			return err
@@ -625,10 +625,10 @@ func (k Keeper) IterateDelegations(ctx sdk.Context, delegator sdk.AccAddress, fn
 			continue
 		}
 
-		// get osmo-equivalent token amount
-		amount, err := k.GetSuperfluidOSMOTokens(ctx, interim.Denom, coin.Amount)
+		// get fury-equivalent token amount
+		amount, err := k.GetSuperfluidFURYTokens(ctx, interim.Denom, coin.Amount)
 		if err != nil {
-			ctx.Logger().Error("failed to get osmo equivalent of token", "Denom", interim.Denom, "Amount", coin.Amount, "Error", err)
+			ctx.Logger().Error("failed to get fury equivalent of token", "Denom", interim.Denom, "Amount", coin.Amount, "Error", err)
 			continue
 		}
 

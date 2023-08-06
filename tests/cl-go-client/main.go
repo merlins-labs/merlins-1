@@ -17,13 +17,13 @@ import (
 	"github.com/ignite/cli/ignite/pkg/cosmosaccount"
 	"github.com/ignite/cli/ignite/pkg/cosmosclient"
 
-	clqueryproto "github.com/osmosis-labs/osmosis/v16/x/concentrated-liquidity/client/queryproto"
-	"github.com/osmosis-labs/osmosis/v16/x/concentrated-liquidity/model"
-	cltypes "github.com/osmosis-labs/osmosis/v16/x/concentrated-liquidity/types"
-	incentivestypes "github.com/osmosis-labs/osmosis/v16/x/incentives/types"
-	lockuptypes "github.com/osmosis-labs/osmosis/v16/x/lockup/types"
-	poolmanagerqueryproto "github.com/osmosis-labs/osmosis/v16/x/poolmanager/client/queryproto"
-	poolmanagertypes "github.com/osmosis-labs/osmosis/v16/x/poolmanager/types"
+	clqueryproto "github.com/merlinslair/merlin/v16/x/concentrated-liquidity/client/queryproto"
+	"github.com/merlinslair/merlin/v16/x/concentrated-liquidity/model"
+	cltypes "github.com/merlinslair/merlin/v16/x/concentrated-liquidity/types"
+	incentivestypes "github.com/merlinslair/merlin/v16/x/incentives/types"
+	lockuptypes "github.com/merlinslair/merlin/v16/x/lockup/types"
+	poolmanagerqueryproto "github.com/merlinslair/merlin/v16/x/poolmanager/client/queryproto"
+	poolmanagertypes "github.com/merlinslair/merlin/v16/x/poolmanager/types"
 	epochstypes "github.com/osmosis-labs/osmosis/x/epochs/types"
 )
 
@@ -52,14 +52,14 @@ const (
 
 const (
 	expectedPoolId           uint64 = 1
-	addressPrefix                   = "osmo"
-	localosmosisFromHomePath        = "/.osmosisd-local"
-	consensusFee                    = "1500uosmo"
-	denom0                          = "uosmo"
+	addressPrefix                   = "fury"
+	localmerlinFromHomePath        = "/.merlin-local"
+	consensusFee                    = "1500ufury"
+	denom0                          = "ufury"
 	denom1                          = "uusdc"
 	tickSpacing              int64  = 100
 	accountNamePrefix               = "lo-test"
-	// Note, this is localosmosis-specific.
+	// Note, this is localmerlin-specific.
 	expectedEpochIdentifier = "hour"
 	numPositions            = 100
 	numSwaps                = 100
@@ -74,7 +74,7 @@ var (
 	defaultAccountName  = fmt.Sprintf("%s%d", accountNamePrefix, 1)
 	defaultMinAmount    = sdk.ZeroInt()
 	defaultSpreadFactor = sdk.MustNewDecFromStr("0.001")
-	externalGaugeCoins  = sdk.NewCoins(sdk.NewCoin("uosmo", sdk.NewInt(1000_000_000)))
+	externalGaugeCoins  = sdk.NewCoins(sdk.NewCoin("ufury", sdk.NewInt(1000_000_000)))
 	accountMutex        sync.Mutex
 )
 
@@ -111,7 +111,7 @@ func main() {
 	log.Println("connected to: ", "chain-id", statusResp.NodeInfo.Network, "height", statusResp.SyncInfo.LatestBlockHeight)
 
 	// Print warnings with common problems
-	log.Printf("\n\n\nWARNING 1: your localosmosis and client home are assummed to be %s. Run 'osmosisd get-env' and confirm it matches the path you see printed here\n\n\n", clientHome)
+	log.Printf("\n\n\nWARNING 1: your localmerlin and client home are assummed to be %s. Run 'merlin get-env' and confirm it matches the path you see printed here\n\n\n", clientHome)
 
 	log.Printf("\n\n\nWARNING 2: you are attempting to interact with pool id %d.\nConfirm that the pool exists. if this is not the pool you want to interact with, please change the expectedPoolId variable in the code\n\n\n", expectedPoolId)
 
@@ -147,7 +147,7 @@ func createManyRandomPositions(igniteClient cosmosclient.Client, poolId uint64, 
 	log.Println(minTick, " ", maxTick)
 	for i := 0; i < numPositions; i++ {
 		var (
-			// 1 to 9. These are localosmosis keyring test accounts with names such as:
+			// 1 to 9. These are localmerlin keyring test accounts with names such as:
 			// lo-test1
 			// lo-test2
 			// ...
@@ -458,7 +458,7 @@ func getClientHomePath() string {
 		return ""
 	}
 
-	return currentUser.HomeDir + localosmosisFromHomePath
+	return currentUser.HomeDir + localmerlinFromHomePath
 }
 
 func runMessageWithRetries(runMsg func() error) {

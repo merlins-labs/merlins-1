@@ -19,22 +19,22 @@ import (
 	"github.com/stretchr/testify/require"
 	tmabcitypes "github.com/tendermint/tendermint/abci/types"
 
-	"github.com/osmosis-labs/osmosis/v16/tests/e2e/util"
-	"github.com/osmosis-labs/osmosis/v16/x/concentrated-liquidity/client/queryproto"
-	"github.com/osmosis-labs/osmosis/v16/x/concentrated-liquidity/model"
-	cltypes "github.com/osmosis-labs/osmosis/v16/x/concentrated-liquidity/types"
-	gammtypes "github.com/osmosis-labs/osmosis/v16/x/gamm/types"
-	poolmanagerqueryproto "github.com/osmosis-labs/osmosis/v16/x/poolmanager/client/queryproto"
-	poolmanagertypes "github.com/osmosis-labs/osmosis/v16/x/poolmanager/types"
-	protorevtypes "github.com/osmosis-labs/osmosis/v16/x/protorev/types"
-	superfluidtypes "github.com/osmosis-labs/osmosis/v16/x/superfluid/types"
-	twapqueryproto "github.com/osmosis-labs/osmosis/v16/x/twap/client/queryproto"
+	"github.com/merlinslair/merlin/v16/tests/e2e/util"
+	"github.com/merlinslair/merlin/v16/x/concentrated-liquidity/client/queryproto"
+	"github.com/merlinslair/merlin/v16/x/concentrated-liquidity/model"
+	cltypes "github.com/merlinslair/merlin/v16/x/concentrated-liquidity/types"
+	gammtypes "github.com/merlinslair/merlin/v16/x/gamm/types"
+	poolmanagerqueryproto "github.com/merlinslair/merlin/v16/x/poolmanager/client/queryproto"
+	poolmanagertypes "github.com/merlinslair/merlin/v16/x/poolmanager/types"
+	protorevtypes "github.com/merlinslair/merlin/v16/x/protorev/types"
+	superfluidtypes "github.com/merlinslair/merlin/v16/x/superfluid/types"
+	twapqueryproto "github.com/merlinslair/merlin/v16/x/twap/client/queryproto"
 	epochstypes "github.com/osmosis-labs/osmosis/x/epochs/types"
 )
 
 // QueryProtoRevNumberOfTrades gets the number of trades the protorev module has executed.
 func (n *NodeConfig) QueryProtoRevNumberOfTrades() (sdk.Int, error) {
-	path := "/osmosis/v14/protorev/number_of_trades"
+	path := "/merlin/v14/protorev/number_of_trades"
 
 	bz, err := n.QueryGRPCGateway(path)
 	if err != nil {
@@ -50,7 +50,7 @@ func (n *NodeConfig) QueryProtoRevNumberOfTrades() (sdk.Int, error) {
 
 // QueryProtoRevProfits gets the profits the protorev module has made.
 func (n *NodeConfig) QueryProtoRevProfits() ([]sdk.Coin, error) {
-	path := "/osmosis/v14/protorev/all_profits"
+	path := "/merlin/v14/protorev/all_profits"
 
 	bz, err := n.QueryGRPCGateway(path)
 	if err != nil {
@@ -66,7 +66,7 @@ func (n *NodeConfig) QueryProtoRevProfits() ([]sdk.Coin, error) {
 
 // QueryProtoRevAllRouteStatistics gets all of the route statistics that the module has recorded.
 func (n *NodeConfig) QueryProtoRevAllRouteStatistics() ([]protorevtypes.RouteStatistics, error) {
-	path := "/osmosis/v14/protorev/all_route_statistics"
+	path := "/merlin/v14/protorev/all_route_statistics"
 
 	bz, err := n.QueryGRPCGateway(path)
 	if err != nil {
@@ -82,7 +82,7 @@ func (n *NodeConfig) QueryProtoRevAllRouteStatistics() ([]protorevtypes.RouteSta
 
 // QueryProtoRevTokenPairArbRoutes gets all of the token pair hot routes that the module is currently using.
 func (n *NodeConfig) QueryProtoRevTokenPairArbRoutes() ([]protorevtypes.TokenPairArbRoutes, error) {
-	path := "/osmosis/v14/protorev/token_pair_arb_routes"
+	path := "/merlin/v14/protorev/token_pair_arb_routes"
 
 	bz, err := n.QueryGRPCGateway(path)
 	if err != nil {
@@ -98,7 +98,7 @@ func (n *NodeConfig) QueryProtoRevTokenPairArbRoutes() ([]protorevtypes.TokenPai
 
 // QueryProtoRevDeveloperAccount gets the developer account of the module.
 func (n *NodeConfig) QueryProtoRevDeveloperAccount() (sdk.AccAddress, error) {
-	path := "/osmosis/v14/protorev/developer_account"
+	path := "/merlin/v14/protorev/developer_account"
 
 	bz, err := n.QueryGRPCGateway(path)
 	if err != nil {
@@ -120,7 +120,7 @@ func (n *NodeConfig) QueryProtoRevDeveloperAccount() (sdk.AccAddress, error) {
 
 // QueryProtoRevPoolWeights gets the pool point weights of the module.
 func (n *NodeConfig) QueryProtoRevPoolWeights() (protorevtypes.PoolWeights, error) {
-	path := "/osmosis/v14/protorev/pool_weights"
+	path := "/merlin/v14/protorev/pool_weights"
 
 	bz, err := n.QueryGRPCGateway(path)
 	if err != nil {
@@ -136,7 +136,7 @@ func (n *NodeConfig) QueryProtoRevPoolWeights() (protorevtypes.PoolWeights, erro
 
 // QueryProtoRevMaxPoolPointsPerTx gets the max pool points per tx of the module.
 func (n *NodeConfig) QueryProtoRevMaxPoolPointsPerTx() (uint64, error) {
-	path := "/osmosis/v14/protorev/max_pool_points_per_tx"
+	path := "/merlin/v14/protorev/max_pool_points_per_tx"
 
 	bz, err := n.QueryGRPCGateway(path)
 	if err != nil {
@@ -152,7 +152,7 @@ func (n *NodeConfig) QueryProtoRevMaxPoolPointsPerTx() (uint64, error) {
 
 // QueryProtoRevMaxPoolPointsPerBlock gets the max pool points per block of the module.
 func (n *NodeConfig) QueryProtoRevMaxPoolPointsPerBlock() (uint64, error) {
-	path := "/osmosis/v14/protorev/max_pool_points_per_block"
+	path := "/merlin/v14/protorev/max_pool_points_per_block"
 
 	bz, err := n.QueryGRPCGateway(path)
 	if err != nil {
@@ -168,7 +168,7 @@ func (n *NodeConfig) QueryProtoRevMaxPoolPointsPerBlock() (uint64, error) {
 
 // QueryProtoRevBaseDenoms gets the base denoms used to construct cyclic arbitrage routes.
 func (n *NodeConfig) QueryProtoRevBaseDenoms() ([]protorevtypes.BaseDenom, error) {
-	path := "/osmosis/v14/protorev/base_denoms"
+	path := "/merlin/v14/protorev/base_denoms"
 
 	bz, err := n.QueryGRPCGateway(path)
 	if err != nil {
@@ -184,7 +184,7 @@ func (n *NodeConfig) QueryProtoRevBaseDenoms() ([]protorevtypes.BaseDenom, error
 
 // QueryProtoRevEnabled queries if the protorev module is enabled.
 func (n *NodeConfig) QueryProtoRevEnabled() (bool, error) {
-	path := "/osmosis/v14/protorev/enabled"
+	path := "/merlin/v14/protorev/enabled"
 
 	bz, err := n.QueryGRPCGateway(path)
 	if err != nil {
@@ -246,7 +246,7 @@ func (n *NodeConfig) QueryGRPCGateway(path string, parameters ...string) ([]byte
 }
 
 func (n *NodeConfig) QueryNumPools() uint64 {
-	path := "osmosis/gamm/v1beta1/num_pools"
+	path := "merlin/gamm/v1beta1/num_pools"
 
 	bz, err := n.QueryGRPCGateway(path)
 	require.NoError(n.t, err)
@@ -259,7 +259,7 @@ func (n *NodeConfig) QueryNumPools() uint64 {
 }
 
 func (n *NodeConfig) QueryPoolType(poolId string) string {
-	path := fmt.Sprintf("/osmosis/gamm/v1beta1/pool_type/%s", poolId)
+	path := fmt.Sprintf("/merlin/gamm/v1beta1/pool_type/%s", poolId)
 	bz, err := n.QueryGRPCGateway(path)
 	require.NoError(n.t, err)
 
@@ -271,7 +271,7 @@ func (n *NodeConfig) QueryPoolType(poolId string) string {
 }
 
 func (n *NodeConfig) QueryConcentratedPositions(address string) []model.FullPositionBreakdown {
-	path := fmt.Sprintf("/osmosis/concentratedliquidity/v1beta1/positions/%s", address)
+	path := fmt.Sprintf("/merlin/concentratedliquidity/v1beta1/positions/%s", address)
 
 	bz, err := n.QueryGRPCGateway(path)
 	require.NoError(n.t, err)
@@ -283,7 +283,7 @@ func (n *NodeConfig) QueryConcentratedPositions(address string) []model.FullPosi
 }
 
 func (n *NodeConfig) QueryConcentratedPool(poolId uint64) (cltypes.ConcentratedPoolExtension, error) {
-	path := fmt.Sprintf("/osmosis/poolmanager/v1beta1/pools/%d", poolId)
+	path := fmt.Sprintf("/merlin/poolmanager/v1beta1/pools/%d", poolId)
 	bz, err := n.QueryGRPCGateway(path)
 	require.NoError(n.t, err)
 
@@ -305,7 +305,7 @@ func (n *NodeConfig) QueryConcentratedPool(poolId uint64) (cltypes.ConcentratedP
 }
 
 func (n *NodeConfig) QueryCFMMPool(poolId uint64) (gammtypes.CFMMPoolI, error) {
-	path := fmt.Sprintf("/osmosis/poolmanager/v1beta1/pools/%d", poolId)
+	path := fmt.Sprintf("/merlin/poolmanager/v1beta1/pools/%d", poolId)
 	bz, err := n.QueryGRPCGateway(path)
 	require.NoError(n.t, err)
 
@@ -483,7 +483,7 @@ func (n *NodeConfig) QueryIntermediaryAccount(denom string, valAddr string) (int
 }
 
 func (n *NodeConfig) QueryCurrentEpoch(identifier string) int64 {
-	path := "osmosis/epochs/v1beta1/current_epoch"
+	path := "merlin/epochs/v1beta1/current_epoch"
 
 	bz, err := n.QueryGRPCGateway(path, "identifier", identifier)
 	require.NoError(n.t, err)
@@ -495,7 +495,7 @@ func (n *NodeConfig) QueryCurrentEpoch(identifier string) int64 {
 }
 
 func (n *NodeConfig) QueryConcentratedPooIdLinkFromCFMM(cfmmPoolId uint64) uint64 {
-	path := fmt.Sprintf("/osmosis/gamm/v1beta1/concentrated_pool_id_link_from_cfmm/%d", cfmmPoolId)
+	path := fmt.Sprintf("/merlin/gamm/v1beta1/concentrated_pool_id_link_from_cfmm/%d", cfmmPoolId)
 
 	bz, err := n.QueryGRPCGateway(path)
 	require.NoError(n.t, err)
@@ -508,7 +508,7 @@ func (n *NodeConfig) QueryConcentratedPooIdLinkFromCFMM(cfmmPoolId uint64) uint6
 }
 
 func (n *NodeConfig) QueryArithmeticTwapToNow(poolId uint64, baseAsset, quoteAsset string, startTime time.Time) (sdk.Dec, error) {
-	path := "osmosis/twap/v1beta1/ArithmeticTwapToNow"
+	path := "merlin/twap/v1beta1/ArithmeticTwapToNow"
 
 	bz, err := n.QueryGRPCGateway(
 		path,
@@ -528,7 +528,7 @@ func (n *NodeConfig) QueryArithmeticTwapToNow(poolId uint64, baseAsset, quoteAss
 }
 
 func (n *NodeConfig) QueryArithmeticTwap(poolId uint64, baseAsset, quoteAsset string, startTime time.Time, endTime time.Time) (sdk.Dec, error) {
-	path := "osmosis/twap/v1beta1/ArithmeticTwap"
+	path := "merlin/twap/v1beta1/ArithmeticTwap"
 
 	bz, err := n.QueryGRPCGateway(
 		path,
@@ -549,7 +549,7 @@ func (n *NodeConfig) QueryArithmeticTwap(poolId uint64, baseAsset, quoteAsset st
 }
 
 func (n *NodeConfig) QueryGeometricTwapToNow(poolId uint64, baseAsset, quoteAsset string, startTime time.Time) (sdk.Dec, error) {
-	path := "osmosis/twap/v1beta1/GeometricTwapToNow"
+	path := "merlin/twap/v1beta1/GeometricTwapToNow"
 
 	bz, err := n.QueryGRPCGateway(
 		path,
@@ -569,7 +569,7 @@ func (n *NodeConfig) QueryGeometricTwapToNow(poolId uint64, baseAsset, quoteAsse
 }
 
 func (n *NodeConfig) QueryGeometricTwap(poolId uint64, baseAsset, quoteAsset string, startTime time.Time, endTime time.Time) (sdk.Dec, error) {
-	path := "osmosis/twap/v1beta1/GeometricTwap"
+	path := "merlin/twap/v1beta1/GeometricTwap"
 
 	bz, err := n.QueryGRPCGateway(
 		path,
@@ -631,7 +631,7 @@ func (n *NodeConfig) QueryListSnapshots() ([]*tmabcitypes.Snapshot, error) {
 
 // QueryAllSuperfluidAssets returns all authorized superfluid assets.
 func (n *NodeConfig) QueryAllSuperfluidAssets() []superfluidtypes.SuperfluidAsset {
-	path := "/osmosis/superfluid/v1beta1/all_assets"
+	path := "/merlin/superfluid/v1beta1/all_assets"
 
 	bz, err := n.QueryGRPCGateway(path)
 	require.NoError(n.t, err)
@@ -644,7 +644,7 @@ func (n *NodeConfig) QueryAllSuperfluidAssets() []superfluidtypes.SuperfluidAsse
 }
 
 func (n *NodeConfig) QueryCommunityPoolModuleAccount() string {
-	cmd := []string{"osmosisd", "query", "auth", "module-accounts", "--output=json"}
+	cmd := []string{"merlin", "query", "auth", "module-accounts", "--output=json"}
 
 	out, _, err := n.containerManager.ExecCmd(n.t, n.Name, cmd, "")
 	require.NoError(n.t, err)

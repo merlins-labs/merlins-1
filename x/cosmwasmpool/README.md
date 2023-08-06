@@ -3,7 +3,7 @@
 
 ## Overview
 
-The CosmWasm Pool Module is an extension for the Osmosis pools, aiming to create a custom module that allows users to create and manage liquidity pools backed by CosmWasm smart contracts. The feature enables developers to build and deploy custom smart contracts that can be integrated with the rest of the pool types on the Osmosis chain.
+The CosmWasm Pool Module is an extension for the Merlin pools, aiming to create a custom module that allows users to create and manage liquidity pools backed by CosmWasm smart contracts. The feature enables developers to build and deploy custom smart contracts that can be integrated with the rest of the pool types on the Merlin chain.
 
 The module is built on top of the CosmWasm smart contracting platform, which provides a secure and efficient way to develop and execute WebAssembly (Wasm) smart contracts on the Cosmos SDK.
 
@@ -358,21 +358,21 @@ pub struct Coin {
 
 ### Governance and Code Id Management
 
-Despite code upload being permissioned by governance on Osmosis, it is allowed to be done by a certain
+Despite code upload being permissioned by governance on Merlin, it is allowed to be done by a certain
 set of addresses:
 
 ```bash
-osmosisd q wasm params
+merlin q wasm params
 code_upload_access:
   address: ""
   addresses:
-  - osmo1cd4nn8yzdrrsfqsmmvaafq8r03xn38qgqt8fzh
-  - osmo1wl59k23zngj34l7d42y9yltask7rjlnxgccawc7ltrknp6n52fps94qsjd
-  - osmo19vxp8vq8qm368dr026qxh8v82satwaf79y235lfv6wmgpwxx8dtskedaku
-  - osmo1e0x2hnhhwyek7eq3kcxu2x6pt77wdnwz0lutz9fespdr9utq963qr0y5p5
-  - osmo14n3a65fnqz9jve85l23al6m3pjugf0atvrfqh5
-  - osmo15wna5dwylkuzvljsudyn6zfsd4zl0rkg5ge888mzk4vtnjpp0z5q4e9w58
-  - osmo1r02tlyyaqs6tmrfa4jf37t7ewuxr57qp8ghzly
+  - fury1cd4nn8yzdrrsfqsmmvaafq8r03xn38qgqt8fzh
+  - fury1wl59k23zngj34l7d42y9yltask7rjlnxgccawc7ltrknp6n52fps94qsjd
+  - fury19vxp8vq8qm368dr026qxh8v82satwaf79y235lfv6wmgpwxx8dtskedaku
+  - fury1e0x2hnhhwyek7eq3kcxu2x6pt77wdnwz0lutz9fespdr9utq963qr0y5p5
+  - fury14n3a65fnqz9jve85l23al6m3pjugf0atvrfqh5
+  - fury15wna5dwylkuzvljsudyn6zfsd4zl0rkg5ge888mzk4vtnjpp0z5q4e9w58
+  - fury1r02tlyyaqs6tmrfa4jf37t7ewuxr57qp8ghzly
   permission: AnyOfAddresses
 instantiate_default_permission: Everybody
 ```

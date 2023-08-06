@@ -1,4 +1,4 @@
-use osmosis_std_derive::CosmwasmExt;
+use merlin_std_derive::CosmwasmExt;
 
 #[derive(
     Clone,
@@ -35,7 +35,7 @@ pub struct MsgTransfer {
     #[prost(string, tag = "2")]
     pub source_channel: String,
     #[prost(message, optional, tag = "3")]
-    pub token: ::core::option::Option<osmosis_std::types::cosmos::base::v1beta1::Coin>,
+    pub token: ::core::option::Option<merlin_std::types::cosmos::base::v1beta1::Coin>,
     #[prost(string, tag = "4")]
     pub sender: String,
     #[prost(string, tag = "5")]

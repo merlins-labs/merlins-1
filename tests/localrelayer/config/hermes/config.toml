@@ -29,14 +29,14 @@ host = '0.0.0.0'
 port = 3001
 
 [[chains]]
-id = 'localosmosis-b'
+id = 'localmerlin-b'
 type = 'CosmosSdk'
-rpc_addr = 'http://localosmosis-b:26657'
-grpc_addr = 'http://localosmosis-b:9090'
-websocket_addr = 'ws://localosmosis-b:26657/websocket'
+rpc_addr = 'http://localmerlin-b:26657'
+grpc_addr = 'http://localmerlin-b:9090'
+websocket_addr = 'ws://localmerlin-b:26657/websocket'
 rpc_timeout = '10s'
-account_prefix = 'osmo'
-key_name = 'localosmosis-b'
+account_prefix = 'fury'
+key_name = 'localmerlin-b'
 key_store_type = 'Test'
 store_prefix = 'ibc'
 default_gas = 100000
@@ -55,7 +55,7 @@ denominator = '3'
 
 [chains.gas_price]
 price = 0.1
-denom = 'uosmo'
+denom = 'ufury'
 
 [chains.packet_filter]
 policy = 'allow'
@@ -68,14 +68,14 @@ list = [[
 derivation = 'cosmos'
 
 [[chains]]
-id = 'localosmosis-a'
+id = 'localmerlin-a'
 type = 'CosmosSdk'
-rpc_addr = 'http://localosmosis-a:26657'
-grpc_addr = 'http://localosmosis-a:9090'
-websocket_addr = 'ws://localosmosis-a:26657/websocket'
+rpc_addr = 'http://localmerlin-a:26657'
+grpc_addr = 'http://localmerlin-a:9090'
+websocket_addr = 'ws://localmerlin-a:26657/websocket'
 rpc_timeout = '10s'
-account_prefix = 'osmo'
-key_name = 'localosmosis-a'
+account_prefix = 'fury'
+key_name = 'localmerlin-a'
 key_store_type = 'Test'
 store_prefix = 'ibc'
 default_gas = 100000
@@ -94,7 +94,7 @@ denominator = '3'
 
 [chains.gas_price]
 price = 0.1
-denom = 'uosmo'
+denom = 'ufury'
 
 [chains.packet_filter]
 policy = 'allow'

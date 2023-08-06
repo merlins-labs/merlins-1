@@ -31,15 +31,15 @@ import (
 	tmtypes "github.com/tendermint/tendermint/proto/tendermint/types"
 	dbm "github.com/tendermint/tm-db"
 
-	"github.com/osmosis-labs/osmosis/v16/app"
+	"github.com/merlinslair/merlin/v16/app"
 
-	"github.com/osmosis-labs/osmosis/v16/x/gamm/pool-models/balancer"
-	gammtypes "github.com/osmosis-labs/osmosis/v16/x/gamm/types"
+	"github.com/merlinslair/merlin/v16/x/gamm/pool-models/balancer"
+	gammtypes "github.com/merlinslair/merlin/v16/x/gamm/types"
 
-	lockupkeeper "github.com/osmosis-labs/osmosis/v16/x/lockup/keeper"
-	lockuptypes "github.com/osmosis-labs/osmosis/v16/x/lockup/types"
-	minttypes "github.com/osmosis-labs/osmosis/v16/x/mint/types"
-	poolmanagertypes "github.com/osmosis-labs/osmosis/v16/x/poolmanager/types"
+	lockupkeeper "github.com/merlinslair/merlin/v16/x/lockup/keeper"
+	lockuptypes "github.com/merlinslair/merlin/v16/x/lockup/types"
+	minttypes "github.com/merlinslair/merlin/v16/x/mint/types"
+	poolmanagertypes "github.com/merlinslair/merlin/v16/x/poolmanager/types"
 )
 
 type KeeperTestHelper struct {
@@ -54,7 +54,7 @@ type KeeperTestHelper struct {
 	// this is not always enabled, because some tests may take a painful performance hit due to CacheKv.
 	withCaching bool
 
-	App         *app.OsmosisApp
+	App         *app.MerlinApp
 	Ctx         sdk.Context
 	QueryHelper *baseapp.QueryServiceTestHelper
 	TestAccs    []sdk.AccAddress
@@ -74,7 +74,7 @@ func init() {
 // Setup sets up basic environment for suite (App, Ctx, and test accounts)
 // preserves the caching enabled/disabled state.
 func (s *KeeperTestHelper) Setup() {
-	dir, err := os.MkdirTemp("", "osmosisd-test-home")
+	dir, err := os.MkdirTemp("", "merlin-test-home")
 	if err != nil {
 		panic(fmt.Sprintf("failed creating temporary directory: %v", err))
 	}
@@ -106,7 +106,7 @@ func (s *KeeperTestHelper) SetupWithLevelDb() func() {
 }
 
 func (s *KeeperTestHelper) setupGeneral() {
-	s.Ctx = s.App.BaseApp.NewContext(false, tmtypes.Header{Height: 1, ChainID: "osmosis-1", Time: defaultTestStartTime})
+	s.Ctx = s.App.BaseApp.NewContext(false, tmtypes.Header{Height: 1, ChainID: "merlin-1", Time: defaultTestStartTime})
 	if s.withCaching {
 		s.Ctx, _ = s.Ctx.CacheContext()
 	}
@@ -337,10 +337,10 @@ func (s *KeeperTestHelper) SetupGammPoolsWithBondDenomMultiplier(multipliers []s
 	pools := []gammtypes.CFMMPoolI{}
 	for index, multiplier := range multipliers {
 		token := fmt.Sprintf("token%d", index)
-		uosmoAmount := gammtypes.InitPoolSharesSupply.ToDec().Mul(multiplier).RoundInt()
+		ufuryAmount := gammtypes.InitPoolSharesSupply.ToDec().Mul(multiplier).RoundInt()
 
 		s.FundAcc(acc1, sdk.NewCoins(
-			sdk.NewCoin(bondDenom, uosmoAmount.Mul(sdk.NewInt(10))),
+			sdk.NewCoin(bondDenom, ufuryAmount.Mul(sdk.NewInt(10))),
 			sdk.NewInt64Coin(token, 100000),
 		).Add(params.PoolCreationFee...))
 
@@ -350,7 +350,7 @@ func (s *KeeperTestHelper) SetupGammPoolsWithBondDenomMultiplier(multipliers []s
 			// pool assets
 			defaultFooAsset = balancer.PoolAsset{
 				Weight: sdk.NewInt(100),
-				Token:  sdk.NewCoin(bondDenom, uosmoAmount),
+				Token:  sdk.NewCoin(bondDenom, ufuryAmount),
 			}
 			defaultBarAsset = balancer.PoolAsset{
 				Weight: sdk.NewInt(100),

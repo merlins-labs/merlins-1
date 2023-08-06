@@ -1,9 +1,9 @@
 package keeper_test
 
 import (
-	"github.com/osmosis-labs/osmosis/v16/app/apptesting"
-	"github.com/osmosis-labs/osmosis/v16/x/protorev"
-	"github.com/osmosis-labs/osmosis/v16/x/protorev/types"
+	"github.com/merlinslair/merlin/v16/app/apptesting"
+	"github.com/merlinslair/merlin/v16/x/protorev"
+	"github.com/merlinslair/merlin/v16/x/protorev/types"
 )
 
 // TestSetProtoRevAdminAccount tests that the admin account can be set through a proposal

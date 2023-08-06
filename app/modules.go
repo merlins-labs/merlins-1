@@ -22,8 +22,8 @@ import (
 
 	icqtypes "github.com/cosmos/ibc-apps/modules/async-icq/v4/types"
 
-	downtimemodule "github.com/osmosis-labs/osmosis/v16/x/downtime-detector/module"
-	downtimetypes "github.com/osmosis-labs/osmosis/v16/x/downtime-detector/types"
+	downtimemodule "github.com/merlinslair/merlin/v16/x/downtime-detector/module"
+	downtimetypes "github.com/merlinslair/merlin/v16/x/downtime-detector/types"
 
 	ibc_hooks "github.com/osmosis-labs/osmosis/x/ibc-hooks"
 
@@ -58,39 +58,39 @@ import (
 	upgradetypes "github.com/cosmos/cosmos-sdk/x/upgrade/types"
 
 	"github.com/osmosis-labs/osmosis/osmoutils/partialord"
-	appparams "github.com/osmosis-labs/osmosis/v16/app/params"
-	_ "github.com/osmosis-labs/osmosis/v16/client/docs/statik"
-	"github.com/osmosis-labs/osmosis/v16/simulation/simtypes"
-	concentratedliquidity "github.com/osmosis-labs/osmosis/v16/x/concentrated-liquidity/clmodule"
-	concentratedliquiditytypes "github.com/osmosis-labs/osmosis/v16/x/concentrated-liquidity/types"
-	cwpoolmodule "github.com/osmosis-labs/osmosis/v16/x/cosmwasmpool/module"
-	cosmwasmpooltypes "github.com/osmosis-labs/osmosis/v16/x/cosmwasmpool/types"
-	"github.com/osmosis-labs/osmosis/v16/x/gamm"
-	gammtypes "github.com/osmosis-labs/osmosis/v16/x/gamm/types"
-	"github.com/osmosis-labs/osmosis/v16/x/ibc-rate-limit/ibcratelimitmodule"
-	ibcratelimittypes "github.com/osmosis-labs/osmosis/v16/x/ibc-rate-limit/types"
-	"github.com/osmosis-labs/osmosis/v16/x/incentives"
-	incentivestypes "github.com/osmosis-labs/osmosis/v16/x/incentives/types"
-	"github.com/osmosis-labs/osmosis/v16/x/lockup"
-	lockuptypes "github.com/osmosis-labs/osmosis/v16/x/lockup/types"
-	"github.com/osmosis-labs/osmosis/v16/x/mint"
-	minttypes "github.com/osmosis-labs/osmosis/v16/x/mint/types"
-	poolincentives "github.com/osmosis-labs/osmosis/v16/x/pool-incentives"
-	poolincentivestypes "github.com/osmosis-labs/osmosis/v16/x/pool-incentives/types"
-	poolmanager "github.com/osmosis-labs/osmosis/v16/x/poolmanager/module"
-	poolmanagertypes "github.com/osmosis-labs/osmosis/v16/x/poolmanager/types"
-	"github.com/osmosis-labs/osmosis/v16/x/protorev"
-	protorevtypes "github.com/osmosis-labs/osmosis/v16/x/protorev/types"
-	superfluid "github.com/osmosis-labs/osmosis/v16/x/superfluid"
-	superfluidtypes "github.com/osmosis-labs/osmosis/v16/x/superfluid/types"
-	"github.com/osmosis-labs/osmosis/v16/x/tokenfactory"
-	tokenfactorytypes "github.com/osmosis-labs/osmosis/v16/x/tokenfactory/types"
-	"github.com/osmosis-labs/osmosis/v16/x/twap/twapmodule"
-	twaptypes "github.com/osmosis-labs/osmosis/v16/x/twap/types"
-	"github.com/osmosis-labs/osmosis/v16/x/txfees"
-	txfeestypes "github.com/osmosis-labs/osmosis/v16/x/txfees/types"
-	valsetpreftypes "github.com/osmosis-labs/osmosis/v16/x/valset-pref/types"
-	valsetprefmodule "github.com/osmosis-labs/osmosis/v16/x/valset-pref/valpref-module"
+	appparams "github.com/merlinslair/merlin/v16/app/params"
+	_ "github.com/merlinslair/merlin/v16/client/docs/statik"
+	"github.com/merlinslair/merlin/v16/simulation/simtypes"
+	concentratedliquidity "github.com/merlinslair/merlin/v16/x/concentrated-liquidity/clmodule"
+	concentratedliquiditytypes "github.com/merlinslair/merlin/v16/x/concentrated-liquidity/types"
+	cwpoolmodule "github.com/merlinslair/merlin/v16/x/cosmwasmpool/module"
+	cosmwasmpooltypes "github.com/merlinslair/merlin/v16/x/cosmwasmpool/types"
+	"github.com/merlinslair/merlin/v16/x/gamm"
+	gammtypes "github.com/merlinslair/merlin/v16/x/gamm/types"
+	"github.com/merlinslair/merlin/v16/x/ibc-rate-limit/ibcratelimitmodule"
+	ibcratelimittypes "github.com/merlinslair/merlin/v16/x/ibc-rate-limit/types"
+	"github.com/merlinslair/merlin/v16/x/incentives"
+	incentivestypes "github.com/merlinslair/merlin/v16/x/incentives/types"
+	"github.com/merlinslair/merlin/v16/x/lockup"
+	lockuptypes "github.com/merlinslair/merlin/v16/x/lockup/types"
+	"github.com/merlinslair/merlin/v16/x/mint"
+	minttypes "github.com/merlinslair/merlin/v16/x/mint/types"
+	poolincentives "github.com/merlinslair/merlin/v16/x/pool-incentives"
+	poolincentivestypes "github.com/merlinslair/merlin/v16/x/pool-incentives/types"
+	poolmanager "github.com/merlinslair/merlin/v16/x/poolmanager/module"
+	poolmanagertypes "github.com/merlinslair/merlin/v16/x/poolmanager/types"
+	"github.com/merlinslair/merlin/v16/x/protorev"
+	protorevtypes "github.com/merlinslair/merlin/v16/x/protorev/types"
+	superfluid "github.com/merlinslair/merlin/v16/x/superfluid"
+	superfluidtypes "github.com/merlinslair/merlin/v16/x/superfluid/types"
+	"github.com/merlinslair/merlin/v16/x/tokenfactory"
+	tokenfactorytypes "github.com/merlinslair/merlin/v16/x/tokenfactory/types"
+	"github.com/merlinslair/merlin/v16/x/twap/twapmodule"
+	twaptypes "github.com/merlinslair/merlin/v16/x/twap/types"
+	"github.com/merlinslair/merlin/v16/x/txfees"
+	txfeestypes "github.com/merlinslair/merlin/v16/x/txfees/types"
+	valsetpreftypes "github.com/merlinslair/merlin/v16/x/valset-pref/types"
+	valsetprefmodule "github.com/merlinslair/merlin/v16/x/valset-pref/valpref-module"
 	"github.com/osmosis-labs/osmosis/x/epochs"
 	epochstypes "github.com/osmosis-labs/osmosis/x/epochs/types"
 )
@@ -126,7 +126,7 @@ var moduleAccountPermissions = map[string][]string{
 
 // appModules return modules to initialize module manager.
 func appModules(
-	app *OsmosisApp,
+	app *MerlinApp,
 	encodingConfig appparams.EncodingConfig,
 	skipGenesisInvariants bool,
 ) []module.AppModule {
@@ -219,7 +219,7 @@ func OrderEndBlockers(allModuleNames []string) []string {
 	ord.FirstElements(govtypes.ModuleName)
 	ord.LastElements(stakingtypes.ModuleName)
 
-	// only Osmosis modules with endblock code are: twap, crisis, govtypes, staking
+	// only Merlin modules with endblock code are: twap, crisis, govtypes, staking
 	// we don't care about the relative ordering between them.
 	return ord.TotalOrdering()
 }
@@ -285,31 +285,31 @@ func ModuleAccountAddrs() map[string]bool {
 	return modAccAddrs
 }
 
-func (app *OsmosisApp) GetAccountKeeper() simtypes.AccountKeeper {
+func (app *MerlinApp) GetAccountKeeper() simtypes.AccountKeeper {
 	return app.AppKeepers.AccountKeeper
 }
 
-func (app *OsmosisApp) GetBankKeeper() simtypes.BankKeeper {
+func (app *MerlinApp) GetBankKeeper() simtypes.BankKeeper {
 	return app.AppKeepers.BankKeeper
 }
 
 // Required for ibctesting
-func (app *OsmosisApp) GetStakingKeeper() stakingkeeper.Keeper {
+func (app *MerlinApp) GetStakingKeeper() stakingkeeper.Keeper {
 	return *app.AppKeepers.StakingKeeper // Dereferencing the pointer
 }
 
-func (app *OsmosisApp) GetIBCKeeper() *ibckeeper.Keeper {
+func (app *MerlinApp) GetIBCKeeper() *ibckeeper.Keeper {
 	return app.AppKeepers.IBCKeeper // This is a *ibckeeper.Keeper
 }
 
-func (app *OsmosisApp) GetScopedIBCKeeper() capabilitykeeper.ScopedKeeper {
+func (app *MerlinApp) GetScopedIBCKeeper() capabilitykeeper.ScopedKeeper {
 	return app.AppKeepers.ScopedIBCKeeper
 }
 
-func (app *OsmosisApp) GetPoolManagerKeeper() simtypes.PoolManagerKeeper {
+func (app *MerlinApp) GetPoolManagerKeeper() simtypes.PoolManagerKeeper {
 	return app.AppKeepers.PoolManagerKeeper
 }
 
-func (app *OsmosisApp) GetTxConfig() client.TxConfig {
+func (app *MerlinApp) GetTxConfig() client.TxConfig {
 	return MakeEncodingConfig().TxConfig
 }

@@ -44,7 +44,7 @@ func Setup() (sdk.Context, *epochskeeper.Keeper) {
 	ctx := testutil.DefaultContext(epochsStoreKey, sdk.NewTransientStoreKey("transient_test"))
 	epochsKeeper := epochskeeper.NewKeeper(epochsStoreKey)
 	epochsKeeper = epochsKeeper.SetHooks(types.NewMultiEpochHooks())
-	ctx.WithBlockHeight(1).WithChainID("osmosis-1").WithBlockTime(time.Now().UTC())
+	ctx.WithBlockHeight(1).WithChainID("merlin-1").WithBlockTime(time.Now().UTC())
 	epochsKeeper.InitGenesis(ctx, *types.DefaultGenesis())
 	SetEpochStartTime(ctx, epochsKeeper)
 	return ctx, epochsKeeper

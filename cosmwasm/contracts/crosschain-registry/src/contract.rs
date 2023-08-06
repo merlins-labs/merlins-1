@@ -151,7 +151,7 @@ mod test {
         let address: GetAddressFromAliasResponse = from_binary(&address_binary).unwrap();
         assert_eq!(
             GetAddressFromAliasResponse {
-                address: "osmo1dfaselkjh32hnkljw3nlklk2lknmes".to_string(),
+                address: "fury1dfaselkjh32hnkljw3nlklk2lknmes".to_string(),
             },
             address
         );
@@ -168,7 +168,7 @@ mod test {
         let address: GetAddressFromAliasResponse = from_binary(&address_binary).unwrap();
         assert_eq!(
             GetAddressFromAliasResponse {
-                address: "osmo1dfg4k3jhlknlfkjdslkjkl43klnfdl".to_string(),
+                address: "fury1dfg4k3jhlknlfkjdslkjkl43klnfdl".to_string(),
             },
             address
         );
@@ -185,7 +185,7 @@ mod test {
         let address: GetAddressFromAliasResponse = from_binary(&address_binary).unwrap();
         assert_eq!(
             GetAddressFromAliasResponse {
-                address: "osmo1dfgjlk4lkfklkld32fsdajknjrrgfg".to_string(),
+                address: "fury1dfgjlk4lkfklkld32fsdajknjrrgfg".to_string(),
             },
             address
         );
@@ -206,12 +206,12 @@ mod test {
         // Store three chain<>channel mappings
         let mut deps = setup().unwrap();
 
-        // Retrieve osmo<>juno link and check the channel is what we expect
+        // Retrieve fury<>juno link and check the channel is what we expect
         let channel_binary = query(
             deps.as_ref(),
             mock_env(),
             QueryMsg::GetChannelFromChainPair {
-                source_chain: "osmosis".to_string(),
+                source_chain: "merlin".to_string(),
                 destination_chain: "juno".to_string(),
             },
         )
@@ -219,12 +219,12 @@ mod test {
         let channel: String = from_binary(&channel_binary).unwrap();
         assert_eq!("channel-42", channel);
 
-        // Check that osmosis' channel-42 is connected to juno
+        // Check that merlin' channel-42 is connected to juno
         let destination_chain = query(
             deps.as_ref(),
             mock_env(),
             QueryMsg::GetDestinationChainFromSourceChainViaChannel {
-                on_chain: "osmosis".to_string(),
+                on_chain: "merlin".to_string(),
                 via_channel: "channel-42".to_string(),
             },
         )
@@ -232,12 +232,12 @@ mod test {
         let destination_chain: String = from_binary(&destination_chain).unwrap();
         assert_eq!("juno", destination_chain);
 
-        // Retrieve osmo<>stars link and check the channel is what we expect
+        // Retrieve fury<>stars link and check the channel is what we expect
         let channel_binary = query(
             deps.as_ref(),
             mock_env(),
             QueryMsg::GetChannelFromChainPair {
-                source_chain: "osmosis".to_string(),
+                source_chain: "merlin".to_string(),
                 destination_chain: "stargaze".to_string(),
             },
         )
@@ -245,12 +245,12 @@ mod test {
         let channel: String = from_binary(&channel_binary).unwrap();
         assert_eq!("channel-75", channel);
 
-        // Check that osmosis' channel-75 is connected to stars
+        // Check that merlin' channel-75 is connected to stars
         let destination_chain = query(
             deps.as_ref(),
             mock_env(),
             QueryMsg::GetDestinationChainFromSourceChainViaChannel {
-                on_chain: "osmosis".to_string(),
+                on_chain: "merlin".to_string(),
                 via_channel: "channel-75".to_string(),
             },
         )
@@ -258,20 +258,20 @@ mod test {
         let destination_chain: String = from_binary(&destination_chain).unwrap();
         assert_eq!("stargaze", destination_chain);
 
-        // Retrieve stargaze<>osmosis link and check the channel is what we expect
+        // Retrieve stargaze<>merlin link and check the channel is what we expect
         let channel_binary = query(
             deps.as_ref(),
             mock_env(),
             QueryMsg::GetChannelFromChainPair {
                 source_chain: "stargaze".to_string(),
-                destination_chain: "osmosis".to_string(),
+                destination_chain: "merlin".to_string(),
             },
         )
         .unwrap();
         let channel: String = from_binary(&channel_binary).unwrap();
         assert_eq!("channel-0", channel);
 
-        // Check that stars' channel-0 is connected to osmo
+        // Check that stars' channel-0 is connected to fury
         let destination_chain = query(
             deps.as_ref(),
             mock_env(),
@@ -282,24 +282,24 @@ mod test {
         )
         .unwrap();
         let destination_chain: String = from_binary(&destination_chain).unwrap();
-        assert_eq!("osmosis", destination_chain);
+        assert_eq!("merlin", destination_chain);
 
         // Attempt to retrieve a link that doesn't exist and check that we get an error
         let channel_binary = query(
             deps.as_ref(),
             mock_env(),
             QueryMsg::GetChannelFromChainPair {
-                source_chain: "osmosis".to_string(),
+                source_chain: "merlin".to_string(),
                 destination_chain: "cerberus".to_string(),
             },
         );
         assert!(channel_binary.is_err());
 
-        // Disable the osmo<>juno link with the global admin
+        // Disable the fury<>juno link with the global admin
         let msg = ExecuteMsg::ModifyChainChannelLinks {
             operations: vec![ConnectionInput {
                 operation: execute::FullOperation::Disable,
-                source_chain: "OSMOSIS".to_string(),
+                source_chain: "MERLIN".to_string(),
                 destination_chain: "JUNO".to_string(),
                 channel_id: Some("CHANNEL-42".to_string()),
                 new_source_chain: None,
@@ -311,22 +311,22 @@ mod test {
         let result = execute(deps.as_mut(), mock_env(), info_creator.clone(), msg);
         assert!(result.is_ok());
 
-        // Retrieve osmo<>juno link again, but this time it should be disabled
+        // Retrieve fury<>juno link again, but this time it should be disabled
         let res = query(
             deps.as_ref(),
             mock_env(),
             QueryMsg::GetChannelFromChainPair {
-                source_chain: "osmosis".to_string(),
+                source_chain: "merlin".to_string(),
                 destination_chain: "juno".to_string(),
             },
         );
         assert!(res.is_err());
 
-        // Enable the osmo<>juno link with the global admin
+        // Enable the fury<>juno link with the global admin
         let msg = ExecuteMsg::ModifyChainChannelLinks {
             operations: vec![ConnectionInput {
                 operation: execute::FullOperation::Enable,
-                source_chain: "OSMOSIS".to_string(),
+                source_chain: "MERLIN".to_string(),
                 destination_chain: "JUNO".to_string(),
                 channel_id: Some("CHANNEL-42".to_string()),
                 new_source_chain: None,
@@ -337,12 +337,12 @@ mod test {
         let result = execute(deps.as_mut(), mock_env(), info_creator, msg);
         assert!(result.is_ok());
 
-        // Retrieve osmo<>juno link again, but this time it should be enabled
+        // Retrieve fury<>juno link again, but this time it should be enabled
         let channel_binary = query(
             deps.as_ref(),
             mock_env(),
             QueryMsg::GetChannelFromChainPair {
-                source_chain: "osmosis".to_string(),
+                source_chain: "merlin".to_string(),
                 destination_chain: "juno".to_string(),
             },
         )

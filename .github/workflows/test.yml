@@ -51,7 +51,7 @@ jobs:
           go-version: ${{env.GO_VERSION}}
       -
         name: Create a file with all core Cosmos SDK pkgs
-        run: go list ./... ./osmomath/... ./osmoutils/... ./x/ibc-hooks/... ./x/epochs | grep -E -v 'tests/simulator|e2e' > pkgs.txt
+        run: go list ./... ./furymath/... ./furyutils/... ./x/ibc-hooks/... ./x/epochs | grep -E -v 'tests/simulator|e2e' > pkgs.txt
       -
         name: Split pkgs into 4 files
         run: split -d -n l/4 pkgs.txt pkgs.txt.part.
@@ -136,7 +136,7 @@ jobs:
         with:
           load: true
           context: .
-          tags: osmosis:debug
+          tags: merlin:debug
           # Use experimental Cache backend API: 
           # https://github.com/docker/build-push-action/blob/master/docs/advanced/cache.md#cache-backend-api
           cache-from: type=gha
@@ -164,6 +164,6 @@ jobs:
           path: ./logs.tgz
         if: failure()
       -
-        name: 🧹 Clean up Osmosis Home
+        name: 🧹 Clean up Merlin Home
         if: always()
-        run: rm -rf $HOME/.osmosisd/ || true
+        run: rm -rf $HOME/.merlin/ || true

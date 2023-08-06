@@ -6,9 +6,9 @@ import (
 	"time"
 
 	"github.com/osmosis-labs/osmosis/osmoutils"
-	cl "github.com/osmosis-labs/osmosis/v16/x/concentrated-liquidity"
-	cltypes "github.com/osmosis-labs/osmosis/v16/x/concentrated-liquidity/types"
-	lockuptypes "github.com/osmosis-labs/osmosis/v16/x/lockup/types"
+	cl "github.com/merlinslair/merlin/v16/x/concentrated-liquidity"
+	cltypes "github.com/merlinslair/merlin/v16/x/concentrated-liquidity/types"
+	lockuptypes "github.com/merlinslair/merlin/v16/x/lockup/types"
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
 )
@@ -67,7 +67,7 @@ func (k Keeper) slashSynthLock(ctx sdk.Context, synthLock *lockuptypes.Synthetic
 	lockSharesToSlash := sdk.NewCoins(sdk.NewCoin(lock.Coins[0].Denom, slashAmt.TruncateInt()))
 
 	// If the slashCoins contains a cl denom, we need to update the underlying cl position to reflect the slash.
-	_ = osmoutils.ApplyFuncIfNoError(ctx, func(cacheCtx sdk.Context) error {
+	_ = furyutils.ApplyFuncIfNoError(ctx, func(cacheCtx sdk.Context) error {
 		if strings.HasPrefix(lock.Coins[0].Denom, cltypes.ConcentratedLiquidityTokenPrefix) {
 			// Run prepare logic to get the underlying coins to slash.
 			// We get the pool address here since the underlying coins will be sent directly from the pool to the community pool instead of the lock module account.

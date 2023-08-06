@@ -1,4 +1,4 @@
-package osmoutils
+package furyutils
 
 import (
 	"errors"
@@ -10,10 +10,10 @@ import (
 	vestingtypes "github.com/cosmos/cosmos-sdk/x/auth/vesting/types"
 )
 
-// OsmoUtilsExtraAccountTypes is a map of extra account types that can be overridden.
+// FuryUtilsExtraAccountTypes is a map of extra account types that can be overridden.
 // This is defined as a global variable so it can be modified in the chain's app.go and used here without
-// having to import the chain. Specifically, this is used for compatibility with Osmosis' Cosmos SDK fork
-var OsmoUtilsExtraAccountTypes map[reflect.Type]struct{}
+// having to import the chain. Specifically, this is used for compatibility with Merlin' Cosmos SDK fork
+var FuryUtilsExtraAccountTypes map[reflect.Type]struct{}
 
 type AccountKeeper interface {
 	NewAccount(sdk.Context, authtypes.AccountI) authtypes.AccountI
@@ -54,7 +54,7 @@ func CanCreateModuleAccountAtAddr(ctx sdk.Context, ak AccountKeeper, addr sdk.Ac
 		reflect.TypeOf(&vestingtypes.PeriodicVestingAccount{}):   {},
 		reflect.TypeOf(&vestingtypes.PermanentLockedAccount{}):   {},
 	}
-	for extraAccountType := range OsmoUtilsExtraAccountTypes {
+	for extraAccountType := range FuryUtilsExtraAccountTypes {
 		overrideAccountTypes[extraAccountType] = struct{}{}
 	}
 

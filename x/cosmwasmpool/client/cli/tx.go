@@ -17,9 +17,9 @@ import (
 	"github.com/spf13/pflag"
 
 	"github.com/osmosis-labs/osmosis/osmoutils/osmocli"
-	"github.com/osmosis-labs/osmosis/v16/x/cosmwasmpool/cosmwasm/msg"
-	"github.com/osmosis-labs/osmosis/v16/x/cosmwasmpool/model"
-	"github.com/osmosis-labs/osmosis/v16/x/cosmwasmpool/types"
+	"github.com/merlinslair/merlin/v16/x/cosmwasmpool/cosmwasm/msg"
+	"github.com/merlinslair/merlin/v16/x/cosmwasmpool/model"
+	"github.com/merlinslair/merlin/v16/x/cosmwasmpool/types"
 )
 
 func NewTxCmd() *cobra.Command {
@@ -32,7 +32,7 @@ func NewCreateCWPoolCmd() (*osmocli.TxCliDesc, *model.MsgCreateCosmWasmPool) {
 	return &osmocli.TxCliDesc{
 		Use:              "create-pool [code-id] [instantiate-msg] [sender]",
 		Short:            "create a cosmwasm pool",
-		Example:          "osmosisd tx cosmwasmpool create-pool 1 uion,uosmo --from lo-test1 --keyring-backend test --chain-id localosmosis --fees 875uosmo -b=block",
+		Example:          "merlin tx cosmwasmpool create-pool 1 uion,ufury --from lo-test1 --keyring-backend test --chain-id localmerlin --fees 875ufury -b=block",
 		NumArgs:          2,
 		ParseAndBuildMsg: BuildCreatePoolMsg,
 	}, &model.MsgCreateCosmWasmPool{}
@@ -67,7 +67,7 @@ func NewCmdUploadCodeIdAndWhitelistProposal() *cobra.Command {
 		Use:     "upload-code-id-and-whitelist [wasm-file-path] [flags]",
 		Args:    cobra.ExactArgs(1),
 		Short:   "Submit an upload code id and whitelist proposal",
-		Example: "osmosisd tx gov submit-proposal upload-code-id-and-whitelist x/cosmwasmpool/bytecode/transmuter.wasm --from lo-test1 --keyring-backend test --title \"Test\" --description \"Test\" -b=block --chain-id localosmosis --fees=100000uosmo --gas=20000000",
+		Example: "merlin tx gov submit-proposal upload-code-id-and-whitelist x/cosmwasmpool/bytecode/transmuter.wasm --from lo-test1 --keyring-backend test --title \"Test\" --description \"Test\" -b=block --chain-id localmerlin --fees=100000ufury --gas=20000000",
 		RunE: func(cmd *cobra.Command, args []string) error {
 			clientCtx, err := client.GetClientTxContext(cmd)
 			if err != nil {

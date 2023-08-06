@@ -7,7 +7,7 @@
 [package]
 name = "crosschain-registry"
 version = "0.1.0"
-authors = ["Adam Tucker <adam@osmosis.team>", "Nicolas Lara <nicolaslara@gmail.com>"]
+authors = ["Adam Tucker <adam@merlin.team>", "Nicolas Lara <nicolaslara@gmail.com>"]
 edition = "2021"
 
 exclude = [

@@ -3,7 +3,7 @@ package keeper_test
 import (
 	"fmt"
 
-	"github.com/osmosis-labs/osmosis/v16/x/tokenfactory/types"
+	"github.com/merlinslair/merlin/v16/x/tokenfactory/types"
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	banktypes "github.com/cosmos/cosmos-sdk/x/bank/types"
@@ -25,7 +25,7 @@ func (s *KeeperTestSuite) TestMintDenomMsg() {
 		{
 			desc:      "denom does not exist",
 			amount:    10,
-			mintDenom: "factory/osmo1t7egva48prqmzl59x5ngv4zx0dtrwewc9m7z44/evmos",
+			mintDenom: "factory/fury1t7egva48prqmzl59x5ngv4zx0dtrwewc9m7z44/evmos",
 			admin:     s.TestAccs[0].String(),
 			valid:     false,
 		},
@@ -72,7 +72,7 @@ func (s *KeeperTestSuite) TestBurnDenomMsg() {
 	}{
 		{
 			desc:      "denom does not exist",
-			burnDenom: "factory/osmo1t7egva48prqmzl59x5ngv4zx0dtrwewc9m7z44/evmos",
+			burnDenom: "factory/fury1t7egva48prqmzl59x5ngv4zx0dtrwewc9m7z44/evmos",
 			admin:     s.TestAccs[0].String(),
 			valid:     false,
 		},
@@ -217,14 +217,14 @@ func (s *KeeperTestSuite) TestSetDenomMetaDataMsg() {
 						Exponent: 0,
 					},
 					{
-						Denom:    "uosmo",
+						Denom:    "ufury",
 						Exponent: 6,
 					},
 				},
 				Base:    s.defaultDenom,
-				Display: "uosmo",
-				Name:    "OSMO",
-				Symbol:  "OSMO",
+				Display: "ufury",
+				Name:    "FURY",
+				Symbol:  "FURY",
 			}),
 			expectedPass:          true,
 			expectedMessageEvents: 1,
@@ -239,14 +239,14 @@ func (s *KeeperTestSuite) TestSetDenomMetaDataMsg() {
 						Exponent: 0,
 					},
 					{
-						Denom:    "uosmo",
+						Denom:    "ufury",
 						Exponent: 6,
 					},
 				},
 				Base:    fmt.Sprintf("factory/%s/litecoin", s.TestAccs[0].String()),
-				Display: "uosmo",
-				Name:    "OSMO",
-				Symbol:  "OSMO",
+				Display: "ufury",
+				Name:    "FURY",
+				Symbol:  "FURY",
 			}),
 			expectedPass: false,
 		},

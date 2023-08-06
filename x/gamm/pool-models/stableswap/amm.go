@@ -6,8 +6,8 @@ import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
 	"github.com/osmosis-labs/osmosis/osmomath"
-	"github.com/osmosis-labs/osmosis/v16/x/gamm/pool-models/internal/cfmm_common"
-	types "github.com/osmosis-labs/osmosis/v16/x/gamm/types"
+	"github.com/merlinslair/merlin/v16/x/gamm/pool-models/internal/cfmm_common"
+	types "github.com/merlinslair/merlin/v16/x/gamm/types"
 )
 
 // Simplified multi-asset CFMM is xy(x^2 + y^2 + w) = k,
@@ -16,13 +16,13 @@ import (
 // When w = 0, this is equivalent to solidly's CFMM
 // We use this version for calculations since the u
 // term in the full CFMM is constant.
-func cfmmConstantMultiNoV(xReserve, yReserve, wSumSquares osmomath.BigDec) osmomath.BigDec {
+func cfmmConstantMultiNoV(xReserve, yReserve, wSumSquares furymath.BigDec) furymath.BigDec {
 	return cfmmConstantMultiNoVY(xReserve, yReserve, wSumSquares).Mul(yReserve)
 }
 
 // returns x(x^2 + y^2 + w) = k
 // For use in comparing values with the same y
-func cfmmConstantMultiNoVY(xReserve, yReserve, wSumSquares osmomath.BigDec) osmomath.BigDec {
+func cfmmConstantMultiNoVY(xReserve, yReserve, wSumSquares furymath.BigDec) furymath.BigDec {
 	if !xReserve.IsPositive() || !yReserve.IsPositive() || wSumSquares.IsNegative() {
 		panic("invalid input: reserves must be positive")
 	}
@@ -38,8 +38,8 @@ func cfmmConstantMultiNoVY(xReserve, yReserve, wSumSquares osmomath.BigDec) osmo
 // So we solve the following expression for `a`:
 // xy(x^2 + y^2 + w) = (x - a)(y + b)((x - a)^2 + (y + b)^2 + w)
 // with w set to 0 for 2 asset pools
-func solveCfmm(xReserve, yReserve osmomath.BigDec, remReserves []osmomath.BigDec, yIn osmomath.BigDec) osmomath.BigDec {
-	wSumSquares := osmomath.ZeroDec()
+func solveCfmm(xReserve, yReserve furymath.BigDec, remReserves []furymath.BigDec, yIn furymath.BigDec) furymath.BigDec {
+	wSumSquares := furymath.ZeroDec()
 	for _, assetReserve := range remReserves {
 		wSumSquares = wSumSquares.Add(assetReserve.Mul(assetReserve))
 	}
@@ -47,7 +47,7 @@ func solveCfmm(xReserve, yReserve osmomath.BigDec, remReserves []osmomath.BigDec
 }
 
 // $$k_{target} = \frac{x_0 y_0 (x_0^2 + y_0^2 + w)}{y_f} - (x_0 (y_f^2 + w) + x_0^3)$$
-func targetKCalculator(x0, y0, w, yf osmomath.BigDec) osmomath.BigDec {
+func targetKCalculator(x0, y0, w, yf furymath.BigDec) furymath.BigDec {
 	// cfmmNoV(x0, y0, w) = x_0 y_0 (x_0^2 + y_0^2 + w)
 	startK := cfmmConstantMultiNoV(x0, y0, w)
 	// remove extra yf term
@@ -62,12 +62,12 @@ func targetKCalculator(x0, y0, w, yf osmomath.BigDec) osmomath.BigDec {
 
 // $$k_{iter}(x_f) = -x_{out}^3 + 3 x_0 x_{out}^2 - (y_f^2 + w + 3x_0^2)x_{out}$$
 // where x_out = x_0 - x_f
-func iterKCalculator(x0, w, yf osmomath.BigDec) func(osmomath.BigDec) osmomath.BigDec {
+func iterKCalculator(x0, w, yf furymath.BigDec) func(furymath.BigDec) furymath.BigDec {
 	// compute coefficients first
-	cubicCoeff := osmomath.OneDec().Neg()
+	cubicCoeff := furymath.OneDec().Neg()
 	quadraticCoeff := x0.MulInt64(3)
 	linearCoeff := quadraticCoeff.Mul(x0).Add(w).Add(yf.Mul(yf)).Neg()
-	return func(xf osmomath.BigDec) osmomath.BigDec {
+	return func(xf furymath.BigDec) furymath.BigDec {
 		xOut := x0.Sub(xf)
 		// horners method
 		// ax^3 + bx^2 + cx = x(c + x(b + ax))
@@ -79,12 +79,12 @@ func iterKCalculator(x0, w, yf osmomath.BigDec) func(osmomath.BigDec) osmomath.B
 }
 
 var (
-	zero = osmomath.ZeroDec()
-	one  = osmomath.OneDec()
+	zero = furymath.ZeroDec()
+	one  = furymath.OneDec()
 )
 
-func deriveUpperLowerXFinalReserveBounds(xReserve, yReserve, wSumSquares, yFinal osmomath.BigDec) (
-	xFinalLowerbound, xFinalUpperbound osmomath.BigDec,
+func deriveUpperLowerXFinalReserveBounds(xReserve, yReserve, wSumSquares, yFinal furymath.BigDec) (
+	xFinalLowerbound, xFinalUpperbound furymath.BigDec,
 ) {
 	xFinalLowerbound, xFinalUpperbound = xReserve, xReserve
 
@@ -102,7 +102,7 @@ func deriveUpperLowerXFinalReserveBounds(xReserve, yReserve, wSumSquares, yFinal
 		xFinalUpperbound = xReserve.Quo(kRatio).Ceil()
 	} else if kRatio.GT(one) {
 		// need to find a lowerbound. We could use a cubic relation, but for now we just set it to 0.
-		xFinalLowerbound = osmomath.ZeroDec()
+		xFinalLowerbound = furymath.ZeroDec()
 	}
 	// else
 	// k remains unchanged.
@@ -111,7 +111,7 @@ func deriveUpperLowerXFinalReserveBounds(xReserve, yReserve, wSumSquares, yFinal
 }
 
 // solveCFMMBinarySearch searches the correct dx using binary search over constant K.
-func solveCFMMBinarySearchMulti(xReserve, yReserve, wSumSquares, yIn osmomath.BigDec) osmomath.BigDec {
+func solveCFMMBinarySearchMulti(xReserve, yReserve, wSumSquares, yIn furymath.BigDec) furymath.BigDec {
 	if !xReserve.IsPositive() || !yReserve.IsPositive() || wSumSquares.IsNegative() {
 		panic("invalid input: reserves and input must be positive")
 	} else if yIn.Abs().GTE(yReserve) {
@@ -125,7 +125,7 @@ func solveCFMMBinarySearchMulti(xReserve, yReserve, wSumSquares, yIn osmomath.Bi
 	maxIterations := 256
 
 	// we use a geometric error tolerance that guarantees approximately 10^-12 precision on outputs
-	errTolerance := osmomath.ErrTolerance{AdditiveTolerance: sdk.Dec{}, MultiplicativeTolerance: sdk.NewDecWithPrec(1, 12)}
+	errTolerance := furymath.ErrTolerance{AdditiveTolerance: sdk.Dec{}, MultiplicativeTolerance: sdk.NewDecWithPrec(1, 12)}
 
 	// if yIn is positive, we want to under-estimate the amount of xOut.
 	// This means, we want x_out to be rounded down, as x_out = x_init - x_final, for x_init > x_final.
@@ -135,10 +135,10 @@ func solveCFMMBinarySearchMulti(xReserve, yReserve, wSumSquares, yIn osmomath.Bi
 	// we want to over_estimate |x_out|, which means rounding x_out down as its a negative quantity.
 	// This means rounding x_final up, to give us a larger negative.
 	// Therefore we always round up.
-	roundingDirection := osmomath.RoundUp
+	roundingDirection := furymath.RoundUp
 	errTolerance.RoundingDir = roundingDirection
 
-	xEst, err := osmomath.BinarySearchBigDec(iterKCalc, xLowEst, xHighEst, targetK, errTolerance, maxIterations)
+	xEst, err := furymath.BinarySearchBigDec(iterKCalc, xLowEst, xHighEst, targetK, errTolerance, maxIterations)
 	if err != nil {
 		panic(err)
 	}
@@ -176,19 +176,19 @@ func (p Pool) spotPrice(quoteDenom, baseDenom string) (spotPrice sdk.Dec, err er
 	return res, err
 }
 
-func oneMinus(spreadFactor sdk.Dec) osmomath.BigDec {
-	return osmomath.BigDecFromSDKDec(sdk.OneDec().Sub(spreadFactor))
+func oneMinus(spreadFactor sdk.Dec) furymath.BigDec {
+	return furymath.BigDecFromSDKDec(sdk.OneDec().Sub(spreadFactor))
 }
 
 // calcOutAmtGivenIn calculate amount of specified denom to output from a pool in sdk.Dec given the input `tokenIn`
 func (p Pool) calcOutAmtGivenIn(tokenIn sdk.Coin, tokenOutDenom string, spreadFactor sdk.Dec) (sdk.Dec, error) {
 	// round liquidity down, and round token in down
-	reserves, err := p.scaledSortedPoolReserves(tokenIn.Denom, tokenOutDenom, osmomath.RoundDown)
+	reserves, err := p.scaledSortedPoolReserves(tokenIn.Denom, tokenOutDenom, furymath.RoundDown)
 	if err != nil {
 		return sdk.Dec{}, err
 	}
 	tokenInSupply, tokenOutSupply, remReserves := reserves[0], reserves[1], reserves[2:]
-	tokenInDec, err := p.scaleCoin(tokenIn, osmomath.RoundDown)
+	tokenInDec, err := p.scaleCoin(tokenIn, furymath.RoundDown)
 	if err != nil {
 		return sdk.Dec{}, err
 	}
@@ -206,12 +206,12 @@ func (p Pool) calcOutAmtGivenIn(tokenIn sdk.Coin, tokenOutDenom string, spreadFa
 // calcInAmtGivenOut calculates exact input amount given the desired output and return as a decimal
 func (p *Pool) calcInAmtGivenOut(tokenOut sdk.Coin, tokenInDenom string, spreadFactor sdk.Dec) (sdk.Dec, error) {
 	// round liquidity down, and round token out up
-	reserves, err := p.scaledSortedPoolReserves(tokenInDenom, tokenOut.Denom, osmomath.RoundDown)
+	reserves, err := p.scaledSortedPoolReserves(tokenInDenom, tokenOut.Denom, furymath.RoundDown)
 	if err != nil {
 		return sdk.Dec{}, err
 	}
 	tokenInSupply, tokenOutSupply, remReserves := reserves[0], reserves[1], reserves[2:]
-	tokenOutAmount, err := p.scaleCoin(tokenOut, osmomath.RoundUp)
+	tokenOutAmount, err := p.scaleCoin(tokenOut, furymath.RoundUp)
 	if err != nil {
 		return sdk.Dec{}, err
 	}
@@ -265,12 +265,12 @@ func (p *Pool) singleAssetJoinSpreadFactorRatio(tokenInDenom string) (sdk.Dec, e
 		tokenOut = p.PoolLiquidity[1]
 	}
 	// We round bankers scaled liquidity, since we care about the ratio of liquidity.
-	scaledLiquidity, err := p.scaledSortedPoolReserves(tokenInDenom, tokenOut.Denom, osmomath.RoundDown)
+	scaledLiquidity, err := p.scaledSortedPoolReserves(tokenInDenom, tokenOut.Denom, furymath.RoundDown)
 	if err != nil {
 		return sdk.Dec{}, err
 	}
 
-	totalLiquidityDenominator := osmomath.ZeroDec()
+	totalLiquidityDenominator := furymath.ZeroDec()
 	for _, amount := range scaledLiquidity {
 		totalLiquidityDenominator = totalLiquidityDenominator.Add(amount)
 	}

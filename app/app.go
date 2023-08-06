@@ -48,26 +48,26 @@ import (
 	"github.com/cosmos/cosmos-sdk/x/crisis"
 	upgradetypes "github.com/cosmos/cosmos-sdk/x/upgrade/types"
 
-	"github.com/osmosis-labs/osmosis/v16/app/keepers"
-	"github.com/osmosis-labs/osmosis/v16/app/upgrades"
-	v10 "github.com/osmosis-labs/osmosis/v16/app/upgrades/v10"
-	v11 "github.com/osmosis-labs/osmosis/v16/app/upgrades/v11"
-	v12 "github.com/osmosis-labs/osmosis/v16/app/upgrades/v12"
-	v13 "github.com/osmosis-labs/osmosis/v16/app/upgrades/v13"
-	v14 "github.com/osmosis-labs/osmosis/v16/app/upgrades/v14"
-	v15 "github.com/osmosis-labs/osmosis/v16/app/upgrades/v15"
-	v16 "github.com/osmosis-labs/osmosis/v16/app/upgrades/v16"
-	v3 "github.com/osmosis-labs/osmosis/v16/app/upgrades/v3"
-	v4 "github.com/osmosis-labs/osmosis/v16/app/upgrades/v4"
-	v5 "github.com/osmosis-labs/osmosis/v16/app/upgrades/v5"
-	v6 "github.com/osmosis-labs/osmosis/v16/app/upgrades/v6"
-	v7 "github.com/osmosis-labs/osmosis/v16/app/upgrades/v7"
-	v8 "github.com/osmosis-labs/osmosis/v16/app/upgrades/v8"
-	v9 "github.com/osmosis-labs/osmosis/v16/app/upgrades/v9"
-	_ "github.com/osmosis-labs/osmosis/v16/client/docs/statik"
+	"github.com/merlinslair/merlin/v16/app/keepers"
+	"github.com/merlinslair/merlin/v16/app/upgrades"
+	v10 "github.com/merlinslair/merlin/v16/app/upgrades/v10"
+	v11 "github.com/merlinslair/merlin/v16/app/upgrades/v11"
+	v12 "github.com/merlinslair/merlin/v16/app/upgrades/v12"
+	v13 "github.com/merlinslair/merlin/v16/app/upgrades/v13"
+	v14 "github.com/merlinslair/merlin/v16/app/upgrades/v14"
+	v15 "github.com/merlinslair/merlin/v16/app/upgrades/v15"
+	v16 "github.com/merlinslair/merlin/v16/app/upgrades/v16"
+	v3 "github.com/merlinslair/merlin/v16/app/upgrades/v3"
+	v4 "github.com/merlinslair/merlin/v16/app/upgrades/v4"
+	v5 "github.com/merlinslair/merlin/v16/app/upgrades/v5"
+	v6 "github.com/merlinslair/merlin/v16/app/upgrades/v6"
+	v7 "github.com/merlinslair/merlin/v16/app/upgrades/v7"
+	v8 "github.com/merlinslair/merlin/v16/app/upgrades/v8"
+	v9 "github.com/merlinslair/merlin/v16/app/upgrades/v9"
+	_ "github.com/merlinslair/merlin/v16/client/docs/statik"
 )
 
-const appName = "OsmosisApp"
+const appName = "MerlinApp"
 
 var (
 	// DefaultNodeHome default home directories for the application daemon
@@ -100,7 +100,7 @@ var (
 	// EmptyWasmOpts defines a type alias for a list of wasm options.
 	EmptyWasmOpts []wasm.Option
 
-	// _ sdksimapp.App = (*OsmosisApp)(nil)
+	// _ sdksimapp.App = (*MerlinApp)(nil)
 
 	Upgrades = []upgrades.Upgrade{v4.Upgrade, v5.Upgrade, v7.Upgrade, v9.Upgrade, v11.Upgrade, v12.Upgrade, v13.Upgrade, v14.Upgrade, v15.Upgrade, v16.Upgrade}
 	Forks    = []upgrades.Fork{v3.Fork, v6.Fork, v8.Fork, v10.Fork}
@@ -128,10 +128,10 @@ func GetWasmEnabledProposals() []wasm.ProposalType {
 	return proposals
 }
 
-// OsmosisApp extends an ABCI application, but with most of its parameters exported.
+// MerlinApp extends an ABCI application, but with most of its parameters exported.
 // They are exported for convenience in creating helper functions, as object
 // capabilities aren't needed for testing.
-type OsmosisApp struct {
+type MerlinApp struct {
 	*baseapp.BaseApp
 	keepers.AppKeepers
 
@@ -145,22 +145,22 @@ type OsmosisApp struct {
 	homePath     string
 }
 
-// init sets DefaultNodeHome to default osmosisd install location.
+// init sets DefaultNodeHome to default merlin install location.
 func init() {
 	userHomeDir, err := os.UserHomeDir()
 	if err != nil {
 		panic(err)
 	}
 
-	DefaultNodeHome = filepath.Join(userHomeDir, ".osmosisd")
+	DefaultNodeHome = filepath.Join(userHomeDir, ".merlin")
 }
 
-// initReusablePackageInjections injects data available within osmosis into the reusable packages.
+// initReusablePackageInjections injects data available within merlin into the reusable packages.
 // This is done to ensure they can be built without depending on at compilation time and thus imported by other chains
 // This should always be called before any other function to avoid inconsistent data
 func initReusablePackageInjections() {
-	// Inject ClawbackVestingAccount account type into osmoutils
-	osmoutils.OsmoUtilsExtraAccountTypes = map[reflect.Type]struct{}{
+	// Inject ClawbackVestingAccount account type into furyutils
+	furyutils.FuryUtilsExtraAccountTypes = map[reflect.Type]struct{}{
 		reflect.TypeOf(&vestingtypes.ClawbackVestingAccount{}): {},
 	}
 }
@@ -173,8 +173,8 @@ func overrideWasmVariables() {
 	wasmtypes.MaxProposalWasmSize = wasmtypes.MaxWasmSize
 }
 
-// NewOsmosisApp returns a reference to an initialized Osmosis.
-func NewOsmosisApp(
+// NewMerlinApp returns a reference to an initialized Merlin.
+func NewMerlinApp(
 	logger log.Logger,
 	db dbm.DB,
 	traceStore io.Writer,
@@ -185,7 +185,7 @@ func NewOsmosisApp(
 	appOpts servertypes.AppOptions,
 	wasmOpts []wasm.Option,
 	baseAppOptions ...func(*baseapp.BaseApp),
-) *OsmosisApp {
+) *MerlinApp {
 	initReusablePackageInjections() // This should run before anything else to make sure the variables are properly initialized
 	overrideWasmVariables()
 	encodingConfig := GetEncodingConfig()
@@ -199,7 +199,7 @@ func NewOsmosisApp(
 	bApp.SetVersion(version.Version)
 	bApp.SetInterfaceRegistry(interfaceRegistry)
 
-	app := &OsmosisApp{
+	app := &MerlinApp{
 		AppKeepers:        keepers.AppKeepers{},
 		BaseApp:           bApp,
 		cdc:               cdc,
@@ -339,26 +339,26 @@ func MakeCodecs() (codec.Codec, *codec.LegacyAmino) {
 	return config.Marshaler, config.Amino
 }
 
-func (app *OsmosisApp) GetBaseApp() *baseapp.BaseApp {
+func (app *MerlinApp) GetBaseApp() *baseapp.BaseApp {
 	return app.BaseApp
 }
 
 // Name returns the name of the App.
-func (app *OsmosisApp) Name() string { return app.BaseApp.Name() }
+func (app *MerlinApp) Name() string { return app.BaseApp.Name() }
 
 // BeginBlocker application updates every begin block.
-func (app *OsmosisApp) BeginBlocker(ctx sdk.Context, req abci.RequestBeginBlock) abci.ResponseBeginBlock {
+func (app *MerlinApp) BeginBlocker(ctx sdk.Context, req abci.RequestBeginBlock) abci.ResponseBeginBlock {
 	BeginBlockForks(ctx, app)
 	return app.mm.BeginBlock(ctx, req)
 }
 
 // EndBlocker application updates every end block.
-func (app *OsmosisApp) EndBlocker(ctx sdk.Context, req abci.RequestEndBlock) abci.ResponseEndBlock {
+func (app *MerlinApp) EndBlocker(ctx sdk.Context, req abci.RequestEndBlock) abci.ResponseEndBlock {
 	return app.mm.EndBlock(ctx, req)
 }
 
 // InitChainer application update at chain initialization.
-func (app *OsmosisApp) InitChainer(ctx sdk.Context, req abci.RequestInitChain) abci.ResponseInitChain {
+func (app *MerlinApp) InitChainer(ctx sdk.Context, req abci.RequestInitChain) abci.ResponseInitChain {
 	var genesisState GenesisState
 	if err := tmjson.Unmarshal(req.AppStateBytes, &genesisState); err != nil {
 		panic(err)
@@ -370,7 +370,7 @@ func (app *OsmosisApp) InitChainer(ctx sdk.Context, req abci.RequestInitChain) a
 }
 
 // LoadHeight loads a particular height.
-func (app *OsmosisApp) LoadHeight(height int64) error {
+func (app *MerlinApp) LoadHeight(height int64) error {
 	return app.LoadVersion(height)
 }
 
@@ -378,30 +378,30 @@ func (app *OsmosisApp) LoadHeight(height int64) error {
 //
 // NOTE: This is solely to be used for testing purposes as it may be desirable
 // for modules to register their own custom testing types.
-func (app *OsmosisApp) LegacyAmino() *codec.LegacyAmino {
+func (app *MerlinApp) LegacyAmino() *codec.LegacyAmino {
 	return app.cdc
 }
 
-// AppCodec returns Osmosis' app codec.
+// AppCodec returns Merlin' app codec.
 //
 // NOTE: This is solely to be used for testing purposes as it may be desirable
 // for modules to register their own custom testing types.
-func (app *OsmosisApp) AppCodec() codec.Codec {
+func (app *MerlinApp) AppCodec() codec.Codec {
 	return app.appCodec
 }
 
-// InterfaceRegistry returns Osmosis' InterfaceRegistry.
-func (app *OsmosisApp) InterfaceRegistry() types.InterfaceRegistry {
+// InterfaceRegistry returns Merlin' InterfaceRegistry.
+func (app *MerlinApp) InterfaceRegistry() types.InterfaceRegistry {
 	return app.interfaceRegistry
 }
 
-func (app *OsmosisApp) ModuleManager() module.Manager {
+func (app *MerlinApp) ModuleManager() module.Manager {
 	return *app.mm
 }
 
 // RegisterAPIRoutes registers all application module routes with the provided
 // API server.
-func (app *OsmosisApp) RegisterAPIRoutes(apiSvr *api.Server, apiConfig config.APIConfig) {
+func (app *MerlinApp) RegisterAPIRoutes(apiSvr *api.Server, apiConfig config.APIConfig) {
 	clientCtx := apiSvr.ClientCtx
 	rpc.RegisterRoutes(clientCtx, apiSvr.Router)
 	// Register legacy tx routes.
@@ -422,18 +422,18 @@ func (app *OsmosisApp) RegisterAPIRoutes(apiSvr *api.Server, apiConfig config.AP
 }
 
 // RegisterTxService implements the Application.RegisterTxService method.
-func (app *OsmosisApp) RegisterTxService(clientCtx client.Context) {
+func (app *MerlinApp) RegisterTxService(clientCtx client.Context) {
 	authtx.RegisterTxService(app.BaseApp.GRPCQueryRouter(), clientCtx, app.BaseApp.Simulate, app.interfaceRegistry)
 }
 
 // RegisterTendermintService implements the Application.RegisterTendermintService
 // method.
-func (app *OsmosisApp) RegisterTendermintService(clientCtx client.Context) {
+func (app *MerlinApp) RegisterTendermintService(clientCtx client.Context) {
 	tmservice.RegisterTendermintService(app.BaseApp.GRPCQueryRouter(), clientCtx, app.interfaceRegistry)
 }
 
 // configure store loader that checks if version == upgradeHeight and applies store upgrades
-func (app *OsmosisApp) setupUpgradeStoreLoaders() {
+func (app *MerlinApp) setupUpgradeStoreLoaders() {
 	upgradeInfo, err := app.UpgradeKeeper.ReadUpgradeInfoFromDisk()
 	if err != nil {
 		panic(fmt.Sprintf("failed to read upgrade info from disk %s", err))
@@ -456,7 +456,7 @@ func (app *OsmosisApp) setupUpgradeStoreLoaders() {
 	}
 }
 
-func (app *OsmosisApp) customPreUpgradeHandler(upgradeInfo store.UpgradeInfo) {
+func (app *MerlinApp) customPreUpgradeHandler(upgradeInfo store.UpgradeInfo) {
 	switch upgradeInfo.Name {
 	case "v16":
 		// v16 upgrade handler
@@ -468,7 +468,7 @@ func (app *OsmosisApp) customPreUpgradeHandler(upgradeInfo store.UpgradeInfo) {
 	}
 }
 
-func (app *OsmosisApp) setupUpgradeHandlers() {
+func (app *MerlinApp) setupUpgradeHandlers() {
 	for _, upgrade := range Upgrades {
 		app.UpgradeKeeper.SetUpgradeHandler(
 			upgrade.UpgradeName,

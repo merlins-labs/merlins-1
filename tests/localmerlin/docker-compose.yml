@@ -1,0 +1,29 @@
+version: "3"
+
+services:
+  merlin:
+    image: local:merlin
+    build:
+      context: ../../
+      dockerfile: Dockerfile
+      args:
+        RUNNER_IMAGE: golang:1.20.3-alpine3.17
+        GO_VERSION: "1.20"
+    volumes:
+      - ./scripts/nativeDenomPoolA.json:/merlin/nativeDenomPoolA.json
+      - ./scripts/nativeDenomPoolB.json:/merlin/nativeDenomPoolB.json
+      - ./scripts/nativeDenomThreeAssetPool.json:/merlin/nativeDenomThreeAssetPool.json
+      - ./scripts/stableswapPool.json:/merlin/stableswapPool.json
+      - ./scripts/setup.sh:/merlin/setup.sh
+      - ../cl-genesis-positions:/merlin/cl-genesis-positions
+      - $HOME/.merlin-local/:/merlin/.merlin/
+    entrypoint:
+      - /merlin/setup.sh
+    command:
+      - $STATE
+    ports:
+      - 26657:26657
+      - 1317:1317
+      - 9090:9090
+      - 9091:9091
+      - 6060:6060

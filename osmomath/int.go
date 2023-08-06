@@ -1,4 +1,4 @@
-package osmomath
+package furymath
 
 import (
 	"encoding"

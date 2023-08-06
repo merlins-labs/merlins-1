@@ -7,15 +7,15 @@ import (
 	"github.com/tendermint/tendermint/libs/log"
 
 	"github.com/osmosis-labs/osmosis/osmoutils"
-	gammtypes "github.com/osmosis-labs/osmosis/v16/x/gamm/types"
-	incentivestypes "github.com/osmosis-labs/osmosis/v16/x/incentives/types"
-	lockuptypes "github.com/osmosis-labs/osmosis/v16/x/lockup/types"
-	"github.com/osmosis-labs/osmosis/v16/x/pool-incentives/types"
+	gammtypes "github.com/merlinslair/merlin/v16/x/gamm/types"
+	incentivestypes "github.com/merlinslair/merlin/v16/x/incentives/types"
+	lockuptypes "github.com/merlinslair/merlin/v16/x/lockup/types"
+	"github.com/merlinslair/merlin/v16/x/pool-incentives/types"
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	paramtypes "github.com/cosmos/cosmos-sdk/x/params/types"
 
-	poolmanagertypes "github.com/osmosis-labs/osmosis/v16/x/poolmanager/types"
+	poolmanagertypes "github.com/merlinslair/merlin/v16/x/poolmanager/types"
 )
 
 type Keeper struct {
@@ -204,7 +204,7 @@ func (k Keeper) GetPoolGaugeId(ctx sdk.Context, poolId uint64, lockableDuration 
 // have the second link.
 func (k Keeper) GetNoLockGaugeIdsFromPool(ctx sdk.Context, poolId uint64) ([]uint64, error) {
 	store := ctx.KVStore(k.storeKey)
-	gaugeIds, err := osmoutils.GatherValuesFromStorePrefix(store, types.GetPoolNoLockGaugeIdIterationStoreKey(poolId), func(b []byte) (uint64, error) {
+	gaugeIds, err := furyutils.GatherValuesFromStorePrefix(store, types.GetPoolNoLockGaugeIdIterationStoreKey(poolId), func(b []byte) (uint64, error) {
 		return sdk.BigEndianToUint64(b), nil
 	})
 	if err != nil {
@@ -252,13 +252,13 @@ func (k Keeper) GetGaugesForCFMMPool(ctx sdk.Context, poolId uint64) ([]incentiv
 func (k Keeper) SetLockableDurations(ctx sdk.Context, lockableDurations []time.Duration) {
 	store := ctx.KVStore(k.storeKey)
 	info := types.LockableDurationsInfo{LockableDurations: lockableDurations}
-	osmoutils.MustSet(store, types.LockableDurationsKey, &info)
+	furyutils.MustSet(store, types.LockableDurationsKey, &info)
 }
 
 func (k Keeper) GetLockableDurations(ctx sdk.Context) []time.Duration {
 	store := ctx.KVStore(k.storeKey)
 	info := types.LockableDurationsInfo{}
-	osmoutils.MustGet(store, types.LockableDurationsKey, &info)
+	furyutils.MustGet(store, types.LockableDurationsKey, &info)
 	return info.LockableDurations
 }
 

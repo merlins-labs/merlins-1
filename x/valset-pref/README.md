@@ -30,19 +30,19 @@ How does this module work?
 Staking Calculation 
 
 - The user provides an amount to delegate and our `MsgDelegateToValidatorSet` divides the amount based on validator weight distribution.
-  For example: Stake 100osmo with validator-set {ValA -> 0.5, ValB -> 0.3, ValC -> 0.2}
-  our delegate logic will attempt to delegate (100 * 0.5) 50osmo for ValA , (100 * 0.3) 30osmo from ValB and (100 * 0.2) 20osmo from ValC.
+  For example: Stake 100fury with validator-set {ValA -> 0.5, ValB -> 0.3, ValC -> 0.2}
+  our delegate logic will attempt to delegate (100 * 0.5) 50fury for ValA , (100 * 0.3) 30fury from ValB and (100 * 0.2) 20fury from ValC.
 
 UnStaking Calculation 
 
 - The user provides an amount to undelegate and our `MsgUnDelegateToValidatorSet` divides the amount based on validator weight distribution.
 - Here, the user can either undelegate the entire amount or partial amount 
-  - Entire amount unstaking: UnStake 100osmo from validator-set {ValA -> 0.5, ValB -> 0.3, ValC -> 0.2},
-    our undelegate logic will attempt to undelegate 50osmo from ValA , 30osmo from ValB, 20osmo from ValC
-  - Partial amount unstaking: UnStake 27osmo from validator-set {ValA -> 0.5, ValB -> 0.3, ValC -> 0.2}, 
-    our undelegate logic will attempt to undelegate (27 * 0.5) 13.5osmos from ValA, (27 * 0.3), 8.1osmo from ValB, 
-    and (50 * 0.2) 5.4smo from ValC where 13.5osmo + 8.1osmo + 5.4osmo = 27osmo
-  - The user will then have 73osmo remaining with unchanged weights {ValA -> 0.5, ValB -> 0.3, ValC -> 0.2},
+  - Entire amount unstaking: UnStake 100fury from validator-set {ValA -> 0.5, ValB -> 0.3, ValC -> 0.2},
+    our undelegate logic will attempt to undelegate 50fury from ValA , 30fury from ValB, 20fury from ValC
+  - Partial amount unstaking: UnStake 27fury from validator-set {ValA -> 0.5, ValB -> 0.3, ValC -> 0.2}, 
+    our undelegate logic will attempt to undelegate (27 * 0.5) 13.5furys from ValA, (27 * 0.3), 8.1fury from ValB, 
+    and (50 * 0.2) 5.4smo from ValC where 13.5fury + 8.1fury + 5.4fury = 27fury
+  - The user will then have 73fury remaining with unchanged weights {ValA -> 0.5, ValB -> 0.3, ValC -> 0.2},
 
 ## Messages
 
@@ -76,9 +76,9 @@ If the user does not have an existing validator set use delegators' current stak
 ```go
     string delegator = 1 [ (gogoproto.moretags) = "yaml:\"delegator\"" ];
     // the amount of tokens the user is trying to delegate.
-    // For ex: delegate 10osmo with validator-set {ValA -> 0.5, ValB -> 0.3, ValC
-    // -> 0.2} our staking logic would attempt to delegate 5osmo to A , 3osmo to
-    // B, 2osmo to C.
+    // For ex: delegate 10fury with validator-set {ValA -> 0.5, ValB -> 0.3, ValC
+    // -> 0.2} our staking logic would attempt to delegate 5fury to A , 3fury to
+    // B, 2fury to C.
     cosmos.base.v1beta1.Coin coin = 2 [
       (gogoproto.nullable) = false,
       (gogoproto.castrepeated) = "github.com/cosmos/cosmos-sdk/types.Coin"
@@ -103,10 +103,10 @@ The given amount will be divided based on the weights distributed to the validat
 ```go
     string delegator = 1 [ (gogoproto.moretags) = "yaml:\"delegator\"" ];
     // the amount the user wants to undelegate
-    // For ex: Undelegate 10osmo with validator-set {ValA -> 0.5, ValB -> 0.3,
+    // For ex: Undelegate 10fury with validator-set {ValA -> 0.5, ValB -> 0.3,
     // ValC
-    // -> 0.2} our undelegate logic would attempt to undelegate 5osmo from A ,
-    // 3osmo from B, 2osmo from C
+    // -> 0.2} our undelegate logic would attempt to undelegate 5fury from A ,
+    // 3fury from B, 2fury from C
     cosmos.base.v1beta1.Coin coin = 3 [
       (gogoproto.nullable) = false,
       (gogoproto.castrepeated) = "github.com/cosmos/cosmos-sdk/types.Coin"
@@ -149,8 +149,8 @@ the redelegation is automatically completed in the EndBlocker. If the user does 
 
 ## Redelegate algorithm logic pseudocode
 
-Existing ValSet   20osmos {ValA-> 0.5, ValB-> 0.3, ValC-> 0.2} [ValA-> 10osmo, ValB-> 6osmo, ValC-> 4osmo]
-New ValSet        20osmos {ValD-> 0.2, ValE-> 0.2, ValF-> 0.6} [ValD-> 4osmo, ValE-> 4osmo, ValF-> 12osmo]
+Existing ValSet   20furys {ValA-> 0.5, ValB-> 0.3, ValC-> 0.2} [ValA-> 10fury, ValB-> 6fury, ValC-> 4fury]
+New ValSet        20furys {ValD-> 0.2, ValE-> 0.2, ValF-> 0.6} [ValD-> 4fury, ValE-> 4fury, ValF-> 12fury]
 
 - // Rearranging the existingValSet and newValSet to to add extra validator padding
   - existing_valset_updated = [ValA: 10, ValB: 6, ValC: 4, ValD: 0, ValE: 0, ValF: 0]

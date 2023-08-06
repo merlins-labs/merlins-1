@@ -7,7 +7,7 @@ import (
 
 	"gopkg.in/yaml.v2"
 
-	"github.com/osmosis-labs/osmosis/v16/x/gamm/types"
+	"github.com/merlinslair/merlin/v16/x/gamm/types"
 
 	errorsmod "cosmossdk.io/errors"
 	sdk "github.com/cosmos/cosmos-sdk/types"
@@ -26,7 +26,7 @@ func (pa PoolAsset) validateWeight() error {
 	}
 
 	// TODO: add validation for asset weight overflow:
-	// https://github.com/osmosis-labs/osmosis/issues/1958
+	// https://github.com/merlinslair/merlin/issues/1958
 
 	return nil
 }

@@ -13,36 +13,36 @@ import (
 	"github.com/cosmos/cosmos-sdk/simapp/helpers"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
-	osmosim "github.com/osmosis-labs/osmosis/v16/simulation/executor"
-	"github.com/osmosis-labs/osmosis/v16/simulation/simtypes/simlogger"
-	txfeetypes "github.com/osmosis-labs/osmosis/v16/x/txfees/types"
+	furysim "github.com/merlinslair/merlin/v16/simulation/executor"
+	"github.com/merlinslair/merlin/v16/simulation/simtypes/simlogger"
+	txfeetypes "github.com/merlinslair/merlin/v16/x/txfees/types"
 )
 
 // Profile with:
-// /usr/local/go/bin/go test -benchmem -run=^$ github.com/osmosis-labs/osmosis/simapp -bench ^BenchmarkFullAppSimulation$ -Commit=true -cpuprofile cpu.out
+// /usr/local/go/bin/go test -benchmem -run=^$ github.com/merlinslair/merlin/simapp -bench ^BenchmarkFullAppSimulation$ -Commit=true -cpuprofile cpu.out
 func BenchmarkFullAppSimulation(b *testing.B) {
 	// -Enabled=true -NumBlocks=1000 -BlockSize=200 \
 	// -Period=1 -Commit=true -Seed=57 -v -timeout 24h
-	osmosim.FlagEnabledValue = true
-	osmosim.FlagNumBlocksValue = 1000
-	osmosim.FlagBlockSizeValue = 200
-	osmosim.FlagCommitValue = true
-	osmosim.FlagVerboseValue = true
-	// osmosim.FlagPeriodValue = 1000
+	furysim.FlagEnabledValue = true
+	furysim.FlagNumBlocksValue = 1000
+	furysim.FlagBlockSizeValue = 200
+	furysim.FlagCommitValue = true
+	furysim.FlagVerboseValue = true
+	// furysim.FlagPeriodValue = 1000
 	fullAppSimulation(b, false)
 }
 
 func TestFullAppSimulation(t *testing.T) {
 	// -Enabled=true -NumBlocks=1000 -BlockSize=200 \
 	// -Period=1 -Commit=true -Seed=57 -v -timeout 24h
-	osmosim.FlagEnabledValue = true
-	osmosim.FlagNumBlocksValue = 200
-	osmosim.FlagBlockSizeValue = 25
-	osmosim.FlagCommitValue = true
-	osmosim.FlagVerboseValue = true
-	osmosim.FlagPeriodValue = 10
-	osmosim.FlagSeedValue = 11
-	osmosim.FlagWriteStatsToDB = true
+	furysim.FlagEnabledValue = true
+	furysim.FlagNumBlocksValue = 200
+	furysim.FlagBlockSizeValue = 25
+	furysim.FlagCommitValue = true
+	furysim.FlagVerboseValue = true
+	furysim.FlagPeriodValue = 10
+	furysim.FlagSeedValue = 11
+	furysim.FlagWriteStatsToDB = true
 	fullAppSimulation(t, true)
 }
 
@@ -50,7 +50,7 @@ func fullAppSimulation(tb testing.TB, is_testing bool) {
 	tb.Helper()
 	// TODO: Get SDK simulator fixed to have min fees possible
 	txfeetypes.ConsensusMinFee = sdk.ZeroDec()
-	config, db, logger, cleanup, err := osmosim.SetupSimulation("goleveldb-app-sim", "Simulation")
+	config, db, logger, cleanup, err := furysim.SetupSimulation("goleveldb-app-sim", "Simulation")
 	if err != nil {
 		tb.Fatalf("simulation setup failed: %s", err.Error())
 	}
@@ -61,11 +61,11 @@ func fullAppSimulation(tb testing.TB, is_testing bool) {
 	config.ExecutionDbConfig.UseMerkleTree = !is_testing
 
 	// Run randomized simulation:
-	_, _, simErr := osmosim.SimulateFromSeed(
+	_, _, simErr := furysim.SimulateFromSeed(
 		tb,
 		os.Stdout,
-		OsmosisAppCreator(logger, db),
-		OsmosisInitFns,
+		MerlinAppCreator(logger, db),
+		MerlinInitFns,
 		config,
 	)
 
@@ -74,20 +74,20 @@ func fullAppSimulation(tb testing.TB, is_testing bool) {
 	}
 
 	if config.ExecutionDbConfig.UseMerkleTree {
-		osmosim.PrintStats(db)
+		furysim.PrintStats(db)
 	}
 }
 
 // TODO: Make another test for the fuzzer itself, which just has noOp txs
 // and doesn't depend on the application.
 func TestAppStateDeterminism(t *testing.T) {
-	// if !osmosim.FlagEnabledValue {
+	// if !furysim.FlagEnabledValue {
 	// 	t.Skip("skipping application simulation")
 	// }
 	// TODO: Get SDK simulator fixed to have min fees possible
 	txfeetypes.ConsensusMinFee = sdk.ZeroDec()
 
-	config := osmosim.NewConfigFromFlags()
+	config := furysim.NewConfigFromFlags()
 	config.ExportConfig.ExportParamsPath = ""
 	config.NumBlocks = 50
 	config.BlockSize = 5
@@ -116,11 +116,11 @@ func TestAppStateDeterminism(t *testing.T) {
 			)
 
 			// Run randomized simulation:
-			lastCommitId, _, simErr := osmosim.SimulateFromSeed(
+			lastCommitId, _, simErr := furysim.SimulateFromSeed(
 				t,
 				os.Stdout,
-				OsmosisAppCreator(logger, db),
-				OsmosisInitFns,
+				MerlinAppCreator(logger, db),
+				MerlinInitFns,
 				config,
 			)
 

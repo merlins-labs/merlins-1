@@ -5,11 +5,11 @@ import (
 	"github.com/cosmos/cosmos-sdk/types/module"
 	upgradetypes "github.com/cosmos/cosmos-sdk/x/upgrade/types"
 
-	"github.com/osmosis-labs/osmosis/v16/app/keepers"
-	"github.com/osmosis-labs/osmosis/v16/app/upgrades"
+	"github.com/merlinslair/merlin/v16/app/keepers"
+	"github.com/merlinslair/merlin/v16/app/upgrades"
 )
 
-// CreateUpgradeHandler returns an x/upgrade handler for the Osmosis v4 on-chain
+// CreateUpgradeHandler returns an x/upgrade handler for the Merlin v4 on-chain
 // upgrade. Namely, it executes:
 //
 // 1. Setting x/gamm parameters for pool creation
@@ -22,7 +22,7 @@ func CreateUpgradeHandler(
 ) upgradetypes.UpgradeHandler {
 	return func(ctx sdk.Context, _plan upgradetypes.Plan, vm module.VersionMap) (module.VersionMap, error) {
 		// Kept as comments for recordkeeping. SetParams is now private:
-		// 		keepers.GAMMKeeper.SetParams(ctx, gammtypes.NewParams(sdk.Coins{sdk.NewInt64Coin("uosmo", 1)})) // 1 uOSMO
+		// 		keepers.GAMMKeeper.SetParams(ctx, gammtypes.NewParams(sdk.Coins{sdk.NewInt64Coin("ufury", 1)})) // 1 uFURY
 
 		Prop12(ctx, keepers.BankKeeper, keepers.DistrKeeper)
 

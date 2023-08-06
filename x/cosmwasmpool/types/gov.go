@@ -14,9 +14,9 @@ const (
 
 func init() {
 	govtypes.RegisterProposalType(ProposalTypeUploadCosmWasmPoolCodeAndWhiteList)
-	govtypes.RegisterProposalTypeCodec(&UploadCosmWasmPoolCodeAndWhiteListProposal{}, "osmosis/UploadCosmWasmPoolCodeAndWhiteListProposal")
+	govtypes.RegisterProposalTypeCodec(&UploadCosmWasmPoolCodeAndWhiteListProposal{}, "merlin/UploadCosmWasmPoolCodeAndWhiteListProposal")
 	govtypes.RegisterProposalType(ProposalTypeMigratePoolContractsProposal)
-	govtypes.RegisterProposalTypeCodec(&MigratePoolContractsProposal{}, "osmosis/MigratePoolContractsProposal")
+	govtypes.RegisterProposalTypeCodec(&MigratePoolContractsProposal{}, "merlin/MigratePoolContractsProposal")
 }
 
 var (

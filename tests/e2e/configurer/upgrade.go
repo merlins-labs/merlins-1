@@ -10,12 +10,12 @@ import (
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
-	appparams "github.com/osmosis-labs/osmosis/v16/app/params"
-	v16 "github.com/osmosis-labs/osmosis/v16/app/upgrades/v16"
-	"github.com/osmosis-labs/osmosis/v16/tests/e2e/configurer/chain"
-	"github.com/osmosis-labs/osmosis/v16/tests/e2e/configurer/config"
-	"github.com/osmosis-labs/osmosis/v16/tests/e2e/containers"
-	"github.com/osmosis-labs/osmosis/v16/tests/e2e/initialization"
+	appparams "github.com/merlinslair/merlin/v16/app/params"
+	v16 "github.com/merlinslair/merlin/v16/app/upgrades/v16"
+	"github.com/merlinslair/merlin/v16/tests/e2e/configurer/chain"
+	"github.com/merlinslair/merlin/v16/tests/e2e/configurer/config"
+	"github.com/merlinslair/merlin/v16/tests/e2e/containers"
+	"github.com/merlinslair/merlin/v16/tests/e2e/initialization"
 )
 
 type UpgradeSettings struct {
@@ -58,7 +58,7 @@ func (uc *UpgradeConfigurer) ConfigureChains() error {
 
 func (uc *UpgradeConfigurer) ConfigureChain(chainConfig *chain.Config) error {
 	uc.t.Logf("starting upgrade e2e infrastructure for chain-id: %s", chainConfig.Id)
-	tmpDir, err := os.MkdirTemp("", "osmosis-e2e-testnet-")
+	tmpDir, err := os.MkdirTemp("", "merlin-e2e-testnet-")
 	if err != nil {
 		return err
 	}
@@ -126,13 +126,13 @@ func (uc *UpgradeConfigurer) CreatePreUpgradeState() error {
 
 	go func() {
 		defer wg.Done()
-		chainA.SendIBC(chainB, chainB.NodeConfigs[0].PublicAddress, initialization.OsmoToken)
+		chainA.SendIBC(chainB, chainB.NodeConfigs[0].PublicAddress, initialization.FuryToken)
 		chainA.SendIBC(chainB, chainB.NodeConfigs[0].PublicAddress, initialization.StakeToken)
 	}()
 
 	go func() {
 		defer wg.Done()
-		chainB.SendIBC(chainA, chainA.NodeConfigs[0].PublicAddress, initialization.OsmoToken)
+		chainB.SendIBC(chainA, chainA.NodeConfigs[0].PublicAddress, initialization.FuryToken)
 		chainB.SendIBC(chainA, chainA.NodeConfigs[0].PublicAddress, initialization.StakeToken)
 	}()
 
@@ -141,24 +141,24 @@ func (uc *UpgradeConfigurer) CreatePreUpgradeState() error {
 
 	wg.Add(2)
 
-	var daiOsmoPoolIdv16 uint64
+	var daiFuryPoolIdv16 uint64
 
 	go func() {
 		defer wg.Done()
-		daiOsmoPoolIdv16 = chainANode.CreateBalancerPool("daiosmov16.json", initialization.ValidatorWalletName)
-		daiOsmoShareDenom := fmt.Sprintf("gamm/pool/%d", daiOsmoPoolIdv16)
-		chainANode.EnableSuperfluidAsset(chainA, daiOsmoShareDenom)
+		daiFuryPoolIdv16 = chainANode.CreateBalancerPool("daifuryv16.json", initialization.ValidatorWalletName)
+		daiFuryShareDenom := fmt.Sprintf("gamm/pool/%d", daiFuryPoolIdv16)
+		chainANode.EnableSuperfluidAsset(chainA, daiFuryShareDenom)
 	}()
 
 	go func() {
 		defer wg.Done()
-		chainBNode.CreateBalancerPool("daiosmov16.json", initialization.ValidatorWalletName)
+		chainBNode.CreateBalancerPool("daifuryv16.json", initialization.ValidatorWalletName)
 	}()
 
 	// Wait for all goroutines to complete
 	wg.Wait()
 
-	config.DaiOsmoPoolIdv16 = daiOsmoPoolIdv16
+	config.DaiFuryPoolIdv16 = daiFuryPoolIdv16
 
 	var (
 		poolShareDenom             string
@@ -245,7 +245,7 @@ func (uc *UpgradeConfigurer) CreatePreUpgradeState() error {
 	go func() {
 		defer wg.Done()
 		// test swap exact amount in for stable swap pool (only chainA)A
-		chainANode.SwapExactAmountIn("2000stake", "1", fmt.Sprintf("%d", config.PreUpgradeStableSwapPoolId), "uosmo", config.StableswapWallet)
+		chainANode.SwapExactAmountIn("2000stake", "1", fmt.Sprintf("%d", config.PreUpgradeStableSwapPoolId), "ufury", config.StableswapWallet)
 	}()
 
 	// Upload the rate limiting contract to both chains (as they both will be updated)
@@ -401,8 +401,8 @@ func (uc *UpgradeConfigurer) runForkUpgrade() error {
 func (uc *UpgradeConfigurer) upgradeContainers(chainConfig *chain.Config, propHeight int64) error {
 	// upgrade containers to the locally compiled daemon
 	uc.t.Logf("starting upgrade for chain-id: %s...", chainConfig.Id)
-	uc.containerManager.OsmosisRepository = containers.CurrentBranchOsmoRepository
-	uc.containerManager.OsmosisTag = containers.CurrentBranchOsmoTag
+	uc.containerManager.MerlinRepository = containers.CurrentBranchFuryRepository
+	uc.containerManager.MerlinTag = containers.CurrentBranchFuryTag
 
 	for _, node := range chainConfig.NodeConfigs {
 		if err := node.Run(); err != nil {

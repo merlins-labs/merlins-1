@@ -37,7 +37,7 @@ fn validate_explicit_receiver(deps: Deps, receiver: &str) -> Result<(String, Add
     };
 
     let registry = Registry::default(deps);
-    let chain = registry.get_connected_chain("osmosis", &channel)?;
+    let chain = registry.get_connected_chain("merlin", &channel)?;
     // TODO: validate that the prefix of the receiver matches the chain
 
     Ok((chain, Addr::unchecked(address)))
@@ -72,8 +72,8 @@ fn validate_chain_receiver(deps: Deps, receiver: &str) -> Result<(String, Addr),
     Ok((chain.to_string(), Addr::unchecked(addr)))
 }
 
-/// The receiver can be specified explicitly (ibc:channel-n/osmo1...) or in a
-/// simplified way (osmo1...).
+/// The receiver can be specified explicitly (ibc:channel-n/fury1...) or in a
+/// simplified way (fury1...).
 ///
 /// The explicit way will allow senders to use any channel/addr combination they
 /// want at the risk of more complexity and transaction failures if not properly

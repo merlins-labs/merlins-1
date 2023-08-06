@@ -8,10 +8,10 @@ import (
 	"github.com/cosmos/cosmos-sdk/client"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
-	osmosisapp "github.com/osmosis-labs/osmosis/v16/app"
+	merlinapp "github.com/merlinslair/merlin/v16/app"
 
-	"github.com/osmosis-labs/osmosis/v16/app/apptesting"
-	"github.com/osmosis-labs/osmosis/v16/x/txfees/types"
+	"github.com/merlinslair/merlin/v16/app/apptesting"
+	"github.com/merlinslair/merlin/v16/x/txfees/types"
 )
 
 type KeeperTestSuite struct {
@@ -29,7 +29,7 @@ func (s *KeeperTestSuite) SetupTest(isCheckTx bool) {
 	s.Setup()
 	s.queryClient = types.NewQueryClient(s.QueryHelper)
 
-	encodingConfig := osmosisapp.MakeEncodingConfig()
+	encodingConfig := merlinapp.MakeEncodingConfig()
 	s.clientCtx = client.Context{}.
 		WithInterfaceRegistry(encodingConfig.InterfaceRegistry).
 		WithTxConfig(encodingConfig.TxConfig).
@@ -41,7 +41,7 @@ func (s *KeeperTestSuite) SetupTest(isCheckTx bool) {
 		s.FundAcc(acc,
 			sdk.NewCoins(
 				sdk.NewCoin(sdk.DefaultBondDenom, sdk.NewInt(10000000000)),
-				sdk.NewCoin("uosmo", sdk.NewInt(100000000000000000)), // Needed for pool creation fee
+				sdk.NewCoin("ufury", sdk.NewInt(100000000000000000)), // Needed for pool creation fee
 				sdk.NewCoin("uion", sdk.NewInt(10000000)),
 				sdk.NewCoin("atom", sdk.NewInt(10000000)),
 				sdk.NewCoin("ust", sdk.NewInt(10000000)),

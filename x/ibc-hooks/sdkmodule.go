@@ -75,11 +75,11 @@ func (AppModuleBasic) GetQueryCmd() *cobra.Command {
 type AppModule struct {
 	AppModuleBasic
 
-	authKeeper osmoutils.AccountKeeper
+	authKeeper furyutils.AccountKeeper
 }
 
 // NewAppModule creates a new AppModule object.
-func NewAppModule(ak osmoutils.AccountKeeper) AppModule {
+func NewAppModule(ak furyutils.AccountKeeper) AppModule {
 	return AppModule{
 		AppModuleBasic: AppModuleBasic{},
 		authKeeper:     ak,

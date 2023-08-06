@@ -6,7 +6,7 @@ import (
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
-	"github.com/osmosis-labs/osmosis/v16/x/valset-pref/types"
+	"github.com/merlinslair/merlin/v16/x/valset-pref/types"
 )
 
 type msgServer struct {
@@ -103,7 +103,7 @@ func (server msgServer) WithdrawDelegationRewards(goCtx context.Context, msg *ty
 	return &types.MsgWithdrawDelegationRewardsResponse{}, nil
 }
 
-// DelegateBondedTokens force unlocks bonded uosmo and stakes according to your current validator set preference.
+// DelegateBondedTokens force unlocks bonded ufury and stakes according to your current validator set preference.
 func (server msgServer) DelegateBondedTokens(goCtx context.Context, msg *types.MsgDelegateBondedTokens) (*types.MsgDelegateBondedTokensResponse, error) {
 	ctx := sdk.UnwrapSDKContext(goCtx)
 
@@ -113,8 +113,8 @@ func (server msgServer) DelegateBondedTokens(goCtx context.Context, msg *types.M
 		return nil, fmt.Errorf("user %s doesn't have validator set", msg.Delegator)
 	}
 
-	// Message 1: force unlock bonded osmo tokens.
-	unlockedOsmoToken, err := server.keeper.ForceUnlockBondedOsmo(ctx, msg.LockID, msg.Delegator)
+	// Message 1: force unlock bonded fury tokens.
+	unlockedFuryToken, err := server.keeper.ForceUnlockBondedFury(ctx, msg.LockID, msg.Delegator)
 	if err != nil {
 		return nil, err
 	}
@@ -124,8 +124,8 @@ func (server msgServer) DelegateBondedTokens(goCtx context.Context, msg *types.M
 		return nil, err
 	}
 
-	// Message 2: Perform osmo token delegation.
-	_, err = server.DelegateToValidatorSet(goCtx, types.NewMsgDelegateToValidatorSet(delegator, unlockedOsmoToken))
+	// Message 2: Perform fury token delegation.
+	_, err = server.DelegateToValidatorSet(goCtx, types.NewMsgDelegateToValidatorSet(delegator, unlockedFuryToken))
 	if err != nil {
 		return nil, err
 	}

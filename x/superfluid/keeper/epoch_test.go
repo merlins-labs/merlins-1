@@ -7,15 +7,15 @@ import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	stakingtypes "github.com/cosmos/cosmos-sdk/x/staking/types"
 
-	cltypes "github.com/osmosis-labs/osmosis/v16/x/concentrated-liquidity/types"
-	gammtypes "github.com/osmosis-labs/osmosis/v16/x/gamm/types"
-	incentivestypes "github.com/osmosis-labs/osmosis/v16/x/incentives/types"
-	lockuptypes "github.com/osmosis-labs/osmosis/v16/x/lockup/types"
-	"github.com/osmosis-labs/osmosis/v16/x/superfluid/keeper"
-	"github.com/osmosis-labs/osmosis/v16/x/superfluid/types"
+	cltypes "github.com/merlinslair/merlin/v16/x/concentrated-liquidity/types"
+	gammtypes "github.com/merlinslair/merlin/v16/x/gamm/types"
+	incentivestypes "github.com/merlinslair/merlin/v16/x/incentives/types"
+	lockuptypes "github.com/merlinslair/merlin/v16/x/lockup/types"
+	"github.com/merlinslair/merlin/v16/x/superfluid/keeper"
+	"github.com/merlinslair/merlin/v16/x/superfluid/types"
 )
 
-func (s *KeeperTestSuite) TestUpdateOsmoEquivalentMultipliers() {
+func (s *KeeperTestSuite) TestUpdateFuryEquivalentMultipliers() {
 	testCases := []struct {
 		name               string
 		asset              types.SuperfluidAsset
@@ -25,38 +25,38 @@ func (s *KeeperTestSuite) TestUpdateOsmoEquivalentMultipliers() {
 		expectedError      error
 	}{
 		{
-			name:               "update LP token Osmo equivalent successfully",
+			name:               "update LP token Fury equivalent successfully",
 			asset:              types.SuperfluidAsset{Denom: DefaultGammAsset, AssetType: types.SuperfluidAssetTypeLPShare},
 			expectedMultiplier: sdk.MustNewDecFromStr("0.01"),
 		},
 		{
-			name:             "update LP token Osmo equivalent with pool unexpectedly deleted",
+			name:             "update LP token Fury equivalent with pool unexpectedly deleted",
 			asset:            types.SuperfluidAsset{Denom: DefaultGammAsset, AssetType: types.SuperfluidAssetTypeLPShare},
 			poolDoesNotExist: true,
 			expectedError:    gammtypes.PoolDoesNotExistError{PoolId: 1},
 		},
 		{
-			name:               "update LP token Osmo equivalent with pool unexpectedly removed Osmo",
+			name:               "update LP token Fury equivalent with pool unexpectedly removed Fury",
 			asset:              types.SuperfluidAsset{Denom: DefaultGammAsset, AssetType: types.SuperfluidAssetTypeLPShare},
 			removeStakingAsset: true,
-			expectedError:      errors.New("pool 1 has zero OSMO amount"),
+			expectedError:      errors.New("pool 1 has zero FURY amount"),
 		},
 		{
-			name:               "update concentrated share Osmo equivalent successfully",
+			name:               "update concentrated share Fury equivalent successfully",
 			asset:              types.SuperfluidAsset{Denom: cltypes.GetConcentratedLockupDenomFromPoolId(1), AssetType: types.SuperfluidAssetTypeConcentratedShare},
 			expectedMultiplier: sdk.MustNewDecFromStr("1"),
 		},
 		{
-			name:             "update concentrated share Osmo equivalent with pool unexpectedly deleted",
+			name:             "update concentrated share Fury equivalent with pool unexpectedly deleted",
 			asset:            types.SuperfluidAsset{Denom: cltypes.GetConcentratedLockupDenomFromPoolId(1), AssetType: types.SuperfluidAssetTypeConcentratedShare},
 			poolDoesNotExist: true,
 			expectedError:    cltypes.PoolNotFoundError{PoolId: 1},
 		},
 		{
-			name:               "update concentrated share Osmo equivalent with pool unexpectedly removed Osmo",
+			name:               "update concentrated share Fury equivalent with pool unexpectedly removed Fury",
 			asset:              types.SuperfluidAsset{Denom: cltypes.GetConcentratedLockupDenomFromPoolId(1), AssetType: types.SuperfluidAssetTypeConcentratedShare},
 			removeStakingAsset: true,
-			expectedError:      errors.New("pool has unexpectedly removed OSMO as one of its underlying assets"),
+			expectedError:      errors.New("pool has unexpectedly removed FURY as one of its underlying assets"),
 		},
 	}
 
@@ -75,7 +75,7 @@ func (s *KeeperTestSuite) TestUpdateOsmoEquivalentMultipliers() {
 			poolCoins := sdk.NewCoins(sdk.NewCoin(stakeDenom, sdk.NewInt(1000000000000000000)), sdk.NewCoin("foo", sdk.NewInt(1000000000000000000)))
 
 			// Ensure that the multiplier is zero before the test
-			multiplier := superfluidKeeper.GetOsmoEquivalentMultiplier(ctx, tc.asset.Denom)
+			multiplier := superfluidKeeper.GetFuryEquivalentMultiplier(ctx, tc.asset.Denom)
 			s.Require().Equal(multiplier, sdk.ZeroDec())
 
 			// Create the respective pool if the test case requires it
@@ -88,7 +88,7 @@ func (s *KeeperTestSuite) TestUpdateOsmoEquivalentMultipliers() {
 			}
 
 			// System under test
-			err := superfluidKeeper.UpdateOsmoEquivalentMultipliers(ctx, tc.asset, 1)
+			err := superfluidKeeper.UpdateFuryEquivalentMultipliers(ctx, tc.asset, 1)
 
 			if tc.expectedError != nil {
 				s.Require().Error(err)
@@ -96,7 +96,7 @@ func (s *KeeperTestSuite) TestUpdateOsmoEquivalentMultipliers() {
 
 				// Ensure unwind superfluid asset is called
 				// Check that multiplier was not set
-				multiplier := superfluidKeeper.GetOsmoEquivalentMultiplier(ctx, tc.asset.Denom)
+				multiplier := superfluidKeeper.GetFuryEquivalentMultiplier(ctx, tc.asset.Denom)
 				s.Require().Equal(multiplier, sdk.ZeroDec())
 				// Check that the asset was deleted
 				_, err := superfluidKeeper.GetSuperfluidAsset(ctx, tc.asset.Denom)
@@ -105,7 +105,7 @@ func (s *KeeperTestSuite) TestUpdateOsmoEquivalentMultipliers() {
 				s.Require().NoError(err)
 
 				// Check that multiplier was set correctly
-				multiplier := superfluidKeeper.GetOsmoEquivalentMultiplier(ctx, tc.asset.Denom)
+				multiplier := superfluidKeeper.GetFuryEquivalentMultiplier(ctx, tc.asset.Denom)
 				s.Require().NotEqual(multiplier, sdk.ZeroDec())
 			}
 		})

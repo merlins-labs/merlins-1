@@ -16,16 +16,16 @@ var (
 
 const (
 	// msgs
-	setHotRoutes             = "osmosis/MsgSetHotRoutes"
-	setDeveloperAccount      = "osmosis/MsgSetDeveloperAccount"
-	setMaxPoolPointsPerTx    = "osmosis/MsgSetMaxPoolPointsPerTx"
-	setMaxPoolPointsPerBlock = "osmosis/MsgSetMaxPoolPointsPerBlock"
-	setPoolWeights           = "osmosis/MsgSetPoolWeights"
-	setBaseDenoms            = "osmosis/MsgSetBaseDenoms"
+	setHotRoutes             = "merlin/MsgSetHotRoutes"
+	setDeveloperAccount      = "merlin/MsgSetDeveloperAccount"
+	setMaxPoolPointsPerTx    = "merlin/MsgSetMaxPoolPointsPerTx"
+	setMaxPoolPointsPerBlock = "merlin/MsgSetMaxPoolPointsPerBlock"
+	setPoolWeights           = "merlin/MsgSetPoolWeights"
+	setBaseDenoms            = "merlin/MsgSetBaseDenoms"
 
 	// proposals
-	setProtoRevEnabledProposal      = "osmosis/SetProtoRevEnabledProposal"
-	setProtoRevAdminAccountProposal = "osmosis/SetProtoRevAdminAccountProposal"
+	setProtoRevEnabledProposal      = "merlin/SetProtoRevEnabledProposal"
+	setProtoRevAdminAccountProposal = "merlin/SetProtoRevAdminAccountProposal"
 )
 
 func init() {

@@ -8,9 +8,9 @@ import (
 	"github.com/stretchr/testify/require"
 	tmproto "github.com/tendermint/tendermint/proto/tendermint/types"
 
-	osmoapp "github.com/osmosis-labs/osmosis/v16/app"
-	"github.com/osmosis-labs/osmosis/v16/x/lockup"
-	"github.com/osmosis-labs/osmosis/v16/x/lockup/types"
+	furyapp "github.com/merlinslair/merlin/v16/app"
+	"github.com/merlinslair/merlin/v16/x/lockup"
+	"github.com/merlinslair/merlin/v16/x/lockup/types"
 
 	"github.com/cosmos/cosmos-sdk/simapp"
 	sdk "github.com/cosmos/cosmos-sdk/types"
@@ -52,7 +52,7 @@ var (
 )
 
 func TestInitGenesis(t *testing.T) {
-	app := osmoapp.Setup(false)
+	app := furyapp.Setup(false)
 	ctx := app.BaseApp.NewContext(false, tmproto.Header{})
 	ctx = ctx.WithBlockTime(now.Add(time.Second))
 	genesis := testGenesis
@@ -75,7 +75,7 @@ func TestInitGenesis(t *testing.T) {
 }
 
 func TestExportGenesis(t *testing.T) {
-	app := osmoapp.Setup(false)
+	app := furyapp.Setup(false)
 	ctx := app.BaseApp.NewContext(false, tmproto.Header{})
 	ctx = ctx.WithBlockTime(now.Add(time.Second))
 	genesis := testGenesis
@@ -128,11 +128,11 @@ func TestExportGenesis(t *testing.T) {
 }
 
 func TestMarshalUnmarshalGenesis(t *testing.T) {
-	app := osmoapp.Setup(false)
+	app := furyapp.Setup(false)
 	ctx := app.BaseApp.NewContext(false, tmproto.Header{})
 	ctx = ctx.WithBlockTime(now.Add(time.Second))
 
-	encodingConfig := osmoapp.MakeEncodingConfig()
+	encodingConfig := furyapp.MakeEncodingConfig()
 	appCodec := encodingConfig.Marshaler
 	am := lockup.NewAppModule(*app.LockupKeeper, app.AccountKeeper, app.BankKeeper)
 
@@ -143,7 +143,7 @@ func TestMarshalUnmarshalGenesis(t *testing.T) {
 
 	genesisExported := am.ExportGenesis(ctx, appCodec)
 	assert.NotPanics(t, func() {
-		app := osmoapp.Setup(false)
+		app := furyapp.Setup(false)
 		ctx := app.BaseApp.NewContext(false, tmproto.Header{})
 		ctx = ctx.WithBlockTime(now.Add(time.Second))
 		am := lockup.NewAppModule(*app.LockupKeeper, app.AccountKeeper, app.BankKeeper)

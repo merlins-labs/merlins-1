@@ -9,10 +9,10 @@ import (
 	"github.com/osmosis-labs/osmosis/osmomath"
 	"github.com/osmosis-labs/osmosis/osmoutils"
 	"github.com/osmosis-labs/osmosis/osmoutils/accum"
-	"github.com/osmosis-labs/osmosis/v16/app/apptesting"
-	cl "github.com/osmosis-labs/osmosis/v16/x/concentrated-liquidity"
-	"github.com/osmosis-labs/osmosis/v16/x/concentrated-liquidity/model"
-	"github.com/osmosis-labs/osmosis/v16/x/concentrated-liquidity/types"
+	"github.com/merlinslair/merlin/v16/app/apptesting"
+	cl "github.com/merlinslair/merlin/v16/x/concentrated-liquidity"
+	"github.com/merlinslair/merlin/v16/x/concentrated-liquidity/model"
+	"github.com/merlinslair/merlin/v16/x/concentrated-liquidity/types"
 )
 
 const (
@@ -706,7 +706,7 @@ func (s *KeeperTestSuite) TestDeletePosition() {
 			// Retrieve the position from the store via position ID and compare to expected values.
 			position := model.Position{}
 			positionIdToPositionKey := types.KeyPositionId(DefaultPositionId)
-			osmoutils.MustGet(store, positionIdToPositionKey, &position)
+			furyutils.MustGet(store, positionIdToPositionKey, &position)
 			s.Require().Equal(DefaultPositionId, position.PositionId)
 			s.Require().Equal(defaultPoolId, position.PoolId)
 			s.Require().Equal(defaultCreator.String(), position.Address)
@@ -760,7 +760,7 @@ func (s *KeeperTestSuite) TestDeletePosition() {
 				// Retrieve the position from the store via position ID and compare to expected values.
 				position := model.Position{}
 				positionIdToPositionKey := types.KeyPositionId(DefaultPositionId)
-				_, err = osmoutils.Get(store, positionIdToPositionKey, &position)
+				_, err = furyutils.Get(store, positionIdToPositionKey, &position)
 				s.Require().NoError(err)
 				s.Require().Equal(model.Position{}, position)
 
@@ -1088,7 +1088,7 @@ func (s *KeeperTestSuite) TestValidateAndFungifyChargedPositions() {
 			unclaimedRewardsForEachUptimeAcrossAllOldPositions := make([]sdk.DecCoins, len(types.SupportedUptimes))
 			for _, positionId := range test.positionIdsToMigrate {
 				unclaimedRewardsForPosition := s.GetTotalAccruedRewardsByAccumulator(positionId, false)
-				unclaimedRewardsForEachUptimeAcrossAllOldPositions, err = osmoutils.AddDecCoinArrays(unclaimedRewardsForEachUptimeAcrossAllOldPositions, unclaimedRewardsForPosition)
+				unclaimedRewardsForEachUptimeAcrossAllOldPositions, err = furyutils.AddDecCoinArrays(unclaimedRewardsForEachUptimeAcrossAllOldPositions, unclaimedRewardsForPosition)
 				s.Require().NoError(err)
 			}
 
@@ -1131,7 +1131,7 @@ func (s *KeeperTestSuite) TestValidateAndFungifyChargedPositions() {
 
 				// Get the final amount expected to be claimed by merging the unclaimed rewards across all uptimes.
 				// Note that the second value is dust, not an error.
-				expectedRewardsToClaim, _ := osmoutils.CollapseDecCoinsArray(unclaimedRewardsForEachUptimeAcrossAllOldPositions).TruncateDecimal()
+				expectedRewardsToClaim, _ := furyutils.CollapseDecCoinsArray(unclaimedRewardsForEachUptimeAcrossAllOldPositions).TruncateDecimal()
 
 				// Claim all the rewards for the new position and check that the rewards match the unclaimed rewards.
 				s.ExecuteAndValidateSuccessfulIncentiveClaim(newPositionId, expectedRewardsToClaim, sdk.Coins(nil))
@@ -1322,9 +1322,9 @@ func (s *KeeperTestSuite) TestFungifyChargedPositions_ClaimIncentives() {
 
 	// an error of 1 for each position
 	roundingError := int64(DefaultFungifyNumPositions)
-	roundingTolerance := osmomath.ErrTolerance{
+	roundingTolerance := furymath.ErrTolerance{
 		AdditiveTolerance: sdk.NewDec(roundingError),
-		RoundingDir:       osmomath.RoundDown,
+		RoundingDir:       furymath.RoundDown,
 	}
 	expectedAmount := sdk.NewInt(60 * 60 * 24) // 1 day in seconds * 1 per second
 	s.FundAcc(pool.GetIncentivesAddress(), sdk.NewCoins(sdk.NewCoin(USDC, expectedAmount)))
@@ -1517,9 +1517,9 @@ func (s *KeeperTestSuite) TestFunctionalFungifyChargedPositions() {
 	s.Require().True(collectedSpreadRewardsMap[leftOne].IsAllGT(collectedSpreadRewardsMap[middlePositionIds[0]]))
 
 	// Ensure that the total spread rewards collected is correct
-	roundingTolerance := osmomath.ErrTolerance{
+	roundingTolerance := furymath.ErrTolerance{
 		AdditiveTolerance: sdk.NewDec(int64(len(allPositionIds))),
-		RoundingDir:       osmomath.RoundDown,
+		RoundingDir:       furymath.RoundDown,
 	}
 	for _, spreadRewardCoin := range expectedTotalSpreadRewardCoins {
 		denom := spreadRewardCoin.Denom
@@ -2196,7 +2196,7 @@ func (s *KeeperTestSuite) TestSetPosition() {
 		// Retrieve the position from the store via position ID and compare to expected values.
 		position := model.Position{}
 		key := types.KeyPositionId(tc.positionId)
-		osmoutils.MustGet(store, key, &position)
+		furyutils.MustGet(store, key, &position)
 		s.Require().Equal(tc.positionId, position.PositionId)
 		s.Require().Equal(tc.poolId, position.PoolId)
 		s.Require().Equal(tc.owner.String(), position.Address)

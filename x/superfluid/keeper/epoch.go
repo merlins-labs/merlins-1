@@ -9,13 +9,13 @@ import (
 	distributiontypes "github.com/cosmos/cosmos-sdk/x/distribution/types"
 
 	"github.com/osmosis-labs/osmosis/osmoutils"
-	cl "github.com/osmosis-labs/osmosis/v16/x/concentrated-liquidity"
-	"github.com/osmosis-labs/osmosis/v16/x/concentrated-liquidity/model"
-	cltypes "github.com/osmosis-labs/osmosis/v16/x/concentrated-liquidity/types"
-	gammtypes "github.com/osmosis-labs/osmosis/v16/x/gamm/types"
-	incentivestypes "github.com/osmosis-labs/osmosis/v16/x/incentives/types"
-	lockuptypes "github.com/osmosis-labs/osmosis/v16/x/lockup/types"
-	"github.com/osmosis-labs/osmosis/v16/x/superfluid/types"
+	cl "github.com/merlinslair/merlin/v16/x/concentrated-liquidity"
+	"github.com/merlinslair/merlin/v16/x/concentrated-liquidity/model"
+	cltypes "github.com/merlinslair/merlin/v16/x/concentrated-liquidity/types"
+	gammtypes "github.com/merlinslair/merlin/v16/x/gamm/types"
+	incentivestypes "github.com/merlinslair/merlin/v16/x/incentives/types"
+	lockuptypes "github.com/merlinslair/merlin/v16/x/lockup/types"
+	"github.com/merlinslair/merlin/v16/x/superfluid/types"
 )
 
 func (k Keeper) AfterEpochEnd(ctx sdk.Context, epochIdentifier string, _ int64) error {
@@ -23,7 +23,7 @@ func (k Keeper) AfterEpochEnd(ctx sdk.Context, epochIdentifier string, _ int64) 
 }
 
 func (k Keeper) AfterEpochStartBeginBlock(ctx sdk.Context) {
-	// cref [#830](https://github.com/osmosis-labs/osmosis/issues/830),
+	// cref [#830](https://github.com/merlinslair/merlin/issues/830),
 	// the supplied epoch number is wrong at time of commit. hence we get from the info.
 	curEpoch := k.ek.GetEpochInfo(ctx, k.GetEpochIdentifier(ctx)).CurrentEpoch
 
@@ -37,9 +37,9 @@ func (k Keeper) AfterEpochStartBeginBlock(ctx sdk.Context) {
 	// Update all LP tokens multipliers for the upcoming epoch.
 	// This affects staking reward distribution until the next epochs rewards.
 	// Exclusive of current epoch's rewards, inclusive of next epoch's rewards.
-	ctx.Logger().Info("Update all osmo equivalency multipliers")
+	ctx.Logger().Info("Update all fury equivalency multipliers")
 	for _, asset := range k.GetAllSuperfluidAssets(ctx) {
-		err := k.UpdateOsmoEquivalentMultipliers(ctx, asset, curEpoch)
+		err := k.UpdateFuryEquivalentMultipliers(ctx, asset, curEpoch)
 		if err != nil {
 			// TODO: Revisit what we do here. (halt all distr, only skip this asset)
 			// Since at MVP of feature, we only have one pool of superfluid staking,
@@ -66,7 +66,7 @@ func (k Keeper) MoveSuperfluidDelegationRewardToGauges(ctx sdk.Context) {
 
 		// To avoid unexpected issues on WithdrawDelegationRewards and AddToGaugeRewards
 		// we use cacheCtx and apply the changes later
-		_ = osmoutils.ApplyFuncIfNoError(ctx, func(cacheCtx sdk.Context) error {
+		_ = furyutils.ApplyFuncIfNoError(ctx, func(cacheCtx sdk.Context) error {
 			_, err := k.ck.WithdrawDelegationRewards(cacheCtx, addr, valAddr)
 			if errors.Is(err, distributiontypes.ErrEmptyDelegationDistInfo) {
 				ctx.Logger().Debug("no swaps occurred in this pool between last epoch and this epoch")
@@ -76,8 +76,8 @@ func (k Keeper) MoveSuperfluidDelegationRewardToGauges(ctx sdk.Context) {
 		})
 
 		// Send delegation rewards to gauges
-		_ = osmoutils.ApplyFuncIfNoError(ctx, func(cacheCtx sdk.Context) error {
-			// Note! We only send the bond denom (osmo), to avoid attack vectors where people
+		_ = furyutils.ApplyFuncIfNoError(ctx, func(cacheCtx sdk.Context) error {
+			// Note! We only send the bond denom (fury), to avoid attack vectors where people
 			// send many different denoms to the intermediary account, and make a resource exhaustion attack on end block.
 			bondDenom := k.sk.BondDenom(cacheCtx)
 			balance := k.bk.GetBalance(cacheCtx, addr, bondDenom)
@@ -108,9 +108,9 @@ func (k Keeper) distributeSuperfluidGauges(ctx sdk.Context) {
 	}
 }
 
-func (k Keeper) UpdateOsmoEquivalentMultipliers(ctx sdk.Context, asset types.SuperfluidAsset, newEpochNumber int64) error {
+func (k Keeper) UpdateFuryEquivalentMultipliers(ctx sdk.Context, asset types.SuperfluidAsset, newEpochNumber int64) error {
 	if asset.AssetType == types.SuperfluidAssetTypeLPShare {
-		// LP_token_Osmo_equivalent = OSMO_amount_on_pool / LP_token_supply
+		// LP_token_Fury_equivalent = FURY_amount_on_pool / LP_token_supply
 		poolId := gammtypes.MustGetPoolIdFromShareDenom(asset.Denom)
 		pool, err := k.gk.GetPoolAndPoke(ctx, poolId)
 		if err != nil {
@@ -120,26 +120,26 @@ func (k Keeper) UpdateOsmoEquivalentMultipliers(ctx sdk.Context, asset types.Sup
 			return err
 		}
 
-		// get OSMO amount
+		// get FURY amount
 		bondDenom := k.sk.BondDenom(ctx)
-		osmoPoolAsset := pool.GetTotalPoolLiquidity(ctx).AmountOf(bondDenom)
-		if osmoPoolAsset.IsZero() {
-			err := fmt.Errorf("pool %d has zero OSMO amount", poolId)
-			// Pool has unexpectedly removed Osmo from its assets.
+		furyPoolAsset := pool.GetTotalPoolLiquidity(ctx).AmountOf(bondDenom)
+		if furyPoolAsset.IsZero() {
+			err := fmt.Errorf("pool %d has zero FURY amount", poolId)
+			// Pool has unexpectedly removed Fury from its assets.
 			k.Logger(ctx).Error(err.Error())
 			k.BeginUnwindSuperfluidAsset(ctx, 0, asset)
 			return err
 		}
 
-		multiplier := k.calculateOsmoBackingPerShare(pool, osmoPoolAsset)
-		k.SetOsmoEquivalentMultiplier(ctx, newEpochNumber, asset.Denom, multiplier)
+		multiplier := k.calculateFuryBackingPerShare(pool, furyPoolAsset)
+		k.SetFuryEquivalentMultiplier(ctx, newEpochNumber, asset.Denom, multiplier)
 	} else if asset.AssetType == types.SuperfluidAssetTypeConcentratedShare {
-		// LP_token_Osmo_equivalent = OSMO_amount_on_pool / LP_token_supply
+		// LP_token_Fury_equivalent = FURY_amount_on_pool / LP_token_supply
 		poolId := cltypes.MustGetPoolIdFromShareDenom(asset.Denom)
 		pool, err := k.clk.GetConcentratedPoolById(ctx, poolId)
 		if err != nil {
 			k.Logger(ctx).Error(err.Error())
-			// Pool has unexpectedly removed Osmo from its assets.
+			// Pool has unexpectedly removed Fury from its assets.
 			k.BeginUnwindSuperfluidAsset(ctx, 0, asset)
 			return err
 		}
@@ -168,19 +168,19 @@ func (k Keeper) UpdateOsmoEquivalentMultipliers(ctx sdk.Context, asset types.Sup
 		}
 		assets := sdk.NewCoins(asset0, asset1)
 
-		// get OSMO amount from underlying assets
-		osmoPoolAsset := assets.AmountOf(bondDenom)
-		if osmoPoolAsset.IsZero() {
-			// Pool has unexpectedly removed OSMO from its assets.
-			err := errors.New("pool has unexpectedly removed OSMO as one of its underlying assets")
+		// get FURY amount from underlying assets
+		furyPoolAsset := assets.AmountOf(bondDenom)
+		if furyPoolAsset.IsZero() {
+			// Pool has unexpectedly removed FURY from its assets.
+			err := errors.New("pool has unexpectedly removed FURY as one of its underlying assets")
 			k.Logger(ctx).Error(err.Error())
 			k.BeginUnwindSuperfluidAsset(ctx, 0, asset)
 			return err
 		}
 
 		// calculate multiplier and set it
-		multiplier := osmoPoolAsset.ToDec().Quo(fullRangeLiquidity)
-		k.SetOsmoEquivalentMultiplier(ctx, newEpochNumber, asset.Denom, multiplier)
+		multiplier := furyPoolAsset.ToDec().Quo(fullRangeLiquidity)
+		k.SetFuryEquivalentMultiplier(ctx, newEpochNumber, asset.Denom, multiplier)
 	} else if asset.AssetType == types.SuperfluidAssetTypeNative {
 		// TODO: Consider deleting superfluid asset type native
 		k.Logger(ctx).Error("unsupported superfluid asset type")

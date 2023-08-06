@@ -16,9 +16,9 @@ import (
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
-	"github.com/osmosis-labs/osmosis/v16/x/incentives/types"
-	lockuptypes "github.com/osmosis-labs/osmosis/v16/x/lockup/types"
-	poolmanagertypes "github.com/osmosis-labs/osmosis/v16/x/poolmanager/types"
+	"github.com/merlinslair/merlin/v16/x/incentives/types"
+	lockuptypes "github.com/merlinslair/merlin/v16/x/lockup/types"
+	poolmanagertypes "github.com/merlinslair/merlin/v16/x/poolmanager/types"
 	epochtypes "github.com/osmosis-labs/osmosis/x/epochs/types"
 )
 
@@ -166,11 +166,11 @@ func (k Keeper) CreateGauge(ctx sdk.Context, isPerpetual bool, owner sdk.AccAddr
 		}
 
 		// check if denom this gauge pays out to exists on-chain
-		// N.B.: The reason we check for osmovaloper is to account for gauges that pay out to
+		// N.B.: The reason we check for furyvaloper is to account for gauges that pay out to
 		// superfluid synthetic locks. These locks have the following format:
-		// "cl/pool/1/superbonding/osmovaloper1wcfyglfgjs2xtsyqu7pl60d0mpw5g7f4wh7pnm"
+		// "cl/pool/1/superbonding/furyvaloper1wcfyglfgjs2xtsyqu7pl60d0mpw5g7f4wh7pnm"
 		// See x/superfluid module README for details.
-		if !k.bk.HasSupply(ctx, distrTo.Denom) && !strings.Contains(distrTo.Denom, "osmovaloper") {
+		if !k.bk.HasSupply(ctx, distrTo.Denom) && !strings.Contains(distrTo.Denom, "furyvaloper") {
 			return 0, fmt.Errorf("denom does not exist: %s", distrTo.Denom)
 		}
 	}

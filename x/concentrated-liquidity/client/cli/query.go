@@ -5,8 +5,8 @@ import (
 	flag "github.com/spf13/pflag"
 
 	"github.com/osmosis-labs/osmosis/osmoutils/osmocli"
-	"github.com/osmosis-labs/osmosis/v16/x/concentrated-liquidity/client/queryproto"
-	"github.com/osmosis-labs/osmosis/v16/x/concentrated-liquidity/types"
+	"github.com/merlinslair/merlin/v16/x/concentrated-liquidity/client/queryproto"
+	"github.com/merlinslair/merlin/v16/x/concentrated-liquidity/types"
 )
 
 // GetQueryCmd returns the cli query commands for this module.
@@ -31,7 +31,7 @@ func GetUserPositions() (*osmocli.QueryDescriptor, *queryproto.UserPositionsRequ
 			Use:   "user-positions [address]",
 			Short: "Query user's positions",
 			Long: `{{.Short}}{{.ExampleHeader}}
-{{.CommandPrefix}} user-positions osmo12smx2wdlyttvyzvzg54y2vnqwq2qjateuf7thj`,
+{{.CommandPrefix}} user-positions fury12smx2wdlyttvyzvzg54y2vnqwq2qjateuf7thj`,
 			Flags:               osmocli.FlagDesc{OptionalFlags: []*flag.FlagSet{FlagSetJustPoolId()}},
 			CustomFlagOverrides: poolIdFlagOverride,
 		},

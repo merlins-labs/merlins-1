@@ -5,10 +5,10 @@ import (
 	"sort"
 
 	"github.com/osmosis-labs/osmosis/osmoutils"
-	cltypes "github.com/osmosis-labs/osmosis/v16/x/concentrated-liquidity/types"
-	"github.com/osmosis-labs/osmosis/v16/x/gamm/types"
-	gammmigration "github.com/osmosis-labs/osmosis/v16/x/gamm/types/migration"
-	poolmanagertypes "github.com/osmosis-labs/osmosis/v16/x/poolmanager/types"
+	cltypes "github.com/merlinslair/merlin/v16/x/concentrated-liquidity/types"
+	"github.com/merlinslair/merlin/v16/x/gamm/types"
+	gammmigration "github.com/merlinslair/merlin/v16/x/gamm/types/migration"
+	poolmanagertypes "github.com/merlinslair/merlin/v16/x/poolmanager/types"
 
 	"github.com/cosmos/cosmos-sdk/store/prefix"
 	sdk "github.com/cosmos/cosmos-sdk/types"
@@ -119,8 +119,8 @@ func (k Keeper) OverwriteMigrationRecordsAndRedirectDistrRecords(ctx sdk.Context
 	// delete all existing migration records
 	// this is done for both replace and update migration calls because, regardless of whether we are replacing all or updating a few,
 	// the resulting migrationInfo that gets passed into this function is the complete set of migration records.
-	osmoutils.DeleteAllKeysFromPrefix(ctx, store, types.KeyPrefixMigrationInfoBalancerPool)
-	osmoutils.DeleteAllKeysFromPrefix(ctx, store, types.KeyPrefixMigrationInfoCLPool)
+	furyutils.DeleteAllKeysFromPrefix(ctx, store, types.KeyPrefixMigrationInfoBalancerPool)
+	furyutils.DeleteAllKeysFromPrefix(ctx, store, types.KeyPrefixMigrationInfoCLPool)
 
 	for _, balancerToCLPoolLink := range migrationInfo.BalancerToConcentratedPoolLinks {
 		balancerToClPoolKey := types.GetKeyPrefixMigrationInfoBalancerPool(balancerToCLPoolLink.BalancerPoolId)

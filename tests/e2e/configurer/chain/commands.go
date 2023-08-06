@@ -13,13 +13,13 @@ import (
 
 	"github.com/tendermint/tendermint/libs/bytes"
 
-	appparams "github.com/osmosis-labs/osmosis/v16/app/params"
-	"github.com/osmosis-labs/osmosis/v16/tests/e2e/configurer/config"
-	"github.com/osmosis-labs/osmosis/v16/tests/e2e/initialization"
-	"github.com/osmosis-labs/osmosis/v16/tests/e2e/util"
+	appparams "github.com/merlinslair/merlin/v16/app/params"
+	"github.com/merlinslair/merlin/v16/tests/e2e/configurer/config"
+	"github.com/merlinslair/merlin/v16/tests/e2e/initialization"
+	"github.com/merlinslair/merlin/v16/tests/e2e/util"
 
-	ibcratelimittypes "github.com/osmosis-labs/osmosis/v16/x/ibc-rate-limit/types"
-	lockuptypes "github.com/osmosis-labs/osmosis/v16/x/lockup/types"
+	ibcratelimittypes "github.com/merlinslair/merlin/v16/x/ibc-rate-limit/types"
+	lockuptypes "github.com/merlinslair/merlin/v16/x/lockup/types"
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
@@ -28,7 +28,7 @@ import (
 	"github.com/tendermint/tendermint/p2p"
 	coretypes "github.com/tendermint/tendermint/rpc/core/types"
 
-	app "github.com/osmosis-labs/osmosis/v16/app"
+	app "github.com/merlinslair/merlin/v16/app"
 
 	paramsutils "github.com/cosmos/cosmos-sdk/x/params/client/utils"
 )
@@ -42,7 +42,7 @@ type params struct {
 
 func (n *NodeConfig) CreateBalancerPool(poolFile, from string) uint64 {
 	n.LogActionF("creating balancer pool from file %s", poolFile)
-	cmd := []string{"osmosisd", "tx", "gamm", "create-pool", fmt.Sprintf("--pool-file=/osmosis/%s", poolFile), fmt.Sprintf("--from=%s", from)}
+	cmd := []string{"merlin", "tx", "gamm", "create-pool", fmt.Sprintf("--pool-file=/merlin/%s", poolFile), fmt.Sprintf("--from=%s", from)}
 	resp, _, err := n.containerManager.ExecTxCmd(n.t, n.chainId, n.Name, cmd)
 	require.NoError(n.t, err)
 
@@ -62,7 +62,7 @@ func (n *NodeConfig) CreateBalancerPool(poolFile, from string) uint64 {
 
 func (n *NodeConfig) CreateStableswapPool(poolFile, from string) uint64 {
 	n.LogActionF("creating stableswap pool from file %s", poolFile)
-	cmd := []string{"osmosisd", "tx", "gamm", "create-pool", fmt.Sprintf("--pool-file=/osmosis/%s", poolFile), "--pool-type=stableswap", fmt.Sprintf("--from=%s", from)}
+	cmd := []string{"merlin", "tx", "gamm", "create-pool", fmt.Sprintf("--pool-file=/merlin/%s", poolFile), "--pool-type=stableswap", fmt.Sprintf("--from=%s", from)}
 	resp, _, err := n.containerManager.ExecTxCmd(n.t, n.chainId, n.Name, cmd)
 	require.NoError(n.t, err)
 
@@ -82,7 +82,7 @@ func (n *NodeConfig) CreateStableswapPool(poolFile, from string) uint64 {
 // CollectSpreadRewards collects spread rewards earned by concentrated position in range of [lowerTick; upperTick] in pool with id of poolId
 func (n *NodeConfig) CollectSpreadRewards(from, positionIds string) {
 	n.LogActionF("collecting spread rewards from concentrated position")
-	cmd := []string{"osmosisd", "tx", "concentratedliquidity", "collect-spread-rewards", positionIds, fmt.Sprintf("--from=%s", from)}
+	cmd := []string{"merlin", "tx", "concentratedliquidity", "collect-spread-rewards", positionIds, fmt.Sprintf("--from=%s", from)}
 	_, _, err := n.containerManager.ExecTxCmd(n.t, n.chainId, n.Name, cmd)
 	require.NoError(n.t, err)
 
@@ -94,7 +94,7 @@ func (n *NodeConfig) CollectSpreadRewards(from, positionIds string) {
 func (n *NodeConfig) CreateConcentratedPool(from, denom1, denom2 string, tickSpacing uint64, spreadFactor string) (uint64, error) {
 	n.LogActionF("creating concentrated pool")
 
-	cmd := []string{"osmosisd", "tx", "concentratedliquidity", "create-pool", denom1, denom2, fmt.Sprintf("%d", tickSpacing), spreadFactor, fmt.Sprintf("--from=%s", from)}
+	cmd := []string{"merlin", "tx", "concentratedliquidity", "create-pool", denom1, denom2, fmt.Sprintf("%d", tickSpacing), spreadFactor, fmt.Sprintf("--from=%s", from)}
 	resp, _, err := n.containerManager.ExecTxCmd(n.t, n.chainId, n.Name, cmd)
 	if err != nil {
 		return 0, err
@@ -119,7 +119,7 @@ func (n *NodeConfig) CreateConcentratedPosition(from, lowerTick, upperTick strin
 	n.LogActionF("creating concentrated position")
 	// gas = 50,000 because e2e  default to 40,000, we hardcoded extra 10k gas to initialize tick
 	// fees = 1250 (because 50,000 * 0.0025 = 1250)
-	cmd := []string{"osmosisd", "tx", "concentratedliquidity", "create-position", fmt.Sprint(poolId), lowerTick, upperTick, tokens, fmt.Sprintf("%d", token0MinAmt), fmt.Sprintf("%d", token1MinAmt), fmt.Sprintf("--from=%s", from), "--gas=500000", "--fees=1250uosmo", "-o json"}
+	cmd := []string{"merlin", "tx", "concentratedliquidity", "create-position", fmt.Sprint(poolId), lowerTick, upperTick, tokens, fmt.Sprintf("%d", token0MinAmt), fmt.Sprintf("%d", token1MinAmt), fmt.Sprintf("--from=%s", from), "--gas=500000", "--fees=1250ufury", "-o json"}
 	outJson, _, err := n.containerManager.ExecTxCmdWithSuccessString(n.t, n.chainId, n.Name, cmd, "code\":0")
 	require.NoError(n.t, err)
 
@@ -140,7 +140,7 @@ func (n *NodeConfig) CreateConcentratedPosition(from, lowerTick, upperTick strin
 
 func (n *NodeConfig) StoreWasmCode(wasmFile, from string) int {
 	n.LogActionF("storing wasm code from file %s", wasmFile)
-	cmd := []string{"osmosisd", "tx", "wasm", "store", wasmFile, fmt.Sprintf("--from=%s", from), "--gas=auto", "--gas-prices=0.1uosmo", "--gas-adjustment=1.3"}
+	cmd := []string{"merlin", "tx", "wasm", "store", wasmFile, fmt.Sprintf("--from=%s", from), "--gas=auto", "--gas-prices=0.1ufury", "--gas-adjustment=1.3"}
 	resp, _, err := n.containerManager.ExecTxCmd(n.t, n.chainId, n.Name, cmd)
 	require.NoError(n.t, err)
 	startIndex := strings.Index(resp.String(), `{"key":"code_id","value":"`) + len(`{"key":"code_id","value":"`)
@@ -157,7 +157,7 @@ func (n *NodeConfig) StoreWasmCode(wasmFile, from string) int {
 
 func (n *NodeConfig) WithdrawPosition(from, liquidityOut string, positionId uint64) {
 	n.LogActionF("withdrawing liquidity from position")
-	cmd := []string{"osmosisd", "tx", "concentratedliquidity", "withdraw-position", fmt.Sprint(positionId), liquidityOut, fmt.Sprintf("--from=%s", from), "--gas=700000", "--fees=5000uosmo"}
+	cmd := []string{"merlin", "tx", "concentratedliquidity", "withdraw-position", fmt.Sprint(positionId), liquidityOut, fmt.Sprintf("--from=%s", from), "--gas=700000", "--fees=5000ufury"}
 	_, _, err := n.containerManager.ExecTxCmd(n.t, n.chainId, n.Name, cmd)
 	require.NoError(n.t, err)
 	n.LogActionF("successfully withdrew %s liquidity from position %d", liquidityOut, positionId)
@@ -165,7 +165,7 @@ func (n *NodeConfig) WithdrawPosition(from, liquidityOut string, positionId uint
 
 func (n *NodeConfig) InstantiateWasmContract(codeId, initMsg, from string) {
 	n.LogActionF("instantiating wasm contract %s with %s", codeId, initMsg)
-	cmd := []string{"osmosisd", "tx", "wasm", "instantiate", codeId, initMsg, fmt.Sprintf("--from=%s", from), "--no-admin", "--label=contract"}
+	cmd := []string{"merlin", "tx", "wasm", "instantiate", codeId, initMsg, fmt.Sprintf("--from=%s", from), "--no-admin", "--label=contract"}
 	n.LogActionF(strings.Join(cmd, " "))
 	_, _, err := n.containerManager.ExecTxCmd(n.t, n.chainId, n.Name, cmd)
 	require.NoError(n.t, err)
@@ -174,7 +174,7 @@ func (n *NodeConfig) InstantiateWasmContract(codeId, initMsg, from string) {
 
 func (n *NodeConfig) WasmExecute(contract, execMsg, from string) {
 	n.LogActionF("executing %s on wasm contract %s from %s", execMsg, contract, from)
-	cmd := []string{"osmosisd", "tx", "wasm", "execute", contract, execMsg, fmt.Sprintf("--from=%s", from)}
+	cmd := []string{"merlin", "tx", "wasm", "execute", contract, execMsg, fmt.Sprintf("--from=%s", from)}
 	n.LogActionF(strings.Join(cmd, " "))
 	_, _, err := n.containerManager.ExecTxCmd(n.t, n.chainId, n.Name, cmd)
 	require.NoError(n.t, err)
@@ -184,7 +184,7 @@ func (n *NodeConfig) WasmExecute(contract, execMsg, from string) {
 // QueryParams extracts the params for a given subspace and key. This is done generically via json to avoid having to
 // specify the QueryParamResponse type (which may not exist for all params).
 func (n *NodeConfig) QueryParams(subspace, key string) string {
-	cmd := []string{"osmosisd", "query", "params", "subspace", subspace, key, "--output=json"}
+	cmd := []string{"merlin", "query", "params", "subspace", subspace, key, "--output=json"}
 
 	out, _, err := n.containerManager.ExecCmd(n.t, n.Name, cmd, "")
 	require.NoError(n.t, err)
@@ -196,7 +196,7 @@ func (n *NodeConfig) QueryParams(subspace, key string) string {
 }
 
 func (n *NodeConfig) QueryGovModuleAccount() string {
-	cmd := []string{"osmosisd", "query", "auth", "module-accounts", "--output=json"}
+	cmd := []string{"merlin", "query", "auth", "module-accounts", "--output=json"}
 
 	out, _, err := n.containerManager.ExecCmd(n.t, n.Name, cmd, "")
 	require.NoError(n.t, err)
@@ -230,7 +230,7 @@ func (n *NodeConfig) SubmitParamChangeProposal(proposalJson, from string) int {
 	err = f.Close()
 	require.NoError(n.t, err)
 
-	cmd := []string{"osmosisd", "tx", "gov", "submit-proposal", "param-change", fmt.Sprintf("/osmosis/param_change_proposal_%s.json", currentTime), fmt.Sprintf("--from=%s", from)}
+	cmd := []string{"merlin", "tx", "gov", "submit-proposal", "param-change", fmt.Sprintf("/merlin/param_change_proposal_%s.json", currentTime), fmt.Sprintf("--from=%s", from)}
 
 	resp, _, err := n.containerManager.ExecTxCmd(n.t, n.chainId, n.Name, cmd)
 	require.NoError(n.t, err)
@@ -265,7 +265,7 @@ func (n *NodeConfig) SendIBCTransfer(dstChain *Config, from, recipient, memo str
 func (n *NodeConfig) FailIBCTransfer(from, recipient, amount string) {
 	n.LogActionF("IBC sending %s from %s to %s", amount, from, recipient)
 
-	cmd := []string{"osmosisd", "tx", "ibc-transfer", "transfer", "transfer", "channel-0", recipient, amount, fmt.Sprintf("--from=%s", from)}
+	cmd := []string{"merlin", "tx", "ibc-transfer", "transfer", "transfer", "channel-0", recipient, amount, fmt.Sprintf("--from=%s", from)}
 
 	_, _, err := n.containerManager.ExecTxCmdWithSuccessString(n.t, n.chainId, n.Name, cmd, "rate limit exceeded")
 	require.NoError(n.t, err)
@@ -277,10 +277,10 @@ func (n *NodeConfig) FailIBCTransfer(from, recipient, amount string) {
 // swapRoutePoolIds is the comma separated list of pool ids to swap through.
 // swapRouteDenoms is the comma separated list of denoms to swap through.
 // To reproduce locally:
-// docker container exec <container id> osmosisd tx gamm swap-exact-amount-in <tokeinInCoin> <tokenOutMinAmountInt> --swap-route-pool-ids <swapRoutePoolIds> --swap-route-denoms <swapRouteDenoms> --chain-id=<id>--from=<address> --keyring-backend=test -b=block --yes --log_format=json
+// docker container exec <container id> merlin tx gamm swap-exact-amount-in <tokeinInCoin> <tokenOutMinAmountInt> --swap-route-pool-ids <swapRoutePoolIds> --swap-route-denoms <swapRouteDenoms> --chain-id=<id>--from=<address> --keyring-backend=test -b=block --yes --log_format=json
 func (n *NodeConfig) SwapExactAmountIn(tokenInCoin, tokenOutMinAmountInt string, swapRoutePoolIds string, swapRouteDenoms string, from string) {
 	n.LogActionF("swapping %s to get a minimum of %s with pool id routes (%s) and denom routes (%s)", tokenInCoin, tokenOutMinAmountInt, swapRoutePoolIds, swapRouteDenoms)
-	cmd := []string{"osmosisd", "tx", "gamm", "swap-exact-amount-in", tokenInCoin, tokenOutMinAmountInt, fmt.Sprintf("--swap-route-pool-ids=%s", swapRoutePoolIds), fmt.Sprintf("--swap-route-denoms=%s", swapRouteDenoms), fmt.Sprintf("--from=%s", from)}
+	cmd := []string{"merlin", "tx", "gamm", "swap-exact-amount-in", tokenInCoin, tokenOutMinAmountInt, fmt.Sprintf("--swap-route-pool-ids=%s", swapRoutePoolIds), fmt.Sprintf("--swap-route-denoms=%s", swapRouteDenoms), fmt.Sprintf("--from=%s", from)}
 	_, _, err := n.containerManager.ExecTxCmd(n.t, n.chainId, n.Name, cmd)
 	require.NoError(n.t, err)
 	n.LogActionF("successfully swapped")
@@ -288,7 +288,7 @@ func (n *NodeConfig) SwapExactAmountIn(tokenInCoin, tokenOutMinAmountInt string,
 
 func (n *NodeConfig) JoinPoolExactAmountIn(tokenIn string, poolId uint64, shareOutMinAmount string, from string) {
 	n.LogActionF("join-swap-extern-amount-in (%s)  (%s) from (%s), pool id (%d)", tokenIn, shareOutMinAmount, from, poolId)
-	cmd := []string{"osmosisd", "tx", "gamm", "join-swap-extern-amount-in", tokenIn, shareOutMinAmount, fmt.Sprintf("--pool-id=%d", poolId), fmt.Sprintf("--from=%s", from)}
+	cmd := []string{"merlin", "tx", "gamm", "join-swap-extern-amount-in", tokenIn, shareOutMinAmount, fmt.Sprintf("--pool-id=%d", poolId), fmt.Sprintf("--from=%s", from)}
 	_, _, err := n.containerManager.ExecTxCmd(n.t, n.chainId, n.Name, cmd)
 	require.NoError(n.t, err)
 	n.LogActionF("successfully joined pool")
@@ -296,7 +296,7 @@ func (n *NodeConfig) JoinPoolExactAmountIn(tokenIn string, poolId uint64, shareO
 
 func (n *NodeConfig) ExitPool(from, minAmountsOut string, poolId uint64, shareAmountIn string) {
 	n.LogActionF("exiting gamm pool")
-	cmd := []string{"osmosisd", "tx", "gamm", "exit-pool", fmt.Sprintf("--min-amounts-out=%s", minAmountsOut), fmt.Sprintf("--share-amount-in=%s", shareAmountIn), fmt.Sprintf("--pool-id=%d", poolId), fmt.Sprintf("--from=%s", from)}
+	cmd := []string{"merlin", "tx", "gamm", "exit-pool", fmt.Sprintf("--min-amounts-out=%s", minAmountsOut), fmt.Sprintf("--share-amount-in=%s", shareAmountIn), fmt.Sprintf("--pool-id=%d", poolId), fmt.Sprintf("--from=%s", from)}
 	_, _, err := n.containerManager.ExecTxCmd(n.t, n.chainId, n.Name, cmd)
 	require.NoError(n.t, err)
 	n.LogActionF("successfully exited pool %d, minAmountsOut %s, shareAmountIn %s", poolId, minAmountsOut, shareAmountIn)
@@ -304,7 +304,7 @@ func (n *NodeConfig) ExitPool(from, minAmountsOut string, poolId uint64, shareAm
 
 func (n *NodeConfig) SubmitUpgradeProposal(upgradeVersion string, upgradeHeight int64, initialDeposit sdk.Coin) {
 	n.LogActionF("submitting upgrade proposal %s for height %d", upgradeVersion, upgradeHeight)
-	cmd := []string{"osmosisd", "tx", "gov", "submit-proposal", "software-upgrade", upgradeVersion, fmt.Sprintf("--title=\"%s upgrade\"", upgradeVersion), "--description=\"upgrade proposal submission\"", fmt.Sprintf("--upgrade-height=%d", upgradeHeight), "--upgrade-info=\"\"", "--from=val", fmt.Sprintf("--deposit=%s", initialDeposit)}
+	cmd := []string{"merlin", "tx", "gov", "submit-proposal", "software-upgrade", upgradeVersion, fmt.Sprintf("--title=\"%s upgrade\"", upgradeVersion), "--description=\"upgrade proposal submission\"", fmt.Sprintf("--upgrade-height=%d", upgradeHeight), "--upgrade-info=\"\"", "--from=val", fmt.Sprintf("--deposit=%s", initialDeposit)}
 	_, _, err := n.containerManager.ExecTxCmd(n.t, n.chainId, n.Name, cmd)
 	require.NoError(n.t, err)
 	n.LogActionF("successfully submitted upgrade proposal")
@@ -312,7 +312,7 @@ func (n *NodeConfig) SubmitUpgradeProposal(upgradeVersion string, upgradeHeight 
 
 func (n *NodeConfig) SubmitSuperfluidProposal(asset string, initialDeposit sdk.Coin) int {
 	n.LogActionF("submitting superfluid proposal for asset %s", asset)
-	cmd := []string{"osmosisd", "tx", "gov", "submit-proposal", "set-superfluid-assets-proposal", fmt.Sprintf("--superfluid-assets=%s", asset), fmt.Sprintf("--title=\"%s superfluid asset\"", asset), fmt.Sprintf("--description=\"%s superfluid asset\"", asset), "--from=val", fmt.Sprintf("--deposit=%s", initialDeposit)}
+	cmd := []string{"merlin", "tx", "gov", "submit-proposal", "set-superfluid-assets-proposal", fmt.Sprintf("--superfluid-assets=%s", asset), fmt.Sprintf("--title=\"%s superfluid asset\"", asset), fmt.Sprintf("--description=\"%s superfluid asset\"", asset), "--from=val", fmt.Sprintf("--deposit=%s", initialDeposit)}
 	resp, _, err := n.containerManager.ExecTxCmd(n.t, n.chainId, n.Name, cmd)
 	require.NoError(n.t, err)
 
@@ -333,7 +333,7 @@ func (n *NodeConfig) SubmitSuperfluidProposal(asset string, initialDeposit sdk.C
 
 func (n *NodeConfig) SubmitCreateConcentratedPoolProposal(initialDeposit sdk.Coin) int {
 	n.LogActionF("Creating concentrated liquidity pool")
-	cmd := []string{"osmosisd", "tx", "gov", "submit-proposal", "create-concentratedliquidity-pool-proposal", "--pool-records=stake,uosmo,100,-6,0.001", "--title=\"create concentrated pool\"", "--description=\"create concentrated pool", "--from=val", fmt.Sprintf("--deposit=%s", initialDeposit)}
+	cmd := []string{"merlin", "tx", "gov", "submit-proposal", "create-concentratedliquidity-pool-proposal", "--pool-records=stake,ufury,100,-6,0.001", "--title=\"create concentrated pool\"", "--description=\"create concentrated pool", "--from=val", fmt.Sprintf("--deposit=%s", initialDeposit)}
 	resp, _, err := n.containerManager.ExecTxCmd(n.t, n.chainId, n.Name, cmd)
 	require.NoError(n.t, err)
 	// Extract the proposal ID from the response
@@ -353,7 +353,7 @@ func (n *NodeConfig) SubmitCreateConcentratedPoolProposal(initialDeposit sdk.Coi
 
 func (n *NodeConfig) SubmitTextProposal(text string, initialDeposit sdk.Coin, isExpedited bool) int {
 	n.LogActionF("submitting text gov proposal")
-	cmd := []string{"osmosisd", "tx", "gov", "submit-proposal", "--type=text", fmt.Sprintf("--title=\"%s\"", text), "--description=\"test text proposal\"", "--from=val", fmt.Sprintf("--deposit=%s", initialDeposit)}
+	cmd := []string{"merlin", "tx", "gov", "submit-proposal", "--type=text", fmt.Sprintf("--title=\"%s\"", text), "--description=\"test text proposal\"", "--from=val", fmt.Sprintf("--deposit=%s", initialDeposit)}
 	if isExpedited {
 		cmd = append(cmd, "--is-expedited=true")
 	}
@@ -377,7 +377,7 @@ func (n *NodeConfig) SubmitTextProposal(text string, initialDeposit sdk.Coin, is
 
 func (n *NodeConfig) SubmitTickSpacingReductionProposal(poolTickSpacingRecords string, initialDeposit sdk.Coin, isExpedited bool) {
 	n.LogActionF("submitting tick spacing reduction gov proposal")
-	cmd := []string{"osmosisd", "tx", "gov", "submit-proposal", "tick-spacing-decrease-proposal", "--title=\"test tick spacing reduction proposal title\"", "--description=\"test tick spacing reduction proposal\"", "--from=val", fmt.Sprintf("--deposit=%s", initialDeposit), fmt.Sprintf("--pool-tick-spacing-records=%s", poolTickSpacingRecords)}
+	cmd := []string{"merlin", "tx", "gov", "submit-proposal", "tick-spacing-decrease-proposal", "--title=\"test tick spacing reduction proposal title\"", "--description=\"test tick spacing reduction proposal\"", "--from=val", fmt.Sprintf("--deposit=%s", initialDeposit), fmt.Sprintf("--pool-tick-spacing-records=%s", poolTickSpacingRecords)}
 	if isExpedited {
 		cmd = append(cmd, "--is-expedited=true")
 	}
@@ -392,7 +392,7 @@ func (n *NodeConfig) DepositProposal(proposalNumber int, isExpedited bool) {
 	if isExpedited {
 		deposit = sdk.NewCoin(appparams.BaseCoinUnit, sdk.NewInt(config.MinExpeditedDepositValue)).String()
 	}
-	cmd := []string{"osmosisd", "tx", "gov", "deposit", fmt.Sprintf("%d", proposalNumber), deposit, "--from=val"}
+	cmd := []string{"merlin", "tx", "gov", "deposit", fmt.Sprintf("%d", proposalNumber), deposit, "--from=val"}
 	_, _, err := n.containerManager.ExecTxCmd(n.t, n.chainId, n.Name, cmd)
 	require.NoError(n.t, err)
 	n.LogActionF("successfully deposited on proposal %d", proposalNumber)
@@ -400,7 +400,7 @@ func (n *NodeConfig) DepositProposal(proposalNumber int, isExpedited bool) {
 
 func (n *NodeConfig) VoteYesProposal(from string, proposalNumber int) {
 	n.LogActionF("voting yes on proposal: %d", proposalNumber)
-	cmd := []string{"osmosisd", "tx", "gov", "vote", fmt.Sprintf("%d", proposalNumber), "yes", fmt.Sprintf("--from=%s", from)}
+	cmd := []string{"merlin", "tx", "gov", "vote", fmt.Sprintf("%d", proposalNumber), "yes", fmt.Sprintf("--from=%s", from)}
 	_, _, err := n.containerManager.ExecTxCmd(n.t, n.chainId, n.Name, cmd)
 	require.NoError(n.t, err)
 	n.LogActionF("successfully voted yes on proposal %d", proposalNumber)
@@ -408,7 +408,7 @@ func (n *NodeConfig) VoteYesProposal(from string, proposalNumber int) {
 
 func (n *NodeConfig) VoteNoProposal(from string, proposalNumber int) {
 	n.LogActionF("voting no on proposal: %d", proposalNumber)
-	cmd := []string{"osmosisd", "tx", "gov", "vote", fmt.Sprintf("%d", proposalNumber), "no", fmt.Sprintf("--from=%s", from)}
+	cmd := []string{"merlin", "tx", "gov", "vote", fmt.Sprintf("%d", proposalNumber), "no", fmt.Sprintf("--from=%s", from)}
 	_, _, err := n.containerManager.ExecTxCmd(n.t, n.chainId, n.Name, cmd)
 	require.NoError(n.t, err)
 	n.LogActionF("successfully voted no on proposal: %d", proposalNumber)
@@ -416,7 +416,7 @@ func (n *NodeConfig) VoteNoProposal(from string, proposalNumber int) {
 
 func (n *NodeConfig) LockTokens(tokens string, duration string, from string) {
 	n.LogActionF("locking %s for %s", tokens, duration)
-	cmd := []string{"osmosisd", "tx", "lockup", "lock-tokens", tokens, fmt.Sprintf("--duration=%s", duration), fmt.Sprintf("--from=%s", from)}
+	cmd := []string{"merlin", "tx", "lockup", "lock-tokens", tokens, fmt.Sprintf("--duration=%s", duration), fmt.Sprintf("--from=%s", from)}
 	_, _, err := n.containerManager.ExecTxCmd(n.t, n.chainId, n.Name, cmd)
 	require.NoError(n.t, err)
 	n.LogActionF("successfully created lock")
@@ -424,7 +424,7 @@ func (n *NodeConfig) LockTokens(tokens string, duration string, from string) {
 
 func (n *NodeConfig) AddToExistingLock(tokens sdk.Int, denom, duration, from string) {
 	n.LogActionF("retrieving existing lock ID")
-	durationPath := fmt.Sprintf("/osmosis/lockup/v1beta1/account_locked_longer_duration/%s?duration=%s", from, duration)
+	durationPath := fmt.Sprintf("/merlin/lockup/v1beta1/account_locked_longer_duration/%s?duration=%s", from, duration)
 	bz, err := n.QueryGRPCGateway(durationPath)
 	require.NoError(n.t, err)
 	var accountLockedDurationResp lockuptypes.AccountLockedDurationResponse
@@ -438,7 +438,7 @@ func (n *NodeConfig) AddToExistingLock(tokens sdk.Int, denom, duration, from str
 		}
 	}
 	n.LogActionF("noting previous lockup amount")
-	path := fmt.Sprintf("/osmosis/lockup/v1beta1/locked_by_id/%s", lockID)
+	path := fmt.Sprintf("/merlin/lockup/v1beta1/locked_by_id/%s", lockID)
 	bz, err = n.QueryGRPCGateway(path)
 	require.NoError(n.t, err)
 	var lockedResp lockuptypes.LockedResponse
@@ -447,7 +447,7 @@ func (n *NodeConfig) AddToExistingLock(tokens sdk.Int, denom, duration, from str
 	previousLockupAmount := lockedResp.Lock.Coins.AmountOf(denom)
 	n.LogActionF("previous lockup amount is %v", previousLockupAmount)
 	n.LogActionF("locking %s for %s", tokens, duration)
-	cmd := []string{"osmosisd", "tx", "lockup", "lock-tokens", fmt.Sprintf("%s%s", tokens, denom), fmt.Sprintf("--duration=%s", duration), fmt.Sprintf("--from=%s", from)}
+	cmd := []string{"merlin", "tx", "lockup", "lock-tokens", fmt.Sprintf("%s%s", tokens, denom), fmt.Sprintf("--duration=%s", duration), fmt.Sprintf("--from=%s", from)}
 	_, _, err = n.containerManager.ExecTxCmd(n.t, n.chainId, n.Name, cmd)
 	require.NoError(n.t, err)
 	n.LogActionF("noting new lockup amount")
@@ -465,7 +465,7 @@ func (n *NodeConfig) AddToExistingLock(tokens sdk.Int, denom, duration, from str
 func (n *NodeConfig) SuperfluidDelegate(lockNumber int, valAddress string, from string) {
 	lockStr := strconv.Itoa(lockNumber)
 	n.LogActionF("superfluid delegating lock %s to %s", lockStr, valAddress)
-	cmd := []string{"osmosisd", "tx", "superfluid", "delegate", lockStr, valAddress, fmt.Sprintf("--from=%s", from)}
+	cmd := []string{"merlin", "tx", "superfluid", "delegate", lockStr, valAddress, fmt.Sprintf("--from=%s", from)}
 	_, _, err := n.containerManager.ExecTxCmd(n.t, n.chainId, n.Name, cmd)
 	require.NoError(n.t, err)
 	n.LogActionF("successfully superfluid delegated lock %s to %s", lockStr, valAddress)
@@ -473,7 +473,7 @@ func (n *NodeConfig) SuperfluidDelegate(lockNumber int, valAddress string, from 
 
 func (n *NodeConfig) BankSend(amount string, sendAddress string, receiveAddress string) {
 	n.LogActionF("bank sending %s from address %s to %s", amount, sendAddress, receiveAddress)
-	cmd := []string{"osmosisd", "tx", "bank", "send", sendAddress, receiveAddress, amount, "--from=val"}
+	cmd := []string{"merlin", "tx", "bank", "send", sendAddress, receiveAddress, amount, "--from=val"}
 	_, _, err := n.containerManager.ExecTxCmd(n.t, n.chainId, n.Name, cmd)
 	require.NoError(n.t, err)
 	n.LogActionF("successfully sent bank sent %s from address %s to %s", amount, sendAddress, receiveAddress)
@@ -481,7 +481,7 @@ func (n *NodeConfig) BankSend(amount string, sendAddress string, receiveAddress 
 
 func (n *NodeConfig) FundCommunityPool(sendAddress string, funds string) {
 	n.LogActionF("funding community pool from address %s with %s", sendAddress, funds)
-	cmd := []string{"osmosisd", "tx", "distribution", "fund-community-pool", funds, fmt.Sprintf("--from=%s", sendAddress)}
+	cmd := []string{"merlin", "tx", "distribution", "fund-community-pool", funds, fmt.Sprintf("--from=%s", sendAddress)}
 	_, _, err := n.containerManager.ExecTxCmd(n.t, n.chainId, n.Name, cmd)
 	require.NoError(n.t, err)
 	n.LogActionF("successfully funded community pool from address %s with %s", sendAddress, funds)
@@ -491,10 +491,10 @@ func (n *NodeConfig) FundCommunityPool(sendAddress string, funds string) {
 // TODO: Abstract this to be a fee token provider account.
 func (n *NodeConfig) CreateWallet(walletName string) string {
 	n.LogActionF("creating wallet %s", walletName)
-	cmd := []string{"osmosisd", "keys", "add", walletName, "--keyring-backend=test"}
+	cmd := []string{"merlin", "keys", "add", walletName, "--keyring-backend=test"}
 	outBuf, _, err := n.containerManager.ExecCmd(n.t, n.Name, cmd, "")
 	require.NoError(n.t, err)
-	re := regexp.MustCompile("osmo1(.{38})")
+	re := regexp.MustCompile("fury1(.{38})")
 	walletAddr := fmt.Sprintf("%s\n", re.FindString(outBuf.String()))
 	walletAddr = strings.TrimSuffix(walletAddr, "\n")
 	n.LogActionF("created wallet %s, wallet address - %s", walletName, walletAddr)
@@ -521,10 +521,10 @@ func (n *NodeConfig) CreateWalletAndFundFrom(newWalletName string, fundingWallet
 
 func (n *NodeConfig) GetWallet(walletName string) string {
 	n.LogActionF("retrieving wallet %s", walletName)
-	cmd := []string{"osmosisd", "keys", "show", walletName, "--keyring-backend=test"}
+	cmd := []string{"merlin", "keys", "show", walletName, "--keyring-backend=test"}
 	outBuf, _, err := n.containerManager.ExecCmd(n.t, n.Name, cmd, "")
 	require.NoError(n.t, err)
-	re := regexp.MustCompile("osmo1(.{38})")
+	re := regexp.MustCompile("fury1(.{38})")
 	walletAddr := fmt.Sprintf("%s\n", re.FindString(outBuf.String()))
 	walletAddr = strings.TrimSuffix(walletAddr, "\n")
 	n.LogActionF("wallet %s found, waller address - %s", walletName, walletAddr)
@@ -545,7 +545,7 @@ func (n *NodeConfig) QueryPropStatusTimed(proposalNumber int, desiredStatus stri
 		},
 		1*time.Minute,
 		10*time.Millisecond,
-		"Osmosis node failed to retrieve prop tally",
+		"Merlin node failed to retrieve prop tally",
 	)
 	elapsed := time.Since(start)
 	totalTime <- elapsed
@@ -566,7 +566,7 @@ type resultStatus struct {
 }
 
 func (n *NodeConfig) Status() (resultStatus, error) {
-	cmd := []string{"osmosisd", "status"}
+	cmd := []string{"merlin", "status"}
 	_, errBuf, err := n.containerManager.ExecCmd(n.t, n.Name, cmd, "")
 	if err != nil {
 		return resultStatus{}, err
@@ -641,8 +641,8 @@ func (n *NodeConfig) SendIBC(dstChain *Config, recipient string, token sdk.Coin)
 
 	// removes the fee token from balances for calculating the difference in other tokens
 	// before and after the IBC send. Since we run tests in parallel now, some tests may
-	// send uosmo between accounts while this test is running. Since we don't care about
-	// non ibc denoms, its safe to filter uosmo out.
+	// send ufury between accounts while this test is running. Since we don't care about
+	// non ibc denoms, its safe to filter ufury out.
 	removeFeeTokenFromBalance := func(balance sdk.Coins) sdk.Coins {
 		filteredCoinDenoms := []string{}
 		for _, coin := range balance {
@@ -788,7 +788,7 @@ func (n *NodeConfig) ParamChangeProposal(subspace, key string, value []byte, cha
 				Value:    value,
 			},
 		},
-		Deposit: "625000000uosmo",
+		Deposit: "625000000ufury",
 	}
 	proposalJson, err := json.Marshal(proposal)
 	if err != nil {

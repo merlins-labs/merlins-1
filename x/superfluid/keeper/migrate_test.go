@@ -13,14 +13,14 @@ import (
 
 	"github.com/osmosis-labs/osmosis/osmomath"
 	"github.com/osmosis-labs/osmosis/osmoutils"
-	"github.com/osmosis-labs/osmosis/v16/app/apptesting"
-	cltypes "github.com/osmosis-labs/osmosis/v16/x/concentrated-liquidity/types"
-	"github.com/osmosis-labs/osmosis/v16/x/gamm/pool-models/balancer"
-	gammtypes "github.com/osmosis-labs/osmosis/v16/x/gamm/types"
-	gammmigration "github.com/osmosis-labs/osmosis/v16/x/gamm/types/migration"
-	lockuptypes "github.com/osmosis-labs/osmosis/v16/x/lockup/types"
-	"github.com/osmosis-labs/osmosis/v16/x/superfluid/keeper"
-	"github.com/osmosis-labs/osmosis/v16/x/superfluid/types"
+	"github.com/merlinslair/merlin/v16/app/apptesting"
+	cltypes "github.com/merlinslair/merlin/v16/x/concentrated-liquidity/types"
+	"github.com/merlinslair/merlin/v16/x/gamm/pool-models/balancer"
+	gammtypes "github.com/merlinslair/merlin/v16/x/gamm/types"
+	gammmigration "github.com/merlinslair/merlin/v16/x/gamm/types/migration"
+	lockuptypes "github.com/merlinslair/merlin/v16/x/lockup/types"
+	"github.com/merlinslair/merlin/v16/x/superfluid/keeper"
+	"github.com/merlinslair/merlin/v16/x/superfluid/types"
 )
 
 var (
@@ -338,7 +338,7 @@ func (s *KeeperTestSuite) TestMigrateSuperfluidBondedBalancerToConcentrated() {
 
 			if tc.overwriteValidatorAddress {
 				synthDenomParts := strings.Split(synthLockBeforeMigration.SynthDenom, "/")
-				synthDenomParts[4] = "osmovaloper1n69ghlk6404gzxtmtq0w7ma59n9vd9ed9dplg" // invalid, too short
+				synthDenomParts[4] = "furyvaloper1n69ghlk6404gzxtmtq0w7ma59n9vd9ed9dplg" // invalid, too short
 				newSynthDenom := strings.Join(synthDenomParts, "/")
 				synthLockBeforeMigration.SynthDenom = newSynthDenom
 			}
@@ -499,7 +499,7 @@ func (s *KeeperTestSuite) TestMigrateSuperfluidUnbondingBalancerToConcentrated()
 			// Modify migration inputs if necessary
 			if tc.overwriteValidatorAddress {
 				synthDenomParts := strings.Split(synthLockBeforeMigration.SynthDenom, "/")
-				synthDenomParts[4] = "osmovaloper1n69ghlk6404gzxtmtq0w7ma59n9vd9ed9dplg" // invalid, too short
+				synthDenomParts[4] = "furyvaloper1n69ghlk6404gzxtmtq0w7ma59n9vd9ed9dplg" // invalid, too short
 				newSynthDenom := strings.Join(synthDenomParts, "/")
 				synthLockBeforeMigration.SynthDenom = newSynthDenom
 			}
@@ -985,9 +985,9 @@ func (s *KeeperTestSuite) TestValidateSharesToMigrateUnlockAndExitBalancerPool()
 			}
 			s.Require().NoError(err)
 
-			defaultErrorTolerance := osmomath.ErrTolerance{
+			defaultErrorTolerance := furymath.ErrTolerance{
 				AdditiveTolerance: sdk.NewDec(1),
-				RoundingDir:       osmomath.RoundDown,
+				RoundingDir:       furymath.RoundDown,
 			}
 
 			if tc.percentOfSharesToMigrate.Equal(sdk.OneDec()) {
@@ -1208,9 +1208,9 @@ func (s *KeeperTestSuite) ValidateMigrateResult(
 
 	// exitPool has rounding difference.
 	// We test if correct amt has been exited and frozen by comparing with rounding tolerance.
-	defaultErrorTolerance := osmomath.ErrTolerance{
+	defaultErrorTolerance := furymath.ErrTolerance{
 		AdditiveTolerance: sdk.NewDec(2),
-		RoundingDir:       osmomath.RoundDown,
+		RoundingDir:       furymath.RoundDown,
 	}
 	s.Require().Equal(0, defaultErrorTolerance.Compare(joinPoolAmt.AmountOf(defaultPoolAssets[0].Token.Denom).ToDec().Mul(percentOfSharesToMigrate).RoundInt(), amount0))
 	s.Require().Equal(0, defaultErrorTolerance.Compare(joinPoolAmt.AmountOf(defaultPoolAssets[1].Token.Denom).ToDec().Mul(percentOfSharesToMigrate).RoundInt(), amount1))
@@ -1268,7 +1268,7 @@ func (s *KeeperTestSuite) TestFunctional_VaryingPositions_Migrations() {
 
 		// Find the largest numPosition value and set numAccounts to be one greater than the largest position value
 		// The first account is used to create pools and the rest are used to create positions
-		largestPositionValue := osmoutils.Max(numBondedSuperfluid, numUnbondingSuperfluidLocked, numUnbondingSuperfluidUnlocking, numVanillaLockLocked, numVanillaLockUnlocking, numNoLock)
+		largestPositionValue := furyutils.Max(numBondedSuperfluid, numUnbondingSuperfluidLocked, numUnbondingSuperfluidUnlocking, numVanillaLockLocked, numVanillaLockUnlocking, numNoLock)
 		numAccounts := largestPositionValue.(int) + 1
 
 		positions := Positions{

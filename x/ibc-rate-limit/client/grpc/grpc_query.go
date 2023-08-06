@@ -1,7 +1,7 @@
 package grpc 
 
 // THIS FILE IS GENERATED CODE, DO NOT EDIT
-// SOURCE AT `proto/osmosis/ibc-rate-limit/v1beta1/query.yml`
+// SOURCE AT `proto/merlin/ibc-rate-limit/v1beta1/query.yml`
 
 import (
 	context "context"
@@ -10,8 +10,8 @@ import (
 	"google.golang.org/grpc/status"
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
-	"github.com/osmosis-labs/osmosis/v16/x/ibc-rate-limit/client"
-	"github.com/osmosis-labs/osmosis/v16/x/ibc-rate-limit/client/queryproto"
+	"github.com/merlinslair/merlin/v16/x/ibc-rate-limit/client"
+	"github.com/merlinslair/merlin/v16/x/ibc-rate-limit/client/queryproto"
 )
 
 type Querier struct {

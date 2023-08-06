@@ -9,10 +9,10 @@ import (
 
 	"github.com/osmosis-labs/osmosis/osmomath"
 	"github.com/osmosis-labs/osmosis/osmoutils"
-	cl "github.com/osmosis-labs/osmosis/v16/x/concentrated-liquidity"
-	"github.com/osmosis-labs/osmosis/v16/x/concentrated-liquidity/model"
-	clmodel "github.com/osmosis-labs/osmosis/v16/x/concentrated-liquidity/model"
-	types "github.com/osmosis-labs/osmosis/v16/x/concentrated-liquidity/types"
+	cl "github.com/merlinslair/merlin/v16/x/concentrated-liquidity"
+	"github.com/merlinslair/merlin/v16/x/concentrated-liquidity/model"
+	clmodel "github.com/merlinslair/merlin/v16/x/concentrated-liquidity/model"
+	types "github.com/merlinslair/merlin/v16/x/concentrated-liquidity/types"
 )
 
 type lpTest struct {
@@ -25,7 +25,7 @@ type lpTest struct {
 	joinTime                          time.Time
 	positionId                        uint64
 	underlyingLockId                  uint64
-	currentSqrtP                      osmomath.BigDec
+	currentSqrtP                      furymath.BigDec
 	tokensProvided                    sdk.Coins
 	customTokensProvided              bool
 	amount0Minimum                    sdk.Int
@@ -73,9 +73,9 @@ var (
 		expectedSpreadRewardGrowthOutsideUpper: cl.EmptyCoins,
 	}
 
-	errToleranceOneRoundDown = osmomath.ErrTolerance{
+	errToleranceOneRoundDown = furymath.ErrTolerance{
 		AdditiveTolerance: sdk.OneDec(),
-		RoundingDir:       osmomath.RoundDown,
+		RoundingDir:       furymath.RoundDown,
 	}
 
 	roundingError = sdk.OneInt()
@@ -665,7 +665,7 @@ func (s *KeeperTestSuite) TestWithdrawPosition() {
 				// check underlying stores were correctly deleted
 				emptyPositionStruct := clmodel.Position{}
 				positionIdToPositionKey := types.KeyPositionId(config.positionId)
-				osmoutils.Get(store, positionIdToPositionKey, &position)
+				furyutils.Get(store, positionIdToPositionKey, &position)
 				s.Require().Equal(model.Position{}, emptyPositionStruct)
 
 				// Retrieve the position ID from the store via owner/poolId key and compare to expected values.
@@ -1666,17 +1666,17 @@ func (s *KeeperTestSuite) TestUpdatePosition() {
 }
 
 func (s *KeeperTestSuite) TestInitializeInitialPositionForPool() {
-	sqrt := func(x int64) osmomath.BigDec {
-		sqrt, err := osmomath.MonotonicSqrt(sdk.NewDec(x))
+	sqrt := func(x int64) furymath.BigDec {
+		sqrt, err := furymath.MonotonicSqrt(sdk.NewDec(x))
 		s.Require().NoError(err)
-		return osmomath.BigDecFromSDKDec(sqrt)
+		return furymath.BigDecFromSDKDec(sqrt)
 	}
 
 	type sendTest struct {
 		amount0Desired        sdk.Int
 		amount1Desired        sdk.Int
 		tickSpacing           uint64
-		expectedCurrSqrtPrice osmomath.BigDec
+		expectedCurrSqrtPrice furymath.BigDec
 		expectedTick          int64
 		expectedError         error
 	}
@@ -1761,9 +1761,9 @@ func (s *KeeperTestSuite) TestInitializeInitialPositionForPool() {
 
 func (s *KeeperTestSuite) TestInverseRelation_CreatePosition_WithdrawPosition() {
 	var (
-		errToleranceOneRoundUp = osmomath.ErrTolerance{
+		errToleranceOneRoundUp = furymath.ErrTolerance{
 			AdditiveTolerance: sdk.OneDec(),
-			RoundingDir:       osmomath.RoundUp,
+			RoundingDir:       furymath.RoundUp,
 		}
 	)
 	tests := makeTests(positionCases)
@@ -1913,7 +1913,7 @@ func (s *KeeperTestSuite) TestUninitializePool() {
 
 			actualSqrtPrice := pool.GetCurrentSqrtPrice()
 			actualTick := pool.GetCurrentTick()
-			s.Require().Equal(osmomath.ZeroDec(), actualSqrtPrice)
+			s.Require().Equal(furymath.ZeroDec(), actualSqrtPrice)
 			s.Require().Equal(int64(0), actualTick)
 		})
 	}

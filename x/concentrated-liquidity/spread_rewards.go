@@ -6,7 +6,7 @@ import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
 	"github.com/osmosis-labs/osmosis/osmoutils/accum"
-	"github.com/osmosis-labs/osmosis/v16/x/concentrated-liquidity/types"
+	"github.com/merlinslair/merlin/v16/x/concentrated-liquidity/types"
 )
 
 var emptyCoins = sdk.DecCoins(nil)
@@ -271,7 +271,7 @@ func (k Keeper) prepareClaimableSpreadRewards(ctx sdk.Context, positionId uint64
 
 		// if there are no shares remaining, the dust is ignored. Otherwise, it is added back to the global accumulator.
 		// Total shares remaining can be zero if we claim in withdrawPosition for the last position in the pool.
-		// The shares are decremented in osmoutils/accum.ClaimRewards.
+		// The shares are decremented in furyutils/accum.ClaimRewards.
 		if !totalSharesRemaining.IsZero() {
 			forfeitedDustPerShare := forfeitedDust.QuoDecTruncate(totalSharesRemaining)
 			spreadRewardAccumulator.AddToAccumulator(forfeitedDustPerShare)
@@ -307,7 +307,7 @@ func updatePositionToInitValuePlusGrowthOutside(accumulator accum.AccumulatorObj
 	// - At any time in-between position updates or claiming, a position must have its AccumValuePerShare be equal to growth_inside_at_{last time of update}.
 	// - Prior to claiming (the logic below), the position's accumulator is updated to:
 	//   growth_inside_at_{last time of update} + growth_outside_at_{current block time of update}
-	// - Then, during claiming in osmoutils.ClaimRewards, we perform the following computation:
+	// - Then, during claiming in furyutils.ClaimRewards, we perform the following computation:
 	// growth_global_at{current block time} - (growth_inside_at_{last time of update} + growth_outside_at_{current block time of update}})
 	// which ends up being equal to growth_inside_from_{last_time_of_update}_to_{current block time of update}}.
 	intervalAccumulationOutside := position.AccumValuePerShare.Add(growthOutside...)

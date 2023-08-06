@@ -14,7 +14,7 @@ const (
 
 func init() {
 	govtypes.RegisterProposalType(ProposalTypeUpdateFeeToken)
-	govtypes.RegisterProposalTypeCodec(&UpdateFeeTokenProposal{}, "osmosis/UpdateFeeTokenProposal")
+	govtypes.RegisterProposalTypeCodec(&UpdateFeeTokenProposal{}, "merlin/UpdateFeeTokenProposal")
 }
 
 var _ govtypes.Content = &UpdateFeeTokenProposal{}

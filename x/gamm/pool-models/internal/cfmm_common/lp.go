@@ -8,7 +8,7 @@ import (
 	errorsmod "cosmossdk.io/errors"
 
 	"github.com/osmosis-labs/osmosis/osmomath"
-	"github.com/osmosis-labs/osmosis/v16/x/gamm/types"
+	"github.com/merlinslair/merlin/v16/x/gamm/types"
 )
 
 const errMsgFormatSharesLargerThanMax = "cannot exit all shares in a pool. Attempted to exit %s shares, max allowed is %s"
@@ -155,9 +155,9 @@ func BinarySearchSingleAssetJoin(
 	}
 
 	// We accept an additive tolerance of 1 LP share error and round down
-	errTolerance := osmomath.ErrTolerance{AdditiveTolerance: sdk.OneDec(), MultiplicativeTolerance: sdk.Dec{}, RoundingDir: osmomath.RoundDown}
+	errTolerance := furymath.ErrTolerance{AdditiveTolerance: sdk.OneDec(), MultiplicativeTolerance: sdk.Dec{}, RoundingDir: furymath.RoundDown}
 
-	numLPShares, err = osmomath.BinarySearch(
+	numLPShares, err = furymath.BinarySearch(
 		estimateCoinOutGivenShares,
 		LPShareLowerBound, LPShareUpperBound, tokenIn.Amount, errTolerance, maxIterations)
 	if err != nil {

@@ -13,21 +13,21 @@ import (
 // on the provided LegacyAmino codec. These types are used for Amino JSON serialization.
 func RegisterLegacyAminoCodec(cdc *codec.LegacyAmino) {
 	cdc.RegisterInterface((*CFMMPoolI)(nil), nil)
-	cdc.RegisterConcrete(&MsgJoinPool{}, "osmosis/gamm/join-pool", nil)
-	cdc.RegisterConcrete(&MsgExitPool{}, "osmosis/gamm/exit-pool", nil)
-	cdc.RegisterConcrete(&MsgSwapExactAmountIn{}, "osmosis/gamm/swap-exact-amount-in", nil)
-	cdc.RegisterConcrete(&MsgSwapExactAmountOut{}, "osmosis/gamm/swap-exact-amount-out", nil)
-	cdc.RegisterConcrete(&MsgJoinSwapExternAmountIn{}, "osmosis/gamm/join-swap-extern-amount-in", nil)
-	cdc.RegisterConcrete(&MsgJoinSwapShareAmountOut{}, "osmosis/gamm/join-swap-share-amount-out", nil)
-	cdc.RegisterConcrete(&MsgExitSwapExternAmountOut{}, "osmosis/gamm/exit-swap-extern-amount-out", nil)
-	cdc.RegisterConcrete(&MsgExitSwapShareAmountIn{}, "osmosis/gamm/exit-swap-share-amount-in", nil)
-	cdc.RegisterConcrete(&UpdateMigrationRecordsProposal{}, "osmosis/gamm/update-migration-records-proposal", nil)
-	cdc.RegisterConcrete(&ReplaceMigrationRecordsProposal{}, "osmosis/gamm/replace-migration-records-proposal", nil)
+	cdc.RegisterConcrete(&MsgJoinPool{}, "merlin/gamm/join-pool", nil)
+	cdc.RegisterConcrete(&MsgExitPool{}, "merlin/gamm/exit-pool", nil)
+	cdc.RegisterConcrete(&MsgSwapExactAmountIn{}, "merlin/gamm/swap-exact-amount-in", nil)
+	cdc.RegisterConcrete(&MsgSwapExactAmountOut{}, "merlin/gamm/swap-exact-amount-out", nil)
+	cdc.RegisterConcrete(&MsgJoinSwapExternAmountIn{}, "merlin/gamm/join-swap-extern-amount-in", nil)
+	cdc.RegisterConcrete(&MsgJoinSwapShareAmountOut{}, "merlin/gamm/join-swap-share-amount-out", nil)
+	cdc.RegisterConcrete(&MsgExitSwapExternAmountOut{}, "merlin/gamm/exit-swap-extern-amount-out", nil)
+	cdc.RegisterConcrete(&MsgExitSwapShareAmountIn{}, "merlin/gamm/exit-swap-share-amount-in", nil)
+	cdc.RegisterConcrete(&UpdateMigrationRecordsProposal{}, "merlin/gamm/update-migration-records-proposal", nil)
+	cdc.RegisterConcrete(&ReplaceMigrationRecordsProposal{}, "merlin/gamm/replace-migration-records-proposal", nil)
 }
 
 func RegisterInterfaces(registry types.InterfaceRegistry) {
 	registry.RegisterInterface(
-		"osmosis.gamm.v1beta1.PoolI", // N.B.: the old proto-path is preserved for backwards-compatibility.
+		"merlin.gamm.v1beta1.PoolI", // N.B.: the old proto-path is preserved for backwards-compatibility.
 		(*CFMMPoolI)(nil),
 	)
 

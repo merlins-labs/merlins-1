@@ -7,9 +7,9 @@ import (
 
 	"github.com/osmosis-labs/osmosis/osmomath"
 	"github.com/osmosis-labs/osmosis/osmoutils/osmoassert"
-	gammtypes "github.com/osmosis-labs/osmosis/v16/x/gamm/types"
-	"github.com/osmosis-labs/osmosis/v16/x/twap"
-	"github.com/osmosis-labs/osmosis/v16/x/twap/types"
+	gammtypes "github.com/merlinslair/merlin/v16/x/gamm/types"
+	"github.com/merlinslair/merlin/v16/x/twap"
+	"github.com/merlinslair/merlin/v16/x/twap/types"
 )
 
 type computeTwapTestCase struct {
@@ -98,7 +98,7 @@ func (s *TestSuite) TestComputeTwap() {
 			for _, twapStrategy := range test.twapStrategies {
 				actualTwap, err := twap.ComputeTwap(test.startRecord, test.endRecord, test.quoteAsset, twapStrategy)
 				s.Require().NoError(err)
-				osmoassert.DecApproxEq(s.T(), test.expTwap, actualTwap, osmomath.GetPowPrecision())
+				osmoassert.DecApproxEq(s.T(), test.expTwap, actualTwap, furymath.GetPowPrecision())
 			}
 		})
 	}
@@ -170,9 +170,9 @@ func (s *TestSuite) TestComputeArithmeticStrategyTwap() {
 // this function should panic in case of zero delta.
 func (s *TestSuite) TestComputeGeometricStrategyTwap() {
 	var (
-		errTolerance = osmomath.ErrTolerance{
+		errTolerance = furymath.ErrTolerance{
 			MultiplicativeTolerance: sdk.SmallestDec(),
-			RoundingDir:             osmomath.RoundDown,
+			RoundingDir:             furymath.RoundDown,
 		}
 
 		// Compute accumulator difference for the underflow test case by
@@ -302,9 +302,9 @@ func (s *TestSuite) TestComputeGeometricStrategyTwap() {
 				actualTwap := geometricStrategy.ComputeTwap(tc.startRecord, tc.endRecord, tc.quoteAsset)
 
 				// Sig fig round the expected value.
-				tc.expTwap = osmomath.SigFigRound(tc.expTwap, gammtypes.SpotPriceSigFigs)
+				tc.expTwap = furymath.SigFigRound(tc.expTwap, gammtypes.SpotPriceSigFigs)
 
-				s.Require().Equal(0, errTolerance.CompareBigDec(osmomath.BigDecFromSDKDec(tc.expTwap), osmomath.BigDecFromSDKDec(actualTwap)), "expected %s, got %s", tc.expTwap, actualTwap)
+				s.Require().Equal(0, errTolerance.CompareBigDec(furymath.BigDecFromSDKDec(tc.expTwap), furymath.BigDecFromSDKDec(actualTwap)), "expected %s, got %s", tc.expTwap, actualTwap)
 			})
 		})
 	}

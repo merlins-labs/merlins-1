@@ -80,7 +80,7 @@ pub fn check_is_global_admin(deps: Deps, sender: Addr) -> Result<(), ContractErr
 
     // If the sender an authorized address, they are authorized to make changes
     let authorized_addr = GLOBAL_ADMIN_MAP
-        .may_load(deps.storage, "osmosis")
+        .may_load(deps.storage, "merlin")
         .unwrap_or_default();
     if authorized_addr.eq(&Some(sender)) {
         return Ok(());
@@ -196,12 +196,12 @@ pub mod test {
 
         contract::instantiate(deps.branch(), mock_env(), creator_info.clone(), msg).unwrap();
 
-        // Set the CHAIN_ADMIN address as the osmosis and mars chain admin
+        // Set the CHAIN_ADMIN address as the merlin and mars chain admin
         let msg = msg::ExecuteMsg::ModifyAuthorizedAddresses {
             operations: vec![
                 AuthorizedAddressInput {
                     operation: execute::Operation::Set,
-                    source_chain: "osmosis".to_string(),
+                    source_chain: "merlin".to_string(),
                     permission: Some(execute::Permission::ChainAdmin),
                     addr: Addr::unchecked(CHAIN_ADMIN.to_string()),
                     new_addr: None,
@@ -217,12 +217,12 @@ pub mod test {
         };
         contract::execute(deps.branch(), mock_env(), creator_info.clone(), msg).unwrap();
 
-        // Set the CHAIN_MAINTAINER address as the osmosis and mars chain maintainer with the chain admin
+        // Set the CHAIN_MAINTAINER address as the merlin and mars chain maintainer with the chain admin
         let msg = msg::ExecuteMsg::ModifyAuthorizedAddresses {
             operations: vec![
                 AuthorizedAddressInput {
                     operation: execute::Operation::Set,
-                    source_chain: "osmosis".to_string(),
+                    source_chain: "merlin".to_string(),
                     permission: Some(execute::Permission::ChainMaintainer),
                     addr: Addr::unchecked(CHAIN_MAINTAINER.to_string()),
                     new_addr: None,
@@ -265,19 +265,19 @@ pub mod test {
             execute::ContractAliasInput {
                 operation: execute::Operation::Set,
                 alias: "contract_one".to_string(),
-                address: Some("osmo1dfaselkjh32hnkljw3nlklk2lknmes".to_string()),
+                address: Some("fury1dfaselkjh32hnkljw3nlklk2lknmes".to_string()),
                 new_alias: None,
             },
             execute::ContractAliasInput {
                 operation: execute::Operation::Set,
                 alias: "contract_two".to_string(),
-                address: Some("osmo1dfg4k3jhlknlfkjdslkjkl43klnfdl".to_string()),
+                address: Some("fury1dfg4k3jhlknlfkjdslkjkl43klnfdl".to_string()),
                 new_alias: None,
             },
             execute::ContractAliasInput {
                 operation: execute::Operation::Set,
                 alias: "contract_three".to_string(),
-                address: Some("osmo1dfgjlk4lkfklkld32fsdajknjrrgfg".to_string()),
+                address: Some("fury1dfgjlk4lkfklkld32fsdajknjrrgfg".to_string()),
                 new_alias: None,
             },
         ];
@@ -288,7 +288,7 @@ pub mod test {
         let operations = vec![
             execute::ConnectionInput {
                 operation: execute::FullOperation::Set,
-                source_chain: "osmosis".to_string(),
+                source_chain: "merlin".to_string(),
                 destination_chain: "juno".to_string(),
                 channel_id: Some("channel-42".to_string()),
                 new_source_chain: None,
@@ -297,7 +297,7 @@ pub mod test {
             },
             execute::ConnectionInput {
                 operation: execute::FullOperation::Set,
-                source_chain: "osmosis".to_string(),
+                source_chain: "merlin".to_string(),
                 destination_chain: "stargaze".to_string(),
                 channel_id: Some("channel-75".to_string()),
                 new_source_chain: None,
@@ -307,7 +307,7 @@ pub mod test {
             execute::ConnectionInput {
                 operation: execute::FullOperation::Set,
                 source_chain: "stargaze".to_string(),
-                destination_chain: "osmosis".to_string(),
+                destination_chain: "merlin".to_string(),
                 channel_id: Some("channel-0".to_string()),
                 new_source_chain: None,
                 new_destination_chain: None,

@@ -16,8 +16,8 @@ import (
 	govtypes "github.com/cosmos/cosmos-sdk/x/gov/types"
 
 	"github.com/osmosis-labs/osmosis/osmoutils/osmocli"
-	clmodel "github.com/osmosis-labs/osmosis/v16/x/concentrated-liquidity/model"
-	"github.com/osmosis-labs/osmosis/v16/x/concentrated-liquidity/types"
+	clmodel "github.com/merlinslair/merlin/v16/x/concentrated-liquidity/model"
+	"github.com/merlinslair/merlin/v16/x/concentrated-liquidity/types"
 )
 
 func NewTxCmd() *cobra.Command {
@@ -41,7 +41,7 @@ func NewCreateConcentratedPoolCmd() (*osmocli.TxCliDesc, *clmodel.MsgCreateConce
 		Use:     "create-pool [denom-0] [denom-1] [tick-spacing] [spread-factor]",
 		Short:   "create a concentrated liquidity pool with the given denom pair, tick spacing, and spread factor",
 		Long:    "denom-1 (the quote denom), tick spacing, and spread factors must all be authorized by the concentrated liquidity module",
-		Example: "osmosisd tx concentratedliquidity create-pool uion uosmo 100 0.01 --from val --chain-id osmosis-1 -b block --keyring-backend test --fees 1000uosmo",
+		Example: "merlin tx concentratedliquidity create-pool uion ufury 100 0.01 --from val --chain-id merlin-1 -b block --keyring-backend test --fees 1000ufury",
 	}, &clmodel.MsgCreateConcentratedPool{}
 }
 
@@ -49,7 +49,7 @@ func NewCreatePositionCmd() (*osmocli.TxCliDesc, *types.MsgCreatePosition) {
 	return &osmocli.TxCliDesc{
 		Use:     "create-position [pool-id] [lower-tick] [upper-tick] [tokensProvided] [token-0-min-amount] [token-1-min-amount]",
 		Short:   "create or add to existing concentrated liquidity position",
-		Example: "osmosisd tx concentratedliquidity create-position 1 \"[-69082]\" 69082 10000uosmo,10000uion 0 0 --from val --chain-id osmosis-1 -b block --keyring-backend test --fees 1000uosmo",
+		Example: "merlin tx concentratedliquidity create-position 1 \"[-69082]\" 69082 10000ufury,10000uion 0 0 --from val --chain-id merlin-1 -b block --keyring-backend test --fees 1000ufury",
 	}, &types.MsgCreatePosition{}
 }
 
@@ -57,7 +57,7 @@ func NewAddToPositionCmd() (*osmocli.TxCliDesc, *types.MsgAddToPosition) {
 	return &osmocli.TxCliDesc{
 		Use:     "add-to-position [position-id] [token-0] [token-1]",
 		Short:   "add to an existing concentrated liquidity position",
-		Example: "osmosisd tx concentratedliquidity add-to-position 10 1000000000uosmo 10000000uion --from val --chain-id localosmosis -b block --keyring-backend test --fees 1000000uosmo",
+		Example: "merlin tx concentratedliquidity add-to-position 10 1000000000ufury 10000000uion --from val --chain-id localmerlin -b block --keyring-backend test --fees 1000000ufury",
 	}, &types.MsgAddToPosition{}
 }
 
@@ -65,7 +65,7 @@ func NewWithdrawPositionCmd() (*osmocli.TxCliDesc, *types.MsgWithdrawPosition) {
 	return &osmocli.TxCliDesc{
 		Use:     "withdraw-position [position-id] [liquidity]",
 		Short:   "withdraw from an existing concentrated liquidity position",
-		Example: "osmosisd tx concentratedliquidity withdraw-position 1 1000 --from val --chain-id localosmosis --keyring-backend=test --fees=1000uosmo",
+		Example: "merlin tx concentratedliquidity withdraw-position 1 1000 --from val --chain-id localmerlin --keyring-backend=test --fees=1000ufury",
 	}, &types.MsgWithdrawPosition{}
 }
 
@@ -73,7 +73,7 @@ func NewCollectSpreadRewardsCmd() (*osmocli.TxCliDesc, *types.MsgCollectSpreadRe
 	return &osmocli.TxCliDesc{
 		Use:     "collect-spread-rewards [position-ids]",
 		Short:   "collect spread rewards from liquidity position(s)",
-		Example: "osmosisd tx concentratedliquidity collect-spread-rewards 998 --from val --chain-id localosmosis -b block --keyring-backend test --fees 1000000uosmo",
+		Example: "merlin tx concentratedliquidity collect-spread-rewards 998 --from val --chain-id localmerlin -b block --keyring-backend test --fees 1000000ufury",
 	}, &types.MsgCollectSpreadRewards{}
 }
 
@@ -81,7 +81,7 @@ func NewCollectIncentivesCmd() (*osmocli.TxCliDesc, *types.MsgCollectIncentives)
 	return &osmocli.TxCliDesc{
 		Use:     "collect-incentives [position-ids]",
 		Short:   "collect incentives from liquidity position(s)",
-		Example: "osmosisd tx concentratedliquidity collect-incentives 1 --from val --chain-id localosmosis -b block --keyring-backend test --fees 10000uosmo",
+		Example: "merlin tx concentratedliquidity collect-incentives 1 --from val --chain-id localmerlin -b block --keyring-backend test --fees 10000ufury",
 	}, &types.MsgCollectIncentives{}
 }
 
@@ -89,7 +89,7 @@ func NewFungifyChargedPositionsCmd() (*osmocli.TxCliDesc, *types.MsgFungifyCharg
 	return &osmocli.TxCliDesc{
 		Use:     "fungify-positions [position-ids]",
 		Short:   "Combine fully charged positions within the same range into a new single fully charged position",
-		Example: "osmosisd tx concentratedliquidity fungify-positions 1,2 --from val --keyring-backend test -b=block --chain-id=localosmosis --gas=1000000 --fees 20000uosmo",
+		Example: "merlin tx concentratedliquidity fungify-positions 1,2 --from val --keyring-backend test -b=block --chain-id=localmerlin --gas=1000000 --fees 20000ufury",
 	}, &types.MsgFungifyChargedPositions{}
 }
 
@@ -102,9 +102,9 @@ func NewCmdCreateConcentratedLiquidityPoolsProposal() *cobra.Command {
 		Long: strings.TrimSpace(`Submit a create concentrated liquidity pool proposal.
 
 Passing in FlagPoolRecords separated by commas would be parsed automatically to pairs of pool records.
-Ex) --pool-records=uion,uosmo,100,-6,0.003,stake,uosmo,1000,-6,0.005 ->
-[uion<>uosmo, tickSpacing 100, exponentAtPriceOne -6, spreadFactor 0.3%]
-[stake<>uosmo, tickSpacing 1000, exponentAtPriceOne -6, spreadFactor 0.5%]
+Ex) --pool-records=uion,ufury,100,-6,0.003,stake,ufury,1000,-6,0.005 ->
+[uion<>ufury, tickSpacing 100, exponentAtPriceOne -6, spreadFactor 0.3%]
+[stake<>ufury, tickSpacing 1000, exponentAtPriceOne -6, spreadFactor 0.5%]
 
 		`),
 		RunE: func(cmd *cobra.Command, args []string) error {

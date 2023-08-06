@@ -10,13 +10,13 @@ import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/stretchr/testify/require"
 
-	"github.com/osmosis-labs/osmosis/v16/app/apptesting"
-	cl "github.com/osmosis-labs/osmosis/v16/x/concentrated-liquidity"
-	clmath "github.com/osmosis-labs/osmosis/v16/x/concentrated-liquidity/math"
-	clmodel "github.com/osmosis-labs/osmosis/v16/x/concentrated-liquidity/model"
-	"github.com/osmosis-labs/osmosis/v16/x/concentrated-liquidity/types"
-	"github.com/osmosis-labs/osmosis/v16/x/gamm/pool-models/balancer"
-	gammmigration "github.com/osmosis-labs/osmosis/v16/x/gamm/types/migration"
+	"github.com/merlinslair/merlin/v16/app/apptesting"
+	cl "github.com/merlinslair/merlin/v16/x/concentrated-liquidity"
+	clmath "github.com/merlinslair/merlin/v16/x/concentrated-liquidity/math"
+	clmodel "github.com/merlinslair/merlin/v16/x/concentrated-liquidity/model"
+	"github.com/merlinslair/merlin/v16/x/concentrated-liquidity/types"
+	"github.com/merlinslair/merlin/v16/x/gamm/pool-models/balancer"
+	gammmigration "github.com/merlinslair/merlin/v16/x/gamm/types/migration"
 )
 
 type BenchTestSuite struct {
@@ -81,7 +81,7 @@ func runBenchmark(b *testing.B, testFunc func(b *testing.B, s *BenchTestSuite, p
 			simapp.FundAccount(s.App.BankKeeper, s.Ctx, acc, sdk.NewCoins(
 				sdk.NewCoin(denom0, maxAmountOfEachToken),
 				sdk.NewCoin(denom1, maxAmountOfEachToken),
-				sdk.NewCoin("uosmo", maxAmountOfEachToken),
+				sdk.NewCoin("ufury", maxAmountOfEachToken),
 			))
 		}
 

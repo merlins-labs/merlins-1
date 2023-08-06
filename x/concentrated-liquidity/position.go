@@ -14,9 +14,9 @@ import (
 
 	"github.com/osmosis-labs/osmosis/osmoutils"
 	"github.com/osmosis-labs/osmosis/osmoutils/accum"
-	"github.com/osmosis-labs/osmosis/v16/x/concentrated-liquidity/model"
-	"github.com/osmosis-labs/osmosis/v16/x/concentrated-liquidity/types"
-	lockuptypes "github.com/osmosis-labs/osmosis/v16/x/lockup/types"
+	"github.com/merlinslair/merlin/v16/x/concentrated-liquidity/model"
+	"github.com/merlinslair/merlin/v16/x/concentrated-liquidity/types"
+	lockuptypes "github.com/merlinslair/merlin/v16/x/lockup/types"
 )
 
 const MinNumPositions = 2
@@ -96,7 +96,7 @@ func (k Keeper) HasAnyPositionForPool(ctx sdk.Context, poolId uint64) (bool, err
 		}
 		return bz[0] != 0, nil
 	}
-	return osmoutils.HasAnyAtPrefix(store, poolPositionKey, parse)
+	return furyutils.HasAnyAtPrefix(store, poolPositionKey, parse)
 }
 
 // GetAllPositionsForPoolId gets all the position for a specific poolId and store prefix.
@@ -157,7 +157,7 @@ func (k Keeper) GetPosition(ctx sdk.Context, positionId uint64) (model.Position,
 	positionIdKey := types.KeyPositionId(positionId)
 
 	positionStruct := &model.Position{}
-	found, err := osmoutils.Get(store, positionIdKey, positionStruct)
+	found, err := furyutils.Get(store, positionIdKey, positionStruct)
 	if err != nil {
 		return model.Position{}, err
 	}
@@ -308,7 +308,7 @@ func (k Keeper) SetPosition(ctx sdk.Context,
 
 	// Set the position ID to position mapping.
 	positionIdKey := types.KeyPositionId(positionId)
-	osmoutils.MustSet(store, positionIdKey, &position)
+	furyutils.MustSet(store, positionIdKey, &position)
 
 	// Set the address-pool-position ID mapping (value set to true).
 	addressPoolIdPositionIdKey := types.KeyAddressPoolIdPositionId(owner, poolId, positionId)
@@ -822,7 +822,7 @@ func (k Keeper) positionHasActiveUnderlyingLockAndUpdate(ctx sdk.Context, positi
 func (k Keeper) GetFullRangeLiquidityInPool(ctx sdk.Context, poolId uint64) (sdk.Dec, error) {
 	store := ctx.KVStore(k.storeKey)
 	poolIdLiquidityKey := types.KeyFullRangeLiquidityPrefix(poolId)
-	currentTotalFullRangeLiquidity, err := osmoutils.GetDec(store, poolIdLiquidityKey)
+	currentTotalFullRangeLiquidity, err := furyutils.GetDec(store, poolIdLiquidityKey)
 	if err != nil {
 		return sdk.Dec{}, err
 	}
@@ -835,7 +835,7 @@ func (k Keeper) updateFullRangeLiquidityInPool(ctx sdk.Context, poolId uint64, l
 	// Get previous total liquidity.
 	poolIdLiquidityKey := types.KeyFullRangeLiquidityPrefix(poolId)
 	currentTotalFullRangeLiquidityDecProto := sdk.DecProto{}
-	found, err := osmoutils.Get(store, poolIdLiquidityKey, &currentTotalFullRangeLiquidityDecProto)
+	found, err := furyutils.Get(store, poolIdLiquidityKey, &currentTotalFullRangeLiquidityDecProto)
 	if err != nil {
 		return err
 	}
@@ -848,6 +848,6 @@ func (k Keeper) updateFullRangeLiquidityInPool(ctx sdk.Context, poolId uint64, l
 	// Add the liquidity of the new position to the total liquidity.
 	newTotalFullRangeLiquidity := currentTotalFullRangeLiquidity.Add(liquidity)
 
-	osmoutils.MustSetDec(store, poolIdLiquidityKey, newTotalFullRangeLiquidity)
+	furyutils.MustSetDec(store, poolIdLiquidityKey, newTotalFullRangeLiquidity)
 	return nil
 }

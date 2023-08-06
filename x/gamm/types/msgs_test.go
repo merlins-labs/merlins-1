@@ -7,12 +7,12 @@ import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/stretchr/testify/require"
 
-	"github.com/osmosis-labs/osmosis/v16/x/gamm/pool-models/stableswap"
-	gammtypes "github.com/osmosis-labs/osmosis/v16/x/gamm/types"
+	"github.com/merlinslair/merlin/v16/x/gamm/pool-models/stableswap"
+	gammtypes "github.com/merlinslair/merlin/v16/x/gamm/types"
 
-	"github.com/osmosis-labs/osmosis/v16/app/apptesting"
-	appParams "github.com/osmosis-labs/osmosis/v16/app/params"
-	poolmanagertypes "github.com/osmosis-labs/osmosis/v16/x/poolmanager/types"
+	"github.com/merlinslair/merlin/v16/app/apptesting"
+	appParams "github.com/merlinslair/merlin/v16/app/params"
+	poolmanagertypes "github.com/merlinslair/merlin/v16/x/poolmanager/types"
 )
 
 func TestMsgSwapExactAmountIn(t *testing.T) {

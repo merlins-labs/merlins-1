@@ -7,7 +7,7 @@ import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
 	"github.com/osmosis-labs/osmosis/osmomath"
-	"github.com/osmosis-labs/osmosis/v16/x/concentrated-liquidity/types"
+	"github.com/merlinslair/merlin/v16/x/concentrated-liquidity/types"
 )
 
 // TicksToSqrtPrice returns the sqrtPrice for the lower and upper ticks by
@@ -38,7 +38,7 @@ func TickToSqrtPrice(tickIndex int64) (sdk.Dec, sdk.Dec, error) {
 	}
 
 	// Determine the sqrtPrice from the price
-	sqrtPrice, err := osmomath.MonotonicSqrt(price)
+	sqrtPrice, err := furymath.MonotonicSqrt(price)
 	if err != nil {
 		return sdk.Dec{}, sdk.Dec{}, err
 	}
@@ -47,18 +47,18 @@ func TickToSqrtPrice(tickIndex int64) (sdk.Dec, sdk.Dec, error) {
 
 // TickToSqrtPriceBigDec returns the sqrtPrice given a tickIndex
 // as a BigDec.
-func TickToSqrtPriceBigDec(tickIndex int64) (osmomath.BigDec, error) {
+func TickToSqrtPriceBigDec(tickIndex int64) (furymath.BigDec, error) {
 	price, err := TickToPrice(tickIndex)
 	if err != nil {
-		return osmomath.BigDec{}, err
+		return furymath.BigDec{}, err
 	}
 
 	// Determine the sqrtPrice from the price
-	sqrtPrice, err := osmomath.MonotonicSqrt(price)
+	sqrtPrice, err := furymath.MonotonicSqrt(price)
 	if err != nil {
-		return osmomath.BigDec{}, err
+		return furymath.BigDec{}, err
 	}
-	return osmomath.BigDecFromSDKDec(sqrtPrice), nil
+	return furymath.BigDecFromSDKDec(sqrtPrice), nil
 }
 
 // TickToPrice returns the price given a tickIndex
@@ -100,7 +100,7 @@ func TickToPrice(tickIndex int64) (price sdk.Dec, err error) {
 	numAdditiveTicks := tickIndex - (geometricExponentDelta * geometricExponentIncrementDistanceInTicks)
 
 	// Finally, we can calculate the price
-	price = PowTenInternal(geometricExponentDelta).Add(osmomath.NewBigDec(numAdditiveTicks).Mul(currentAdditiveIncrementInTicks).SDKDec())
+	price = PowTenInternal(geometricExponentDelta).Add(furymath.NewBigDec(numAdditiveTicks).Mul(currentAdditiveIncrementInTicks).SDKDec())
 
 	// defense in depth, this logic would not be reached due to use having checked if given tick is in between
 	// min tick and max tick.
@@ -140,7 +140,7 @@ func RoundDownTickToSpacing(tickIndex int64, tickSpacing int64) (int64, error) {
 // SqrtPriceToTickRoundDown converts the given sqrt price to its corresponding tick rounded down
 // to the nearest tick spacing.
 func SqrtPriceToTickRoundDownSpacing(sqrtPrice sdk.Dec, tickSpacing uint64) (int64, error) {
-	tickIndex, err := CalculateSqrtPriceToTick(osmomath.BigDecFromSDKDec(sqrtPrice))
+	tickIndex, err := CalculateSqrtPriceToTick(furymath.BigDecFromSDKDec(sqrtPrice))
 	if err != nil {
 		return 0, err
 	}
@@ -162,7 +162,7 @@ func PowTenInternal(exponent int64) sdk.Dec {
 	return negPowersOfTen[-exponent]
 }
 
-func powTenBigDec(exponent int64) osmomath.BigDec {
+func powTenBigDec(exponent int64) furymath.BigDec {
 	if exponent >= 0 {
 		return bigPowersOfTen[exponent]
 	}
@@ -205,7 +205,7 @@ func CalculatePriceToTickDec(price sdk.Dec) (tickIndex sdk.Dec, err error) {
 	// We know were between (geoSpacing.initialPrice, geoSpacing.endPrice)
 	// The number of ticks that need to be filled by our current spacing is
 	// (price - geoSpacing.initialPrice) / geoSpacing.additiveIncrementPerTick
-	priceInThisExponent := osmomath.BigDecFromSDKDec(price.Sub(geoSpacing.initialPrice))
+	priceInThisExponent := furymath.BigDecFromSDKDec(price.Sub(geoSpacing.initialPrice))
 	ticksFilledByCurrentSpacing := priceInThisExponent.Quo(geoSpacing.additiveIncrementPerTick)
 	// we get the bucket index by:
 	// * taking the bucket index of the smallest price in this tick
@@ -220,7 +220,7 @@ func CalculatePriceToTickDec(price sdk.Dec) (tickIndex sdk.Dec, err error) {
 
 // CalculateSqrtPriceToTick takes in a square root and returns the corresponding tick index.
 // This function does not take into consideration tick spacing.
-func CalculateSqrtPriceToTick(sqrtPrice osmomath.BigDec) (tickIndex int64, err error) {
+func CalculateSqrtPriceToTick(sqrtPrice furymath.BigDec) (tickIndex int64, err error) {
 	// SqrtPrice may have errors, so we take the tick obtained from the price
 	// and move it in a +/- 1 tick range based on the sqrt price those ticks would imply.
 	price := sqrtPrice.Mul(sqrtPrice)

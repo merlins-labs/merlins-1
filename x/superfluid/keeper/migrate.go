@@ -7,10 +7,10 @@ import (
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
-	cltypes "github.com/osmosis-labs/osmosis/v16/x/concentrated-liquidity/types"
-	gammtypes "github.com/osmosis-labs/osmosis/v16/x/gamm/types"
-	lockuptypes "github.com/osmosis-labs/osmosis/v16/x/lockup/types"
-	"github.com/osmosis-labs/osmosis/v16/x/superfluid/types"
+	cltypes "github.com/merlinslair/merlin/v16/x/concentrated-liquidity/types"
+	gammtypes "github.com/merlinslair/merlin/v16/x/gamm/types"
+	lockuptypes "github.com/merlinslair/merlin/v16/x/lockup/types"
+	"github.com/merlinslair/merlin/v16/x/superfluid/types"
 )
 
 type MigrationType int
@@ -94,7 +94,7 @@ func (k Keeper) migrateSuperfluidBondedBalancerToConcentrated(ctx sdk.Context,
 	}
 
 	// Superfluid undelegate the portion of shares the user is migrating from the superfluid delegated position.
-	// If all shares are being migrated, this deletes the connection between the gamm lock and the intermediate account, deletes the synthetic lock, and burns the synthetic osmo.
+	// If all shares are being migrated, this deletes the connection between the gamm lock and the intermediate account, deletes the synthetic lock, and burns the synthetic fury.
 	intermediateAccount := types.SuperfluidIntermediaryAccount{}
 	var gammLockToMigrate *lockuptypes.PeriodLock
 	if isPartialMigration {

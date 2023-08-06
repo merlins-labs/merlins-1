@@ -9,11 +9,11 @@ import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	stakingtypes "github.com/cosmos/cosmos-sdk/x/staking/types"
 
-	"github.com/osmosis-labs/osmosis/v16/x/gamm/pool-models/balancer"
-	gammtypes "github.com/osmosis-labs/osmosis/v16/x/gamm/types"
-	lockuptypes "github.com/osmosis-labs/osmosis/v16/x/lockup/types"
-	"github.com/osmosis-labs/osmosis/v16/x/superfluid/keeper"
-	"github.com/osmosis-labs/osmosis/v16/x/superfluid/types"
+	"github.com/merlinslair/merlin/v16/x/gamm/pool-models/balancer"
+	gammtypes "github.com/merlinslair/merlin/v16/x/gamm/types"
+	lockuptypes "github.com/merlinslair/merlin/v16/x/lockup/types"
+	"github.com/merlinslair/merlin/v16/x/superfluid/keeper"
+	"github.com/merlinslair/merlin/v16/x/superfluid/types"
 )
 
 var (
@@ -31,7 +31,7 @@ var (
 	defaultPoolAssets []balancer.PoolAsset = []balancer.PoolAsset{defaultFooAsset, defaultBondDenomAsset}
 	defaultAcctFunds  sdk.Coins            = sdk.NewCoins(
 		sdk.NewCoin(sdk.DefaultBondDenom, sdk.NewInt(10000000000)),
-		sdk.NewCoin("uosmo", sdk.NewInt(10000000000)),
+		sdk.NewCoin("ufury", sdk.NewInt(10000000000)),
 		sdk.NewCoin("foo", sdk.NewInt(10000000)),
 		sdk.NewCoin("bar", sdk.NewInt(10000000)),
 		sdk.NewCoin("baz", sdk.NewInt(10000000)),

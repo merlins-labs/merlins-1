@@ -12,10 +12,10 @@ import (
 	errorsmod "cosmossdk.io/errors"
 
 	"github.com/osmosis-labs/osmosis/osmoutils"
-	"github.com/osmosis-labs/osmosis/v16/x/concentrated-liquidity/model"
-	types "github.com/osmosis-labs/osmosis/v16/x/concentrated-liquidity/types"
-	lockuptypes "github.com/osmosis-labs/osmosis/v16/x/lockup/types"
-	poolmanagertypes "github.com/osmosis-labs/osmosis/v16/x/poolmanager/types"
+	"github.com/merlinslair/merlin/v16/x/concentrated-liquidity/model"
+	types "github.com/merlinslair/merlin/v16/x/concentrated-liquidity/types"
+	lockuptypes "github.com/merlinslair/merlin/v16/x/lockup/types"
+	poolmanagertypes "github.com/merlinslair/merlin/v16/x/poolmanager/types"
 )
 
 // InitializePool initializes a new concentrated liquidity pool with the given PoolI interface and creator address.
@@ -91,7 +91,7 @@ func (k Keeper) getPoolById(ctx sdk.Context, poolId uint64) (types.ConcentratedP
 	store := ctx.KVStore(k.storeKey)
 	pool := model.Pool{}
 	key := types.KeyPool(poolId)
-	found, err := osmoutils.Get(store, key, &pool)
+	found, err := furyutils.Get(store, key, &pool)
 	if err != nil {
 		panic(err)
 	}
@@ -102,7 +102,7 @@ func (k Keeper) getPoolById(ctx sdk.Context, poolId uint64) (types.ConcentratedP
 }
 
 func (k Keeper) GetPools(ctx sdk.Context) ([]poolmanagertypes.PoolI, error) {
-	return osmoutils.GatherValuesFromStorePrefix(
+	return furyutils.GatherValuesFromStorePrefix(
 		ctx.KVStore(k.storeKey), types.PoolPrefix, func(value []byte) (poolmanagertypes.PoolI, error) {
 			pool := model.Pool{}
 			err := k.cdc.Unmarshal(value, &pool)
@@ -123,7 +123,7 @@ func (k Keeper) setPool(ctx sdk.Context, pool types.ConcentratedPoolExtension) e
 	}
 	store := ctx.KVStore(k.storeKey)
 	key := types.KeyPool(pool.GetId())
-	osmoutils.MustSet(store, key, poolModel)
+	furyutils.MustSet(store, key, poolModel)
 	return nil
 }
 
@@ -234,7 +234,7 @@ func (k Keeper) GetSerializedPools(ctx sdk.Context, pagination *query.PageReques
 	pageRes, err := query.Paginate(poolStore, pagination, func(key, _ []byte) error {
 		pool := model.Pool{}
 		// Get the next pool from the poolStore and pass it to the pool variable
-		_, err := osmoutils.Get(poolStore, key, &pool)
+		_, err := furyutils.Get(poolStore, key, &pool)
 		if err != nil {
 			return err
 		}

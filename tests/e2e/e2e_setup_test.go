@@ -7,24 +7,24 @@ import (
 
 	"github.com/stretchr/testify/suite"
 
-	configurer "github.com/osmosis-labs/osmosis/v16/tests/e2e/configurer"
+	configurer "github.com/merlinslair/merlin/v16/tests/e2e/configurer"
 )
 
 const (
 	// Environment variable signifying whether to run e2e tests.
-	e2eEnabledEnv = "OSMOSIS_E2E"
+	e2eEnabledEnv = "MERLIN_E2E"
 	// Environment variable name to skip the upgrade tests
-	skipUpgradeEnv = "OSMOSIS_E2E_SKIP_UPGRADE"
+	skipUpgradeEnv = "MERLIN_E2E_SKIP_UPGRADE"
 	// Environment variable name to skip the IBC tests
-	skipIBCEnv = "OSMOSIS_E2E_SKIP_IBC"
+	skipIBCEnv = "MERLIN_E2E_SKIP_IBC"
 	// Environment variable name to skip state sync testing
-	skipStateSyncEnv = "OSMOSIS_E2E_SKIP_STATE_SYNC" //nolint:unused // this is used in the code
+	skipStateSyncEnv = "MERLIN_E2E_SKIP_STATE_SYNC" //nolint:unused // this is used in the code
 	// Environment variable name to determine if this upgrade is a fork
-	forkHeightEnv = "OSMOSIS_E2E_FORK_HEIGHT"
+	forkHeightEnv = "MERLIN_E2E_FORK_HEIGHT"
 	// Environment variable name to skip cleaning up Docker resources in teardown
-	skipCleanupEnv = "OSMOSIS_E2E_SKIP_CLEANUP"
+	skipCleanupEnv = "MERLIN_E2E_SKIP_CLEANUP"
 	// Environment variable name to determine what version we are upgrading to
-	upgradeVersionEnv = "OSMOSIS_E2E_UPGRADE_VERSION"
+	upgradeVersionEnv = "MERLIN_E2E_UPGRADE_VERSION"
 )
 
 type IntegrationTestSuite struct {
@@ -82,7 +82,7 @@ func (s *IntegrationTestSuite) SetupSuite() {
 		}
 	}
 
-	if str := os.Getenv("OSMOSIS_E2E_SKIP_STATE_SYNC"); len(str) > 0 {
+	if str := os.Getenv("MERLIN_E2E_SKIP_STATE_SYNC"); len(str) > 0 {
 		s.skipStateSync, err = strconv.ParseBool(str)
 		s.Require().NoError(err)
 		if s.skipStateSync {
@@ -91,7 +91,7 @@ func (s *IntegrationTestSuite) SetupSuite() {
 	}
 
 	isDebugLogEnabled := false
-	if str := os.Getenv("OSMOSIS_E2E_DEBUG_LOG"); len(str) > 0 {
+	if str := os.Getenv("MERLIN_E2E_DEBUG_LOG"); len(str) > 0 {
 		isDebugLogEnabled, err = strconv.ParseBool(str)
 		s.Require().NoError(err)
 		if isDebugLogEnabled {

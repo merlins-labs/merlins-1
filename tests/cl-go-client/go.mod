@@ -5,7 +5,7 @@ go 1.20
 require (
 	github.com/cosmos/cosmos-sdk v0.47.3
 	github.com/ignite/cli v0.23.0
-	github.com/osmosis-labs/osmosis/v16 v16.0.0-20230623172200-24f580da1227
+	github.com/merlinslair/merlin/v16 v16.0.0-20230623172200-24f580da1227
 	github.com/osmosis-labs/osmosis/x/epochs v0.0.1
 
 )
@@ -142,9 +142,9 @@ require (
 )
 
 replace (
-	// osmosis-patched wasmd
-	// ToDo: replace the commit hash with v0.31.0-osmo-v15 once the version is tagged
-	github.com/CosmWasm/wasmd => github.com/osmosis-labs/wasmd v0.31.0-osmo-v16
+	// merlin-patched wasmd
+	// ToDo: replace the commit hash with v0.31.0-fury-v15 once the version is tagged
+	github.com/CosmWasm/wasmd => github.com/osmosis-labs/wasmd v0.31.0-fury-v16
 	// dragonberry
 	github.com/confio/ics23/go => github.com/cosmos/cosmos-sdk/ics23/go v0.8.0
 	// Our cosmos-sdk branch is:  https://github.com/osmosis-labs/cosmos-sdk, current branch: v16.x. Direct commit link: https://github.com/osmosis-labs/cosmos-sdk/commit/ed4eb883f2a65bd5343e9d2f6186060f45294cb2
@@ -154,7 +154,7 @@ replace (
 
 	github.com/ignite/cli => github.com/p0mvn/cli v0.23.1
 
-	github.com/osmosis-labs/osmosis/v15 => ../../
+	github.com/merlinslair/merlin/v15 => ../../
 
 	// Informal Tendermint fork
 	github.com/tendermint/tendermint => github.com/informalsystems/tendermint v0.34.24

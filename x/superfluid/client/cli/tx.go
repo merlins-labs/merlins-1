@@ -10,7 +10,7 @@ import (
 
 	"github.com/osmosis-labs/osmosis/osmoutils"
 	"github.com/osmosis-labs/osmosis/osmoutils/osmocli"
-	"github.com/osmosis-labs/osmosis/v16/x/superfluid/types"
+	"github.com/merlinslair/merlin/v16/x/superfluid/types"
 
 	"github.com/cosmos/cosmos-sdk/client"
 	"github.com/cosmos/cosmos-sdk/client/flags"
@@ -19,8 +19,8 @@ import (
 	govcli "github.com/cosmos/cosmos-sdk/x/gov/client/cli"
 	govtypes "github.com/cosmos/cosmos-sdk/x/gov/types"
 
-	cltypes "github.com/osmosis-labs/osmosis/v16/x/concentrated-liquidity/types"
-	gammtypes "github.com/osmosis-labs/osmosis/v16/x/gamm/types"
+	cltypes "github.com/merlinslair/merlin/v16/x/concentrated-liquidity/types"
+	gammtypes "github.com/merlinslair/merlin/v16/x/gamm/types"
 )
 
 // GetTxCmd returns the transaction commands for this module.
@@ -320,7 +320,7 @@ func NewCmdUpdateUnpoolWhitelistProposal() *cobra.Command {
 		Long: "This proposal will update the unpool whitelist if passed. " +
 			"Every pool id must be valid. If the pool id is invalid, the proposal will not be submitted. " +
 			"If the flag to overwrite is set, the whitelist is completely overridden. Otherwise, it is appended to the existing whitelist, having all duplicates removed.",
-		Example: "osmosisd tx gov submit-proposal update-unpool-whitelist --pool-ids \"1, 2, 3\" --title \"Title\" --description \"Description\"",
+		Example: "merlin tx gov submit-proposal update-unpool-whitelist --pool-ids \"1, 2, 3\" --title \"Title\" --description \"Description\"",
 		RunE: func(cmd *cobra.Command, args []string) error {
 			clientCtx, err := client.GetClientTxContext(cmd)
 			if err != nil {
@@ -369,7 +369,7 @@ func NewCreateFullRangePositionAndSuperfluidDelegateCmd() (*osmocli.TxCliDesc, *
 	return &osmocli.TxCliDesc{
 		Use:     "create-full-range-position-and-sf-delegate [coins] [val_addr] [pool-id]",
 		Short:   "creates a full range concentrated position and superfluid delegates it to the provided validator",
-		Example: "create-full-range-position-and-sf-delegate 100000000uosmo,10000udai 45 --from val --chain-id osmosis-1",
+		Example: "create-full-range-position-and-sf-delegate 100000000ufury,10000udai 45 --from val --chain-id merlin-1",
 	}, &types.MsgCreateFullRangePositionAndSuperfluidDelegate{}
 }
 
@@ -389,7 +389,7 @@ func parseUpdateUnpoolWhitelistArgsToContent(flags *flag.FlagSet) (govtypes.Cont
 		return nil, err
 	}
 
-	poolIds, err := osmoutils.ParseUint64SliceFromString(poolIdsStr, ",")
+	poolIds, err := furyutils.ParseUint64SliceFromString(poolIdsStr, ",")
 	if err != nil {
 		return nil, err
 	}
@@ -412,7 +412,7 @@ func NewAddToConcentratedLiquiditySuperfluidPositionCmd() (*osmocli.TxCliDesc, *
 	return &osmocli.TxCliDesc{
 		Use:     "add-to-superfluid-cl-position [position-id] [token-0] [token-1]",
 		Short:   "add to an existing superfluid staked concentrated liquidity position",
-		Example: "add-to-superfluid-cl-position 10 1000000000uosmo 10000000uion",
+		Example: "add-to-superfluid-cl-position 10 1000000000ufury 10000000uion",
 	}, &types.MsgAddToConcentratedLiquiditySuperfluidPosition{}
 }
 
@@ -420,6 +420,6 @@ func NewUnlockAndMigrateSharesToFullRangeConcentratedPositionCmd() (*osmocli.TxC
 	return &osmocli.TxCliDesc{
 		Use:     "unlock-and-migrate-to-cl [lock-id] [shares-to-migrate] [token-out-mins]",
 		Short:   "unlock and migrate gamm shares to full range concentrated position",
-		Example: "unlock-and-migrate-cl 10 25000000000gamm/pool/2 1000000000uosmo,10000000uion",
+		Example: "unlock-and-migrate-cl 10 25000000000gamm/pool/2 1000000000ufury,10000000uion",
 	}, &types.MsgUnlockAndMigrateSharesToFullRangeConcentratedPosition{}
 }

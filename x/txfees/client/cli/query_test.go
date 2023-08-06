@@ -8,8 +8,8 @@ import (
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
-	"github.com/osmosis-labs/osmosis/v16/app/apptesting"
-	"github.com/osmosis-labs/osmosis/v16/x/txfees/types"
+	"github.com/merlinslair/merlin/v16/app/apptesting"
+	"github.com/merlinslair/merlin/v16/x/txfees/types"
 )
 
 type QueryTestSuite struct {
@@ -23,7 +23,7 @@ func (s *QueryTestSuite) SetupSuite() {
 
 	// set up pool
 	poolAssets := []sdk.Coin{
-		sdk.NewInt64Coin("uosmo", 1000000),
+		sdk.NewInt64Coin("ufury", 1000000),
 		sdk.NewInt64Coin("stake", 120000000),
 	}
 	s.PrepareBalancerPoolWithCoins(poolAssets...)
@@ -34,7 +34,7 @@ func (s *QueryTestSuite) SetupSuite() {
 		"test",
 		[]types.FeeToken{
 			{
-				Denom:  "uosmo",
+				Denom:  "ufury",
 				PoolID: 1,
 			},
 		},
@@ -54,25 +54,25 @@ func (s *QueryTestSuite) TestQueriesNeverAlterState() {
 	}{
 		{
 			"Query base denom",
-			"/osmosis.txfees.v1beta1.Query/BaseDenom",
+			"/merlin.txfees.v1beta1.Query/BaseDenom",
 			&types.QueryBaseDenomRequest{},
 			&types.QueryBaseDenomResponse{},
 		},
 		{
 			"Query poolID by denom",
-			"/osmosis.txfees.v1beta1.Query/DenomPoolId",
-			&types.QueryDenomPoolIdRequest{Denom: "uosmo"},
+			"/merlin.txfees.v1beta1.Query/DenomPoolId",
+			&types.QueryDenomPoolIdRequest{Denom: "ufury"},
 			&types.QueryDenomPoolIdResponse{},
 		},
 		{
 			"Query spot price by denom",
-			"/osmosis.txfees.v1beta1.Query/DenomSpotPrice",
-			&types.QueryDenomSpotPriceRequest{Denom: "uosmo"},
+			"/merlin.txfees.v1beta1.Query/DenomSpotPrice",
+			&types.QueryDenomSpotPriceRequest{Denom: "ufury"},
 			&types.QueryDenomSpotPriceResponse{},
 		},
 		{
 			"Query fee tokens",
-			"/osmosis.txfees.v1beta1.Query/FeeTokens",
+			"/merlin.txfees.v1beta1.Query/FeeTokens",
 			&types.QueryFeeTokensRequest{},
 			&types.QueryFeeTokensResponse{},
 		},

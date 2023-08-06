@@ -11,8 +11,8 @@ import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
 	"github.com/osmosis-labs/osmosis/osmomath"
-	"github.com/osmosis-labs/osmosis/v16/x/concentrated-liquidity/swapstrategy"
-	"github.com/osmosis-labs/osmosis/v16/x/concentrated-liquidity/types"
+	"github.com/merlinslair/merlin/v16/x/concentrated-liquidity/swapstrategy"
+	"github.com/merlinslair/merlin/v16/x/concentrated-liquidity/types"
 )
 
 const (
@@ -228,7 +228,7 @@ func (s *KeeperTestSuite) swapNearTickBoundary(r *rand.Rand, pool types.Concentr
 
 	// Decide if below, exactly, or above target tick
 
-	poolSpotPrice := pool.GetCurrentSqrtPrice().Power(osmomath.NewBigDec(2))
+	poolSpotPrice := pool.GetCurrentSqrtPrice().Power(furymath.NewBigDec(2))
 	fmt.Printf("pool: tick %d, spot price: %s, liq %s \n", pool.GetCurrentTick(), poolSpotPrice, curLiquidity)
 
 	amountInRequired = tickAmtChange(r, amountInRequired)
@@ -313,16 +313,16 @@ func (s *KeeperTestSuite) swap(pool types.ConcentratedPoolExtension, swapInFunde
 		return false, false
 	}
 
-	errTolerance := osmomath.ErrTolerance{
+	errTolerance := furymath.ErrTolerance{
 		// 2% tolerance
 		MultiplicativeTolerance: sdk.NewDecWithPrec(2, 2),
 		// Expected amount in returned from swap "in given out" to be smaller
 		// than original amount in given to "out given in".
 		// Reason: rounding in pool's favor.
-		RoundingDir: osmomath.RoundDown,
+		RoundingDir: furymath.RoundDown,
 	}
 
-	result := errTolerance.CompareBigDec(osmomath.BigDecFromSDKDec(swapInFunded.Amount.ToDec()), osmomath.BigDecFromSDKDec(amountInSwapResult.Amount.ToDec()))
+	result := errTolerance.CompareBigDec(furymath.BigDecFromSDKDec(swapInFunded.Amount.ToDec()), furymath.BigDecFromSDKDec(amountInSwapResult.Amount.ToDec()))
 
 	if result != 0 {
 		// Note: did some investigations into why this happens.

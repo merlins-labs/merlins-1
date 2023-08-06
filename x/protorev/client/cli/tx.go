@@ -16,7 +16,7 @@ import (
 	govtypes "github.com/cosmos/cosmos-sdk/x/gov/types"
 
 	"github.com/osmosis-labs/osmosis/osmoutils/osmocli"
-	"github.com/osmosis-labs/osmosis/v16/x/protorev/types"
+	"github.com/merlinslair/merlin/v16/x/protorev/types"
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
 )
@@ -46,14 +46,14 @@ func CmdSetDeveloperHotRoutes() *osmocli.TxCliDesc {
 		Sample json file:
 		[
 			{
-				"token_in": "uosmo",
+				"token_in": "ufury",
 				"token_out": "ibc/123...",
 				"arb_routes" : [
 					{
 						"trades": [
 							{
 								"pool": 1,
-								"token_in": "uosmo",
+								"token_in": "ufury",
 								"token_out": "uatom"
 							},
 							{
@@ -64,7 +64,7 @@ func CmdSetDeveloperHotRoutes() *osmocli.TxCliDesc {
 							{
 								"pool": 0,
 								"token_in": "ibc/123...",
-								"token_out": "uosmo"
+								"token_out": "ufury"
 							}
 						],
 						"step_size": 1000000
@@ -172,7 +172,7 @@ func CmdSetBaseDenoms() *osmocli.TxCliDesc {
 		[
 			{
 				"step_size" : 10000,
-				"denom" : "uosmo"
+				"denom" : "ufury"
 			},
 			{
 				"step_size" : 10000,
@@ -194,7 +194,7 @@ func CmdSetProtoRevAdminAccountProposal() *cobra.Command {
 		Use:     "set-admin-account-proposal [sdk.AccAddress]",
 		Args:    cobra.ExactArgs(1),
 		Short:   "submit a set protorev admin account proposal to set the admin account for x/protorev",
-		Example: fmt.Sprintf(`$ %s tx protorev set-protorev-admin-account osmo123... --from mykey`, version.AppName),
+		Example: fmt.Sprintf(`$ %s tx protorev set-protorev-admin-account fury123... --from mykey`, version.AppName),
 		RunE: func(cmd *cobra.Command, args []string) error {
 			createContent := func(title string, description string, args ...string) (govtypes.Content, error) {
 				return types.NewSetProtoRevAdminAccountProposal(title, description, args[0]), nil

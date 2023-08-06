@@ -4,7 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 
-	"github.com/osmosis-labs/osmosis/v16/x/incentives/types"
+	"github.com/merlinslair/merlin/v16/x/incentives/types"
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
 )

@@ -1,6 +1,6 @@
 # Concentrated Liquidity Go Client
 
-This Go-client allows connecting to an Osmosis chain via Ignite CLI and
+This Go-client allows connecting to an Merlin chain via Ignite CLI and
 setting up a concentrated liquidity pool with positions.
 
 ## General Setup FAQ
@@ -9,41 +9,41 @@ setting up a concentrated liquidity pool with positions.
    * Make sure keyring is set up.
    * Client home is pointing to the right place.
 
-## LocalOsmosis Setup
+## LocalMerlin Setup
 
-Make sure that you run `localosmosis` in the background and have keys
+Make sure that you run `localmerlin` in the background and have keys
 added to your keyring with:
 
 ```bash
-make set-env localosmosis # sets environment to $HOME/.osmosisd-local
+make set-env localmerlin # sets environment to $HOME/.merlin-local
 
 make localnet-start
 
 make localnet-keys
 ```
 
-See `tests/localosmosis` for more info.
+See `tests/localmerlin` for more info.
 
 ## Testnet Setup
 
-Configure a different `osmosisd` environment with configs.
+Configure a different `merlin` environment with configs.
 
 ```bash
-make set-env .osmosisd-testnet-script
+make set-env .merlin-testnet-script
 
-osmosisd init test-script
+merlin init test-script
 
-cd $HOME/.osmosisd-testnet-script/config
+cd $HOME/.merlin-testnet-script/config
 
 nano client.toml
 ```
 
 Replace node RPC with the testnet value and save,
 
-Next, manually edit the `localosmosisFromHomePath` variable in the script:
-<https://github.com/osmosis-labs/osmosis/blob/98025f185ab2ee1b060511ed22679112abcc08fa/tests/cl-go-client/main.go#L28>
+Next, manually edit the `localmerlinFromHomePath` variable in the script:
+<https://github.com/merlinslair/merlin/blob/98025f185ab2ee1b060511ed22679112abcc08fa/tests/cl-go-client/main.go#L28>
 
-Set the value to `.osmosisd-testnet-script` and save.
+Set the value to `.merlin-testnet-script` and save.
 
 Now, you are able to run this script on testnet. This assummes that
 testnet accounts have been set up with the default test accounts

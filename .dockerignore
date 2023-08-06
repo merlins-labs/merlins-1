@@ -5,7 +5,7 @@ networks/
 proto/
 scripts/
 tools/
-tests/localosmosis/
+tests/localmerlin/
 tests/localrelayer/
 tests/cl-genesis-positions
 tests/cl-go-client

@@ -4,8 +4,8 @@ import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
 	"github.com/osmosis-labs/osmosis/osmomath"
-	"github.com/osmosis-labs/osmosis/v16/x/concentrated-liquidity/model"
-	"github.com/osmosis-labs/osmosis/v16/x/concentrated-liquidity/types"
+	"github.com/merlinslair/merlin/v16/x/concentrated-liquidity/model"
+	"github.com/merlinslair/merlin/v16/x/concentrated-liquidity/types"
 )
 
 type ExpectedGlobalRewardValues struct {
@@ -106,8 +106,8 @@ func (s *KeeperTestSuite) assertTotalRewardsInvariant(expectedGlobalRewardValues
 	// This is to allow for cases where we slightly overround, which would otherwise fail here.
 	// TODO: create ErrTolerance type that allows for additive OR multiplicative tolerance to allow for
 	// tightening this check further.
-	errTolerance := osmomath.ErrTolerance{
-		RoundingDir: osmomath.RoundDown,
+	errTolerance := furymath.ErrTolerance{
+		RoundingDir: furymath.RoundDown,
 	}
 
 	// Assert total collected spread rewards and incentives equal to expected
@@ -169,8 +169,8 @@ func (s *KeeperTestSuite) assertWithdrawAllInvariant() {
 	// This is to allow for cases where we slightly overround, which would otherwise fail here.
 	// TODO: create ErrTolerance type that allows for additive OR multiplicative tolerance to allow for
 	// tightening this check further.
-	errTolerance := osmomath.ErrTolerance{
-		RoundingDir: osmomath.RoundDown,
+	errTolerance := furymath.ErrTolerance{
+		RoundingDir: furymath.RoundDown,
 	}
 
 	// Assert total withdrawn assets equal to expected

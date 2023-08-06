@@ -9,7 +9,7 @@ import (
 	"github.com/stretchr/testify/require"
 
 	"github.com/osmosis-labs/osmosis/osmomath"
-	"github.com/osmosis-labs/osmosis/v16/x/gamm/pool-models/balancer"
+	"github.com/merlinslair/merlin/v16/x/gamm/pool-models/balancer"
 )
 
 func createTestPool(t *testing.T, spreadFactor, exitFee sdk.Dec, poolAssets ...balancer.PoolAsset) *balancer.Pool {
@@ -31,7 +31,7 @@ func assertExpectedSharesErrRatio(t *testing.T, expectedShares, actualShares sdk
 	allowedErrRatioDec, err := sdk.NewDecFromStr(allowedErrRatio)
 	require.NoError(t, err)
 
-	errTolerance := osmomath.ErrTolerance{
+	errTolerance := furymath.ErrTolerance{
 		MultiplicativeTolerance: allowedErrRatioDec,
 	}
 

@@ -8,10 +8,10 @@ import (
 	stakingtypes "github.com/cosmos/cosmos-sdk/x/staking/types"
 
 	"github.com/osmosis-labs/osmosis/osmomath"
-	"github.com/osmosis-labs/osmosis/v16/app/apptesting"
-	cltypes "github.com/osmosis-labs/osmosis/v16/x/concentrated-liquidity/types"
-	"github.com/osmosis-labs/osmosis/v16/x/superfluid/keeper"
-	"github.com/osmosis-labs/osmosis/v16/x/superfluid/types"
+	"github.com/merlinslair/merlin/v16/app/apptesting"
+	cltypes "github.com/merlinslair/merlin/v16/x/concentrated-liquidity/types"
+	"github.com/merlinslair/merlin/v16/x/superfluid/keeper"
+	"github.com/merlinslair/merlin/v16/x/superfluid/types"
 )
 
 func (s *KeeperTestSuite) TestAddToConcentratedLiquiditySuperfluidPosition() {
@@ -163,16 +163,16 @@ func (s *KeeperTestSuite) TestAddToConcentratedLiquiditySuperfluidPosition() {
 			// expectedAsset1 = floor(liquidityDelta * (curSqrtPrice - minSqrtPrice)) =  99999899.000000000000000000
 			//
 			// Note that the expected difference valid additive difference of 101 on asset 1.
-			var errTolerance osmomath.ErrTolerance
+			var errTolerance furymath.ErrTolerance
 			errTolerance.AdditiveTolerance = sdk.NewDec(101)
-			errTolerance.RoundingDir = osmomath.RoundDown
+			errTolerance.RoundingDir = furymath.RoundDown
 
 			postAddToPositionStakeSupply := bankKeeper.GetSupply(ctx, bondDenom)
 			postAddToPositionPoolFunds := bankKeeper.GetAllBalances(ctx, clPoolAddress)
 
-			// Check that bond denom supply changed by the amount of bond denom added (taking into consideration risk adjusted osmo value and err tolerance)
+			// Check that bond denom supply changed by the amount of bond denom added (taking into consideration risk adjusted fury value and err tolerance)
 			diffInBondDenomSupply := postAddToPositionStakeSupply.Amount.Sub(preAddToPositionStakeSupply.Amount)
-			expectedBondDenomSupplyDiff := superfluidKeeper.GetRiskAdjustedOsmoValue(ctx, tc.amount0Added)
+			expectedBondDenomSupplyDiff := superfluidKeeper.GetRiskAdjustedFuryValue(ctx, tc.amount0Added)
 			s.Require().Equal(0, errTolerance.Compare(expectedBondDenomSupplyDiff, diffInBondDenomSupply), fmt.Sprintf("expected (%s), actual (%s)", expectedBondDenomSupplyDiff, diffInBondDenomSupply))
 
 			// Check that the pool funds changed by the amount of tokens added (taking into consideration err tolerance)
@@ -224,7 +224,7 @@ func (s *KeeperTestSuite) TestAddToConcentratedLiquiditySuperfluidPosition() {
 			s.Require().False(found)
 
 			// Check if the new intermediary account has expected delegation amount.
-			expectedDelegationAmt := superfluidKeeper.GetRiskAdjustedOsmoValue(ctx, finalAmount0)
+			expectedDelegationAmt := superfluidKeeper.GetRiskAdjustedFuryValue(ctx, finalAmount0)
 			delegationAmt, found := stakingKeeper.GetDelegation(ctx, newIntermediaryAcc, valAddr)
 			s.Require().True(found)
 			s.Require().Equal(expectedDelegationAmt, delegationAmt.Shares.TruncateInt())

@@ -9,7 +9,7 @@ pub struct InstantiateMsg {
     /// The address that will be allowed to manage which swap_contract to use
     pub governor: String,
 
-    /// This should be an instance of the Osmosis swaprouter contract
+    /// This should be an instance of the Merlin swaprouter contract
     pub swap_contract: String,
 }
 
@@ -18,7 +18,7 @@ pub struct InstantiateMsg {
 #[cw_serde]
 pub enum FailedDeliveryAction {
     DoNothing,
-    /// An osmosis addres used to recover any tokens that get stuck in the
+    /// An merlin addres used to recover any tokens that get stuck in the
     /// contract due to IBC failures
     LocalRecoveryAddr(Addr),
     // Here we could potentially add new actions in the future
@@ -29,8 +29,8 @@ pub enum FailedDeliveryAction {
 #[cw_serde]
 pub enum ExecuteMsg {
     /// Execute a swap and forward it to the receiver address on the specified ibc channel
-    OsmosisSwap {
-        /// The final denom to be received (as represented on osmosis)
+    MerlinSwap {
+        /// The final denom to be received (as represented on merlin)
         output_denom: String,
         /// The receiver of the IBC packet to be sent after the swap
         receiver: String,
@@ -41,7 +41,7 @@ pub enum ExecuteMsg {
         /// it. If provided, the memo is expected to be a valid JSON object
         next_memo: Option<SerializableJson>,
         /// If for any reason the swap were to fail, users can specify a
-        /// "recovery address" that can clain the funds on osmosis after a
+        /// "recovery address" that can clain the funds on merlin after a
         /// confirmed failure.
         on_failed_delivery: FailedDeliveryAction,
     },
@@ -110,7 +110,7 @@ pub enum MigrateMsg {}
 pub enum IBCLifecycleComplete {
     #[serde(rename = "ibc_ack")]
     IBCAck {
-        /// The source channel (osmosis side) of the IBC packet
+        /// The source channel (merlin side) of the IBC packet
         channel: String,
         /// The sequence number that the packet was sent with
         sequence: u64,
@@ -121,7 +121,7 @@ pub enum IBCLifecycleComplete {
     },
     #[serde(rename = "ibc_timeout")]
     IBCTimeout {
-        /// The source channel (osmosis side) of the IBC packet
+        /// The source channel (merlin side) of the IBC packet
         channel: String,
         /// The sequence number that the packet was sent with
         sequence: u64,

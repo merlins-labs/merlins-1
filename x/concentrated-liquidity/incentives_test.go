@@ -12,24 +12,24 @@ import (
 	distributiontypes "github.com/cosmos/cosmos-sdk/x/distribution/types"
 
 	"github.com/osmosis-labs/osmosis/osmoutils/accum"
-	cl "github.com/osmosis-labs/osmosis/v16/x/concentrated-liquidity"
-	"github.com/osmosis-labs/osmosis/v16/x/concentrated-liquidity/math"
-	"github.com/osmosis-labs/osmosis/v16/x/concentrated-liquidity/model"
-	"github.com/osmosis-labs/osmosis/v16/x/concentrated-liquidity/types"
-	"github.com/osmosis-labs/osmosis/v16/x/gamm/pool-models/balancer"
-	gammtypes "github.com/osmosis-labs/osmosis/v16/x/gamm/types"
-	gammmigration "github.com/osmosis-labs/osmosis/v16/x/gamm/types/migration"
-	poolincentivestypes "github.com/osmosis-labs/osmosis/v16/x/pool-incentives/types"
+	cl "github.com/merlinslair/merlin/v16/x/concentrated-liquidity"
+	"github.com/merlinslair/merlin/v16/x/concentrated-liquidity/math"
+	"github.com/merlinslair/merlin/v16/x/concentrated-liquidity/model"
+	"github.com/merlinslair/merlin/v16/x/concentrated-liquidity/types"
+	"github.com/merlinslair/merlin/v16/x/gamm/pool-models/balancer"
+	gammtypes "github.com/merlinslair/merlin/v16/x/gamm/types"
+	gammmigration "github.com/merlinslair/merlin/v16/x/gamm/types/migration"
+	poolincentivestypes "github.com/merlinslair/merlin/v16/x/pool-incentives/types"
 )
 
 var (
 	defaultPoolId     = uint64(1)
 	defaultMultiplier = sdk.OneInt()
 
-	testAddressOne   = sdk.MustAccAddressFromBech32("osmo1cyyzpxplxdzkeea7kwsydadg87357qnahakaks")
-	testAddressTwo   = sdk.MustAccAddressFromBech32("osmo18s5lynnmx37hq4wlrw9gdn68sg2uxp5rgk26vv")
-	testAddressThree = sdk.MustAccAddressFromBech32("osmo1qwexv7c6sm95lwhzn9027vyu2ccneaqad4w8ka")
-	testAddressFour  = sdk.MustAccAddressFromBech32("osmo14hcxlnwlqtq75ttaxf674vk6mafspg8xwgnn53")
+	testAddressOne   = sdk.MustAccAddressFromBech32("fury1cyyzpxplxdzkeea7kwsydadg87357qnahakaks")
+	testAddressTwo   = sdk.MustAccAddressFromBech32("fury18s5lynnmx37hq4wlrw9gdn68sg2uxp5rgk26vv")
+	testAddressThree = sdk.MustAccAddressFromBech32("fury1qwexv7c6sm95lwhzn9027vyu2ccneaqad4w8ka")
+	testAddressFour  = sdk.MustAccAddressFromBech32("fury14hcxlnwlqtq75ttaxf674vk6mafspg8xwgnn53")
 
 	// Note: lexicographic order is denomFour, denomOne, denomThree, denomTwo
 	testDenomOne   = "denomOne"

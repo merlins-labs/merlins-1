@@ -3,7 +3,7 @@ package poolmanager
 import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
-	"github.com/osmosis-labs/osmosis/v16/x/poolmanager/types"
+	"github.com/merlinslair/merlin/v16/x/poolmanager/types"
 )
 
 var IntMaxValue = intMaxValue
@@ -12,10 +12,10 @@ func (k Keeper) GetNextPoolIdAndIncrement(ctx sdk.Context) uint64 {
 	return k.getNextPoolIdAndIncrement(ctx)
 }
 
-func (k Keeper) GetOsmoRoutedMultihopTotalSpreadFactor(ctx sdk.Context, route types.MultihopRoute) (
+func (k Keeper) GetFuryRoutedMultihopTotalSpreadFactor(ctx sdk.Context, route types.MultihopRoute) (
 	totalPathSpreadFactor sdk.Dec, sumOfSpreadFactors sdk.Dec, err error,
 ) {
-	return k.getOsmoRoutedMultihopTotalSpreadFactor(ctx, route)
+	return k.getFuryRoutedMultihopTotalSpreadFactor(ctx, route)
 }
 
 // SetPoolRoutesUnsafe sets the given routes to the poolmanager keeper
@@ -42,8 +42,8 @@ func (k Keeper) ValidateCreatedPool(ctx sdk.Context, poolId uint64, pool types.P
 	return k.validateCreatedPool(ctx, poolId, pool)
 }
 
-func (k Keeper) IsOsmoRoutedMultihop(ctx sdk.Context, route types.MultihopRoute, inDenom, outDenom string) (isRouted bool) {
-	return k.isOsmoRoutedMultihop(ctx, route, inDenom, outDenom)
+func (k Keeper) IsFuryRoutedMultihop(ctx sdk.Context, route types.MultihopRoute, inDenom, outDenom string) (isRouted bool) {
+	return k.isFuryRoutedMultihop(ctx, route, inDenom, outDenom)
 }
 
 func (k Keeper) CreateMultihopExpectedSwapOuts(
@@ -54,11 +54,11 @@ func (k Keeper) CreateMultihopExpectedSwapOuts(
 	return k.createMultihopExpectedSwapOuts(ctx, route, tokenOut)
 }
 
-func (k Keeper) CreateOsmoMultihopExpectedSwapOuts(
+func (k Keeper) CreateFuryMultihopExpectedSwapOuts(
 	ctx sdk.Context,
 	route []types.SwapAmountOutRoute,
 	tokenOut sdk.Coin,
 	cumulativeRouteSwapFee, sumOfSwapFees sdk.Dec,
 ) ([]sdk.Int, error) {
-	return k.createOsmoMultihopExpectedSwapOuts(ctx, route, tokenOut, cumulativeRouteSwapFee, sumOfSwapFees)
+	return k.createFuryMultihopExpectedSwapOuts(ctx, route, tokenOut, cumulativeRouteSwapFee, sumOfSwapFees)
 }

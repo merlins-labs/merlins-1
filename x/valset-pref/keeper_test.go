@@ -10,12 +10,12 @@ import (
 
 	"github.com/stretchr/testify/suite"
 
-	"github.com/osmosis-labs/osmosis/v16/app/apptesting"
-	appParams "github.com/osmosis-labs/osmosis/v16/app/params"
-	lockuptypes "github.com/osmosis-labs/osmosis/v16/x/lockup/types"
-	"github.com/osmosis-labs/osmosis/v16/x/valset-pref/types"
+	"github.com/merlinslair/merlin/v16/app/apptesting"
+	appParams "github.com/merlinslair/merlin/v16/app/params"
+	lockuptypes "github.com/merlinslair/merlin/v16/x/lockup/types"
+	"github.com/merlinslair/merlin/v16/x/valset-pref/types"
 
-	valPref "github.com/osmosis-labs/osmosis/v16/x/valset-pref"
+	valPref "github.com/merlinslair/merlin/v16/x/valset-pref"
 )
 
 type KeeperTestSuite struct {
@@ -171,7 +171,7 @@ func (s *KeeperTestSuite) TestGetDelegationPreference() {
 			msgServer := valPref.NewMsgServerImpl(s.App.ValidatorSetPreferenceKeeper)
 			c := sdk.WrapSDKContext(s.Ctx)
 
-			amountToFund := sdk.Coins{sdk.NewInt64Coin(sdk.DefaultBondDenom, 100_000_000)} // 100 osmo
+			amountToFund := sdk.Coins{sdk.NewInt64Coin(sdk.DefaultBondDenom, 100_000_000)} // 100 fury
 
 			s.FundAcc(test.delegator, amountToFund)
 
@@ -210,31 +210,31 @@ func (s *KeeperTestSuite) SetupValidatorsAndDelegations() ([]string, []types.Val
 
 // SetupLocks sets up locks for a delegator
 func (s *KeeperTestSuite) SetupLocks(delegator sdk.AccAddress) []lockuptypes.PeriodLock {
-	// create a pool with uosmo
+	// create a pool with ufury
 	locks := []lockuptypes.PeriodLock{}
 	// Setup lock
 	coinsToLock := sdk.Coins{sdk.NewInt64Coin(sdk.DefaultBondDenom, 10_000_000)}
-	osmoToLock := sdk.Coins{sdk.NewInt64Coin(appParams.BaseCoinUnit, 10_000_000)}
-	multipleCoinsToLock := sdk.Coins{coinsToLock[0], osmoToLock[0]}
+	furyToLock := sdk.Coins{sdk.NewInt64Coin(appParams.BaseCoinUnit, 10_000_000)}
+	multipleCoinsToLock := sdk.Coins{coinsToLock[0], furyToLock[0]}
 	s.FundAcc(delegator, sdk.Coins{sdk.NewInt64Coin(sdk.DefaultBondDenom, 100_000_000), sdk.NewInt64Coin(appParams.BaseCoinUnit, 100_000_000)})
 
-	// lock with osmo
+	// lock with fury
 	twoWeekDuration, err := time.ParseDuration("336h")
 	s.Require().NoError(err)
-	workingLock, err := s.App.LockupKeeper.CreateLock(s.Ctx, delegator, osmoToLock, twoWeekDuration)
+	workingLock, err := s.App.LockupKeeper.CreateLock(s.Ctx, delegator, furyToLock, twoWeekDuration)
 	s.Require().NoError(err)
 
 	locks = append(locks, workingLock)
 
-	// locking with stake denom instead of osmo denom
+	// locking with stake denom instead of fury denom
 	stakeDenomLock, err := s.App.LockupKeeper.CreateLock(s.Ctx, delegator, coinsToLock, twoWeekDuration)
 	s.Require().NoError(err)
 
 	locks = append(locks, stakeDenomLock)
 
 	// lock case where lock owner != delegator
-	s.FundAcc(sdk.AccAddress([]byte("addr5---------------")), osmoToLock)
-	lockWithDifferentOwner, err := s.App.LockupKeeper.CreateLock(s.Ctx, sdk.AccAddress([]byte("addr5---------------")), osmoToLock, twoWeekDuration)
+	s.FundAcc(sdk.AccAddress([]byte("addr5---------------")), furyToLock)
+	lockWithDifferentOwner, err := s.App.LockupKeeper.CreateLock(s.Ctx, sdk.AccAddress([]byte("addr5---------------")), furyToLock, twoWeekDuration)
 	s.Require().NoError(err)
 
 	locks = append(locks, lockWithDifferentOwner)
@@ -242,13 +242,13 @@ func (s *KeeperTestSuite) SetupLocks(delegator sdk.AccAddress) []lockuptypes.Per
 	// lock case where the duration != <= 2 weeks
 	morethanTwoWeekDuration, err := time.ParseDuration("337h")
 	s.Require().NoError(err)
-	maxDurationLock, err := s.App.LockupKeeper.CreateLock(s.Ctx, delegator, osmoToLock, morethanTwoWeekDuration)
+	maxDurationLock, err := s.App.LockupKeeper.CreateLock(s.Ctx, delegator, furyToLock, morethanTwoWeekDuration)
 	s.Require().NoError(err)
 
 	locks = append(locks, maxDurationLock)
 
 	// unbonding locks
-	unbondingLocks, err := s.App.LockupKeeper.CreateLock(s.Ctx, delegator, osmoToLock, twoWeekDuration)
+	unbondingLocks, err := s.App.LockupKeeper.CreateLock(s.Ctx, delegator, furyToLock, twoWeekDuration)
 	s.Require().NoError(err)
 
 	_, err = s.App.LockupKeeper.BeginUnlock(s.Ctx, unbondingLocks.ID, nil)
@@ -257,10 +257,10 @@ func (s *KeeperTestSuite) SetupLocks(delegator sdk.AccAddress) []lockuptypes.Per
 	locks = append(locks, unbondingLocks)
 
 	// synthetic locks
-	syntheticLocks, err := s.App.LockupKeeper.CreateLock(s.Ctx, delegator, osmoToLock, twoWeekDuration)
+	syntheticLocks, err := s.App.LockupKeeper.CreateLock(s.Ctx, delegator, furyToLock, twoWeekDuration)
 	s.Require().NoError(err)
 
-	err = s.App.LockupKeeper.CreateSyntheticLockup(s.Ctx, syntheticLocks.ID, "uosmo", time.Minute, true)
+	err = s.App.LockupKeeper.CreateSyntheticLockup(s.Ctx, syntheticLocks.ID, "ufury", time.Minute, true)
 	s.Require().NoError(err)
 
 	locks = append(locks, syntheticLocks)

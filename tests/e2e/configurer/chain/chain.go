@@ -11,11 +11,11 @@ import (
 	"github.com/stretchr/testify/require"
 	coretypes "github.com/tendermint/tendermint/rpc/core/types"
 
-	appparams "github.com/osmosis-labs/osmosis/v16/app/params"
-	"github.com/osmosis-labs/osmosis/v16/tests/e2e/configurer/config"
+	appparams "github.com/merlinslair/merlin/v16/app/params"
+	"github.com/merlinslair/merlin/v16/tests/e2e/configurer/config"
 
-	"github.com/osmosis-labs/osmosis/v16/tests/e2e/containers"
-	"github.com/osmosis-labs/osmosis/v16/tests/e2e/initialization"
+	"github.com/merlinslair/merlin/v16/tests/e2e/containers"
+	"github.com/merlinslair/merlin/v16/tests/e2e/initialization"
 )
 
 type Config struct {
@@ -170,8 +170,8 @@ func (c *Config) SendIBC(dstChain *Config, recipient string, token sdk.Coin) {
 
 	// removes the fee token from balances for calculating the difference in other tokens
 	// before and after the IBC send. Since we run tests in parallel now, some tests may
-	// send uosmo between accounts while this test is running. Since we don't care about
-	// non ibc denoms, its safe to filter uosmo out.
+	// send ufury between accounts while this test is running. Since we don't care about
+	// non ibc denoms, its safe to filter ufury out.
 	// TODO: we can probably improve this by specifying the denom we expect to be received
 	// and just look out for that. This wasn't required prior to parallel tests, but
 	// would be useful now.

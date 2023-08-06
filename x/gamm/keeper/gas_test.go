@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"strconv"
 
-	"github.com/osmosis-labs/osmosis/v16/x/gamm/pool-models/balancer"
-	"github.com/osmosis-labs/osmosis/v16/x/gamm/types"
+	"github.com/merlinslair/merlin/v16/x/gamm/pool-models/balancer"
+	"github.com/merlinslair/merlin/v16/x/gamm/types"
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
 )
@@ -64,7 +64,7 @@ func (s *KeeperTestSuite) TestJoinPoolGas() {
 
 	// mint some assets to the accounts
 	s.FundAcc(defaultAddr, sdk.NewCoins(
-		sdk.NewCoin("uosmo", sdk.NewInt(10000000000000)),
+		sdk.NewCoin("ufury", sdk.NewInt(10000000000000)),
 		sdk.NewCoin("foo", sdk.NewInt(10000000000000000)),
 		sdk.NewCoin("bar", sdk.NewInt(10000000000000000)),
 		sdk.NewCoin("baz", sdk.NewInt(10000000000000000)),
@@ -87,7 +87,7 @@ func (s *KeeperTestSuite) TestJoinPoolGas() {
 func (s *KeeperTestSuite) TestRepeatedJoinPoolDistinctDenom() {
 	// mint some usomo to account
 	s.FundAcc(defaultAddr, sdk.NewCoins(
-		sdk.NewCoin("uosmo", sdk.NewInt(1000000000000000000)),
+		sdk.NewCoin("ufury", sdk.NewInt(1000000000000000000)),
 	))
 
 	// number of distinct denom to test

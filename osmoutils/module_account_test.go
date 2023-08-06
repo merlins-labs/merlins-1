@@ -1,4 +1,4 @@
-package osmoutils_test
+package furyutils_test
 
 import (
 	"github.com/cosmos/cosmos-sdk/crypto/keys/secp256k1"
@@ -59,7 +59,7 @@ func (s *TestSuite) TestCreateModuleAccount() {
 			for _, priorAcc := range tc.priorAccounts {
 				s.accountKeeper.SetAccount(s.ctx, priorAcc)
 			}
-			err := osmoutils.CreateModuleAccount(s.ctx, s.accountKeeper, tc.moduleAccAddr)
+			err := furyutils.CreateModuleAccount(s.ctx, s.accountKeeper, tc.moduleAccAddr)
 			osmoassert.ConditionalError(s.T(), tc.expErr, err)
 		})
 	}

@@ -3,7 +3,7 @@ package keeper_test
 import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
-	"github.com/osmosis-labs/osmosis/v16/x/valset-pref/types"
+	"github.com/merlinslair/merlin/v16/x/valset-pref/types"
 )
 
 func (s *KeeperTestSuite) TestValidateLockForForceUnlock() {
@@ -34,7 +34,7 @@ func (s *KeeperTestSuite) TestValidateLockForForceUnlock() {
 			expectPass:    false,
 		},
 		{
-			name:          "Invalid Lock: contains non osmo denom",
+			name:          "Invalid Lock: contains non fury denom",
 			lockID:        locks[1].ID,
 			delegatorAddr: "addr1---------------",
 			expectPass:    false,

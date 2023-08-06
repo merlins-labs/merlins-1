@@ -8,7 +8,7 @@ import (
 	errorsmod "cosmossdk.io/errors"
 
 	"github.com/osmosis-labs/osmosis/osmomath"
-	"github.com/osmosis-labs/osmosis/v16/x/gamm/types"
+	"github.com/merlinslair/merlin/v16/x/gamm/types"
 )
 
 // subPoolAssetWeights subtracts the weights of two different pool asset slices.
@@ -106,7 +106,7 @@ func solveConstantFunctionInvariant(
 	y := tokenBalanceFixedBefore.Quo(tokenBalanceFixedAfter)
 
 	// amountY = balanceY * (1 - (y ^ weightRatio))
-	yToWeightRatio := osmomath.Pow(y, weightRatio)
+	yToWeightRatio := furymath.Pow(y, weightRatio)
 	paranthetical := sdk.OneDec().Sub(yToWeightRatio)
 	amountY := tokenBalanceUnknownBefore.Mul(paranthetical)
 	return amountY

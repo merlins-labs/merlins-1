@@ -3,7 +3,7 @@ package keeper
 import (
 	"fmt"
 
-	"github.com/osmosis-labs/osmosis/v16/x/protorev/types"
+	"github.com/merlinslair/merlin/v16/x/protorev/types"
 
 	"github.com/cosmos/cosmos-sdk/store/prefix"
 
@@ -453,12 +453,12 @@ func (k Keeper) SetMaxPointsPerBlock(ctx sdk.Context, maxPoints uint64) error {
 func (k Keeper) GetPoolWeights(ctx sdk.Context) types.PoolWeights {
 	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefixPoolWeights)
 	poolWeights := &types.PoolWeights{}
-	osmoutils.MustGet(store, types.KeyPrefixPoolWeights, poolWeights)
+	furyutils.MustGet(store, types.KeyPrefixPoolWeights, poolWeights)
 	return *poolWeights
 }
 
 // SetPoolWeights sets the weights of different pool types.
 func (k Keeper) SetPoolWeights(ctx sdk.Context, poolWeights types.PoolWeights) {
 	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefixPoolWeights)
-	osmoutils.MustSet(store, types.KeyPrefixPoolWeights, &poolWeights)
+	furyutils.MustSet(store, types.KeyPrefixPoolWeights, &poolWeights)
 }

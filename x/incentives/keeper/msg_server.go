@@ -4,7 +4,7 @@ import (
 	"context"
 
 	"github.com/osmosis-labs/osmosis/osmoutils"
-	"github.com/osmosis-labs/osmosis/v16/x/incentives/types"
+	"github.com/merlinslair/merlin/v16/x/incentives/types"
 
 	errorsmod "cosmossdk.io/errors"
 	sdk "github.com/cosmos/cosmos-sdk/types"
@@ -46,7 +46,7 @@ func (server msgServer) CreateGauge(goCtx context.Context, msg *types.MsgCreateG
 	ctx.EventManager().EmitEvents(sdk.Events{
 		sdk.NewEvent(
 			types.TypeEvtCreateGauge,
-			sdk.NewAttribute(types.AttributeGaugeID, osmoutils.Uint64ToString(gaugeID)),
+			sdk.NewAttribute(types.AttributeGaugeID, furyutils.Uint64ToString(gaugeID)),
 		),
 	})
 
@@ -73,7 +73,7 @@ func (server msgServer) AddToGauge(goCtx context.Context, msg *types.MsgAddToGau
 	ctx.EventManager().EmitEvents(sdk.Events{
 		sdk.NewEvent(
 			types.TypeEvtAddToGauge,
-			sdk.NewAttribute(types.AttributeGaugeID, osmoutils.Uint64ToString(msg.GaugeId)),
+			sdk.NewAttribute(types.AttributeGaugeID, furyutils.Uint64ToString(msg.GaugeId)),
 		),
 	})
 

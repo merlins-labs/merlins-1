@@ -10,7 +10,7 @@ require (
 	github.com/tendermint/tendermint v0.37.0-rc1
 )
 
-require github.com/osmosis-labs/osmosis/v16 v16.0.0-20230623172200-24f580da1227
+require github.com/merlinslair/merlin/v16 v16.0.0-20230623172200-24f580da1227
 
 require (
 	cosmossdk.io/errors v1.0.0-beta.7 // indirect
@@ -153,9 +153,9 @@ require (
 )
 
 replace (
-	// osmosis-patched wasmd
-	// ToDo: replace the commit hash with v0.31.0-osmo-v15 once the version is tagged
-	github.com/CosmWasm/wasmd => github.com/osmosis-labs/wasmd v0.31.0-osmo-v16
+	// merlin-patched wasmd
+	// ToDo: replace the commit hash with v0.31.0-fury-v15 once the version is tagged
+	github.com/CosmWasm/wasmd => github.com/osmosis-labs/wasmd v0.31.0-fury-v16
 	// dragonberry
 	github.com/confio/ics23/go => github.com/cosmos/cosmos-sdk/ics23/go v0.8.0
 	// Our cosmos-sdk branch is:  https://github.com/osmosis-labs/cosmos-sdk, current branch: v16.x. Direct commit link: https://github.com/osmosis-labs/cosmos-sdk/commit/ed4eb883f2a65bd5343e9d2f6186060f45294cb2

@@ -6,9 +6,9 @@ This package contains all logic necessary for initializing configuration
 data either for a new chain or a single node via Docker containers.
 
 The motivation for doing this via Docker is to be able to initialize
-configs of any Osmosis version.
+configs of any Merlin version.
 
-For example, while the latest Osmosis version is v9,
+For example, while the latest Merlin version is v9,
 we might want to spin up a chain of v8 and test the upgrade.
 
 Additionally, there are known file permission errors when initializing
@@ -91,34 +91,34 @@ initResource, err := m.pool.RunWithOptions(
 Assumming that the container was correctly mounted on a volume,
 it produces the following:
 
-- `osmo-test-< chain id >-encode` file
+- `fury-test-< chain id >-encode` file
   - This is encoded metadata about the newly created chain with its nodes
-- `osmo-test-< chain id >` folder
+- `fury-test-< chain id >` folder
   - For every `NodeCondig` provided to the container, it will produce a folder
     with the respective node configs
 
 Example:
 
 ```sh
-$:/tmp/osmosis-e2e-testnet-1167397304 $ ls
-osmo-test-a  osmo-test-a-encode
+$:/tmp/merlin-e2e-testnet-1167397304 $ ls
+fury-test-a  fury-test-a-encode
 
-$:/tmp/osmosis-e2e-testnet-1167397304/osmo-test-a $ cd  osmo-test-a
+$:/tmp/merlin-e2e-testnet-1167397304/fury-test-a $ cd  fury-test-a
 
-$:/tmp/osmosis-e2e-testnet-1167397304/osmo-test-a $ ls
-osmo-test-a-osmosis-00  osmo-test-a-osmosis-11  osmo-test-a-osmosis-22  osmo-test-a-osmosis-33
+$:/tmp/merlin-e2e-testnet-1167397304/fury-test-a $ ls
+fury-test-a-merlin-00  fury-test-a-merlin-11  fury-test-a-merlin-22  fury-test-a-merlin-33
 
-$:/tmp/osmosis-e2e-testnet-1167397304/osmo-test-a $ cd  osmo-test-a-osmosis-00
+$:/tmp/merlin-e2e-testnet-1167397304/fury-test-a $ cd  fury-test-a-merlin-00
 
-$:/tmp/osmosis-e2e-testnet-1167397304/osmo-test-a/osmo-test-a-osmosis-00 $ ls
+$:/tmp/merlin-e2e-testnet-1167397304/fury-test-a/fury-test-a-merlin-00 $ ls
 config  data  keyring-test  wasm
 ```
 
 - Here we mounted the container on
-`/tmp/osmosis-e2e-testnet-1167397304/osmo-test`as a volume
+`/tmp/merlin-e2e-testnet-1167397304/fury-test`as a volume
 - < chain id > = "a"
 - 4 `NodeConfig`s were provided via the `--config` flag
-- `osmo-test-a-encode` output file corresponds to the serialized `internalChain` struct
+- `fury-test-a-encode` output file corresponds to the serialized `internalChain` struct
 defined in `tests/e2e/initialization/chain.go`
 
 ### Initializing a Node (`node`)

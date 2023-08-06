@@ -50,7 +50,7 @@ cosmwasm-std =  { workspace = true }
 cw-storage-plus = { workspace = true }
 cw2 = { workspace = true }
 schemars = { workspace = true }
-osmosis-std = { workspace = true }
+merlin-std = { workspace = true }
 serde = { workspace = true }
 thiserror = { workspace = true }
 serde-json-wasm = { workspace = true }
@@ -66,4 +66,4 @@ enum-repr = "0.2.6"
 
 [dev-dependencies]
 cw-multi-test = { workspace = true }
-osmosis-testing = { workspace = true }
+merlin-testing = { workspace = true }

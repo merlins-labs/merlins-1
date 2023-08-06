@@ -7,7 +7,7 @@ import (
 	errorsmod "cosmossdk.io/errors"
 
 	"github.com/osmosis-labs/osmosis/osmoutils"
-	"github.com/osmosis-labs/osmosis/v16/x/pool-incentives/types"
+	"github.com/merlinslair/merlin/v16/x/pool-incentives/types"
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
 )
@@ -71,13 +71,13 @@ func (k Keeper) AllocateAsset(ctx sdk.Context) error {
 func (k Keeper) GetDistrInfo(ctx sdk.Context) types.DistrInfo {
 	store := ctx.KVStore(k.storeKey)
 	distrInfo := types.DistrInfo{}
-	osmoutils.MustGet(store, types.DistrInfoKey, &distrInfo)
+	furyutils.MustGet(store, types.DistrInfoKey, &distrInfo)
 	return distrInfo
 }
 
 func (k Keeper) SetDistrInfo(ctx sdk.Context, distrInfo types.DistrInfo) {
 	store := ctx.KVStore(k.storeKey)
-	osmoutils.MustSet(store, types.DistrInfoKey, &distrInfo)
+	furyutils.MustSet(store, types.DistrInfoKey, &distrInfo)
 }
 
 // validateRecords validates a list of records to ensure that:

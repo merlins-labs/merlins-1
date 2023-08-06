@@ -8,13 +8,13 @@ import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
 	"github.com/osmosis-labs/osmosis/osmomath"
-	cl "github.com/osmosis-labs/osmosis/v16/x/concentrated-liquidity"
-	clmodel "github.com/osmosis-labs/osmosis/v16/x/concentrated-liquidity/model"
-	"github.com/osmosis-labs/osmosis/v16/x/concentrated-liquidity/types"
-	"github.com/osmosis-labs/osmosis/v16/x/gamm/pool-models/balancer"
-	lockuptypes "github.com/osmosis-labs/osmosis/v16/x/lockup/types"
-	poolmanagertypes "github.com/osmosis-labs/osmosis/v16/x/poolmanager/types"
-	sftypes "github.com/osmosis-labs/osmosis/v16/x/superfluid/types"
+	cl "github.com/merlinslair/merlin/v16/x/concentrated-liquidity"
+	clmodel "github.com/merlinslair/merlin/v16/x/concentrated-liquidity/model"
+	"github.com/merlinslair/merlin/v16/x/concentrated-liquidity/types"
+	"github.com/merlinslair/merlin/v16/x/gamm/pool-models/balancer"
+	lockuptypes "github.com/merlinslair/merlin/v16/x/lockup/types"
+	poolmanagertypes "github.com/merlinslair/merlin/v16/x/poolmanager/types"
+	sftypes "github.com/merlinslair/merlin/v16/x/superfluid/types"
 )
 
 func (s *KeeperTestSuite) TestInitializePool() {
@@ -257,7 +257,7 @@ func (s *KeeperTestSuite) TestCalculateSpotPrice() {
 	// test that we have correct values for reversed quote asset and base asset
 	spotPriceBaseETH, err := s.App.ConcentratedLiquidityKeeper.CalculateSpotPrice(s.Ctx, poolId, USDC, ETH)
 	s.Require().NoError(err)
-	s.Require().Equal(spotPriceBaseETH, osmomath.OneDec().Quo(DefaultCurrSqrtPrice.PowerInteger(2)).SDKDec())
+	s.Require().Equal(spotPriceBaseETH, furymath.OneDec().Quo(DefaultCurrSqrtPrice.PowerInteger(2)).SDKDec())
 
 	// try getting spot price from a non-existent pool
 	spotPrice, err = s.App.ConcentratedLiquidityKeeper.CalculateSpotPrice(s.Ctx, poolId+1, USDC, ETH)
@@ -334,7 +334,7 @@ func (s *KeeperTestSuite) TestSetPool() {
 		CurrentTickLiquidity: sdk.ZeroDec(),
 		Token0:               ETH,
 		Token1:               USDC,
-		CurrentSqrtPrice:     osmomath.OneDec(),
+		CurrentSqrtPrice:     furymath.OneDec(),
 		CurrentTick:          0,
 		TickSpacing:          DefaultTickSpacing,
 		ExponentAtPriceOne:   -6,
@@ -465,7 +465,7 @@ func (s *KeeperTestSuite) TestDecreaseConcentratedPoolTickSpacing() {
 			s.SetupTest()
 			owner := s.TestAccs[0]
 
-			// Create OSMO <> USDC pool with tick spacing of 100
+			// Create FURY <> USDC pool with tick spacing of 100
 			concentratedPool := s.PrepareConcentratedPoolWithCoinsAndFullRangePosition(ETH, USDC)
 
 			// Create a position in the pool that is divisible by the tick spacing
@@ -501,7 +501,7 @@ func (s *KeeperTestSuite) TestGetTotalPoolLiquidity() {
 	var (
 		defaultPoolCoinOne = sdk.NewCoin(USDC, sdk.OneInt())
 		defaultPoolCoinTwo = sdk.NewCoin(ETH, sdk.NewInt(2))
-		nonPoolCool        = sdk.NewCoin("uosmo", sdk.NewInt(3))
+		nonPoolCool        = sdk.NewCoin("ufury", sdk.NewInt(3))
 
 		defaultCoins = sdk.NewCoins(defaultPoolCoinOne, defaultPoolCoinTwo)
 	)

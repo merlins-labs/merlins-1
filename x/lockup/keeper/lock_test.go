@@ -7,10 +7,10 @@ import (
 
 	errorsmod "cosmossdk.io/errors"
 
-	cl "github.com/osmosis-labs/osmosis/v16/x/concentrated-liquidity"
-	cltypes "github.com/osmosis-labs/osmosis/v16/x/concentrated-liquidity/types"
-	"github.com/osmosis-labs/osmosis/v16/x/lockup/types"
-	lockuptypes "github.com/osmosis-labs/osmosis/v16/x/lockup/types"
+	cl "github.com/merlinslair/merlin/v16/x/concentrated-liquidity"
+	cltypes "github.com/merlinslair/merlin/v16/x/concentrated-liquidity/types"
+	"github.com/merlinslair/merlin/v16/x/lockup/types"
+	lockuptypes "github.com/merlinslair/merlin/v16/x/lockup/types"
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
 )
@@ -817,7 +817,7 @@ func (s *KeeperTestSuite) TestHasLock() {
 			tokenLocked:     sdk.NewInt64Coin("stake", 10),
 			durationLocked:  time.Minute,
 			lockAddr:        addr1,
-			denomToQuery:    "uosmo",
+			denomToQuery:    "ufury",
 			durationToQuery: time.Minute,
 			expectedHas:     false,
 		},
@@ -826,7 +826,7 @@ func (s *KeeperTestSuite) TestHasLock() {
 			tokenLocked:     sdk.NewInt64Coin("stake", 10),
 			durationLocked:  time.Minute,
 			lockAddr:        addr2,
-			denomToQuery:    "uosmo",
+			denomToQuery:    "ufury",
 			durationToQuery: time.Minute,
 			expectedHas:     false,
 		},

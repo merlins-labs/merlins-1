@@ -6,20 +6,20 @@ import (
 	authkeeper "github.com/cosmos/cosmos-sdk/x/auth/keeper"
 	icqkeeper "github.com/cosmos/ibc-apps/modules/async-icq/v4/keeper"
 
-	ibcratelimit "github.com/osmosis-labs/osmosis/v16/x/ibc-rate-limit"
+	ibcratelimit "github.com/merlinslair/merlin/v16/x/ibc-rate-limit"
 
 	bankkeeper "github.com/cosmos/cosmos-sdk/x/bank/keeper"
 
-	gammkeeper "github.com/osmosis-labs/osmosis/v16/x/gamm/keeper"
-	"github.com/osmosis-labs/osmosis/v16/x/poolmanager"
+	gammkeeper "github.com/merlinslair/merlin/v16/x/gamm/keeper"
+	"github.com/merlinslair/merlin/v16/x/poolmanager"
 )
 
 func MigrateNextPoolId(ctx sdk.Context, gammKeeper *gammkeeper.Keeper, poolmanager *poolmanager.Keeper) {
 	migrateNextPoolId(ctx, gammKeeper, poolmanager)
 }
 
-func RegisterOsmoIonMetadata(ctx sdk.Context, bankKeeper bankkeeper.Keeper) {
-	registerOsmoIonMetadata(ctx, bankKeeper)
+func RegisterFuryIonMetadata(ctx sdk.Context, bankKeeper bankkeeper.Keeper) {
+	registerFuryIonMetadata(ctx, bankKeeper)
 }
 
 func SetICQParams(ctx sdk.Context, icqKeeper *icqkeeper.Keeper) {

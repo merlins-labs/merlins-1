@@ -3,7 +3,7 @@ use cosmwasm_schema::{cw_serde, QueryResponses};
 /// Message type for `instantiate` entry_point
 #[cw_serde]
 pub struct InstantiateMsg {
-    pub osmosis_channel: String,
+    pub merlin_channel: String,
     pub crosschain_swaps_contract: String,
 }
 
@@ -23,15 +23,15 @@ pub struct Wasm {
 #[cw_serde]
 pub enum ExecuteMsg {
     /// Execute a swap and forward it to the receiver address on the specified ibc channel
-    OsmosisSwap {
-        /// The final denom to be received (as represented on osmosis)
+    MerlinSwap {
+        /// The final denom to be received (as represented on merlin)
         output_denom: String,
         /// The receiver of the IBC packet to be sent after the swap
         receiver: String,
         /// Slippage for the swap
         slippage: swaprouter::Slippage,
         /// If for any reason the swap were to fail, users can specify a
-        /// "recovery address" that can clain the funds on osmosis after a
+        /// "recovery address" that can clain the funds on merlin after a
         /// confirmed failure.
         on_failed_delivery: crosschain_swaps::FailedDeliveryAction,
 

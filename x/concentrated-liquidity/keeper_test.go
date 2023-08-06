@@ -13,16 +13,16 @@ import (
 	"github.com/osmosis-labs/osmosis/osmomath"
 	"github.com/osmosis-labs/osmosis/osmoutils"
 	"github.com/osmosis-labs/osmosis/osmoutils/accum"
-	concentrated_liquidity "github.com/osmosis-labs/osmosis/v16/x/concentrated-liquidity"
-	"github.com/osmosis-labs/osmosis/v16/x/concentrated-liquidity/clmocks"
-	"github.com/osmosis-labs/osmosis/v16/x/concentrated-liquidity/math"
-	"github.com/osmosis-labs/osmosis/v16/x/concentrated-liquidity/model"
-	"github.com/osmosis-labs/osmosis/v16/x/concentrated-liquidity/types"
-	poolmanagertypes "github.com/osmosis-labs/osmosis/v16/x/poolmanager/types"
+	concentrated_liquidity "github.com/merlinslair/merlin/v16/x/concentrated-liquidity"
+	"github.com/merlinslair/merlin/v16/x/concentrated-liquidity/clmocks"
+	"github.com/merlinslair/merlin/v16/x/concentrated-liquidity/math"
+	"github.com/merlinslair/merlin/v16/x/concentrated-liquidity/model"
+	"github.com/merlinslair/merlin/v16/x/concentrated-liquidity/types"
+	poolmanagertypes "github.com/merlinslair/merlin/v16/x/poolmanager/types"
 
-	cl "github.com/osmosis-labs/osmosis/v16/x/concentrated-liquidity"
+	cl "github.com/merlinslair/merlin/v16/x/concentrated-liquidity"
 
-	"github.com/osmosis-labs/osmosis/v16/app/apptesting"
+	"github.com/merlinslair/merlin/v16/app/apptesting"
 )
 
 var (
@@ -34,9 +34,9 @@ var (
 	DefaultUpperTick                     = int64(31500000)
 	DefaultCurrPrice                     = sdk.NewDec(5000)
 	DefaultCurrTick                int64 = 31000000
-	DefaultCurrSqrtPrice                 = func() osmomath.BigDec {
-		curSqrtPrice, _ := osmomath.MonotonicSqrt(DefaultCurrPrice) // 70.710678118654752440
-		return osmomath.BigDecFromSDKDec(curSqrtPrice)
+	DefaultCurrSqrtPrice                 = func() furymath.BigDec {
+		curSqrtPrice, _ := furymath.MonotonicSqrt(DefaultCurrPrice) // 70.710678118654752440
+		return furymath.BigDecFromSDKDec(curSqrtPrice)
 	}()
 
 	DefaultZeroSpreadFactor       = sdk.ZeroDec()
@@ -79,8 +79,8 @@ var (
 )
 
 func TestConstants(t *testing.T) {
-	lowerSqrtPrice, _ := osmomath.MonotonicSqrt(DefaultLowerPrice)
-	upperSqrtPrice, _ := osmomath.MonotonicSqrt(DefaultUpperPrice)
+	lowerSqrtPrice, _ := furymath.MonotonicSqrt(DefaultLowerPrice)
+	upperSqrtPrice, _ := furymath.MonotonicSqrt(DefaultUpperPrice)
 	liq := math.GetLiquidityFromAmounts(DefaultCurrSqrtPrice,
 		lowerSqrtPrice, upperSqrtPrice, DefaultAmt0, DefaultAmt1)
 	require.Equal(t, DefaultLiquidityAmt, liq)
@@ -258,7 +258,7 @@ func (s *KeeperTestSuite) addUptimeGrowthInsideRange(ctx sdk.Context, poolId uin
 		s.Require().NoError(err)
 		s.Require().Equal(len(lowerTickInfo.UptimeTrackers.List), len(uptimeGrowthToAdd))
 
-		newLowerUptimeTrackerValues, err := osmoutils.AddDecCoinArrays(cl.GetUptimeTrackerValues(lowerTickInfo.UptimeTrackers.List), uptimeGrowthToAdd)
+		newLowerUptimeTrackerValues, err := furyutils.AddDecCoinArrays(cl.GetUptimeTrackerValues(lowerTickInfo.UptimeTrackers.List), uptimeGrowthToAdd)
 		s.Require().NoError(err)
 
 		s.initializeTick(ctx, currentTick, lowerTick, lowerTickInfo.LiquidityGross, lowerTickInfo.SpreadRewardGrowthOppositeDirectionOfLastTraversal, wrapUptimeTrackers(newLowerUptimeTrackerValues), true)
@@ -268,7 +268,7 @@ func (s *KeeperTestSuite) addUptimeGrowthInsideRange(ctx sdk.Context, poolId uin
 		s.Require().NoError(err)
 		s.Require().Equal(len(upperTickInfo.UptimeTrackers.List), len(uptimeGrowthToAdd))
 
-		newUpperUptimeTrackerValues, err := osmoutils.AddDecCoinArrays(cl.GetUptimeTrackerValues(upperTickInfo.UptimeTrackers.List), uptimeGrowthToAdd)
+		newUpperUptimeTrackerValues, err := furyutils.AddDecCoinArrays(cl.GetUptimeTrackerValues(upperTickInfo.UptimeTrackers.List), uptimeGrowthToAdd)
 		s.Require().NoError(err)
 
 		s.initializeTick(ctx, currentTick, upperTick, upperTickInfo.LiquidityGross, upperTickInfo.SpreadRewardGrowthOppositeDirectionOfLastTraversal, wrapUptimeTrackers(newUpperUptimeTrackerValues), false)
@@ -303,7 +303,7 @@ func (s *KeeperTestSuite) addUptimeGrowthOutsideRange(ctx sdk.Context, poolId ui
 		s.Require().NoError(err)
 		s.Require().Equal(len(lowerTickInfo.UptimeTrackers.List), len(uptimeGrowthToAdd))
 
-		newLowerUptimeTrackerValues, err := osmoutils.AddDecCoinArrays(cl.GetUptimeTrackerValues(lowerTickInfo.UptimeTrackers.List), uptimeGrowthToAdd)
+		newLowerUptimeTrackerValues, err := furyutils.AddDecCoinArrays(cl.GetUptimeTrackerValues(lowerTickInfo.UptimeTrackers.List), uptimeGrowthToAdd)
 		s.Require().NoError(err)
 
 		s.initializeTick(ctx, currentTick, lowerTick, lowerTickInfo.LiquidityGross, lowerTickInfo.SpreadRewardGrowthOppositeDirectionOfLastTraversal, wrapUptimeTrackers(newLowerUptimeTrackerValues), true)
@@ -313,7 +313,7 @@ func (s *KeeperTestSuite) addUptimeGrowthOutsideRange(ctx sdk.Context, poolId ui
 		s.Require().NoError(err)
 		s.Require().Equal(len(upperTickInfo.UptimeTrackers.List), len(uptimeGrowthToAdd))
 
-		newUpperUptimeTrackerValues, err := osmoutils.AddDecCoinArrays(cl.GetUptimeTrackerValues(upperTickInfo.UptimeTrackers.List), uptimeGrowthToAdd)
+		newUpperUptimeTrackerValues, err := furyutils.AddDecCoinArrays(cl.GetUptimeTrackerValues(upperTickInfo.UptimeTrackers.List), uptimeGrowthToAdd)
 		s.Require().NoError(err)
 
 		s.initializeTick(ctx, currentTick, upperTick, upperTickInfo.LiquidityGross, upperTickInfo.SpreadRewardGrowthOppositeDirectionOfLastTraversal, wrapUptimeTrackers(newUpperUptimeTrackerValues), false)
@@ -323,7 +323,7 @@ func (s *KeeperTestSuite) addUptimeGrowthOutsideRange(ctx sdk.Context, poolId ui
 		s.Require().NoError(err)
 		s.Require().Equal(len(lowerTickInfo.UptimeTrackers.List), len(uptimeGrowthToAdd))
 
-		newLowerUptimeTrackerValues, err := osmoutils.AddDecCoinArrays(cl.GetUptimeTrackerValues(lowerTickInfo.UptimeTrackers.List), uptimeGrowthToAdd)
+		newLowerUptimeTrackerValues, err := furyutils.AddDecCoinArrays(cl.GetUptimeTrackerValues(lowerTickInfo.UptimeTrackers.List), uptimeGrowthToAdd)
 		s.Require().NoError(err)
 
 		s.initializeTick(ctx, currentTick, lowerTick, lowerTickInfo.LiquidityGross, lowerTickInfo.SpreadRewardGrowthOppositeDirectionOfLastTraversal, wrapUptimeTrackers(newLowerUptimeTrackerValues), true)

@@ -8,8 +8,8 @@ import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	stakingtypes "github.com/cosmos/cosmos-sdk/x/staking/types"
 
-	osmosisApp "github.com/osmosis-labs/osmosis/v16/app"
-	"github.com/osmosis-labs/osmosis/v16/app/params"
+	merlinApp "github.com/merlinslair/merlin/v16/app"
+	"github.com/merlinslair/merlin/v16/app/params"
 )
 
 var (
@@ -22,7 +22,7 @@ func init() {
 }
 
 func initEncodingConfigAndCdc() (params.EncodingConfig, codec.Codec) {
-	encodingConfig := osmosisApp.MakeEncodingConfig()
+	encodingConfig := merlinApp.MakeEncodingConfig()
 
 	encodingConfig.InterfaceRegistry.RegisterImplementations(
 		(*sdk.Msg)(nil),

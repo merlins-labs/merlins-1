@@ -3,8 +3,8 @@ package keeper_test
 import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
-	poolmanagertypes "github.com/osmosis-labs/osmosis/v16/x/poolmanager/types"
-	"github.com/osmosis-labs/osmosis/v16/x/protorev/types"
+	poolmanagertypes "github.com/merlinslair/merlin/v16/x/poolmanager/types"
+	"github.com/merlinslair/merlin/v16/x/protorev/types"
 )
 
 // TestGetNumberOfTrades tests GetNumberOfTrades and IncrementNumberOfTrades
@@ -27,31 +27,31 @@ func (s *KeeperTestSuite) TestGetNumberOfTrades() {
 // TestGetProfitsByDenom tests GetProfitsByDenom, UpdateProfitsByDenom, and GetAllProfits
 func (s *KeeperTestSuite) TestGetProfitsByDenom() {
 	// Should be zero by default
-	profits, err := s.App.ProtoRevKeeper.GetProfitsByDenom(s.Ctx, types.OsmosisDenomination)
+	profits, err := s.App.ProtoRevKeeper.GetProfitsByDenom(s.Ctx, types.MerlinDenomination)
 	s.Require().Error(err)
-	s.Require().Equal(sdk.NewCoin(types.OsmosisDenomination, sdk.ZeroInt()), profits)
+	s.Require().Equal(sdk.NewCoin(types.MerlinDenomination, sdk.ZeroInt()), profits)
 
 	// Pseudo execute a trade
-	err = s.App.ProtoRevKeeper.UpdateProfitsByDenom(s.Ctx, types.OsmosisDenomination, sdk.NewInt(9000))
+	err = s.App.ProtoRevKeeper.UpdateProfitsByDenom(s.Ctx, types.MerlinDenomination, sdk.NewInt(9000))
 	s.Require().NoError(err)
 
 	// Check the updated result
-	profits, err = s.App.ProtoRevKeeper.GetProfitsByDenom(s.Ctx, types.OsmosisDenomination)
+	profits, err = s.App.ProtoRevKeeper.GetProfitsByDenom(s.Ctx, types.MerlinDenomination)
 	s.Require().NoError(err)
-	s.Require().Equal(sdk.NewCoin(types.OsmosisDenomination, sdk.NewInt(9000)), profits)
+	s.Require().Equal(sdk.NewCoin(types.MerlinDenomination, sdk.NewInt(9000)), profits)
 
 	// Pseudo execute a second trade
-	err = s.App.ProtoRevKeeper.UpdateProfitsByDenom(s.Ctx, types.OsmosisDenomination, sdk.NewInt(5000))
+	err = s.App.ProtoRevKeeper.UpdateProfitsByDenom(s.Ctx, types.MerlinDenomination, sdk.NewInt(5000))
 	s.Require().NoError(err)
 
 	// Check the updated result after the second trade
-	profits, err = s.App.ProtoRevKeeper.GetProfitsByDenom(s.Ctx, types.OsmosisDenomination)
+	profits, err = s.App.ProtoRevKeeper.GetProfitsByDenom(s.Ctx, types.MerlinDenomination)
 	s.Require().NoError(err)
-	s.Require().Equal(sdk.NewCoin(types.OsmosisDenomination, sdk.NewInt(14000)), profits)
+	s.Require().Equal(sdk.NewCoin(types.MerlinDenomination, sdk.NewInt(14000)), profits)
 
 	// Check the result of GetAllProfits
 	allProfits := s.App.ProtoRevKeeper.GetAllProfits(s.Ctx)
-	s.Require().Equal([]sdk.Coin{{Denom: types.OsmosisDenomination, Amount: sdk.NewInt(14000)}}, allProfits)
+	s.Require().Equal([]sdk.Coin{{Denom: types.MerlinDenomination, Amount: sdk.NewInt(14000)}}, allProfits)
 
 	// Pseudo execute a third trade in a different denom
 	err = s.App.ProtoRevKeeper.UpdateProfitsByDenom(s.Ctx, "Atom", sdk.NewInt(1000))
@@ -59,7 +59,7 @@ func (s *KeeperTestSuite) TestGetProfitsByDenom() {
 
 	// Check the result of GetAllProfits
 	allProfits = s.App.ProtoRevKeeper.GetAllProfits(s.Ctx)
-	s.Require().Equal([]sdk.Coin{{Denom: "Atom", Amount: sdk.NewInt(1000)}, {Denom: types.OsmosisDenomination, Amount: sdk.NewInt(14000)}}, allProfits)
+	s.Require().Equal([]sdk.Coin{{Denom: "Atom", Amount: sdk.NewInt(1000)}, {Denom: types.MerlinDenomination, Amount: sdk.NewInt(14000)}}, allProfits)
 }
 
 // TestGetTradesByRoute tests GetTradesByRoute, IncrementTradesByRoute, and GetAllRoutes
@@ -113,22 +113,22 @@ func (s *KeeperTestSuite) TestGetProfitsByRoute() {
 	s.Require().Equal([]sdk.Coin{}, profits)
 
 	// Check the profits for a route that has not been executed
-	profit, err := s.App.ProtoRevKeeper.GetProfitsByRoute(s.Ctx, []uint64{1, 2, 3}, types.OsmosisDenomination)
+	profit, err := s.App.ProtoRevKeeper.GetProfitsByRoute(s.Ctx, []uint64{1, 2, 3}, types.MerlinDenomination)
 	s.Require().Error(err)
-	s.Require().Equal(sdk.NewCoin(types.OsmosisDenomination, sdk.ZeroInt()), profit)
+	s.Require().Equal(sdk.NewCoin(types.MerlinDenomination, sdk.ZeroInt()), profit)
 
 	// Pseudo execute a trade
-	err = s.App.ProtoRevKeeper.UpdateProfitsByRoute(s.Ctx, []uint64{1, 2, 3}, types.OsmosisDenomination, sdk.NewInt(1000))
+	err = s.App.ProtoRevKeeper.UpdateProfitsByRoute(s.Ctx, []uint64{1, 2, 3}, types.MerlinDenomination, sdk.NewInt(1000))
 	s.Require().NoError(err)
 
 	// Check the updated result
-	profit, err = s.App.ProtoRevKeeper.GetProfitsByRoute(s.Ctx, []uint64{1, 2, 3}, types.OsmosisDenomination)
+	profit, err = s.App.ProtoRevKeeper.GetProfitsByRoute(s.Ctx, []uint64{1, 2, 3}, types.MerlinDenomination)
 	s.Require().NoError(err)
-	s.Require().Equal(sdk.NewCoin(types.OsmosisDenomination, sdk.NewInt(1000)), profit)
+	s.Require().Equal(sdk.NewCoin(types.MerlinDenomination, sdk.NewInt(1000)), profit)
 
 	// Check the result of GetAllProfitsByRoute
 	profits = s.App.ProtoRevKeeper.GetAllProfitsByRoute(s.Ctx, []uint64{1, 2, 3})
-	s.Require().Equal([]sdk.Coin{{Denom: types.OsmosisDenomination, Amount: sdk.NewInt(1000)}}, profits)
+	s.Require().Equal([]sdk.Coin{{Denom: types.MerlinDenomination, Amount: sdk.NewInt(1000)}}, profits)
 
 	// Pseudo execute a second trade
 	err = s.App.ProtoRevKeeper.UpdateProfitsByRoute(s.Ctx, []uint64{1, 2, 3}, "Atom", sdk.NewInt(2000))
@@ -141,7 +141,7 @@ func (s *KeeperTestSuite) TestGetProfitsByRoute() {
 
 	// Check the result of GetAllProfitsByRoute
 	profits = s.App.ProtoRevKeeper.GetAllProfitsByRoute(s.Ctx, []uint64{1, 2, 3})
-	s.Require().Contains(profits, sdk.Coin{Denom: types.OsmosisDenomination, Amount: sdk.NewInt(1000)})
+	s.Require().Contains(profits, sdk.Coin{Denom: types.MerlinDenomination, Amount: sdk.NewInt(1000)})
 	s.Require().Contains(profits, sdk.Coin{Denom: "Atom", Amount: sdk.NewInt(2000)})
 }
 
@@ -151,7 +151,7 @@ func (s *KeeperTestSuite) TestUpdateStatistics() {
 	// Pseudo execute a trade
 	err := s.App.ProtoRevKeeper.UpdateStatistics(s.Ctx,
 		poolmanagertypes.SwapAmountInRoutes{{TokenOutDenom: "", PoolId: 1}, {TokenOutDenom: "", PoolId: 2}, {TokenOutDenom: "", PoolId: 3}},
-		types.OsmosisDenomination, sdk.NewInt(1000),
+		types.MerlinDenomination, sdk.NewInt(1000),
 	)
 	s.Require().NoError(err)
 
@@ -161,9 +161,9 @@ func (s *KeeperTestSuite) TestUpdateStatistics() {
 	s.Require().Equal(sdk.NewInt(1), trades)
 
 	// Check the result of GetProfitsByRoute
-	profit, err := s.App.ProtoRevKeeper.GetProfitsByRoute(s.Ctx, []uint64{1, 2, 3}, types.OsmosisDenomination)
+	profit, err := s.App.ProtoRevKeeper.GetProfitsByRoute(s.Ctx, []uint64{1, 2, 3}, types.MerlinDenomination)
 	s.Require().NoError(err)
-	s.Require().Equal(sdk.NewCoin(types.OsmosisDenomination, sdk.NewInt(1000)), profit)
+	s.Require().Equal(sdk.NewCoin(types.MerlinDenomination, sdk.NewInt(1000)), profit)
 
 	// Check the result of GetAllRoutes
 	routes, err := s.App.ProtoRevKeeper.GetAllRoutes(s.Ctx)
@@ -173,7 +173,7 @@ func (s *KeeperTestSuite) TestUpdateStatistics() {
 	// Pseudo execute a second trade
 	err = s.App.ProtoRevKeeper.UpdateStatistics(s.Ctx,
 		poolmanagertypes.SwapAmountInRoutes{{TokenOutDenom: "", PoolId: 2}, {TokenOutDenom: "", PoolId: 3}, {TokenOutDenom: "", PoolId: 4}},
-		types.OsmosisDenomination, sdk.NewInt(1100),
+		types.MerlinDenomination, sdk.NewInt(1100),
 	)
 	s.Require().NoError(err)
 
@@ -183,9 +183,9 @@ func (s *KeeperTestSuite) TestUpdateStatistics() {
 	s.Require().Equal(sdk.NewInt(1), trades)
 
 	// Check the result of GetProfitsByRoute
-	profit, err = s.App.ProtoRevKeeper.GetProfitsByRoute(s.Ctx, []uint64{2, 3, 4}, types.OsmosisDenomination)
+	profit, err = s.App.ProtoRevKeeper.GetProfitsByRoute(s.Ctx, []uint64{2, 3, 4}, types.MerlinDenomination)
 	s.Require().NoError(err)
-	s.Require().Equal(sdk.NewCoin(types.OsmosisDenomination, sdk.NewInt(1100)), profit)
+	s.Require().Equal(sdk.NewCoin(types.MerlinDenomination, sdk.NewInt(1100)), profit)
 
 	// Check the result of GetAllRoutes
 	routes, err = s.App.ProtoRevKeeper.GetAllRoutes(s.Ctx)

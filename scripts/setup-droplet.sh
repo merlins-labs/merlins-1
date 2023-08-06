@@ -1,14 +1,14 @@
 #!/usr/bin/env bash
 
-export REPO=https://github.com/osmosis-labs/osmosis.git
+export REPO=https://github.com/merlinslair/merlin.git
 export BRANCH=main
-export NODE=osmosisd
-export CLI=osmosisd
+export NODE=merlin
+export CLI=merlin
 export MONIKER=testnet_node_moniker
 # export GENESIS=https://raw.githubusercontent.com/cosmos/launch/master/genesis.json
 # Thanatos - first ransomware to accept payment in bitcoin cash!
 # (Also some greek god for death)
-export CHAINID="osmo-testnet-thanatos"
+export CHAINID="fury-testnet-thanatos"
 
 sudo apt update -y
 sudo apt upgrade -y
@@ -31,7 +31,7 @@ git clone $REPO
 echo $(basename $REPO .git)
 
 make LEDGER_ENABLED=false build
-cp ./build/osmosisd /root/go/bin/
+cp ./build/merlin /root/go/bin/
 
 # install docker (https://docs.docker.com/engine/install/ubuntu/)
 

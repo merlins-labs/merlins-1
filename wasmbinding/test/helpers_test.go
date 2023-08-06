@@ -13,19 +13,19 @@ import (
 	"github.com/cosmos/cosmos-sdk/simapp"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
-	"github.com/osmosis-labs/osmosis/v16/app"
+	"github.com/merlinslair/merlin/v16/app"
 )
 
-func CreateTestInput() (*app.OsmosisApp, sdk.Context) {
-	osmosis := app.Setup(false)
-	ctx := osmosis.BaseApp.NewContext(false, tmproto.Header{Height: 1, ChainID: "osmosis-1", Time: time.Now().UTC()})
-	return osmosis, ctx
+func CreateTestInput() (*app.MerlinApp, sdk.Context) {
+	merlin := app.Setup(false)
+	ctx := merlin.BaseApp.NewContext(false, tmproto.Header{Height: 1, ChainID: "merlin-1", Time: time.Now().UTC()})
+	return merlin, ctx
 }
 
-func FundAccount(t *testing.T, ctx sdk.Context, osmosis *app.OsmosisApp, acct sdk.AccAddress) {
+func FundAccount(t *testing.T, ctx sdk.Context, merlin *app.MerlinApp, acct sdk.AccAddress) {
 	t.Helper()
-	err := simapp.FundAccount(osmosis.BankKeeper, ctx, acct, sdk.NewCoins(
-		sdk.NewCoin("uosmo", sdk.NewInt(10000000000)),
+	err := simapp.FundAccount(merlin.BankKeeper, ctx, acct, sdk.NewCoins(
+		sdk.NewCoin("ufury", sdk.NewInt(10000000000)),
 	))
 	require.NoError(t, err)
 }

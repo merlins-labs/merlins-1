@@ -1,4 +1,4 @@
-package osmoutils_test
+package furyutils_test
 
 import (
 	"testing"
@@ -72,7 +72,7 @@ func TestSubDecCoins(t *testing.T) {
 	}
 	for name, tc := range tests {
 		t.Run(name, func(t *testing.T) {
-			actualOutput, err := osmoutils.SubDecCoinArrays(tc.firstInput, tc.secondInput)
+			actualOutput, err := furyutils.SubDecCoinArrays(tc.firstInput, tc.secondInput)
 
 			if tc.expectError {
 				require.Error(t, err)
@@ -140,7 +140,7 @@ func TestAddDecCoins(t *testing.T) {
 	}
 	for name, tc := range tests {
 		t.Run(name, func(t *testing.T) {
-			actualOutput, err := osmoutils.AddDecCoinArrays(tc.firstInput, tc.secondInput)
+			actualOutput, err := furyutils.AddDecCoinArrays(tc.firstInput, tc.secondInput)
 
 			if tc.expectError {
 				require.Error(t, err)
@@ -188,7 +188,7 @@ func TestCollapseDecCoinsArray(t *testing.T) {
 	}
 	for name, tc := range tests {
 		t.Run(name, func(t *testing.T) {
-			actualOutput := osmoutils.CollapseDecCoinsArray(tc.input)
+			actualOutput := furyutils.CollapseDecCoinsArray(tc.input)
 			require.Equal(t, tc.expectedOutput, actualOutput)
 		})
 	}
@@ -219,7 +219,7 @@ func TestConvertCoinsToDecCoins(t *testing.T) {
 
 	for _, test := range tests {
 		t.Run(test.name, func(t *testing.T) {
-			result := osmoutils.ConvertCoinsToDecCoins(test.inputCoins)
+			result := furyutils.ConvertCoinsToDecCoins(test.inputCoins)
 			require.Equal(t, result, test.expectedDecCoins)
 
 		})

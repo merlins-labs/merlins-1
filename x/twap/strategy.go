@@ -4,9 +4,9 @@ import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
 	"github.com/osmosis-labs/osmosis/osmomath"
-	"github.com/osmosis-labs/osmosis/v16/x/twap/types"
+	"github.com/merlinslair/merlin/v16/x/twap/types"
 
-	gammtypes "github.com/osmosis-labs/osmosis/v16/x/gamm/types"
+	gammtypes "github.com/merlinslair/merlin/v16/x/gamm/types"
 )
 
 // twapStrategy is an interface for computing TWAPs.
@@ -52,7 +52,7 @@ func (s *geometric) computeTwap(startRecord types.TwapRecord, endRecord types.Tw
 
 	exponent := arithmeticMeanOfLogPrices
 	// result = 2^exponent = 2^arithmeticMeanOfLogPrices
-	result := osmomath.Exp2(osmomath.BigDecFromSDKDec(exponent.Abs()))
+	result := furymath.Exp2(furymath.BigDecFromSDKDec(exponent.Abs()))
 
 	isExponentNegative := exponent.IsNegative()
 	isQuoteAsset0 := quoteAsset == startRecord.Asset0Denom
@@ -65,10 +65,10 @@ func (s *geometric) computeTwap(startRecord types.TwapRecord, endRecord types.Tw
 	// https://proofwiki.org/wiki/Geometric_Mean_of_Reciprocals_is_Reciprocal_of_Geometric_Mean
 	invertCase2 := !isExponentNegative && !isQuoteAsset0
 	if invertCase1 || invertCase2 {
-		result = osmomath.OneDec().Quo(result)
+		result = furymath.OneDec().Quo(result)
 	}
 
 	// N.B. we round because this is the max number of significant figures supported
 	// by the underlying spot price function.
-	return osmomath.SigFigRound(result.SDKDec(), gammtypes.SpotPriceSigFigs)
+	return furymath.SigFigRound(result.SDKDec(), gammtypes.SpotPriceSigFigs)
 }

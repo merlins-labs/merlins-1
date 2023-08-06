@@ -9,8 +9,8 @@ import (
 
 	"github.com/osmosis-labs/osmosis/osmoutils"
 	"github.com/osmosis-labs/osmosis/osmoutils/accum"
-	types "github.com/osmosis-labs/osmosis/v16/x/concentrated-liquidity/types"
-	"github.com/osmosis-labs/osmosis/v16/x/concentrated-liquidity/types/genesis"
+	types "github.com/merlinslair/merlin/v16/x/concentrated-liquidity/types"
+	"github.com/merlinslair/merlin/v16/x/concentrated-liquidity/types/genesis"
 )
 
 // InitGenesis initializes the concentrated-liquidity module with the provided genesis state.
@@ -253,5 +253,5 @@ func (k Keeper) initOrUpdateAccumPosition(ctx sdk.Context, accumumulator accum.A
 		Options:               options,
 	}
 
-	osmoutils.MustSet(ctx.KVStore(k.storeKey), accum.FormatPositionPrefixKey(accumumulator.GetName(), index), &position)
+	furyutils.MustSet(ctx.KVStore(k.storeKey), accum.FormatPositionPrefixKey(accumumulator.GetName(), index), &position)
 }

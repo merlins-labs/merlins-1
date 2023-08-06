@@ -1,24 +1,24 @@
 use std::path::PathBuf;
 
 use cosmwasm_std::Coin;
-use osmosis_testing::{Account, OsmosisTestApp, SigningAccount};
-use osmosis_testing::{Gamm, Module, Wasm};
+use merlin_testing::{Account, MerlinTestApp, SigningAccount};
+use merlin_testing::{Gamm, Module, Wasm};
 use swaprouter::msg::InstantiateMsg;
 
 pub struct TestEnv {
-    pub app: OsmosisTestApp,
+    pub app: MerlinTestApp,
     pub contract_address: String,
     pub owner: SigningAccount,
 }
 impl TestEnv {
     pub fn new() -> Self {
-        let app = OsmosisTestApp::new();
+        let app = MerlinTestApp::new();
         let gamm = Gamm::new(&app);
         let wasm = Wasm::new(&app);
 
         // setup owner account
         let initial_balance = [
-            Coin::new(1_000_000_000_000, "uosmo"),
+            Coin::new(1_000_000_000_000, "ufury"),
             Coin::new(1_000_000_000_000, "uion"),
             Coin::new(1_000_000_000_000, "uatom"),
         ];
@@ -28,7 +28,7 @@ impl TestEnv {
         gamm.create_basic_pool(
             &[
                 Coin::new(100_000_000, "uion"),
-                Coin::new(100_000_000, "uosmo"),
+                Coin::new(100_000_000, "ufury"),
             ],
             &owner,
         )
@@ -36,7 +36,7 @@ impl TestEnv {
         gamm.create_basic_pool(
             &[
                 Coin::new(100_000_000, "uatom"),
-                Coin::new(200_000_000, "uosmo"),
+                Coin::new(200_000_000, "ufury"),
             ],
             &owner,
         )

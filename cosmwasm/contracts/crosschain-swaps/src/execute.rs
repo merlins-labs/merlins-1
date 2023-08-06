@@ -18,7 +18,7 @@ use crate::ContractError;
 use crate::{state, ExecuteMsg};
 
 /// This function takes any token. If it's already something we can work with
-/// (either native to osmosis or native to a chain connected to osmosis via a
+/// (either native to merlin or native to a chain connected to merlin via a
 /// valid channel), it will just proceed to swap and forward. If it's not, then
 /// it will send an IBC message to unwrap it first and provide a callback to
 /// ensure the right swap_and_forward gets called after the unwrap succeeds
@@ -60,7 +60,7 @@ pub fn unwrap_or_swap_and_forward(
             String::new(),
             Some(Callback {
                 contract: env.contract.address.clone(),
-                msg: serde_cw_value::to_value(&ExecuteMsg::OsmosisSwap {
+                msg: serde_cw_value::to_value(&ExecuteMsg::MerlinSwap {
                     output_denom,
                     receiver: receiver.to_string(),
                     slippage,

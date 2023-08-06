@@ -6,8 +6,8 @@ import (
 
 	"github.com/stretchr/testify/suite"
 
-	"github.com/osmosis-labs/osmosis/v16/x/incentives/types"
-	lockuptypes "github.com/osmosis-labs/osmosis/v16/x/lockup/types"
+	"github.com/merlinslair/merlin/v16/x/incentives/types"
+	lockuptypes "github.com/merlinslair/merlin/v16/x/lockup/types"
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
 )
@@ -346,7 +346,7 @@ func (s *KeeperTestSuite) TestAddToGaugeRewards() {
 			name:  "valid case: valid gauge",
 			owner: s.TestAccs[0],
 			coinsToAdd: sdk.NewCoins(
-				sdk.NewCoin("uosmo", sdk.NewInt(100000)),
+				sdk.NewCoin("ufury", sdk.NewInt(100000)),
 				sdk.NewCoin("atom", sdk.NewInt(99999)),
 			),
 			gaugeId:            1,
@@ -358,7 +358,7 @@ func (s *KeeperTestSuite) TestAddToGaugeRewards() {
 			name:  "valid case: valid gauge with >4 denoms",
 			owner: s.TestAccs[0],
 			coinsToAdd: sdk.NewCoins(
-				sdk.NewCoin("uosmo", sdk.NewInt(100000)),
+				sdk.NewCoin("ufury", sdk.NewInt(100000)),
 				sdk.NewCoin("atom", sdk.NewInt(99999)),
 				sdk.NewCoin("mars", sdk.NewInt(88888)),
 				sdk.NewCoin("akash", sdk.NewInt(77777)),
@@ -376,7 +376,7 @@ func (s *KeeperTestSuite) TestAddToGaugeRewards() {
 			name:  "invalid case: gauge Id is not valid",
 			owner: s.TestAccs[0],
 			coinsToAdd: sdk.NewCoins(
-				sdk.NewCoin("uosmo", sdk.NewInt(100000)),
+				sdk.NewCoin("ufury", sdk.NewInt(100000)),
 				sdk.NewCoin("atom", sdk.NewInt(99999)),
 			),
 			gaugeId:            0,
@@ -453,7 +453,7 @@ func (s *KeeperTestSuite) TestCreateGauge_NoLockGauges() {
 
 	var (
 		defaultCoins = sdk.NewCoins(
-			sdk.NewCoin("uosmo", sdk.NewInt(100000)),
+			sdk.NewCoin("ufury", sdk.NewInt(100000)),
 			sdk.NewCoin("atom", sdk.NewInt(99999)),
 		)
 
@@ -499,7 +499,7 @@ func (s *KeeperTestSuite) TestCreateGauge_NoLockGauges() {
 			distrTo: lockuptypes.QueryCondition{
 				LockQueryType: lockuptypes.NoLock,
 				// Note: this is invalid for NoLock gauges
-				Denom: "uosmo",
+				Denom: "ufury",
 			},
 			poolId: concentratedPoolId,
 

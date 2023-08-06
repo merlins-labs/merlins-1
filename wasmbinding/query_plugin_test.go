@@ -19,27 +19,27 @@ import (
 	"github.com/tendermint/tendermint/crypto/ed25519"
 	tmproto "github.com/tendermint/tendermint/proto/tendermint/types"
 
-	"github.com/osmosis-labs/osmosis/v16/app/apptesting"
-	"github.com/osmosis-labs/osmosis/v16/x/gamm/pool-models/balancer"
-	gammv2types "github.com/osmosis-labs/osmosis/v16/x/gamm/v2types"
+	"github.com/merlinslair/merlin/v16/app/apptesting"
+	"github.com/merlinslair/merlin/v16/x/gamm/pool-models/balancer"
+	gammv2types "github.com/merlinslair/merlin/v16/x/gamm/v2types"
 
-	"github.com/osmosis-labs/osmosis/v16/app"
-	lockuptypes "github.com/osmosis-labs/osmosis/v16/x/lockup/types"
+	"github.com/merlinslair/merlin/v16/app"
+	lockuptypes "github.com/merlinslair/merlin/v16/x/lockup/types"
 	epochtypes "github.com/osmosis-labs/osmosis/x/epochs/types"
 
-	"github.com/osmosis-labs/osmosis/v16/wasmbinding"
+	"github.com/merlinslair/merlin/v16/wasmbinding"
 )
 
 type StargateTestSuite struct {
 	suite.Suite
 
 	ctx sdk.Context
-	app *app.OsmosisApp
+	app *app.MerlinApp
 }
 
 func (suite *StargateTestSuite) SetupTest() {
 	suite.app = app.Setup(false)
-	suite.ctx = suite.app.BaseApp.NewContext(false, tmproto.Header{Height: 1, ChainID: "osmosis-1", Time: time.Now().UTC()})
+	suite.ctx = suite.app.BaseApp.NewContext(false, tmproto.Header{Height: 1, ChainID: "merlin-1", Time: time.Now().UTC()})
 }
 
 func TestStargateTestSuite(t *testing.T) {
@@ -60,7 +60,7 @@ func (suite *StargateTestSuite) TestStargateQuerier() {
 	}{
 		{
 			name: "happy path",
-			path: "/osmosis.epochs.v1beta1.Query/EpochInfos",
+			path: "/merlin.epochs.v1beta1.Query/EpochInfos",
 			requestData: func() []byte {
 				epochrequest := epochtypes.QueryEpochsInfoRequest{}
 				bz, err := proto.Marshal(&epochrequest)
@@ -71,7 +71,7 @@ func (suite *StargateTestSuite) TestStargateQuerier() {
 		},
 		{
 			name: "happy path gamm spot price",
-			path: "/osmosis.gamm.v2.Query/SpotPrice",
+			path: "/merlin.gamm.v2.Query/SpotPrice",
 			testSetup: func() {
 				pk := ed25519.GenPrivKey().PubKey()
 				sender := sdk.AccAddress(pk.Address())
@@ -87,7 +87,7 @@ func (suite *StargateTestSuite) TestStargateQuerier() {
 				queryrequest := gammv2types.QuerySpotPriceRequest{ //nolint:staticcheck // we're intentionally using this deprecated package for testing
 					PoolId:          1,
 					BaseAssetDenom:  "bar",
-					QuoteAssetDenom: "uosmo",
+					QuoteAssetDenom: "ufury",
 				}
 				bz, err := proto.Marshal(&queryrequest)
 				suite.Require().NoError(err)
@@ -100,7 +100,7 @@ func (suite *StargateTestSuite) TestStargateQuerier() {
 		},
 		{
 			name: "happy path pool manager",
-			path: "/osmosis.poolmanager.v1beta1.Query/SpotPrice",
+			path: "/merlin.poolmanager.v1beta1.Query/SpotPrice",
 			testSetup: func() {
 				pk := ed25519.GenPrivKey().PubKey()
 				sender := sdk.AccAddress(pk.Address())
@@ -116,7 +116,7 @@ func (suite *StargateTestSuite) TestStargateQuerier() {
 				queryrequest := gammv2types.QuerySpotPriceRequest{ //nolint:staticcheck // we're intentionally using this deprecated package for testing
 					PoolId:          1,
 					BaseAssetDenom:  "bar",
-					QuoteAssetDenom: "uosmo",
+					QuoteAssetDenom: "ufury",
 				}
 				bz, err := proto.Marshal(&queryrequest)
 				suite.Require().NoError(err)
@@ -129,7 +129,7 @@ func (suite *StargateTestSuite) TestStargateQuerier() {
 		},
 		{
 			name: "unregistered path(not whitelisted)",
-			path: "/osmosis.lockup.Query/AccountLockedLongerDuration",
+			path: "/merlin.lockup.Query/AccountLockedLongerDuration",
 			requestData: func() []byte {
 				request := lockuptypes.AccountLockedLongerDurationRequest{}
 				bz, err := proto.Marshal(&request)
@@ -141,7 +141,7 @@ func (suite *StargateTestSuite) TestStargateQuerier() {
 		{
 			name: "test query using iterator",
 			testSetup: func() {
-				accAddr, err := sdk.AccAddressFromBech32("osmo1t7egva48prqmzl59x5ngv4zx0dtrwewc9m7z44")
+				accAddr, err := sdk.AccAddressFromBech32("fury1t7egva48prqmzl59x5ngv4zx0dtrwewc9m7z44")
 				suite.Require().NoError(err)
 
 				// fund account to receive non-empty response
@@ -153,7 +153,7 @@ func (suite *StargateTestSuite) TestStargateQuerier() {
 			path: "/cosmos.bank.v1beta1.Query/AllBalances",
 			requestData: func() []byte {
 				bankrequest := banktypes.QueryAllBalancesRequest{
-					Address: "osmo1t7egva48prqmzl59x5ngv4zx0dtrwewc9m7z44",
+					Address: "fury1t7egva48prqmzl59x5ngv4zx0dtrwewc9m7z44",
 				}
 				bz, err := proto.Marshal(&bankrequest)
 				suite.Require().NoError(err)
@@ -164,7 +164,7 @@ func (suite *StargateTestSuite) TestStargateQuerier() {
 		{
 			name: "edge case: resending request",
 			testSetup: func() {
-				accAddr, err := sdk.AccAddressFromBech32("osmo1t7egva48prqmzl59x5ngv4zx0dtrwewc9m7z44")
+				accAddr, err := sdk.AccAddressFromBech32("fury1t7egva48prqmzl59x5ngv4zx0dtrwewc9m7z44")
 				suite.Require().NoError(err)
 
 				// fund account to receive non-empty response
@@ -176,7 +176,7 @@ func (suite *StargateTestSuite) TestStargateQuerier() {
 			path: "/cosmos.bank.v1beta1.Query/AllBalances",
 			requestData: func() []byte {
 				bankrequest := banktypes.QueryAllBalancesRequest{
-					Address: "osmo1t7egva48prqmzl59x5ngv4zx0dtrwewc9m7z44",
+					Address: "fury1t7egva48prqmzl59x5ngv4zx0dtrwewc9m7z44",
 				}
 				bz, err := proto.Marshal(&bankrequest)
 				suite.Require().NoError(err)
@@ -198,7 +198,7 @@ func (suite *StargateTestSuite) TestStargateQuerier() {
 		},
 		{
 			name: "unmatching path and data in request",
-			path: "/osmosis.epochs.v1beta1.Query/EpochInfos",
+			path: "/merlin.epochs.v1beta1.Query/EpochInfos",
 			requestData: func() []byte {
 				epochrequest := epochtypes.QueryCurrentEpochRequest{}
 				bz, err := proto.Marshal(&epochrequest)
@@ -212,10 +212,10 @@ func (suite *StargateTestSuite) TestStargateQuerier() {
 			name: "error in unmarshalling response",
 			// set up whitelist with wrong data
 			testSetup: func() {
-				wasmbinding.SetWhitelistedQuery("/osmosis.epochs.v1beta1.Query/EpochInfos",
+				wasmbinding.SetWhitelistedQuery("/merlin.epochs.v1beta1.Query/EpochInfos",
 					&banktypes.QueryAllBalancesResponse{})
 			},
-			path: "/osmosis.epochs.v1beta1.Query/EpochInfos",
+			path: "/merlin.epochs.v1beta1.Query/EpochInfos",
 			requestData: func() []byte {
 				return []byte{}
 			},

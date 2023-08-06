@@ -10,10 +10,10 @@ import (
 	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
 
 	"github.com/osmosis-labs/osmosis/osmoutils"
-	"github.com/osmosis-labs/osmosis/v16/x/gamm/pool-models/balancer"
-	"github.com/osmosis-labs/osmosis/v16/x/gamm/pool-models/stableswap"
-	"github.com/osmosis-labs/osmosis/v16/x/gamm/types"
-	poolmanagertypes "github.com/osmosis-labs/osmosis/v16/x/poolmanager/types"
+	"github.com/merlinslair/merlin/v16/x/gamm/pool-models/balancer"
+	"github.com/merlinslair/merlin/v16/x/gamm/pool-models/stableswap"
+	"github.com/merlinslair/merlin/v16/x/gamm/types"
+	poolmanagertypes "github.com/merlinslair/merlin/v16/x/poolmanager/types"
 )
 
 func (k Keeper) MarshalPool(pool poolmanagertypes.PoolI) ([]byte, error) {
@@ -31,7 +31,7 @@ func (k Keeper) GetPool(ctx sdk.Context, poolId uint64) (poolmanagertypes.PoolI,
 }
 
 func (k Keeper) GetPools(ctx sdk.Context) ([]poolmanagertypes.PoolI, error) {
-	return osmoutils.GatherValuesFromStorePrefix(ctx.KVStore(k.storeKey), types.KeyPrefixPools, func(bz []byte) (poolmanagertypes.PoolI, error) {
+	return furyutils.GatherValuesFromStorePrefix(ctx.KVStore(k.storeKey), types.KeyPrefixPools, func(bz []byte) (poolmanagertypes.PoolI, error) {
 		pool, err := k.UnmarshalPool(bz)
 		if err != nil {
 			return nil, err
@@ -240,7 +240,7 @@ func (k Keeper) GetPoolDenoms(ctx sdk.Context, poolId uint64) ([]string, error) 
 		return nil, err
 	}
 
-	denoms := osmoutils.CoinsDenoms(pool.GetTotalPoolLiquidity(ctx))
+	denoms := furyutils.CoinsDenoms(pool.GetTotalPoolLiquidity(ctx))
 	return denoms, err
 }
 

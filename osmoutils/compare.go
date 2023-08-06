@@ -1,4 +1,4 @@
-package osmoutils
+package furyutils
 
 // Max returns the maximum value among the given values of any type that supports comparison.
 func Max(values ...interface{}) interface{} {

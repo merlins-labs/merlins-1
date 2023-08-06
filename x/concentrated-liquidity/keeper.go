@@ -8,7 +8,7 @@ import (
 	paramtypes "github.com/cosmos/cosmos-sdk/x/params/types"
 
 	"github.com/osmosis-labs/osmosis/osmoutils"
-	"github.com/osmosis-labs/osmosis/v16/x/concentrated-liquidity/types"
+	"github.com/merlinslair/merlin/v16/x/concentrated-liquidity/types"
 )
 
 type Keeper struct {
@@ -83,28 +83,28 @@ func (k *Keeper) SetIncentivesKeeper(incentivesKeeper types.IncentivesKeeper) {
 func (k Keeper) GetNextPositionId(ctx sdk.Context) uint64 {
 	store := ctx.KVStore(k.storeKey)
 	nextPositionId := gogotypes.UInt64Value{}
-	osmoutils.MustGet(store, types.KeyNextGlobalPositionId, &nextPositionId)
+	furyutils.MustGet(store, types.KeyNextGlobalPositionId, &nextPositionId)
 	return nextPositionId.Value
 }
 
 // SetNextPositionId sets next position Id.
 func (k Keeper) SetNextPositionId(ctx sdk.Context, positionId uint64) {
 	store := ctx.KVStore(k.storeKey)
-	osmoutils.MustSet(store, types.KeyNextGlobalPositionId, &gogotypes.UInt64Value{Value: positionId})
+	furyutils.MustSet(store, types.KeyNextGlobalPositionId, &gogotypes.UInt64Value{Value: positionId})
 }
 
 // GetNextIncentiveRecordId returns the next incentive record ID.
 func (k Keeper) GetNextIncentiveRecordId(ctx sdk.Context) uint64 {
 	store := ctx.KVStore(k.storeKey)
 	nextIncentiveRecord := gogotypes.UInt64Value{}
-	osmoutils.MustGet(store, types.KeyNextGlobalIncentiveRecordId, &nextIncentiveRecord)
+	furyutils.MustGet(store, types.KeyNextGlobalIncentiveRecordId, &nextIncentiveRecord)
 	return nextIncentiveRecord.Value
 }
 
 // SetNextIncentiveRecordId sets next incentive record ID.
 func (k Keeper) SetNextIncentiveRecordId(ctx sdk.Context, id uint64) {
 	store := ctx.KVStore(k.storeKey)
-	osmoutils.MustSet(store, types.KeyNextGlobalIncentiveRecordId, &gogotypes.UInt64Value{Value: id})
+	furyutils.MustSet(store, types.KeyNextGlobalIncentiveRecordId, &gogotypes.UInt64Value{Value: id})
 }
 
 // Set the concentrated-liquidity listeners.

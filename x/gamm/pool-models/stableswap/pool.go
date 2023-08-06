@@ -10,9 +10,9 @@ import (
 	errorsmod "cosmossdk.io/errors"
 
 	"github.com/osmosis-labs/osmosis/osmomath"
-	"github.com/osmosis-labs/osmosis/v16/x/gamm/pool-models/internal/cfmm_common"
-	"github.com/osmosis-labs/osmosis/v16/x/gamm/types"
-	poolmanagertypes "github.com/osmosis-labs/osmosis/v16/x/poolmanager/types"
+	"github.com/merlinslair/merlin/v16/x/gamm/pool-models/internal/cfmm_common"
+	"github.com/merlinslair/merlin/v16/x/gamm/types"
+	poolmanagertypes "github.com/merlinslair/merlin/v16/x/poolmanager/types"
 )
 
 var (
@@ -132,18 +132,18 @@ func (p Pool) NumAssets() int {
 
 // scaleCoin returns the BigDec amount of the
 // input token after scaling it by the token's scaling factor
-func (p Pool) scaleCoin(input sdk.Coin, roundingDirection osmomath.RoundingDirection) (osmomath.BigDec, error) {
+func (p Pool) scaleCoin(input sdk.Coin, roundingDirection furymath.RoundingDirection) (furymath.BigDec, error) {
 	scalingFactor := p.GetScalingFactorByDenom(input.Denom)
-	scaledAmount, err := osmomath.DivIntByU64ToBigDec(input.Amount, scalingFactor, roundingDirection)
+	scaledAmount, err := furymath.DivIntByU64ToBigDec(input.Amount, scalingFactor, roundingDirection)
 	if err != nil {
-		return osmomath.BigDec{}, err
+		return furymath.BigDec{}, err
 	}
 	return scaledAmount, nil
 }
 
 // getDescaledPoolAmt descales the passed in amount
 // by the scaling factor of the passed in denom
-func (p Pool) getDescaledPoolAmt(denom string, amount osmomath.BigDec) sdk.Dec {
+func (p Pool) getDescaledPoolAmt(denom string, amount furymath.BigDec) sdk.Dec {
 	scalingFactor := p.GetScalingFactorByDenom(denom)
 
 	return amount.MulInt64(int64(scalingFactor)).SDKDec()
@@ -155,7 +155,7 @@ func (p Pool) getDescaledPoolAmt(denom string, amount osmomath.BigDec) sdk.Dec {
 // deterministic.
 //
 // Returns reserve amounts as an array of type BigDec.
-func (p Pool) scaledSortedPoolReserves(first string, second string, round osmomath.RoundingDirection) ([]osmomath.BigDec, error) {
+func (p Pool) scaledSortedPoolReserves(first string, second string, round furymath.RoundingDirection) ([]furymath.BigDec, error) {
 	reorderedLiquidity, reorderedScalingFactors, err := p.reorderReservesAndScalingFactors(first, second)
 	if err != nil {
 		return nil, err
@@ -165,7 +165,7 @@ func (p Pool) scaledSortedPoolReserves(first string, second string, round osmoma
 		return nil, err
 	}
 
-	return osmomath.DivCoinAmtsByU64ToBigDec(reorderedLiquidity, reorderedScalingFactors, round)
+	return furymath.DivCoinAmtsByU64ToBigDec(reorderedLiquidity, reorderedScalingFactors, round)
 }
 
 // reorderReservesAndScalingFactors takes the pool liquidity and scaling factors, and reorders them s.t.

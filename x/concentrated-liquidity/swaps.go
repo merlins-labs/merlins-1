@@ -8,13 +8,13 @@ import (
 
 	"github.com/osmosis-labs/osmosis/osmomath"
 	"github.com/osmosis-labs/osmosis/osmoutils/accum"
-	events "github.com/osmosis-labs/osmosis/v16/x/poolmanager/events"
+	events "github.com/merlinslair/merlin/v16/x/poolmanager/events"
 
-	"github.com/osmosis-labs/osmosis/v16/x/concentrated-liquidity/math"
-	"github.com/osmosis-labs/osmosis/v16/x/concentrated-liquidity/swapstrategy"
-	"github.com/osmosis-labs/osmosis/v16/x/concentrated-liquidity/types"
-	gammtypes "github.com/osmosis-labs/osmosis/v16/x/gamm/types"
-	poolmanagertypes "github.com/osmosis-labs/osmosis/v16/x/poolmanager/types"
+	"github.com/merlinslair/merlin/v16/x/concentrated-liquidity/math"
+	"github.com/merlinslair/merlin/v16/x/concentrated-liquidity/swapstrategy"
+	"github.com/merlinslair/merlin/v16/x/concentrated-liquidity/types"
+	gammtypes "github.com/merlinslair/merlin/v16/x/gamm/types"
+	poolmanagertypes "github.com/merlinslair/merlin/v16/x/poolmanager/types"
 )
 
 // SwapState defines the state of a swap.
@@ -39,7 +39,7 @@ type SwapState struct {
 	// Current sqrt price while calculating swap.
 	// Initialized to the pool's current sqrt price.
 	// Updated after every swap step.
-	sqrtPrice osmomath.BigDec
+	sqrtPrice furymath.BigDec
 
 	// Current tick while calculating swap.
 	// Initialized to the pool's current tick.
@@ -91,7 +91,7 @@ type SwapDetails struct {
 type PoolUpdates struct {
 	NewCurrentTick int64
 	NewLiquidity   sdk.Dec
-	NewSqrtPrice   osmomath.BigDec
+	NewSqrtPrice   furymath.BigDec
 }
 
 var (
@@ -333,7 +333,7 @@ func (k Keeper) computeOutAmtGivenIn(
 	// TODO: for now, we check if amountSpecifiedRemaining is GT 0.0000001. This is because there are times when the remaining
 	// amount may be extremely small, and that small amount cannot generate and amountIn/amountOut and we are therefore left
 	// in an infinite loop.
-	for swapState.amountSpecifiedRemaining.GT(smallestDec) && !swapState.sqrtPrice.Equal(osmomath.BigDecFromSDKDec(sqrtPriceLimit)) {
+	for swapState.amountSpecifiedRemaining.GT(smallestDec) && !swapState.sqrtPrice.Equal(furymath.BigDecFromSDKDec(sqrtPriceLimit)) {
 		// Log the sqrtPrice we start the iteration with
 		sqrtPriceStart := swapState.sqrtPrice
 
@@ -386,7 +386,7 @@ func (k Keeper) computeOutAmtGivenIn(
 		// We add the amount of tokens we received (amountOut) from the ComputeSwapWithinBucketOutGivenIn(...) above to the amountCalculated accumulator
 		swapState.amountCalculated.AddMut(amountOut)
 
-		nextInitializedTickSqrtPriceBigDec := osmomath.BigDecFromSDKDec(nextInitializedTickSqrtPrice)
+		nextInitializedTickSqrtPriceBigDec := furymath.BigDecFromSDKDec(nextInitializedTickSqrtPrice)
 
 		// If ComputeSwapWithinBucketOutGivenIn(...) calculated a computedSqrtPrice that is equal to the nextInitializedTickSqrtPrice, this means all liquidity in the current
 		// bucket has been consumed and we must move on to the next bucket to complete the swap
@@ -487,7 +487,7 @@ func (k Keeper) computeInAmtGivenOut(
 	// TODO: for now, we check if amountSpecifiedRemaining is GT 10^-18. This is because there are times when the remaining
 	// amount may be extremely small, and that small amount cannot generate and amountIn/amountOut and we are therefore left
 	// in an infinite loop.
-	for swapState.amountSpecifiedRemaining.GT(smallestDec) && !swapState.sqrtPrice.Equal(osmomath.BigDecFromSDKDec(sqrtPriceLimit)) {
+	for swapState.amountSpecifiedRemaining.GT(smallestDec) && !swapState.sqrtPrice.Equal(furymath.BigDecFromSDKDec(sqrtPriceLimit)) {
 		// log the sqrtPrice we start the iteration with
 		sqrtPriceStart := swapState.sqrtPrice
 
@@ -537,7 +537,7 @@ func (k Keeper) computeInAmtGivenOut(
 		swapState.amountSpecifiedRemaining.SubMut(amountOut)
 		swapState.amountCalculated.AddMut(amountIn.Add(spreadRewardChargeTotal))
 
-		nextInitializedTickSqrtPriceBigDec := osmomath.BigDecFromSDKDec(nextInitializedTickSqrtPrice)
+		nextInitializedTickSqrtPriceBigDec := furymath.BigDecFromSDKDec(nextInitializedTickSqrtPrice)
 
 		// If the ComputeSwapWithinBucketInGivenOut(...) calculated a computedSqrtPrice that is equal to the nextInitializedTickSqrtPrice, this means all liquidity in the current
 		// bucket has been consumed and we must move on to the next bucket by crossing a tick to complete the swap
@@ -595,7 +595,7 @@ func (k Keeper) computeInAmtGivenOut(
 	return tokenIn, tokenOut, PoolUpdates{swapState.tick, swapState.liquidity, swapState.sqrtPrice}, swapState.globalSpreadRewardGrowth, nil
 }
 
-func emitSwapDebugLogs(ctx sdk.Context, swapState SwapState, reachedPrice osmomath.BigDec, amountIn, amountOut, spreadCharge sdk.Dec) {
+func emitSwapDebugLogs(ctx sdk.Context, swapState SwapState, reachedPrice furymath.BigDec, amountIn, amountOut, spreadCharge sdk.Dec) {
 	ctx.Logger().Debug("start sqrt price", swapState.sqrtPrice)
 	ctx.Logger().Debug("reached sqrt price", reachedPrice)
 	ctx.Logger().Debug("liquidity", swapState.liquidity)
@@ -795,14 +795,14 @@ func (k Keeper) getSwapAccumulators(ctx sdk.Context, poolId uint64) (accum.Accum
 // is swapping one for zero (right) directly to the tick. Then, immediately swapping zero for one (left).
 // After the first swap, our sqrtPriceCurrent is the crossed tick's sqrt price. Also sqrtPriceTarget is the crossed tick's sqrt price.
 // In such a case, no amounts are consumed and the swap step is allowed to succeed.
-func validateSwapProgressAndAmountConsumption(computedSqrtPrice, sqrtPriceStart osmomath.BigDec, amountIn, amountOut sdk.Dec) error {
+func validateSwapProgressAndAmountConsumption(computedSqrtPrice, sqrtPriceStart furymath.BigDec, amountIn, amountOut sdk.Dec) error {
 	if computedSqrtPrice.Equal(sqrtPriceStart) && !(amountIn.IsZero() && amountOut.IsZero()) {
 		return types.SwapNoProgressWithConsumptionError{ComputedSqrtPrice: computedSqrtPrice, AmountIn: amountIn, AmountOut: amountOut}
 	}
 	return nil
 }
 
-func edgeCaseInequalityBasedOnSwapStrategy(isZeroForOne bool, nextInitializedTickSqrtPrice, computedSqrtPrice osmomath.BigDec) bool {
+func edgeCaseInequalityBasedOnSwapStrategy(isZeroForOne bool, nextInitializedTickSqrtPrice, computedSqrtPrice furymath.BigDec) bool {
 	if isZeroForOne {
 		return nextInitializedTickSqrtPrice.GT(computedSqrtPrice)
 	}

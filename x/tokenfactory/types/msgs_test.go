@@ -7,8 +7,8 @@ import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/stretchr/testify/require"
 
-	"github.com/osmosis-labs/osmosis/v16/app/apptesting"
-	"github.com/osmosis-labs/osmosis/v16/x/tokenfactory/types"
+	"github.com/merlinslair/merlin/v16/app/apptesting"
+	"github.com/merlinslair/merlin/v16/x/tokenfactory/types"
 
 	banktypes "github.com/cosmos/cosmos-sdk/x/bank/types"
 	"github.com/tendermint/tendermint/crypto/ed25519"
@@ -50,7 +50,7 @@ func TestAuthzMsg(t *testing.T) {
 			msg: &types.MsgChangeAdmin{
 				Sender:   addr1,
 				Denom:    "denom",
-				NewAdmin: "osmo1q8tq5qhrhw6t970egemuuwywhlhpnmdmts6xnu",
+				NewAdmin: "fury1q8tq5qhrhw6t970egemuuwywhlhpnmdmts6xnu",
 			},
 		},
 	}

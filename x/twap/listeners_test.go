@@ -7,10 +7,10 @@ import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
 	"github.com/osmosis-labs/osmosis/osmoutils"
-	"github.com/osmosis-labs/osmosis/v16/x/twap"
-	"github.com/osmosis-labs/osmosis/v16/x/twap/types"
+	"github.com/merlinslair/merlin/v16/x/twap"
+	"github.com/merlinslair/merlin/v16/x/twap/types"
 
-	poolmanagertypes "github.com/osmosis-labs/osmosis/v16/x/poolmanager/types"
+	poolmanagertypes "github.com/merlinslair/merlin/v16/x/poolmanager/types"
 )
 
 var defaultPoolId uint64 = 1
@@ -57,7 +57,7 @@ func (s *TestSuite) TestAfterPoolCreatedHook() {
 					s.RunBasicSwap(poolId)
 				}
 
-				denoms := osmoutils.CoinsDenoms(tc.poolCoins)
+				denoms := furyutils.CoinsDenoms(tc.poolCoins)
 				denomPairs := types.GetAllUniqueDenomPairs(denoms)
 				expectedRecords := []types.TwapRecord{}
 				for _, denomPair := range denomPairs {

@@ -8,10 +8,10 @@ import (
 	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
 
 	"github.com/osmosis-labs/osmosis/osmomath"
-	"github.com/osmosis-labs/osmosis/v16/app/apptesting"
-	"github.com/osmosis-labs/osmosis/v16/x/gamm/types"
-	gammmigration "github.com/osmosis-labs/osmosis/v16/x/gamm/types/migration"
-	poolincentivestypes "github.com/osmosis-labs/osmosis/v16/x/pool-incentives/types"
+	"github.com/merlinslair/merlin/v16/app/apptesting"
+	"github.com/merlinslair/merlin/v16/x/gamm/types"
+	gammmigration "github.com/merlinslair/merlin/v16/x/gamm/types/migration"
+	poolincentivestypes "github.com/merlinslair/merlin/v16/x/pool-incentives/types"
 )
 
 func (s *KeeperTestSuite) TestMigrate() {
@@ -38,9 +38,9 @@ func (s *KeeperTestSuite) TestMigrate() {
 	// We add 1 to account for ExitPool rounding exit amount up. This is not an issue since the balance is deducted from the user regardless.
 	// These leaves us with full transfer of asset 0 and a (correct) transfer of asset 1 amounting to full GAMM balance minus 100000.
 	// We expect this tolerance to be sufficient as long as our test cases are on the same order of magnitude.
-	defaultErrorTolerance := osmomath.ErrTolerance{
+	defaultErrorTolerance := furymath.ErrTolerance{
 		AdditiveTolerance: sdk.NewDec(100000),
-		RoundingDir:       osmomath.RoundDown,
+		RoundingDir:       furymath.RoundDown,
 	}
 	defaultJoinTime := s.Ctx.BlockTime()
 
@@ -58,7 +58,7 @@ func (s *KeeperTestSuite) TestMigrate() {
 		tokenOutMins           sdk.Coins
 		expectedLiquidity      sdk.Dec
 		setupPoolMigrationLink bool
-		errTolerance           osmomath.ErrTolerance
+		errTolerance           furymath.ErrTolerance
 	}{
 		{
 			name: "migrate all of the shares (with pool migration link)",
@@ -381,7 +381,7 @@ func (s *KeeperTestSuite) TestReplaceMigrationRecords() {
 					ClPoolId:       3,
 				},
 			},
-			overwriteBalancerDenom0: "uosmo",
+			overwriteBalancerDenom0: "ufury",
 			expectErr:               true,
 		},
 		{
@@ -392,7 +392,7 @@ func (s *KeeperTestSuite) TestReplaceMigrationRecords() {
 					ClPoolId:       3,
 				},
 			},
-			overwriteBalancerDenom1: "uosmo",
+			overwriteBalancerDenom1: "ufury",
 			expectErr:               true,
 		},
 		{
@@ -638,7 +638,7 @@ func (s *KeeperTestSuite) TestUpdateMigrationRecords() {
 					ClPoolId:       6,
 				},
 			},
-			overwriteBalancerDenom0: "osmo",
+			overwriteBalancerDenom0: "fury",
 			isPreexistingRecordsSet: false,
 			expectErr:               true,
 		},
@@ -650,7 +650,7 @@ func (s *KeeperTestSuite) TestUpdateMigrationRecords() {
 					ClPoolId:       6,
 				},
 			},
-			overwriteBalancerDenom1: "osmo",
+			overwriteBalancerDenom1: "fury",
 			isPreexistingRecordsSet: false,
 			expectErr:               true,
 		},
@@ -904,9 +904,9 @@ func (suite *KeeperTestSuite) TestRedirectDistributionRecord() {
 
 	var (
 		defaultUsdcAmount = sdk.NewInt(7300000000)
-		defaultOsmoAmount = sdk.NewInt(10000000000)
+		defaultFuryAmount = sdk.NewInt(10000000000)
 		usdcCoin          = sdk.NewCoin("uusdc", defaultUsdcAmount)
-		osmoCoin          = sdk.NewCoin("uosmo", defaultOsmoAmount)
+		furyCoin          = sdk.NewCoin("ufury", defaultFuryAmount)
 	)
 
 	longestLockableDuration, err := suite.App.PoolIncentivesKeeper.GetLongestLockableDuration(suite.Ctx)
@@ -919,18 +919,18 @@ func (suite *KeeperTestSuite) TestRedirectDistributionRecord() {
 		expectError   error
 	}{
 		"happy path": {
-			poolLiquidity: sdk.NewCoins(usdcCoin, osmoCoin),
+			poolLiquidity: sdk.NewCoins(usdcCoin, furyCoin),
 			cfmmPoolId:    uint64(1),
 			clPoolId:      uint64(3),
 		},
 		"error: cfmm pool ID doesn't exist": {
-			poolLiquidity: sdk.NewCoins(usdcCoin, osmoCoin),
+			poolLiquidity: sdk.NewCoins(usdcCoin, furyCoin),
 			cfmmPoolId:    uint64(4),
 			clPoolId:      uint64(3),
 			expectError:   poolincentivestypes.NoGaugeAssociatedWithPoolError{PoolId: 4, Duration: longestLockableDuration},
 		},
 		"error: cl pool ID doesn't exist": {
-			poolLiquidity: sdk.NewCoins(usdcCoin, osmoCoin),
+			poolLiquidity: sdk.NewCoins(usdcCoin, furyCoin),
 			cfmmPoolId:    uint64(1),
 			clPoolId:      uint64(4),
 			expectError:   poolincentivestypes.NoGaugeAssociatedWithPoolError{PoolId: 4, Duration: longestLockableDuration},

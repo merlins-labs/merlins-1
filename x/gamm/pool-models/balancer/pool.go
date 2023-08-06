@@ -10,9 +10,9 @@ import (
 	errorsmod "cosmossdk.io/errors"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
-	"github.com/osmosis-labs/osmosis/v16/x/gamm/pool-models/internal/cfmm_common"
-	"github.com/osmosis-labs/osmosis/v16/x/gamm/types"
-	poolmanagertypes "github.com/osmosis-labs/osmosis/v16/x/poolmanager/types"
+	"github.com/merlinslair/merlin/v16/x/gamm/pool-models/internal/cfmm_common"
+	"github.com/merlinslair/merlin/v16/x/gamm/types"
+	poolmanagertypes "github.com/merlinslair/merlin/v16/x/poolmanager/types"
 )
 
 //nolint:deadcode
@@ -619,13 +619,13 @@ func (p *Pool) applySwap(ctx sdk.Context, tokensIn sdk.Coins, tokensOut sdk.Coin
 // we take the ratio of weights and divide this by ratio of supplies
 // this is equivalent to spot_price = (Quote Supply / Quote Weight) / (Base Supply / Base Weight)
 //
-// As an example, assume equal weights. uosmo supply of 2 and uatom supply of 4.
+// As an example, assume equal weights. ufury supply of 2 and uatom supply of 4.
 //
-// Case 1: base = uosmo, quote = uatom -> for one uosmo, get 2 uatom = 4 / 2 = 2
-// In other words, it costs 2 uatom to get one uosmo.
+// Case 1: base = ufury, quote = uatom -> for one ufury, get 2 uatom = 4 / 2 = 2
+// In other words, it costs 2 uatom to get one ufury.
 //
-// Case 2: base = uatom, quote = uosmo -> for one uatom, get 0.5 uosmo = 2 / 4 = 0.5
-// In other words, it costs 0.5 uosmo to get one uatom.
+// Case 2: base = uatom, quote = ufury -> for one uatom, get 0.5 ufury = 2 / 4 = 0.5
+// In other words, it costs 0.5 ufury to get one uatom.
 //
 // panics if the pool in state is incorrect, and has any weight that is 0.
 func (p Pool) SpotPrice(ctx sdk.Context, quoteAsset, baseAsset string) (spotPrice sdk.Dec, err error) {

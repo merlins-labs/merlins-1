@@ -7,9 +7,9 @@ import (
 	"github.com/stretchr/testify/suite"
 	tmproto "github.com/tendermint/tendermint/proto/tendermint/types"
 
-	"github.com/osmosis-labs/osmosis/v16/app"
-	"github.com/osmosis-labs/osmosis/v16/app/apptesting"
-	"github.com/osmosis-labs/osmosis/v16/x/lockup/keeper"
+	"github.com/merlinslair/merlin/v16/app"
+	"github.com/merlinslair/merlin/v16/app/apptesting"
+	"github.com/merlinslair/merlin/v16/x/lockup/keeper"
 )
 
 type KeeperTestSuite struct {
@@ -34,7 +34,7 @@ func (s *KeeperTestSuite) SetupTest() {
 
 func (s *KeeperTestSuite) SetupTestWithLevelDb() {
 	s.App, s.cleanup = app.SetupTestingAppWithLevelDb(false)
-	s.Ctx = s.App.BaseApp.NewContext(false, tmproto.Header{Height: 1, ChainID: "osmosis-1", Time: time.Now().UTC()})
+	s.Ctx = s.App.BaseApp.NewContext(false, tmproto.Header{Height: 1, ChainID: "merlin-1", Time: time.Now().UTC()})
 }
 
 func (s *KeeperTestSuite) Cleanup() {

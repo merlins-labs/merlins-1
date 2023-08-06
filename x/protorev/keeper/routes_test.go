@@ -3,8 +3,8 @@ package keeper_test
 import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
-	poolmanagertypes "github.com/osmosis-labs/osmosis/v16/x/poolmanager/types"
-	"github.com/osmosis-labs/osmosis/v16/x/protorev/types"
+	poolmanagertypes "github.com/merlinslair/merlin/v16/x/poolmanager/types"
+	"github.com/merlinslair/merlin/v16/x/protorev/types"
 )
 
 type TestRoute struct {
@@ -34,9 +34,9 @@ func (s *KeeperTestSuite) TestBuildRoutes() {
 					{PoolId: 4, InputDenom: "bitcoin", OutputDenom: "Atom"},
 				},
 				{
-					{PoolId: 25, InputDenom: types.OsmosisDenomination, OutputDenom: "Atom"},
+					{PoolId: 25, InputDenom: types.MerlinDenomination, OutputDenom: "Atom"},
 					{PoolId: 1, InputDenom: "Atom", OutputDenom: "akash"},
-					{PoolId: 7, InputDenom: "akash", OutputDenom: types.OsmosisDenomination},
+					{PoolId: 7, InputDenom: "akash", OutputDenom: types.MerlinDenomination},
 				},
 			},
 		},
@@ -47,9 +47,9 @@ func (s *KeeperTestSuite) TestBuildRoutes() {
 			poolID:      4,
 			expectedRoutes: [][]TestRoute{
 				{
-					{PoolId: 25, InputDenom: types.OsmosisDenomination, OutputDenom: "Atom"},
+					{PoolId: 25, InputDenom: types.MerlinDenomination, OutputDenom: "Atom"},
 					{PoolId: 4, InputDenom: "Atom", OutputDenom: "bitcoin"},
-					{PoolId: 10, InputDenom: "bitcoin", OutputDenom: types.OsmosisDenomination},
+					{PoolId: 10, InputDenom: "bitcoin", OutputDenom: types.MerlinDenomination},
 				},
 			},
 		},
@@ -60,9 +60,9 @@ func (s *KeeperTestSuite) TestBuildRoutes() {
 			poolID:      19,
 			expectedRoutes: [][]TestRoute{
 				{
-					{PoolId: 9, InputDenom: types.OsmosisDenomination, OutputDenom: "ethereum"},
+					{PoolId: 9, InputDenom: types.MerlinDenomination, OutputDenom: "ethereum"},
 					{PoolId: 19, InputDenom: "ethereum", OutputDenom: "bitcoin"},
-					{PoolId: 10, InputDenom: "bitcoin", OutputDenom: types.OsmosisDenomination},
+					{PoolId: 10, InputDenom: "bitcoin", OutputDenom: types.MerlinDenomination},
 				},
 				{
 					{PoolId: 3, InputDenom: "Atom", OutputDenom: "ethereum"},
@@ -72,8 +72,8 @@ func (s *KeeperTestSuite) TestBuildRoutes() {
 			},
 		},
 		{
-			description:    "No route exists for swap in osmo and swap out Atom",
-			inputDenom:     types.OsmosisDenomination,
+			description:    "No route exists for swap in fury and swap out Atom",
+			inputDenom:     types.MerlinDenomination,
 			outputDenom:    "Atom",
 			poolID:         25,
 			expectedRoutes: [][]TestRoute{},
@@ -81,13 +81,13 @@ func (s *KeeperTestSuite) TestBuildRoutes() {
 		{
 			description: "Route exists for swap on stable pool",
 			inputDenom:  "usdc",
-			outputDenom: types.OsmosisDenomination,
+			outputDenom: types.MerlinDenomination,
 			poolID:      29,
 			expectedRoutes: [][]TestRoute{
 				{
-					{PoolId: 29, InputDenom: types.OsmosisDenomination, OutputDenom: "usdc"},
+					{PoolId: 29, InputDenom: types.MerlinDenomination, OutputDenom: "usdc"},
 					{PoolId: 40, InputDenom: "usdc", OutputDenom: "busd"},
-					{PoolId: 30, InputDenom: "busd", OutputDenom: types.OsmosisDenomination},
+					{PoolId: 30, InputDenom: "busd", OutputDenom: types.MerlinDenomination},
 				},
 			},
 		},
@@ -121,35 +121,35 @@ func (s *KeeperTestSuite) TestBuildHighestLiquidityRoute() {
 	}{
 		{
 			description: "Route exists for swap in Atom and swap out Akash",
-			swapDenom:   types.OsmosisDenomination,
+			swapDenom:   types.MerlinDenomination,
 			swapIn:      "Atom",
 			swapOut:     "akash",
 			poolId:      1,
 			expectedRoute: []TestRoute{
-				{7, types.OsmosisDenomination, "akash"},
+				{7, types.MerlinDenomination, "akash"},
 				{1, "akash", "Atom"},
-				{25, "Atom", types.OsmosisDenomination},
+				{25, "Atom", types.MerlinDenomination},
 			},
 			hasRoute:                 true,
 			expectedRoutePointPoints: 6,
 		},
 		{
 			description: "Route exists for swap in Akash and swap out Atom",
-			swapDenom:   types.OsmosisDenomination,
+			swapDenom:   types.MerlinDenomination,
 			swapIn:      "akash",
 			swapOut:     "Atom",
 			poolId:      1,
 			expectedRoute: []TestRoute{
-				{25, types.OsmosisDenomination, "Atom"},
+				{25, types.MerlinDenomination, "Atom"},
 				{1, "Atom", "akash"},
-				{7, "akash", types.OsmosisDenomination},
+				{7, "akash", types.MerlinDenomination},
 			},
 			hasRoute:                 true,
 			expectedRoutePointPoints: 6,
 		},
 		{
 			description:              "Route does not exist for swap in Terra and swap out Atom because the pool does not exist",
-			swapDenom:                types.OsmosisDenomination,
+			swapDenom:                types.MerlinDenomination,
 			swapIn:                   "terra",
 			swapOut:                  "Atom",
 			poolId:                   7,
@@ -158,38 +158,38 @@ func (s *KeeperTestSuite) TestBuildHighestLiquidityRoute() {
 			expectedRoutePointPoints: 0,
 		},
 		{
-			description: "Route exists for swap in Osmo and swap out Akash",
+			description: "Route exists for swap in Fury and swap out Akash",
 			swapDenom:   "Atom",
-			swapIn:      types.OsmosisDenomination,
+			swapIn:      types.MerlinDenomination,
 			swapOut:     "akash",
 			poolId:      7,
 			expectedRoute: []TestRoute{
 				{1, "Atom", "akash"},
-				{7, "akash", types.OsmosisDenomination},
-				{25, types.OsmosisDenomination, "Atom"},
+				{7, "akash", types.MerlinDenomination},
+				{25, types.MerlinDenomination, "Atom"},
 			},
 			hasRoute:                 true,
 			expectedRoutePointPoints: 6,
 		},
 		{
-			description: "Route exists for swap in Akash and swap out Osmo",
+			description: "Route exists for swap in Akash and swap out Fury",
 			swapDenom:   "Atom",
 			swapIn:      "akash",
-			swapOut:     types.OsmosisDenomination,
+			swapOut:     types.MerlinDenomination,
 			poolId:      7,
 			expectedRoute: []TestRoute{
-				{25, "Atom", types.OsmosisDenomination},
-				{7, types.OsmosisDenomination, "akash"},
+				{25, "Atom", types.MerlinDenomination},
+				{7, types.MerlinDenomination, "akash"},
 				{1, "akash", "Atom"},
 			},
 			hasRoute:                 true,
 			expectedRoutePointPoints: 6,
 		},
 		{
-			description:              "Route does not exist for swap in Terra and swap out Osmo because the pool does not exist",
+			description:              "Route does not exist for swap in Terra and swap out Fury because the pool does not exist",
 			swapDenom:                "Atom",
 			swapIn:                   "terra",
-			swapOut:                  types.OsmosisDenomination,
+			swapOut:                  types.MerlinDenomination,
 			poolId:                   7,
 			expectedRoute:            []TestRoute{},
 			hasRoute:                 false,
@@ -261,8 +261,8 @@ func (s *KeeperTestSuite) TestBuildHotRoutes() {
 			expectedRoutes: [][]TestRoute{
 				{
 					{34, "Atom", "test/1"},
-					{35, "test/1", types.OsmosisDenomination},
-					{36, types.OsmosisDenomination, "test/2"},
+					{35, "test/1", types.MerlinDenomination},
+					{36, types.MerlinDenomination, "test/2"},
 					{10, "test/2", "Atom"},
 				},
 			},

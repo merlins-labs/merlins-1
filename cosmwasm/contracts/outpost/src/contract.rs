@@ -28,15 +28,15 @@ pub fn instantiate(
             contract: msg.crosschain_swaps_contract,
         })
     };
-    if prefix != "osmo" {
+    if prefix != "fury" {
         return Err(ContractError::InvalidCrosschainSwapsContract {
             contract: format!("invalid prefix: {}", msg.crosschain_swaps_contract),
         });
     }
 
-    // Store the contract addr and the osmosis channel
+    // Store the contract addr and the merlin channel
     let state = Config {
-        osmosis_channel: msg.osmosis_channel,
+        merlin_channel: msg.merlin_channel,
         crosschain_swaps_contract: msg.crosschain_swaps_contract,
     };
     CONFIG.save(deps.storage, &state)?;
@@ -57,7 +57,7 @@ pub fn execute(
     msg: ExecuteMsg,
 ) -> Result<Response, ContractError> {
     match msg {
-        ExecuteMsg::OsmosisSwap { .. } => {
+        ExecuteMsg::MerlinSwap { .. } => {
             // IBC transfers support only one token at a time
             let coin = cw_utils::one_coin(&info)?;
             execute_swap(deps, env.contract.address, env.block.time, coin, msg)

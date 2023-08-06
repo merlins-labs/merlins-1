@@ -1,8 +1,8 @@
 go 1.20
 
-use ./osmomath
+use ./furymath
 
-use ./osmoutils
+use ./furyutils
 
 use ./x/ibc-hooks
 

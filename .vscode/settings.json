@@ -20,7 +20,7 @@
     }
   },
   "gopls": {
-    "local": "github.com/osmosis-labs/osmosis"
+    "local": "github.com/merlinslair/merlin"
   },
   "files.eol": "\n",
   "[proto3]": {

@@ -2,11 +2,11 @@ mod test_env;
 use std::str::FromStr;
 
 use cosmwasm_std::{Coin, Decimal};
-use osmosis_std::types::osmosis::gamm::v1beta1::SwapAmountInRoute;
-use osmosis_testing::cosmrs::proto::cosmos::bank::v1beta1::QueryAllBalancesRequest;
-use osmosis_testing::cosmrs::proto::cosmwasm::wasm::v1::MsgExecuteContractResponse;
-use osmosis_testing::{
-    Account, Bank, Module, OsmosisTestApp, RunnerError, RunnerExecuteResult, SigningAccount, Wasm,
+use merlin_std::types::merlin::gamm::v1beta1::SwapAmountInRoute;
+use merlin_testing::cosmrs::proto::cosmos::bank::v1beta1::QueryAllBalancesRequest;
+use merlin_testing::cosmrs::proto::cosmwasm::wasm::v1::MsgExecuteContractResponse;
+use merlin_testing::{
+    Account, Bank, Module, MerlinTestApp, RunnerError, RunnerExecuteResult, SigningAccount, Wasm,
 };
 use swaprouter::msg::{ExecuteMsg, Slippage};
 use test_env::*;
@@ -16,12 +16,12 @@ test_swap!(
     should succeed,
 
     msg = ExecuteMsg::Swap {
-        input_coin: Coin::new(1000, "uosmo"),
+        input_coin: Coin::new(1000, "ufury"),
         output_denom: "uion".to_string(),
         slippage: Slippage::MinOutputAmount(1u128.into()),
     },
     funds: [
-        Coin::new(1000, "uosmo")
+        Coin::new(1000, "ufury")
     ]
 );
 
@@ -30,12 +30,12 @@ test_swap!(
     "Insufficient Funds: execute wasm contract failed",
 
     msg = ExecuteMsg::Swap {
-        input_coin: Coin::new(1000, "uosmo"),
+        input_coin: Coin::new(1000, "ufury"),
         output_denom: "uion".to_string(),
         slippage: Slippage::MinOutputAmount(1u128.into()),
     },
     funds: [
-        Coin::new(10, "uosmo")
+        Coin::new(10, "ufury")
     ]
 );
 
@@ -44,7 +44,7 @@ test_swap!(
     "Insufficient Funds: execute wasm contract failed",
 
     msg = ExecuteMsg::Swap {
-        input_coin: Coin::new(1000, "uosmo"),
+        input_coin: Coin::new(1000, "ufury"),
         output_denom: "uion".to_string(),
         slippage: Slippage::MinOutputAmount(1u128.into()),
     },
@@ -58,22 +58,22 @@ test_swap!(
     "dispatch: submessages: uion token is lesser than min amount: calculated amount is lesser than min amount",
 
     msg = ExecuteMsg::Swap {
-        input_coin: Coin::new(1000, "uosmo"),
+        input_coin: Coin::new(1000, "ufury"),
         output_denom: "uion".to_string(),
         slippage: Slippage::MinOutputAmount(1000000000000000000000000u128.into()),
     },
     funds: [
-        Coin::new(1000, "uosmo")
+        Coin::new(1000, "ufury")
     ]
 );
 
 test_swap!(
     non_existant_route should failed_with
-    "alloc::vec::Vec<osmosis_std::types::osmosis::gamm::v1beta1::SwapAmountInRoute> not found: execute wasm contract failed",
+    "alloc::vec::Vec<merlin_std::types::merlin::gamm::v1beta1::SwapAmountInRoute> not found: execute wasm contract failed",
 
     msg = ExecuteMsg::Swap {
         input_coin: Coin::new(1000, "uion"),
-        output_denom: "uosmo".to_string(),
+        output_denom: "ufury".to_string(),
         slippage: Slippage::MinOutputAmount(1000000000000000000000000u128.into()),
     },
     funds: [
@@ -85,12 +85,12 @@ test_swap!(
     twap_based_swap
     should succeed,
     msg = ExecuteMsg::Swap {
-        input_coin: Coin::new(1000, "uosmo"),
+        input_coin: Coin::new(1000, "ufury"),
         output_denom: "uion".to_string(),
         slippage: Slippage::Twap{ window_seconds: Some(1), slippage_percentage: Decimal::from_str("5").unwrap() },
     },
     funds: [
-        Coin::new(10000, "uosmo")
+        Coin::new(10000, "ufury")
     ]
 );
 
@@ -136,7 +136,7 @@ fn setup_route_and_execute_swap(
     msg: &ExecuteMsg,
     funds: &[Coin],
 ) -> (
-    OsmosisTestApp,
+    MerlinTestApp,
     SigningAccount,
     RunnerExecuteResult<MsgExecuteContractResponse>,
 ) {
@@ -148,7 +148,7 @@ fn setup_route_and_execute_swap(
     let wasm = Wasm::new(&app);
 
     let initial_balance = [
-        Coin::new(INITIAL_AMOUNT, "uosmo"),
+        Coin::new(INITIAL_AMOUNT, "ufury"),
         Coin::new(INITIAL_AMOUNT, "uion"),
         Coin::new(INITIAL_AMOUNT, "uatom"),
     ];
@@ -156,9 +156,9 @@ fn setup_route_and_execute_swap(
     let sender = app.init_account(&initial_balance).unwrap();
 
     // setup route
-    // uosmo/uion = pool(2): uosmo/uatom -> pool(3): uatom/uion
+    // ufury/uion = pool(2): ufury/uatom -> pool(3): uatom/uion
     let set_route_msg = ExecuteMsg::SetRoute {
-        input_denom: "uosmo".to_string(),
+        input_denom: "ufury".to_string(),
         output_denom: "uion".to_string(),
         pool_route: vec![
             SwapAmountInRoute {
@@ -186,7 +186,7 @@ fn setup_route_and_execute_swap(
 }
 
 fn assert_input_decreased_and_output_increased(
-    app: &OsmosisTestApp,
+    app: &MerlinTestApp,
     sender: &str,
     msg: &ExecuteMsg,
 ) {
@@ -223,7 +223,7 @@ fn assert_input_decreased_and_output_increased(
 }
 
 fn get_amount(
-    balances: &Vec<osmosis_testing::cosmrs::proto::cosmos::base::v1beta1::Coin>,
+    balances: &Vec<merlin_testing::cosmrs::proto::cosmos::base::v1beta1::Coin>,
     denom: &str,
 ) -> u128 {
     balances

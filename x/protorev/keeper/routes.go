@@ -5,8 +5,8 @@ import (
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
-	poolmanagertypes "github.com/osmosis-labs/osmosis/v16/x/poolmanager/types"
-	"github.com/osmosis-labs/osmosis/v16/x/protorev/types"
+	poolmanagertypes "github.com/merlinslair/merlin/v16/x/poolmanager/types"
+	"github.com/merlinslair/merlin/v16/x/protorev/types"
 )
 
 type RouteMetaData struct {
@@ -107,7 +107,7 @@ func (k Keeper) BuildHighestLiquidityRoutes(ctx sdk.Context, tokenIn, tokenOut s
 	return routes, nil
 }
 
-// BuildHighestLiquidityRoute constructs a cyclic arbitrage route that is starts/ends with swapDenom (ex. osmo) given the swap (tokenIn, tokenOut, poolId).
+// BuildHighestLiquidityRoute constructs a cyclic arbitrage route that is starts/ends with swapDenom (ex. fury) given the swap (tokenIn, tokenOut, poolId).
 func (k Keeper) BuildHighestLiquidityRoute(ctx sdk.Context, swapDenom types.BaseDenom, tokenIn, tokenOut string, poolId uint64) (RouteMetaData, error) {
 	// Create the first swap for the MultiHopSwap Route
 	entryPoolId, err := k.GetPoolForDenomPair(ctx, swapDenom.Denom, tokenOut)

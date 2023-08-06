@@ -22,9 +22,9 @@ func (base *BaseDenom) Validate() error {
 
 // ValidateBaseDenoms validates the base denoms that are used to generate highest liquidity routes.
 func ValidateBaseDenoms(denoms []BaseDenom) error {
-	// The first base denom must be the Osmosis denomination
-	if len(denoms) == 0 || denoms[0].Denom != OsmosisDenomination {
-		return fmt.Errorf("the first base denom must be the Osmosis denomination")
+	// The first base denom must be the Merlin denomination
+	if len(denoms) == 0 || denoms[0].Denom != MerlinDenomination {
+		return fmt.Errorf("the first base denom must be the Merlin denomination")
 	}
 
 	seenDenoms := make(map[string]bool)

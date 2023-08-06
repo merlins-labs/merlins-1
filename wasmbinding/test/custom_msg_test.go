@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"testing"
 
-	"github.com/osmosis-labs/osmosis/v16/app/apptesting"
+	"github.com/merlinslair/merlin/v16/app/apptesting"
 
 	"github.com/stretchr/testify/require"
 
@@ -13,34 +13,34 @@ import (
 	wasmvmtypes "github.com/CosmWasm/wasmvm/types"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
-	"github.com/osmosis-labs/osmosis/v16/app"
-	"github.com/osmosis-labs/osmosis/v16/wasmbinding/bindings"
+	"github.com/merlinslair/merlin/v16/app"
+	"github.com/merlinslair/merlin/v16/wasmbinding/bindings"
 )
 
 func TestCreateDenomMsg(t *testing.T) {
 	apptesting.SkipIfWSL(t)
 	creator := RandomAccountAddress()
-	osmosis, ctx := SetupCustomApp(t, creator)
+	merlin, ctx := SetupCustomApp(t, creator)
 
 	lucky := RandomAccountAddress()
-	reflect := instantiateReflectContract(t, ctx, osmosis, lucky)
+	reflect := instantiateReflectContract(t, ctx, merlin, lucky)
 	require.NotEmpty(t, reflect)
 
-	msg := bindings.OsmosisMsg{CreateDenom: &bindings.CreateDenom{
+	msg := bindings.MerlinMsg{CreateDenom: &bindings.CreateDenom{
 		Subdenom: "SUN",
 	}}
-	err := executeCustom(t, ctx, osmosis, reflect, lucky, msg, sdk.Coin{})
+	err := executeCustom(t, ctx, merlin, reflect, lucky, msg, sdk.Coin{})
 	require.NoError(t, err)
 
 	// query the denom and see if it matches
-	query := bindings.OsmosisQuery{
+	query := bindings.MerlinQuery{
 		FullDenom: &bindings.FullDenom{
 			CreatorAddr: reflect.String(),
 			Subdenom:    "SUN",
 		},
 	}
 	resp := bindings.FullDenomResponse{}
-	queryCustom(t, ctx, osmosis, reflect, query, &resp)
+	queryCustom(t, ctx, merlin, reflect, query, &resp)
 
 	require.Equal(t, resp.Denom, fmt.Sprintf("factory/%s/SUN", reflect.String()))
 }
@@ -48,107 +48,107 @@ func TestCreateDenomMsg(t *testing.T) {
 func TestMintMsg(t *testing.T) {
 	apptesting.SkipIfWSL(t)
 	creator := RandomAccountAddress()
-	osmosis, ctx := SetupCustomApp(t, creator)
+	merlin, ctx := SetupCustomApp(t, creator)
 
 	lucky := RandomAccountAddress()
-	reflect := instantiateReflectContract(t, ctx, osmosis, lucky)
+	reflect := instantiateReflectContract(t, ctx, merlin, lucky)
 	require.NotEmpty(t, reflect)
 
 	// lucky was broke
-	balances := osmosis.BankKeeper.GetAllBalances(ctx, lucky)
+	balances := merlin.BankKeeper.GetAllBalances(ctx, lucky)
 	require.Empty(t, balances)
 
 	// Create denom for minting
-	msg := bindings.OsmosisMsg{CreateDenom: &bindings.CreateDenom{
+	msg := bindings.MerlinMsg{CreateDenom: &bindings.CreateDenom{
 		Subdenom: "SUN",
 	}}
-	err := executeCustom(t, ctx, osmosis, reflect, lucky, msg, sdk.Coin{})
+	err := executeCustom(t, ctx, merlin, reflect, lucky, msg, sdk.Coin{})
 	require.NoError(t, err)
 	sunDenom := fmt.Sprintf("factory/%s/%s", reflect.String(), msg.CreateDenom.Subdenom)
 
 	amount, ok := sdk.NewIntFromString("808010808")
 	require.True(t, ok)
-	msg = bindings.OsmosisMsg{MintTokens: &bindings.MintTokens{
+	msg = bindings.MerlinMsg{MintTokens: &bindings.MintTokens{
 		Denom:         sunDenom,
 		Amount:        amount,
 		MintToAddress: lucky.String(),
 	}}
-	err = executeCustom(t, ctx, osmosis, reflect, lucky, msg, sdk.Coin{})
+	err = executeCustom(t, ctx, merlin, reflect, lucky, msg, sdk.Coin{})
 	require.NoError(t, err)
 
-	balances = osmosis.BankKeeper.GetAllBalances(ctx, lucky)
+	balances = merlin.BankKeeper.GetAllBalances(ctx, lucky)
 	require.Len(t, balances, 1)
 	coin := balances[0]
 	require.Equal(t, amount, coin.Amount)
 	require.Contains(t, coin.Denom, "factory/")
 
 	// query the denom and see if it matches
-	query := bindings.OsmosisQuery{
+	query := bindings.MerlinQuery{
 		FullDenom: &bindings.FullDenom{
 			CreatorAddr: reflect.String(),
 			Subdenom:    "SUN",
 		},
 	}
 	resp := bindings.FullDenomResponse{}
-	queryCustom(t, ctx, osmosis, reflect, query, &resp)
+	queryCustom(t, ctx, merlin, reflect, query, &resp)
 
 	require.Equal(t, resp.Denom, coin.Denom)
 
 	// mint the same denom again
-	err = executeCustom(t, ctx, osmosis, reflect, lucky, msg, sdk.Coin{})
+	err = executeCustom(t, ctx, merlin, reflect, lucky, msg, sdk.Coin{})
 	require.NoError(t, err)
 
-	balances = osmosis.BankKeeper.GetAllBalances(ctx, lucky)
+	balances = merlin.BankKeeper.GetAllBalances(ctx, lucky)
 	require.Len(t, balances, 1)
 	coin = balances[0]
 	require.Equal(t, amount.MulRaw(2), coin.Amount)
 	require.Contains(t, coin.Denom, "factory/")
 
 	// query the denom and see if it matches
-	query = bindings.OsmosisQuery{
+	query = bindings.MerlinQuery{
 		FullDenom: &bindings.FullDenom{
 			CreatorAddr: reflect.String(),
 			Subdenom:    "SUN",
 		},
 	}
 	resp = bindings.FullDenomResponse{}
-	queryCustom(t, ctx, osmosis, reflect, query, &resp)
+	queryCustom(t, ctx, merlin, reflect, query, &resp)
 
 	require.Equal(t, resp.Denom, coin.Denom)
 
 	// now mint another amount / denom
 	// create it first
-	msg = bindings.OsmosisMsg{CreateDenom: &bindings.CreateDenom{
+	msg = bindings.MerlinMsg{CreateDenom: &bindings.CreateDenom{
 		Subdenom: "MOON",
 	}}
-	err = executeCustom(t, ctx, osmosis, reflect, lucky, msg, sdk.Coin{})
+	err = executeCustom(t, ctx, merlin, reflect, lucky, msg, sdk.Coin{})
 	require.NoError(t, err)
 	moonDenom := fmt.Sprintf("factory/%s/%s", reflect.String(), msg.CreateDenom.Subdenom)
 
 	amount = amount.SubRaw(1)
-	msg = bindings.OsmosisMsg{MintTokens: &bindings.MintTokens{
+	msg = bindings.MerlinMsg{MintTokens: &bindings.MintTokens{
 		Denom:         moonDenom,
 		Amount:        amount,
 		MintToAddress: lucky.String(),
 	}}
-	err = executeCustom(t, ctx, osmosis, reflect, lucky, msg, sdk.Coin{})
+	err = executeCustom(t, ctx, merlin, reflect, lucky, msg, sdk.Coin{})
 	require.NoError(t, err)
 
-	balances = osmosis.BankKeeper.GetAllBalances(ctx, lucky)
+	balances = merlin.BankKeeper.GetAllBalances(ctx, lucky)
 	require.Len(t, balances, 2)
 	coin = balances[0]
 	require.Equal(t, amount, coin.Amount)
 	require.Contains(t, coin.Denom, "factory/")
 
 	// query the denom and see if it matches
-	query = bindings.OsmosisQuery{
+	query = bindings.MerlinQuery{
 		FullDenom: &bindings.FullDenom{
 			CreatorAddr: reflect.String(),
 			Subdenom:    "MOON",
 		},
 	}
 	resp = bindings.FullDenomResponse{}
-	queryCustom(t, ctx, osmosis, reflect, query, &resp)
+	queryCustom(t, ctx, merlin, reflect, query, &resp)
 
 	require.Equal(t, resp.Denom, coin.Denom)
 
@@ -158,14 +158,14 @@ func TestMintMsg(t *testing.T) {
 	require.Contains(t, coin.Denom, "factory/")
 
 	// query the denom and see if it matches
-	query = bindings.OsmosisQuery{
+	query = bindings.MerlinQuery{
 		FullDenom: &bindings.FullDenom{
 			CreatorAddr: reflect.String(),
 			Subdenom:    "SUN",
 		},
 	}
 	resp = bindings.FullDenomResponse{}
-	queryCustom(t, ctx, osmosis, reflect, query, &resp)
+	queryCustom(t, ctx, merlin, reflect, query, &resp)
 
 	require.Equal(t, resp.Denom, coin.Denom)
 }
@@ -173,55 +173,55 @@ func TestMintMsg(t *testing.T) {
 func TestBurnMsg(t *testing.T) {
 	apptesting.SkipIfWSL(t)
 	creator := RandomAccountAddress()
-	osmosis, ctx := SetupCustomApp(t, creator)
+	merlin, ctx := SetupCustomApp(t, creator)
 
 	lucky := RandomAccountAddress()
-	reflect := instantiateReflectContract(t, ctx, osmosis, lucky)
+	reflect := instantiateReflectContract(t, ctx, merlin, lucky)
 	require.NotEmpty(t, reflect)
 
 	// lucky was broke
-	balances := osmosis.BankKeeper.GetAllBalances(ctx, lucky)
+	balances := merlin.BankKeeper.GetAllBalances(ctx, lucky)
 	require.Empty(t, balances)
 
 	// Create denom for minting
-	msg := bindings.OsmosisMsg{CreateDenom: &bindings.CreateDenom{
+	msg := bindings.MerlinMsg{CreateDenom: &bindings.CreateDenom{
 		Subdenom: "SUN",
 	}}
-	err := executeCustom(t, ctx, osmosis, reflect, lucky, msg, sdk.Coin{})
+	err := executeCustom(t, ctx, merlin, reflect, lucky, msg, sdk.Coin{})
 	require.NoError(t, err)
 	sunDenom := fmt.Sprintf("factory/%s/%s", reflect.String(), msg.CreateDenom.Subdenom)
 
 	amount, ok := sdk.NewIntFromString("808010808")
 	require.True(t, ok)
 
-	msg = bindings.OsmosisMsg{MintTokens: &bindings.MintTokens{
+	msg = bindings.MerlinMsg{MintTokens: &bindings.MintTokens{
 		Denom:         sunDenom,
 		Amount:        amount,
 		MintToAddress: lucky.String(),
 	}}
-	err = executeCustom(t, ctx, osmosis, reflect, lucky, msg, sdk.Coin{})
+	err = executeCustom(t, ctx, merlin, reflect, lucky, msg, sdk.Coin{})
 	require.NoError(t, err)
 
 	// can't burn from different address
-	msg = bindings.OsmosisMsg{BurnTokens: &bindings.BurnTokens{
+	msg = bindings.MerlinMsg{BurnTokens: &bindings.BurnTokens{
 		Denom:           sunDenom,
 		Amount:          amount,
 		BurnFromAddress: lucky.String(),
 	}}
-	err = executeCustom(t, ctx, osmosis, reflect, lucky, msg, sdk.Coin{})
+	err = executeCustom(t, ctx, merlin, reflect, lucky, msg, sdk.Coin{})
 	require.Error(t, err)
 
 	// lucky needs to send balance to reflect contract to burn it
-	luckyBalance := osmosis.BankKeeper.GetAllBalances(ctx, lucky)
-	err = osmosis.BankKeeper.SendCoins(ctx, lucky, reflect, luckyBalance)
+	luckyBalance := merlin.BankKeeper.GetAllBalances(ctx, lucky)
+	err = merlin.BankKeeper.SendCoins(ctx, lucky, reflect, luckyBalance)
 	require.NoError(t, err)
 
-	msg = bindings.OsmosisMsg{BurnTokens: &bindings.BurnTokens{
+	msg = bindings.MerlinMsg{BurnTokens: &bindings.BurnTokens{
 		Denom:           sunDenom,
 		Amount:          amount,
 		BurnFromAddress: reflect.String(),
 	}}
-	err = executeCustom(t, ctx, osmosis, reflect, lucky, msg, sdk.Coin{})
+	err = executeCustom(t, ctx, merlin, reflect, lucky, msg, sdk.Coin{})
 	require.NoError(t, err)
 }
 
@@ -244,7 +244,7 @@ type ReflectSubMsgs struct {
 	Msgs []wasmvmtypes.SubMsg `json:"msgs"`
 }
 
-func executeCustom(t *testing.T, ctx sdk.Context, osmosis *app.OsmosisApp, contract sdk.AccAddress, sender sdk.AccAddress, msg bindings.OsmosisMsg, funds sdk.Coin) error {
+func executeCustom(t *testing.T, ctx sdk.Context, merlin *app.MerlinApp, contract sdk.AccAddress, sender sdk.AccAddress, msg bindings.MerlinMsg, funds sdk.Coin) error {
 	t.Helper()
 
 	customBz, err := json.Marshal(msg)
@@ -265,7 +265,7 @@ func executeCustom(t *testing.T, ctx sdk.Context, osmosis *app.OsmosisApp, contr
 		coins = sdk.Coins{funds}
 	}
 
-	contractKeeper := keeper.NewDefaultPermissionKeeper(osmosis.WasmKeeper)
+	contractKeeper := keeper.NewDefaultPermissionKeeper(merlin.WasmKeeper)
 	_, err = contractKeeper.Execute(ctx, contract, sender, reflectBz, coins)
 	return err
 }

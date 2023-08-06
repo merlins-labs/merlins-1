@@ -11,9 +11,9 @@ import (
 	"github.com/gogo/protobuf/proto"
 
 	"github.com/osmosis-labs/osmosis/osmoutils"
-	"github.com/osmosis-labs/osmosis/v16/x/concentrated-liquidity/model"
-	"github.com/osmosis-labs/osmosis/v16/x/concentrated-liquidity/types"
-	"github.com/osmosis-labs/osmosis/v16/x/concentrated-liquidity/types/genesis"
+	"github.com/merlinslair/merlin/v16/x/concentrated-liquidity/model"
+	"github.com/merlinslair/merlin/v16/x/concentrated-liquidity/types"
+	"github.com/merlinslair/merlin/v16/x/concentrated-liquidity/types/genesis"
 )
 
 const (
@@ -23,7 +23,7 @@ const (
 
 // getAllPositions gets all CL positions for export genesis.
 func (k Keeper) getAllPositions(ctx sdk.Context) ([]model.Position, error) {
-	return osmoutils.GatherValuesFromStorePrefix(
+	return furyutils.GatherValuesFromStorePrefix(
 		ctx.KVStore(k.storeKey), types.PositionIdPrefix, ParsePositionFromBz)
 }
 

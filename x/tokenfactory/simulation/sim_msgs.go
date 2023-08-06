@@ -6,9 +6,9 @@ import (
 	legacysimulationtype "github.com/cosmos/cosmos-sdk/types/simulation"
 
 	"github.com/osmosis-labs/osmosis/osmoutils"
-	"github.com/osmosis-labs/osmosis/v16/simulation/simtypes"
-	"github.com/osmosis-labs/osmosis/v16/x/tokenfactory/keeper"
-	"github.com/osmosis-labs/osmosis/v16/x/tokenfactory/types"
+	"github.com/merlinslair/merlin/v16/simulation/simtypes"
+	"github.com/merlinslair/merlin/v16/x/tokenfactory/keeper"
+	"github.com/merlinslair/merlin/v16/x/tokenfactory/types"
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
 )
@@ -116,7 +116,7 @@ func accountCreatedTokenFactoryDenom(k keeper.Keeper, ctx sdk.Context) simtypes.
 
 func getTokenFactoryDenomAndItsAdmin(k keeper.Keeper, sim *simtypes.SimCtx, ctx sdk.Context, acc legacysimulationtype.Account) (string, sdk.AccAddress, error) {
 	store := k.GetCreatorPrefixStore(ctx, acc.Address.String())
-	denoms := osmoutils.GatherAllKeysFromStore(store)
+	denoms := furyutils.GatherAllKeysFromStore(store)
 	denom := simtypes.RandSelect(sim, denoms...)
 
 	authData, err := k.GetAuthorityMetadata(ctx, denom)

@@ -26,7 +26,7 @@ pub fn execute_swap(
     coin: Coin,
     user_msg: ExecuteMsg,
 ) -> Result<Response, ContractError> {
-    let ExecuteMsg::OsmosisSwap {
+    let ExecuteMsg::MerlinSwap {
         output_denom,
         receiver,
         slippage,
@@ -42,11 +42,11 @@ pub fn execute_swap(
 
     let next_memo = build_callback_memo(callback)?;
 
-    // note that this is not the same osmosis swap as the one above (which is
+    // note that this is not the same merlin swap as the one above (which is
     // defined in this create). The one in crosschain_swaps doesn't accept a
     // callback. They share the same name because that's the name we want to
     // expose to the user
-    let instruction = crosschain_swaps::ExecuteMsg::OsmosisSwap {
+    let instruction = crosschain_swaps::ExecuteMsg::MerlinSwap {
         output_denom,
         receiver,
         slippage,

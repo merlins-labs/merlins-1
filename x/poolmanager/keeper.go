@@ -5,7 +5,7 @@ import (
 	gogotypes "github.com/gogo/protobuf/types"
 
 	"github.com/osmosis-labs/osmosis/osmoutils"
-	"github.com/osmosis-labs/osmosis/v16/x/poolmanager/types"
+	"github.com/merlinslair/merlin/v16/x/poolmanager/types"
 
 	paramtypes "github.com/cosmos/cosmos-sdk/x/params/types"
 )
@@ -103,14 +103,14 @@ func (k Keeper) ExportGenesis(ctx sdk.Context) *types.GenesisState {
 func (k Keeper) GetNextPoolId(ctx sdk.Context) uint64 {
 	store := ctx.KVStore(k.storeKey)
 	nextPoolId := gogotypes.UInt64Value{}
-	osmoutils.MustGet(store, types.KeyNextGlobalPoolId, &nextPoolId)
+	furyutils.MustGet(store, types.KeyNextGlobalPoolId, &nextPoolId)
 	return nextPoolId.Value
 }
 
 // SetNextPoolId sets next pool Id.
 func (k Keeper) SetNextPoolId(ctx sdk.Context, poolId uint64) {
 	store := ctx.KVStore(k.storeKey)
-	osmoutils.MustSet(store, types.KeyNextGlobalPoolId, &gogotypes.UInt64Value{Value: poolId})
+	furyutils.MustSet(store, types.KeyNextGlobalPoolId, &gogotypes.UInt64Value{Value: poolId})
 }
 
 // SetPoolIncentivesKeeper sets pool incentives keeper

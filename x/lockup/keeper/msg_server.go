@@ -5,7 +5,7 @@ import (
 	"fmt"
 
 	"github.com/osmosis-labs/osmosis/osmoutils"
-	"github.com/osmosis-labs/osmosis/v16/x/lockup/types"
+	"github.com/merlinslair/merlin/v16/x/lockup/types"
 
 	errorsmod "cosmossdk.io/errors"
 	sdk "github.com/cosmos/cosmos-sdk/types"
@@ -50,7 +50,7 @@ func (server msgServer) LockTokens(goCtx context.Context, msg *types.MsgLockToke
 		ctx.EventManager().EmitEvents(sdk.Events{
 			sdk.NewEvent(
 				types.TypeEvtAddTokensToLock,
-				sdk.NewAttribute(types.AttributePeriodLockID, osmoutils.Uint64ToString(lockID)),
+				sdk.NewAttribute(types.AttributePeriodLockID, furyutils.Uint64ToString(lockID)),
 				sdk.NewAttribute(types.AttributePeriodLockOwner, msg.Owner),
 				sdk.NewAttribute(types.AttributePeriodLockAmount, msg.Coins.String()),
 			),
@@ -67,7 +67,7 @@ func (server msgServer) LockTokens(goCtx context.Context, msg *types.MsgLockToke
 	ctx.EventManager().EmitEvents(sdk.Events{
 		sdk.NewEvent(
 			types.TypeEvtLockTokens,
-			sdk.NewAttribute(types.AttributePeriodLockID, osmoutils.Uint64ToString(lock.ID)),
+			sdk.NewAttribute(types.AttributePeriodLockID, furyutils.Uint64ToString(lock.ID)),
 			sdk.NewAttribute(types.AttributePeriodLockOwner, lock.Owner),
 			sdk.NewAttribute(types.AttributePeriodLockAmount, lock.Coins.String()),
 			sdk.NewAttribute(types.AttributePeriodLockDuration, lock.Duration.String()),
@@ -137,7 +137,7 @@ func (server msgServer) BeginUnlockingAll(goCtx context.Context, msg *types.MsgB
 func createBeginUnlockEvent(lock *types.PeriodLock) sdk.Event {
 	return sdk.NewEvent(
 		types.TypeEvtBeginUnlock,
-		sdk.NewAttribute(types.AttributePeriodLockID, osmoutils.Uint64ToString(lock.ID)),
+		sdk.NewAttribute(types.AttributePeriodLockID, furyutils.Uint64ToString(lock.ID)),
 		sdk.NewAttribute(types.AttributePeriodLockOwner, lock.Owner),
 		sdk.NewAttribute(types.AttributePeriodLockDuration, lock.Duration.String()),
 		sdk.NewAttribute(types.AttributePeriodLockUnlockTime, lock.EndTime.String()),
@@ -168,7 +168,7 @@ func (server msgServer) ExtendLockup(goCtx context.Context, msg *types.MsgExtend
 	ctx.EventManager().EmitEvents(sdk.Events{
 		sdk.NewEvent(
 			types.TypeEvtLockTokens,
-			sdk.NewAttribute(types.AttributePeriodLockID, osmoutils.Uint64ToString(lock.ID)),
+			sdk.NewAttribute(types.AttributePeriodLockID, furyutils.Uint64ToString(lock.ID)),
 			sdk.NewAttribute(types.AttributePeriodLockOwner, lock.Owner),
 			sdk.NewAttribute(types.AttributePeriodLockDuration, lock.Duration.String()),
 		),

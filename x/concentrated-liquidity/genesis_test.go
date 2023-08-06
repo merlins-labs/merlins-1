@@ -11,12 +11,12 @@ import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
 	"github.com/osmosis-labs/osmosis/osmoutils/accum"
-	osmoapp "github.com/osmosis-labs/osmosis/v16/app"
-	cl "github.com/osmosis-labs/osmosis/v16/x/concentrated-liquidity"
-	clmodule "github.com/osmosis-labs/osmosis/v16/x/concentrated-liquidity/clmodule"
-	"github.com/osmosis-labs/osmosis/v16/x/concentrated-liquidity/model"
-	"github.com/osmosis-labs/osmosis/v16/x/concentrated-liquidity/types"
-	"github.com/osmosis-labs/osmosis/v16/x/concentrated-liquidity/types/genesis"
+	furyapp "github.com/merlinslair/merlin/v16/app"
+	cl "github.com/merlinslair/merlin/v16/x/concentrated-liquidity"
+	clmodule "github.com/merlinslair/merlin/v16/x/concentrated-liquidity/clmodule"
+	"github.com/merlinslair/merlin/v16/x/concentrated-liquidity/model"
+	"github.com/merlinslair/merlin/v16/x/concentrated-liquidity/types"
+	"github.com/merlinslair/merlin/v16/x/concentrated-liquidity/types/genesis"
 )
 
 type singlePoolGenesisEntry struct {
@@ -96,7 +96,7 @@ var (
 func accumRecordWithDefinedValues(accumRecord accum.Record, numShares sdk.Dec, initAccumValue, unclaimedRewards sdk.Int) accum.Record {
 	accumRecord.NumShares = numShares
 	accumRecord.AccumValuePerShare = sdk.NewDecCoins(sdk.NewDecCoin("uion", initAccumValue))
-	accumRecord.UnclaimedRewardsTotal = sdk.NewDecCoins(sdk.NewDecCoin("uosmo", unclaimedRewards))
+	accumRecord.UnclaimedRewardsTotal = sdk.NewDecCoins(sdk.NewDecCoin("ufury", unclaimedRewards))
 	return accumRecord
 }
 
@@ -823,13 +823,13 @@ func (s *KeeperTestSuite) TestExportGenesis() {
 // It checks that the exported genesis can be marshaled and unmarshaled without panicking.
 func TestMarshalUnmarshalGenesis(t *testing.T) {
 	// Set up the app and context
-	app := osmoapp.Setup(false)
+	app := furyapp.Setup(false)
 	ctx := app.BaseApp.NewContext(false, tmproto.Header{})
 	now := ctx.BlockTime()
 	ctx = ctx.WithBlockTime(now.Add(time.Second))
 
 	// Create an app module for the ConcentratedLiquidityKeeper
-	encodingConfig := osmoapp.MakeEncodingConfig()
+	encodingConfig := furyapp.MakeEncodingConfig()
 	appCodec := encodingConfig.Marshaler
 	appModule := clmodule.NewAppModule(appCodec, *app.ConcentratedLiquidityKeeper)
 
@@ -838,7 +838,7 @@ func TestMarshalUnmarshalGenesis(t *testing.T) {
 
 	// Test that the exported genesis can be marshaled and unmarshaled without panicking
 	assert.NotPanics(t, func() {
-		app := osmoapp.Setup(false)
+		app := furyapp.Setup(false)
 		ctx := app.BaseApp.NewContext(false, tmproto.Header{})
 		ctx = ctx.WithBlockTime(now.Add(time.Second))
 		am := clmodule.NewAppModule(appCodec, *app.ConcentratedLiquidityKeeper)

@@ -3,10 +3,10 @@ package keeper_test
 import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
-	"github.com/osmosis-labs/osmosis/v16/app/apptesting"
-	poolmanagertypes "github.com/osmosis-labs/osmosis/v16/x/poolmanager/types"
-	protorevtypes "github.com/osmosis-labs/osmosis/v16/x/protorev/keeper"
-	"github.com/osmosis-labs/osmosis/v16/x/protorev/types"
+	"github.com/merlinslair/merlin/v16/app/apptesting"
+	poolmanagertypes "github.com/merlinslair/merlin/v16/x/poolmanager/types"
+	protorevtypes "github.com/merlinslair/merlin/v16/x/protorev/keeper"
+	"github.com/merlinslair/merlin/v16/x/protorev/types"
 )
 
 // Mainnet Arb Route - 2 Asset, Same Weights (Block: 5905150)
@@ -23,7 +23,7 @@ var routeTwoAssetSameWeight = poolmanagertypes.SwapAmountInRoutes{
 	},
 	poolmanagertypes.SwapAmountInRoute{
 		PoolId:        24,
-		TokenOutDenom: "uosmo",
+		TokenOutDenom: "ufury",
 	},
 }
 
@@ -41,7 +41,7 @@ var routeMultiAssetSameWeight = poolmanagertypes.SwapAmountInRoutes{
 	},
 	poolmanagertypes.SwapAmountInRoute{
 		PoolId:        27,
-		TokenOutDenom: "uosmo",
+		TokenOutDenom: "ufury",
 	},
 }
 
@@ -59,7 +59,7 @@ var routeMostProfitable = poolmanagertypes.SwapAmountInRoutes{
 	},
 	poolmanagertypes.SwapAmountInRoute{
 		PoolId:        27,
-		TokenOutDenom: "uosmo",
+		TokenOutDenom: "ufury",
 	},
 }
 
@@ -95,7 +95,7 @@ var routeNoArb = poolmanagertypes.SwapAmountInRoutes{
 	},
 	poolmanagertypes.SwapAmountInRoute{
 		PoolId:        8,
-		TokenOutDenom: "uosmo",
+		TokenOutDenom: "ufury",
 	},
 }
 
@@ -113,7 +113,7 @@ var routeStableSwap = poolmanagertypes.SwapAmountInRoutes{
 	},
 	poolmanagertypes.SwapAmountInRoute{
 		PoolId:        30,
-		TokenOutDenom: "uosmo",
+		TokenOutDenom: "ufury",
 	},
 }
 
@@ -127,7 +127,7 @@ var fourPoolRoute = poolmanagertypes.SwapAmountInRoutes{
 	},
 	poolmanagertypes.SwapAmountInRoute{
 		PoolId:        35,
-		TokenOutDenom: types.OsmosisDenomination,
+		TokenOutDenom: types.MerlinDenomination,
 	},
 	poolmanagertypes.SwapAmountInRoute{
 		PoolId:        36,
@@ -145,7 +145,7 @@ var fourPoolRoute = poolmanagertypes.SwapAmountInRoutes{
 var twoPoolRoute = poolmanagertypes.SwapAmountInRoutes{
 	poolmanagertypes.SwapAmountInRoute{
 		PoolId:        38,
-		TokenOutDenom: types.OsmosisDenomination,
+		TokenOutDenom: types.MerlinDenomination,
 	},
 	poolmanagertypes.SwapAmountInRoute{
 		PoolId:        39,
@@ -346,10 +346,10 @@ func (s *KeeperTestSuite) TestExecuteTrade() {
 			name: "Mainnet Arb Route",
 			param: param{
 				route:          routeTwoAssetSameWeight,
-				inputCoin:      sdk.NewCoin("uosmo", sdk.NewInt(10100000)),
+				inputCoin:      sdk.NewCoin("ufury", sdk.NewInt(10100000)),
 				expectedProfit: sdk.NewInt(24852),
 			},
-			arbDenom:            types.OsmosisDenomination,
+			arbDenom:            types.MerlinDenomination,
 			expectPass:          true,
 			expectedNumOfTrades: sdk.NewInt(1),
 		},
@@ -357,20 +357,20 @@ func (s *KeeperTestSuite) TestExecuteTrade() {
 			name: "No arbitrage opportunity - expect error at multihopswap due to profitability invariant",
 			param: param{
 				route:          routeNoArb,
-				inputCoin:      sdk.NewCoin("uosmo", sdk.NewInt(1000000)),
+				inputCoin:      sdk.NewCoin("ufury", sdk.NewInt(1000000)),
 				expectedProfit: sdk.NewInt(0),
 			},
-			arbDenom:   types.OsmosisDenomination,
+			arbDenom:   types.MerlinDenomination,
 			expectPass: false,
 		},
 		{
 			name: "0 input amount - expect error at multihopswap due to amount needing to be positive",
 			param: param{
 				route:          routeNoArb,
-				inputCoin:      sdk.NewCoin("uosmo", sdk.NewInt(0)),
+				inputCoin:      sdk.NewCoin("ufury", sdk.NewInt(0)),
 				expectedProfit: sdk.NewInt(0),
 			},
-			arbDenom:   types.OsmosisDenomination,
+			arbDenom:   types.MerlinDenomination,
 			expectPass: false,
 		},
 		{
@@ -462,9 +462,9 @@ func (s *KeeperTestSuite) TestIterateRoutes() {
 			params: paramm{
 				routes:                     []poolmanagertypes.SwapAmountInRoutes{routeTwoAssetSameWeight},
 				expectedMaxProfitAmount:    sdk.NewInt(24848),
-				expectedMaxProfitInputCoin: sdk.NewCoin("uosmo", sdk.NewInt(10000000)),
+				expectedMaxProfitInputCoin: sdk.NewCoin("ufury", sdk.NewInt(10000000)),
 				expectedOptimalRoute:       routeTwoAssetSameWeight,
-				arbDenom:                   types.OsmosisDenomination,
+				arbDenom:                   types.MerlinDenomination,
 			},
 			expectPass: true,
 		},
@@ -473,9 +473,9 @@ func (s *KeeperTestSuite) TestIterateRoutes() {
 			params: paramm{
 				routes:                     []poolmanagertypes.SwapAmountInRoutes{routeMultiAssetSameWeight, routeTwoAssetSameWeight},
 				expectedMaxProfitAmount:    sdk.NewInt(24848),
-				expectedMaxProfitInputCoin: sdk.NewCoin("uosmo", sdk.NewInt(10000000)),
+				expectedMaxProfitInputCoin: sdk.NewCoin("ufury", sdk.NewInt(10000000)),
 				expectedOptimalRoute:       routeTwoAssetSameWeight,
-				arbDenom:                   types.OsmosisDenomination,
+				arbDenom:                   types.MerlinDenomination,
 			},
 			expectPass: true,
 		},
@@ -484,9 +484,9 @@ func (s *KeeperTestSuite) TestIterateRoutes() {
 			params: paramm{
 				routes:                     []poolmanagertypes.SwapAmountInRoutes{routeMostProfitable, routeMultiAssetSameWeight, routeTwoAssetSameWeight},
 				expectedMaxProfitAmount:    sdk.NewInt(67511675),
-				expectedMaxProfitInputCoin: sdk.NewCoin("uosmo", sdk.NewInt(520000000)),
+				expectedMaxProfitInputCoin: sdk.NewCoin("ufury", sdk.NewInt(520000000)),
 				expectedOptimalRoute:       routeMostProfitable,
-				arbDenom:                   types.OsmosisDenomination,
+				arbDenom:                   types.MerlinDenomination,
 			},
 			expectPass: true,
 		},
@@ -554,7 +554,7 @@ func (s *KeeperTestSuite) TestConvertProfits() {
 	type param struct {
 		inputCoin           sdk.Coin
 		profit              sdk.Int
-		expectedUosmoProfit sdk.Int
+		expectedUfuryProfit sdk.Int
 	}
 
 	tests := []struct {
@@ -563,29 +563,29 @@ func (s *KeeperTestSuite) TestConvertProfits() {
 		expectPass bool
 	}{
 		{
-			name: "Convert atom to uosmo",
+			name: "Convert atom to ufury",
 			param: param{
 				inputCoin:           sdk.NewCoin("Atom", sdk.NewInt(100)),
 				profit:              sdk.NewInt(10),
-				expectedUosmoProfit: sdk.NewInt(8),
+				expectedUfuryProfit: sdk.NewInt(8),
 			},
 			expectPass: true,
 		},
 		{
-			name: "Convert juno to uosmo (random denom)",
+			name: "Convert juno to ufury (random denom)",
 			param: param{
 				inputCoin:           sdk.NewCoin("juno", sdk.NewInt(100)),
 				profit:              sdk.NewInt(10),
-				expectedUosmoProfit: sdk.NewInt(9),
+				expectedUfuryProfit: sdk.NewInt(9),
 			},
 			expectPass: true,
 		},
 		{
-			name: "Convert denom without pool to uosmo",
+			name: "Convert denom without pool to ufury",
 			param: param{
 				inputCoin:           sdk.NewCoin("random", sdk.NewInt(100)),
 				profit:              sdk.NewInt(10),
-				expectedUosmoProfit: sdk.NewInt(10),
+				expectedUfuryProfit: sdk.NewInt(10),
 			},
 			expectPass: false,
 		},
@@ -596,7 +596,7 @@ func (s *KeeperTestSuite) TestConvertProfits() {
 
 		if test.expectPass {
 			s.Require().NoError(err)
-			s.Require().Equal(test.param.expectedUosmoProfit, profit)
+			s.Require().Equal(test.param.expectedUfuryProfit, profit)
 		} else {
 			s.Require().Error(err)
 		}

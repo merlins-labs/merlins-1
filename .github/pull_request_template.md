@@ -40,6 +40,6 @@ This change added tests and can be verified as follows:
 
 Where is the change documented? 
   - [ ] Specification (`x/{module}/README.md`)
-  - [ ] Osmosis documentation site
+  - [ ] Merlin documentation site
   - [ ] Code comments?
   - [ ] N/A

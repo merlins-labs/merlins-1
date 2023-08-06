@@ -98,7 +98,7 @@ instead of the "one-size-fits-all" approach explained above?
 
 ### Geometric Tick Spacing with Additive Ranges
 
-In Osmosis' implementation of concentrated liquidity, we will instead make use
+In Merlin' implementation of concentrated liquidity, we will instead make use
 of geometric tick spacing with additive ranges.
 
 We start by defining an exponent for the precision factor of each incremental
@@ -902,7 +902,7 @@ Balancer position to a Superfluid delegated Concentrated Liquidity position.
 ![Migrate Superfluid Delegate Balancer to Concentrated](./img/MigrateSuperfluidDelegated.png)
 
 The migration process starts by removing the connection between the GAMM lock and
-the GAMM intermediary account. The synthetic OSMO that was previously minted by
+the GAMM intermediary account. The synthetic FURY that was previously minted by
 the GAMM intermediary account is immediately undelegated (skipping the two-week
 unbonding period) and sent to the Superfluid module account where it is burned.
 
@@ -915,7 +915,7 @@ Concentrated Liquidity pool.
 The underlying liquidity this creates is tokenized (similar to GAMM shares) and
 is put into a new lock, which is then routed to the Lockup module account. A new
 intermediary account is created based on this new CL share denom. The new
-intermediary account mints synthetic OSMO and delegates it to the validator the
+intermediary account mints synthetic FURY and delegates it to the validator the
 user originally delegated to. Finally, a new synthetic lock in a bonded status
 is created based on the new CL lock ID, the new CL intermediary account, and the
 new CL synthetic denom.
@@ -933,7 +933,7 @@ a position that was migrated.
 The process is identical to the Superfluid delegated migration, with three
 exceptions. First, the connection between the GAMM intermediary account and the
 GAMM lock is already removed when a user started undelegation, so it does not
-need to be done again. Second, no synthetic OSMO needs to be burned or created.
+need to be done again. Second, no synthetic FURY needs to be burned or created.
 Lastly, instead of creating a new CL synthetic lock in a bonded status, we create
 a new CL synthetic lock in an unlocking status. This lock will be unlocked once
 the two-week unbonding period is over.
@@ -1329,7 +1329,7 @@ In general, the design space of incentive mechanisms for concentrated liquidity 
 underexplored, so our implementation takes this as an opportunity to break some new ground in the
 broader design space of order-book-style AMMs.
 
-Below, we outline the approach for CL incentives that Osmosis will be implementing for its initial
+Below, we outline the approach for CL incentives that Merlin will be implementing for its initial
 implementation of concentrated liquidity, as well as our baseline reasoning for why we are pursuing
 this design.
 
@@ -1359,7 +1359,7 @@ meaning that liquidity providers are incentivized to keep their liquidity on the
 they trade.
 
 Specifically, we want to ensure that idle liquidity waiting for volume does not sit off the
-books with the goal of jumping in when a trade happens, as this makes Osmosis's liquidity
+books with the goal of jumping in when a trade happens, as this makes Merlin's liquidity
 look thinner than it is and risks driving volume to other exchanges.
 
 While just-in-time (JIT) liquidity technically benefits the trader on a first-degree basis
@@ -1381,7 +1381,7 @@ we roughly know that it functions as intended.
 
 ## Our Implementation
 
-At launch, Osmosis's CL incentives will primarily be in the format described above while we
+At launch, Merlin's CL incentives will primarily be in the format described above while we
 iron out a mechanism that achieves the remaining two properties predictably and effectively.
 As a piece of foreshadowing, the primary problem space we will be tackling is the following:
 status quo incentives advantage LPs who keep their liquidity off the books until a trade
@@ -1411,7 +1411,7 @@ that has been in the pool for the required amount of time qualifies for claiming
 
 ### Incentive Creation and Querying
 
-While it is technically possible for Osmosis to enable the creation of incentive records directly in the CL module, incentive creation is currently funneled through existing gauge infrastructure in the `x/incentives` module. This simplifies UX drastically for frontends, external incentive creators, and governance, while making CL incentives fully backwards-compatible with incentive creation and querying flows that everyone is already used to. As of the initial version of Osmosis's CL, all incentive creation and querying logic will be handled by respective gauge functions (e.g. the `IncentivizedPools` query in the `x/incentives` module will include CL pools that have internal incentives on them).
+While it is technically possible for Merlin to enable the creation of incentive records directly in the CL module, incentive creation is currently funneled through existing gauge infrastructure in the `x/incentives` module. This simplifies UX drastically for frontends, external incentive creators, and governance, while making CL incentives fully backwards-compatible with incentive creation and querying flows that everyone is already used to. As of the initial version of Merlin's CL, all incentive creation and querying logic will be handled by respective gauge functions (e.g. the `IncentivizedPools` query in the `x/incentives` module will include CL pools that have internal incentives on them).
 
 To create a gauge dedicated to the concentrated liquidity pool, run a `MsgCreateGauge` message in the `x/incentives` module with the following parameter constraints:
 - `PoolId`: The ID of the CL pool to create a gauge for.
@@ -1512,7 +1512,7 @@ to reason about.
 This goes in-hand with centralized exchanges that limit the quote asset set
 to only a few denoms.
 
-Our list at launch is expected to consist of OSMO, DAI and USDC. These are set
+Our list at launch is expected to consist of FURY, DAI and USDC. These are set
 in the v16 upgrade handler.
 
 - `IsPermisionlessPoolCreationEnabled` bool
@@ -1586,13 +1586,13 @@ all incentive records for a given pool ID and min uptime index by performing pre
 
 There are precision issues that we must be considerate of in our design.
 
-Consider the balancer pool between `arb` base unit and `uosmo`:
+Consider the balancer pool between `arb` base unit and `ufury`:
 
 ```bash
-osmosisd q gamm pool 1011
+merlin q gamm pool 1011
 pool:
-  '@type': /osmosis.gamm.v1beta1.Pool
-  address: osmo1pv6ffw8whyle2nyxhh8re44k4mu4smqd7fd66cu2y8gftw3473csxft8y5
+  '@type': /merlin.gamm.v1beta1.Pool
+  address: fury1pv6ffw8whyle2nyxhh8re44k4mu4smqd7fd66cu2y8gftw3473csxft8y5
   future_pool_governor: 24h
   id: "1011"
   pool_assets:
@@ -1602,7 +1602,7 @@ pool:
     weight: "536870912000000"
   - token:
       amount: "218023341414"
-      denom: uosmo
+      denom: ufury
     weight: "536870912000000"
   pool_params:
     exit_fee: "0.000000000000000000"
@@ -1614,15 +1614,15 @@ pool:
   total_weight: "1073741824000000"
 ```
 
-Let's say we want to migrate this into a CL pool where `uosmo` is the quote
+Let's say we want to migrate this into a CL pool where `ufury` is the quote
 asset and `arb` base unit is the base asset.
 
 Note that quote asset is denom1 and base asset is denom0.
-We want quote asset to be `uosmo` so that limit orders on ticks
-have tick spacing in terms of `uosmo` as the quote.
+We want quote asset to be `ufury` so that limit orders on ticks
+have tick spacing in terms of `ufury` as the quote.
 
 Note:
-- OSMO has precision of 6. 1 OSMO = 10**6 `uosmo`
+- FURY has precision of 6. 1 FURY = 10**6 `ufury`
 - ARB has precision of 18. 1 ARB = 10**18 `arb` base unit
 
 Therefore, the true price of the pool is:
@@ -1641,7 +1641,7 @@ However, in our core logic it is represented as:
 or
 
 ```python
-osmosisd q gamm spot-price 1011 uosmo ibc/10E5E5B06D78FFBB61FD9F89209DEE5FD4446ED0550CBB8E3747DA79E10D9DC6
+merlin q gamm spot-price 1011 ufury ibc/10E5E5B06D78FFBB61FD9F89209DEE5FD4446ED0550CBB8E3747DA79E10D9DC6
 spot_price: "0.000000000002155018"
 ```
 
@@ -1653,7 +1653,7 @@ precision is 10**18.
 
 This starts to matter for assets such as `upepe`. That have
 a precision of 18 and a very low price level relative to
-the quote asset that has precision of 6 (e.g `uosmo` or `uusdc`).
+the quote asset that has precision of 6 (e.g `ufury` or `uusdc`).
 
 The true price of PEPE in USDC terms is `0.0000009749`.
 
@@ -1669,7 +1669,7 @@ tick.
 As a workaround, we have decided to limit min spot price to 10^-12
 and min tick to `-108000000`. It has been shown at at price levels
 below 10^-12, this issue is most apparent. See this issue for details:
-<https://github.com/osmosis-labs/osmosis/issues/5550>
+<https://github.com/merlinslair/merlin/issues/5550>
 
 Now, we have a problem that we cannot handle pairs where
 the quote asset has a precision of 6 and the base asset has a
@@ -1677,7 +1677,7 @@ precision of 18.
 
 Note that this is not a problem for pairs where the quote asset
 has a precision of 18 and the base asset has a precision of 6.
-E.g. OSMO/DAI.
+E.g. FURY/DAI.
 
 ### Solution
 

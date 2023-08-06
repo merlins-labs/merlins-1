@@ -4,12 +4,12 @@ import (
 	gocontext "context"
 	"testing"
 
-	"github.com/osmosis-labs/osmosis/v16/x/poolmanager/types"
+	"github.com/merlinslair/merlin/v16/x/poolmanager/types"
 
 	"github.com/stretchr/testify/suite"
 
-	"github.com/osmosis-labs/osmosis/v16/app/apptesting"
-	poolmanagerqueryproto "github.com/osmosis-labs/osmosis/v16/x/poolmanager/client/queryproto"
+	"github.com/merlinslair/merlin/v16/app/apptesting"
+	poolmanagerqueryproto "github.com/merlinslair/merlin/v16/x/poolmanager/client/queryproto"
 )
 
 type QueryTestSuite struct {
@@ -34,13 +34,13 @@ func (s *QueryTestSuite) TestQueriesNeverAlterState() {
 	}{
 		{
 			"Query num pools",
-			"/osmosis.poolmanager.v1beta1.Query/NumPools",
+			"/merlin.poolmanager.v1beta1.Query/NumPools",
 			&poolmanagerqueryproto.NumPoolsRequest{},
 			&poolmanagerqueryproto.NumPoolsResponse{},
 		},
 		{
 			"Query estimate swap in",
-			"/osmosis.poolmanager.v1beta1.Query/EstimateSwapExactAmountIn",
+			"/merlin.poolmanager.v1beta1.Query/EstimateSwapExactAmountIn",
 			&poolmanagerqueryproto.EstimateSwapExactAmountInRequest{
 				PoolId:  1,
 				TokenIn: "10bar",
@@ -50,7 +50,7 @@ func (s *QueryTestSuite) TestQueriesNeverAlterState() {
 		},
 		{
 			"Query estimate swap out",
-			"/osmosis.poolmanager.v1beta1.Query/EstimateSwapExactAmountOut",
+			"/merlin.poolmanager.v1beta1.Query/EstimateSwapExactAmountOut",
 			&poolmanagerqueryproto.EstimateSwapExactAmountOutRequest{
 				PoolId:   1,
 				TokenOut: "6baz",
@@ -96,20 +96,20 @@ func (s *QueryTestSuite) TestSimplifiedQueries() {
 	output1 := &poolmanagerqueryproto.EstimateSwapExactAmountInResponse{}
 	output2 := &poolmanagerqueryproto.EstimateSwapExactAmountInResponse{}
 	err := s.QueryHelper.Invoke(gocontext.Background(),
-		"/osmosis.poolmanager.v1beta1.Query/EstimateSwapExactAmountIn", swapIn, output1)
+		"/merlin.poolmanager.v1beta1.Query/EstimateSwapExactAmountIn", swapIn, output1)
 	s.Require().NoError(err)
 	err = s.QueryHelper.Invoke(gocontext.Background(),
-		"/osmosis.poolmanager.v1beta1.Query/EstimateSinglePoolSwapExactAmountIn", simplifiedSwapIn, output2)
+		"/merlin.poolmanager.v1beta1.Query/EstimateSinglePoolSwapExactAmountIn", simplifiedSwapIn, output2)
 	s.Require().NoError(err)
 	s.Require().Equal(output1, output2)
 
 	output3 := &poolmanagerqueryproto.EstimateSwapExactAmountOutResponse{}
 	output4 := &poolmanagerqueryproto.EstimateSwapExactAmountOutResponse{}
 	err = s.QueryHelper.Invoke(gocontext.Background(),
-		"/osmosis.poolmanager.v1beta1.Query/EstimateSwapExactAmountOut", swapOut, output3)
+		"/merlin.poolmanager.v1beta1.Query/EstimateSwapExactAmountOut", swapOut, output3)
 	s.Require().NoError(err)
 	err = s.QueryHelper.Invoke(gocontext.Background(),
-		"/osmosis.poolmanager.v1beta1.Query/EstimateSinglePoolSwapExactAmountOut", simplifiedSwapOut, output4)
+		"/merlin.poolmanager.v1beta1.Query/EstimateSinglePoolSwapExactAmountOut", simplifiedSwapOut, output4)
 	s.Require().NoError(err)
 	s.Require().Equal(output3, output4)
 }

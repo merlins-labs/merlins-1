@@ -4,23 +4,23 @@ import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
 	"github.com/osmosis-labs/osmosis/osmomath"
-	gammkeeper "github.com/osmosis-labs/osmosis/v16/x/gamm/keeper"
-	"github.com/osmosis-labs/osmosis/v16/x/gamm/pool-models/balancer"
-	"github.com/osmosis-labs/osmosis/v16/x/gamm/pool-models/stableswap"
-	gammtypes "github.com/osmosis-labs/osmosis/v16/x/gamm/types"
-	poolmanagertypes "github.com/osmosis-labs/osmosis/v16/x/poolmanager/types"
+	gammkeeper "github.com/merlinslair/merlin/v16/x/gamm/keeper"
+	"github.com/merlinslair/merlin/v16/x/gamm/pool-models/balancer"
+	"github.com/merlinslair/merlin/v16/x/gamm/pool-models/stableswap"
+	gammtypes "github.com/merlinslair/merlin/v16/x/gamm/types"
+	poolmanagertypes "github.com/merlinslair/merlin/v16/x/poolmanager/types"
 )
 
 const (
 	BAR   = "bar"
 	BAZ   = "baz"
 	FOO   = "foo"
-	UOSMO = "uosmo"
+	UFURY = "ufury"
 	STAKE = "stake"
 )
 
 var DefaultAcctFunds sdk.Coins = sdk.NewCoins(
-	sdk.NewCoin(UOSMO, sdk.NewInt(10000000000)),
+	sdk.NewCoin(UFURY, sdk.NewInt(10000000000)),
 	sdk.NewCoin(FOO, sdk.NewInt(10000000000)),
 	sdk.NewCoin(BAR, sdk.NewInt(10000000000)),
 	sdk.NewCoin(BAZ, sdk.NewInt(10000000000)),
@@ -41,7 +41,7 @@ var DefaultPoolAssets = []balancer.PoolAsset{
 	},
 	{
 		Weight: sdk.NewInt(400),
-		Token:  sdk.NewCoin(UOSMO, sdk.NewInt(5000000)),
+		Token:  sdk.NewCoin(UFURY, sdk.NewInt(5000000)),
 	},
 }
 
@@ -161,7 +161,7 @@ func (s *KeeperTestHelper) PrepareBalancerPoolWithPoolParams(poolParams balancer
 // PrepareCustomBalancerPool sets up a Balancer pool with an array of assets and given parameters
 func (s *KeeperTestHelper) PrepareCustomBalancerPool(assets []balancer.PoolAsset, params balancer.PoolParams) uint64 {
 	// Add coins for pool creation fee + coins needed to mint balances
-	fundCoins := sdk.NewCoins(sdk.NewCoin(UOSMO, sdk.NewInt(10000000000)))
+	fundCoins := sdk.NewCoins(sdk.NewCoin(UFURY, sdk.NewInt(10000000000)))
 	for _, a := range assets {
 		fundCoins = fundCoins.Add(a.Token)
 	}
@@ -297,7 +297,7 @@ func (s *KeeperTestHelper) CalcAmoutOfTokenToGetTargetPrice(ctx sdk.Context, poo
 	ratioPrice := targetSpotPrice.Quo(spotPriceNow)
 	ratioWeight := (baseAsset.Weight.ToDec()).Quo(baseAsset.Weight.ToDec().Add(quoteAsset.Weight.ToDec()))
 
-	amountTrade = quoteAsset.Token.Amount.ToDec().Mul(osmomath.Pow(ratioPrice, ratioWeight).Sub(sdk.OneDec()))
+	amountTrade = quoteAsset.Token.Amount.ToDec().Mul(furymath.Pow(ratioPrice, ratioWeight).Sub(sdk.OneDec()))
 
 	return amountTrade
 }

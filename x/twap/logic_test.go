@@ -12,11 +12,11 @@ import (
 	"github.com/osmosis-labs/osmosis/osmomath"
 	"github.com/osmosis-labs/osmosis/osmoutils"
 	"github.com/osmosis-labs/osmosis/osmoutils/osmoassert"
-	gammtypes "github.com/osmosis-labs/osmosis/v16/x/gamm/types"
-	poolmanagertypes "github.com/osmosis-labs/osmosis/v16/x/poolmanager/types"
-	"github.com/osmosis-labs/osmosis/v16/x/twap"
-	"github.com/osmosis-labs/osmosis/v16/x/twap/types"
-	"github.com/osmosis-labs/osmosis/v16/x/twap/types/twapmock"
+	gammtypes "github.com/merlinslair/merlin/v16/x/gamm/types"
+	poolmanagertypes "github.com/merlinslair/merlin/v16/x/poolmanager/types"
+	"github.com/merlinslair/merlin/v16/x/twap"
+	"github.com/merlinslair/merlin/v16/x/twap/types"
+	"github.com/merlinslair/merlin/v16/x/twap/types/twapmock"
 )
 
 var (
@@ -1323,7 +1323,7 @@ func (s *TestSuite) TestAfterCreatePool() {
 			s.Require().Equal(tc.poolId, poolId)
 			s.Require().NoError(err)
 
-			denoms := osmoutils.CoinsDenoms(tc.poolCoins)
+			denoms := furyutils.CoinsDenoms(tc.poolCoins)
 			denomPairs := types.GetAllUniqueDenomPairs(denoms)
 			expectedRecords := []types.TwapRecord{}
 			for _, denomPair := range denomPairs {
@@ -1433,7 +1433,7 @@ func (s *TestSuite) TestTwapLog_CorrectBase() {
 }
 
 func (s *TestSuite) TestTwapLog() {
-	smallestAdditiveTolerance := osmomath.ErrTolerance{
+	smallestAdditiveTolerance := furymath.ErrTolerance{
 		AdditiveTolerance: sdk.SmallestDec(),
 	}
 
@@ -1471,8 +1471,8 @@ func (s *TestSuite) TestTwapLog() {
 				result := twap.TwapLog(tc.price)
 
 				smallestAdditiveTolerance.CompareBigDec(
-					osmomath.BigDecFromSDKDec(tc.expected),
-					osmomath.BigDecFromSDKDec(result),
+					furymath.BigDecFromSDKDec(tc.expected),
+					furymath.BigDecFromSDKDec(result),
 				)
 			})
 		})

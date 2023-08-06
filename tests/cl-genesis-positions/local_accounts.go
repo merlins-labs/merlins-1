@@ -13,9 +13,9 @@ import (
 
 const (
 	expectedPoolId           uint64 = 1
-	addressPrefix                   = "osmo"
-	localosmosisFromHomePath        = "/.osmosisd-local"
-	consensusFee                    = "1500uosmo"
+	addressPrefix                   = "fury"
+	localmerlinFromHomePath        = "/.merlin-local"
+	consensusFee                    = "1500ufury"
 	accountNamePrefix               = "lo-test"
 	numPositions                    = 1_000
 	randSeed                        = 1
@@ -76,5 +76,5 @@ func getClientHomePath() string {
 		return ""
 	}
 
-	return currentUser.HomeDir + localosmosisFromHomePath
+	return currentUser.HomeDir + localmerlinFromHomePath
 }

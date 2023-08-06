@@ -8,7 +8,7 @@ import (
 	errorsmod "cosmossdk.io/errors"
 
 	"github.com/osmosis-labs/osmosis/osmoutils"
-	"github.com/osmosis-labs/osmosis/v16/x/superfluid/types"
+	"github.com/merlinslair/merlin/v16/x/superfluid/types"
 
 	"github.com/cosmos/cosmos-sdk/store/prefix"
 	sdk "github.com/cosmos/cosmos-sdk/types"
@@ -34,7 +34,7 @@ func (k Keeper) GetSuperfluidAsset(ctx sdk.Context, denom string) (types.Superfl
 	asset := types.SuperfluidAsset{}
 	store := ctx.KVStore(k.storeKey)
 	prefixStore := prefix.NewStore(store, types.KeyPrefixSuperfluidAsset)
-	found, err := osmoutils.Get(prefixStore, []byte(denom), &asset)
+	found, err := furyutils.Get(prefixStore, []byte(denom), &asset)
 	if err != nil {
 		return types.SuperfluidAsset{}, err
 	}

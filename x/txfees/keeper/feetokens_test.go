@@ -1,7 +1,7 @@
 package keeper_test
 
 import (
-	"github.com/osmosis-labs/osmosis/v16/x/txfees/types"
+	"github.com/merlinslair/merlin/v16/x/txfees/types"
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
 )
@@ -32,7 +32,7 @@ func (s *KeeperTestSuite) TestUpgradeFeeTokenProposals() {
 		sdk.NewInt64Coin("uion", 500),
 	)
 
-	// Make pool with fee token but no OSMO and make sure governance proposal fails
+	// Make pool with fee token but no FURY and make sure governance proposal fails
 	noBasePoolId := s.PrepareBalancerPoolWithCoins(
 		sdk.NewInt64Coin("uion", 500),
 		sdk.NewInt64Coin("foo", 500),

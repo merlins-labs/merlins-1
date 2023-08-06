@@ -8,10 +8,10 @@ import (
 
 	"github.com/stretchr/testify/suite"
 
-	"github.com/osmosis-labs/osmosis/v16/app/apptesting"
-	incentivetypes "github.com/osmosis-labs/osmosis/v16/x/incentives/types"
-	lockuptypes "github.com/osmosis-labs/osmosis/v16/x/lockup/types"
-	tokenfactorytypes "github.com/osmosis-labs/osmosis/v16/x/tokenfactory/types"
+	"github.com/merlinslair/merlin/v16/app/apptesting"
+	incentivetypes "github.com/merlinslair/merlin/v16/x/incentives/types"
+	lockuptypes "github.com/merlinslair/merlin/v16/x/lockup/types"
+	tokenfactorytypes "github.com/merlinslair/merlin/v16/x/tokenfactory/types"
 )
 
 const (
@@ -28,7 +28,7 @@ var (
 	defaultPoolId       = uint64(1)
 	defaultAmount       = sdk.NewInt(100)
 	initalDefaultSupply = sdk.NewCoins(sdk.NewCoin(denomA, defaultAmount), sdk.NewCoin(denomB, defaultAmount))
-	uosmo               = "uosmo"
+	ufury               = "ufury"
 
 	defaultDenoms = []string{denomA, denomB}
 )
@@ -80,7 +80,7 @@ func (s *TransmuterSuite) TestFunctionalTransmuter() {
 	s.Require().NoError(err)
 
 	// Create gauge
-	incentive := sdk.NewCoins(sdk.NewCoin(uosmo, sdk.NewInt(1_000_000)))
+	incentive := sdk.NewCoins(sdk.NewCoin(ufury, sdk.NewInt(1_000_000)))
 	s.FundAcc(s.TestAccs[1], incentive)
 	gaugeId, err := s.App.IncentivesKeeper.CreateGauge(s.Ctx, true, s.TestAccs[1], incentive, lockuptypes.QueryCondition{
 		LockQueryType: lockuptypes.ByDuration,

@@ -1,4 +1,4 @@
-package osmomath
+package furymath
 
 import sdk "github.com/cosmos/cosmos-sdk/types"
 
