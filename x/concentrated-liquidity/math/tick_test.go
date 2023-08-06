@@ -216,7 +216,7 @@ func TestTickToSqrtPrice(t *testing.T) {
 				return
 			}
 			require.NoError(t, err)
-			expectedSqrtPrice, err := furymath.MonotonicSqrt(tc.expectedPrice)
+			expectedSqrtPrice, err := osmomath.MonotonicSqrt(tc.expectedPrice)
 			require.NoError(t, err)
 
 			require.Equal(t, tc.expectedPrice.String(), price.String())
@@ -292,9 +292,9 @@ func TestTicksToSqrtPrice(t *testing.T) {
 			require.NoError(t, err)
 
 			// convert test case's prices to sqrt price
-			expectedLowerSqrtPrice, err := furymath.MonotonicSqrt(tc.expectedLowerPrice)
+			expectedLowerSqrtPrice, err := osmomath.MonotonicSqrt(tc.expectedLowerPrice)
 			require.NoError(t, err)
-			expectedUpperSqrtPrice, err := furymath.MonotonicSqrt(tc.expectedUpperPrice)
+			expectedUpperSqrtPrice, err := osmomath.MonotonicSqrt(tc.expectedUpperPrice)
 			require.NoError(t, err)
 
 			require.Equal(t, tc.expectedLowerPrice.String(), priceLower.String())
@@ -620,7 +620,7 @@ func TestTickToSqrtPricePriceToTick_InverseRelationship(t *testing.T) {
 			// require.Equal(t, expectedPrice.String(), priceFromSqrtPrice.String())
 
 			// 5. Compute tick from sqrt price from the original tick.
-			inverseTickFromSqrtPrice, err := math.CalculateSqrtPriceToTick(furymath.BigDecFromSDKDec(sqrtPrice))
+			inverseTickFromSqrtPrice, err := math.CalculateSqrtPriceToTick(osmomath.BigDecFromSDKDec(sqrtPrice))
 			require.NoError(t, err)
 
 			require.Equal(t, tickFromPrice, inverseTickFromSqrtPrice, "expected: %s, actual: %s", tickFromPrice, inverseTickFromSqrtPrice)

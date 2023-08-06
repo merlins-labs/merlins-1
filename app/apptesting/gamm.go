@@ -297,7 +297,7 @@ func (s *KeeperTestHelper) CalcAmoutOfTokenToGetTargetPrice(ctx sdk.Context, poo
 	ratioPrice := targetSpotPrice.Quo(spotPriceNow)
 	ratioWeight := (baseAsset.Weight.ToDec()).Quo(baseAsset.Weight.ToDec().Add(quoteAsset.Weight.ToDec()))
 
-	amountTrade = quoteAsset.Token.Amount.ToDec().Mul(furymath.Pow(ratioPrice, ratioWeight).Sub(sdk.OneDec()))
+	amountTrade = quoteAsset.Token.Amount.ToDec().Mul(osmomath.Pow(ratioPrice, ratioWeight).Sub(sdk.OneDec()))
 
 	return amountTrade
 }

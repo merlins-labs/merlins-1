@@ -109,7 +109,7 @@ func ValidateValAddrAndWeight(args []string) ([]types.ValidatorPreference, error
 	var valAddrs []string
 	valAddrs = append(valAddrs, strings.Split(args[1], ",")...)
 
-	weights, err := furyutils.ParseSdkDecFromString(args[2], ",")
+	weights, err := osmoutils.ParseSdkDecFromString(args[2], ",")
 	if err != nil {
 		return nil, err
 	}

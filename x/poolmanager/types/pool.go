@@ -35,5 +35,5 @@ type PoolI interface {
 
 // NewPoolAddress returns an address for a pool from a given id.
 func NewPoolAddress(poolId uint64) sdk.AccAddress {
-	return furyutils.NewModuleAddressWithPrefix(ModuleName, "pool", sdk.Uint64ToBigEndian(poolId))
+	return osmoutils.NewModuleAddressWithPrefix(ModuleName, "pool", sdk.Uint64ToBigEndian(poolId))
 }

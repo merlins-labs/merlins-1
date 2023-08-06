@@ -19,7 +19,7 @@ func applyPoolIncentivesUpdate(ctx sdk.Context, poolincentiveskeeper *poolincent
 
 	// If error, undo state update, log, and proceed. We don't want to stop the entire upgrade due to
 	// an unexpected error here.
-	_ = furyutils.ApplyFuncIfNoError(ctx, func(wrappedCtx sdk.Context) error {
+	_ = osmoutils.ApplyFuncIfNoError(ctx, func(wrappedCtx sdk.Context) error {
 		err := poolincentiveskeeper.UpdateDistrRecords(wrappedCtx, records...)
 		if err != nil {
 			ctx.Logger().Error("Something has happened, prop update did not apply. Continuing to proceed with other components of the upgrade.")

@@ -576,7 +576,7 @@ func (k Keeper) AllPools(
 			return nil, err
 		}
 
-		sortedPools = furyutils.MergeSlices(sortedPools, currentModulePools, less)
+		sortedPools = osmoutils.MergeSlices(sortedPools, currentModulePools, less)
 	}
 
 	return sortedPools, nil

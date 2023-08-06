@@ -389,7 +389,7 @@ func parseUpdateUnpoolWhitelistArgsToContent(flags *flag.FlagSet) (govtypes.Cont
 		return nil, err
 	}
 
-	poolIds, err := furyutils.ParseUint64SliceFromString(poolIdsStr, ",")
+	poolIds, err := osmoutils.ParseUint64SliceFromString(poolIdsStr, ",")
 	if err != nil {
 		return nil, err
 	}

@@ -131,7 +131,7 @@ func (m Manager) legacyActions(seed int64, cdc codec.JSONCodec) []simtypes.Actio
 func (m Manager) Actions(seed int64, cdc codec.JSONCodec) []simtypes.ActionsWithMetadata {
 	actions := m.legacyActions(seed, cdc)
 	moduleKeys := maps.Keys(m.Modules)
-	furyutils.SortSlice(moduleKeys)
+	osmoutils.SortSlice(moduleKeys)
 	for _, simModuleName := range moduleKeys {
 		for _, action := range m.Modules[simModuleName].Actions() {
 			var actionWithMetaData simtypes.ActionsWithMetadata

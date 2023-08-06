@@ -97,7 +97,7 @@ func (k Keeper) GetPool(ctx sdk.Context, poolId uint64) (poolmanagertypes.PoolI,
 //   - An error if unmarshalling fails for any of the values fetched from the store.
 //     In this case, the slice of PoolI interfaces will be nil.
 func (k Keeper) GetPools(ctx sdk.Context) ([]poolmanagertypes.PoolI, error) {
-	return furyutils.GatherValuesFromStorePrefix(
+	return osmoutils.GatherValuesFromStorePrefix(
 		ctx.KVStore(k.storeKey), types.PoolsKey, func(value []byte) (poolmanagertypes.PoolI, error) {
 			pool := model.Pool{}
 			err := k.cdc.Unmarshal(value, &pool)
@@ -111,7 +111,7 @@ func (k Keeper) GetPools(ctx sdk.Context) ([]poolmanagertypes.PoolI, error) {
 
 // GetPoolsWithWasmKeeper behaves the same as GetPools, but it also sets the WasmKeeper field of the pool.
 func (k Keeper) GetPoolsWithWasmKeeper(ctx sdk.Context) ([]poolmanagertypes.PoolI, error) {
-	return furyutils.GatherValuesFromStorePrefix(
+	return osmoutils.GatherValuesFromStorePrefix(
 		ctx.KVStore(k.storeKey), types.PoolsKey, func(value []byte) (poolmanagertypes.PoolI, error) {
 			pool := model.CosmWasmPool{}
 			err := k.cdc.Unmarshal(value, &pool)

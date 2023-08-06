@@ -222,7 +222,7 @@ searching up the `poolmanagerkeeper.router` mapping, and calling
 ```go
 // x/poolmanager/router.go RouteExactAmountIn(...)
 
-moduleRouteBytes := furyutils.MustGet(poolmanagertypes.FormatModuleRouteIndex(poolId))
+moduleRouteBytes := osmoutils.MustGet(poolmanagertypes.FormatModuleRouteIndex(poolId))
 moduleRoute, _ := poolmanagertypes.ModuleRouteFromBytes(moduleRouteBytes)
 
 swapModule := k.routes[moduleRoute.PoolType]

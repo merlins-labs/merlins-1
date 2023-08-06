@@ -119,7 +119,7 @@ func (k Keeper) GetTickInfo(ctx sdk.Context, poolId uint64, tickIndex int64) (ti
 	tickStruct := model.TickInfo{}
 	key := types.KeyTick(poolId, tickIndex)
 
-	found, err := furyutils.Get(store, key, &tickStruct)
+	found, err := osmoutils.Get(store, key, &tickStruct)
 	// return 0 values if key has not been initialized
 	if !found {
 		// If tick has not yet been initialized, we create a new one and initialize
@@ -157,11 +157,11 @@ func (k Keeper) GetTickInfo(ctx sdk.Context, poolId uint64, tickIndex int64) (ti
 func (k Keeper) SetTickInfo(ctx sdk.Context, poolId uint64, tickIndex int64, tickInfo *model.TickInfo) {
 	store := ctx.KVStore(k.storeKey)
 	key := types.KeyTick(poolId, tickIndex)
-	furyutils.MustSet(store, key, tickInfo)
+	osmoutils.MustSet(store, key, tickInfo)
 }
 
 func (k Keeper) GetAllInitializedTicksForPool(ctx sdk.Context, poolId uint64) ([]genesis.FullTick, error) {
-	return furyutils.GatherValuesFromStorePrefixWithKeyParser(ctx.KVStore(k.storeKey), types.KeyTickPrefixByPoolId(poolId), ParseFullTickFromBytes)
+	return osmoutils.GatherValuesFromStorePrefixWithKeyParser(ctx.KVStore(k.storeKey), types.KeyTickPrefixByPoolId(poolId), ParseFullTickFromBytes)
 }
 
 // validateTickInRangeIsValid validates that given ticks are valid. That is:
@@ -370,7 +370,7 @@ func (k Keeper) GetTickLiquidityNetInDirection(ctx sdk.Context, poolId uint64, t
 		}
 		ctx.Logger().Debug(fmt.Sprintf("validateTick %s; validate sqrtPrice %s\n", validateTick.String(), validateSqrtPrice.String()))
 
-		if err := swapStrategy.ValidateSqrtPrice(validateSqrtPrice, furymath.BigDecFromSDKDec(currentTickSqrtPrice)); err != nil {
+		if err := swapStrategy.ValidateSqrtPrice(validateSqrtPrice, osmomath.BigDecFromSDKDec(currentTickSqrtPrice)); err != nil {
 			return err
 		}
 
@@ -437,7 +437,7 @@ func (k Keeper) getTickByTickIndex(ctx sdk.Context, poolId uint64, tickIndex int
 	store := ctx.KVStore(k.storeKey)
 	keyTick := types.KeyTick(poolId, tickIndex)
 	tickStruct := model.TickInfo{}
-	found, err := furyutils.Get(store, keyTick, &tickStruct)
+	found, err := osmoutils.Get(store, keyTick, &tickStruct)
 	if err != nil {
 		return model.TickInfo{}, err
 	}

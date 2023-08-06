@@ -53,7 +53,7 @@ func (k Keeper) CalculateSpotPrice(
 	}
 
 	// we want to round this to `SpotPriceSigFigs` of precision
-	spotPrice = furymath.SigFigRound(spotPrice, types.SpotPriceSigFigs)
+	spotPrice = osmomath.SigFigRound(spotPrice, types.SpotPriceSigFigs)
 	return spotPrice, err
 }
 

@@ -985,9 +985,9 @@ func (s *KeeperTestSuite) TestValidateSharesToMigrateUnlockAndExitBalancerPool()
 			}
 			s.Require().NoError(err)
 
-			defaultErrorTolerance := furymath.ErrTolerance{
+			defaultErrorTolerance := osmomath.ErrTolerance{
 				AdditiveTolerance: sdk.NewDec(1),
-				RoundingDir:       furymath.RoundDown,
+				RoundingDir:       osmomath.RoundDown,
 			}
 
 			if tc.percentOfSharesToMigrate.Equal(sdk.OneDec()) {
@@ -1208,9 +1208,9 @@ func (s *KeeperTestSuite) ValidateMigrateResult(
 
 	// exitPool has rounding difference.
 	// We test if correct amt has been exited and frozen by comparing with rounding tolerance.
-	defaultErrorTolerance := furymath.ErrTolerance{
+	defaultErrorTolerance := osmomath.ErrTolerance{
 		AdditiveTolerance: sdk.NewDec(2),
-		RoundingDir:       furymath.RoundDown,
+		RoundingDir:       osmomath.RoundDown,
 	}
 	s.Require().Equal(0, defaultErrorTolerance.Compare(joinPoolAmt.AmountOf(defaultPoolAssets[0].Token.Denom).ToDec().Mul(percentOfSharesToMigrate).RoundInt(), amount0))
 	s.Require().Equal(0, defaultErrorTolerance.Compare(joinPoolAmt.AmountOf(defaultPoolAssets[1].Token.Denom).ToDec().Mul(percentOfSharesToMigrate).RoundInt(), amount1))
@@ -1268,7 +1268,7 @@ func (s *KeeperTestSuite) TestFunctional_VaryingPositions_Migrations() {
 
 		// Find the largest numPosition value and set numAccounts to be one greater than the largest position value
 		// The first account is used to create pools and the rest are used to create positions
-		largestPositionValue := furyutils.Max(numBondedSuperfluid, numUnbondingSuperfluidLocked, numUnbondingSuperfluidUnlocking, numVanillaLockLocked, numVanillaLockUnlocking, numNoLock)
+		largestPositionValue := osmoutils.Max(numBondedSuperfluid, numUnbondingSuperfluidLocked, numUnbondingSuperfluidUnlocking, numVanillaLockLocked, numVanillaLockUnlocking, numNoLock)
 		numAccounts := largestPositionValue.(int) + 1
 
 		positions := Positions{

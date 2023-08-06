@@ -34,7 +34,7 @@ func (k Keeper) GetSuperfluidAsset(ctx sdk.Context, denom string) (types.Superfl
 	asset := types.SuperfluidAsset{}
 	store := ctx.KVStore(k.storeKey)
 	prefixStore := prefix.NewStore(store, types.KeyPrefixSuperfluidAsset)
-	found, err := furyutils.Get(prefixStore, []byte(denom), &asset)
+	found, err := osmoutils.Get(prefixStore, []byte(denom), &asset)
 	if err != nil {
 		return types.SuperfluidAsset{}, err
 	}

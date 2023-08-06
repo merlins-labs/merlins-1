@@ -87,9 +87,9 @@ func TwapLog(x sdk.Dec) sdk.Dec {
 // twapPow exponentiates 2 to the given exponent.
 // Used as a test-helper for the power function used in geometric twap.
 func TwapPow(exponent sdk.Dec) sdk.Dec {
-	exp2 := furymath.Exp2(furymath.BigDecFromSDKDec(exponent.Abs()))
+	exp2 := osmomath.Exp2(osmomath.BigDecFromSDKDec(exponent.Abs()))
 	if exponent.IsNegative() {
-		return furymath.OneDec().Quo(exp2).SDKDec()
+		return osmomath.OneDec().Quo(exp2).SDKDec()
 	}
 	return exp2.SDKDec()
 }

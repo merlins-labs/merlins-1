@@ -223,7 +223,7 @@ func ValidateSwapAmountInSplitRoute(splitRoutes []SwapAmountInSplitRoute) error 
 		multihopRoutes = append(multihopRoutes, multihopRoute)
 	}
 
-	if furyutils.ContainsDuplicateDeepEqual(multihopRoutes) {
+	if osmoutils.ContainsDuplicateDeepEqual(multihopRoutes) {
 		return ErrDuplicateRoutesNotAllowed
 	}
 
@@ -262,7 +262,7 @@ func ValidateSwapAmountOutSplitRoute(splitRoutes []SwapAmountOutSplitRoute) erro
 		multihopRoutes = append(multihopRoutes, multihopRoute)
 	}
 
-	if furyutils.ContainsDuplicateDeepEqual(multihopRoutes) {
+	if osmoutils.ContainsDuplicateDeepEqual(multihopRoutes) {
 		return ErrDuplicateRoutesNotAllowed
 	}
 

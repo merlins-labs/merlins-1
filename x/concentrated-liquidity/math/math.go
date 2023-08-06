@@ -13,14 +13,14 @@ import (
 // sqrtPriceB is the larger of sqrtpCur and the nextPrice
 // Liquidity0 = amount0 * (sqrtPriceA * sqrtPriceB) / (sqrtPriceB - sqrtPriceA)
 // TODO: Define rounding properties we expect to hold for this function.
-func Liquidity0(amount sdk.Int, sqrtPriceA, sqrtPriceB furymath.BigDec) sdk.Dec {
+func Liquidity0(amount sdk.Int, sqrtPriceA, sqrtPriceB osmomath.BigDec) sdk.Dec {
 	if sqrtPriceA.GT(sqrtPriceB) {
 		sqrtPriceA, sqrtPriceB = sqrtPriceB, sqrtPriceA
 	}
 
 	// We convert to BigDec to avoid precision loss when calculating liquidity. Without doing this,
 	// our liquidity calculations will be off from our theoretical calculations within our tests.
-	amountBigDec := furymath.BigDecFromSDKDec(amount.ToDec())
+	amountBigDec := osmomath.BigDecFromSDKDec(amount.ToDec())
 
 	product := sqrtPriceA.Mul(sqrtPriceB)
 	diff := sqrtPriceB.Sub(sqrtPriceA)
@@ -35,14 +35,14 @@ func Liquidity0(amount sdk.Int, sqrtPriceA, sqrtPriceB furymath.BigDec) sdk.Dec 
 // sqrtPriceA is the smaller of sqrtpCur and the nextPrice
 // sqrtPriceB is the larger of sqrtpCur and the nextPrice
 // Liquidity1 = amount1 / (sqrtPriceB - sqrtPriceA)
-func Liquidity1(amount sdk.Int, sqrtPriceA, sqrtPriceB furymath.BigDec) sdk.Dec {
+func Liquidity1(amount sdk.Int, sqrtPriceA, sqrtPriceB osmomath.BigDec) sdk.Dec {
 	if sqrtPriceA.GT(sqrtPriceB) {
 		sqrtPriceA, sqrtPriceB = sqrtPriceB, sqrtPriceA
 	}
 
 	// We convert to BigDec to avoid precision loss when calculating liquidity. Without doing this,
 	// our liquidity calculations will be off from our theoretical calculations within our tests.
-	amountBigDec := furymath.BigDecFromSDKDec(amount.ToDec())
+	amountBigDec := osmomath.BigDecFromSDKDec(amount.ToDec())
 	diff := sqrtPriceB.Sub(sqrtPriceA)
 	if diff.IsZero() {
 		panic(fmt.Sprintf("liquidity1 diff is zero: sqrtPriceA %s sqrtPriceB %s", sqrtPriceA, sqrtPriceB))
@@ -55,7 +55,7 @@ func Liquidity1(amount sdk.Int, sqrtPriceA, sqrtPriceB furymath.BigDec) sdk.Dec 
 // sqrtPriceA is the smaller of sqrtpCur and the nextPrice
 // sqrtPriceB is the larger of sqrtpCur and the nextPrice
 // CalcAmount0Delta = (liquidity * (sqrtPriceB - sqrtPriceA)) / (sqrtPriceB * sqrtPriceA)
-func CalcAmount0Delta(liq, sqrtPriceA, sqrtPriceB furymath.BigDec, roundUp bool) furymath.BigDec {
+func CalcAmount0Delta(liq, sqrtPriceA, sqrtPriceB osmomath.BigDec, roundUp bool) osmomath.BigDec {
 	if sqrtPriceA.GT(sqrtPriceB) {
 		sqrtPriceA, sqrtPriceB = sqrtPriceB, sqrtPriceA
 	}
@@ -90,7 +90,7 @@ func CalcAmount0Delta(liq, sqrtPriceA, sqrtPriceB furymath.BigDec, roundUp bool)
 // sqrtPriceA is the smaller of sqrtpCur and the nextPrice
 // sqrtPriceB is the larger of sqrtpCur and the nextPrice
 // CalcAmount1Delta = liq * (sqrtPriceB - sqrtPriceA)
-func CalcAmount1Delta(liq, sqrtPriceA, sqrtPriceB furymath.BigDec, roundUp bool) furymath.BigDec {
+func CalcAmount1Delta(liq, sqrtPriceA, sqrtPriceB osmomath.BigDec, roundUp bool) osmomath.BigDec {
 	// make sqrtPriceA the smaller value amongst sqrtPriceA and sqrtPriceB
 	if sqrtPriceA.GT(sqrtPriceB) {
 		sqrtPriceA, sqrtPriceB = sqrtPriceB, sqrtPriceA
@@ -123,7 +123,7 @@ func CalcAmount1Delta(liq, sqrtPriceA, sqrtPriceB furymath.BigDec, roundUp bool)
 // When we swap for token one out given token zero in, the price is decreasing, and we need to move the sqrt price (decrease it) less
 // to avoid overpaying the amount out of the pool. Therefore, we round up.
 // sqrt_next = liq * sqrt_cur / (liq + token_in * sqrt_cur)
-func GetNextSqrtPriceFromAmount0InRoundingUp(sqrtPriceCurrent, liquidity, amountZeroRemainingIn furymath.BigDec) (sqrtPriceNext furymath.BigDec) {
+func GetNextSqrtPriceFromAmount0InRoundingUp(sqrtPriceCurrent, liquidity, amountZeroRemainingIn osmomath.BigDec) (sqrtPriceNext osmomath.BigDec) {
 	if amountZeroRemainingIn.IsZero() {
 		return sqrtPriceCurrent
 	}
@@ -140,7 +140,7 @@ func GetNextSqrtPriceFromAmount0InRoundingUp(sqrtPriceCurrent, liquidity, amount
 // When we swap for token one in given token zero out, the price is increasing and we need to move the price up enough
 // so that we get the desired output amount out. Therefore, we round up.
 // sqrt_next = liq * sqrt_cur / (liq - token_out * sqrt_cur)
-func GetNextSqrtPriceFromAmount0OutRoundingUp(sqrtPriceCurrent, liquidity, amountZeroRemainingOut furymath.BigDec) (sqrtPriceNext furymath.BigDec) {
+func GetNextSqrtPriceFromAmount0OutRoundingUp(sqrtPriceCurrent, liquidity, amountZeroRemainingOut osmomath.BigDec) (sqrtPriceNext osmomath.BigDec) {
 	if amountZeroRemainingOut.IsZero() {
 		return sqrtPriceCurrent
 	}
@@ -158,7 +158,7 @@ func GetNextSqrtPriceFromAmount0OutRoundingUp(sqrtPriceCurrent, liquidity, amoun
 // When we swap for token zero out given token one in, the price is increasing and we need to move the sqrt price (increase it) less to
 // avoid overpaying out of the pool. Therefore, we round down.
 // sqrt_next = sqrt_cur + token_in / liq
-func GetNextSqrtPriceFromAmount1InRoundingDown(sqrtPriceCurrent, liquidity, amountOneRemainingIn furymath.BigDec) (sqrtPriceNext furymath.BigDec) {
+func GetNextSqrtPriceFromAmount1InRoundingDown(sqrtPriceCurrent, liquidity, amountOneRemainingIn osmomath.BigDec) (sqrtPriceNext osmomath.BigDec) {
 	return sqrtPriceCurrent.Add(amountOneRemainingIn.QuoTruncate(liquidity))
 }
 
@@ -167,15 +167,15 @@ func GetNextSqrtPriceFromAmount1InRoundingDown(sqrtPriceCurrent, liquidity, amou
 // When we swap for token zero in given token one out, the price is decrearing and we need to move the price down enough
 // so that we get the desired output amount out.
 // sqrt_next = sqrt_cur - token_out / liq
-func GetNextSqrtPriceFromAmount1OutRoundingDown(sqrtPriceCurrent, liquidity, amountOneRemainingOut furymath.BigDec) (sqrtPriceNext furymath.BigDec) {
+func GetNextSqrtPriceFromAmount1OutRoundingDown(sqrtPriceCurrent, liquidity, amountOneRemainingOut osmomath.BigDec) (sqrtPriceNext osmomath.BigDec) {
 	return sqrtPriceCurrent.Sub(amountOneRemainingOut.QuoRoundUp(liquidity))
 }
 
 // GetLiquidityFromAmounts takes the current sqrtPrice and the sqrtPrice for the upper and lower ticks as well as the amounts of asset0 and asset1
 // and returns the resulting liquidity from these inputs.
-func GetLiquidityFromAmounts(sqrtPrice furymath.BigDec, sqrtPriceA, sqrtPriceB sdk.Dec, amount0, amount1 sdk.Int) (liquidity sdk.Dec) {
-	sqrtPriceABigDec := furymath.BigDecFromSDKDec(sqrtPriceA)
-	sqrtPriceBBigDec := furymath.BigDecFromSDKDec(sqrtPriceB)
+func GetLiquidityFromAmounts(sqrtPrice osmomath.BigDec, sqrtPriceA, sqrtPriceB sdk.Dec, amount0, amount1 sdk.Int) (liquidity sdk.Dec) {
+	sqrtPriceABigDec := osmomath.BigDecFromSDKDec(sqrtPriceA)
+	sqrtPriceBBigDec := osmomath.BigDecFromSDKDec(sqrtPriceB)
 
 	// Reorder the prices so that sqrtPriceA is the smaller of the two.
 	// todo: Remove this.

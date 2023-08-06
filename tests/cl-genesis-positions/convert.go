@@ -250,7 +250,7 @@ func parsePrice(strPrice string) (result sdk.Dec) {
 			result = cltypes.MinSpotPrice
 		}
 	}()
-	result = furymath.MustNewDecFromStr(strPrice).SDKDec()
+	result = osmomath.MustNewDecFromStr(strPrice).SDKDec()
 	return result
 }
 
@@ -262,7 +262,7 @@ func parseStringToInt(strInt string) (result sdk.Int, failedParsing bool) {
 			failedParsing = true
 		}
 	}()
-	result = furymath.MustNewDecFromStr(strInt).SDKDec().MulInt64(int64(merlinPrecision)).TruncateInt()
+	result = osmomath.MustNewDecFromStr(strInt).SDKDec().MulInt64(int64(merlinPrecision)).TruncateInt()
 	return result, failedParsing
 }
 

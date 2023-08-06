@@ -46,7 +46,7 @@ func (server msgServer) CreateGauge(goCtx context.Context, msg *types.MsgCreateG
 	ctx.EventManager().EmitEvents(sdk.Events{
 		sdk.NewEvent(
 			types.TypeEvtCreateGauge,
-			sdk.NewAttribute(types.AttributeGaugeID, furyutils.Uint64ToString(gaugeID)),
+			sdk.NewAttribute(types.AttributeGaugeID, osmoutils.Uint64ToString(gaugeID)),
 		),
 	})
 
@@ -73,7 +73,7 @@ func (server msgServer) AddToGauge(goCtx context.Context, msg *types.MsgAddToGau
 	ctx.EventManager().EmitEvents(sdk.Events{
 		sdk.NewEvent(
 			types.TypeEvtAddToGauge,
-			sdk.NewAttribute(types.AttributeGaugeID, furyutils.Uint64ToString(msg.GaugeId)),
+			sdk.NewAttribute(types.AttributeGaugeID, osmoutils.Uint64ToString(msg.GaugeId)),
 		),
 	})
 

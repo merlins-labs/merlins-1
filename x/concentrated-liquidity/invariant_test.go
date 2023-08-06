@@ -106,8 +106,8 @@ func (s *KeeperTestSuite) assertTotalRewardsInvariant(expectedGlobalRewardValues
 	// This is to allow for cases where we slightly overround, which would otherwise fail here.
 	// TODO: create ErrTolerance type that allows for additive OR multiplicative tolerance to allow for
 	// tightening this check further.
-	errTolerance := furymath.ErrTolerance{
-		RoundingDir: furymath.RoundDown,
+	errTolerance := osmomath.ErrTolerance{
+		RoundingDir: osmomath.RoundDown,
 	}
 
 	// Assert total collected spread rewards and incentives equal to expected
@@ -169,8 +169,8 @@ func (s *KeeperTestSuite) assertWithdrawAllInvariant() {
 	// This is to allow for cases where we slightly overround, which would otherwise fail here.
 	// TODO: create ErrTolerance type that allows for additive OR multiplicative tolerance to allow for
 	// tightening this check further.
-	errTolerance := furymath.ErrTolerance{
-		RoundingDir: furymath.RoundDown,
+	errTolerance := osmomath.ErrTolerance{
+		RoundingDir: osmomath.RoundDown,
 	}
 
 	// Assert total withdrawn assets equal to expected

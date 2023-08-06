@@ -24,7 +24,7 @@ type valSet struct {
 // SetValidatorSetPreferences sets a new valset position for a delegator in modules state.
 func (k Keeper) SetValidatorSetPreferences(ctx sdk.Context, delegator string, validators types.ValidatorSetPreferences) {
 	store := ctx.KVStore(k.storeKey)
-	furyutils.MustSet(store, []byte(delegator), &validators)
+	osmoutils.MustSet(store, []byte(delegator), &validators)
 }
 
 // GetValidatorSetPreference returns the existing valset position for a delegator.
@@ -393,7 +393,7 @@ func (k Keeper) IsPreferenceValid(ctx sdk.Context, preferences []types.Validator
 	var weightsRoundedValPrefList []types.ValidatorPreference
 	for _, val := range preferences {
 		// round up weights
-		valWeightStr := furymath.SigFigRound(val.Weight, sdk.NewDec(10).Power(2).TruncateInt())
+		valWeightStr := osmomath.SigFigRound(val.Weight, sdk.NewDec(10).Power(2).TruncateInt())
 
 		_, _, err := k.GetValidatorInfo(ctx, val.ValOperAddress)
 		if err != nil {

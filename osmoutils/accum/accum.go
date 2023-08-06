@@ -67,7 +67,7 @@ func MakeAccumulatorWithValueAndShare(accumStore store.KVStore, accumName string
 // Gets the current value of the accumulator corresponding to accumName in accumStore
 func GetAccumulator(accumStore store.KVStore, accumName string) (AccumulatorObject, error) {
 	accumContent := AccumulatorContent{}
-	found, err := furyutils.Get(accumStore, formatAccumPrefixKey(accumName), &accumContent)
+	found, err := osmoutils.Get(accumStore, formatAccumPrefixKey(accumName), &accumContent)
 	if err != nil {
 		return AccumulatorObject{}, err
 	}
@@ -83,14 +83,14 @@ func GetAccumulator(accumStore store.KVStore, accumName string) (AccumulatorObje
 // MustGetPosition returns the position associated with the given address. No errors in position retrieval are allowed.
 func (accum AccumulatorObject) MustGetPosition(name string) Record {
 	position := Record{}
-	furyutils.MustGet(accum.store, FormatPositionPrefixKey(accum.name, name), &position)
+	osmoutils.MustGet(accum.store, FormatPositionPrefixKey(accum.name, name), &position)
 	return position
 }
 
 // GetPosition returns the position associated with the given address. If the position does not exist, returns an error.
 func (accum AccumulatorObject) GetPosition(name string) (Record, error) {
 	position := Record{}
-	found, err := furyutils.Get(accum.store, FormatPositionPrefixKey(accum.name, name), &position)
+	found, err := osmoutils.Get(accum.store, FormatPositionPrefixKey(accum.name, name), &position)
 	if err != nil {
 		return Record{}, err
 	}
@@ -106,7 +106,7 @@ func setAccumulator(accum *AccumulatorObject, value sdk.DecCoins, shares sdk.Dec
 		return fmt.Errorf("Accumulator name cannot contain '%s', provided name %s", KeySeparator, accum.name)
 	}
 	newAccum := AccumulatorContent{value, shares}
-	furyutils.MustSet(accum.store, formatAccumPrefixKey(accum.name), &newAccum)
+	osmoutils.MustSet(accum.store, formatAccumPrefixKey(accum.name), &newAccum)
 	return nil
 }
 

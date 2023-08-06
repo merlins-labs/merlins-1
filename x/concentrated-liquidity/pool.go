@@ -91,7 +91,7 @@ func (k Keeper) getPoolById(ctx sdk.Context, poolId uint64) (types.ConcentratedP
 	store := ctx.KVStore(k.storeKey)
 	pool := model.Pool{}
 	key := types.KeyPool(poolId)
-	found, err := furyutils.Get(store, key, &pool)
+	found, err := osmoutils.Get(store, key, &pool)
 	if err != nil {
 		panic(err)
 	}
@@ -102,7 +102,7 @@ func (k Keeper) getPoolById(ctx sdk.Context, poolId uint64) (types.ConcentratedP
 }
 
 func (k Keeper) GetPools(ctx sdk.Context) ([]poolmanagertypes.PoolI, error) {
-	return furyutils.GatherValuesFromStorePrefix(
+	return osmoutils.GatherValuesFromStorePrefix(
 		ctx.KVStore(k.storeKey), types.PoolPrefix, func(value []byte) (poolmanagertypes.PoolI, error) {
 			pool := model.Pool{}
 			err := k.cdc.Unmarshal(value, &pool)
@@ -123,7 +123,7 @@ func (k Keeper) setPool(ctx sdk.Context, pool types.ConcentratedPoolExtension) e
 	}
 	store := ctx.KVStore(k.storeKey)
 	key := types.KeyPool(pool.GetId())
-	furyutils.MustSet(store, key, poolModel)
+	osmoutils.MustSet(store, key, poolModel)
 	return nil
 }
 
@@ -234,7 +234,7 @@ func (k Keeper) GetSerializedPools(ctx sdk.Context, pagination *query.PageReques
 	pageRes, err := query.Paginate(poolStore, pagination, func(key, _ []byte) error {
 		pool := model.Pool{}
 		// Get the next pool from the poolStore and pass it to the pool variable
-		_, err := furyutils.Get(poolStore, key, &pool)
+		_, err := osmoutils.Get(poolStore, key, &pool)
 		if err != nil {
 			return err
 		}

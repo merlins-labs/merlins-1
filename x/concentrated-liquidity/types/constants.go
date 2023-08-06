@@ -29,10 +29,10 @@ const (
 var (
 	MaxSpotPrice       = sdk.MustNewDecFromStr("100000000000000000000000000000000000000")
 	MinSpotPrice       = sdk.MustNewDecFromStr("0.000000000001") // 10^-12
-	MaxSqrtPrice       = furymath.MustMonotonicSqrt(MaxSpotPrice)
-	MinSqrtPrice       = furymath.MustMonotonicSqrt(MinSpotPrice)
-	MaxSqrtPriceBigDec = furymath.BigDecFromSDKDec(MaxSqrtPrice)
-	MinSqrtPriceBigDec = furymath.BigDecFromSDKDec(MinSqrtPrice)
+	MaxSqrtPrice       = osmomath.MustMonotonicSqrt(MaxSpotPrice)
+	MinSqrtPrice       = osmomath.MustMonotonicSqrt(MinSpotPrice)
+	MaxSqrtPriceBigDec = osmomath.BigDecFromSDKDec(MaxSqrtPrice)
+	MinSqrtPriceBigDec = osmomath.BigDecFromSDKDec(MinSqrtPrice)
 	// Supported uptimes preset to 1 ns, 1 min, 1 hr, 1D, 1W, 2W
 	SupportedUptimes        = []time.Duration{time.Nanosecond, time.Minute, time.Hour, time.Hour * 24, time.Hour * 24 * 7, time.Hour * 24 * 7 * 2}
 	AuthorizedTickSpacing   = []uint64{1, 10, 100, 1000}

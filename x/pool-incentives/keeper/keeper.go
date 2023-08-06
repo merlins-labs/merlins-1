@@ -204,7 +204,7 @@ func (k Keeper) GetPoolGaugeId(ctx sdk.Context, poolId uint64, lockableDuration 
 // have the second link.
 func (k Keeper) GetNoLockGaugeIdsFromPool(ctx sdk.Context, poolId uint64) ([]uint64, error) {
 	store := ctx.KVStore(k.storeKey)
-	gaugeIds, err := furyutils.GatherValuesFromStorePrefix(store, types.GetPoolNoLockGaugeIdIterationStoreKey(poolId), func(b []byte) (uint64, error) {
+	gaugeIds, err := osmoutils.GatherValuesFromStorePrefix(store, types.GetPoolNoLockGaugeIdIterationStoreKey(poolId), func(b []byte) (uint64, error) {
 		return sdk.BigEndianToUint64(b), nil
 	})
 	if err != nil {
@@ -252,13 +252,13 @@ func (k Keeper) GetGaugesForCFMMPool(ctx sdk.Context, poolId uint64) ([]incentiv
 func (k Keeper) SetLockableDurations(ctx sdk.Context, lockableDurations []time.Duration) {
 	store := ctx.KVStore(k.storeKey)
 	info := types.LockableDurationsInfo{LockableDurations: lockableDurations}
-	furyutils.MustSet(store, types.LockableDurationsKey, &info)
+	osmoutils.MustSet(store, types.LockableDurationsKey, &info)
 }
 
 func (k Keeper) GetLockableDurations(ctx sdk.Context) []time.Duration {
 	store := ctx.KVStore(k.storeKey)
 	info := types.LockableDurationsInfo{}
-	furyutils.MustGet(store, types.LockableDurationsKey, &info)
+	osmoutils.MustGet(store, types.LockableDurationsKey, &info)
 	return info.LockableDurations
 }
 

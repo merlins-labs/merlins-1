@@ -9,7 +9,7 @@ import (
 // Whitelists the code id.
 func (k Keeper) WhitelistCodeId(ctx sdk.Context, codeId uint64) {
 	params := k.GetParams(ctx)
-	if !furyutils.Contains(params.CodeIdWhitelist, codeId) {
+	if !osmoutils.Contains(params.CodeIdWhitelist, codeId) {
 		params.CodeIdWhitelist = append(params.CodeIdWhitelist, codeId)
 		k.SetParams(ctx, params)
 	}
@@ -44,5 +44,5 @@ func (k Keeper) deWhiteListCodeId(ctx sdk.Context, codeId uint64) bool {
 // isWhitelisted returns true if the code id is in the whitelist.
 func (k Keeper) isWhitelisted(ctx sdk.Context, codeId uint64) bool {
 	whitelist := k.GetParams(ctx).CodeIdWhitelist
-	return furyutils.Contains(whitelist, codeId)
+	return osmoutils.Contains(whitelist, codeId)
 }

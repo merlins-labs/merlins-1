@@ -98,7 +98,7 @@ func (s *TestSuite) TestComputeTwap() {
 			for _, twapStrategy := range test.twapStrategies {
 				actualTwap, err := twap.ComputeTwap(test.startRecord, test.endRecord, test.quoteAsset, twapStrategy)
 				s.Require().NoError(err)
-				osmoassert.DecApproxEq(s.T(), test.expTwap, actualTwap, furymath.GetPowPrecision())
+				osmoassert.DecApproxEq(s.T(), test.expTwap, actualTwap, osmomath.GetPowPrecision())
 			}
 		})
 	}
@@ -170,9 +170,9 @@ func (s *TestSuite) TestComputeArithmeticStrategyTwap() {
 // this function should panic in case of zero delta.
 func (s *TestSuite) TestComputeGeometricStrategyTwap() {
 	var (
-		errTolerance = furymath.ErrTolerance{
+		errTolerance = osmomath.ErrTolerance{
 			MultiplicativeTolerance: sdk.SmallestDec(),
-			RoundingDir:             furymath.RoundDown,
+			RoundingDir:             osmomath.RoundDown,
 		}
 
 		// Compute accumulator difference for the underflow test case by
@@ -302,9 +302,9 @@ func (s *TestSuite) TestComputeGeometricStrategyTwap() {
 				actualTwap := geometricStrategy.ComputeTwap(tc.startRecord, tc.endRecord, tc.quoteAsset)
 
 				// Sig fig round the expected value.
-				tc.expTwap = furymath.SigFigRound(tc.expTwap, gammtypes.SpotPriceSigFigs)
+				tc.expTwap = osmomath.SigFigRound(tc.expTwap, gammtypes.SpotPriceSigFigs)
 
-				s.Require().Equal(0, errTolerance.CompareBigDec(furymath.BigDecFromSDKDec(tc.expTwap), furymath.BigDecFromSDKDec(actualTwap)), "expected %s, got %s", tc.expTwap, actualTwap)
+				s.Require().Equal(0, errTolerance.CompareBigDec(osmomath.BigDecFromSDKDec(tc.expTwap), osmomath.BigDecFromSDKDec(actualTwap)), "expected %s, got %s", tc.expTwap, actualTwap)
 			})
 		})
 	}

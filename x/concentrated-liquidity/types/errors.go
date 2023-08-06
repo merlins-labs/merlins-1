@@ -191,9 +191,9 @@ func (e TokenOutDenomNotInPoolError) Error() string {
 }
 
 type SqrtPriceValidationError struct {
-	SqrtPriceLimit furymath.BigDec
-	LowerBound     furymath.BigDec
-	UpperBound     furymath.BigDec
+	SqrtPriceLimit osmomath.BigDec
+	LowerBound     osmomath.BigDec
+	UpperBound     osmomath.BigDec
 }
 
 func (e SqrtPriceValidationError) Error() string {
@@ -282,7 +282,7 @@ func (e SpotPriceNegativeError) Error() string {
 }
 
 type SqrtPriceNegativeError struct {
-	ProvidedSqrtPrice furymath.BigDec
+	ProvidedSqrtPrice osmomath.BigDec
 }
 
 func (e SqrtPriceNegativeError) Error() string {
@@ -853,7 +853,7 @@ func (e SwapNoProgressError) Error() string {
 }
 
 type SwapNoProgressWithConsumptionError struct {
-	ComputedSqrtPrice furymath.BigDec
+	ComputedSqrtPrice osmomath.BigDec
 	AmountIn          sdk.Dec
 	AmountOut         sdk.Dec
 }
@@ -880,8 +880,8 @@ func (e OverChargeSwapOutGivenInError) Error() string {
   
 type ComputedSqrtPriceInequalityError struct {
 	IsZeroForOne                 bool
-	NextInitializedTickSqrtPrice furymath.BigDec
-	ComputedSqrtPrice            furymath.BigDec
+	NextInitializedTickSqrtPrice osmomath.BigDec
+	ComputedSqrtPrice            osmomath.BigDec
 }
 
 func (e ComputedSqrtPriceInequalityError) Error() string {

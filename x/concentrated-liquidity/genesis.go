@@ -253,5 +253,5 @@ func (k Keeper) initOrUpdateAccumPosition(ctx sdk.Context, accumumulator accum.A
 		Options:               options,
 	}
 
-	furyutils.MustSet(ctx.KVStore(k.storeKey), accum.FormatPositionPrefixKey(accumumulator.GetName(), index), &position)
+	osmoutils.MustSet(ctx.KVStore(k.storeKey), accum.FormatPositionPrefixKey(accumumulator.GetName(), index), &position)
 }

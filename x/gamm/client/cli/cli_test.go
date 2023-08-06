@@ -18,7 +18,7 @@ import (
 	"github.com/cosmos/cosmos-sdk/types/query"
 )
 
-var testAddresses = furyutils.CreateRandomAccounts(3)
+var testAddresses = osmoutils.CreateRandomAccounts(3)
 
 type IntegrationTestSuite struct {
 	suite.Suite

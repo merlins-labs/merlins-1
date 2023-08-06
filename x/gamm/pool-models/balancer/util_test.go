@@ -31,7 +31,7 @@ func assertExpectedSharesErrRatio(t *testing.T, expectedShares, actualShares sdk
 	allowedErrRatioDec, err := sdk.NewDecFromStr(allowedErrRatio)
 	require.NoError(t, err)
 
-	errTolerance := furymath.ErrTolerance{
+	errTolerance := osmomath.ErrTolerance{
 		MultiplicativeTolerance: allowedErrRatioDec,
 	}
 

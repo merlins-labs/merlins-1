@@ -1323,7 +1323,7 @@ func (s *TestSuite) TestAfterCreatePool() {
 			s.Require().Equal(tc.poolId, poolId)
 			s.Require().NoError(err)
 
-			denoms := furyutils.CoinsDenoms(tc.poolCoins)
+			denoms := osmoutils.CoinsDenoms(tc.poolCoins)
 			denomPairs := types.GetAllUniqueDenomPairs(denoms)
 			expectedRecords := []types.TwapRecord{}
 			for _, denomPair := range denomPairs {
@@ -1433,7 +1433,7 @@ func (s *TestSuite) TestTwapLog_CorrectBase() {
 }
 
 func (s *TestSuite) TestTwapLog() {
-	smallestAdditiveTolerance := furymath.ErrTolerance{
+	smallestAdditiveTolerance := osmomath.ErrTolerance{
 		AdditiveTolerance: sdk.SmallestDec(),
 	}
 
@@ -1471,8 +1471,8 @@ func (s *TestSuite) TestTwapLog() {
 				result := twap.TwapLog(tc.price)
 
 				smallestAdditiveTolerance.CompareBigDec(
-					furymath.BigDecFromSDKDec(tc.expected),
-					furymath.BigDecFromSDKDec(result),
+					osmomath.BigDecFromSDKDec(tc.expected),
+					osmomath.BigDecFromSDKDec(result),
 				)
 			})
 		})

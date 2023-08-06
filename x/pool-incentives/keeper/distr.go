@@ -71,13 +71,13 @@ func (k Keeper) AllocateAsset(ctx sdk.Context) error {
 func (k Keeper) GetDistrInfo(ctx sdk.Context) types.DistrInfo {
 	store := ctx.KVStore(k.storeKey)
 	distrInfo := types.DistrInfo{}
-	furyutils.MustGet(store, types.DistrInfoKey, &distrInfo)
+	osmoutils.MustGet(store, types.DistrInfoKey, &distrInfo)
 	return distrInfo
 }
 
 func (k Keeper) SetDistrInfo(ctx sdk.Context, distrInfo types.DistrInfo) {
 	store := ctx.KVStore(k.storeKey)
-	furyutils.MustSet(store, types.DistrInfoKey, &distrInfo)
+	osmoutils.MustSet(store, types.DistrInfoKey, &distrInfo)
 }
 
 // validateRecords validates a list of records to ensure that:

@@ -62,7 +62,7 @@ func (suite *UpgradeTestSuite) TestUpgrade() {
 	}
 
 	// Allow 0.01% margin of error.
-	multiplicativeTolerance := furymath.ErrTolerance{
+	multiplicativeTolerance := osmomath.ErrTolerance{
 		MultiplicativeTolerance: sdk.MustNewDecFromStr("0.0001"),
 	}
 
@@ -143,7 +143,7 @@ func (suite *UpgradeTestSuite) TestUpgrade() {
 				suite.Require().Equal(v16.DAIIBCDenom, concentratedTypePool.GetToken1())
 
 				// Validate that the spot price of the CL pool is what we expect
-				suite.Require().Equal(0, multiplicativeTolerance.CompareBigDec(concentratedTypePool.GetCurrentSqrtPrice().PowerInteger(2), furymath.BigDecFromSDKDec(balancerSpotPrice)))
+				suite.Require().Equal(0, multiplicativeTolerance.CompareBigDec(concentratedTypePool.GetCurrentSqrtPrice().PowerInteger(2), osmomath.BigDecFromSDKDec(balancerSpotPrice)))
 
 				// Validate that link was created.
 				migrationInfo, err := suite.App.GAMMKeeper.GetAllMigrationInfo(suite.Ctx)
@@ -177,7 +177,7 @@ func (suite *UpgradeTestSuite) TestUpgrade() {
 
 				// Validate that cw pool module address is allowed to upload contract code
 				allowedAddresses := suite.App.WasmKeeper.GetParams(suite.Ctx).CodeUploadAccess.Addresses
-				isCwPoolModuleAddressAllowedUpload := furyutils.Contains(allowedAddresses, suite.App.AccountKeeper.GetModuleAddress(cosmwasmpooltypes.ModuleName).String())
+				isCwPoolModuleAddressAllowedUpload := osmoutils.Contains(allowedAddresses, suite.App.AccountKeeper.GetModuleAddress(cosmwasmpooltypes.ModuleName).String())
 				suite.Require().True(isCwPoolModuleAddressAllowedUpload)
 			},
 			func() {

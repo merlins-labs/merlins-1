@@ -327,10 +327,10 @@ func (s *KeeperTestSuite) TestPrepareConcentratedLockForSlash() {
 				asset0PostSlash, asset1PostSlash, err := cl.CalculateUnderlyingAssetsFromPosition(s.Ctx, positionPostSlash, clPool)
 				s.Require().NoError(err)
 
-				errTolerance := furymath.ErrTolerance{
+				errTolerance := osmomath.ErrTolerance{
 					AdditiveTolerance: sdk.NewDec(1),
 					// Actual should be greater than expected, so we round up
-					RoundingDir: furymath.RoundUp,
+					RoundingDir: osmomath.RoundUp,
 				}
 
 				s.Require().Equal(0, errTolerance.Compare(asset0PreSlash.Sub(asset0PostSlash).Amount, underlyingAssetsToSlash[0].Amount))

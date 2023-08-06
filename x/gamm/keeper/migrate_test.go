@@ -38,9 +38,9 @@ func (s *KeeperTestSuite) TestMigrate() {
 	// We add 1 to account for ExitPool rounding exit amount up. This is not an issue since the balance is deducted from the user regardless.
 	// These leaves us with full transfer of asset 0 and a (correct) transfer of asset 1 amounting to full GAMM balance minus 100000.
 	// We expect this tolerance to be sufficient as long as our test cases are on the same order of magnitude.
-	defaultErrorTolerance := furymath.ErrTolerance{
+	defaultErrorTolerance := osmomath.ErrTolerance{
 		AdditiveTolerance: sdk.NewDec(100000),
-		RoundingDir:       furymath.RoundDown,
+		RoundingDir:       osmomath.RoundDown,
 	}
 	defaultJoinTime := s.Ctx.BlockTime()
 
@@ -58,7 +58,7 @@ func (s *KeeperTestSuite) TestMigrate() {
 		tokenOutMins           sdk.Coins
 		expectedLiquidity      sdk.Dec
 		setupPoolMigrationLink bool
-		errTolerance           furymath.ErrTolerance
+		errTolerance           osmomath.ErrTolerance
 	}{
 		{
 			name: "migrate all of the shares (with pool migration link)",

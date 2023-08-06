@@ -1,4 +1,4 @@
-package furyutils
+package osmoutils
 
 import (
 	"encoding/binary"

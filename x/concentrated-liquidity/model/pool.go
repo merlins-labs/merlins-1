@@ -40,10 +40,10 @@ func NewConcentratedLiquidityPool(poolId uint64, denom0, denom1 string, tickSpac
 	// Create a new pool struct with the specified parameters
 	pool := Pool{
 		Address:              poolmanagertypes.NewPoolAddress(poolId).String(),
-		IncentivesAddress:    furyutils.NewModuleAddressWithPrefix(types.ModuleName, incentivesAddressPrefix, sdk.Uint64ToBigEndian(poolId)).String(),
-		SpreadRewardsAddress: furyutils.NewModuleAddressWithPrefix(types.ModuleName, spreadRewardsAddressPrefix, sdk.Uint64ToBigEndian(poolId)).String(),
+		IncentivesAddress:    osmoutils.NewModuleAddressWithPrefix(types.ModuleName, incentivesAddressPrefix, sdk.Uint64ToBigEndian(poolId)).String(),
+		SpreadRewardsAddress: osmoutils.NewModuleAddressWithPrefix(types.ModuleName, spreadRewardsAddressPrefix, sdk.Uint64ToBigEndian(poolId)).String(),
 		Id:                   poolId,
-		CurrentSqrtPrice:     furymath.ZeroDec(),
+		CurrentSqrtPrice:     osmomath.ZeroDec(),
 		CurrentTick:          0,
 		CurrentTickLiquidity: sdk.ZeroDec(),
 		Token0:               denom0,
@@ -121,7 +121,7 @@ func (p Pool) SpotPrice(ctx sdk.Context, baseAssetDenom string, quoteAssetDenom 
 	if baseAssetDenom == p.Token0 {
 		return p.CurrentSqrtPrice.PowerInteger(2).SDKDec(), nil
 	}
-	return furymath.OneDec().Quo(p.CurrentSqrtPrice.PowerInteger(2)).SDKDec(), nil
+	return osmomath.OneDec().Quo(p.CurrentSqrtPrice.PowerInteger(2)).SDKDec(), nil
 }
 
 // GetToken0 returns the token0 of the pool
@@ -135,7 +135,7 @@ func (p Pool) GetToken1() string {
 }
 
 // GetCurrentSqrtPrice returns the current sqrt price of the pool
-func (p Pool) GetCurrentSqrtPrice() furymath.BigDec {
+func (p Pool) GetCurrentSqrtPrice() osmomath.BigDec {
 	return p.CurrentSqrtPrice
 }
 
@@ -174,7 +174,7 @@ func (p *Pool) UpdateLiquidity(newLiquidity sdk.Dec) {
 }
 
 // SetCurrentSqrtPrice updates the current sqrt price of the pool when the first position is created.
-func (p *Pool) SetCurrentSqrtPrice(newSqrtPrice furymath.BigDec) {
+func (p *Pool) SetCurrentSqrtPrice(newSqrtPrice osmomath.BigDec) {
 	p.CurrentSqrtPrice = newSqrtPrice
 }
 
@@ -242,12 +242,12 @@ func (p Pool) CalcActualAmounts(ctx sdk.Context, lowerTick, upperTick int64, liq
 	roundUp := liquidityDelta.IsPositive()
 
 	var (
-		liquidityDeltaBigDec     = furymath.BigDecFromSDKDec(liquidityDelta)
-		sqrtPriceLowerTickBigDec = furymath.BigDecFromSDKDec(sqrtPriceLowerTick)
-		sqrtPriceUpperTickBigDec = furymath.BigDecFromSDKDec(sqrtPriceUpperTick)
+		liquidityDeltaBigDec     = osmomath.BigDecFromSDKDec(liquidityDelta)
+		sqrtPriceLowerTickBigDec = osmomath.BigDecFromSDKDec(sqrtPriceLowerTick)
+		sqrtPriceUpperTickBigDec = osmomath.BigDecFromSDKDec(sqrtPriceUpperTick)
 
-		actualAmountDenom0 furymath.BigDec
-		actualAmountDenom1 furymath.BigDec
+		actualAmountDenom0 osmomath.BigDec
+		actualAmountDenom1 osmomath.BigDec
 	)
 
 	if p.IsCurrentTickInRange(lowerTick, upperTick) {
@@ -260,12 +260,12 @@ func (p Pool) CalcActualAmounts(ctx sdk.Context, lowerTick, upperTick int64, liq
 	} else if p.CurrentTick < lowerTick {
 		// outcome two: position is below current price
 		// this means position is solely made up of asset0
-		actualAmountDenom1 = furymath.ZeroDec()
+		actualAmountDenom1 = osmomath.ZeroDec()
 		actualAmountDenom0 = math.CalcAmount0Delta(liquidityDeltaBigDec, sqrtPriceLowerTickBigDec, sqrtPriceUpperTickBigDec, roundUp)
 	} else {
 		// outcome three: position is above current price
 		// this means position is solely made up of asset1
-		actualAmountDenom0 = furymath.ZeroDec()
+		actualAmountDenom0 = osmomath.ZeroDec()
 		actualAmountDenom1 = math.CalcAmount1Delta(liquidityDeltaBigDec, sqrtPriceLowerTickBigDec, sqrtPriceUpperTickBigDec, roundUp)
 	}
 
@@ -286,7 +286,7 @@ func (p Pool) IsCurrentTickInRange(lowerTick, upperTick int64) bool {
 // ApplySwap state of pool after swap.
 // It specifically overwrites the pool's liquidity, curr tick and the curr sqrt price.
 // Note that this method is mutative.
-func (p *Pool) ApplySwap(newLiquidity sdk.Dec, newCurrentTick int64, newCurrentSqrtPrice furymath.BigDec) error {
+func (p *Pool) ApplySwap(newLiquidity sdk.Dec, newCurrentTick int64, newCurrentSqrtPrice osmomath.BigDec) error {
 	// Check if the new liquidity provided is not negative.
 	if newLiquidity.IsNegative() {
 		return types.NegativeLiquidityError{Liquidity: newLiquidity}

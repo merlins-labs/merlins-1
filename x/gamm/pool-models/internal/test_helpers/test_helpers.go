@@ -40,7 +40,7 @@ func TestCalculateAmountOutAndIn_InverseRelationship(
 	assetOutDenom string,
 	initialCalcOut int64,
 	spreadFactor sdk.Dec,
-	errTolerance furymath.ErrTolerance,
+	errTolerance osmomath.ErrTolerance,
 ) {
 	initialOut := sdk.NewInt64Coin(assetOutDenom, initialCalcOut)
 	initialOutCoins := sdk.NewCoins(initialOut)
@@ -68,7 +68,7 @@ func TestCalculateAmountOutAndIn_InverseRelationship(
 		require.True(t, actual.GT(expected))
 	} else {
 		if expected.Sub(actual).Abs().GT(sdk.OneDec()) {
-			compRes := errTolerance.CompareBigDec(furymath.BigDecFromSDKDec(expected), furymath.BigDecFromSDKDec(actual))
+			compRes := errTolerance.CompareBigDec(osmomath.BigDecFromSDKDec(expected), osmomath.BigDecFromSDKDec(actual))
 			require.True(t, compRes == 0, "expected %s, actual %s, not within error tolerance %v",
 				expected, actual, errTolerance)
 		}

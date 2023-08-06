@@ -127,7 +127,7 @@ func (k Keeper) createPoolZeroLiquidityNoCreationFee(ctx sdk.Context, msg types.
 
 	// Create and save the pool's module account to the account keeper.
 	// This utilizes the pool address already created and validated in the previous steps.
-	if err := furyutils.CreateModuleAccount(ctx, k.accountKeeper, pool.GetAddress()); err != nil {
+	if err := osmoutils.CreateModuleAccount(ctx, k.accountKeeper, pool.GetAddress()); err != nil {
 		return nil, fmt.Errorf("creating pool module account for id %d: %w", poolId, err)
 	}
 
@@ -158,7 +158,7 @@ func (k Keeper) getNextPoolIdAndIncrement(ctx sdk.Context) uint64 {
 
 func (k Keeper) SetPoolRoute(ctx sdk.Context, poolId uint64, poolType types.PoolType) {
 	store := ctx.KVStore(k.storeKey)
-	furyutils.MustSet(store, types.FormatModuleRouteKey(poolId), &types.ModuleRoute{PoolType: poolType})
+	osmoutils.MustSet(store, types.FormatModuleRouteKey(poolId), &types.ModuleRoute{PoolType: poolType})
 }
 
 // GetPoolModule returns the swap module for the given pool ID.
@@ -173,7 +173,7 @@ func (k Keeper) GetPoolModule(ctx sdk.Context, poolId uint64) (types.PoolModuleI
 	store := ctx.KVStore(k.storeKey)
 
 	moduleRoute := &types.ModuleRoute{}
-	found, err := furyutils.Get(store, types.FormatModuleRouteKey(poolId), moduleRoute)
+	found, err := osmoutils.Get(store, types.FormatModuleRouteKey(poolId), moduleRoute)
 	if err != nil {
 		return nil, err
 	}
@@ -192,7 +192,7 @@ func (k Keeper) GetPoolModule(ctx sdk.Context, poolId uint64) (types.PoolModuleI
 // getAllPoolRoutes returns all pool routes from state.
 func (k Keeper) getAllPoolRoutes(ctx sdk.Context) []types.ModuleRoute {
 	store := ctx.KVStore(k.storeKey)
-	moduleRoutes, err := furyutils.GatherValuesFromStorePrefixWithKeyParser(store, types.SwapModuleRouterPrefix, parsePoolRouteWithKey)
+	moduleRoutes, err := osmoutils.GatherValuesFromStorePrefixWithKeyParser(store, types.SwapModuleRouterPrefix, parsePoolRouteWithKey)
 	if err != nil {
 		panic(err)
 	}

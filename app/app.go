@@ -159,8 +159,8 @@ func init() {
 // This is done to ensure they can be built without depending on at compilation time and thus imported by other chains
 // This should always be called before any other function to avoid inconsistent data
 func initReusablePackageInjections() {
-	// Inject ClawbackVestingAccount account type into furyutils
-	furyutils.FuryUtilsExtraAccountTypes = map[reflect.Type]struct{}{
+	// Inject ClawbackVestingAccount account type into osmoutils
+	osmoutils.FuryUtilsExtraAccountTypes = map[reflect.Type]struct{}{
 		reflect.TypeOf(&vestingtypes.ClawbackVestingAccount{}): {},
 	}
 }

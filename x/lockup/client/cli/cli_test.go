@@ -11,7 +11,7 @@ import (
 	"github.com/merlins-labs/merlin/v16/x/lockup/types"
 )
 
-var testAddresses = furyutils.CreateRandomAccounts(3)
+var testAddresses = osmoutils.CreateRandomAccounts(3)
 
 func TestLockTokensCmd(t *testing.T) {
 	desc, _ := NewLockTokensCmd()

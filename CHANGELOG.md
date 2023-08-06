@@ -91,7 +91,7 @@ and control over token transfers.
   * [#4757](https://github.com/merlins-labs/merlin/pull/4752) Pagination for all intermediary accounts
   * [#5066](https://github.com/merlins-labs/merlin/pull/5066) Fixed bad stargate query declaration
   * [#4868](https://github.com/merlins-labs/merlin/pull/4868) Remove wasmEnabledProposals []wasm.ProposalType from NewMerlinApp
-  * [#4791](https://github.com/merlins-labs/merlin/pull/4791) feat(furyutils): cosmwasm query and message wrappers
+  * [#4791](https://github.com/merlins-labs/merlin/pull/4791) feat(osmoutils): cosmwasm query and message wrappers
   * [#4549](https://github.com/merlins-labs/merlin/pull/4549) added single pool query
   * [#4659](https://github.com/merlins-labs/merlin/pull/4659) feat: implement AllPools query in x/poolmanager
   * [#4489](https://github.com/merlins-labs/merlin/pull/4489) Add unlocking lock id to BeginUnlocking response
@@ -112,7 +112,7 @@ and control over token transfers.
   * [#4336](https://github.com/merlins-labs/merlin/pull/4336) feat: make epochs standalone
   * [#4801](https://github.com/merlins-labs/merlin/pull/4801) refactor: remove GetTotalShares, GetTotalLiquidity and GetExitFee from PoolI
   * [#4951](https://github.com/merlins-labs/merlin/pull/4951) feat: implement pool liquidity query in pool manager, deprecate the one in gamm
-  * [#5000](https://github.com/merlins-labs/merlin/pull/5000) furymath.Power panics for base < 1 to temporarily restrict broken logic for such base.
+  * [#5000](https://github.com/merlins-labs/merlin/pull/5000) osmomath.Power panics for base < 1 to temporarily restrict broken logic for such base.
   * [#5468](https://github.com/merlins-labs/merlin/pull/5468) fix: Reduce tokenfactory denom creation gas fee to 1_000_000
 
 ## Dependencies
@@ -143,7 +143,7 @@ and control over token transfers.
   * [#4950](https://github.com/merlins-labs/merlin/pull/4950) Add in/out tokens to Concentrated Liquidity's AfterConcentratedPoolSwap hook
   * [#4629](https://github.com/merlins-labs/merlin/pull/4629) Add amino proto annotations
   * [#4830](https://github.com/merlins-labs/merlin/pull/4830) Add gas cost when we AddToGaugeRewards, linearly increase with coins to add
-  * [#5000](https://github.com/merlins-labs/merlin/pull/5000) furymath.Power panics for base < 1 to temporarily restrict broken logic for such base.
+  * [#5000](https://github.com/merlins-labs/merlin/pull/5000) osmomath.Power panics for base < 1 to temporarily restrict broken logic for such base.
   * [#4336](https://github.com/merlins-labs/merlin/pull/4336) Move epochs module into its own go.mod
   * [#5589](https://github.com/merlins-labs/merlin/pull/5589) Include linked balancer pool in incentivized pools query
 
@@ -200,7 +200,7 @@ This release containts the following new modules:
 
 ### Misc Improvements
 
-  * [#4131](https://github.com/merlins-labs/merlin/pull/4141) Add GatherValuesFromStorePrefixWithKeyParser function to furyutils.
+  * [#4131](https://github.com/merlins-labs/merlin/pull/4141) Add GatherValuesFromStorePrefixWithKeyParser function to osmoutils.
   * [#4388](https://github.com/merlins-labs/merlin/pull/4388) Increase the max allowed contract size for non-proposal contracts to 3MB
   * [#4384](https://github.com/merlins-labs/merlin/pull/4384) migrate stXXX/XXX constant product pools 833, 817, 810 to stable swap
   * [#4461](https://github.com/merlins-labs/merlin/pull/4461) added rate limit quotas for a set of high value tokens
@@ -255,21 +255,21 @@ This release's main features are utility helpers for smart contract developers. 
 * [#2387](https://github.com/merlins-labs/merlin/pull/3838) Upgrade to IBC v4.2.0, and as a requirement for it wasmd to 0.30.0
 * [#3609](https://github.com/merlins-labs/merlin/pull/3609) Add Downtime-detection module.
 * [#2788](https://github.com/merlins-labs/merlin/pull/2788) Add logarithm base 2 implementation.
-* [#3677](https://github.com/merlins-labs/merlin/pull/3677) Add methods for cloning and mutative multiplication on furymath.BigDec.
-* [#3676](https://github.com/merlins-labs/merlin/pull/3676) implement `PowerInteger` function on `furymath.BigDec` 
-* [#3678](https://github.com/merlins-labs/merlin/pull/3678) implement mutative `PowerIntegerMut` function on `furymath.BigDec`.
+* [#3677](https://github.com/merlins-labs/merlin/pull/3677) Add methods for cloning and mutative multiplication on osmomath.BigDec.
+* [#3676](https://github.com/merlins-labs/merlin/pull/3676) implement `PowerInteger` function on `osmomath.BigDec` 
+* [#3678](https://github.com/merlins-labs/merlin/pull/3678) implement mutative `PowerIntegerMut` function on `osmomath.BigDec`.
 * [#3708](https://github.com/merlins-labs/merlin/pull/3708) `Exp2` function to compute 2^decimal.
 * [#3693](https://github.com/merlins-labs/merlin/pull/3693) Add `EstimateSwapExactAmountOut` query to stargate whitelist
 * [#3731](https://github.com/merlins-labs/merlin/pull/3731) BigDec Power functions with decimal exponent.
 * [#3847](https://github.com/merlins-labs/merlin/pull/3847) GeometricTwap and GeometricTwapToNow queries added to Stargate whitelist.
-* [#3899](https://github.com/merlins-labs/merlin/pull/3899) Fixed furyutils so its importable by chains that don't use the merlin CosmosSDK fork 
+* [#3899](https://github.com/merlins-labs/merlin/pull/3899) Fixed osmoutils so its importable by chains that don't use the merlin CosmosSDK fork 
   
 ### API breaks
 
-* [#3763](https://github.com/merlins-labs/merlin/pull/3763) Move binary search and error tolerance code from `furyutils` into `furymath`
-* [#3817](https://github.com/merlins-labs/merlin/pull/3817) Move osmoassert from `app/apptesting/osmoassert` to `furyutils/osmoassert`.
-* [#3771](https://github.com/merlins-labs/merlin/pull/3771) Move furymath into its own go.mod
-* [#3827](https://github.com/merlins-labs/merlin/pull/3827) Move furyutils into its own go.mod
+* [#3763](https://github.com/merlins-labs/merlin/pull/3763) Move binary search and error tolerance code from `osmoutils` into `osmomath`
+* [#3817](https://github.com/merlins-labs/merlin/pull/3817) Move osmoassert from `app/apptesting/osmoassert` to `osmoutils/osmoassert`.
+* [#3771](https://github.com/merlins-labs/merlin/pull/3771) Move osmomath into its own go.mod
+* [#3827](https://github.com/merlins-labs/merlin/pull/3827) Move osmoutils into its own go.mod
 
 ### Bug fixes
 
@@ -287,8 +287,8 @@ Additionally, the swagger files for v13 have been updated to improve compatibili
 
 * [#3611](https://github.com/merlins-labs/merlin/pull/3611),[#3647](https://github.com/merlins-labs/merlin/pull/3647) Introduce osmocli, to automate thousands of lines of CLI boilerplate
 * [#3634](https://github.com/merlins-labs/merlin/pull/3634) (Makefile) Ensure correct golang version in make build and make install. (Thank you @jhernandezb )
-* [#3712](https://github.com/merlins-labs/merlin/pull/3712) replace `furymath.BigDec` `Power` with `PowerInteger` 
-* [#3711](https://github.com/merlins-labs/merlin/pull/3711) Use Dec instead of Int for additive `ErrTolerace` in `furyutils`.
+* [#3712](https://github.com/merlins-labs/merlin/pull/3712) replace `osmomath.BigDec` `Power` with `PowerInteger` 
+* [#3711](https://github.com/merlins-labs/merlin/pull/3711) Use Dec instead of Int for additive `ErrTolerace` in `osmoutils`.
 * [3647](https://github.com/merlins-labs/merlin/pull/3647), [3942](https://github.com/merlins-labs/merlin/pull/3942) (CLI) re-order the command line arguments for `merlin tx gamm join-swap-share-amount-out`
 
 ## v13.0.0

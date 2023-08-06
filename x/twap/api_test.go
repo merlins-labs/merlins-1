@@ -896,11 +896,11 @@ func (s *TestSuite) TestGeometricTwapToNow_BalancerPool_Randomized() {
 			twap, err := app.TwapKeeper.GetGeometricTwapToNow(ctx, 1, denom0, denom1, oldTime)
 			s.Require().NoError(err)
 
-			furymath.ErrTolerance{
+			osmomath.ErrTolerance{
 				MultiplicativeTolerance: sdk.SmallestDec(),
 			}.CompareBigDec(
-				furymath.BigDecFromSDKDec(spotPrice),
-				furymath.BigDecFromSDKDec(twap),
+				osmomath.BigDecFromSDKDec(spotPrice),
+				osmomath.BigDecFromSDKDec(twap),
 			)
 		})
 	}

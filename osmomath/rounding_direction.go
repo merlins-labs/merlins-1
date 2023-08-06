@@ -1,4 +1,4 @@
-package furymath
+package osmomath
 
 import (
 	"errors"

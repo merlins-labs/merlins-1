@@ -127,7 +127,7 @@ func (im *IBCModule) OnRecvPacket(
 	relayer sdk.AccAddress,
 ) exported.Acknowledgement {
 	if err := ValidateReceiverAddress(packet); err != nil {
-		return furyutils.NewEmitErrorAcknowledgement(ctx, types.ErrBadMessage, err.Error())
+		return osmoutils.NewEmitErrorAcknowledgement(ctx, types.ErrBadMessage, err.Error())
 	}
 
 	contract := im.ics4Middleware.GetContractAddress(ctx)
@@ -139,10 +139,10 @@ func (im *IBCModule) OnRecvPacket(
 	err := CheckAndUpdateRateLimits(ctx, im.ics4Middleware.ContractKeeper, "recv_packet", contract, packet)
 	if err != nil {
 		if strings.Contains(err.Error(), "rate limit exceeded") {
-			return furyutils.NewEmitErrorAcknowledgement(ctx, types.ErrRateLimitExceeded)
+			return osmoutils.NewEmitErrorAcknowledgement(ctx, types.ErrRateLimitExceeded)
 		}
 		fullError := errorsmod.Wrap(types.ErrContractError, err.Error())
-		return furyutils.NewEmitErrorAcknowledgement(ctx, fullError)
+		return osmoutils.NewEmitErrorAcknowledgement(ctx, fullError)
 	}
 
 	// if this returns an Acknowledgement that isn't successful, all state changes are discarded
@@ -161,7 +161,7 @@ func (im *IBCModule) OnAcknowledgementPacket(
 		return errorsmod.Wrapf(sdkerrors.ErrUnknownRequest, "cannot unmarshal ICS-20 transfer packet acknowledgement: %v", err)
 	}
 
-	if furyutils.IsAckError(acknowledgement) {
+	if osmoutils.IsAckError(acknowledgement) {
 		err := im.RevertSentPacket(ctx, packet) // If there is an error here we should still handle the ack
 		if err != nil {
 			ctx.EventManager().EmitEvent(

@@ -163,9 +163,9 @@ func (s *KeeperTestSuite) TestAddToConcentratedLiquiditySuperfluidPosition() {
 			// expectedAsset1 = floor(liquidityDelta * (curSqrtPrice - minSqrtPrice)) =  99999899.000000000000000000
 			//
 			// Note that the expected difference valid additive difference of 101 on asset 1.
-			var errTolerance furymath.ErrTolerance
+			var errTolerance osmomath.ErrTolerance
 			errTolerance.AdditiveTolerance = sdk.NewDec(101)
-			errTolerance.RoundingDir = furymath.RoundDown
+			errTolerance.RoundingDir = osmomath.RoundDown
 
 			postAddToPositionStakeSupply := bankKeeper.GetSupply(ctx, bondDenom)
 			postAddToPositionPoolFunds := bankKeeper.GetAllBalances(ctx, clPoolAddress)

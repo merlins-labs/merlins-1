@@ -305,5 +305,5 @@ func twapLog(price sdk.Dec) sdk.Dec {
 		panic("twap: cannot take logarithm of zero")
 	}
 
-	return furymath.BigDecFromSDKDec(price).LogBase2().SDKDec()
+	return osmomath.BigDecFromSDKDec(price).LogBase2().SDKDec()
 }

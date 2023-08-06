@@ -489,7 +489,7 @@ func (s *KeeperTestSuite) TestGetInitialSpreadRewardGrowthOppositeDirectionOfLas
 		validPoolId = 1
 	)
 
-	sqrtPrice := furymath.MustMonotonicSqrt(DefaultAmt1.ToDec().Quo(DefaultAmt0.ToDec()))
+	sqrtPrice := osmomath.MustMonotonicSqrt(DefaultAmt1.ToDec().Quo(DefaultAmt0.ToDec()))
 	initialPoolTick, err := clmath.SqrtPriceToTickRoundDownSpacing(sqrtPrice, DefaultTickSpacing)
 	s.Require().NoError(err)
 
@@ -1546,9 +1546,9 @@ func (s *KeeperTestSuite) CollectAndAssertSpreadRewards(ctx sdk.Context, poolId 
 	}
 
 	// Define error tolerance
-	var errTolerance furymath.ErrTolerance
+	var errTolerance osmomath.ErrTolerance
 	errTolerance.AdditiveTolerance = sdk.NewDec(10)
-	errTolerance.RoundingDir = furymath.RoundDown
+	errTolerance.RoundingDir = osmomath.RoundDown
 
 	// Check that the total spread rewards collected is equal to the total spread rewards (within a tolerance)
 	for _, coin := range totalSpreadRewardsCollected {

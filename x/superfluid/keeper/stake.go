@@ -510,7 +510,7 @@ func (k Keeper) mintFuryTokensAndDelegate(ctx sdk.Context, furyAmount sdk.Int, i
 		return err
 	}
 
-	err = furyutils.ApplyFuncIfNoError(ctx, func(cacheCtx sdk.Context) error {
+	err = osmoutils.ApplyFuncIfNoError(ctx, func(cacheCtx sdk.Context) error {
 		bondDenom := k.sk.BondDenom(cacheCtx)
 		coins := sdk.Coins{sdk.NewCoin(bondDenom, furyAmount)}
 		err = k.bk.MintCoins(cacheCtx, types.ModuleName, coins)
@@ -555,7 +555,7 @@ func (k Keeper) forceUndelegateAndBurnFuryTokens(ctx sdk.Context,
 	} else if err != nil {
 		return err
 	}
-	err = furyutils.ApplyFuncIfNoError(ctx, func(cacheCtx sdk.Context) error {
+	err = osmoutils.ApplyFuncIfNoError(ctx, func(cacheCtx sdk.Context) error {
 		undelegatedCoins, err := k.sk.InstantUndelegate(cacheCtx, intermediaryAcc.GetAccAddress(), valAddr, shares)
 		if err != nil {
 			return err

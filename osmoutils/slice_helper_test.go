@@ -1,4 +1,4 @@
-package furyutils_test
+package osmoutils_test
 
 import (
 	"reflect"
@@ -24,7 +24,7 @@ func TestReverseSlice(t *testing.T) {
 	}
 	for name, tc := range tests {
 		t.Run(name, func(t *testing.T) {
-			actualSolvedInput := furyutils.ReverseSlice(tc.s)
+			actualSolvedInput := osmoutils.ReverseSlice(tc.s)
 			require.Equal(t, tc.expectedSolvedInput, actualSolvedInput)
 		})
 	}
@@ -66,7 +66,7 @@ func TestMergeSlices(t *testing.T) {
 
 	for _, tc := range testCases {
 		t.Run(tc.name, func(t *testing.T) {
-			got := furyutils.MergeSlices(tc.slice1, tc.slice2, lessInt)
+			got := osmoutils.MergeSlices(tc.slice1, tc.slice2, lessInt)
 			if !reflect.DeepEqual(got, tc.want) {
 				t.Errorf("got: %v, want: %v", got, tc.want)
 			}
@@ -87,7 +87,7 @@ func TestContainsDuplicateDeepEqual(t *testing.T) {
 	}
 
 	for _, tt := range tests {
-		got := furyutils.ContainsDuplicateDeepEqual(tt.input)
+		got := osmoutils.ContainsDuplicateDeepEqual(tt.input)
 		require.Equal(t, tt.want, got)
 	}
 }
@@ -116,7 +116,7 @@ func TestContains(t *testing.T) {
 
 	for _, tc := range testCases {
 		t.Run(tc.name, func(t *testing.T) {
-			got := furyutils.Contains(tc.slice, tc.item)
+			got := osmoutils.Contains(tc.slice, tc.item)
 			if got != tc.expect {
 				t.Fatalf("Contains(%v, %v): expected %v, got %v", tc.slice, tc.item, tc.expect, got)
 			}

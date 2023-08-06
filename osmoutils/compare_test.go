@@ -1,4 +1,4 @@
-package furyutils_test
+package osmoutils_test
 
 import (
 	"testing"
@@ -33,7 +33,7 @@ func TestMax(t *testing.T) {
 
 	for _, tc := range testCases {
 		t.Run(tc.name, func(t *testing.T) {
-			result := furyutils.Max(tc.values...)
+			result := osmoutils.Max(tc.values...)
 			assert.Equal(t, tc.max, result)
 		})
 	}

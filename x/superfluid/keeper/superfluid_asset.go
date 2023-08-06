@@ -42,7 +42,7 @@ func (k Keeper) AddNewSuperfluidAsset(ctx sdk.Context, asset types.SuperfluidAss
 	// initialize fury equivalent multipliers
 	epochIdentifier := k.GetEpochIdentifier(ctx)
 	currentEpoch := k.ek.GetEpochInfo(ctx, epochIdentifier).CurrentEpoch
-	return furyutils.ApplyFuncIfNoError(ctx, func(ctx sdk.Context) error {
+	return osmoutils.ApplyFuncIfNoError(ctx, func(ctx sdk.Context) error {
 		k.SetSuperfluidAsset(ctx, asset)
 		err := k.UpdateFuryEquivalentMultipliers(ctx, asset, currentEpoch)
 		return err

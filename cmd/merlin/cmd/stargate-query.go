@@ -434,11 +434,11 @@ func GetStructAndFill(queryPath, module, structName string, structArguments ...s
 			v.PoolId = poolId
 			v.BaseAsset = structArguments[1]
 			v.QuoteAsset = structArguments[2]
-			startTime, err := furyutils.ParseTimeString(structArguments[3])
+			startTime, err := osmoutils.ParseTimeString(structArguments[3])
 			if err != nil {
 				return nil, err
 			}
-			endTime, err := furyutils.ParseTimeString(structArguments[4])
+			endTime, err := osmoutils.ParseTimeString(structArguments[4])
 			if err != nil {
 				return nil, err
 			}
@@ -455,7 +455,7 @@ func GetStructAndFill(queryPath, module, structName string, structArguments ...s
 			v.PoolId = poolId
 			v.BaseAsset = structArguments[1]
 			v.QuoteAsset = structArguments[2]
-			startTime, err := furyutils.ParseTimeString(structArguments[3])
+			startTime, err := osmoutils.ParseTimeString(structArguments[3])
 			if err != nil {
 				return nil, err
 			}
@@ -470,11 +470,11 @@ func GetStructAndFill(queryPath, module, structName string, structArguments ...s
 			v.PoolId = poolId
 			v.BaseAsset = structArguments[1]
 			v.QuoteAsset = structArguments[2]
-			startTime, err := furyutils.ParseTimeString(structArguments[3])
+			startTime, err := osmoutils.ParseTimeString(structArguments[3])
 			if err != nil {
 				return nil, err
 			}
-			endTime, err := furyutils.ParseTimeString(structArguments[4])
+			endTime, err := osmoutils.ParseTimeString(structArguments[4])
 			if err != nil {
 				return nil, err
 			}
@@ -490,7 +490,7 @@ func GetStructAndFill(queryPath, module, structName string, structArguments ...s
 			v.PoolId = poolId
 			v.BaseAsset = structArguments[1]
 			v.QuoteAsset = structArguments[2]
-			startTime, err := furyutils.ParseTimeString(structArguments[3])
+			startTime, err := osmoutils.ParseTimeString(structArguments[3])
 			if err != nil {
 				return nil, err
 			}

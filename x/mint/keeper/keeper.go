@@ -92,14 +92,14 @@ func (k *Keeper) SetHooks(h types.MintHooks) *Keeper {
 
 // GetMinter gets the minter.
 func (k Keeper) GetMinter(ctx sdk.Context) (minter types.Minter) {
-	furyutils.MustGet(ctx.KVStore(k.storeKey), types.MinterKey, &minter)
+	osmoutils.MustGet(ctx.KVStore(k.storeKey), types.MinterKey, &minter)
 	return
 }
 
 // SetMinter sets the minter.
 func (k Keeper) SetMinter(ctx sdk.Context, minter types.Minter) {
 	store := ctx.KVStore(k.storeKey)
-	furyutils.MustSet(store, types.MinterKey, &minter)
+	osmoutils.MustSet(store, types.MinterKey, &minter)
 }
 
 // GetParams returns the total set of minting parameters.

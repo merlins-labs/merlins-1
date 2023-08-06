@@ -453,12 +453,12 @@ func (k Keeper) SetMaxPointsPerBlock(ctx sdk.Context, maxPoints uint64) error {
 func (k Keeper) GetPoolWeights(ctx sdk.Context) types.PoolWeights {
 	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefixPoolWeights)
 	poolWeights := &types.PoolWeights{}
-	furyutils.MustGet(store, types.KeyPrefixPoolWeights, poolWeights)
+	osmoutils.MustGet(store, types.KeyPrefixPoolWeights, poolWeights)
 	return *poolWeights
 }
 
 // SetPoolWeights sets the weights of different pool types.
 func (k Keeper) SetPoolWeights(ctx sdk.Context, poolWeights types.PoolWeights) {
 	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefixPoolWeights)
-	furyutils.MustSet(store, types.KeyPrefixPoolWeights, &poolWeights)
+	osmoutils.MustSet(store, types.KeyPrefixPoolWeights, &poolWeights)
 }

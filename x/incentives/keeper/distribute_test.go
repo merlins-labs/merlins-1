@@ -7,7 +7,7 @@ import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/stretchr/testify/suite"
 
-	furyutils "github.com/osmosis-labs/osmosis/osmoutils"
+	osmoutils "github.com/osmosis-labs/osmosis/osmoutils"
 	appParams "github.com/merlins-labs/merlin/v16/app/params"
 	"github.com/merlins-labs/merlin/v16/x/incentives/types"
 	incentivetypes "github.com/merlins-labs/merlin/v16/x/incentives/types"
@@ -923,9 +923,9 @@ func (s *KeeperTestSuite) TestFunctionalInternalExternalCLGauge() {
 		externalGaugeCoins       = sdk.NewCoins(sdk.NewCoin("eth", sdk.NewInt(defaultExternalGaugeValue)), sdk.NewCoin("usdc", sdk.NewInt(defaultExternalGaugeValue)))                                                     // distributed full sum at epoch
 		halfOfExternalGaugeCoins = sdk.NewCoins(sdk.NewCoin("eth", sdk.NewInt(defaultExternalGaugeValue/numEpochsPaidOverGaugeTwo)), sdk.NewCoin("usdc", sdk.NewInt(defaultExternalGaugeValue/numEpochsPaidOverGaugeTwo))) // distributed at each epoch for non-perp gauge with numEpoch = 2
 
-		internalGaugeDecCoins       = furyutils.ConvertCoinsToDecCoins(internalGaugeCoins)
-		externalGaugeDecCoins       = furyutils.ConvertCoinsToDecCoins(externalGaugeCoins)
-		halfOfExternalGaugeDecCoins = furyutils.ConvertCoinsToDecCoins(halfOfExternalGaugeCoins)
+		internalGaugeDecCoins       = osmoutils.ConvertCoinsToDecCoins(internalGaugeCoins)
+		externalGaugeDecCoins       = osmoutils.ConvertCoinsToDecCoins(externalGaugeCoins)
+		halfOfExternalGaugeDecCoins = osmoutils.ConvertCoinsToDecCoins(halfOfExternalGaugeCoins)
 
 		emissionRateForPool1          = sdk.NewDecFromInt(sdk.NewInt(defaultExternalGaugeValue)).QuoTruncate(sdk.NewDec(epochInfo.Duration.Milliseconds()).QuoInt(sdk.NewInt(1000)))
 		emissionRateForPool2          = sdk.NewDecFromInt(sdk.NewInt(defaultExternalGaugeValue / 2)).QuoTruncate(sdk.NewDec(epochInfo.Duration.Milliseconds()).QuoInt(sdk.NewInt(1000)))

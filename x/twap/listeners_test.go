@@ -57,7 +57,7 @@ func (s *TestSuite) TestAfterPoolCreatedHook() {
 					s.RunBasicSwap(poolId)
 				}
 
-				denoms := furyutils.CoinsDenoms(tc.poolCoins)
+				denoms := osmoutils.CoinsDenoms(tc.poolCoins)
 				denomPairs := types.GetAllUniqueDenomPairs(denoms)
 				expectedRecords := []types.TwapRecord{}
 				for _, denomPair := range denomPairs {

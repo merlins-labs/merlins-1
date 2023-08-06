@@ -2,7 +2,7 @@ from decimal import Decimal, getcontext
 from clmath import *
 from math import *
 
-# Precomputed sqrt values using furymath.MonotonicSqrt
+# Precomputed sqrt values using osmomath.MonotonicSqrt
 minSqrtPrice = Decimal("0.000001000000000000")
 sqrt4000 = Decimal("63.245553203367586640")
 sqrt4545 = Decimal("67.416615162732695594")

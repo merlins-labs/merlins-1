@@ -70,14 +70,14 @@ func (k Keeper) Logger(ctx sdk.Context) log.Logger {
 func (k Keeper) SetLockableDurations(ctx sdk.Context, lockableDurations []time.Duration) {
 	store := ctx.KVStore(k.storeKey)
 	info := types.LockableDurationsInfo{LockableDurations: lockableDurations}
-	furyutils.MustSet(store, types.LockableDurationsKey, &info)
+	osmoutils.MustSet(store, types.LockableDurationsKey, &info)
 }
 
 // GetLockableDurations returns all incentivized lockable durations.
 func (k Keeper) GetLockableDurations(ctx sdk.Context) []time.Duration {
 	store := ctx.KVStore(k.storeKey)
 	info := types.LockableDurationsInfo{}
-	furyutils.MustGet(store, types.LockableDurationsKey, &info)
+	osmoutils.MustGet(store, types.LockableDurationsKey, &info)
 	return info.LockableDurations
 }
 

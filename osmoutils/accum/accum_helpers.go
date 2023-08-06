@@ -15,13 +15,13 @@ func initOrUpdatePosition(accum AccumulatorObject, accumulatorValuePerShare sdk.
 		UnclaimedRewardsTotal: unclaimedRewardsTotal,
 		Options:               options,
 	}
-	furyutils.MustSet(accum.store, FormatPositionPrefixKey(accum.name, index), &position)
+	osmoutils.MustSet(accum.store, FormatPositionPrefixKey(accum.name, index), &position)
 }
 
 // Gets addr's current position from store
 func GetPosition(accum AccumulatorObject, name string) (Record, error) {
 	position := Record{}
-	found, err := furyutils.Get(accum.store, FormatPositionPrefixKey(accum.name, name), &position)
+	found, err := osmoutils.Get(accum.store, FormatPositionPrefixKey(accum.name, name), &position)
 	if err != nil {
 		return Record{}, err
 	}

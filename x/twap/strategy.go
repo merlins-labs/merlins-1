@@ -52,7 +52,7 @@ func (s *geometric) computeTwap(startRecord types.TwapRecord, endRecord types.Tw
 
 	exponent := arithmeticMeanOfLogPrices
 	// result = 2^exponent = 2^arithmeticMeanOfLogPrices
-	result := furymath.Exp2(furymath.BigDecFromSDKDec(exponent.Abs()))
+	result := osmomath.Exp2(osmomath.BigDecFromSDKDec(exponent.Abs()))
 
 	isExponentNegative := exponent.IsNegative()
 	isQuoteAsset0 := quoteAsset == startRecord.Asset0Denom
@@ -65,10 +65,10 @@ func (s *geometric) computeTwap(startRecord types.TwapRecord, endRecord types.Tw
 	// https://proofwiki.org/wiki/Geometric_Mean_of_Reciprocals_is_Reciprocal_of_Geometric_Mean
 	invertCase2 := !isExponentNegative && !isQuoteAsset0
 	if invertCase1 || invertCase2 {
-		result = furymath.OneDec().Quo(result)
+		result = osmomath.OneDec().Quo(result)
 	}
 
 	// N.B. we round because this is the max number of significant figures supported
 	// by the underlying spot price function.
-	return furymath.SigFigRound(result.SDKDec(), gammtypes.SpotPriceSigFigs)
+	return osmomath.SigFigRound(result.SDKDec(), gammtypes.SpotPriceSigFigs)
 }

@@ -1,4 +1,4 @@
-package furyutils
+package osmoutils
 
 import db "github.com/tendermint/tm-db"
 

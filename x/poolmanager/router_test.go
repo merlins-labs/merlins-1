@@ -1988,8 +1988,8 @@ func (s *KeeperTestSuite) TestSplitRouteExactAmountIn() {
 			// As a result, we roughly expect the amount out to be the same
 			// as the amount in given in another token. However, the actual
 			// amount must be stricly less than the given due to price impact.
-			errTolerance := furymath.ErrTolerance{
-				RoundingDir:             furymath.RoundDown,
+			errTolerance := osmomath.ErrTolerance{
+				RoundingDir:             osmomath.RoundDown,
 				MultiplicativeTolerance: sdk.NewDec(1),
 			}
 
@@ -2190,8 +2190,8 @@ func (s *KeeperTestSuite) TestSplitRouteExactAmountOut() {
 			// As a result, we roughly expect the amount in to be the same
 			// as the amount out given of another token. However, the actual
 			// amount must be stricly greater than the given due to price impact.
-			errTolerance := furymath.ErrTolerance{
-				RoundingDir:             furymath.RoundUp,
+			errTolerance := osmomath.ErrTolerance{
+				RoundingDir:             osmomath.RoundUp,
 				MultiplicativeTolerance: sdk.NewDec(1),
 			}
 
