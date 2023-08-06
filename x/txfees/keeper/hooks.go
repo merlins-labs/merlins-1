@@ -3,8 +3,8 @@ package keeper
 import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
-	"github.com/osmosis-labs/osmosis/osmoutils"
 	txfeestypes "github.com/merlins-labs/merlin/v16/x/txfees/types"
+	"github.com/osmosis-labs/osmosis/osmoutils"
 	epochstypes "github.com/osmosis-labs/osmosis/x/epochs/types"
 )
 

@@ -383,23 +383,23 @@ docker-build-nonroot:
 ###                                Linting                                  ###
 ###############################################################################
 
+golangci_version=v1.53.3
+
+lint-install:
+	@echo "--> Installing golangci-lint $(golangci_version)"
+	@go install github.com/golangci/golangci-lint/cmd/golangci-lint@$(golangci_version)
+
 lint:
 	@echo "--> Running linter"
-	@go run github.com/golangci/golangci-lint/cmd/golangci-lint run --timeout=10m
-	@docker run -v $(PWD):/workdir ghcr.io/igorshubovych/markdownlint-cli:latest "**/*.md"
+	$(MAKE) lint-install
+	@./scripts/go-lint-all.bash --timeout=15m
 
-format:
-	@go run github.com/golangci/golangci-lint/cmd/golangci-lint run ./... --fix
-	@go run mvdan.cc/gofumpt -l -w x/ app/ ante/ tests/
-	@docker run -v $(PWD):/workdir ghcr.io/igorshubovych/markdownlint-cli:latest "**/*.md" --fix
+lint-fix:
+	@echo "--> Running linter"
+	$(MAKE) lint-install
+	@./scripts/go-lint-all.bash --fix
 
-mdlint:
-	@echo "--> Running markdown linter"
-	@docker run -v $(PWD):/workdir ghcr.io/igorshubovych/markdownlint-cli:latest "**/*.md"
-
-markdown:
-	@docker run -v $(PWD):/workdir ghcr.io/igorshubovych/markdownlint-cli:latest "**/*.md" --fix
-
+.PHONY: lint lint-fix
 ###############################################################################
 ###                                Localnet                                 ###
 ###############################################################################

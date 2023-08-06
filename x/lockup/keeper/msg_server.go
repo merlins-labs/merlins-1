@@ -4,8 +4,8 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/osmosis-labs/osmosis/osmoutils"
 	"github.com/merlins-labs/merlin/v16/x/lockup/types"
+	"github.com/osmosis-labs/osmosis/osmoutils"
 
 	errorsmod "cosmossdk.io/errors"
 	sdk "github.com/cosmos/cosmos-sdk/types"

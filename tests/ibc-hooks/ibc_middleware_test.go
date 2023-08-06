@@ -15,11 +15,11 @@ import (
 
 	wasmkeeper "github.com/CosmWasm/wasmd/x/wasm/keeper"
 
-	"github.com/osmosis-labs/osmosis/osmoutils"
 	"github.com/merlins-labs/merlin/v16/x/gamm/pool-models/balancer"
 	gammtypes "github.com/merlins-labs/merlin/v16/x/gamm/types"
 	minttypes "github.com/merlins-labs/merlin/v16/x/mint/types"
 	txfeetypes "github.com/merlins-labs/merlin/v16/x/txfees/types"
+	"github.com/osmosis-labs/osmosis/osmoutils"
 
 	"github.com/merlins-labs/merlin/v16/app/apptesting"
 

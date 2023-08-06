@@ -9,12 +9,12 @@ import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/stretchr/testify/suite"
 
-	"github.com/osmosis-labs/osmosis/osmomath"
-	"github.com/osmosis-labs/osmosis/osmoutils/osmoassert"
 	"github.com/merlins-labs/merlin/v16/app/apptesting"
 	clmath "github.com/merlins-labs/merlin/v16/x/concentrated-liquidity/math"
 	"github.com/merlins-labs/merlin/v16/x/concentrated-liquidity/model"
 	"github.com/merlins-labs/merlin/v16/x/concentrated-liquidity/types"
+	"github.com/osmosis-labs/osmosis/osmomath"
+	"github.com/osmosis-labs/osmosis/osmoutils/osmoassert"
 )
 
 const (
@@ -53,7 +53,6 @@ func TestConcentratedPoolTestSuite(t *testing.T) {
 
 // TestGetAddress tests the GetAddress method of pool
 func (s *ConcentratedPoolTestSuite) TestGetAddress() {
-
 	tests := []struct {
 		name          string
 		expectedPanic bool
@@ -94,7 +93,6 @@ func (s *ConcentratedPoolTestSuite) TestGetAddress() {
 
 // TestGetIncentivesAddress tests the GetIncentivesAddress method of pool
 func (s *ConcentratedPoolTestSuite) TestGetIncentivesAddress() {
-
 	tests := []struct {
 		name          string
 		expectedPanic bool

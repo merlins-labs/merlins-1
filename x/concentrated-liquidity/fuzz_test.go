@@ -10,9 +10,9 @@ import (
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
-	"github.com/osmosis-labs/osmosis/osmomath"
 	"github.com/merlins-labs/merlin/v16/x/concentrated-liquidity/swapstrategy"
 	"github.com/merlins-labs/merlin/v16/x/concentrated-liquidity/types"
+	"github.com/osmosis-labs/osmosis/osmomath"
 )
 
 const (
@@ -460,7 +460,6 @@ func (s *KeeperTestSuite) addOrRemoveLiquidity(r *rand.Rand, poolId uint64) {
 	} else {
 		s.removeRandomPosition(r)
 	}
-
 }
 
 // if true add position, if false remove position

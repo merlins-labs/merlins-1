@@ -5,9 +5,9 @@ import (
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
-	"github.com/osmosis-labs/osmosis/osmomath"
 	"github.com/merlins-labs/merlin/v16/x/gamm/pool-models/internal/cfmm_common"
 	types "github.com/merlins-labs/merlin/v16/x/gamm/types"
+	"github.com/osmosis-labs/osmosis/osmomath"
 )
 
 // Simplified multi-asset CFMM is xy(x^2 + y^2 + w) = k,

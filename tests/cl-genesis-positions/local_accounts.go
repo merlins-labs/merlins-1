@@ -12,13 +12,13 @@ import (
 )
 
 const (
-	expectedPoolId           uint64 = 1
-	addressPrefix                   = "fury"
+	expectedPoolId          uint64 = 1
+	addressPrefix                  = "fury"
 	localmerlinFromHomePath        = "/.merlin-local"
-	consensusFee                    = "1500ufury"
-	accountNamePrefix               = "lo-test"
-	numPositions                    = 1_000
-	randSeed                        = 1
+	consensusFee                   = "1500ufury"
+	accountNamePrefix              = "lo-test"
+	numPositions                   = 1_000
+	randSeed                       = 1
 
 	accountMax = 10
 )

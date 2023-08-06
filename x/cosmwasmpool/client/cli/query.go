@@ -3,9 +3,9 @@ package cli
 import (
 	"github.com/spf13/cobra"
 
-	"github.com/osmosis-labs/osmosis/osmoutils/osmocli"
 	"github.com/merlins-labs/merlin/v16/x/cosmwasmpool/client/queryproto"
 	"github.com/merlins-labs/merlin/v16/x/cosmwasmpool/types"
+	"github.com/osmosis-labs/osmosis/osmoutils/osmocli"
 )
 
 // NewQueryCmd returns the cli query commands for this module.

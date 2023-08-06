@@ -7,9 +7,9 @@ import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	dbm "github.com/tendermint/tm-db"
 
-	"github.com/osmosis-labs/osmosis/osmomath"
 	"github.com/merlins-labs/merlin/v16/x/concentrated-liquidity/math"
 	"github.com/merlins-labs/merlin/v16/x/concentrated-liquidity/types"
+	"github.com/osmosis-labs/osmosis/osmomath"
 )
 
 // oneForZeroStrategy implements the swapStrategy interface.

@@ -7,8 +7,8 @@ import (
 
 	errorsmod "cosmossdk.io/errors"
 
-	"github.com/osmosis-labs/osmosis/osmomath"
 	"github.com/merlins-labs/merlin/v16/x/gamm/types"
+	"github.com/osmosis-labs/osmosis/osmomath"
 )
 
 // subPoolAssetWeights subtracts the weights of two different pool asset slices.

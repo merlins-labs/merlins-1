@@ -44,11 +44,11 @@ type Pool struct {
 	SpreadRewardsAddress string `protobuf:"bytes,3,opt,name=spread_rewards_address,json=spreadRewardsAddress,proto3" json:"spread_rewards_address,omitempty" yaml:"spread_rewards_address"`
 	Id                   uint64 `protobuf:"varint,4,opt,name=id,proto3" json:"id,omitempty"`
 	// Amount of total liquidity
-	CurrentTickLiquidity github_com_cosmos_cosmos_sdk_types.Dec          `protobuf:"bytes,5,opt,name=current_tick_liquidity,json=currentTickLiquidity,proto3,customtype=github.com/cosmos/cosmos-sdk/types.Dec" json:"current_tick_liquidity" yaml:"current_tick_liquidity"`
-	Token0               string                                          `protobuf:"bytes,6,opt,name=token0,proto3" json:"token0,omitempty"`
-	Token1               string                                          `protobuf:"bytes,7,opt,name=token1,proto3" json:"token1,omitempty"`
+	CurrentTickLiquidity github_com_cosmos_cosmos_sdk_types.Dec        `protobuf:"bytes,5,opt,name=current_tick_liquidity,json=currentTickLiquidity,proto3,customtype=github.com/cosmos/cosmos-sdk/types.Dec" json:"current_tick_liquidity" yaml:"current_tick_liquidity"`
+	Token0               string                                        `protobuf:"bytes,6,opt,name=token0,proto3" json:"token0,omitempty"`
+	Token1               string                                        `protobuf:"bytes,7,opt,name=token1,proto3" json:"token1,omitempty"`
 	CurrentSqrtPrice     github_com_merlin_labs_merlin_osmomath.BigDec `protobuf:"bytes,8,opt,name=current_sqrt_price,json=currentSqrtPrice,proto3,customtype=github.com/osmosis-labs/osmosis/osmomath.BigDec" json:"current_sqrt_price" yaml:"spot_price"`
-	CurrentTick          int64                                           `protobuf:"varint,9,opt,name=current_tick,json=currentTick,proto3" json:"current_tick,omitempty" yaml:"current_tick"`
+	CurrentTick          int64                                         `protobuf:"varint,9,opt,name=current_tick,json=currentTick,proto3" json:"current_tick,omitempty" yaml:"current_tick"`
 	// tick_spacing must be one of the authorized_tick_spacing values set in the
 	// concentrated-liquidity parameters
 	TickSpacing        uint64 `protobuf:"varint,10,opt,name=tick_spacing,json=tickSpacing,proto3" json:"tick_spacing,omitempty" yaml:"tick_spacing"`

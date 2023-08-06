@@ -4,8 +4,8 @@ import (
 	"github.com/spf13/cobra"
 	"github.com/spf13/pflag"
 
-	"github.com/osmosis-labs/osmosis/osmoutils/osmocli"
 	"github.com/merlins-labs/merlin/v16/x/lockup/types"
+	"github.com/osmosis-labs/osmosis/osmoutils/osmocli"
 )
 
 // GetTxCmd returns the transaction commands for this module.

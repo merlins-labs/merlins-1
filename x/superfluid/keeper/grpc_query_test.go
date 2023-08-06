@@ -6,9 +6,9 @@ import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	stakingtypes "github.com/cosmos/cosmos-sdk/x/staking/types"
 
-	"github.com/osmosis-labs/osmosis/osmoutils"
 	cltypes "github.com/merlins-labs/merlin/v16/x/concentrated-liquidity/types"
 	"github.com/merlins-labs/merlin/v16/x/superfluid/types"
+	"github.com/osmosis-labs/osmosis/osmoutils"
 )
 
 func (s *KeeperTestSuite) TestGRPCParams() {
@@ -406,7 +406,6 @@ func (s *KeeperTestSuite) TestUserConcentratedSuperfluidPositionsBondedAndUnbond
 	s.Require().True(osmoutils.ContainsDuplicateDeepEqual([]interface{}{expectedUnbondingPositionIds, actualUnbondingPositionIds}))
 	s.Require().True(osmoutils.ContainsDuplicateDeepEqual([]interface{}{expectedUnbondingLockIds, actualUnbondingLockIds}))
 	s.Require().Equal(expectedUnbondingTotalSharesLocked, actualUnbondingTotalSharesLocked)
-
 }
 
 func (s *KeeperTestSuite) TestGRPCQueryTotalDelegationByDelegator() {

@@ -3,12 +3,12 @@ package apptesting
 import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
-	"github.com/osmosis-labs/osmosis/osmomath"
 	gammkeeper "github.com/merlins-labs/merlin/v16/x/gamm/keeper"
 	"github.com/merlins-labs/merlin/v16/x/gamm/pool-models/balancer"
 	"github.com/merlins-labs/merlin/v16/x/gamm/pool-models/stableswap"
 	gammtypes "github.com/merlins-labs/merlin/v16/x/gamm/types"
 	poolmanagertypes "github.com/merlins-labs/merlin/v16/x/poolmanager/types"
+	"github.com/osmosis-labs/osmosis/osmomath"
 )
 
 const (
@@ -86,9 +86,11 @@ func (s *KeeperTestHelper) PrepareBalancerPoolWithCoinsAndWeights(coins sdk.Coin
 	})
 }
 
-var zeroDec = sdk.ZeroDec()
-var oneThirdSpotPriceUnits = sdk.NewDec(1).Quo(sdk.NewDec(3)).
-	MulIntMut(gammtypes.SpotPriceSigFigs).RoundInt().ToDec().QuoInt(gammtypes.SpotPriceSigFigs)
+var (
+	zeroDec                = sdk.ZeroDec()
+	oneThirdSpotPriceUnits = sdk.NewDec(1).Quo(sdk.NewDec(3)).
+				MulIntMut(gammtypes.SpotPriceSigFigs).RoundInt().ToDec().QuoInt(gammtypes.SpotPriceSigFigs)
+)
 
 // PrepareBalancerPool returns a Balancer pool's pool-ID with pool params set in PrepareBalancerPoolWithPoolParams.
 func (s *KeeperTestHelper) PrepareBalancerPool() uint64 {

@@ -57,7 +57,6 @@ import (
 	"github.com/cosmos/cosmos-sdk/x/upgrade"
 	upgradetypes "github.com/cosmos/cosmos-sdk/x/upgrade/types"
 
-	"github.com/osmosis-labs/osmosis/osmoutils/partialord"
 	appparams "github.com/merlins-labs/merlin/v16/app/params"
 	_ "github.com/merlins-labs/merlin/v16/client/docs/statik"
 	"github.com/merlins-labs/merlin/v16/simulation/simtypes"
@@ -91,6 +90,7 @@ import (
 	txfeestypes "github.com/merlins-labs/merlin/v16/x/txfees/types"
 	valsetpreftypes "github.com/merlins-labs/merlin/v16/x/valset-pref/types"
 	valsetprefmodule "github.com/merlins-labs/merlin/v16/x/valset-pref/valpref-module"
+	"github.com/osmosis-labs/osmosis/osmoutils/partialord"
 	"github.com/osmosis-labs/osmosis/x/epochs"
 	epochstypes "github.com/osmosis-labs/osmosis/x/epochs/types"
 )

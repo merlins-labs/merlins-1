@@ -14,11 +14,11 @@ import (
 	"github.com/stretchr/testify/suite"
 	tmproto "github.com/tendermint/tendermint/proto/tendermint/types"
 
-	"github.com/osmosis-labs/osmosis/osmoutils/osmoassert"
 	"github.com/merlins-labs/merlin/v16/app/apptesting"
 	"github.com/merlins-labs/merlin/v16/x/mint/keeper"
 	"github.com/merlins-labs/merlin/v16/x/mint/types"
 	poolincentivestypes "github.com/merlins-labs/merlin/v16/x/pool-incentives/types"
+	"github.com/osmosis-labs/osmosis/osmoutils/osmoassert"
 )
 
 type KeeperTestSuite struct {

@@ -6,13 +6,13 @@ import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/cosmos/cosmos-sdk/types/query"
 
-	"github.com/osmosis-labs/osmosis/osmomath"
-	"github.com/osmosis-labs/osmosis/osmoutils"
-	"github.com/osmosis-labs/osmosis/osmoutils/accum"
 	"github.com/merlins-labs/merlin/v16/app/apptesting"
 	cl "github.com/merlins-labs/merlin/v16/x/concentrated-liquidity"
 	"github.com/merlins-labs/merlin/v16/x/concentrated-liquidity/model"
 	"github.com/merlins-labs/merlin/v16/x/concentrated-liquidity/types"
+	"github.com/osmosis-labs/osmosis/osmomath"
+	"github.com/osmosis-labs/osmosis/osmoutils"
+	"github.com/osmosis-labs/osmosis/osmoutils/accum"
 )
 
 const (
@@ -565,11 +565,10 @@ func (s *KeeperTestSuite) TestGetUserPositionsSerialized() {
 
 	for _, test := range tests {
 		s.Run(test.name, func() {
-
 			s.SetupTest()
 			k := s.App.ConcentratedLiquidityKeeper
 
-			//s.FundAcc(s.TestAccs[0], sdk.NewCoins(sdk.NewCoin(ETH, DefaultAmt0), sdk.NewCoin(USDC, DefaultAmt1)))
+			// s.FundAcc(s.TestAccs[0], sdk.NewCoins(sdk.NewCoin(ETH, DefaultAmt0), sdk.NewCoin(USDC, DefaultAmt1)))
 
 			s.PrepareConcentratedPool()
 			s.PrepareConcentratedPool()
@@ -1250,7 +1249,7 @@ func (s *KeeperTestSuite) TestFungifyChargedPositions_SwapAndClaimSpreadRewards(
 	s.SetupTest()
 
 	const swapAmount = 1_000_000
-	var defaultAddress = s.TestAccs[0]
+	defaultAddress := s.TestAccs[0]
 
 	// Set up pool, positions, and incentive records
 	_, expectedPositionIds, totalLiquidity := s.runFungifySetup(defaultAddress, DefaultFungifyNumPositions, DefaultFungifyFullChargeDuration, DefaultSpreadFactor, DefaultIncentiveRecords)
@@ -1304,7 +1303,7 @@ func (s *KeeperTestSuite) TestFungifyChargedPositions_SwapAndClaimSpreadRewards(
 func (s *KeeperTestSuite) TestFungifyChargedPositions_ClaimIncentives() {
 	// Init suite for the test.
 	s.SetupTest()
-	var defaultAddress = s.TestAccs[0]
+	defaultAddress := s.TestAccs[0]
 
 	// Set incentives for pool to ensure accumulators work correctly
 	testIncentiveRecord := types.IncentiveRecord{

@@ -25,7 +25,6 @@ import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	coretypes "github.com/tendermint/tendermint/rpc/core/types"
 
-	"github.com/osmosis-labs/osmosis/osmoutils/osmoassert"
 	appparams "github.com/merlins-labs/merlin/v16/app/params"
 	v16 "github.com/merlins-labs/merlin/v16/app/upgrades/v16"
 	"github.com/merlins-labs/merlin/v16/tests/e2e/configurer/chain"
@@ -33,6 +32,7 @@ import (
 	"github.com/merlins-labs/merlin/v16/tests/e2e/initialization"
 	clmath "github.com/merlins-labs/merlin/v16/x/concentrated-liquidity/math"
 	cltypes "github.com/merlins-labs/merlin/v16/x/concentrated-liquidity/types"
+	"github.com/osmosis-labs/osmosis/osmoutils/osmoassert"
 )
 
 // TODO: Find more scalable way to do this

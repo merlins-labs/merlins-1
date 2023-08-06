@@ -11,8 +11,6 @@ import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	stakingtypes "github.com/cosmos/cosmos-sdk/x/staking/types"
 
-	"github.com/osmosis-labs/osmosis/osmomath"
-	"github.com/osmosis-labs/osmosis/osmoutils"
 	"github.com/merlins-labs/merlin/v16/app/apptesting"
 	cltypes "github.com/merlins-labs/merlin/v16/x/concentrated-liquidity/types"
 	"github.com/merlins-labs/merlin/v16/x/gamm/pool-models/balancer"
@@ -21,6 +19,8 @@ import (
 	lockuptypes "github.com/merlins-labs/merlin/v16/x/lockup/types"
 	"github.com/merlins-labs/merlin/v16/x/superfluid/keeper"
 	"github.com/merlins-labs/merlin/v16/x/superfluid/types"
+	"github.com/osmosis-labs/osmosis/osmomath"
+	"github.com/osmosis-labs/osmosis/osmoutils"
 )
 
 var (

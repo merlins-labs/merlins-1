@@ -7,9 +7,9 @@ import (
 
 	errorsmod "cosmossdk.io/errors"
 
-	"github.com/osmosis-labs/osmosis/osmoutils"
 	"github.com/merlins-labs/merlin/v16/x/mint/types"
 	poolincentivestypes "github.com/merlins-labs/merlin/v16/x/pool-incentives/types"
+	"github.com/osmosis-labs/osmosis/osmoutils"
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	authtypes "github.com/cosmos/cosmos-sdk/x/auth/types"

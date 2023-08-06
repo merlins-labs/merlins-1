@@ -8,8 +8,8 @@ import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/stretchr/testify/require"
 
-	"github.com/osmosis-labs/osmosis/osmomath"
 	"github.com/merlins-labs/merlin/v16/x/gamm/pool-models/balancer"
+	"github.com/osmosis-labs/osmosis/osmomath"
 )
 
 func createTestPool(t *testing.T, spreadFactor, exitFee sdk.Dec, poolAssets ...balancer.PoolAsset) *balancer.Pool {

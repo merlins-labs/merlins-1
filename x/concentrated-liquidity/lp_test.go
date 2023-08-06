@@ -7,12 +7,12 @@ import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	distributiontypes "github.com/cosmos/cosmos-sdk/x/distribution/types"
 
-	"github.com/osmosis-labs/osmosis/osmomath"
-	"github.com/osmosis-labs/osmosis/osmoutils"
 	cl "github.com/merlins-labs/merlin/v16/x/concentrated-liquidity"
 	"github.com/merlins-labs/merlin/v16/x/concentrated-liquidity/model"
 	clmodel "github.com/merlins-labs/merlin/v16/x/concentrated-liquidity/model"
 	types "github.com/merlins-labs/merlin/v16/x/concentrated-liquidity/types"
+	"github.com/osmosis-labs/osmosis/osmomath"
+	"github.com/osmosis-labs/osmosis/osmoutils"
 )
 
 type lpTest struct {
@@ -1760,12 +1760,10 @@ func (s *KeeperTestSuite) TestInitializeInitialPositionForPool() {
 }
 
 func (s *KeeperTestSuite) TestInverseRelation_CreatePosition_WithdrawPosition() {
-	var (
-		errToleranceOneRoundUp = osmomath.ErrTolerance{
-			AdditiveTolerance: sdk.OneDec(),
-			RoundingDir:       osmomath.RoundUp,
-		}
-	)
+	errToleranceOneRoundUp := osmomath.ErrTolerance{
+		AdditiveTolerance: sdk.OneDec(),
+		RoundingDir:       osmomath.RoundUp,
+	}
 	tests := makeTests(positionCases)
 
 	for name, tc := range tests {

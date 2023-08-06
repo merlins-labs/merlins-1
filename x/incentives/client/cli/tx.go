@@ -7,9 +7,9 @@ import (
 
 	"github.com/spf13/cobra"
 
-	"github.com/osmosis-labs/osmosis/osmoutils/osmocli"
 	"github.com/merlins-labs/merlin/v16/x/incentives/types"
 	lockuptypes "github.com/merlins-labs/merlin/v16/x/lockup/types"
+	"github.com/osmosis-labs/osmosis/osmoutils/osmocli"
 
 	"github.com/cosmos/cosmos-sdk/client"
 	"github.com/cosmos/cosmos-sdk/client/flags"
@@ -88,8 +88,8 @@ func NewCreateGaugeCmd() *cobra.Command {
 			}
 
 			var distributeTo lockuptypes.QueryCondition
-			// if poolId is 0 it is a guranteed lock gauge
-			// if poolId is > 0 it is a guranteed no-lock gauge
+			// if poolId is 0 it is a guaranteed lock gauge
+			// if poolId is > 0 it is a guaranteed no-lock gauge
 			if poolId == 0 {
 				distributeTo = lockuptypes.QueryCondition{
 					LockQueryType: lockuptypes.ByDuration,

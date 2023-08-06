@@ -9,9 +9,9 @@ import (
 	"github.com/spf13/pflag"
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
+	"github.com/merlins-labs/merlin/v16/x/valset-pref/types"
 	"github.com/osmosis-labs/osmosis/osmoutils"
 	"github.com/osmosis-labs/osmosis/osmoutils/osmocli"
-	"github.com/merlins-labs/merlin/v16/x/valset-pref/types"
 )
 
 func GetTxCmd() *cobra.Command {

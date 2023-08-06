@@ -4,18 +4,16 @@ package cosmwasmpool
 import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
-	"github.com/osmosis-labs/osmosis/osmoutils"
 	"github.com/merlins-labs/merlin/v16/x/cosmwasmpool/cosmwasm/msg"
 	"github.com/merlins-labs/merlin/v16/x/cosmwasmpool/model"
 	"github.com/merlins-labs/merlin/v16/x/cosmwasmpool/types"
 	poolmanagertypes "github.com/merlins-labs/merlin/v16/x/poolmanager/types"
+	"github.com/osmosis-labs/osmosis/osmoutils"
 
 	"github.com/osmosis-labs/osmosis/osmoutils/cosmwasm"
 )
 
-var (
-	emptyCoins = sdk.NewCoins()
-)
+var emptyCoins = sdk.NewCoins()
 
 // It converts the given pool to a CosmWasmPool, instantiates the Wasm contract using the contract keeper,
 // and then sets the contract address in the CosmWasmPool model before storing it.

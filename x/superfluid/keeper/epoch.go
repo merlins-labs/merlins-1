@@ -8,7 +8,6 @@ import (
 
 	distributiontypes "github.com/cosmos/cosmos-sdk/x/distribution/types"
 
-	"github.com/osmosis-labs/osmosis/osmoutils"
 	cl "github.com/merlins-labs/merlin/v16/x/concentrated-liquidity"
 	"github.com/merlins-labs/merlin/v16/x/concentrated-liquidity/model"
 	cltypes "github.com/merlins-labs/merlin/v16/x/concentrated-liquidity/types"
@@ -16,6 +15,7 @@ import (
 	incentivestypes "github.com/merlins-labs/merlin/v16/x/incentives/types"
 	lockuptypes "github.com/merlins-labs/merlin/v16/x/lockup/types"
 	"github.com/merlins-labs/merlin/v16/x/superfluid/types"
+	"github.com/osmosis-labs/osmosis/osmoutils"
 )
 
 func (k Keeper) AfterEpochEnd(ctx sdk.Context, epochIdentifier string, _ int64) error {

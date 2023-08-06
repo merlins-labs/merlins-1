@@ -16,10 +16,10 @@ import (
 	"github.com/spf13/cobra"
 	"github.com/spf13/pflag"
 
-	"github.com/osmosis-labs/osmosis/osmoutils/osmocli"
 	"github.com/merlins-labs/merlin/v16/x/cosmwasmpool/cosmwasm/msg"
 	"github.com/merlins-labs/merlin/v16/x/cosmwasmpool/model"
 	"github.com/merlins-labs/merlin/v16/x/cosmwasmpool/types"
+	"github.com/osmosis-labs/osmosis/osmoutils/osmocli"
 )
 
 func NewTxCmd() *cobra.Command {

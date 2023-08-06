@@ -7,14 +7,14 @@ import (
 	"github.com/cosmos/cosmos-sdk/testutil"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
-	"github.com/osmosis-labs/osmosis/osmomath"
-	"github.com/osmosis-labs/osmosis/osmoutils/accum"
 	cl "github.com/merlins-labs/merlin/v16/x/concentrated-liquidity"
 	"github.com/merlins-labs/merlin/v16/x/concentrated-liquidity/client/queryproto"
 	"github.com/merlins-labs/merlin/v16/x/concentrated-liquidity/math"
 	"github.com/merlins-labs/merlin/v16/x/concentrated-liquidity/model"
 	"github.com/merlins-labs/merlin/v16/x/concentrated-liquidity/types"
 	"github.com/merlins-labs/merlin/v16/x/concentrated-liquidity/types/genesis"
+	"github.com/osmosis-labs/osmosis/osmomath"
+	"github.com/osmosis-labs/osmosis/osmoutils/accum"
 )
 
 const validPoolId = 1
@@ -361,7 +361,6 @@ func (s *KeeperTestSuite) TestInitOrUpdateTick() {
 			} else {
 				s.Require().True(gasConsumed < uint64(types.BaseGasFeeForInitializingTick))
 			}
-
 		})
 	}
 }
@@ -1089,12 +1088,10 @@ func (s *KeeperTestSuite) TestGetTickLiquidityNetInDirection() {
 			boundTick:       sdk.NewInt(-15),
 			expectedLiquidityDepths: []queryproto.TickLiquidityNet{
 				{
-
 					LiquidityNet: sdk.NewDec(-20),
 					TickIndex:    10,
 				},
 				{
-
 					LiquidityNet: sdk.NewDec(20),
 					TickIndex:    -10,
 				},

@@ -7,7 +7,6 @@ import (
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
-	"github.com/osmosis-labs/osmosis/osmomath"
 	cl "github.com/merlins-labs/merlin/v16/x/concentrated-liquidity"
 	clmodel "github.com/merlins-labs/merlin/v16/x/concentrated-liquidity/model"
 	"github.com/merlins-labs/merlin/v16/x/concentrated-liquidity/types"
@@ -15,6 +14,7 @@ import (
 	lockuptypes "github.com/merlins-labs/merlin/v16/x/lockup/types"
 	poolmanagertypes "github.com/merlins-labs/merlin/v16/x/poolmanager/types"
 	sftypes "github.com/merlins-labs/merlin/v16/x/superfluid/types"
+	"github.com/osmosis-labs/osmosis/osmomath"
 )
 
 func (s *KeeperTestSuite) TestInitializePool() {
@@ -654,7 +654,6 @@ func (s *KeeperTestSuite) TestGetUserUnbondingPositions() {
 						Liquidity:  sdk.MustNewDecFromStr("10000.000000000000001000"),
 					},
 					Locks: lockuptypes.PeriodLock{
-
 						ID:       2,
 						Owner:    defaultAddress.String(),
 						Duration: time.Hour,

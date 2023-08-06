@@ -4,8 +4,8 @@ import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	dbm "github.com/tendermint/tm-db"
 
-	"github.com/osmosis-labs/osmosis/osmomath"
 	"github.com/merlins-labs/merlin/v16/x/concentrated-liquidity/types"
+	"github.com/osmosis-labs/osmosis/osmomath"
 )
 
 // swapStrategy defines the interface for computing a swap.
@@ -87,9 +87,7 @@ type SwapStrategy interface {
 	ZeroForOne() bool
 }
 
-var (
-	oneBigDec = osmomath.OneDec()
-)
+var oneBigDec = osmomath.OneDec()
 
 // New returns a swap strategy based on the provided zeroForOne parameter
 // with sqrtPriceLimit for the maximum square root price until which to perform

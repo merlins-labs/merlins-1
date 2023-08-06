@@ -8,10 +8,10 @@ import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/stretchr/testify/suite"
 
-	"github.com/osmosis-labs/osmosis/osmoutils/osmoassert"
 	"github.com/merlins-labs/merlin/v16/app/apptesting"
 	"github.com/merlins-labs/merlin/v16/x/twap"
 	"github.com/merlins-labs/merlin/v16/x/twap/types"
+	"github.com/osmosis-labs/osmosis/osmoutils/osmoassert"
 )
 
 // TODO: Consider switching this everywhere

@@ -5,9 +5,9 @@ import (
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
-	"github.com/osmosis-labs/osmosis/osmoutils"
 	gammtypes "github.com/merlins-labs/merlin/v16/x/gamm/types"
 	lockuptypes "github.com/merlins-labs/merlin/v16/x/lockup/types"
+	"github.com/osmosis-labs/osmosis/osmoutils"
 
 	"github.com/merlins-labs/merlin/v16/x/superfluid/types"
 )

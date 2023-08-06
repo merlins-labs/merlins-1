@@ -13,14 +13,14 @@ import (
 	"github.com/stretchr/testify/suite"
 	abci "github.com/tendermint/tendermint/abci/types"
 
-	"github.com/osmosis-labs/osmosis/osmomath"
-	"github.com/osmosis-labs/osmosis/osmoutils"
 	"github.com/merlins-labs/merlin/v16/app/apptesting"
 	v16 "github.com/merlins-labs/merlin/v16/app/upgrades/v16"
 	cltypes "github.com/merlins-labs/merlin/v16/x/concentrated-liquidity/types"
 	cosmwasmpooltypes "github.com/merlins-labs/merlin/v16/x/cosmwasmpool/types"
 	poolmanagertypes "github.com/merlins-labs/merlin/v16/x/poolmanager/types"
 	protorevtypes "github.com/merlins-labs/merlin/v16/x/protorev/types"
+	"github.com/osmosis-labs/osmosis/osmomath"
+	"github.com/osmosis-labs/osmosis/osmoutils"
 )
 
 type UpgradeTestSuite struct {
@@ -84,7 +84,6 @@ func (suite *UpgradeTestSuite) TestUpgrade() {
 
 				// Create DAI / FURY pool
 				suite.PrepareBalancerPoolWithCoins(daiCoin, desiredDenom0Coin)
-
 			},
 			func() {
 				stakingParams := suite.App.StakingKeeper.GetParams(suite.Ctx)

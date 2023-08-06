@@ -11,7 +11,6 @@ import (
 	"github.com/cosmos/cosmos-sdk/types/query"
 	distributiontypes "github.com/cosmos/cosmos-sdk/x/distribution/types"
 
-	"github.com/osmosis-labs/osmosis/osmoutils/accum"
 	cl "github.com/merlins-labs/merlin/v16/x/concentrated-liquidity"
 	"github.com/merlins-labs/merlin/v16/x/concentrated-liquidity/math"
 	"github.com/merlins-labs/merlin/v16/x/concentrated-liquidity/model"
@@ -20,6 +19,7 @@ import (
 	gammtypes "github.com/merlins-labs/merlin/v16/x/gamm/types"
 	gammmigration "github.com/merlins-labs/merlin/v16/x/gamm/types/migration"
 	poolincentivestypes "github.com/merlins-labs/merlin/v16/x/pool-incentives/types"
+	"github.com/osmosis-labs/osmosis/osmoutils/accum"
 )
 
 var (
@@ -3205,7 +3205,6 @@ func (s *KeeperTestSuite) TestPrepareClaimAllIncentivesForPosition() {
 			for i, uptimeAccumDiffPostClaim := range uptimeAccumsDiffPostClaim {
 				s.Require().Equal(expectedForfeitedIncentives[i].Amount, uptimeAccumDiffPostClaim.Amount)
 			}
-
 		})
 	}
 }
@@ -4236,7 +4235,6 @@ func (s *KeeperTestSuite) TestGetIncentiveRecordSerialized() {
 
 	for _, test := range tests {
 		s.Run(test.name, func() {
-
 			s.SetupTest()
 			k := s.App.ConcentratedLiquidityKeeper
 

@@ -51,14 +51,14 @@ const (
 )
 
 const (
-	expectedPoolId           uint64 = 1
-	addressPrefix                   = "fury"
+	expectedPoolId          uint64 = 1
+	addressPrefix                  = "fury"
 	localmerlinFromHomePath        = "/.merlin-local"
-	consensusFee                    = "1500ufury"
-	denom0                          = "ufury"
-	denom1                          = "uusdc"
-	tickSpacing              int64  = 100
-	accountNamePrefix               = "lo-test"
+	consensusFee                   = "1500ufury"
+	denom0                         = "ufury"
+	denom1                         = "uusdc"
+	tickSpacing             int64  = 100
+	accountNamePrefix              = "lo-test"
 	// Note, this is localmerlin-specific.
 	expectedEpochIdentifier = "hour"
 	numPositions            = 100
@@ -79,9 +79,7 @@ var (
 )
 
 func main() {
-	var (
-		desiredOperation int
-	)
+	var desiredOperation int
 
 	flag.IntVar(&desiredOperation, "operation", 0, fmt.Sprintf("operation to run:\ncreate positions: %v, make many swaps: %v", createPositions, makeManySmallSwaps))
 

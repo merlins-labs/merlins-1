@@ -31,7 +31,7 @@ const (
 	pathToFilesFromRoot = "tests/cl-genesis-positions/"
 
 	positionsFileName       = "subgraph_positions.json"
-	merlinGenesisFileName  = "genesis.json"
+	merlinGenesisFileName   = "genesis.json"
 	bigbangPosiionsFileName = "bigbang_positions.json"
 
 	localMerlinHomePath = "/merlin/.merlin/"
@@ -54,7 +54,7 @@ var (
 func main() {
 	var (
 		desiredOperation int
-		isLocalMerlin   bool
+		isLocalMerlin    bool
 	)
 
 	flag.BoolVar(&writeBigBangConfigToDisk, "big-bang", false, fmt.Sprintf("flag indicating whether to write the big bang config to disk at path %s", bigbangPosiionsFileName))

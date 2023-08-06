@@ -8,7 +8,6 @@ import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/golang/mock/gomock"
 
-	"github.com/osmosis-labs/osmosis/osmomath"
 	"github.com/merlins-labs/merlin/v16/app/apptesting"
 	"github.com/merlins-labs/merlin/v16/tests/mocks"
 	cl "github.com/merlins-labs/merlin/v16/x/concentrated-liquidity"
@@ -20,6 +19,7 @@ import (
 	poolincentivestypes "github.com/merlins-labs/merlin/v16/x/pool-incentives/types"
 	"github.com/merlins-labs/merlin/v16/x/poolmanager"
 	"github.com/merlins-labs/merlin/v16/x/poolmanager/types"
+	"github.com/osmosis-labs/osmosis/osmomath"
 )
 
 type poolSetup struct {
@@ -645,10 +645,10 @@ func (s *KeeperTestSuite) TestMultihopSwapExactAmountIn() {
 			tokenIn:           sdk.NewCoin(foo, sdk.NewInt(100000)),
 			tokenOutMinAmount: sdk.NewInt(1),
 		},
-		//TODO:
-		//change values in and out to be different with each swap module type
-		//tests for stable-swap pools
-		//edge cases:
+		// TODO:
+		// change values in and out to be different with each swap module type
+		// tests for stable-swap pools
+		// edge cases:
 		//  * invalid route length
 		//  * pool does not exist
 		//  * swap errors

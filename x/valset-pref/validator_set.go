@@ -9,11 +9,11 @@ import (
 	stakingtypes "github.com/cosmos/cosmos-sdk/x/staking/types"
 	"github.com/gogo/protobuf/proto"
 
-	"github.com/osmosis-labs/osmosis/osmomath"
-	"github.com/osmosis-labs/osmosis/osmoutils"
 	appParams "github.com/merlins-labs/merlin/v16/app/params"
 	lockuptypes "github.com/merlins-labs/merlin/v16/x/lockup/types"
 	"github.com/merlins-labs/merlin/v16/x/valset-pref/types"
+	"github.com/osmosis-labs/osmosis/osmomath"
+	"github.com/osmosis-labs/osmosis/osmoutils"
 )
 
 type valSet struct {

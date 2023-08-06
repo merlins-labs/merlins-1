@@ -3,8 +3,8 @@ package swapstrategy_test
 import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
-	"github.com/osmosis-labs/osmosis/osmoutils/osmoassert"
 	"github.com/merlins-labs/merlin/v16/x/concentrated-liquidity/swapstrategy"
+	"github.com/osmosis-labs/osmosis/osmoutils/osmoassert"
 )
 
 var onePercentSpreadFactor = sdk.NewDecWithPrec(1, 2)

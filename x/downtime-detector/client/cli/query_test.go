@@ -4,10 +4,10 @@ import (
 	"testing"
 	"time"
 
-	"github.com/osmosis-labs/osmosis/osmoutils/osmocli"
 	"github.com/merlins-labs/merlin/v16/x/downtime-detector/client/cli"
 	"github.com/merlins-labs/merlin/v16/x/downtime-detector/client/queryproto"
 	"github.com/merlins-labs/merlin/v16/x/downtime-detector/types"
+	"github.com/osmosis-labs/osmosis/osmoutils/osmocli"
 )
 
 // We test the custom duration parser via this
