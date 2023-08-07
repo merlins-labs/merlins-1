@@ -28,7 +28,7 @@ cd ..
 (cd tests/integration/tx/internal; make codegen)
 
 # move proto files to the right places
-cp -r github.com/merlin-network/merlin/* ./
-rm -rf github.com merlin-network
+cp -r github.com/merlins-labs/merlin/* ./
+rm -rf github.com merlins-labs
 
 go mod tidy
