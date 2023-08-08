@@ -6,7 +6,7 @@ import "google/protobuf/duration.proto";
 import "merlin/incentives/params.proto";
 import "merlin/incentives/gauge.proto";
 
-option go_package = "github.com/merlins-labs/merlin/v16/x/incentives/types";
+option go_package = "github.com/merlins-labs/merlin/x/incentives/types";
 
 // GenesisState defines the incentives module's various parameters when first
 // initialized

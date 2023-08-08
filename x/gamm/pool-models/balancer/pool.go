@@ -10,9 +10,9 @@ import (
 	errorsmod "cosmossdk.io/errors"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
-	"github.com/merlins-labs/merlin/v16/x/gamm/pool-models/internal/cfmm_common"
-	"github.com/merlins-labs/merlin/v16/x/gamm/types"
-	poolmanagertypes "github.com/merlins-labs/merlin/v16/x/poolmanager/types"
+	"github.com/merlins-labs/merlin/x/gamm/pool-models/internal/cfmm_common"
+	"github.com/merlins-labs/merlin/x/gamm/types"
+	poolmanagertypes "github.com/merlins-labs/merlin/x/poolmanager/types"
 )
 
 //nolint:deadcode

@@ -3,7 +3,7 @@ package types
 import (
 	time "time"
 
-	lockuptypes "github.com/merlins-labs/merlin/v16/x/lockup/types"
+	lockuptypes "github.com/merlins-labs/merlin/x/lockup/types"
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
 )

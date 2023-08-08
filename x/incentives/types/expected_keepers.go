@@ -5,9 +5,9 @@ import (
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
-	cltypes "github.com/merlins-labs/merlin/v16/x/concentrated-liquidity/types"
-	lockuptypes "github.com/merlins-labs/merlin/v16/x/lockup/types"
-	poolmanagertypes "github.com/merlins-labs/merlin/v16/x/poolmanager/types"
+	cltypes "github.com/merlins-labs/merlin/x/concentrated-liquidity/types"
+	lockuptypes "github.com/merlins-labs/merlin/x/lockup/types"
+	poolmanagertypes "github.com/merlins-labs/merlin/x/poolmanager/types"
 	epochstypes "github.com/osmosis-labs/osmosis/x/epochs/types"
 )
 

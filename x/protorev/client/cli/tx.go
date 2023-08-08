@@ -15,7 +15,7 @@ import (
 
 	govtypes "github.com/cosmos/cosmos-sdk/x/gov/types"
 
-	"github.com/merlins-labs/merlin/v16/x/protorev/types"
+	"github.com/merlins-labs/merlin/x/protorev/types"
 	"github.com/osmosis-labs/osmosis/osmoutils/osmocli"
 
 	sdk "github.com/cosmos/cosmos-sdk/types"

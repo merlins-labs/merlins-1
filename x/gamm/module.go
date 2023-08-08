@@ -25,14 +25,14 @@ import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/cosmos/cosmos-sdk/types/module"
 
-	"github.com/merlins-labs/merlin/v16/simulation/simtypes"
-	"github.com/merlins-labs/merlin/v16/x/gamm/client/cli"
-	"github.com/merlins-labs/merlin/v16/x/gamm/keeper"
-	"github.com/merlins-labs/merlin/v16/x/gamm/pool-models/balancer"
-	"github.com/merlins-labs/merlin/v16/x/gamm/pool-models/stableswap"
-	simulation "github.com/merlins-labs/merlin/v16/x/gamm/simulation"
-	"github.com/merlins-labs/merlin/v16/x/gamm/types"
-	"github.com/merlins-labs/merlin/v16/x/gamm/v2types"
+	"github.com/merlins-labs/merlin/simulation/simtypes"
+	"github.com/merlins-labs/merlin/x/gamm/client/cli"
+	"github.com/merlins-labs/merlin/x/gamm/keeper"
+	"github.com/merlins-labs/merlin/x/gamm/pool-models/balancer"
+	"github.com/merlins-labs/merlin/x/gamm/pool-models/stableswap"
+	simulation "github.com/merlins-labs/merlin/x/gamm/simulation"
+	"github.com/merlins-labs/merlin/x/gamm/types"
+	"github.com/merlins-labs/merlin/x/gamm/v2types"
 )
 
 var (

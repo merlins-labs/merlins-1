@@ -5,8 +5,8 @@ import (
 
 	"github.com/stretchr/testify/require"
 
-	"github.com/merlins-labs/merlin/v16/x/concentrated-liquidity/types"
-	"github.com/merlins-labs/merlin/v16/x/concentrated-liquidity/types/genesis"
+	"github.com/merlins-labs/merlin/x/concentrated-liquidity/types"
+	"github.com/merlins-labs/merlin/x/concentrated-liquidity/types/genesis"
 )
 
 func TestValidateGenesis(t *testing.T) {

@@ -4,7 +4,7 @@ package merlin.cosmwasmpool.v1beta1;
 import "gogoproto/gogo.proto";
 import "cosmos/base/v1beta1/coin.proto";
 
-option go_package = "github.com/merlins-labs/merlin/v16/x/cosmwasmpool/cosmwasm/msg";
+option go_package = "github.com/merlins-labs/merlin/x/cosmwasmpool/cosmwasm/msg";
 
 // ===================== CalcOutAmtGivenIn
 message CalcOutAmtGivenIn {

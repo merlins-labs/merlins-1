@@ -10,9 +10,9 @@ import (
 	"github.com/cosmos/cosmos-sdk/client/flags"
 	"github.com/spf13/cobra"
 
-	poolmanager "github.com/merlins-labs/merlin/v16/x/poolmanager/client/queryproto"
-	"github.com/merlins-labs/merlin/v16/x/twap/client/queryproto"
-	"github.com/merlins-labs/merlin/v16/x/twap/types"
+	poolmanager "github.com/merlins-labs/merlin/x/poolmanager/client/queryproto"
+	"github.com/merlins-labs/merlin/x/twap/client/queryproto"
+	"github.com/merlins-labs/merlin/x/twap/types"
 	"github.com/osmosis-labs/osmosis/osmoutils/osmocli"
 )
 

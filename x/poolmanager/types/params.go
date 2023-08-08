@@ -3,7 +3,7 @@ package types
 import (
 	"fmt"
 
-	appparams "github.com/merlins-labs/merlin/v16/app/params"
+	appparams "github.com/merlins-labs/merlin/app/params"
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	paramtypes "github.com/cosmos/cosmos-sdk/x/params/types"

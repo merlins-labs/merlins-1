@@ -5,8 +5,8 @@ import (
 
 	"github.com/stretchr/testify/suite"
 
-	"github.com/merlins-labs/merlin/v16/app/apptesting"
-	v9 "github.com/merlins-labs/merlin/v16/app/upgrades/v9"
+	"github.com/merlins-labs/merlin/app/apptesting"
+	v9 "github.com/merlins-labs/merlin/app/upgrades/v9"
 )
 
 type UpgradeTestSuite struct {

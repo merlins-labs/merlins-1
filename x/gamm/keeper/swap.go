@@ -7,9 +7,9 @@ import (
 	errorsmod "cosmossdk.io/errors"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
-	"github.com/merlins-labs/merlin/v16/x/gamm/types"
-	"github.com/merlins-labs/merlin/v16/x/poolmanager/events"
-	poolmanagertypes "github.com/merlins-labs/merlin/v16/x/poolmanager/types"
+	"github.com/merlins-labs/merlin/x/gamm/types"
+	"github.com/merlins-labs/merlin/x/poolmanager/events"
+	poolmanagertypes "github.com/merlins-labs/merlin/x/poolmanager/types"
 )
 
 // swapExactAmountIn is an internal method for swapping an exact amount of tokens

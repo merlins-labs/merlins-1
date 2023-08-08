@@ -4,7 +4,7 @@ import (
 	"github.com/spf13/cobra"
 
 	// "github.com/cosmos/cosmos-sdk/client/flags"
-	"github.com/merlins-labs/merlin/v16/x/tokenfactory/types"
+	"github.com/merlins-labs/merlin/x/tokenfactory/types"
 	"github.com/osmosis-labs/osmosis/osmoutils/osmocli"
 )
 

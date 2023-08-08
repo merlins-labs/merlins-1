@@ -7,10 +7,10 @@ import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	distributiontypes "github.com/cosmos/cosmos-sdk/x/distribution/types"
 
-	cl "github.com/merlins-labs/merlin/v16/x/concentrated-liquidity"
-	"github.com/merlins-labs/merlin/v16/x/concentrated-liquidity/model"
-	clmodel "github.com/merlins-labs/merlin/v16/x/concentrated-liquidity/model"
-	types "github.com/merlins-labs/merlin/v16/x/concentrated-liquidity/types"
+	cl "github.com/merlins-labs/merlin/x/concentrated-liquidity"
+	"github.com/merlins-labs/merlin/x/concentrated-liquidity/model"
+	clmodel "github.com/merlins-labs/merlin/x/concentrated-liquidity/model"
+	types "github.com/merlins-labs/merlin/x/concentrated-liquidity/types"
 	"github.com/osmosis-labs/osmosis/osmomath"
 	"github.com/osmosis-labs/osmosis/osmoutils"
 )

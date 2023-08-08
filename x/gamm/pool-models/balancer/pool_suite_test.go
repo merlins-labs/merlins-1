@@ -11,10 +11,10 @@ import (
 	"github.com/stretchr/testify/require"
 	"github.com/stretchr/testify/suite"
 
-	"github.com/merlins-labs/merlin/v16/app/apptesting"
-	v10 "github.com/merlins-labs/merlin/v16/app/upgrades/v10"
-	"github.com/merlins-labs/merlin/v16/x/gamm/pool-models/balancer"
-	"github.com/merlins-labs/merlin/v16/x/gamm/types"
+	"github.com/merlins-labs/merlin/app/apptesting"
+	v10 "github.com/merlins-labs/merlin/app/upgrades/v10"
+	"github.com/merlins-labs/merlin/x/gamm/pool-models/balancer"
+	"github.com/merlins-labs/merlin/x/gamm/types"
 	"github.com/osmosis-labs/osmosis/osmoutils/osmoassert"
 )
 

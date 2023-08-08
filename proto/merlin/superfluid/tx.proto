@@ -8,7 +8,7 @@ import "cosmos/base/v1beta1/coin.proto";
 import "google/protobuf/timestamp.proto";
 import "merlin/superfluid/superfluid.proto";
 
-option go_package = "github.com/merlins-labs/merlin/v16/x/superfluid/types";
+option go_package = "github.com/merlins-labs/merlin/x/superfluid/types";
 
 // Msg defines the Msg service.
 service Msg {

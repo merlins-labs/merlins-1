@@ -6,11 +6,11 @@ import (
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
-	"github.com/merlins-labs/merlin/v16/x/twap"
-	"github.com/merlins-labs/merlin/v16/x/twap/types"
+	"github.com/merlins-labs/merlin/x/twap"
+	"github.com/merlins-labs/merlin/x/twap/types"
 	"github.com/osmosis-labs/osmosis/osmoutils"
 
-	poolmanagertypes "github.com/merlins-labs/merlin/v16/x/poolmanager/types"
+	poolmanagertypes "github.com/merlins-labs/merlin/x/poolmanager/types"
 )
 
 var defaultPoolId uint64 = 1

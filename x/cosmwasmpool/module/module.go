@@ -15,14 +15,14 @@ import (
 	"github.com/spf13/cobra"
 	abci "github.com/tendermint/tendermint/abci/types"
 
-	"github.com/merlins-labs/merlin/v16/simulation/simtypes"
-	cosmwasmpool "github.com/merlins-labs/merlin/v16/x/cosmwasmpool"
-	moduleclient "github.com/merlins-labs/merlin/v16/x/cosmwasmpool/client"
-	"github.com/merlins-labs/merlin/v16/x/cosmwasmpool/client/cli"
-	"github.com/merlins-labs/merlin/v16/x/cosmwasmpool/client/grpc"
-	"github.com/merlins-labs/merlin/v16/x/cosmwasmpool/client/queryproto"
-	"github.com/merlins-labs/merlin/v16/x/cosmwasmpool/model"
-	"github.com/merlins-labs/merlin/v16/x/cosmwasmpool/types"
+	"github.com/merlins-labs/merlin/simulation/simtypes"
+	cosmwasmpool "github.com/merlins-labs/merlin/x/cosmwasmpool"
+	moduleclient "github.com/merlins-labs/merlin/x/cosmwasmpool/client"
+	"github.com/merlins-labs/merlin/x/cosmwasmpool/client/cli"
+	"github.com/merlins-labs/merlin/x/cosmwasmpool/client/grpc"
+	"github.com/merlins-labs/merlin/x/cosmwasmpool/client/queryproto"
+	"github.com/merlins-labs/merlin/x/cosmwasmpool/model"
+	"github.com/merlins-labs/merlin/x/cosmwasmpool/types"
 )
 
 var (

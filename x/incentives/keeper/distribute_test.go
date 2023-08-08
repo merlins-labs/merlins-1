@@ -7,12 +7,12 @@ import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/stretchr/testify/suite"
 
-	appParams "github.com/merlins-labs/merlin/v16/app/params"
-	"github.com/merlins-labs/merlin/v16/x/incentives/types"
-	incentivetypes "github.com/merlins-labs/merlin/v16/x/incentives/types"
-	lockuptypes "github.com/merlins-labs/merlin/v16/x/lockup/types"
-	poolincentivetypes "github.com/merlins-labs/merlin/v16/x/pool-incentives/types"
-	poolmanagertypes "github.com/merlins-labs/merlin/v16/x/poolmanager/types"
+	appParams "github.com/merlins-labs/merlin/app/params"
+	"github.com/merlins-labs/merlin/x/incentives/types"
+	incentivetypes "github.com/merlins-labs/merlin/x/incentives/types"
+	lockuptypes "github.com/merlins-labs/merlin/x/lockup/types"
+	poolincentivetypes "github.com/merlins-labs/merlin/x/pool-incentives/types"
+	poolmanagertypes "github.com/merlins-labs/merlin/x/poolmanager/types"
 	osmoutils "github.com/osmosis-labs/osmosis/osmoutils"
 )
 

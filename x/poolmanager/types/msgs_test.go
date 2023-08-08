@@ -7,9 +7,9 @@ import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/stretchr/testify/require"
 
-	"github.com/merlins-labs/merlin/v16/app/apptesting"
-	appParams "github.com/merlins-labs/merlin/v16/app/params"
-	"github.com/merlins-labs/merlin/v16/x/poolmanager/types"
+	"github.com/merlins-labs/merlin/app/apptesting"
+	appParams "github.com/merlins-labs/merlin/app/params"
+	"github.com/merlins-labs/merlin/x/poolmanager/types"
 )
 
 var (

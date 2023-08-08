@@ -5,7 +5,7 @@ import (
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
-	poolmanagertypes "github.com/merlins-labs/merlin/v16/x/poolmanager/types"
+	poolmanagertypes "github.com/merlins-labs/merlin/x/poolmanager/types"
 	"github.com/osmosis-labs/osmosis/osmomath"
 )
 

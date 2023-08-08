@@ -4,8 +4,8 @@ import (
 	"github.com/spf13/cobra"
 	flag "github.com/spf13/pflag"
 
-	"github.com/merlins-labs/merlin/v16/x/concentrated-liquidity/client/queryproto"
-	"github.com/merlins-labs/merlin/v16/x/concentrated-liquidity/types"
+	"github.com/merlins-labs/merlin/x/concentrated-liquidity/client/queryproto"
+	"github.com/merlins-labs/merlin/x/concentrated-liquidity/types"
 	"github.com/osmosis-labs/osmosis/osmoutils/osmocli"
 )
 

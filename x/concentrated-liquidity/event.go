@@ -6,7 +6,7 @@ import (
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
-	types "github.com/merlins-labs/merlin/v16/x/concentrated-liquidity/types"
+	types "github.com/merlins-labs/merlin/x/concentrated-liquidity/types"
 )
 
 // event is the interface all event types should be implementing

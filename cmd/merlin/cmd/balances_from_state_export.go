@@ -12,9 +12,9 @@ import (
 	tmjson "github.com/tendermint/tendermint/libs/json"
 	tmtypes "github.com/tendermint/tendermint/types"
 
-	appparams "github.com/merlins-labs/merlin/v16/app/params"
-	gammtypes "github.com/merlins-labs/merlin/v16/x/gamm/types"
-	lockuptypes "github.com/merlins-labs/merlin/v16/x/lockup/types"
+	appparams "github.com/merlins-labs/merlin/app/params"
+	gammtypes "github.com/merlins-labs/merlin/x/gamm/types"
+	lockuptypes "github.com/merlins-labs/merlin/x/lockup/types"
 	"github.com/osmosis-labs/osmosis/osmoutils"
 
 	"github.com/cosmos/cosmos-sdk/client"

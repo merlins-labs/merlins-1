@@ -16,12 +16,12 @@ import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/cosmos/cosmos-sdk/types/module"
 
-	downtimedetector "github.com/merlins-labs/merlin/v16/x/downtime-detector"
-	downtimeclient "github.com/merlins-labs/merlin/v16/x/downtime-detector/client"
-	downtimecli "github.com/merlins-labs/merlin/v16/x/downtime-detector/client/cli"
-	"github.com/merlins-labs/merlin/v16/x/downtime-detector/client/grpc"
-	"github.com/merlins-labs/merlin/v16/x/downtime-detector/client/queryproto"
-	"github.com/merlins-labs/merlin/v16/x/downtime-detector/types"
+	downtimedetector "github.com/merlins-labs/merlin/x/downtime-detector"
+	downtimeclient "github.com/merlins-labs/merlin/x/downtime-detector/client"
+	downtimecli "github.com/merlins-labs/merlin/x/downtime-detector/client/cli"
+	"github.com/merlins-labs/merlin/x/downtime-detector/client/grpc"
+	"github.com/merlins-labs/merlin/x/downtime-detector/client/queryproto"
+	"github.com/merlins-labs/merlin/x/downtime-detector/types"
 )
 
 var (

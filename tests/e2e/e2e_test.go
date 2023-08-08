@@ -19,19 +19,19 @@ import (
 	"github.com/osmosis-labs/osmosis/osmomath"
 	ibchookskeeper "github.com/osmosis-labs/osmosis/x/ibc-hooks/keeper"
 
-	ibcratelimittypes "github.com/merlins-labs/merlin/v16/x/ibc-rate-limit/types"
-	poolmanagertypes "github.com/merlins-labs/merlin/v16/x/poolmanager/types"
+	ibcratelimittypes "github.com/merlins-labs/merlin/x/ibc-rate-limit/types"
+	poolmanagertypes "github.com/merlins-labs/merlin/x/poolmanager/types"
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	coretypes "github.com/tendermint/tendermint/rpc/core/types"
 
-	appparams "github.com/merlins-labs/merlin/v16/app/params"
-	v16 "github.com/merlins-labs/merlin/v16/app/upgrades/v16"
-	"github.com/merlins-labs/merlin/v16/tests/e2e/configurer/chain"
-	"github.com/merlins-labs/merlin/v16/tests/e2e/configurer/config"
-	"github.com/merlins-labs/merlin/v16/tests/e2e/initialization"
-	clmath "github.com/merlins-labs/merlin/v16/x/concentrated-liquidity/math"
-	cltypes "github.com/merlins-labs/merlin/v16/x/concentrated-liquidity/types"
+	appparams "github.com/merlins-labs/merlin/app/params"
+	v16 "github.com/merlins-labs/merlin/app/upgrades/v16"
+	"github.com/merlins-labs/merlin/tests/e2e/configurer/chain"
+	"github.com/merlins-labs/merlin/tests/e2e/configurer/config"
+	"github.com/merlins-labs/merlin/tests/e2e/initialization"
+	clmath "github.com/merlins-labs/merlin/x/concentrated-liquidity/math"
+	cltypes "github.com/merlins-labs/merlin/x/concentrated-liquidity/types"
 	"github.com/osmosis-labs/osmosis/osmoutils/osmoassert"
 )
 

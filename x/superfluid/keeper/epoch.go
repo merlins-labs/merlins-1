@@ -8,13 +8,13 @@ import (
 
 	distributiontypes "github.com/cosmos/cosmos-sdk/x/distribution/types"
 
-	cl "github.com/merlins-labs/merlin/v16/x/concentrated-liquidity"
-	"github.com/merlins-labs/merlin/v16/x/concentrated-liquidity/model"
-	cltypes "github.com/merlins-labs/merlin/v16/x/concentrated-liquidity/types"
-	gammtypes "github.com/merlins-labs/merlin/v16/x/gamm/types"
-	incentivestypes "github.com/merlins-labs/merlin/v16/x/incentives/types"
-	lockuptypes "github.com/merlins-labs/merlin/v16/x/lockup/types"
-	"github.com/merlins-labs/merlin/v16/x/superfluid/types"
+	cl "github.com/merlins-labs/merlin/x/concentrated-liquidity"
+	"github.com/merlins-labs/merlin/x/concentrated-liquidity/model"
+	cltypes "github.com/merlins-labs/merlin/x/concentrated-liquidity/types"
+	gammtypes "github.com/merlins-labs/merlin/x/gamm/types"
+	incentivestypes "github.com/merlins-labs/merlin/x/incentives/types"
+	lockuptypes "github.com/merlins-labs/merlin/x/lockup/types"
+	"github.com/merlins-labs/merlin/x/superfluid/types"
 	"github.com/osmosis-labs/osmosis/osmoutils"
 )
 

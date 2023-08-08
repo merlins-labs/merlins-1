@@ -8,12 +8,12 @@ import (
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
-	"github.com/merlins-labs/merlin/v16/tests/e2e/configurer/chain"
-	"github.com/merlins-labs/merlin/v16/tests/e2e/initialization"
-	"github.com/merlins-labs/merlin/v16/tests/e2e/util"
-	"github.com/merlins-labs/merlin/v16/x/concentrated-liquidity/model"
-	"github.com/merlins-labs/merlin/v16/x/concentrated-liquidity/types"
-	gammtypes "github.com/merlins-labs/merlin/v16/x/gamm/types"
+	"github.com/merlins-labs/merlin/tests/e2e/configurer/chain"
+	"github.com/merlins-labs/merlin/tests/e2e/initialization"
+	"github.com/merlins-labs/merlin/tests/e2e/util"
+	"github.com/merlins-labs/merlin/x/concentrated-liquidity/model"
+	"github.com/merlins-labs/merlin/x/concentrated-liquidity/types"
+	gammtypes "github.com/merlins-labs/merlin/x/gamm/types"
 )
 
 var defaultFeePerTx = sdk.NewInt(1000)

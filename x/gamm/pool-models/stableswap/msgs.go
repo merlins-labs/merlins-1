@@ -5,8 +5,8 @@ import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
 
-	"github.com/merlins-labs/merlin/v16/x/gamm/types"
-	poolmanagertypes "github.com/merlins-labs/merlin/v16/x/poolmanager/types"
+	"github.com/merlins-labs/merlin/x/gamm/types"
+	poolmanagertypes "github.com/merlins-labs/merlin/x/poolmanager/types"
 )
 
 const (

@@ -8,7 +8,7 @@ import (
 	"github.com/cosmos/cosmos-sdk/store/prefix"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
-	"github.com/merlins-labs/merlin/v16/x/txfees/types"
+	"github.com/merlins-labs/merlin/x/txfees/types"
 )
 
 type Keeper struct {

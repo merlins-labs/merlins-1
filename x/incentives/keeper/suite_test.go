@@ -5,8 +5,8 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/merlins-labs/merlin/v16/x/incentives/types"
-	lockuptypes "github.com/merlins-labs/merlin/v16/x/lockup/types"
+	"github.com/merlins-labs/merlin/x/incentives/types"
+	lockuptypes "github.com/merlins-labs/merlin/x/lockup/types"
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
 )

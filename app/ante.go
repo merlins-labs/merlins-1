@@ -11,11 +11,11 @@ import (
 	ante "github.com/cosmos/cosmos-sdk/x/auth/ante"
 	"github.com/cosmos/cosmos-sdk/x/auth/signing"
 
-	furyante "github.com/merlins-labs/merlin/v16/ante"
-	v9 "github.com/merlins-labs/merlin/v16/app/upgrades/v9"
+	furyante "github.com/merlins-labs/merlin/ante"
+	v9 "github.com/merlins-labs/merlin/app/upgrades/v9"
 
-	txfeeskeeper "github.com/merlins-labs/merlin/v16/x/txfees/keeper"
-	txfeestypes "github.com/merlins-labs/merlin/v16/x/txfees/types"
+	txfeeskeeper "github.com/merlins-labs/merlin/x/txfees/keeper"
+	txfeestypes "github.com/merlins-labs/merlin/x/txfees/types"
 )
 
 // Link to default ante handler used by cosmos sdk:

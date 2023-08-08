@@ -4,7 +4,7 @@ import (
 	"fmt"
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
-	superfluidtypes "github.com/merlins-labs/merlin/v16/x/superfluid/types"
+	superfluidtypes "github.com/merlins-labs/merlin/x/superfluid/types"
 )
 
 // MsgFilterDecorator defines an AnteHandler decorator for the v8 upgrade that

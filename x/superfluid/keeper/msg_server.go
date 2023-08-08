@@ -8,11 +8,11 @@ import (
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
-	gammtypes "github.com/merlins-labs/merlin/v16/x/gamm/types"
-	lockuptypes "github.com/merlins-labs/merlin/v16/x/lockup/types"
+	gammtypes "github.com/merlins-labs/merlin/x/gamm/types"
+	lockuptypes "github.com/merlins-labs/merlin/x/lockup/types"
 
-	"github.com/merlins-labs/merlin/v16/x/superfluid/keeper/internal/events"
-	"github.com/merlins-labs/merlin/v16/x/superfluid/types"
+	"github.com/merlins-labs/merlin/x/superfluid/keeper/internal/events"
+	"github.com/merlins-labs/merlin/x/superfluid/types"
 )
 
 type msgServer struct {

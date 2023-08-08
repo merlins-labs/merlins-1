@@ -1,7 +1,7 @@
 package v4
 
 import (
-	"github.com/merlins-labs/merlin/v16/app/upgrades"
+	"github.com/merlins-labs/merlin/app/upgrades"
 
 	store "github.com/cosmos/cosmos-sdk/store/types"
 )

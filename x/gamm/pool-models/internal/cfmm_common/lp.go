@@ -7,7 +7,7 @@ import (
 
 	errorsmod "cosmossdk.io/errors"
 
-	"github.com/merlins-labs/merlin/v16/x/gamm/types"
+	"github.com/merlins-labs/merlin/x/gamm/types"
 	"github.com/osmosis-labs/osmosis/osmomath"
 )
 

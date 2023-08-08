@@ -9,9 +9,9 @@ import (
 	"github.com/tendermint/tendermint/crypto/secp256k1"
 	tmproto "github.com/tendermint/tendermint/proto/tendermint/types"
 
-	"github.com/merlins-labs/merlin/v16/app"
-	"github.com/merlins-labs/merlin/v16/x/incentives/types"
-	lockuptypes "github.com/merlins-labs/merlin/v16/x/lockup/types"
+	"github.com/merlins-labs/merlin/app"
+	"github.com/merlins-labs/merlin/x/incentives/types"
+	lockuptypes "github.com/merlins-labs/merlin/x/lockup/types"
 
 	"github.com/cosmos/cosmos-sdk/simapp"
 	sdk "github.com/cosmos/cosmos-sdk/types"

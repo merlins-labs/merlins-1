@@ -7,9 +7,9 @@ import (
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
-	"github.com/merlins-labs/merlin/v16/x/concentrated-liquidity/math"
-	types "github.com/merlins-labs/merlin/v16/x/concentrated-liquidity/types"
-	lockuptypes "github.com/merlins-labs/merlin/v16/x/lockup/types"
+	"github.com/merlins-labs/merlin/x/concentrated-liquidity/math"
+	types "github.com/merlins-labs/merlin/x/concentrated-liquidity/types"
+	lockuptypes "github.com/merlins-labs/merlin/x/lockup/types"
 	"github.com/osmosis-labs/osmosis/osmomath"
 )
 

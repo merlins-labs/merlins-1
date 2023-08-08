@@ -11,10 +11,10 @@ import (
 	"github.com/cosmos/cosmos-sdk/types/query"
 	"golang.org/x/exp/slices"
 
-	"github.com/merlins-labs/merlin/v16/x/concentrated-liquidity/math"
-	"github.com/merlins-labs/merlin/v16/x/concentrated-liquidity/model"
-	"github.com/merlins-labs/merlin/v16/x/concentrated-liquidity/types"
-	gammtypes "github.com/merlins-labs/merlin/v16/x/gamm/types"
+	"github.com/merlins-labs/merlin/x/concentrated-liquidity/math"
+	"github.com/merlins-labs/merlin/x/concentrated-liquidity/model"
+	"github.com/merlins-labs/merlin/x/concentrated-liquidity/types"
+	gammtypes "github.com/merlins-labs/merlin/x/gamm/types"
 	"github.com/osmosis-labs/osmosis/osmoutils"
 	"github.com/osmosis-labs/osmosis/osmoutils/accum"
 )

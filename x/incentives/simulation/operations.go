@@ -4,13 +4,13 @@ import (
 	"math/rand"
 	"time"
 
-	furysimtypes "github.com/merlins-labs/merlin/v16/simulation/simtypes"
+	furysimtypes "github.com/merlins-labs/merlin/simulation/simtypes"
 
 	"github.com/cosmos/cosmos-sdk/baseapp"
 
-	"github.com/merlins-labs/merlin/v16/x/incentives/keeper"
-	"github.com/merlins-labs/merlin/v16/x/incentives/types"
-	lockuptypes "github.com/merlins-labs/merlin/v16/x/lockup/types"
+	"github.com/merlins-labs/merlin/x/incentives/keeper"
+	"github.com/merlins-labs/merlin/x/incentives/types"
+	lockuptypes "github.com/merlins-labs/merlin/x/lockup/types"
 
 	"github.com/cosmos/cosmos-sdk/codec"
 	simappparams "github.com/cosmos/cosmos-sdk/simapp/params"

@@ -14,8 +14,8 @@ import (
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
-	"github.com/merlins-labs/merlin/v16/app"
-	"github.com/merlins-labs/merlin/v16/app/apptesting"
+	"github.com/merlins-labs/merlin/app"
+	"github.com/merlins-labs/merlin/app/apptesting"
 )
 
 func TestNoStorageWithoutProposal(t *testing.T) {

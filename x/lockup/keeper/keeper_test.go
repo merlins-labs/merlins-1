@@ -7,9 +7,9 @@ import (
 	"github.com/stretchr/testify/suite"
 	tmproto "github.com/tendermint/tendermint/proto/tendermint/types"
 
-	"github.com/merlins-labs/merlin/v16/app"
-	"github.com/merlins-labs/merlin/v16/app/apptesting"
-	"github.com/merlins-labs/merlin/v16/x/lockup/keeper"
+	"github.com/merlins-labs/merlin/app"
+	"github.com/merlins-labs/merlin/app/apptesting"
+	"github.com/merlins-labs/merlin/x/lockup/keeper"
 )
 
 type KeeperTestSuite struct {

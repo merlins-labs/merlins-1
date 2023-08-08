@@ -7,10 +7,10 @@ import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
 
-	"github.com/merlins-labs/merlin/v16/app/apptesting"
-	"github.com/merlins-labs/merlin/v16/x/gamm/types"
-	gammmigration "github.com/merlins-labs/merlin/v16/x/gamm/types/migration"
-	poolincentivestypes "github.com/merlins-labs/merlin/v16/x/pool-incentives/types"
+	"github.com/merlins-labs/merlin/app/apptesting"
+	"github.com/merlins-labs/merlin/x/gamm/types"
+	gammmigration "github.com/merlins-labs/merlin/x/gamm/types/migration"
+	poolincentivestypes "github.com/merlins-labs/merlin/x/pool-incentives/types"
 	"github.com/osmosis-labs/osmosis/osmomath"
 )
 

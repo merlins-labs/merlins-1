@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"testing"
 
-	"github.com/merlins-labs/merlin/v16/app/apptesting"
+	"github.com/merlins-labs/merlin/app/apptesting"
 
 	"github.com/stretchr/testify/require"
 
@@ -13,8 +13,8 @@ import (
 	wasmvmtypes "github.com/CosmWasm/wasmvm/types"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
-	"github.com/merlins-labs/merlin/v16/app"
-	"github.com/merlins-labs/merlin/v16/wasmbinding/bindings"
+	"github.com/merlins-labs/merlin/app"
+	"github.com/merlins-labs/merlin/wasmbinding/bindings"
 )
 
 func TestCreateDenomMsg(t *testing.T) {

@@ -29,8 +29,8 @@ import (
 	"github.com/tendermint/tendermint/privval"
 	tmtypes "github.com/tendermint/tendermint/types"
 
-	merlinApp "github.com/merlins-labs/merlin/v16/app"
-	"github.com/merlins-labs/merlin/v16/tests/e2e/util"
+	merlinApp "github.com/merlins-labs/merlin/app"
+	"github.com/merlins-labs/merlin/tests/e2e/util"
 )
 
 type internalNode struct {

@@ -1,8 +1,8 @@
 package keeper_test
 
 import (
-	cltypes "github.com/merlins-labs/merlin/v16/x/concentrated-liquidity/types"
-	"github.com/merlins-labs/merlin/v16/x/superfluid/types"
+	cltypes "github.com/merlins-labs/merlin/x/concentrated-liquidity/types"
+	"github.com/merlins-labs/merlin/x/superfluid/types"
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
 )

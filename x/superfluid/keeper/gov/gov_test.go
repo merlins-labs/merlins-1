@@ -4,12 +4,12 @@ import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/tendermint/tendermint/crypto/ed25519"
 
-	"github.com/merlins-labs/merlin/v16/app/apptesting"
-	cltypes "github.com/merlins-labs/merlin/v16/x/concentrated-liquidity/types"
-	"github.com/merlins-labs/merlin/v16/x/gamm/pool-models/balancer"
-	minttypes "github.com/merlins-labs/merlin/v16/x/mint/types"
-	"github.com/merlins-labs/merlin/v16/x/superfluid/keeper/gov"
-	"github.com/merlins-labs/merlin/v16/x/superfluid/types"
+	"github.com/merlins-labs/merlin/app/apptesting"
+	cltypes "github.com/merlins-labs/merlin/x/concentrated-liquidity/types"
+	"github.com/merlins-labs/merlin/x/gamm/pool-models/balancer"
+	minttypes "github.com/merlins-labs/merlin/x/mint/types"
+	"github.com/merlins-labs/merlin/x/superfluid/keeper/gov"
+	"github.com/merlins-labs/merlin/x/superfluid/types"
 )
 
 func (s *KeeperTestSuite) createGammPool(denoms []string) uint64 {

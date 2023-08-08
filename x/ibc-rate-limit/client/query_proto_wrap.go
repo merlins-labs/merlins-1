@@ -3,8 +3,8 @@ package client
 import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
-	ibcratelimit "github.com/merlins-labs/merlin/v16/x/ibc-rate-limit"
-	"github.com/merlins-labs/merlin/v16/x/ibc-rate-limit/client/queryproto"
+	ibcratelimit "github.com/merlins-labs/merlin/x/ibc-rate-limit"
+	"github.com/merlins-labs/merlin/x/ibc-rate-limit/client/queryproto"
 )
 
 // This file should evolve to being code gen'd, off of `proto/twap/v1beta/query.yml`

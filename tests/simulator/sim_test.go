@@ -13,9 +13,9 @@ import (
 	"github.com/cosmos/cosmos-sdk/simapp/helpers"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
-	furysim "github.com/merlins-labs/merlin/v16/simulation/executor"
-	"github.com/merlins-labs/merlin/v16/simulation/simtypes/simlogger"
-	txfeetypes "github.com/merlins-labs/merlin/v16/x/txfees/types"
+	furysim "github.com/merlins-labs/merlin/simulation/executor"
+	"github.com/merlins-labs/merlin/simulation/simtypes/simlogger"
+	txfeetypes "github.com/merlins-labs/merlin/x/txfees/types"
 )
 
 // Profile with:

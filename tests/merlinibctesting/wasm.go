@@ -14,7 +14,7 @@ import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	govtypes "github.com/cosmos/cosmos-sdk/x/gov/types"
 	transfertypes "github.com/cosmos/ibc-go/v4/modules/apps/transfer/types"
-	"github.com/merlins-labs/merlin/v16/x/ibc-rate-limit/types"
+	"github.com/merlins-labs/merlin/x/ibc-rate-limit/types"
 	"github.com/stretchr/testify/suite"
 )
 

@@ -6,10 +6,10 @@ import (
 
 	"github.com/stretchr/testify/suite"
 
-	"github.com/merlins-labs/merlin/v16/x/gamm/client/cli"
-	"github.com/merlins-labs/merlin/v16/x/gamm/pool-models/balancer"
-	"github.com/merlins-labs/merlin/v16/x/gamm/types"
-	poolmanagertypes "github.com/merlins-labs/merlin/v16/x/poolmanager/types"
+	"github.com/merlins-labs/merlin/x/gamm/client/cli"
+	"github.com/merlins-labs/merlin/x/gamm/pool-models/balancer"
+	"github.com/merlins-labs/merlin/x/gamm/types"
+	poolmanagertypes "github.com/merlins-labs/merlin/x/poolmanager/types"
 	"github.com/osmosis-labs/osmosis/osmoutils"
 	"github.com/osmosis-labs/osmosis/osmoutils/osmocli"
 

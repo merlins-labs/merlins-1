@@ -6,7 +6,7 @@ import (
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
-	"github.com/merlins-labs/merlin/v16/x/protorev/types"
+	"github.com/merlins-labs/merlin/x/protorev/types"
 )
 
 type MsgServer struct {

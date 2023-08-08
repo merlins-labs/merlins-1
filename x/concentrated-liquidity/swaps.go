@@ -6,15 +6,15 @@ import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	db "github.com/tendermint/tm-db"
 
-	events "github.com/merlins-labs/merlin/v16/x/poolmanager/events"
+	events "github.com/merlins-labs/merlin/x/poolmanager/events"
 	"github.com/osmosis-labs/osmosis/osmomath"
 	"github.com/osmosis-labs/osmosis/osmoutils/accum"
 
-	"github.com/merlins-labs/merlin/v16/x/concentrated-liquidity/math"
-	"github.com/merlins-labs/merlin/v16/x/concentrated-liquidity/swapstrategy"
-	"github.com/merlins-labs/merlin/v16/x/concentrated-liquidity/types"
-	gammtypes "github.com/merlins-labs/merlin/v16/x/gamm/types"
-	poolmanagertypes "github.com/merlins-labs/merlin/v16/x/poolmanager/types"
+	"github.com/merlins-labs/merlin/x/concentrated-liquidity/math"
+	"github.com/merlins-labs/merlin/x/concentrated-liquidity/swapstrategy"
+	"github.com/merlins-labs/merlin/x/concentrated-liquidity/types"
+	gammtypes "github.com/merlins-labs/merlin/x/gamm/types"
+	poolmanagertypes "github.com/merlins-labs/merlin/x/poolmanager/types"
 )
 
 // SwapState defines the state of a swap.

@@ -1,4 +1,4 @@
-module github.com/merlins-labs/merlin/v16
+module github.com/merlins-labs/merlin
 
 go 1.20
 

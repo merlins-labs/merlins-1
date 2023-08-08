@@ -7,8 +7,8 @@ import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
 
-	"github.com/merlins-labs/merlin/v16/x/txfees/keeper/txfee_filters"
-	"github.com/merlins-labs/merlin/v16/x/txfees/types"
+	"github.com/merlins-labs/merlin/x/txfees/keeper/txfee_filters"
+	"github.com/merlins-labs/merlin/x/txfees/types"
 
 	authtypes "github.com/cosmos/cosmos-sdk/x/auth/types"
 )

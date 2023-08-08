@@ -7,9 +7,9 @@ import (
 	"github.com/stretchr/testify/require"
 	"github.com/stretchr/testify/suite"
 
-	"github.com/merlins-labs/merlin/v16/x/gamm/pool-models/balancer"
-	"github.com/merlins-labs/merlin/v16/x/gamm/pool-models/internal/test_helpers"
-	"github.com/merlins-labs/merlin/v16/x/gamm/types"
+	"github.com/merlins-labs/merlin/x/gamm/pool-models/balancer"
+	"github.com/merlins-labs/merlin/x/gamm/pool-models/internal/test_helpers"
+	"github.com/merlins-labs/merlin/x/gamm/types"
 )
 
 type BalancerTestSuite struct {

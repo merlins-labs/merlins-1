@@ -3,10 +3,10 @@ package keeper_test
 import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
-	"github.com/merlins-labs/merlin/v16/x/gamm/pool-models/balancer"
-	"github.com/merlins-labs/merlin/v16/x/gamm/pool-models/stableswap"
-	poolmanagertypes "github.com/merlins-labs/merlin/v16/x/poolmanager/types"
-	"github.com/merlins-labs/merlin/v16/x/protorev/types"
+	"github.com/merlins-labs/merlin/x/gamm/pool-models/balancer"
+	"github.com/merlins-labs/merlin/x/gamm/pool-models/stableswap"
+	poolmanagertypes "github.com/merlins-labs/merlin/x/poolmanager/types"
+	"github.com/merlins-labs/merlin/x/protorev/types"
 )
 
 // Tests the hook implementation that is called after swapping

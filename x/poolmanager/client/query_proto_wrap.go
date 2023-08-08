@@ -7,9 +7,9 @@ import (
 
 	codectypes "github.com/cosmos/cosmos-sdk/codec/types"
 
-	"github.com/merlins-labs/merlin/v16/x/poolmanager"
-	"github.com/merlins-labs/merlin/v16/x/poolmanager/client/queryproto"
-	"github.com/merlins-labs/merlin/v16/x/poolmanager/types"
+	"github.com/merlins-labs/merlin/x/poolmanager"
+	"github.com/merlins-labs/merlin/x/poolmanager/client/queryproto"
+	"github.com/merlins-labs/merlin/x/poolmanager/types"
 )
 
 // This file should evolve to being code gen'd, off of `proto/poolmanager/v1beta/query.yml`

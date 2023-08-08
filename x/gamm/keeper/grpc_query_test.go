@@ -8,11 +8,11 @@ import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/cosmos/cosmos-sdk/types/query"
 
-	"github.com/merlins-labs/merlin/v16/x/gamm/pool-models/balancer"
-	"github.com/merlins-labs/merlin/v16/x/gamm/pool-models/stableswap"
-	"github.com/merlins-labs/merlin/v16/x/gamm/types"
-	"github.com/merlins-labs/merlin/v16/x/gamm/v2types"
-	poolmanagertypes "github.com/merlins-labs/merlin/v16/x/poolmanager/types"
+	"github.com/merlins-labs/merlin/x/gamm/pool-models/balancer"
+	"github.com/merlins-labs/merlin/x/gamm/pool-models/stableswap"
+	"github.com/merlins-labs/merlin/x/gamm/types"
+	"github.com/merlins-labs/merlin/x/gamm/v2types"
+	poolmanagertypes "github.com/merlins-labs/merlin/x/poolmanager/types"
 )
 
 func (s *KeeperTestSuite) TestCalcExitPoolCoinsFromShares() {

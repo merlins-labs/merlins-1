@@ -6,7 +6,7 @@ import (
 	"path/filepath"
 	"time"
 
-	"github.com/merlins-labs/merlin/v16/tests/e2e/util"
+	"github.com/merlins-labs/merlin/tests/e2e/util"
 )
 
 func InitChain(id, dataDir string, nodeConfigs []*NodeConfig, votingPeriod, expeditedVotingPeriod time.Duration, forkHeight int) (*Chain, error) {

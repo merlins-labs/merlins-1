@@ -5,7 +5,7 @@ import (
 	"time"
 
 	proto "github.com/gogo/protobuf/proto"
-	"github.com/merlins-labs/merlin/v16/x/pool-incentives/types"
+	"github.com/merlins-labs/merlin/x/pool-incentives/types"
 	"github.com/stretchr/testify/require"
 
 	sdk "github.com/cosmos/cosmos-sdk/types"

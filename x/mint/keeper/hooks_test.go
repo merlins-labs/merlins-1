@@ -6,9 +6,9 @@ import (
 	"github.com/stretchr/testify/suite"
 	tmproto "github.com/tendermint/tendermint/proto/tendermint/types"
 
-	furyapp "github.com/merlins-labs/merlin/v16/app"
-	"github.com/merlins-labs/merlin/v16/x/mint/keeper"
-	"github.com/merlins-labs/merlin/v16/x/mint/types"
+	furyapp "github.com/merlins-labs/merlin/app"
+	"github.com/merlins-labs/merlin/x/mint/keeper"
+	"github.com/merlins-labs/merlin/x/mint/types"
 	"github.com/osmosis-labs/osmosis/osmoutils/osmoassert"
 
 	sdk "github.com/cosmos/cosmos-sdk/types"

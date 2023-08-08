@@ -5,8 +5,8 @@ import (
 	"github.com/cosmos/cosmos-sdk/types/module"
 	upgradetypes "github.com/cosmos/cosmos-sdk/x/upgrade/types"
 
-	"github.com/merlins-labs/merlin/v16/app/keepers"
-	"github.com/merlins-labs/merlin/v16/app/upgrades"
+	"github.com/merlins-labs/merlin/app/keepers"
+	"github.com/merlins-labs/merlin/app/upgrades"
 )
 
 func CreateUpgradeHandler(

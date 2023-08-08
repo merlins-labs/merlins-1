@@ -3,8 +3,8 @@ package keeper
 import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
-	gammtypes "github.com/merlins-labs/merlin/v16/x/gamm/types"
-	minttypes "github.com/merlins-labs/merlin/v16/x/mint/types"
+	gammtypes "github.com/merlins-labs/merlin/x/gamm/types"
+	minttypes "github.com/merlins-labs/merlin/x/mint/types"
 )
 
 type Hooks struct {

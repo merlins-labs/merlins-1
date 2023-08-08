@@ -12,7 +12,7 @@ import (
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
-	"github.com/merlins-labs/merlin/v16/wasmbinding"
+	"github.com/merlins-labs/merlin/wasmbinding"
 	"github.com/osmosis-labs/osmosis/osmoutils"
 
 	authtypes "github.com/cosmos/cosmos-sdk/x/auth/types"
@@ -22,17 +22,17 @@ import (
 	slashingtypes "github.com/cosmos/cosmos-sdk/x/slashing/types"
 	stakingtypes "github.com/cosmos/cosmos-sdk/x/staking/types"
 
-	concentratedliquidityquery "github.com/merlins-labs/merlin/v16/x/concentrated-liquidity/client/queryproto"
-	downtimequerytypes "github.com/merlins-labs/merlin/v16/x/downtime-detector/client/queryproto"
-	gammtypes "github.com/merlins-labs/merlin/v16/x/gamm/types"
-	incentivestypes "github.com/merlins-labs/merlin/v16/x/incentives/types"
-	lockuptypes "github.com/merlins-labs/merlin/v16/x/lockup/types"
-	minttypes "github.com/merlins-labs/merlin/v16/x/mint/types"
-	poolincentivestypes "github.com/merlins-labs/merlin/v16/x/pool-incentives/types"
-	poolmanagerqueryproto "github.com/merlins-labs/merlin/v16/x/poolmanager/client/queryproto"
-	superfluidtypes "github.com/merlins-labs/merlin/v16/x/superfluid/types"
-	twapquerytypes "github.com/merlins-labs/merlin/v16/x/twap/client/queryproto"
-	txfeestypes "github.com/merlins-labs/merlin/v16/x/txfees/types"
+	concentratedliquidityquery "github.com/merlins-labs/merlin/x/concentrated-liquidity/client/queryproto"
+	downtimequerytypes "github.com/merlins-labs/merlin/x/downtime-detector/client/queryproto"
+	gammtypes "github.com/merlins-labs/merlin/x/gamm/types"
+	incentivestypes "github.com/merlins-labs/merlin/x/incentives/types"
+	lockuptypes "github.com/merlins-labs/merlin/x/lockup/types"
+	minttypes "github.com/merlins-labs/merlin/x/mint/types"
+	poolincentivestypes "github.com/merlins-labs/merlin/x/pool-incentives/types"
+	poolmanagerqueryproto "github.com/merlins-labs/merlin/x/poolmanager/client/queryproto"
+	superfluidtypes "github.com/merlins-labs/merlin/x/superfluid/types"
+	twapquerytypes "github.com/merlins-labs/merlin/x/twap/client/queryproto"
+	txfeestypes "github.com/merlins-labs/merlin/x/txfees/types"
 	epochtypes "github.com/osmosis-labs/osmosis/x/epochs/types"
 )
 

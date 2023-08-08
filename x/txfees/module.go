@@ -25,9 +25,9 @@ import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/cosmos/cosmos-sdk/types/module"
 
-	"github.com/merlins-labs/merlin/v16/x/txfees/client/cli"
-	"github.com/merlins-labs/merlin/v16/x/txfees/keeper"
-	"github.com/merlins-labs/merlin/v16/x/txfees/types"
+	"github.com/merlins-labs/merlin/x/txfees/client/cli"
+	"github.com/merlins-labs/merlin/x/txfees/keeper"
+	"github.com/merlins-labs/merlin/x/txfees/types"
 )
 
 var (

@@ -15,13 +15,13 @@ import (
 
 	wasmkeeper "github.com/CosmWasm/wasmd/x/wasm/keeper"
 
-	"github.com/merlins-labs/merlin/v16/x/gamm/pool-models/balancer"
-	gammtypes "github.com/merlins-labs/merlin/v16/x/gamm/types"
-	minttypes "github.com/merlins-labs/merlin/v16/x/mint/types"
-	txfeetypes "github.com/merlins-labs/merlin/v16/x/txfees/types"
+	"github.com/merlins-labs/merlin/x/gamm/pool-models/balancer"
+	gammtypes "github.com/merlins-labs/merlin/x/gamm/types"
+	minttypes "github.com/merlins-labs/merlin/x/mint/types"
+	txfeetypes "github.com/merlins-labs/merlin/x/txfees/types"
 	"github.com/osmosis-labs/osmosis/osmoutils"
 
-	"github.com/merlins-labs/merlin/v16/app/apptesting"
+	"github.com/merlins-labs/merlin/app/apptesting"
 
 	"github.com/stretchr/testify/suite"
 
@@ -32,9 +32,9 @@ import (
 	channeltypes "github.com/cosmos/ibc-go/v4/modules/core/04-channel/types"
 	ibctesting "github.com/cosmos/ibc-go/v4/testing"
 
-	"github.com/merlins-labs/merlin/v16/tests/merlinibctesting"
+	"github.com/merlins-labs/merlin/tests/merlinibctesting"
 
-	"github.com/merlins-labs/merlin/v16/tests/ibc-hooks/testutils"
+	"github.com/merlins-labs/merlin/tests/ibc-hooks/testutils"
 )
 
 type HooksTestSuite struct {

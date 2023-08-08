@@ -13,10 +13,10 @@ import (
 	upgradetypes "github.com/cosmos/cosmos-sdk/x/upgrade/types"
 	transfertypes "github.com/cosmos/ibc-go/v4/modules/apps/transfer/types"
 
-	"github.com/merlins-labs/merlin/v16/app/keepers"
-	"github.com/merlins-labs/merlin/v16/app/upgrades"
-	ibcratelimittypes "github.com/merlins-labs/merlin/v16/x/ibc-rate-limit/types"
-	lockuptypes "github.com/merlins-labs/merlin/v16/x/lockup/types"
+	"github.com/merlins-labs/merlin/app/keepers"
+	"github.com/merlins-labs/merlin/app/upgrades"
+	ibcratelimittypes "github.com/merlins-labs/merlin/x/ibc-rate-limit/types"
+	lockuptypes "github.com/merlins-labs/merlin/x/lockup/types"
 )
 
 //go:embed rate_limiter.wasm

@@ -3,13 +3,13 @@ package simulation
 import (
 	"math/rand"
 
-	furysimtypes "github.com/merlins-labs/merlin/v16/simulation/simtypes"
+	furysimtypes "github.com/merlins-labs/merlin/simulation/simtypes"
 
 	"github.com/cosmos/cosmos-sdk/baseapp"
 
-	lockuptypes "github.com/merlins-labs/merlin/v16/x/lockup/types"
-	"github.com/merlins-labs/merlin/v16/x/superfluid/keeper"
-	"github.com/merlins-labs/merlin/v16/x/superfluid/types"
+	lockuptypes "github.com/merlins-labs/merlin/x/lockup/types"
+	"github.com/merlins-labs/merlin/x/superfluid/keeper"
+	"github.com/merlins-labs/merlin/x/superfluid/types"
 
 	"github.com/cosmos/cosmos-sdk/codec"
 	simappparams "github.com/cosmos/cosmos-sdk/simapp/params"

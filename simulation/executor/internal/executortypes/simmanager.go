@@ -15,7 +15,7 @@ import (
 	authtypes "github.com/cosmos/cosmos-sdk/x/auth/types"
 	"golang.org/x/exp/maps"
 
-	"github.com/merlins-labs/merlin/v16/simulation/simtypes"
+	"github.com/merlins-labs/merlin/simulation/simtypes"
 	"github.com/osmosis-labs/osmosis/osmoutils"
 )
 

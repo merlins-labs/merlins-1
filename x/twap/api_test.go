@@ -8,10 +8,10 @@ import (
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
-	sdkrand "github.com/merlins-labs/merlin/v16/simulation/simtypes/random"
-	"github.com/merlins-labs/merlin/v16/x/gamm/pool-models/balancer"
-	"github.com/merlins-labs/merlin/v16/x/twap"
-	"github.com/merlins-labs/merlin/v16/x/twap/types"
+	sdkrand "github.com/merlins-labs/merlin/simulation/simtypes/random"
+	"github.com/merlins-labs/merlin/x/gamm/pool-models/balancer"
+	"github.com/merlins-labs/merlin/x/twap"
+	"github.com/merlins-labs/merlin/x/twap/types"
 	"github.com/osmosis-labs/osmosis/osmomath"
 )
 

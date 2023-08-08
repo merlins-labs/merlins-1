@@ -6,9 +6,9 @@ import (
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
-	"github.com/merlins-labs/merlin/v16/app/apptesting"
-	"github.com/merlins-labs/merlin/v16/wasmbinding"
-	"github.com/merlins-labs/merlin/v16/wasmbinding/bindings"
+	"github.com/merlins-labs/merlin/app/apptesting"
+	"github.com/merlins-labs/merlin/wasmbinding"
+	"github.com/merlins-labs/merlin/wasmbinding/bindings"
 
 	"github.com/stretchr/testify/require"
 )

@@ -15,11 +15,11 @@ import (
 	ibctesting "github.com/cosmos/ibc-go/v4/testing"
 	"github.com/stretchr/testify/suite"
 
-	txfeetypes "github.com/merlins-labs/merlin/v16/x/txfees/types"
+	txfeetypes "github.com/merlins-labs/merlin/x/txfees/types"
 
-	"github.com/merlins-labs/merlin/v16/app/apptesting"
-	"github.com/merlins-labs/merlin/v16/tests/merlinibctesting"
-	"github.com/merlins-labs/merlin/v16/x/ibc-rate-limit/types"
+	"github.com/merlins-labs/merlin/app/apptesting"
+	"github.com/merlins-labs/merlin/tests/merlinibctesting"
+	"github.com/merlins-labs/merlin/x/ibc-rate-limit/types"
 )
 
 type MiddlewareTestSuite struct {

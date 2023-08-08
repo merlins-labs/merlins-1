@@ -1,12 +1,12 @@
 package v16
 
 import (
-	"github.com/merlins-labs/merlin/v16/app/upgrades"
+	"github.com/merlins-labs/merlin/app/upgrades"
 
 	store "github.com/cosmos/cosmos-sdk/store/types"
 
-	cltypes "github.com/merlins-labs/merlin/v16/x/concentrated-liquidity/types"
-	cosmwasmpooltypes "github.com/merlins-labs/merlin/v16/x/cosmwasmpool/types"
+	cltypes "github.com/merlins-labs/merlin/x/concentrated-liquidity/types"
+	cosmwasmpooltypes "github.com/merlins-labs/merlin/x/cosmwasmpool/types"
 )
 
 // UpgradeName defines the on-chain upgrade name for the Merlin v16 upgrade.

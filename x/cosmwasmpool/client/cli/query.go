@@ -3,8 +3,8 @@ package cli
 import (
 	"github.com/spf13/cobra"
 
-	"github.com/merlins-labs/merlin/v16/x/cosmwasmpool/client/queryproto"
-	"github.com/merlins-labs/merlin/v16/x/cosmwasmpool/types"
+	"github.com/merlins-labs/merlin/x/cosmwasmpool/client/queryproto"
+	"github.com/merlins-labs/merlin/x/cosmwasmpool/types"
 	"github.com/osmosis-labs/osmosis/osmoutils/osmocli"
 )
 

@@ -5,11 +5,11 @@ import (
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
-	gammtypes "github.com/merlins-labs/merlin/v16/x/gamm/types"
-	lockuptypes "github.com/merlins-labs/merlin/v16/x/lockup/types"
+	gammtypes "github.com/merlins-labs/merlin/x/gamm/types"
+	lockuptypes "github.com/merlins-labs/merlin/x/lockup/types"
 	"github.com/osmosis-labs/osmosis/osmoutils"
 
-	"github.com/merlins-labs/merlin/v16/x/superfluid/types"
+	"github.com/merlins-labs/merlin/x/superfluid/types"
 )
 
 // Returns a list of newly created lockIDs, or an error.

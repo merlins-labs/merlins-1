@@ -8,10 +8,10 @@ import (
 	"github.com/cosmos/cosmos-sdk/crypto/keys/ed25519"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
-	"github.com/merlins-labs/merlin/v16/app/apptesting"
-	appParams "github.com/merlins-labs/merlin/v16/app/params"
-	balancer "github.com/merlins-labs/merlin/v16/x/gamm/pool-models/balancer"
-	"github.com/merlins-labs/merlin/v16/x/gamm/types"
+	"github.com/merlins-labs/merlin/app/apptesting"
+	appParams "github.com/merlins-labs/merlin/app/params"
+	balancer "github.com/merlins-labs/merlin/x/gamm/pool-models/balancer"
+	"github.com/merlins-labs/merlin/x/gamm/types"
 )
 
 func TestMsgCreateBalancerPool_ValidateBasic(t *testing.T) {

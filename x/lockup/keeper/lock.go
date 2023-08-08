@@ -13,8 +13,8 @@ import (
 
 	"github.com/gogo/protobuf/proto"
 
-	cltypes "github.com/merlins-labs/merlin/v16/x/concentrated-liquidity/types"
-	"github.com/merlins-labs/merlin/v16/x/lockup/types"
+	cltypes "github.com/merlins-labs/merlin/x/concentrated-liquidity/types"
+	"github.com/merlins-labs/merlin/x/lockup/types"
 	"github.com/osmosis-labs/osmosis/osmoutils/sumtree"
 )
 

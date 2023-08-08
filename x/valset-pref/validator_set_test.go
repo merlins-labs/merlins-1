@@ -3,7 +3,7 @@ package keeper_test
 import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
-	"github.com/merlins-labs/merlin/v16/x/valset-pref/types"
+	"github.com/merlins-labs/merlin/x/valset-pref/types"
 )
 
 func (s *KeeperTestSuite) TestValidateLockForForceUnlock() {

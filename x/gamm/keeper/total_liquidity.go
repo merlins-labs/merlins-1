@@ -4,7 +4,7 @@ import (
 	"github.com/cosmos/cosmos-sdk/store/prefix"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
-	"github.com/merlins-labs/merlin/v16/x/gamm/types"
+	"github.com/merlins-labs/merlin/x/gamm/types"
 )
 
 func (k Keeper) GetTotalLiquidity(ctx sdk.Context) (sdk.Coins, error) {

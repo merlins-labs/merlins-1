@@ -8,12 +8,12 @@ import (
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
-	"github.com/merlins-labs/merlin/v16/app/apptesting"
-	"github.com/merlins-labs/merlin/v16/x/lockup/types"
+	"github.com/merlins-labs/merlin/app/apptesting"
+	"github.com/merlins-labs/merlin/x/lockup/types"
 
 	"github.com/tendermint/tendermint/crypto/ed25519"
 
-	appParams "github.com/merlins-labs/merlin/v16/app/params"
+	appParams "github.com/merlins-labs/merlin/app/params"
 )
 
 func TestMsgLockTokens(t *testing.T) {

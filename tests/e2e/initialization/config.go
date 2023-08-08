@@ -18,20 +18,20 @@ import (
 	"github.com/gogo/protobuf/proto"
 	tmjson "github.com/tendermint/tendermint/libs/json"
 
-	"github.com/merlins-labs/merlin/v16/x/gamm/pool-models/balancer"
-	gammtypes "github.com/merlins-labs/merlin/v16/x/gamm/types"
-	incentivestypes "github.com/merlins-labs/merlin/v16/x/incentives/types"
-	minttypes "github.com/merlins-labs/merlin/v16/x/mint/types"
-	poolitypes "github.com/merlins-labs/merlin/v16/x/pool-incentives/types"
-	poolmanagertypes "github.com/merlins-labs/merlin/v16/x/poolmanager/types"
-	protorevtypes "github.com/merlins-labs/merlin/v16/x/protorev/types"
-	twaptypes "github.com/merlins-labs/merlin/v16/x/twap/types"
-	txfeestypes "github.com/merlins-labs/merlin/v16/x/txfees/types"
+	"github.com/merlins-labs/merlin/x/gamm/pool-models/balancer"
+	gammtypes "github.com/merlins-labs/merlin/x/gamm/types"
+	incentivestypes "github.com/merlins-labs/merlin/x/incentives/types"
+	minttypes "github.com/merlins-labs/merlin/x/mint/types"
+	poolitypes "github.com/merlins-labs/merlin/x/pool-incentives/types"
+	poolmanagertypes "github.com/merlins-labs/merlin/x/poolmanager/types"
+	protorevtypes "github.com/merlins-labs/merlin/x/protorev/types"
+	twaptypes "github.com/merlins-labs/merlin/x/twap/types"
+	txfeestypes "github.com/merlins-labs/merlin/x/txfees/types"
 	epochtypes "github.com/osmosis-labs/osmosis/x/epochs/types"
 
 	types1 "github.com/cosmos/cosmos-sdk/codec/types"
 
-	"github.com/merlins-labs/merlin/v16/tests/e2e/util"
+	"github.com/merlins-labs/merlin/tests/e2e/util"
 )
 
 // NodeConfig is a confiuration for the node supplied from the test runner

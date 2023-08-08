@@ -7,8 +7,8 @@ import (
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
-	"github.com/merlins-labs/merlin/v16/x/protorev/keeper"
-	"github.com/merlins-labs/merlin/v16/x/protorev/types"
+	"github.com/merlins-labs/merlin/x/protorev/keeper"
+	"github.com/merlins-labs/merlin/x/protorev/types"
 )
 
 // BenchmarkEpochHook benchmarks the epoch hook. In particular, it benchmarks the UpdatePools function.

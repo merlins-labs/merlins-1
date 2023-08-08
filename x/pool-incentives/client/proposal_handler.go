@@ -1,8 +1,8 @@
 package client
 
 import (
-	"github.com/merlins-labs/merlin/v16/x/pool-incentives/client/cli"
-	"github.com/merlins-labs/merlin/v16/x/pool-incentives/client/rest"
+	"github.com/merlins-labs/merlin/x/pool-incentives/client/cli"
+	"github.com/merlins-labs/merlin/x/pool-incentives/client/rest"
 
 	govclient "github.com/cosmos/cosmos-sdk/x/gov/client"
 )

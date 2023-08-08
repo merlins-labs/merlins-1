@@ -6,16 +6,16 @@ import (
 
 	"github.com/tendermint/tendermint/libs/log"
 
-	gammtypes "github.com/merlins-labs/merlin/v16/x/gamm/types"
-	incentivestypes "github.com/merlins-labs/merlin/v16/x/incentives/types"
-	lockuptypes "github.com/merlins-labs/merlin/v16/x/lockup/types"
-	"github.com/merlins-labs/merlin/v16/x/pool-incentives/types"
+	gammtypes "github.com/merlins-labs/merlin/x/gamm/types"
+	incentivestypes "github.com/merlins-labs/merlin/x/incentives/types"
+	lockuptypes "github.com/merlins-labs/merlin/x/lockup/types"
+	"github.com/merlins-labs/merlin/x/pool-incentives/types"
 	"github.com/osmosis-labs/osmosis/osmoutils"
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	paramtypes "github.com/cosmos/cosmos-sdk/x/params/types"
 
-	poolmanagertypes "github.com/merlins-labs/merlin/v16/x/poolmanager/types"
+	poolmanagertypes "github.com/merlins-labs/merlin/x/poolmanager/types"
 )
 
 type Keeper struct {

@@ -3,11 +3,11 @@ package apptesting
 import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
-	gammkeeper "github.com/merlins-labs/merlin/v16/x/gamm/keeper"
-	"github.com/merlins-labs/merlin/v16/x/gamm/pool-models/balancer"
-	"github.com/merlins-labs/merlin/v16/x/gamm/pool-models/stableswap"
-	gammtypes "github.com/merlins-labs/merlin/v16/x/gamm/types"
-	poolmanagertypes "github.com/merlins-labs/merlin/v16/x/poolmanager/types"
+	gammkeeper "github.com/merlins-labs/merlin/x/gamm/keeper"
+	"github.com/merlins-labs/merlin/x/gamm/pool-models/balancer"
+	"github.com/merlins-labs/merlin/x/gamm/pool-models/stableswap"
+	gammtypes "github.com/merlins-labs/merlin/x/gamm/types"
+	poolmanagertypes "github.com/merlins-labs/merlin/x/poolmanager/types"
 	"github.com/osmosis-labs/osmosis/osmomath"
 )
 

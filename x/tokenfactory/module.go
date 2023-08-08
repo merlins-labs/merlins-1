@@ -23,12 +23,12 @@ import (
 	"github.com/spf13/cobra"
 	abci "github.com/tendermint/tendermint/abci/types"
 
-	"github.com/merlins-labs/merlin/v16/simulation/simtypes"
-	simulation "github.com/merlins-labs/merlin/v16/x/tokenfactory/simulation"
+	"github.com/merlins-labs/merlin/simulation/simtypes"
+	simulation "github.com/merlins-labs/merlin/x/tokenfactory/simulation"
 
-	"github.com/merlins-labs/merlin/v16/x/tokenfactory/client/cli"
-	"github.com/merlins-labs/merlin/v16/x/tokenfactory/keeper"
-	"github.com/merlins-labs/merlin/v16/x/tokenfactory/types"
+	"github.com/merlins-labs/merlin/x/tokenfactory/client/cli"
+	"github.com/merlins-labs/merlin/x/tokenfactory/keeper"
+	"github.com/merlins-labs/merlin/x/tokenfactory/types"
 )
 
 var (

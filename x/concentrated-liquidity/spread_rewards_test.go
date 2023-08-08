@@ -6,11 +6,11 @@ import (
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
-	"github.com/merlins-labs/merlin/v16/app/apptesting"
-	cl "github.com/merlins-labs/merlin/v16/x/concentrated-liquidity"
-	clmath "github.com/merlins-labs/merlin/v16/x/concentrated-liquidity/math"
-	clmodel "github.com/merlins-labs/merlin/v16/x/concentrated-liquidity/model"
-	"github.com/merlins-labs/merlin/v16/x/concentrated-liquidity/types"
+	"github.com/merlins-labs/merlin/app/apptesting"
+	cl "github.com/merlins-labs/merlin/x/concentrated-liquidity"
+	clmath "github.com/merlins-labs/merlin/x/concentrated-liquidity/math"
+	clmodel "github.com/merlins-labs/merlin/x/concentrated-liquidity/model"
+	"github.com/merlins-labs/merlin/x/concentrated-liquidity/types"
 	"github.com/osmosis-labs/osmosis/osmomath"
 	"github.com/osmosis-labs/osmosis/osmoutils/accum"
 )

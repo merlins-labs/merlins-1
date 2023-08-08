@@ -13,13 +13,13 @@ import (
 
 	"github.com/tendermint/tendermint/libs/bytes"
 
-	appparams "github.com/merlins-labs/merlin/v16/app/params"
-	"github.com/merlins-labs/merlin/v16/tests/e2e/configurer/config"
-	"github.com/merlins-labs/merlin/v16/tests/e2e/initialization"
-	"github.com/merlins-labs/merlin/v16/tests/e2e/util"
+	appparams "github.com/merlins-labs/merlin/app/params"
+	"github.com/merlins-labs/merlin/tests/e2e/configurer/config"
+	"github.com/merlins-labs/merlin/tests/e2e/initialization"
+	"github.com/merlins-labs/merlin/tests/e2e/util"
 
-	ibcratelimittypes "github.com/merlins-labs/merlin/v16/x/ibc-rate-limit/types"
-	lockuptypes "github.com/merlins-labs/merlin/v16/x/lockup/types"
+	ibcratelimittypes "github.com/merlins-labs/merlin/x/ibc-rate-limit/types"
+	lockuptypes "github.com/merlins-labs/merlin/x/lockup/types"
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
@@ -28,7 +28,7 @@ import (
 	"github.com/tendermint/tendermint/p2p"
 	coretypes "github.com/tendermint/tendermint/rpc/core/types"
 
-	app "github.com/merlins-labs/merlin/v16/app"
+	app "github.com/merlins-labs/merlin/app"
 
 	paramsutils "github.com/cosmos/cosmos-sdk/x/params/client/utils"
 )

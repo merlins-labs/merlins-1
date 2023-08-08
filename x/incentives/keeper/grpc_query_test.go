@@ -8,9 +8,9 @@ import (
 
 	query "github.com/cosmos/cosmos-sdk/types/query"
 
-	"github.com/merlins-labs/merlin/v16/x/incentives/types"
-	lockuptypes "github.com/merlins-labs/merlin/v16/x/lockup/types"
-	pooltypes "github.com/merlins-labs/merlin/v16/x/pool-incentives/types"
+	"github.com/merlins-labs/merlin/x/incentives/types"
+	lockuptypes "github.com/merlins-labs/merlin/x/lockup/types"
+	pooltypes "github.com/merlins-labs/merlin/x/pool-incentives/types"
 )
 
 var _ = suite.TestingSuite(nil)

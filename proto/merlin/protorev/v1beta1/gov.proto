@@ -6,7 +6,7 @@ import "gogoproto/gogo.proto";
 import "cosmos_proto/cosmos.proto";
 import "merlin/protorev/v1beta1/protorev.proto";
 
-option go_package = "github.com/merlins-labs/merlin/v16/x/protorev/types";
+option go_package = "github.com/merlins-labs/merlin/x/protorev/types";
 
 // SetProtoRevEnabledProposal is a gov Content type to update whether the
 // protorev module is enabled

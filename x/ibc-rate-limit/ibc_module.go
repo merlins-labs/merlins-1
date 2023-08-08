@@ -16,7 +16,7 @@ import (
 	porttypes "github.com/cosmos/ibc-go/v4/modules/core/05-port/types"
 	"github.com/cosmos/ibc-go/v4/modules/core/exported"
 
-	"github.com/merlins-labs/merlin/v16/x/ibc-rate-limit/types"
+	"github.com/merlins-labs/merlin/x/ibc-rate-limit/types"
 )
 
 type IBCModule struct {

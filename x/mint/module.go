@@ -27,11 +27,11 @@ import (
 	"github.com/cosmos/cosmos-sdk/types/module"
 	simtypes "github.com/cosmos/cosmos-sdk/types/simulation"
 
-	"github.com/merlins-labs/merlin/v16/x/mint/client/cli"
-	"github.com/merlins-labs/merlin/v16/x/mint/client/rest"
-	"github.com/merlins-labs/merlin/v16/x/mint/keeper"
-	"github.com/merlins-labs/merlin/v16/x/mint/simulation"
-	"github.com/merlins-labs/merlin/v16/x/mint/types"
+	"github.com/merlins-labs/merlin/x/mint/client/cli"
+	"github.com/merlins-labs/merlin/x/mint/client/rest"
+	"github.com/merlins-labs/merlin/x/mint/keeper"
+	"github.com/merlins-labs/merlin/x/mint/simulation"
+	"github.com/merlins-labs/merlin/x/mint/types"
 )
 
 var (

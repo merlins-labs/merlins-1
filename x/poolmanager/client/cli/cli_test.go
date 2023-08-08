@@ -7,11 +7,11 @@ import (
 	"github.com/gogo/protobuf/proto"
 	"github.com/stretchr/testify/suite"
 
-	"github.com/merlins-labs/merlin/v16/app"
-	"github.com/merlins-labs/merlin/v16/x/poolmanager/client/cli"
-	"github.com/merlins-labs/merlin/v16/x/poolmanager/client/queryproto"
-	poolmanagertestutil "github.com/merlins-labs/merlin/v16/x/poolmanager/client/testutil"
-	"github.com/merlins-labs/merlin/v16/x/poolmanager/types"
+	"github.com/merlins-labs/merlin/app"
+	"github.com/merlins-labs/merlin/x/poolmanager/client/cli"
+	"github.com/merlins-labs/merlin/x/poolmanager/client/queryproto"
+	poolmanagertestutil "github.com/merlins-labs/merlin/x/poolmanager/client/testutil"
+	"github.com/merlins-labs/merlin/x/poolmanager/types"
 	"github.com/osmosis-labs/osmosis/osmoutils"
 	"github.com/osmosis-labs/osmosis/osmoutils/osmocli"
 

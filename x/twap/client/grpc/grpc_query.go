@@ -10,8 +10,8 @@ import (
 	"google.golang.org/grpc/status"
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
-	"github.com/merlins-labs/merlin/v16/x/twap/client"
-	"github.com/merlins-labs/merlin/v16/x/twap/client/queryproto"
+	"github.com/merlins-labs/merlin/x/twap/client"
+	"github.com/merlins-labs/merlin/x/twap/client/queryproto"
 )
 
 type Querier struct {

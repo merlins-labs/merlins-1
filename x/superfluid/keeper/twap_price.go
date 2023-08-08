@@ -3,8 +3,8 @@ package keeper
 import (
 	"github.com/gogo/protobuf/proto"
 
-	gammtypes "github.com/merlins-labs/merlin/v16/x/gamm/types"
-	"github.com/merlins-labs/merlin/v16/x/superfluid/types"
+	gammtypes "github.com/merlins-labs/merlin/x/gamm/types"
+	"github.com/merlins-labs/merlin/x/superfluid/types"
 
 	"github.com/cosmos/cosmos-sdk/store/prefix"
 	sdk "github.com/cosmos/cosmos-sdk/types"

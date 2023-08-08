@@ -5,7 +5,7 @@ import "gogoproto/gogo.proto";
 import "merlin/superfluid/superfluid.proto";
 import "merlin/superfluid/params.proto";
 
-option go_package = "github.com/merlins-labs/merlin/v16/x/superfluid/types";
+option go_package = "github.com/merlins-labs/merlin/x/superfluid/types";
 
 // GenesisState defines the module's genesis state.
 message GenesisState {

@@ -3,8 +3,8 @@ package cli_test
 import (
 	"testing"
 
-	"github.com/merlins-labs/merlin/v16/x/tokenfactory/client/cli"
-	"github.com/merlins-labs/merlin/v16/x/tokenfactory/types"
+	"github.com/merlins-labs/merlin/x/tokenfactory/client/cli"
+	"github.com/merlins-labs/merlin/x/tokenfactory/types"
 	"github.com/osmosis-labs/osmosis/osmoutils/osmocli"
 )
 

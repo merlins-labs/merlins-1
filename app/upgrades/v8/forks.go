@@ -3,7 +3,7 @@ package v8
 import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
-	"github.com/merlins-labs/merlin/v16/app/keepers"
+	"github.com/merlins-labs/merlin/app/keepers"
 )
 
 // RunForkLogic executes height-gated on-chain fork logic for the Merlin v8

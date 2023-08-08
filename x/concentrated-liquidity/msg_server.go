@@ -5,8 +5,8 @@ import (
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
-	clmodel "github.com/merlins-labs/merlin/v16/x/concentrated-liquidity/model"
-	"github.com/merlins-labs/merlin/v16/x/concentrated-liquidity/types"
+	clmodel "github.com/merlins-labs/merlin/x/concentrated-liquidity/model"
+	"github.com/merlins-labs/merlin/x/concentrated-liquidity/types"
 )
 
 type msgServer struct {

@@ -5,10 +5,10 @@ import (
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
-	cl "github.com/merlins-labs/merlin/v16/x/concentrated-liquidity"
-	"github.com/merlins-labs/merlin/v16/x/concentrated-liquidity/model"
-	"github.com/merlins-labs/merlin/v16/x/concentrated-liquidity/types"
-	"github.com/merlins-labs/merlin/v16/x/concentrated-liquidity/types/genesis"
+	cl "github.com/merlins-labs/merlin/x/concentrated-liquidity"
+	"github.com/merlins-labs/merlin/x/concentrated-liquidity/model"
+	"github.com/merlins-labs/merlin/x/concentrated-liquidity/types"
+	"github.com/merlins-labs/merlin/x/concentrated-liquidity/types/genesis"
 )
 
 const (

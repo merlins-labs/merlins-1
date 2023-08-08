@@ -27,12 +27,12 @@ import (
 	simtypes "github.com/cosmos/cosmos-sdk/types/simulation"
 	stakingtypes "github.com/cosmos/cosmos-sdk/x/staking/types"
 
-	furysimtypes "github.com/merlins-labs/merlin/v16/simulation/simtypes"
-	"github.com/merlins-labs/merlin/v16/x/incentives/client/cli"
-	"github.com/merlins-labs/merlin/v16/x/incentives/keeper"
-	"github.com/merlins-labs/merlin/v16/x/incentives/simulation"
-	"github.com/merlins-labs/merlin/v16/x/incentives/types"
-	"github.com/merlins-labs/merlin/v16/x/mint/client/rest"
+	furysimtypes "github.com/merlins-labs/merlin/simulation/simtypes"
+	"github.com/merlins-labs/merlin/x/incentives/client/cli"
+	"github.com/merlins-labs/merlin/x/incentives/keeper"
+	"github.com/merlins-labs/merlin/x/incentives/simulation"
+	"github.com/merlins-labs/merlin/x/incentives/types"
+	"github.com/merlins-labs/merlin/x/mint/client/rest"
 )
 
 var (

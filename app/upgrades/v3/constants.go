@@ -1,6 +1,6 @@
 package v3
 
-import "github.com/merlins-labs/merlin/v16/app/upgrades"
+import "github.com/merlins-labs/merlin/app/upgrades"
 
 const (
 	// UpgradeName defines the on-chain upgrade name for the Merlin v3 upgrade.

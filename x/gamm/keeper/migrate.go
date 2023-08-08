@@ -4,10 +4,10 @@ import (
 	"fmt"
 	"sort"
 
-	cltypes "github.com/merlins-labs/merlin/v16/x/concentrated-liquidity/types"
-	"github.com/merlins-labs/merlin/v16/x/gamm/types"
-	gammmigration "github.com/merlins-labs/merlin/v16/x/gamm/types/migration"
-	poolmanagertypes "github.com/merlins-labs/merlin/v16/x/poolmanager/types"
+	cltypes "github.com/merlins-labs/merlin/x/concentrated-liquidity/types"
+	"github.com/merlins-labs/merlin/x/gamm/types"
+	gammmigration "github.com/merlins-labs/merlin/x/gamm/types/migration"
+	poolmanagertypes "github.com/merlins-labs/merlin/x/poolmanager/types"
 	"github.com/osmosis-labs/osmosis/osmoutils"
 
 	"github.com/cosmos/cosmos-sdk/store/prefix"

@@ -9,7 +9,7 @@ import (
 
 	"github.com/pkg/errors"
 
-	"github.com/merlins-labs/merlin/v16/cmd/querygen/templates"
+	"github.com/merlins-labs/merlin/cmd/querygen/templates"
 )
 
 var grpcTemplate template.Template

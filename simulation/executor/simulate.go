@@ -21,9 +21,9 @@ import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/cosmos/cosmos-sdk/types/simulation"
 
-	"github.com/merlins-labs/merlin/v16/simulation/executor/internal/executortypes"
-	"github.com/merlins-labs/merlin/v16/simulation/executor/internal/stats"
-	"github.com/merlins-labs/merlin/v16/simulation/simtypes"
+	"github.com/merlins-labs/merlin/simulation/executor/internal/executortypes"
+	"github.com/merlins-labs/merlin/simulation/executor/internal/stats"
+	"github.com/merlins-labs/merlin/simulation/simtypes"
 )
 
 const AverageBlockTime = 6 * time.Second

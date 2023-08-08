@@ -6,9 +6,9 @@ import (
 
 	"github.com/stretchr/testify/require"
 
-	simapp "github.com/merlins-labs/merlin/v16/app"
-	"github.com/merlins-labs/merlin/v16/x/mint/simulation"
-	"github.com/merlins-labs/merlin/v16/x/mint/types"
+	simapp "github.com/merlins-labs/merlin/app"
+	"github.com/merlins-labs/merlin/x/mint/simulation"
+	"github.com/merlins-labs/merlin/x/mint/types"
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/cosmos/cosmos-sdk/types/kv"

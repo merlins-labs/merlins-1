@@ -5,7 +5,7 @@ import (
 
 	"github.com/spf13/cobra"
 
-	"github.com/merlins-labs/merlin/v16/x/superfluid/types"
+	"github.com/merlins-labs/merlin/x/superfluid/types"
 	"github.com/osmosis-labs/osmosis/osmoutils/osmocli"
 
 	"github.com/cosmos/cosmos-sdk/client"

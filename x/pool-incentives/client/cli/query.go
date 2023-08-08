@@ -3,7 +3,7 @@ package cli
 import (
 	"github.com/spf13/cobra"
 
-	"github.com/merlins-labs/merlin/v16/x/pool-incentives/types"
+	"github.com/merlins-labs/merlin/x/pool-incentives/types"
 	"github.com/osmosis-labs/osmosis/osmoutils/osmocli"
 )
 

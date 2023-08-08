@@ -12,8 +12,8 @@ import (
 	tmtypes "github.com/tendermint/tendermint/proto/tendermint/types"
 	dbm "github.com/tendermint/tm-db"
 
-	sdkrand "github.com/merlins-labs/merlin/v16/simulation/simtypes/random"
-	"github.com/merlins-labs/merlin/v16/x/gamm/types"
+	sdkrand "github.com/merlins-labs/merlin/simulation/simtypes/random"
+	"github.com/merlins-labs/merlin/x/gamm/types"
 	"github.com/osmosis-labs/osmosis/osmomath"
 )
 

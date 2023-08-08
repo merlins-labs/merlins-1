@@ -16,12 +16,12 @@ import (
 
 	banktypes "github.com/cosmos/cosmos-sdk/x/bank/types"
 
-	merlinApp "github.com/merlins-labs/merlin/v16/app"
-	"github.com/merlins-labs/merlin/v16/x/concentrated-liquidity/model"
+	merlinApp "github.com/merlins-labs/merlin/app"
+	"github.com/merlins-labs/merlin/x/concentrated-liquidity/model"
 
-	cltypes "github.com/merlins-labs/merlin/v16/x/concentrated-liquidity/types"
-	clgenesis "github.com/merlins-labs/merlin/v16/x/concentrated-liquidity/types/genesis"
-	poolmanagertypes "github.com/merlins-labs/merlin/v16/x/poolmanager/types"
+	cltypes "github.com/merlins-labs/merlin/x/concentrated-liquidity/types"
+	clgenesis "github.com/merlins-labs/merlin/x/concentrated-liquidity/types/genesis"
+	poolmanagertypes "github.com/merlins-labs/merlin/x/poolmanager/types"
 )
 
 func EditLocalMerlinGenesis(updatedCLGenesis *clgenesis.GenesisState, updatedBankGenesis *banktypes.GenesisState) {

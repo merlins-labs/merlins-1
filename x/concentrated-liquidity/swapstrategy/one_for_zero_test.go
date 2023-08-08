@@ -3,9 +3,9 @@ package swapstrategy_test
 import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
-	"github.com/merlins-labs/merlin/v16/x/concentrated-liquidity/math"
-	"github.com/merlins-labs/merlin/v16/x/concentrated-liquidity/swapstrategy"
-	"github.com/merlins-labs/merlin/v16/x/concentrated-liquidity/types"
+	"github.com/merlins-labs/merlin/x/concentrated-liquidity/math"
+	"github.com/merlins-labs/merlin/x/concentrated-liquidity/swapstrategy"
+	"github.com/merlins-labs/merlin/x/concentrated-liquidity/types"
 	"github.com/osmosis-labs/osmosis/osmomath"
 )
 

@@ -3,7 +3,7 @@ package merlin.cosmwasmpool.v1beta1;
 
 import "gogoproto/gogo.proto";
 
-option go_package = "github.com/merlins-labs/merlin/v16/x/cosmwasmpool/types";
+option go_package = "github.com/merlins-labs/merlin/x/cosmwasmpool/types";
 
 // UploadCosmWasmPoolCodeAndWhiteListProposal is a gov Content type for
 // uploading coswasm pool code and adding it to internal whitelist. Only the
