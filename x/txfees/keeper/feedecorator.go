@@ -85,7 +85,7 @@ func (mfd MempoolFeeDecorator) AnteHandle(ctx sdk.Context, tx sdk.Tx, simulate b
 		return ctx, errorsmod.Wrapf(sdkerrors.ErrInsufficientFee,
 			"Expected 1 fee denom attached, got %d", len(feeCoins))
 	}
-	// The minimum base gas price is in ufury, convert the fee denom's worth to ufury terms.
+	// The minimum base gas price is in umer, convert the fee denom's worth to umer terms.
 	// Then compare if its sufficient for paying the tx fee.
 	err = mfd.TxFeesKeeper.IsSufficientFee(ctx, minBaseGasPrice, feeTx.GetGas(), feeCoins[0])
 	if err != nil {
@@ -110,7 +110,7 @@ func (mfd MempoolFeeDecorator) getMinBaseGasPrice(ctx sdk.Context, baseDenom str
 	return minBaseGasPrice
 }
 
-// IsSufficientFee checks if the feeCoin provided (in any asset), is worth enough fury at current spot prices
+// IsSufficientFee checks if the feeCoin provided (in any asset), is worth enough mer at current spot prices
 // to pay the gas cost of this tx.
 func (k Keeper) IsSufficientFee(ctx sdk.Context, minBaseGasPrice sdk.Dec, gasRequested uint64, feeCoin sdk.Coin) error {
 	baseDenom, err := k.GetBaseDenom(ctx)
@@ -234,13 +234,13 @@ func DeductFees(txFeesKeeper types.TxFeesKeeper, bankKeeper types.BankKeeper, ct
 		return errorsmod.Wrapf(sdkerrors.ErrInsufficientFee, "invalid fee amount: %s", fees)
 	}
 
-	// pulls base denom from TxFeesKeeper (should be uFURY)
+	// pulls base denom from TxFeesKeeper (should be uMER)
 	baseDenom, err := txFeesKeeper.GetBaseDenom(ctx)
 	if err != nil {
 		return err
 	}
 
-	// checks if input fee is uFURY (assumes only one fee token exists in the fees array (as per the check in mempoolFeeDecorator))
+	// checks if input fee is uMER (assumes only one fee token exists in the fees array (as per the check in mempoolFeeDecorator))
 	if fees[0].Denom == baseDenom {
 		// sends to FeeCollectorName module account
 		err := bankKeeper.SendCoinsFromAccountToModule(ctx, acc.GetAddress(), types.FeeCollectorName, fees)

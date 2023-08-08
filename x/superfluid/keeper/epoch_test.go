@@ -15,7 +15,7 @@ import (
 	"github.com/merlins-labs/merlin/x/superfluid/types"
 )
 
-func (s *KeeperTestSuite) TestUpdateFuryEquivalentMultipliers() {
+func (s *KeeperTestSuite) TestUpdateMerEquivalentMultipliers() {
 	testCases := []struct {
 		name               string
 		asset              types.SuperfluidAsset
@@ -25,38 +25,38 @@ func (s *KeeperTestSuite) TestUpdateFuryEquivalentMultipliers() {
 		expectedError      error
 	}{
 		{
-			name:               "update LP token Fury equivalent successfully",
+			name:               "update LP token Mer equivalent successfully",
 			asset:              types.SuperfluidAsset{Denom: DefaultGammAsset, AssetType: types.SuperfluidAssetTypeLPShare},
 			expectedMultiplier: sdk.MustNewDecFromStr("0.01"),
 		},
 		{
-			name:             "update LP token Fury equivalent with pool unexpectedly deleted",
+			name:             "update LP token Mer equivalent with pool unexpectedly deleted",
 			asset:            types.SuperfluidAsset{Denom: DefaultGammAsset, AssetType: types.SuperfluidAssetTypeLPShare},
 			poolDoesNotExist: true,
 			expectedError:    gammtypes.PoolDoesNotExistError{PoolId: 1},
 		},
 		{
-			name:               "update LP token Fury equivalent with pool unexpectedly removed Fury",
+			name:               "update LP token Mer equivalent with pool unexpectedly removed Mer",
 			asset:              types.SuperfluidAsset{Denom: DefaultGammAsset, AssetType: types.SuperfluidAssetTypeLPShare},
 			removeStakingAsset: true,
-			expectedError:      errors.New("pool 1 has zero FURY amount"),
+			expectedError:      errors.New("pool 1 has zero MER amount"),
 		},
 		{
-			name:               "update concentrated share Fury equivalent successfully",
+			name:               "update concentrated share Mer equivalent successfully",
 			asset:              types.SuperfluidAsset{Denom: cltypes.GetConcentratedLockupDenomFromPoolId(1), AssetType: types.SuperfluidAssetTypeConcentratedShare},
 			expectedMultiplier: sdk.MustNewDecFromStr("1"),
 		},
 		{
-			name:             "update concentrated share Fury equivalent with pool unexpectedly deleted",
+			name:             "update concentrated share Mer equivalent with pool unexpectedly deleted",
 			asset:            types.SuperfluidAsset{Denom: cltypes.GetConcentratedLockupDenomFromPoolId(1), AssetType: types.SuperfluidAssetTypeConcentratedShare},
 			poolDoesNotExist: true,
 			expectedError:    cltypes.PoolNotFoundError{PoolId: 1},
 		},
 		{
-			name:               "update concentrated share Fury equivalent with pool unexpectedly removed Fury",
+			name:               "update concentrated share Mer equivalent with pool unexpectedly removed Mer",
 			asset:              types.SuperfluidAsset{Denom: cltypes.GetConcentratedLockupDenomFromPoolId(1), AssetType: types.SuperfluidAssetTypeConcentratedShare},
 			removeStakingAsset: true,
-			expectedError:      errors.New("pool has unexpectedly removed FURY as one of its underlying assets"),
+			expectedError:      errors.New("pool has unexpectedly removed MER as one of its underlying assets"),
 		},
 	}
 
@@ -75,7 +75,7 @@ func (s *KeeperTestSuite) TestUpdateFuryEquivalentMultipliers() {
 			poolCoins := sdk.NewCoins(sdk.NewCoin(stakeDenom, sdk.NewInt(1000000000000000000)), sdk.NewCoin("foo", sdk.NewInt(1000000000000000000)))
 
 			// Ensure that the multiplier is zero before the test
-			multiplier := superfluidKeeper.GetFuryEquivalentMultiplier(ctx, tc.asset.Denom)
+			multiplier := superfluidKeeper.GetMerEquivalentMultiplier(ctx, tc.asset.Denom)
 			s.Require().Equal(multiplier, sdk.ZeroDec())
 
 			// Create the respective pool if the test case requires it
@@ -88,7 +88,7 @@ func (s *KeeperTestSuite) TestUpdateFuryEquivalentMultipliers() {
 			}
 
 			// System under test
-			err := superfluidKeeper.UpdateFuryEquivalentMultipliers(ctx, tc.asset, 1)
+			err := superfluidKeeper.UpdateMerEquivalentMultipliers(ctx, tc.asset, 1)
 
 			if tc.expectedError != nil {
 				s.Require().Error(err)
@@ -96,7 +96,7 @@ func (s *KeeperTestSuite) TestUpdateFuryEquivalentMultipliers() {
 
 				// Ensure unwind superfluid asset is called
 				// Check that multiplier was not set
-				multiplier := superfluidKeeper.GetFuryEquivalentMultiplier(ctx, tc.asset.Denom)
+				multiplier := superfluidKeeper.GetMerEquivalentMultiplier(ctx, tc.asset.Denom)
 				s.Require().Equal(multiplier, sdk.ZeroDec())
 				// Check that the asset was deleted
 				_, err := superfluidKeeper.GetSuperfluidAsset(ctx, tc.asset.Denom)
@@ -105,7 +105,7 @@ func (s *KeeperTestSuite) TestUpdateFuryEquivalentMultipliers() {
 				s.Require().NoError(err)
 
 				// Check that multiplier was set correctly
-				multiplier := superfluidKeeper.GetFuryEquivalentMultiplier(ctx, tc.asset.Denom)
+				multiplier := superfluidKeeper.GetMerEquivalentMultiplier(ctx, tc.asset.Denom)
 				s.Require().NotEqual(multiplier, sdk.ZeroDec())
 			}
 		})

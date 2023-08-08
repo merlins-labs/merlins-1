@@ -52,10 +52,10 @@ const (
 
 const (
 	expectedPoolId          uint64 = 1
-	addressPrefix                  = "fury"
+	addressPrefix                  = "mer"
 	localmerlinFromHomePath        = "/.merlin-local"
-	consensusFee                   = "1500ufury"
-	denom0                         = "ufury"
+	consensusFee                   = "1500umer"
+	denom0                         = "umer"
 	denom1                         = "uusdc"
 	tickSpacing             int64  = 100
 	accountNamePrefix              = "lo-test"
@@ -74,7 +74,7 @@ var (
 	defaultAccountName  = fmt.Sprintf("%s%d", accountNamePrefix, 1)
 	defaultMinAmount    = sdk.ZeroInt()
 	defaultSpreadFactor = sdk.MustNewDecFromStr("0.001")
-	externalGaugeCoins  = sdk.NewCoins(sdk.NewCoin("ufury", sdk.NewInt(1000_000_000)))
+	externalGaugeCoins  = sdk.NewCoins(sdk.NewCoin("umer", sdk.NewInt(1000_000_000)))
 	accountMutex        sync.Mutex
 )
 

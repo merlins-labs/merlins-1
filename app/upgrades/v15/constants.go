@@ -16,7 +16,7 @@ const UpgradeName = "v15"
 
 // pool ids to migrate
 const (
-	stFURY_FURYPoolId   = 833
+	stMER_MERPoolId   = 833
 	stJUNO_JUNOPoolId   = 817
 	stSTARS_STARSPoolId = 810
 )

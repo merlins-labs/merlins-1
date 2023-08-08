@@ -580,7 +580,7 @@ func (s *KeeperTestSuite) TestMsgSetBaseDenoms() {
 			false,
 		},
 		{
-			"Invalid message (invalid base denoms must start with fury)",
+			"Invalid message (invalid base denoms must start with mer)",
 			s.adminAccount.String(),
 			[]types.BaseDenom{
 				{

@@ -17,7 +17,7 @@ func (s *KeeperTestSuite) TestGetTokenPairArbRoutes() {
 	}
 
 	// Testing to see if we will not find a route that does not exist
-	_, err := s.App.ProtoRevKeeper.GetTokenPairArbRoutes(s.Ctx, "fury", "abc")
+	_, err := s.App.ProtoRevKeeper.GetTokenPairArbRoutes(s.Ctx, "mer", "abc")
 	s.Require().Error(err)
 }
 
@@ -72,12 +72,12 @@ func (s *KeeperTestSuite) TestGetAllBaseDenoms() {
 	s.Require().Equal(0, len(baseDenoms))
 
 	// Should be able to set the base denoms
-	err = s.App.ProtoRevKeeper.SetBaseDenoms(s.Ctx, []types.BaseDenom{{Denom: "fury"}, {Denom: "atom"}, {Denom: "weth"}})
+	err = s.App.ProtoRevKeeper.SetBaseDenoms(s.Ctx, []types.BaseDenom{{Denom: "mer"}, {Denom: "atom"}, {Denom: "weth"}})
 	s.Require().NoError(err)
 	baseDenoms, err = s.App.ProtoRevKeeper.GetAllBaseDenoms(s.Ctx)
 	s.Require().NoError(err)
 	s.Require().Equal(3, len(baseDenoms))
-	s.Require().Equal(baseDenoms[0].Denom, "fury")
+	s.Require().Equal(baseDenoms[0].Denom, "mer")
 	s.Require().Equal(baseDenoms[1].Denom, "atom")
 	s.Require().Equal(baseDenoms[2].Denom, "weth")
 }
@@ -135,10 +135,10 @@ func (s *KeeperTestSuite) TestGetDeveloperFees() {
 	s.Require().NoError(err)
 	s.Require().Equal(0, len(fees))
 
-	// Should be no fury fees on genesis
-	furyFees, err := s.App.ProtoRevKeeper.GetDeveloperFees(s.Ctx, types.MerlinDenomination)
+	// Should be no mer fees on genesis
+	merFees, err := s.App.ProtoRevKeeper.GetDeveloperFees(s.Ctx, types.MerlinDenomination)
 	s.Require().Error(err)
-	s.Require().Equal(sdk.Coin{}, furyFees)
+	s.Require().Equal(sdk.Coin{}, merFees)
 
 	// Should be no atom fees on genesis
 	atomFees, err := s.App.ProtoRevKeeper.GetDeveloperFees(s.Ctx, "Atom")
@@ -154,9 +154,9 @@ func (s *KeeperTestSuite) TestGetDeveloperFees() {
 	s.Require().NoError(err)
 
 	// Should be able to get the fees
-	furyFees, err = s.App.ProtoRevKeeper.GetDeveloperFees(s.Ctx, types.MerlinDenomination)
+	merFees, err = s.App.ProtoRevKeeper.GetDeveloperFees(s.Ctx, types.MerlinDenomination)
 	s.Require().NoError(err)
-	s.Require().Equal(sdk.NewCoin(types.MerlinDenomination, sdk.NewInt(100)), furyFees)
+	s.Require().Equal(sdk.NewCoin(types.MerlinDenomination, sdk.NewInt(100)), merFees)
 	atomFees, err = s.App.ProtoRevKeeper.GetDeveloperFees(s.Ctx, "Atom")
 	s.Require().NoError(err)
 	s.Require().Equal(sdk.NewCoin("Atom", sdk.NewInt(100)), atomFees)
@@ -167,7 +167,7 @@ func (s *KeeperTestSuite) TestGetDeveloperFees() {
 	fees, err = s.App.ProtoRevKeeper.GetAllDeveloperFees(s.Ctx)
 	s.Require().NoError(err)
 	s.Require().Equal(3, len(fees))
-	s.Require().Contains(fees, furyFees)
+	s.Require().Contains(fees, merFees)
 	s.Require().Contains(fees, atomFees)
 }
 
@@ -177,17 +177,17 @@ func (s *KeeperTestSuite) TestDeleteDeveloperFees() {
 	s.Require().NoError(err)
 
 	// Should be able to get the fees
-	furyFees, err := s.App.ProtoRevKeeper.GetDeveloperFees(s.Ctx, types.MerlinDenomination)
+	merFees, err := s.App.ProtoRevKeeper.GetDeveloperFees(s.Ctx, types.MerlinDenomination)
 	s.Require().NoError(err)
-	s.Require().Equal(sdk.NewCoin(types.MerlinDenomination, sdk.NewInt(100)), furyFees)
+	s.Require().Equal(sdk.NewCoin(types.MerlinDenomination, sdk.NewInt(100)), merFees)
 
 	// Should be able to delete the fees
 	s.App.ProtoRevKeeper.DeleteDeveloperFees(s.Ctx, types.MerlinDenomination)
 
-	// Should be no fury fees after deletion
-	furyFees, err = s.App.ProtoRevKeeper.GetDeveloperFees(s.Ctx, types.MerlinDenomination)
+	// Should be no mer fees after deletion
+	merFees, err = s.App.ProtoRevKeeper.GetDeveloperFees(s.Ctx, types.MerlinDenomination)
 	s.Require().Error(err)
-	s.Require().Equal(sdk.Coin{}, furyFees)
+	s.Require().Equal(sdk.Coin{}, merFees)
 }
 
 // TestGetProtoRevEnabled tests the GetProtoRevEnabled and SetProtoRevEnabled functions.

@@ -102,7 +102,7 @@ func TestInstantiateContract(t *testing.T) {
 	initMsgBz, err := json.Marshal(initMsg)
 	require.NoError(t, err)
 
-	funds := sdk.NewInt64Coin("ufury", 123456)
+	funds := sdk.NewInt64Coin("umer", 123456)
 	_, _, err = contractKeeper.Instantiate(ctx, codeID, funder, funder, initMsgBz, "demo contract", sdk.Coins{funds})
 	require.NoError(t, err)
 }

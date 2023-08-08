@@ -24,7 +24,7 @@ var (
 
 	validSwapExactAmountInRoutes = []types.SwapAmountInRoute{{
 		PoolId:        1,
-		TokenOutDenom: "ufury",
+		TokenOutDenom: "umer",
 	}, {
 		PoolId:        2,
 		TokenOutDenom: "uatom",
@@ -40,7 +40,7 @@ var (
 		TokenInDenom: "uatom",
 	}, {
 		PoolId:       2,
-		TokenInDenom: "ufury",
+		TokenInDenom: "umer",
 	}}
 )
 

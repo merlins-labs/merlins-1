@@ -22,7 +22,7 @@ func CreateUpgradeHandler(
 ) upgradetypes.UpgradeHandler {
 	return func(ctx sdk.Context, _plan upgradetypes.Plan, vm module.VersionMap) (module.VersionMap, error) {
 		// Kept as comments for recordkeeping. SetParams is now private:
-		// 		keepers.GAMMKeeper.SetParams(ctx, gammtypes.NewParams(sdk.Coins{sdk.NewInt64Coin("ufury", 1)})) // 1 uFURY
+		// 		keepers.GAMMKeeper.SetParams(ctx, gammtypes.NewParams(sdk.Coins{sdk.NewInt64Coin("umer", 1)})) // 1 uMER
 
 		Prop12(ctx, keepers.BankKeeper, keepers.DistrKeeper)
 

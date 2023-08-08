@@ -126,13 +126,13 @@ func (uc *UpgradeConfigurer) CreatePreUpgradeState() error {
 
 	go func() {
 		defer wg.Done()
-		chainA.SendIBC(chainB, chainB.NodeConfigs[0].PublicAddress, initialization.FuryToken)
+		chainA.SendIBC(chainB, chainB.NodeConfigs[0].PublicAddress, initialization.MerToken)
 		chainA.SendIBC(chainB, chainB.NodeConfigs[0].PublicAddress, initialization.StakeToken)
 	}()
 
 	go func() {
 		defer wg.Done()
-		chainB.SendIBC(chainA, chainA.NodeConfigs[0].PublicAddress, initialization.FuryToken)
+		chainB.SendIBC(chainA, chainA.NodeConfigs[0].PublicAddress, initialization.MerToken)
 		chainB.SendIBC(chainA, chainA.NodeConfigs[0].PublicAddress, initialization.StakeToken)
 	}()
 
@@ -141,24 +141,24 @@ func (uc *UpgradeConfigurer) CreatePreUpgradeState() error {
 
 	wg.Add(2)
 
-	var daiFuryPoolIdv16 uint64
+	var daiMerPoolIdv16 uint64
 
 	go func() {
 		defer wg.Done()
-		daiFuryPoolIdv16 = chainANode.CreateBalancerPool("daifuryv16.json", initialization.ValidatorWalletName)
-		daiFuryShareDenom := fmt.Sprintf("gamm/pool/%d", daiFuryPoolIdv16)
-		chainANode.EnableSuperfluidAsset(chainA, daiFuryShareDenom)
+		daiMerPoolIdv16 = chainANode.CreateBalancerPool("daimerv16.json", initialization.ValidatorWalletName)
+		daiMerShareDenom := fmt.Sprintf("gamm/pool/%d", daiMerPoolIdv16)
+		chainANode.EnableSuperfluidAsset(chainA, daiMerShareDenom)
 	}()
 
 	go func() {
 		defer wg.Done()
-		chainBNode.CreateBalancerPool("daifuryv16.json", initialization.ValidatorWalletName)
+		chainBNode.CreateBalancerPool("daimerv16.json", initialization.ValidatorWalletName)
 	}()
 
 	// Wait for all goroutines to complete
 	wg.Wait()
 
-	config.DaiFuryPoolIdv16 = daiFuryPoolIdv16
+	config.DaiMerPoolIdv16 = daiMerPoolIdv16
 
 	var (
 		poolShareDenom             string
@@ -245,7 +245,7 @@ func (uc *UpgradeConfigurer) CreatePreUpgradeState() error {
 	go func() {
 		defer wg.Done()
 		// test swap exact amount in for stable swap pool (only chainA)A
-		chainANode.SwapExactAmountIn("2000stake", "1", fmt.Sprintf("%d", config.PreUpgradeStableSwapPoolId), "ufury", config.StableswapWallet)
+		chainANode.SwapExactAmountIn("2000stake", "1", fmt.Sprintf("%d", config.PreUpgradeStableSwapPoolId), "umer", config.StableswapWallet)
 	}()
 
 	// Upload the rate limiting contract to both chains (as they both will be updated)
@@ -401,8 +401,8 @@ func (uc *UpgradeConfigurer) runForkUpgrade() error {
 func (uc *UpgradeConfigurer) upgradeContainers(chainConfig *chain.Config, propHeight int64) error {
 	// upgrade containers to the locally compiled daemon
 	uc.t.Logf("starting upgrade for chain-id: %s...", chainConfig.Id)
-	uc.containerManager.MerlinRepository = containers.CurrentBranchFuryRepository
-	uc.containerManager.MerlinTag = containers.CurrentBranchFuryTag
+	uc.containerManager.MerlinRepository = containers.CurrentBranchMerRepository
+	uc.containerManager.MerlinTag = containers.CurrentBranchMerTag
 
 	for _, node := range chainConfig.NodeConfigs {
 		if err := node.Run(); err != nil {

@@ -7,8 +7,8 @@ type PoolManagerInterface interface {
 	RouteGetPoolDenoms(ctx sdk.Context, poolId uint64) (denoms []string, err error)
 	// CalculateSpotPrice returns the spot price of the quote asset in terms of the base asset,
 	// using the specified pool.
-	// E.g. if pool 1 traded 2 atom for 3 fury, the quote asset was atom, and the base asset was fury,
-	// this would return 1.5. (Meaning that 1 atom costs 1.5 fury)
+	// E.g. if pool 1 traded 2 atom for 3 mer, the quote asset was atom, and the base asset was mer,
+	// this would return 1.5. (Meaning that 1 atom costs 1.5 mer)
 	RouteCalculateSpotPrice(
 		ctx sdk.Context,
 		poolID uint64,

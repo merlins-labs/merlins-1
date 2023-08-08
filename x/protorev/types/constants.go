@@ -5,7 +5,7 @@ import (
 )
 
 // MerlinDenomination stores the native denom name for Merlin on chain used for route building
-var MerlinDenomination string = "ufury"
+var MerlinDenomination string = "umer"
 
 // ----------------- Module Execution Time Constants ----------------- //
 

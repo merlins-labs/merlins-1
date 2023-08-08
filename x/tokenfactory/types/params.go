@@ -32,7 +32,7 @@ func NewParams(denomCreationFee sdk.Coins, denomCreationGasConsume uint64) Param
 func DefaultParams() Params {
 	return Params{
 		// For choice, see: https://github.com/merlins-labs/merlin/pull/4983
-		DenomCreationFee:        sdk.NewCoins(), // used to be 10 FURY at launch.
+		DenomCreationFee:        sdk.NewCoins(), // used to be 10 MER at launch.
 		DenomCreationGasConsume: uint64(DefaultCreationGasFee),
 	}
 }

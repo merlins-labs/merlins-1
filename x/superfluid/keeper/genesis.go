@@ -16,9 +16,9 @@ func (k Keeper) InitGenesis(ctx sdk.Context, genState types.GenesisState) {
 		k.SetSuperfluidAsset(ctx, asset)
 	}
 
-	// initialize fury equivalent multipliers
-	for _, multiplierRecord := range genState.FuryEquivalentMultipliers {
-		k.SetFuryEquivalentMultiplier(ctx, multiplierRecord.EpochNumber, multiplierRecord.Denom, multiplierRecord.Multiplier)
+	// initialize mer equivalent multipliers
+	for _, multiplierRecord := range genState.MerEquivalentMultipliers {
+		k.SetMerEquivalentMultiplier(ctx, multiplierRecord.EpochNumber, multiplierRecord.Denom, multiplierRecord.Multiplier)
 	}
 
 	for _, intermediaryAcc := range genState.IntermediaryAccounts {
@@ -44,7 +44,7 @@ func (k Keeper) ExportGenesis(ctx sdk.Context) *types.GenesisState {
 	return &types.GenesisState{
 		Params:                        k.GetParams(ctx),
 		SuperfluidAssets:              k.GetAllSuperfluidAssets(ctx),
-		FuryEquivalentMultipliers:     k.GetAllFuryEquivalentMultipliers(ctx),
+		MerEquivalentMultipliers:     k.GetAllMerEquivalentMultipliers(ctx),
 		IntermediaryAccounts:          k.GetAllIntermediaryAccounts(ctx),
 		IntemediaryAccountConnections: k.GetAllLockIdIntermediaryAccountConnections(ctx),
 	}

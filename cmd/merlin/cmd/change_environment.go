@@ -12,7 +12,7 @@ import (
 )
 
 const (
-	EnvVariable = "MERLIND_ENVIRONMENT"
+	EnvVariable = "MERLIN_ENVIRONMENT"
 	EnvMainnet  = "mainnet"
 	EnvLocalnet = "localmerlin"
 )

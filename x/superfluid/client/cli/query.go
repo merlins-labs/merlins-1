@@ -137,7 +137,7 @@ func GetCmdSuperfluidUndelegationsByDelegator() *cobra.Command {
 func GetCmdTotalSuperfluidDelegations() *cobra.Command {
 	return osmocli.SimpleQueryCmd[*types.TotalSuperfluidDelegationsRequest](
 		"total-superfluid-delegations",
-		"Query total amount of fury delegated via superfluid staking", "",
+		"Query total amount of mer delegated via superfluid staking", "",
 		types.ModuleName, types.NewQueryClient,
 	)
 }

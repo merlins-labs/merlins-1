@@ -50,13 +50,11 @@ type NodeConfig struct {
 
 const (
 	// common
-	FuryDenom           = "ufury"
+	MerDenom           = "umer"
 	IonDenom            = "uion"
 	StakeDenom          = "stake"
 	AtomDenom           = "uatom"
 	DaiDenom            = "ibc/0CD3A0285E1341859B5E86B6AB7682F023D03E97607CCC1DC95706411D866DF7"
-	FuryIBCDenom        = "ibc/ED07A3391A112B175915CD8FAF43A2DA8E4790EDE12566649D0C2F97716B8518"
-	StakeIBCDenom       = "ibc/C053D637CCA2A2BA030E2C5EE1B28A16F71CCB0E45E8BE52766DC1B241B7787"
 	E2EFeeToken         = "e2e-default-feetoken"
 	UstIBCDenom         = "ibc/BE1BB42D4BE3C30D50B68D7C41DB4DFCE9678E8EF8C539F6E6A9345048894FCC"
 	LuncIBCDenom        = "ibc/0EF15DF2F02480ADE0BB6E85D9EBB5DAEA2836D3860E9F97F9AADE4F57A31AA0"
@@ -64,8 +62,8 @@ const (
 	IbcSendAmount       = 3300000000
 	ValidatorWalletName = "val"
 	// chainA
-	ChainAID      = "fury-test-a"
-	FuryBalanceA  = 20000000000000
+	ChainAID      = "mer-test-a"
+	MerBalanceA  = 20000000000000
 	IonBalanceA   = 100000000000
 	StakeBalanceA = 110000000000
 	StakeAmountA  = 100000000000
@@ -73,8 +71,8 @@ const (
 	LuncBalanceA  = 500000000000000
 	DaiBalanceA   = "100000000000000000000000"
 	// chainB
-	ChainBID          = "fury-test-b"
-	FuryBalanceB      = 500000000000
+	ChainBID          = "mer-test-b"
+	MerBalanceB      = 500000000000
 	IonBalanceB       = 100000000000
 	StakeBalanceB     = 440000000000
 	StakeAmountB      = 400000000000
@@ -85,23 +83,23 @@ const (
 	EpochWeekDuration     = time.Second * 120
 	TWAPPruningKeepPeriod = EpochDayDuration / 4
 
-	DaiFuryPoolId = 674
+	DaiMerPoolId = 674
 )
 
 var (
 	StakeAmountIntA  = sdk.NewInt(StakeAmountA)
-	StakeAmountCoinA = sdk.NewCoin(FuryDenom, StakeAmountIntA)
+	StakeAmountCoinA = sdk.NewCoin(MerDenom, StakeAmountIntA)
 	StakeAmountIntB  = sdk.NewInt(StakeAmountB)
-	StakeAmountCoinB = sdk.NewCoin(FuryDenom, StakeAmountIntB)
+	StakeAmountCoinB = sdk.NewCoin(MerDenom, StakeAmountIntB)
 
-	DaiFuryPoolBalances = fmt.Sprintf("%s%s", DaiBalanceA, DaiDenom)
+	DaiMerPoolBalances = fmt.Sprintf("%s%s", DaiBalanceA, DaiDenom)
 
-	InitBalanceStrA = fmt.Sprintf("%d%s,%d%s,%d%s,%d%s,%d%s", FuryBalanceA, FuryDenom, StakeBalanceA, StakeDenom, IonBalanceA, IonDenom, UstBalanceA, UstIBCDenom, LuncBalanceA, LuncIBCDenom)
-	InitBalanceStrB = fmt.Sprintf("%d%s,%d%s,%d%s", FuryBalanceB, FuryDenom, StakeBalanceB, StakeDenom, IonBalanceB, IonDenom)
-	FuryToken       = sdk.NewInt64Coin(FuryDenom, IbcSendAmount)  // 3,300ufury
+	InitBalanceStrA = fmt.Sprintf("%d%s,%d%s,%d%s,%d%s,%d%s", MerBalanceA, MerDenom, StakeBalanceA, StakeDenom, IonBalanceA, IonDenom, UstBalanceA, UstIBCDenom, LuncBalanceA, LuncIBCDenom)
+	InitBalanceStrB = fmt.Sprintf("%d%s,%d%s,%d%s", MerBalanceB, MerDenom, StakeBalanceB, StakeDenom, IonBalanceB, IonDenom)
+	MerToken       = sdk.NewInt64Coin(MerDenom, IbcSendAmount)  // 3,300umer
 	StakeToken      = sdk.NewInt64Coin(StakeDenom, IbcSendAmount) // 3,300ustake
-	tenFury         = sdk.Coins{sdk.NewInt64Coin(FuryDenom, 10_000_000)}
-	fiftyFury       = sdk.Coins{sdk.NewInt64Coin(FuryDenom, 50_000_000)}
+	tenMer         = sdk.Coins{sdk.NewInt64Coin(MerDenom, 10_000_000)}
+	fiftyMer       = sdk.Coins{sdk.NewInt64Coin(MerDenom, 50_000_000)}
 	WalletFeeTokens = sdk.NewCoin(E2EFeeToken, sdk.NewInt(WalletFeeBalance))
 )
 
@@ -200,11 +198,11 @@ func initGenesis(chain *internalChain, votingPeriod, expeditedVotingPeriod time.
 	configDir := chain.nodes[0].configDir()
 	for _, val := range chain.nodes {
 		if chain.chainMeta.Id == ChainAID {
-			if err := addAccount(configDir, "", InitBalanceStrA+","+DaiFuryPoolBalances, val.keyInfo.GetAddress(), forkHeight); err != nil {
+			if err := addAccount(configDir, "", InitBalanceStrA+","+DaiMerPoolBalances, val.keyInfo.GetAddress(), forkHeight); err != nil {
 				return err
 			}
 		} else if chain.chainMeta.Id == ChainBID {
-			if err := addAccount(configDir, "", InitBalanceStrB+","+DaiFuryPoolBalances, val.keyInfo.GetAddress(), forkHeight); err != nil {
+			if err := addAccount(configDir, "", InitBalanceStrB+","+DaiMerPoolBalances, val.keyInfo.GetAddress(), forkHeight); err != nil {
 				return err
 			}
 		}
@@ -326,7 +324,7 @@ func initGenesis(chain *internalChain, votingPeriod, expeditedVotingPeriod time.
 
 func updateBankGenesis(appGenState map[string]json.RawMessage) func(s *banktypes.GenesisState) {
 	return func(bankGenState *banktypes.GenesisState) {
-		denomsToRegister := []string{StakeDenom, IonDenom, FuryDenom, AtomDenom, LuncIBCDenom, UstIBCDenom, DaiDenom}
+		denomsToRegister := []string{StakeDenom, IonDenom, MerDenom, AtomDenom, LuncIBCDenom, UstIBCDenom, DaiDenom}
 		for _, denom := range denomsToRegister {
 			setDenomMetadata(bankGenState, denom)
 		}
@@ -358,7 +356,7 @@ func updateBankGenesis(appGenState map[string]json.RawMessage) func(s *banktypes
 
 func updateStakeGenesis(stakeGenState *staketypes.GenesisState) {
 	stakeGenState.Params = staketypes.Params{
-		BondDenom:         FuryDenom,
+		BondDenom:         MerDenom,
 		MaxValidators:     100,
 		MaxEntries:        7,
 		HistoricalEntries: 10000,
@@ -374,7 +372,7 @@ func updatePoolIncentiveGenesis(pooliGenState *poolitypes.GenesisState) {
 		time.Second * 240,
 	}
 	pooliGenState.Params = poolitypes.Params{
-		MintedDenom: FuryDenom,
+		MintedDenom: MerDenom,
 	}
 }
 
@@ -390,33 +388,33 @@ func updateIncentivesGenesis(incentivesGenState *incentivestypes.GenesisState) {
 }
 
 func updateMintGenesis(mintGenState *minttypes.GenesisState) {
-	mintGenState.Params.MintDenom = FuryDenom
+	mintGenState.Params.MintDenom = MerDenom
 	mintGenState.Params.EpochIdentifier = "day"
 }
 
 func updateTxfeesGenesis(txfeesGenState *txfeestypes.GenesisState) {
-	txfeesGenState.Basedenom = FuryDenom
+	txfeesGenState.Basedenom = MerDenom
 	txfeesGenState.Feetokens = []txfeestypes.FeeToken{
 		{Denom: E2EFeeToken, PoolID: 1},
 	}
 }
 
 func updateGammGenesis(gammGenState *gammtypes.GenesisState) {
-	gammGenState.Params.PoolCreationFee = tenFury
-	// setup fee pool, between "e2e_default_fee_token" and "ufury"
-	ufuryFeeTokenPool := setupPool(1, "ufury", E2EFeeToken)
+	gammGenState.Params.PoolCreationFee = tenMer
+	// setup fee pool, between "e2e_default_fee_token" and "umer"
+	umerFeeTokenPool := setupPool(1, "umer", E2EFeeToken)
 
-	gammGenState.Pools = []*types1.Any{ufuryFeeTokenPool}
+	gammGenState.Pools = []*types1.Any{umerFeeTokenPool}
 
-	// Notice that this is non-inclusive. The DAI/FURY pool should be created in the
+	// Notice that this is non-inclusive. The DAI/MER pool should be created in the
 	// pre-upgrade logic of the upgrade configurer.
-	for poolId := uint64(2); poolId < DaiFuryPoolId; poolId++ {
-		gammGenState.Pools = append(gammGenState.Pools, setupPool(poolId, FuryDenom, AtomDenom))
+	for poolId := uint64(2); poolId < DaiMerPoolId; poolId++ {
+		gammGenState.Pools = append(gammGenState.Pools, setupPool(poolId, MerDenom, AtomDenom))
 	}
 
 	// Note that we set the next pool number as 1 greater than the latest created pool.
 	// This is to ensure that migrations are performed correctly.
-	gammGenState.NextPoolNumber = DaiFuryPoolId
+	gammGenState.NextPoolNumber = DaiMerPoolId
 }
 
 func updatePoolManagerGenesis(appGenState map[string]json.RawMessage) func(*poolmanagertypes.GenesisState) {
@@ -499,15 +497,15 @@ func updateTWAPGenesis(appGenState map[string]json.RawMessage) func(twapGenState
 }
 
 func updateCrisisGenesis(crisisGenState *crisistypes.GenesisState) {
-	crisisGenState.ConstantFee.Denom = FuryDenom
+	crisisGenState.ConstantFee.Denom = MerDenom
 }
 
 func updateGovGenesis(votingPeriod, expeditedVotingPeriod time.Duration) func(*govtypes.GenesisState) {
 	return func(govGenState *govtypes.GenesisState) {
 		govGenState.VotingParams.VotingPeriod = votingPeriod
 		govGenState.VotingParams.ExpeditedVotingPeriod = expeditedVotingPeriod
-		govGenState.DepositParams.MinDeposit = tenFury
-		govGenState.DepositParams.MinExpeditedDeposit = fiftyFury
+		govGenState.DepositParams.MinDeposit = tenMer
+		govGenState.DepositParams.MinExpeditedDeposit = fiftyMer
 	}
 }
 

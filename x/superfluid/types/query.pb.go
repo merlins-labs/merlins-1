@@ -329,7 +329,7 @@ func (m *AssetMultiplierRequest) GetDenom() string {
 }
 
 type AssetMultiplierResponse struct {
-	FuryEquivalentMultiplier *FuryEquivalentMultiplierRecord `protobuf:"bytes,1,opt,name=fury_equivalent_multiplier,json=furyEquivalentMultiplier,proto3" json:"fury_equivalent_multiplier,omitempty"`
+	MerEquivalentMultiplier *MerEquivalentMultiplierRecord `protobuf:"bytes,1,opt,name=mer_equivalent_multiplier,json=merEquivalentMultiplier,proto3" json:"mer_equivalent_multiplier,omitempty"`
 }
 
 func (m *AssetMultiplierResponse) Reset()         { *m = AssetMultiplierResponse{} }
@@ -365,9 +365,9 @@ func (m *AssetMultiplierResponse) XXX_DiscardUnknown() {
 
 var xxx_messageInfo_AssetMultiplierResponse proto.InternalMessageInfo
 
-func (m *AssetMultiplierResponse) GetFuryEquivalentMultiplier() *FuryEquivalentMultiplierRecord {
+func (m *AssetMultiplierResponse) GetMerEquivalentMultiplier() *MerEquivalentMultiplierRecord {
 	if m != nil {
-		return m.FuryEquivalentMultiplier
+		return m.MerEquivalentMultiplier
 	}
 	return nil
 }
@@ -723,7 +723,7 @@ func (m *QueryTotalDelegationByValidatorForDenomResponse) GetAssets() []Delegati
 type Delegations struct {
 	ValAddr        string                                 `protobuf:"bytes,1,opt,name=val_addr,json=valAddr,proto3" json:"val_addr,omitempty"`
 	AmountSfsd     github_com_cosmos_cosmos_sdk_types.Int `protobuf:"bytes,2,opt,name=amount_sfsd,json=amountSfsd,proto3,customtype=github.com/cosmos/cosmos-sdk/types.Int" json:"amount_sfsd" yaml:"amount_sfsd"`
-	FuryEquivalent github_com_cosmos_cosmos_sdk_types.Int `protobuf:"bytes,3,opt,name=fury_equivalent,json=furyEquivalent,proto3,customtype=github.com/cosmos/cosmos-sdk/types.Int" json:"fury_equivalent" yaml:"fury_equivalent"`
+	MerEquivalent github_com_cosmos_cosmos_sdk_types.Int `protobuf:"bytes,3,opt,name=mer_equivalent,json=merEquivalent,proto3,customtype=github.com/cosmos/cosmos-sdk/types.Int" json:"mer_equivalent" yaml:"mer_equivalent"`
 }
 
 func (m *Delegations) Reset()         { *m = Delegations{} }
@@ -1959,7 +1959,7 @@ type QueryClient interface {
 	AssetType(ctx context.Context, in *AssetTypeRequest, opts ...grpc.CallOption) (*AssetTypeResponse, error)
 	// Returns all registered superfluid assets.
 	AllAssets(ctx context.Context, in *AllAssetsRequest, opts ...grpc.CallOption) (*AllAssetsResponse, error)
-	// Returns the fury equivalent multiplier used in the most recent epoch.
+	// Returns the mer equivalent multiplier used in the most recent epoch.
 	AssetMultiplier(ctx context.Context, in *AssetMultiplierRequest, opts ...grpc.CallOption) (*AssetMultiplierResponse, error)
 	// Returns all superfluid intermediary accounts.
 	AllIntermediaryAccounts(ctx context.Context, in *AllIntermediaryAccountsRequest, opts ...grpc.CallOption) (*AllIntermediaryAccountsResponse, error)
@@ -1967,8 +1967,8 @@ type QueryClient interface {
 	ConnectedIntermediaryAccount(ctx context.Context, in *ConnectedIntermediaryAccountRequest, opts ...grpc.CallOption) (*ConnectedIntermediaryAccountResponse, error)
 	// Returns the amount of delegations of specific denom for all validators
 	TotalDelegationByValidatorForDenom(ctx context.Context, in *QueryTotalDelegationByValidatorForDenomRequest, opts ...grpc.CallOption) (*QueryTotalDelegationByValidatorForDenomResponse, error)
-	// Returns the total amount of fury superfluidly staked.
-	// Response is denominated in ufury.
+	// Returns the total amount of mer superfluidly staked.
+	// Response is denominated in umer.
 	TotalSuperfluidDelegations(ctx context.Context, in *TotalSuperfluidDelegationsRequest, opts ...grpc.CallOption) (*TotalSuperfluidDelegationsResponse, error)
 	// Returns the coins superfluid delegated for the delegator, validator, denom
 	// triplet
@@ -2162,7 +2162,7 @@ type QueryServer interface {
 	AssetType(context.Context, *AssetTypeRequest) (*AssetTypeResponse, error)
 	// Returns all registered superfluid assets.
 	AllAssets(context.Context, *AllAssetsRequest) (*AllAssetsResponse, error)
-	// Returns the fury equivalent multiplier used in the most recent epoch.
+	// Returns the mer equivalent multiplier used in the most recent epoch.
 	AssetMultiplier(context.Context, *AssetMultiplierRequest) (*AssetMultiplierResponse, error)
 	// Returns all superfluid intermediary accounts.
 	AllIntermediaryAccounts(context.Context, *AllIntermediaryAccountsRequest) (*AllIntermediaryAccountsResponse, error)
@@ -2170,8 +2170,8 @@ type QueryServer interface {
 	ConnectedIntermediaryAccount(context.Context, *ConnectedIntermediaryAccountRequest) (*ConnectedIntermediaryAccountResponse, error)
 	// Returns the amount of delegations of specific denom for all validators
 	TotalDelegationByValidatorForDenom(context.Context, *QueryTotalDelegationByValidatorForDenomRequest) (*QueryTotalDelegationByValidatorForDenomResponse, error)
-	// Returns the total amount of fury superfluidly staked.
-	// Response is denominated in ufury.
+	// Returns the total amount of mer superfluidly staked.
+	// Response is denominated in umer.
 	TotalSuperfluidDelegations(context.Context, *TotalSuperfluidDelegationsRequest) (*TotalSuperfluidDelegationsResponse, error)
 	// Returns the coins superfluid delegated for the delegator, validator, denom
 	// triplet
@@ -2862,9 +2862,9 @@ func (m *AssetMultiplierResponse) MarshalToSizedBuffer(dAtA []byte) (int, error)
 	_ = i
 	var l int
 	_ = l
-	if m.FuryEquivalentMultiplier != nil {
+	if m.MerEquivalentMultiplier != nil {
 		{
-			size, err := m.FuryEquivalentMultiplier.MarshalToSizedBuffer(dAtA[:i])
+			size, err := m.MerEquivalentMultiplier.MarshalToSizedBuffer(dAtA[:i])
 			if err != nil {
 				return 0, err
 			}
@@ -3161,9 +3161,9 @@ func (m *Delegations) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	var l int
 	_ = l
 	{
-		size := m.FuryEquivalent.Size()
+		size := m.MerEquivalent.Size()
 		i -= size
-		if _, err := m.FuryEquivalent.MarshalTo(dAtA[i:]); err != nil {
+		if _, err := m.MerEquivalent.MarshalTo(dAtA[i:]); err != nil {
 			return 0, err
 		}
 		i = encodeVarintQuery(dAtA, i, uint64(size))
@@ -4070,8 +4070,8 @@ func (m *AssetMultiplierResponse) Size() (n int) {
 	}
 	var l int
 	_ = l
-	if m.FuryEquivalentMultiplier != nil {
-		l = m.FuryEquivalentMultiplier.Size()
+	if m.MerEquivalentMultiplier != nil {
+		l = m.MerEquivalentMultiplier.Size()
 		n += 1 + l + sovQuery(uint64(l))
 	}
 	return n
@@ -4198,7 +4198,7 @@ func (m *Delegations) Size() (n int) {
 	}
 	l = m.AmountSfsd.Size()
 	n += 1 + l + sovQuery(uint64(l))
-	l = m.FuryEquivalent.Size()
+	l = m.MerEquivalent.Size()
 	n += 1 + l + sovQuery(uint64(l))
 	return n
 }
@@ -5063,7 +5063,7 @@ func (m *AssetMultiplierResponse) Unmarshal(dAtA []byte) error {
 		switch fieldNum {
 		case 1:
 			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field FuryEquivalentMultiplier", wireType)
+				return fmt.Errorf("proto: wrong wireType = %d for field MerEquivalentMultiplier", wireType)
 			}
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
@@ -5090,10 +5090,10 @@ func (m *AssetMultiplierResponse) Unmarshal(dAtA []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			if m.FuryEquivalentMultiplier == nil {
-				m.FuryEquivalentMultiplier = &FuryEquivalentMultiplierRecord{}
+			if m.MerEquivalentMultiplier == nil {
+				m.MerEquivalentMultiplier = &MerEquivalentMultiplierRecord{}
 			}
-			if err := m.FuryEquivalentMultiplier.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+			if err := m.MerEquivalentMultiplier.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
 				return err
 			}
 			iNdEx = postIndex
@@ -5907,7 +5907,7 @@ func (m *Delegations) Unmarshal(dAtA []byte) error {
 			iNdEx = postIndex
 		case 3:
 			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field FuryEquivalent", wireType)
+				return fmt.Errorf("proto: wrong wireType = %d for field MerEquivalent", wireType)
 			}
 			var stringLen uint64
 			for shift := uint(0); ; shift += 7 {
@@ -5935,7 +5935,7 @@ func (m *Delegations) Unmarshal(dAtA []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			if err := m.FuryEquivalent.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+			if err := m.MerEquivalent.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
 				return err
 			}
 			iNdEx = postIndex

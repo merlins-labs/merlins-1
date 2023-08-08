@@ -50,7 +50,7 @@ func (suite *UpgradeTestSuite) TestUpgradePayments() {
 				// mint coins to distribution module / feepool.communitypool
 
 				bal := int64(1000000000000)
-				coin := sdk.NewInt64Coin("ufury", bal)
+				coin := sdk.NewInt64Coin("umer", bal)
 				coins := sdk.NewCoins(coin)
 				err := suite.app.BankKeeper.MintCoins(suite.ctx, "mint", coins)
 				suite.Require().NoError(err)
@@ -85,9 +85,9 @@ func (suite *UpgradeTestSuite) TestUpgradePayments() {
 					suite.Require().NoError(err)
 					amount, err := strconv.ParseInt(strings.TrimSpace(payment[1]), 10, 64)
 					suite.Require().NoError(err)
-					coin := sdk.NewInt64Coin("ufury", amount)
+					coin := sdk.NewInt64Coin("umer", amount)
 
-					accBal := suite.app.BankKeeper.GetBalance(suite.ctx, addr, "ufury")
+					accBal := suite.app.BankKeeper.GetBalance(suite.ctx, addr, "umer")
 					suite.Require().Equal(coin, accBal)
 
 					total += amount
@@ -100,18 +100,18 @@ func (suite *UpgradeTestSuite) TestUpgradePayments() {
 
 				// check that distribution module account balance has been reduced correctly
 				distAddr := suite.app.AccountKeeper.GetModuleAddress("distribution")
-				distBal := suite.app.BankKeeper.GetBalance(suite.ctx, distAddr, "ufury")
-				suite.Require().Equal(distBal, sdk.NewInt64Coin("ufury", expectedBal))
+				distBal := suite.app.BankKeeper.GetBalance(suite.ctx, distAddr, "umer")
+				suite.Require().Equal(distBal, sdk.NewInt64Coin("umer", expectedBal))
 
 				// check that feepool.communitypool has been reduced correctly
 				feePool := suite.app.DistrKeeper.GetFeePool(suite.ctx)
-				suite.Require().Equal(feePool.GetCommunityPool(), sdk.NewDecCoins(sdk.NewInt64DecCoin("ufury", expectedBal)))
+				suite.Require().Equal(feePool.GetCommunityPool(), sdk.NewDecCoins(sdk.NewInt64DecCoin("umer", expectedBal)))
 
 				// Check that gamm Minimum Fee has been set correctly
 
 				// Kept as comments for recordkeeping. Since SetParams is now private, the changes being tested for can no longer be made:
 				//  	gammParams := suite.app.GAMMKeeper.GetParams(suite.ctx)
-				//  	expectedCreationFee := sdk.NewCoins(sdk.NewCoin("ufury", sdk.OneInt()))
+				//  	expectedCreationFee := sdk.NewCoins(sdk.NewCoin("umer", sdk.OneInt()))
 				//  	suite.Require().Equal(gammParams.PoolCreationFee, expectedCreationFee)
 			},
 			true,

@@ -118,11 +118,11 @@ func (s *KeeperTestSuite) TestGetProportions() {
 		},
 		{
 			name:       "54617981 * .131/.273 approx = 2.62",
-			mintedCoin: sdk.NewCoin("ufury", sdk.NewInt(54617981)),
+			mintedCoin: sdk.NewCoin("umer", sdk.NewInt(54617981)),
 			ratio:      complexRatioDec, // .131/.273
 			// TODO: Should not be truncated. Remove truncation after rounding errors are addressed and resolved.
 			// Ref: https://github.com/merlins-labs/merlin/issues/1917
-			expectedCoin: sdk.NewCoin("ufury", sdk.NewInt(54617981).ToDec().Mul(complexRatioDec).TruncateInt()),
+			expectedCoin: sdk.NewCoin("umer", sdk.NewInt(54617981).ToDec().Mul(complexRatioDec).TruncateInt()),
 		},
 		{
 			name:         "1 * 1 = 1",

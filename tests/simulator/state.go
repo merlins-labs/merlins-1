@@ -8,8 +8,8 @@ import (
 	"time"
 
 	"github.com/merlins-labs/merlin/app"
-	furysim "github.com/merlins-labs/merlin/simulation/executor"
-	furysimtypes "github.com/merlins-labs/merlin/simulation/simtypes"
+	mersim "github.com/merlins-labs/merlin/simulation/executor"
+	mersimtypes "github.com/merlins-labs/merlin/simulation/simtypes"
 
 	"github.com/cosmos/cosmos-sdk/codec"
 	sdk "github.com/cosmos/cosmos-sdk/types"
@@ -24,9 +24,9 @@ import (
 // InitChainFn returns the initial application state using a genesis or the simulation parameters.
 // It panics if the user provides files for both of them.
 // If a file is not given for the genesis or the sim params, it creates a randomized one.
-func InitChainFn() furysim.InitChainFn {
+func InitChainFn() mersim.InitChainFn {
 	cdc := app.MakeEncodingConfig().Marshaler
-	return func(simManager furysimtypes.ModuleGenesisGenerator, r *rand.Rand, accs []simtypes.Account, config furysim.InitializationConfig,
+	return func(simManager mersimtypes.ModuleGenesisGenerator, r *rand.Rand, accs []simtypes.Account, config mersim.InitializationConfig,
 	) (simAccs []simtypes.Account, req abci.RequestInitChain) {
 		// N.B.: wasmd has the following check in its simulator:
 		// https://github.com/osmosis-labs/wasmd/blob/c2ec9092d086b5ac6dd367f33ce8b5cce8e4c5f5/x/wasm/types/types.go#L261-L264
@@ -51,7 +51,7 @@ func InitChainFn() furysim.InitChainFn {
 		req = abci.RequestInitChain{
 			Time:            genesisTime,
 			ChainId:         config.ChainID,
-			ConsensusParams: furysim.DefaultRandomConsensusParams(r, appState, cdc),
+			ConsensusParams: mersim.DefaultRandomConsensusParams(r, appState, cdc),
 			// Validators: ...,
 			AppStateBytes: appState,
 			// InitialHeight: ...,
@@ -127,7 +127,7 @@ func updateStakingAndBankState(appState json.RawMessage, cdc codec.JSONCodec) js
 // AppStateRandomizedFn creates calls each module's GenesisState generator function
 // and creates the simulation params.
 func AppStateRandomizedFn(
-	simManager furysimtypes.ModuleGenesisGenerator, r *rand.Rand, cdc codec.JSONCodec,
+	simManager mersimtypes.ModuleGenesisGenerator, r *rand.Rand, cdc codec.JSONCodec,
 	accs []simtypes.Account, genesisTimestamp time.Time, appParams simtypes.AppParams,
 ) (json.RawMessage, []simtypes.Account) {
 	numAccs := int64(len(accs))
@@ -162,7 +162,7 @@ func AppStateRandomizedFn(
 		GenTimestamp: genesisTimestamp,
 	}
 
-	simManager.GenerateGenesisStates(simState, &furysimtypes.SimCtx{})
+	simManager.GenerateGenesisStates(simState, &mersimtypes.SimCtx{})
 
 	appState, err := json.Marshal(genesisState)
 	if err != nil {

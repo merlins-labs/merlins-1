@@ -17,7 +17,7 @@ func RandomizedGenState(simState *module.SimulationState) {
 			MinimumRiskFactor: sdk.NewDecWithPrec(5, 2), // 5%
 		},
 		SuperfluidAssets:          []types.SuperfluidAsset{},
-		FuryEquivalentMultipliers: []types.FuryEquivalentMultiplierRecord{},
+		MerEquivalentMultipliers: []types.MerEquivalentMultiplierRecord{},
 	}
 
 	bz, err := json.MarshalIndent(&superfluidGenesis.Params, "", " ")

@@ -128,9 +128,9 @@ type MsgDelegateToValidatorSet struct {
 	// delegator is the user who is trying to delegate.
 	Delegator string `protobuf:"bytes,1,opt,name=delegator,proto3" json:"delegator,omitempty" yaml:"delegator"`
 	// the amount of tokens the user is trying to delegate.
-	// For ex: delegate 10fury with validator-set {ValA -> 0.5, ValB -> 0.3, ValC
-	// -> 0.2} our staking logic would attempt to delegate 5fury to A , 3fury to
-	// B, 2fury to C.
+	// For ex: delegate 10mer with validator-set {ValA -> 0.5, ValB -> 0.3, ValC
+	// -> 0.2} our staking logic would attempt to delegate 5mer to A , 3mer to
+	// B, 2mer to C.
 	Coin types.Coin `protobuf:"bytes,2,opt,name=coin,proto3,castrepeated=github.com/cosmos/cosmos-sdk/types.Coin" json:"coin"`
 }
 
@@ -221,10 +221,10 @@ type MsgUndelegateFromValidatorSet struct {
 	// delegator is the user who is trying to undelegate.
 	Delegator string `protobuf:"bytes,1,opt,name=delegator,proto3" json:"delegator,omitempty" yaml:"delegator"`
 	// the amount the user wants to undelegate
-	// For ex: Undelegate 10fury with validator-set {ValA -> 0.5, ValB -> 0.3,
+	// For ex: Undelegate 10mer with validator-set {ValA -> 0.5, ValB -> 0.3,
 	// ValC
-	// -> 0.2} our undelegate logic would attempt to undelegate 5fury from A ,
-	// 3fury from B, 2fury from C
+	// -> 0.2} our undelegate logic would attempt to undelegate 5mer from A ,
+	// 3mer from B, 2mer from C
 	Coin types.Coin `protobuf:"bytes,3,opt,name=coin,proto3,castrepeated=github.com/cosmos/cosmos-sdk/types.Coin" json:"coin"`
 }
 
@@ -484,13 +484,13 @@ func (m *MsgWithdrawDelegationRewardsResponse) XXX_DiscardUnknown() {
 
 var xxx_messageInfo_MsgWithdrawDelegationRewardsResponse proto.InternalMessageInfo
 
-// MsgDelegateBondedTokens breaks bonded lockup (by ID) of fury, of
-// length <= 2 weeks and takes all that fury and delegates according to
+// MsgDelegateBondedTokens breaks bonded lockup (by ID) of mer, of
+// length <= 2 weeks and takes all that mer and delegates according to
 // delegator's current validator set preference.
 type MsgDelegateBondedTokens struct {
-	// delegator is the user who is trying to force unbond fury and delegate.
+	// delegator is the user who is trying to force unbond mer and delegate.
 	Delegator string `protobuf:"bytes,1,opt,name=delegator,proto3" json:"delegator,omitempty" yaml:"delegator"`
-	// lockup id of fury in the pool
+	// lockup id of mer in the pool
 	LockID uint64 `protobuf:"varint,2,opt,name=lockID,proto3" json:"lockID,omitempty"`
 }
 
@@ -673,7 +673,7 @@ type MsgClient interface {
 	// validator-set.
 	WithdrawDelegationRewards(ctx context.Context, in *MsgWithdrawDelegationRewards, opts ...grpc.CallOption) (*MsgWithdrawDelegationRewardsResponse, error)
 	// DelegateBondedTokens allows users to break the lockup bond and delegate
-	// fury tokens to a predefined validator-set.
+	// mer tokens to a predefined validator-set.
 	DelegateBondedTokens(ctx context.Context, in *MsgDelegateBondedTokens, opts ...grpc.CallOption) (*MsgDelegateBondedTokensResponse, error)
 }
 
@@ -758,7 +758,7 @@ type MsgServer interface {
 	// validator-set.
 	WithdrawDelegationRewards(context.Context, *MsgWithdrawDelegationRewards) (*MsgWithdrawDelegationRewardsResponse, error)
 	// DelegateBondedTokens allows users to break the lockup bond and delegate
-	// fury tokens to a predefined validator-set.
+	// mer tokens to a predefined validator-set.
 	DelegateBondedTokens(context.Context, *MsgDelegateBondedTokens) (*MsgDelegateBondedTokensResponse, error)
 }
 

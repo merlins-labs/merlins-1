@@ -29,12 +29,12 @@ func NewCmdSubmitUpdateFeeTokenProposal() *cobra.Command {
 	cmd := &cobra.Command{
 		Use:     "update-fee-token [flags]",
 		Args:    cobra.ExactArgs(0),
-		Example: "update-fee-token --fee-tokens ufury,1,uion,2,ufoo,0 --from val --chain-id merlin-1",
+		Example: "update-fee-token --fee-tokens umer,1,uion,2,ufoo,0 --from val --chain-id merlin-1",
 		Short:   "Submit a update fee token record proposal",
 		Long: strings.TrimSpace(`Submit a update fee token record proposal.
 
 Passing in denom,poolID pairs separated by commas would be parsed automatically to pairs of fee token records.
-Ex) ufury,1,uion,2,ufoo,0 -> [Adds ufury<>pool1, uion<>pool2, Removes ufoo as a fee token]
+Ex) umer,1,uion,2,ufoo,0 -> [Adds umer<>pool1, uion<>pool2, Removes ufoo as a fee token]
 
 		`),
 		RunE: func(cmd *cobra.Command, args []string) error {

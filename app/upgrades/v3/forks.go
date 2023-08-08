@@ -18,11 +18,11 @@ func RunForkLogic(ctx sdk.Context, keepers *keepers.AppKeepers) {
 	FixMinCommisionRate(ctx, keepers.StakingKeeper)
 }
 
-// Fixes an error where minimum deposit was set to "500 fury". This denom does
+// Fixes an error where minimum deposit was set to "500 mer". This denom does
 // not exist, which makes it impossible for a proposal to go to a vote.
 func FixMinDepositDenom(ctx sdk.Context, gov *govkeeper.Keeper) {
 	params := gov.GetDepositParams(ctx)
-	params.MinDeposit = sdk.NewCoins(sdk.NewCoin("ufury", sdk.NewInt(500000000)))
+	params.MinDeposit = sdk.NewCoins(sdk.NewCoin("umer", sdk.NewInt(500000000)))
 	gov.SetDepositParams(ctx, params)
 }
 

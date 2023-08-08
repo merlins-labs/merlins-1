@@ -27,7 +27,7 @@ import (
 	simtypes "github.com/cosmos/cosmos-sdk/types/simulation"
 	stakingtypes "github.com/cosmos/cosmos-sdk/x/staking/types"
 
-	furysimtypes "github.com/merlins-labs/merlin/simulation/simtypes"
+	mersimtypes "github.com/merlins-labs/merlin/simulation/simtypes"
 	"github.com/merlins-labs/merlin/x/incentives/client/cli"
 	"github.com/merlins-labs/merlin/x/incentives/keeper"
 	"github.com/merlins-labs/merlin/x/incentives/simulation"
@@ -114,13 +114,13 @@ type AppModule struct {
 	keeper keeper.Keeper
 
 	accountKeeper stakingtypes.AccountKeeper
-	bankKeeper    furysimtypes.BankKeeper
+	bankKeeper    mersimtypes.BankKeeper
 	epochKeeper   types.EpochKeeper
 }
 
 // NewAppModule creates a new AppModule struct.
 func NewAppModule(keeper keeper.Keeper,
-	accountKeeper stakingtypes.AccountKeeper, bankKeeper furysimtypes.BankKeeper,
+	accountKeeper stakingtypes.AccountKeeper, bankKeeper mersimtypes.BankKeeper,
 	epochKeeper types.EpochKeeper,
 ) AppModule {
 	return AppModule{

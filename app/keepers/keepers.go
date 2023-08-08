@@ -528,8 +528,8 @@ func (appKeepers *AppKeepers) WireICS20PreWasmKeeper(
 	hooksKeeper *ibchookskeeper.Keeper,
 ) {
 	// Setup the ICS4Wrapper used by the hooks middleware
-	furyPrefix := sdk.GetConfig().GetBech32AccountAddrPrefix()
-	wasmHooks := ibchooks.NewWasmHooks(hooksKeeper, nil, furyPrefix) // The contract keeper needs to be set later
+	merPrefix := sdk.GetConfig().GetBech32AccountAddrPrefix()
+	wasmHooks := ibchooks.NewWasmHooks(hooksKeeper, nil, merPrefix) // The contract keeper needs to be set later
 	appKeepers.Ics20WasmHooks = &wasmHooks
 	appKeepers.HooksICS4Wrapper = ibchooks.NewICS4Middleware(
 		appKeepers.IBCKeeper.ChannelKeeper,

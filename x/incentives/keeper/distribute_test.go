@@ -170,7 +170,7 @@ func (s *KeeperTestSuite) TestDistribute() {
 
 func (s *KeeperTestSuite) TestDistribute_InternalIncentives_NoLock() {
 	fiveKRewardCoins := sdk.NewInt64Coin(defaultRewardDenom, 5000)
-	fiveKRewardCoinsUfury := sdk.NewInt64Coin(appParams.BaseCoinUnit, 5000)
+	fiveKRewardCoinsUmer := sdk.NewInt64Coin(appParams.BaseCoinUnit, 5000)
 	fifteenKRewardCoins := sdk.NewInt64Coin(defaultRewardDenom, 15000)
 
 	coinsToMint := sdk.NewCoins(sdk.NewCoin(defaultRewardDenom, sdk.NewInt(10000000)), sdk.NewCoin(appParams.BaseCoinUnit, sdk.NewInt(10000000)))
@@ -200,8 +200,8 @@ func (s *KeeperTestSuite) TestDistribute_InternalIncentives_NoLock() {
 		"valid case: gauge with multiple coins": {
 			numPools:              1,
 			gaugeStartTime:        defaultGaugeStartTime,
-			gaugeCoins:            sdk.NewCoins(fiveKRewardCoins, fiveKRewardCoinsUfury),
-			expectedDistributions: sdk.NewCoins(fiveKRewardCoins, fiveKRewardCoinsUfury),
+			gaugeCoins:            sdk.NewCoins(fiveKRewardCoins, fiveKRewardCoinsUmer),
+			expectedDistributions: sdk.NewCoins(fiveKRewardCoins, fiveKRewardCoinsUmer),
 			expectErr:             false,
 		},
 		"valid case: multiple gaugeId and poolId": {

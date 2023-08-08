@@ -71,7 +71,7 @@ func (s *KeeperTestSuite) TestSuperfluidAfterEpochEnd() {
 			}
 
 			// check lptoken twap value set
-			newEpochMultiplier := s.App.SuperfluidKeeper.GetFuryEquivalentMultiplier(s.Ctx, denoms[0])
+			newEpochMultiplier := s.App.SuperfluidKeeper.GetMerEquivalentMultiplier(s.Ctx, denoms[0])
 			s.Require().Equal(newEpochMultiplier, sdk.NewDec(15))
 
 			for index, lock := range locks {

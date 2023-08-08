@@ -23,7 +23,7 @@ var routeTwoAssetSameWeight = poolmanagertypes.SwapAmountInRoutes{
 	},
 	poolmanagertypes.SwapAmountInRoute{
 		PoolId:        24,
-		TokenOutDenom: "ufury",
+		TokenOutDenom: "umer",
 	},
 }
 
@@ -41,7 +41,7 @@ var routeMultiAssetSameWeight = poolmanagertypes.SwapAmountInRoutes{
 	},
 	poolmanagertypes.SwapAmountInRoute{
 		PoolId:        27,
-		TokenOutDenom: "ufury",
+		TokenOutDenom: "umer",
 	},
 }
 
@@ -59,7 +59,7 @@ var routeMostProfitable = poolmanagertypes.SwapAmountInRoutes{
 	},
 	poolmanagertypes.SwapAmountInRoute{
 		PoolId:        27,
-		TokenOutDenom: "ufury",
+		TokenOutDenom: "umer",
 	},
 }
 
@@ -95,7 +95,7 @@ var routeNoArb = poolmanagertypes.SwapAmountInRoutes{
 	},
 	poolmanagertypes.SwapAmountInRoute{
 		PoolId:        8,
-		TokenOutDenom: "ufury",
+		TokenOutDenom: "umer",
 	},
 }
 
@@ -113,7 +113,7 @@ var routeStableSwap = poolmanagertypes.SwapAmountInRoutes{
 	},
 	poolmanagertypes.SwapAmountInRoute{
 		PoolId:        30,
-		TokenOutDenom: "ufury",
+		TokenOutDenom: "umer",
 	},
 }
 
@@ -346,7 +346,7 @@ func (s *KeeperTestSuite) TestExecuteTrade() {
 			name: "Mainnet Arb Route",
 			param: param{
 				route:          routeTwoAssetSameWeight,
-				inputCoin:      sdk.NewCoin("ufury", sdk.NewInt(10100000)),
+				inputCoin:      sdk.NewCoin("umer", sdk.NewInt(10100000)),
 				expectedProfit: sdk.NewInt(24852),
 			},
 			arbDenom:            types.MerlinDenomination,
@@ -357,7 +357,7 @@ func (s *KeeperTestSuite) TestExecuteTrade() {
 			name: "No arbitrage opportunity - expect error at multihopswap due to profitability invariant",
 			param: param{
 				route:          routeNoArb,
-				inputCoin:      sdk.NewCoin("ufury", sdk.NewInt(1000000)),
+				inputCoin:      sdk.NewCoin("umer", sdk.NewInt(1000000)),
 				expectedProfit: sdk.NewInt(0),
 			},
 			arbDenom:   types.MerlinDenomination,
@@ -367,7 +367,7 @@ func (s *KeeperTestSuite) TestExecuteTrade() {
 			name: "0 input amount - expect error at multihopswap due to amount needing to be positive",
 			param: param{
 				route:          routeNoArb,
-				inputCoin:      sdk.NewCoin("ufury", sdk.NewInt(0)),
+				inputCoin:      sdk.NewCoin("umer", sdk.NewInt(0)),
 				expectedProfit: sdk.NewInt(0),
 			},
 			arbDenom:   types.MerlinDenomination,
@@ -462,7 +462,7 @@ func (s *KeeperTestSuite) TestIterateRoutes() {
 			params: paramm{
 				routes:                     []poolmanagertypes.SwapAmountInRoutes{routeTwoAssetSameWeight},
 				expectedMaxProfitAmount:    sdk.NewInt(24848),
-				expectedMaxProfitInputCoin: sdk.NewCoin("ufury", sdk.NewInt(10000000)),
+				expectedMaxProfitInputCoin: sdk.NewCoin("umer", sdk.NewInt(10000000)),
 				expectedOptimalRoute:       routeTwoAssetSameWeight,
 				arbDenom:                   types.MerlinDenomination,
 			},
@@ -473,7 +473,7 @@ func (s *KeeperTestSuite) TestIterateRoutes() {
 			params: paramm{
 				routes:                     []poolmanagertypes.SwapAmountInRoutes{routeMultiAssetSameWeight, routeTwoAssetSameWeight},
 				expectedMaxProfitAmount:    sdk.NewInt(24848),
-				expectedMaxProfitInputCoin: sdk.NewCoin("ufury", sdk.NewInt(10000000)),
+				expectedMaxProfitInputCoin: sdk.NewCoin("umer", sdk.NewInt(10000000)),
 				expectedOptimalRoute:       routeTwoAssetSameWeight,
 				arbDenom:                   types.MerlinDenomination,
 			},
@@ -484,7 +484,7 @@ func (s *KeeperTestSuite) TestIterateRoutes() {
 			params: paramm{
 				routes:                     []poolmanagertypes.SwapAmountInRoutes{routeMostProfitable, routeMultiAssetSameWeight, routeTwoAssetSameWeight},
 				expectedMaxProfitAmount:    sdk.NewInt(67511675),
-				expectedMaxProfitInputCoin: sdk.NewCoin("ufury", sdk.NewInt(520000000)),
+				expectedMaxProfitInputCoin: sdk.NewCoin("umer", sdk.NewInt(520000000)),
 				expectedOptimalRoute:       routeMostProfitable,
 				arbDenom:                   types.MerlinDenomination,
 			},
@@ -554,7 +554,7 @@ func (s *KeeperTestSuite) TestConvertProfits() {
 	type param struct {
 		inputCoin           sdk.Coin
 		profit              sdk.Int
-		expectedUfuryProfit sdk.Int
+		expectedUmerProfit sdk.Int
 	}
 
 	tests := []struct {
@@ -563,29 +563,29 @@ func (s *KeeperTestSuite) TestConvertProfits() {
 		expectPass bool
 	}{
 		{
-			name: "Convert atom to ufury",
+			name: "Convert atom to umer",
 			param: param{
 				inputCoin:           sdk.NewCoin("Atom", sdk.NewInt(100)),
 				profit:              sdk.NewInt(10),
-				expectedUfuryProfit: sdk.NewInt(8),
+				expectedUmerProfit: sdk.NewInt(8),
 			},
 			expectPass: true,
 		},
 		{
-			name: "Convert juno to ufury (random denom)",
+			name: "Convert juno to umer (random denom)",
 			param: param{
 				inputCoin:           sdk.NewCoin("juno", sdk.NewInt(100)),
 				profit:              sdk.NewInt(10),
-				expectedUfuryProfit: sdk.NewInt(9),
+				expectedUmerProfit: sdk.NewInt(9),
 			},
 			expectPass: true,
 		},
 		{
-			name: "Convert denom without pool to ufury",
+			name: "Convert denom without pool to umer",
 			param: param{
 				inputCoin:           sdk.NewCoin("random", sdk.NewInt(100)),
 				profit:              sdk.NewInt(10),
-				expectedUfuryProfit: sdk.NewInt(10),
+				expectedUmerProfit: sdk.NewInt(10),
 			},
 			expectPass: false,
 		},
@@ -596,7 +596,7 @@ func (s *KeeperTestSuite) TestConvertProfits() {
 
 		if test.expectPass {
 			s.Require().NoError(err)
-			s.Require().Equal(test.param.expectedUfuryProfit, profit)
+			s.Require().Equal(test.param.expectedUmerProfit, profit)
 		} else {
 			s.Require().Error(err)
 		}

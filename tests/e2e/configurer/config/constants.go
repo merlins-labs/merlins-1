@@ -26,11 +26,11 @@ var (
 	InitialMinDeposit = MinDepositValue / 4
 	// Minimum expedited deposit value for proposal to be submitted.
 	InitialMinExpeditedDeposit = MinExpeditedDepositValue / 4
-	// v16 upgrade specific canonical FURY/DAI pool id.
+	// v16 upgrade specific canonical MER/DAI pool id.
 	// It is expected to create a concentrated liquidity pool
 	// associated with this balancer pool in the upgrade handler.
 	// This is meant to be removed post-v16.
-	DaiFuryPoolIdv16 uint64
+	DaiMerPoolIdv16 uint64
 	// A pool created via CLI before starting an
 	// upgrade.
 	PreUpgradePoolId uint64

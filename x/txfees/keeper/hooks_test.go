@@ -49,7 +49,7 @@ func (s *KeeperTestSuite) TestTxFeesAfterEpochEnd() {
 		expectPass   bool
 	}{
 		{
-			name:         "One non-fury fee token (uion): TxFees AfterEpochEnd",
+			name:         "One non-mer fee token (uion): TxFees AfterEpochEnd",
 			coins:        sdk.Coins{sdk.NewInt64Coin(uion, 10)},
 			baseDenom:    baseDenom,
 			denoms:       []string{uion},
@@ -57,7 +57,7 @@ func (s *KeeperTestSuite) TestTxFeesAfterEpochEnd() {
 			spreadFactor: sdk.MustNewDecFromStr("0"),
 		},
 		{
-			name:         "Multiple non-fury fee token: TxFees AfterEpochEnd",
+			name:         "Multiple non-mer fee token: TxFees AfterEpochEnd",
 			coins:        sdk.Coins{sdk.NewInt64Coin(atom, 20), sdk.NewInt64Coin(ust, 30)},
 			baseDenom:    baseDenom,
 			denoms:       []string{atom, ust},
@@ -73,7 +73,7 @@ func (s *KeeperTestSuite) TestTxFeesAfterEpochEnd() {
 
 		s.Run(tc.name, func() {
 			for i, coin := range tc.coins {
-				// Get the output amount in fury denom
+				// Get the output amount in mer denom
 				pool, ok := tc.poolTypes[i].(gammtypes.CFMMPoolI)
 				s.Require().True(ok)
 
@@ -99,7 +99,7 @@ func (s *KeeperTestSuite) TestTxFeesAfterEpochEnd() {
 			moduleAddrNonNativeFee := s.App.AccountKeeper.GetModuleAddress(types.NonNativeFeeCollectorName)
 			s.Equal(s.App.BankKeeper.GetAllBalances(s.Ctx, moduleAddrNonNativeFee), tc.coins)
 
-			// End of epoch, so all the non-fury fee amount should be swapped to fury and transfer to fee module account
+			// End of epoch, so all the non-mer fee amount should be swapped to mer and transfer to fee module account
 			params := s.App.IncentivesKeeper.GetParams(s.Ctx)
 			futureCtx := s.Ctx.WithBlockTime(time.Now().Add(time.Minute))
 			err := s.App.TxFeesKeeper.AfterEpochEnd(futureCtx, params.DistrEpochIdentifier, int64(1))
@@ -109,9 +109,9 @@ func (s *KeeperTestSuite) TestTxFeesAfterEpochEnd() {
 			moduleAddrFee := s.App.AccountKeeper.GetModuleAddress(types.FeeCollectorName)
 			moduleBaseDenomBalance := s.App.BankKeeper.GetBalance(s.Ctx, moduleAddrFee, tc.baseDenom)
 
-			// non-furys module account should be empty as all the funds should be transferred to fury module
+			// non-mers module account should be empty as all the funds should be transferred to mer module
 			s.Empty(s.App.BankKeeper.GetAllBalances(s.Ctx, moduleAddrNonNativeFee))
-			// check that the total fury amount has been transferred to module account
+			// check that the total mer amount has been transferred to module account
 			s.Equal(moduleBaseDenomBalance.Amount, finalOutputAmount)
 		})
 	}

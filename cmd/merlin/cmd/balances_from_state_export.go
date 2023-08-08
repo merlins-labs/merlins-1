@@ -211,12 +211,12 @@ Example:
 					acc = newDerivedAccount(address)
 				}
 
-				unbondingFurys := sdk.NewInt(0)
+				unbondingMers := sdk.NewInt(0)
 				for _, entry := range unbonding.Entries {
-					unbondingFurys = unbondingFurys.Add(entry.Balance)
+					unbondingMers = unbondingMers.Add(entry.Balance)
 				}
 
-				acc.UnbondingStake = acc.UnbondingStake.Add(unbondingFurys)
+				acc.UnbondingStake = acc.UnbondingStake.Add(unbondingMers)
 
 				snapshotAccs[address] = acc
 			}
@@ -236,9 +236,9 @@ Example:
 				}
 
 				val := validators[delegation.ValidatorAddress]
-				stakedFurys := delegation.Shares.MulInt(val.Tokens).Quo(val.DelegatorShares).RoundInt()
+				stakedMers := delegation.Shares.MulInt(val.Tokens).Quo(val.DelegatorShares).RoundInt()
 
-				acc.Staked = acc.Staked.Add(stakedFurys)
+				acc.Staked = acc.Staked.Add(stakedMers)
 
 				snapshotAccs[address] = acc
 			}

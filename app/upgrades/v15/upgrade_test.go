@@ -29,7 +29,7 @@ type UpgradeTestSuite struct {
 }
 
 var DefaultAcctFunds sdk.Coins = sdk.NewCoins(
-	sdk.NewCoin("ufury", sdk.NewInt(10000000000)),
+	sdk.NewCoin("umer", sdk.NewInt(10000000000)),
 	sdk.NewCoin("foo", sdk.NewInt(10000000)),
 	sdk.NewCoin("bar", sdk.NewInt(10000000)),
 	sdk.NewCoin("baz", sdk.NewInt(10000000)),
@@ -168,32 +168,32 @@ func (suite *UpgradeTestSuite) TestMigrateBalancerToStablePools() {
 	suite.validateCons(tokenInStable, tokenIn)
 }
 
-func (suite *UpgradeTestSuite) TestRegisterFuryIonMetadata() {
+func (suite *UpgradeTestSuite) TestRegisterMerIonMetadata() {
 	suite.SetupTest() // reset
 
-	expectedUfurydenom := "ufury"
+	expectedUmerdenom := "umer"
 	expectedUiondenom := "uion"
 
 	ctx := suite.Ctx
 	bankKeeper := suite.App.BankKeeper
 
 	// meta data should not be found pre-registration of meta data
-	_, found := suite.App.BankKeeper.GetDenomMetaData(ctx, "ufury")
+	_, found := suite.App.BankKeeper.GetDenomMetaData(ctx, "umer")
 	suite.Require().False(found)
 
 	_, found = suite.App.BankKeeper.GetDenomMetaData(ctx, "uion")
 	suite.Require().False(found)
 
 	// system under test.
-	v15.RegisterFuryIonMetadata(ctx, *bankKeeper)
+	v15.RegisterMerIonMetadata(ctx, *bankKeeper)
 
-	ufuryMetadata, found := suite.App.BankKeeper.GetDenomMetaData(ctx, "ufury")
+	umerMetadata, found := suite.App.BankKeeper.GetDenomMetaData(ctx, "umer")
 	suite.Require().True(found)
 
 	uionMetadata, found := suite.App.BankKeeper.GetDenomMetaData(ctx, "uion")
 	suite.Require().True(found)
 
-	suite.Require().Equal(expectedUfurydenom, ufuryMetadata.Base)
+	suite.Require().Equal(expectedUmerdenom, umerMetadata.Base)
 	suite.Require().Equal(expectedUiondenom, uionMetadata.Base)
 }
 
@@ -229,7 +229,7 @@ func (suite *UpgradeTestSuite) TestSetRateLimits() {
 
 	addr, _, err := contractKeeper.Instantiate(suite.Ctx, codeID, govModule, govModule, initMsgBz, "rate limiting contract", nil)
 	suite.Require().NoError(err)
-	addrStr, err := sdk.Bech32ifyAddressBytes("fury", addr)
+	addrStr, err := sdk.Bech32ifyAddressBytes("mer", addr)
 	suite.Require().NoError(err)
 	params, err := ibcratelimittypes.NewParams(addrStr)
 	suite.Require().NoError(err)

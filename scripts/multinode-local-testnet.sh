@@ -1112,34 +1112,34 @@ sed -i -E 's|0.0.0.0:9090|0.0.0.0:9064|g' $VALIDATOR3_APP_TOML
 sed -i -E 's|0.0.0.0:9091|0.0.0.0:9065|g' $VALIDATOR3_APP_TOML
 
 # validator4
-sed -i -E 's|tcp://0.0.0.0:1317|tcp://0.0.0.0:1314|g' $VALIDATOR2_APP_TOML
-sed -i -E 's|0.0.0.0:9090|0.0.0.0:7050|g' $VALIDATOR2_APP_TOML
-sed -i -E 's|0.0.0.0:9091|0.0.0.0:7051|g' $VALIDATOR2_APP_TOML
+sed -i -E 's|tcp://0.0.0.0:1317|tcp://0.0.0.0:1314|g' $VALIDATOR4_APP_TOML
+sed -i -E 's|0.0.0.0:9090|0.0.0.0:7050|g' $VALIDATOR4_APP_TOML
+sed -i -E 's|0.0.0.0:9091|0.0.0.0:7051|g' $VALIDATOR4_APP_TOML
 
 # validator5
-sed -i -E 's|tcp://0.0.0.0:1317|tcp://0.0.0.0:1313|g' $VALIDATOR3_APP_TOML
-sed -i -E 's|0.0.0.0:9090|0.0.0.0:6040|g' $VALIDATOR3_APP_TOML
-sed -i -E 's|0.0.0.0:9091|0.0.0.0:6041|g' $VALIDATOR3_APP_TOML
+sed -i -E 's|tcp://0.0.0.0:1317|tcp://0.0.0.0:1313|g' $VALIDATOR5_APP_TOML
+sed -i -E 's|0.0.0.0:9090|0.0.0.0:6040|g' $VALIDATOR5_APP_TOML
+sed -i -E 's|0.0.0.0:9091|0.0.0.0:6041|g' $VALIDATOR5_APP_TOML
 
 # validator6
-sed -i -E 's|tcp://0.0.0.0:1317|tcp://0.0.0.0:1312|g' $VALIDATOR2_APP_TOML
-sed -i -E 's|0.0.0.0:9090|0.0.0.0:5030|g' $VALIDATOR2_APP_TOML
-sed -i -E 's|0.0.0.0:9091|0.0.0.0:5031|g' $VALIDATOR2_APP_TOML
+sed -i -E 's|tcp://0.0.0.0:1317|tcp://0.0.0.0:1312|g' $VALIDATOR6_APP_TOML
+sed -i -E 's|0.0.0.0:9090|0.0.0.0:5030|g' $VALIDATOR6_APP_TOML
+sed -i -E 's|0.0.0.0:9091|0.0.0.0:5031|g' $VALIDATOR6_APP_TOML
 
 # validator7
-sed -i -E 's|tcp://0.0.0.0:1317|tcp://0.0.0.0:1311|g' $VALIDATOR3_APP_TOML
-sed -i -E 's|0.0.0.0:9090|0.0.0.0:4020|g' $VALIDATOR3_APP_TOML
-sed -i -E 's|0.0.0.0:9091|0.0.0.0:4021|g' $VALIDATOR3_APP_TOML
+sed -i -E 's|tcp://0.0.0.0:1317|tcp://0.0.0.0:1311|g' $VALIDATOR7_APP_TOML
+sed -i -E 's|0.0.0.0:9090|0.0.0.0:4020|g' $VALIDATOR7_APP_TOML
+sed -i -E 's|0.0.0.0:9091|0.0.0.0:4021|g' $VALIDATOR7_APP_TOML
 
 # validator8
-sed -i -E 's|tcp://0.0.0.0:1317|tcp://0.0.0.0:1310|g' $VALIDATOR2_APP_TOML
-sed -i -E 's|0.0.0.0:9090|0.0.0.0:3010|g' $VALIDATOR2_APP_TOML
-sed -i -E 's|0.0.0.0:9091|0.0.0.0:3011|g' $VALIDATOR2_APP_TOML
+sed -i -E 's|tcp://0.0.0.0:1317|tcp://0.0.0.0:1310|g' $VALIDATOR8_APP_TOML
+sed -i -E 's|0.0.0.0:9090|0.0.0.0:3010|g' $VALIDATOR8_APP_TOML
+sed -i -E 's|0.0.0.0:9091|0.0.0.0:3011|g' $VALIDATOR8_APP_TOML
 
 # validator9
-sed -i -E 's|tcp://0.0.0.0:1317|tcp://0.0.0.0:1319|g' $VALIDATOR3_APP_TOML
-sed -i -E 's|0.0.0.0:9090|0.0.0.0:2000|g' $VALIDATOR3_APP_TOML
-sed -i -E 's|0.0.0.0:9091|0.0.0.0:2001|g' $VALIDATOR3_APP_TOML
+sed -i -E 's|tcp://0.0.0.0:1317|tcp://0.0.0.0:1319|g' $VALIDATOR9_APP_TOML
+sed -i -E 's|0.0.0.0:9090|0.0.0.0:2000|g' $VALIDATOR9_APP_TOML
+sed -i -E 's|0.0.0.0:9091|0.0.0.0:2001|g' $VALIDATOR9_APP_TOML
 
 
 # change config.toml values

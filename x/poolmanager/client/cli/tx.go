@@ -43,7 +43,7 @@ func NewSwapExactAmountInCmd() (*osmocli.TxCliDesc, *types.MsgSwapExactAmountIn)
 	return &osmocli.TxCliDesc{
 		Use:     "swap-exact-amount-in [token-in] [token-out-min-amount]",
 		Short:   "swap exact amount in",
-		Example: "merlin tx poolmanager swap-exact-amount-in 2000000ufury 1 --swap-route-pool-ids 5 --swap-route-denoms uion --from val --keyring-backend test -b=block --chain-id=localmerlin --fees 10000ufury",
+		Example: "merlin tx poolmanager swap-exact-amount-in 2000000umer 1 --swap-route-pool-ids 5 --swap-route-denoms uion --from val --keyring-backend test -b=block --chain-id=localmerlin --fees 10000umer",
 		CustomFieldParsers: map[string]osmocli.CustomFieldParserFn{
 			"Routes": osmocli.FlagOnlyParser(swapAmountInRoutes),
 		},
@@ -56,7 +56,7 @@ func NewSwapExactAmountOutCmd() (*osmocli.TxCliDesc, *types.MsgSwapExactAmountOu
 	return &osmocli.TxCliDesc{
 		Use:              "swap-exact-amount-out [token-out] [token-in-max-amount]",
 		Short:            "swap exact amount out",
-		Example:          "merlin tx poolmanager swap-exact-amount-out 100uion 1000000 --swap-route-pool-ids 1 --swap-route-denoms ufury --from val --keyring-backend test -b=block --chain-id=localmerlin --fees 10000ufury",
+		Example:          "merlin tx poolmanager swap-exact-amount-out 100uion 1000000 --swap-route-pool-ids 1 --swap-route-denoms umer --from val --keyring-backend test -b=block --chain-id=localmerlin --fees 10000umer",
 		NumArgs:          2,
 		ParseAndBuildMsg: NewBuildSwapExactAmountOutMsg,
 		Flags:            osmocli.FlagDesc{RequiredFlags: []*flag.FlagSet{FlagSetMultihopSwapRoutes()}},
@@ -67,7 +67,7 @@ func NewSplitRouteSwapExactAmountIn() (*osmocli.TxCliDesc, *types.MsgSplitRouteS
 	return &osmocli.TxCliDesc{
 		Use:   "split-route-swap-exact-amount-in [token-in-denom] [token-out-min-amount] [flags]",
 		Short: "split route swap exact amount in",
-		Example: `merlin tx poolmanager split-route-swap-exact-amount-in ufury 1 --routes-file="./routes.json" --from val --keyring-backend test -b=block --chain-id=localmerlin --fees 10000ufury
+		Example: `merlin tx poolmanager split-route-swap-exact-amount-in umer 1 --routes-file="./routes.json" --from val --keyring-backend test -b=block --chain-id=localmerlin --fees 10000umer
 		- routes.json
 		{
 			"Route": [
@@ -79,7 +79,7 @@ func NewSplitRouteSwapExactAmountIn() (*osmocli.TxCliDesc, *types.MsgSplitRouteS
 				},
 				{
 				"pool_id": 2,
-				"token_out_denom": "ufury"
+				"token_out_denom": "umer"
 				}
 			  ],
 			  "token_in_amount": 1000
@@ -92,7 +92,7 @@ func NewSplitRouteSwapExactAmountIn() (*osmocli.TxCliDesc, *types.MsgSplitRouteS
 				},
 				{
 				"pool_id": 4,
-				"token_out_denom": "ufury"
+				"token_out_denom": "umer"
 				}
 			  ],
 			  "token_in_amount": 999
@@ -113,7 +113,7 @@ func NewSplitRouteSwapExactAmountOut() (*osmocli.TxCliDesc, *types.MsgSplitRoute
 	return &osmocli.TxCliDesc{
 		Use:   "split-route-swap-exact-amount-out [token-out-denom] [token-in-max-amount] [flags]",
 		Short: "split route swap exact amount out",
-		Example: `merlin tx poolmanager split-route-swap-exact-amount-out ufury 1 --routes-file="./routes.json" --from val --keyring-backend test -b=block --chain-id=localmerlin --fees 10000ufury
+		Example: `merlin tx poolmanager split-route-swap-exact-amount-out umer 1 --routes-file="./routes.json" --from val --keyring-backend test -b=block --chain-id=localmerlin --fees 10000umer
 		- routes.json
 		{
 			"route": [
@@ -125,7 +125,7 @@ func NewSplitRouteSwapExactAmountOut() (*osmocli.TxCliDesc, *types.MsgSplitRoute
 					},
 					{
 					"pool_id": 2,
-					"token_in_denom": "ufury"
+					"token_in_denom": "umer"
 					}
 				],
 				"token_out_amount": 1000
@@ -138,7 +138,7 @@ func NewSplitRouteSwapExactAmountOut() (*osmocli.TxCliDesc, *types.MsgSplitRoute
 					},
 					{
 					"pool_id": 4,
-					"token_in_denom": "ufury"
+					"token_in_denom": "umer"
 					}
 				],
 				"token_out_amount": 999
@@ -244,8 +244,8 @@ func NewCreatePoolCmd() *cobra.Command {
 		Long:  `Must provide path to a pool JSON file (--pool-file) describing the pool to be created`,
 		Example: `Sample pool JSON file contents:
 {
-	"weights": "4uatom,4fury,2uakt",
-	"initial-deposit": "100uatom,5fury,20uakt",
+	"weights": "4uatom,4mer,2uakt",
+	"initial-deposit": "100uatom,5mer,20uakt",
 	"swap-fee": "0.01",
 	"exit-fee": "0.01",
 	"future-governor": "168h"

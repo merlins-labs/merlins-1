@@ -37,7 +37,7 @@ const (
 	localMerlinHomePath = "/merlin/.merlin/"
 
 	denom0 = "uusdc"
-	denom1 = "ufury"
+	denom1 = "umer"
 )
 
 var (
@@ -61,7 +61,7 @@ func main() {
 	flag.BoolVar(&writeGenesisToDisk, "genesis", false, fmt.Sprintf("flag indicating whether to write the genesis file to disk at path %s", merlinGenesisFileName))
 	flag.BoolVar(&useKeyringAccounts, "keyring", false, "flag indicating whether to use local test keyring accounts")
 	flag.BoolVar(&isLocalMerlin, "localmerlin", false, "flag indicating whether this is being run inside the localmerlin container")
-	flag.IntVar(&desiredOperation, "operation", 0, fmt.Sprintf("operation to run:\nget subgraph data: %v, convert subgraph positions to fury genesis: %v\nmerge converted subgraph genesis and localmerlin genesis: %v", getData, convertPositions, mergeSubgraphAndLocalMerlinGenesis))
+	flag.IntVar(&desiredOperation, "operation", 0, fmt.Sprintf("operation to run:\nget subgraph data: %v, convert subgraph positions to mer genesis: %v\nmerge converted subgraph genesis and localmerlin genesis: %v", getData, convertPositions, mergeSubgraphAndLocalMerlinGenesis))
 
 	flag.Parse()
 

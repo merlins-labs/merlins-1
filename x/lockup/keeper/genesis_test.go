@@ -8,7 +8,7 @@ import (
 	"github.com/stretchr/testify/require"
 	tmproto "github.com/tendermint/tendermint/proto/tendermint/types"
 
-	furyapp "github.com/merlins-labs/merlin/app"
+	merapp "github.com/merlins-labs/merlin/app"
 	"github.com/merlins-labs/merlin/x/lockup"
 	"github.com/merlins-labs/merlin/x/lockup/types"
 
@@ -52,7 +52,7 @@ var (
 )
 
 func TestInitGenesis(t *testing.T) {
-	app := furyapp.Setup(false)
+	app := merapp.Setup(false)
 	ctx := app.BaseApp.NewContext(false, tmproto.Header{})
 	ctx = ctx.WithBlockTime(now.Add(time.Second))
 	genesis := testGenesis
@@ -75,7 +75,7 @@ func TestInitGenesis(t *testing.T) {
 }
 
 func TestExportGenesis(t *testing.T) {
-	app := furyapp.Setup(false)
+	app := merapp.Setup(false)
 	ctx := app.BaseApp.NewContext(false, tmproto.Header{})
 	ctx = ctx.WithBlockTime(now.Add(time.Second))
 	genesis := testGenesis
@@ -128,11 +128,11 @@ func TestExportGenesis(t *testing.T) {
 }
 
 func TestMarshalUnmarshalGenesis(t *testing.T) {
-	app := furyapp.Setup(false)
+	app := merapp.Setup(false)
 	ctx := app.BaseApp.NewContext(false, tmproto.Header{})
 	ctx = ctx.WithBlockTime(now.Add(time.Second))
 
-	encodingConfig := furyapp.MakeEncodingConfig()
+	encodingConfig := merapp.MakeEncodingConfig()
 	appCodec := encodingConfig.Marshaler
 	am := lockup.NewAppModule(*app.LockupKeeper, app.AccountKeeper, app.BankKeeper)
 
@@ -143,7 +143,7 @@ func TestMarshalUnmarshalGenesis(t *testing.T) {
 
 	genesisExported := am.ExportGenesis(ctx, appCodec)
 	assert.NotPanics(t, func() {
-		app := furyapp.Setup(false)
+		app := merapp.Setup(false)
 		ctx := app.BaseApp.NewContext(false, tmproto.Header{})
 		ctx = ctx.WithBlockTime(now.Add(time.Second))
 		am := lockup.NewAppModule(*app.LockupKeeper, app.AccountKeeper, app.BankKeeper)

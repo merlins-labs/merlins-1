@@ -41,7 +41,7 @@ var (
 // 			s.Ctx,
 // 			acc,
 // 			sdk.NewCoins(
-// 				sdk.NewCoin("ufury", sdk.NewInt(1000000000)),
+// 				sdk.NewCoin("umer", sdk.NewInt(1000000000)),
 // 				sdk.NewCoin("foo", sdk.NewInt(1000)),
 // 				sdk.NewCoin("bar", sdk.NewInt(1000)),
 // 				sdk.NewCoin("baz", sdk.NewInt(1000)),
@@ -116,7 +116,7 @@ var (
 // 			coins[i] = sdk.Coin{denoms[i], amount}
 // 		}
 // 		coinOf[acc.String()] = coins
-// 		coins = append(coins, sdk.NewCoin("ufury", sdk.NewInt(1000000000)))
+// 		coins = append(coins, sdk.NewCoin("umer", sdk.NewInt(1000000000)))
 
 // 		s.FundAcc(
 // 			s.App.BankKeeper,
@@ -160,7 +160,7 @@ var (
 // 		s.Ctx,
 // 		acc1,
 // 		sdk.NewCoins(
-// 			sdk.NewCoin("ufury", sdk.NewInt(1000000000)),
+// 			sdk.NewCoin("umer", sdk.NewInt(1000000000)),
 // 			sdk.NewCoin("foo", sdk.NewInt(1000)),
 // 			sdk.NewCoin("bar", sdk.NewInt(1000)),
 // 			sdk.NewCoin("baz", sdk.NewInt(1000)),
@@ -200,7 +200,7 @@ var (
 // 		s.Ctx,
 // 		acc1,
 // 		sdk.NewCoins(
-// 			sdk.NewCoin("ufury", sdk.NewInt(1000000000)),
+// 			sdk.NewCoin("umer", sdk.NewInt(1000000000)),
 // 			sdk.NewCoin("foo", sdk.NewInt(1000)),
 // 			sdk.NewCoin("bar", sdk.NewInt(1000)),
 // 			sdk.NewCoin("baz", sdk.NewInt(1000)),

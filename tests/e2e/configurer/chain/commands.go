@@ -119,7 +119,7 @@ func (n *NodeConfig) CreateConcentratedPosition(from, lowerTick, upperTick strin
 	n.LogActionF("creating concentrated position")
 	// gas = 50,000 because e2e  default to 40,000, we hardcoded extra 10k gas to initialize tick
 	// fees = 1250 (because 50,000 * 0.0025 = 1250)
-	cmd := []string{"merlin", "tx", "concentratedliquidity", "create-position", fmt.Sprint(poolId), lowerTick, upperTick, tokens, fmt.Sprintf("%d", token0MinAmt), fmt.Sprintf("%d", token1MinAmt), fmt.Sprintf("--from=%s", from), "--gas=500000", "--fees=1250ufury", "-o json"}
+	cmd := []string{"merlin", "tx", "concentratedliquidity", "create-position", fmt.Sprint(poolId), lowerTick, upperTick, tokens, fmt.Sprintf("%d", token0MinAmt), fmt.Sprintf("%d", token1MinAmt), fmt.Sprintf("--from=%s", from), "--gas=500000", "--fees=1250umer", "-o json"}
 	outJson, _, err := n.containerManager.ExecTxCmdWithSuccessString(n.t, n.chainId, n.Name, cmd, "code\":0")
 	require.NoError(n.t, err)
 
@@ -140,7 +140,7 @@ func (n *NodeConfig) CreateConcentratedPosition(from, lowerTick, upperTick strin
 
 func (n *NodeConfig) StoreWasmCode(wasmFile, from string) int {
 	n.LogActionF("storing wasm code from file %s", wasmFile)
-	cmd := []string{"merlin", "tx", "wasm", "store", wasmFile, fmt.Sprintf("--from=%s", from), "--gas=auto", "--gas-prices=0.1ufury", "--gas-adjustment=1.3"}
+	cmd := []string{"merlin", "tx", "wasm", "store", wasmFile, fmt.Sprintf("--from=%s", from), "--gas=auto", "--gas-prices=0.1umer", "--gas-adjustment=1.3"}
 	resp, _, err := n.containerManager.ExecTxCmd(n.t, n.chainId, n.Name, cmd)
 	require.NoError(n.t, err)
 	startIndex := strings.Index(resp.String(), `{"key":"code_id","value":"`) + len(`{"key":"code_id","value":"`)
@@ -157,7 +157,7 @@ func (n *NodeConfig) StoreWasmCode(wasmFile, from string) int {
 
 func (n *NodeConfig) WithdrawPosition(from, liquidityOut string, positionId uint64) {
 	n.LogActionF("withdrawing liquidity from position")
-	cmd := []string{"merlin", "tx", "concentratedliquidity", "withdraw-position", fmt.Sprint(positionId), liquidityOut, fmt.Sprintf("--from=%s", from), "--gas=700000", "--fees=5000ufury"}
+	cmd := []string{"merlin", "tx", "concentratedliquidity", "withdraw-position", fmt.Sprint(positionId), liquidityOut, fmt.Sprintf("--from=%s", from), "--gas=700000", "--fees=5000umer"}
 	_, _, err := n.containerManager.ExecTxCmd(n.t, n.chainId, n.Name, cmd)
 	require.NoError(n.t, err)
 	n.LogActionF("successfully withdrew %s liquidity from position %d", liquidityOut, positionId)
@@ -333,7 +333,7 @@ func (n *NodeConfig) SubmitSuperfluidProposal(asset string, initialDeposit sdk.C
 
 func (n *NodeConfig) SubmitCreateConcentratedPoolProposal(initialDeposit sdk.Coin) int {
 	n.LogActionF("Creating concentrated liquidity pool")
-	cmd := []string{"merlin", "tx", "gov", "submit-proposal", "create-concentratedliquidity-pool-proposal", "--pool-records=stake,ufury,100,-6,0.001", "--title=\"create concentrated pool\"", "--description=\"create concentrated pool", "--from=val", fmt.Sprintf("--deposit=%s", initialDeposit)}
+	cmd := []string{"merlin", "tx", "gov", "submit-proposal", "create-concentratedliquidity-pool-proposal", "--pool-records=stake,umer,100,-6,0.001", "--title=\"create concentrated pool\"", "--description=\"create concentrated pool", "--from=val", fmt.Sprintf("--deposit=%s", initialDeposit)}
 	resp, _, err := n.containerManager.ExecTxCmd(n.t, n.chainId, n.Name, cmd)
 	require.NoError(n.t, err)
 	// Extract the proposal ID from the response
@@ -641,8 +641,8 @@ func (n *NodeConfig) SendIBC(dstChain *Config, recipient string, token sdk.Coin)
 
 	// removes the fee token from balances for calculating the difference in other tokens
 	// before and after the IBC send. Since we run tests in parallel now, some tests may
-	// send ufury between accounts while this test is running. Since we don't care about
-	// non ibc denoms, its safe to filter ufury out.
+	// send umer between accounts while this test is running. Since we don't care about
+	// non ibc denoms, its safe to filter umer out.
 	removeFeeTokenFromBalance := func(balance sdk.Coins) sdk.Coins {
 		filteredCoinDenoms := []string{}
 		for _, coin := range balance {
@@ -788,7 +788,7 @@ func (n *NodeConfig) ParamChangeProposal(subspace, key string, value []byte, cha
 				Value:    value,
 			},
 		},
-		Deposit: "625000000ufury",
+		Deposit: "625000000umer",
 	}
 	proposalJson, err := json.Marshal(proposal)
 	if err != nil {

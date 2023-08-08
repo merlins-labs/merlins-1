@@ -170,9 +170,9 @@ func (s *KeeperTestSuite) TestAddToConcentratedLiquiditySuperfluidPosition() {
 			postAddToPositionStakeSupply := bankKeeper.GetSupply(ctx, bondDenom)
 			postAddToPositionPoolFunds := bankKeeper.GetAllBalances(ctx, clPoolAddress)
 
-			// Check that bond denom supply changed by the amount of bond denom added (taking into consideration risk adjusted fury value and err tolerance)
+			// Check that bond denom supply changed by the amount of bond denom added (taking into consideration risk adjusted mer value and err tolerance)
 			diffInBondDenomSupply := postAddToPositionStakeSupply.Amount.Sub(preAddToPositionStakeSupply.Amount)
-			expectedBondDenomSupplyDiff := superfluidKeeper.GetRiskAdjustedFuryValue(ctx, tc.amount0Added)
+			expectedBondDenomSupplyDiff := superfluidKeeper.GetRiskAdjustedMerValue(ctx, tc.amount0Added)
 			s.Require().Equal(0, errTolerance.Compare(expectedBondDenomSupplyDiff, diffInBondDenomSupply), fmt.Sprintf("expected (%s), actual (%s)", expectedBondDenomSupplyDiff, diffInBondDenomSupply))
 
 			// Check that the pool funds changed by the amount of tokens added (taking into consideration err tolerance)
@@ -224,7 +224,7 @@ func (s *KeeperTestSuite) TestAddToConcentratedLiquiditySuperfluidPosition() {
 			s.Require().False(found)
 
 			// Check if the new intermediary account has expected delegation amount.
-			expectedDelegationAmt := superfluidKeeper.GetRiskAdjustedFuryValue(ctx, finalAmount0)
+			expectedDelegationAmt := superfluidKeeper.GetRiskAdjustedMerValue(ctx, finalAmount0)
 			delegationAmt, found := stakingKeeper.GetDelegation(ctx, newIntermediaryAcc, valAddr)
 			s.Require().True(found)
 			s.Require().Equal(expectedDelegationAmt, delegationAmt.Shares.TruncateInt())

@@ -73,7 +73,7 @@ func (s *QueryTestSuite) TestQueriesNeverAlterState() {
 			&types.AllIntermediaryAccountsResponse{},
 		},
 		{
-			"Query fury equivalent multiplier of an asset",
+			"Query mer equivalent multiplier of an asset",
 			"/osmosis.superfluid.Query/AssetMultiplier",
 			&types.AssetMultiplierRequest{Denom: "gamm/pool/1"},
 			&types.AssetMultiplierResponse{},

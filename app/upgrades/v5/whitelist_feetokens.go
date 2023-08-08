@@ -11,9 +11,9 @@ import (
 	"github.com/merlins-labs/merlin/x/txfees/types"
 )
 
-// Every asset with a liquid fury pairing pool on Merlin, as of 12/01/21
-// Notably, Tick is not on this list because the fury pool has $76 of liquidity.
-// Cheq'd and KRT are also not on this, due to neither having fury pairings.
+// Every asset with a liquid mer pairing pool on Merlin, as of 12/01/21
+// Notably, Tick is not on this list because the mer pool has $76 of liquidity.
+// Cheq'd and KRT are also not on this, due to neither having mer pairings.
 // We nolint because these are strings of whitelisted ibc denoms.
 //
 //nolint:gosec

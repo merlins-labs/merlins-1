@@ -346,7 +346,7 @@ func (s *KeeperTestSuite) TestAddToGaugeRewards() {
 			name:  "valid case: valid gauge",
 			owner: s.TestAccs[0],
 			coinsToAdd: sdk.NewCoins(
-				sdk.NewCoin("ufury", sdk.NewInt(100000)),
+				sdk.NewCoin("umer", sdk.NewInt(100000)),
 				sdk.NewCoin("atom", sdk.NewInt(99999)),
 			),
 			gaugeId:            1,
@@ -358,7 +358,7 @@ func (s *KeeperTestSuite) TestAddToGaugeRewards() {
 			name:  "valid case: valid gauge with >4 denoms",
 			owner: s.TestAccs[0],
 			coinsToAdd: sdk.NewCoins(
-				sdk.NewCoin("ufury", sdk.NewInt(100000)),
+				sdk.NewCoin("umer", sdk.NewInt(100000)),
 				sdk.NewCoin("atom", sdk.NewInt(99999)),
 				sdk.NewCoin("mars", sdk.NewInt(88888)),
 				sdk.NewCoin("akash", sdk.NewInt(77777)),
@@ -376,7 +376,7 @@ func (s *KeeperTestSuite) TestAddToGaugeRewards() {
 			name:  "invalid case: gauge Id is not valid",
 			owner: s.TestAccs[0],
 			coinsToAdd: sdk.NewCoins(
-				sdk.NewCoin("ufury", sdk.NewInt(100000)),
+				sdk.NewCoin("umer", sdk.NewInt(100000)),
 				sdk.NewCoin("atom", sdk.NewInt(99999)),
 			),
 			gaugeId:            0,
@@ -453,7 +453,7 @@ func (s *KeeperTestSuite) TestCreateGauge_NoLockGauges() {
 
 	var (
 		defaultCoins = sdk.NewCoins(
-			sdk.NewCoin("ufury", sdk.NewInt(100000)),
+			sdk.NewCoin("umer", sdk.NewInt(100000)),
 			sdk.NewCoin("atom", sdk.NewInt(99999)),
 		)
 
@@ -499,7 +499,7 @@ func (s *KeeperTestSuite) TestCreateGauge_NoLockGauges() {
 			distrTo: lockuptypes.QueryCondition{
 				LockQueryType: lockuptypes.NoLock,
 				// Note: this is invalid for NoLock gauges
-				Denom: "ufury",
+				Denom: "umer",
 			},
 			poolId: concentratedPoolId,
 

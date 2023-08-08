@@ -6,7 +6,7 @@ import (
 	"github.com/stretchr/testify/suite"
 	tmproto "github.com/tendermint/tendermint/proto/tendermint/types"
 
-	furyapp "github.com/merlins-labs/merlin/app"
+	merapp "github.com/merlins-labs/merlin/app"
 	"github.com/merlins-labs/merlin/x/mint/keeper"
 	"github.com/merlins-labs/merlin/x/mint/types"
 	"github.com/osmosis-labs/osmosis/osmoutils/osmoassert"
@@ -363,7 +363,7 @@ func (s *KeeperTestSuite) TestAfterEpochEnd() {
 				MintingRewardsDistributionStartEpoch: tc.mintStartEpoch,
 			}
 
-			app := furyapp.Setup(false)
+			app := merapp.Setup(false)
 			ctx := app.BaseApp.NewContext(false, tmproto.Header{})
 
 			mintKeeper := app.MintKeeper
@@ -431,7 +431,7 @@ func (s *KeeperTestSuite) TestAfterEpochEnd() {
 //
 // Ref: https://github.com/merlins-labs/merlin/issues/1917
 func (s *KeeperTestSuite) TestAfterEpochEnd_FirstYearThirdening_RealParameters() {
-	app := furyapp.Setup(false)
+	app := merapp.Setup(false)
 	ctx := app.BaseApp.NewContext(false, tmproto.Header{})
 	mintKeeper := app.MintKeeper
 	accountKeeper := app.AccountKeeper

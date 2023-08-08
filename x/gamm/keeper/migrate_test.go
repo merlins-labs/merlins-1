@@ -381,7 +381,7 @@ func (s *KeeperTestSuite) TestReplaceMigrationRecords() {
 					ClPoolId:       3,
 				},
 			},
-			overwriteBalancerDenom0: "ufury",
+			overwriteBalancerDenom0: "umer",
 			expectErr:               true,
 		},
 		{
@@ -392,7 +392,7 @@ func (s *KeeperTestSuite) TestReplaceMigrationRecords() {
 					ClPoolId:       3,
 				},
 			},
-			overwriteBalancerDenom1: "ufury",
+			overwriteBalancerDenom1: "umer",
 			expectErr:               true,
 		},
 		{
@@ -638,7 +638,7 @@ func (s *KeeperTestSuite) TestUpdateMigrationRecords() {
 					ClPoolId:       6,
 				},
 			},
-			overwriteBalancerDenom0: "fury",
+			overwriteBalancerDenom0: "mer",
 			isPreexistingRecordsSet: false,
 			expectErr:               true,
 		},
@@ -650,7 +650,7 @@ func (s *KeeperTestSuite) TestUpdateMigrationRecords() {
 					ClPoolId:       6,
 				},
 			},
-			overwriteBalancerDenom1: "fury",
+			overwriteBalancerDenom1: "mer",
 			isPreexistingRecordsSet: false,
 			expectErr:               true,
 		},
@@ -904,9 +904,9 @@ func (suite *KeeperTestSuite) TestRedirectDistributionRecord() {
 
 	var (
 		defaultUsdcAmount = sdk.NewInt(7300000000)
-		defaultFuryAmount = sdk.NewInt(10000000000)
+		defaultMerAmount = sdk.NewInt(10000000000)
 		usdcCoin          = sdk.NewCoin("uusdc", defaultUsdcAmount)
-		furyCoin          = sdk.NewCoin("ufury", defaultFuryAmount)
+		merCoin          = sdk.NewCoin("umer", defaultMerAmount)
 	)
 
 	longestLockableDuration, err := suite.App.PoolIncentivesKeeper.GetLongestLockableDuration(suite.Ctx)
@@ -919,18 +919,18 @@ func (suite *KeeperTestSuite) TestRedirectDistributionRecord() {
 		expectError   error
 	}{
 		"happy path": {
-			poolLiquidity: sdk.NewCoins(usdcCoin, furyCoin),
+			poolLiquidity: sdk.NewCoins(usdcCoin, merCoin),
 			cfmmPoolId:    uint64(1),
 			clPoolId:      uint64(3),
 		},
 		"error: cfmm pool ID doesn't exist": {
-			poolLiquidity: sdk.NewCoins(usdcCoin, furyCoin),
+			poolLiquidity: sdk.NewCoins(usdcCoin, merCoin),
 			cfmmPoolId:    uint64(4),
 			clPoolId:      uint64(3),
 			expectError:   poolincentivestypes.NoGaugeAssociatedWithPoolError{PoolId: 4, Duration: longestLockableDuration},
 		},
 		"error: cl pool ID doesn't exist": {
-			poolLiquidity: sdk.NewCoins(usdcCoin, furyCoin),
+			poolLiquidity: sdk.NewCoins(usdcCoin, merCoin),
 			cfmmPoolId:    uint64(1),
 			clPoolId:      uint64(4),
 			expectError:   poolincentivestypes.NoGaugeAssociatedWithPoolError{PoolId: 4, Duration: longestLockableDuration},

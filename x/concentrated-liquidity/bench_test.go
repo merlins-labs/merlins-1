@@ -81,7 +81,7 @@ func runBenchmark(b *testing.B, testFunc func(b *testing.B, s *BenchTestSuite, p
 			simapp.FundAccount(s.App.BankKeeper, s.Ctx, acc, sdk.NewCoins(
 				sdk.NewCoin(denom0, maxAmountOfEachToken),
 				sdk.NewCoin(denom1, maxAmountOfEachToken),
-				sdk.NewCoin("ufury", maxAmountOfEachToken),
+				sdk.NewCoin("umer", maxAmountOfEachToken),
 			))
 		}
 

@@ -619,13 +619,13 @@ func (p *Pool) applySwap(ctx sdk.Context, tokensIn sdk.Coins, tokensOut sdk.Coin
 // we take the ratio of weights and divide this by ratio of supplies
 // this is equivalent to spot_price = (Quote Supply / Quote Weight) / (Base Supply / Base Weight)
 //
-// As an example, assume equal weights. ufury supply of 2 and uatom supply of 4.
+// As an example, assume equal weights. umer supply of 2 and uatom supply of 4.
 //
-// Case 1: base = ufury, quote = uatom -> for one ufury, get 2 uatom = 4 / 2 = 2
-// In other words, it costs 2 uatom to get one ufury.
+// Case 1: base = umer, quote = uatom -> for one umer, get 2 uatom = 4 / 2 = 2
+// In other words, it costs 2 uatom to get one umer.
 //
-// Case 2: base = uatom, quote = ufury -> for one uatom, get 0.5 ufury = 2 / 4 = 0.5
-// In other words, it costs 0.5 ufury to get one uatom.
+// Case 2: base = uatom, quote = umer -> for one uatom, get 0.5 umer = 2 / 4 = 0.5
+// In other words, it costs 0.5 umer to get one uatom.
 //
 // panics if the pool in state is incorrect, and has any weight that is 0.
 func (p Pool) SpotPrice(ctx sdk.Context, quoteAsset, baseAsset string) (spotPrice sdk.Dec, err error) {

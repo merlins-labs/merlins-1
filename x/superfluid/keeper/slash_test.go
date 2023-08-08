@@ -238,7 +238,7 @@ func (s *KeeperTestSuite) TestPrepareConcentratedLockForSlash() {
 		s.Run(tc.name, func() {
 			s.SetupTest()
 
-			clPool, concentratedLockId, positionId := s.PrepareConcentratedPoolWithCoinsAndLockedFullRangePosition("ufury", apptesting.USDC)
+			clPool, concentratedLockId, positionId := s.PrepareConcentratedPoolWithCoinsAndLockedFullRangePosition("umer", apptesting.USDC)
 			clPoolId := clPool.GetId()
 
 			lock, err := s.App.LockupKeeper.GetLockByID(s.Ctx, concentratedLockId)

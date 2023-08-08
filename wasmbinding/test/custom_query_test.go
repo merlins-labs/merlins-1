@@ -95,7 +95,7 @@ func storeReflectCode(t *testing.T, ctx sdk.Context, merlin *app.MerlinApp, addr
 	t.Helper()
 
 	govKeeper := merlin.GovKeeper
-	wasmCode, err := os.ReadFile("../testdata/fury_reflect.wasm")
+	wasmCode, err := os.ReadFile("../testdata/mer_reflect.wasm")
 	require.NoError(t, err)
 
 	src := wasmtypes.StoreCodeProposalFixture(func(p *wasmtypes.StoreCodeProposal) {

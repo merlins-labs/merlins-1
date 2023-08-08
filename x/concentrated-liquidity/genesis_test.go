@@ -10,7 +10,7 @@ import (
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
-	furyapp "github.com/merlins-labs/merlin/app"
+	merapp "github.com/merlins-labs/merlin/app"
 	cl "github.com/merlins-labs/merlin/x/concentrated-liquidity"
 	clmodule "github.com/merlins-labs/merlin/x/concentrated-liquidity/clmodule"
 	"github.com/merlins-labs/merlin/x/concentrated-liquidity/model"
@@ -96,7 +96,7 @@ var (
 func accumRecordWithDefinedValues(accumRecord accum.Record, numShares sdk.Dec, initAccumValue, unclaimedRewards sdk.Int) accum.Record {
 	accumRecord.NumShares = numShares
 	accumRecord.AccumValuePerShare = sdk.NewDecCoins(sdk.NewDecCoin("uion", initAccumValue))
-	accumRecord.UnclaimedRewardsTotal = sdk.NewDecCoins(sdk.NewDecCoin("ufury", unclaimedRewards))
+	accumRecord.UnclaimedRewardsTotal = sdk.NewDecCoins(sdk.NewDecCoin("umer", unclaimedRewards))
 	return accumRecord
 }
 
@@ -823,13 +823,13 @@ func (s *KeeperTestSuite) TestExportGenesis() {
 // It checks that the exported genesis can be marshaled and unmarshaled without panicking.
 func TestMarshalUnmarshalGenesis(t *testing.T) {
 	// Set up the app and context
-	app := furyapp.Setup(false)
+	app := merapp.Setup(false)
 	ctx := app.BaseApp.NewContext(false, tmproto.Header{})
 	now := ctx.BlockTime()
 	ctx = ctx.WithBlockTime(now.Add(time.Second))
 
 	// Create an app module for the ConcentratedLiquidityKeeper
-	encodingConfig := furyapp.MakeEncodingConfig()
+	encodingConfig := merapp.MakeEncodingConfig()
 	appCodec := encodingConfig.Marshaler
 	appModule := clmodule.NewAppModule(appCodec, *app.ConcentratedLiquidityKeeper)
 
@@ -838,7 +838,7 @@ func TestMarshalUnmarshalGenesis(t *testing.T) {
 
 	// Test that the exported genesis can be marshaled and unmarshaled without panicking
 	assert.NotPanics(t, func() {
-		app := furyapp.Setup(false)
+		app := merapp.Setup(false)
 		ctx := app.BaseApp.NewContext(false, tmproto.Header{})
 		ctx = ctx.WithBlockTime(now.Add(time.Second))
 		am := clmodule.NewAppModule(appCodec, *app.ConcentratedLiquidityKeeper)

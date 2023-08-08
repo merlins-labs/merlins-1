@@ -59,7 +59,7 @@ func CustomQuerier(qp *QueryPlugin) func(ctx sdk.Context, request json.RawMessag
 
 			fullDenom, err := GetFullDenom(creator, subdenom)
 			if err != nil {
-				return nil, errorsmod.Wrap(err, "fury full denom query")
+				return nil, errorsmod.Wrap(err, "mer full denom query")
 			}
 
 			res := bindings.FullDenomResponse{
@@ -68,7 +68,7 @@ func CustomQuerier(qp *QueryPlugin) func(ctx sdk.Context, request json.RawMessag
 
 			bz, err := json.Marshal(res)
 			if err != nil {
-				return nil, errorsmod.Wrap(err, "fury full denom query response")
+				return nil, errorsmod.Wrap(err, "mer full denom query response")
 			}
 
 			return bz, nil

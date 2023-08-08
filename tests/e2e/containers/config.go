@@ -18,15 +18,15 @@ const (
 	// Current Git branch merlin repo/version. It is meant to be built locally.
 	// It is used when skipping upgrade by setting MERLIN_E2E_SKIP_UPGRADE to true).
 	// This image should be pre-built with `make docker-build-debug` either in CI or locally.
-	CurrentBranchFuryRepository = "merlin"
-	CurrentBranchFuryTag        = "debug"
+	CurrentBranchMerRepository = "merlin"
+	CurrentBranchMerTag        = "debug"
 	// Pre-upgrade merlin repo/tag to pull.
 	// It should be uploaded to Docker Hub. MERLIN_E2E_SKIP_UPGRADE should be unset
 	// for this functionality to be used.
-	previousVersionFuryRepository = "fanfury/merlin-dev"
-	previousVersionFuryTag        = "v15.x-9fa047c2-1687827963"
+	previousVersionMerRepository = "fanmer/merlin-dev"
+	previousVersionMerTag        = "v15.x-9fa047c2-1687827963"
 	// Pre-upgrade repo/tag for merlin initialization (this should be one version below upgradeVersion)
-	previousVersionInitRepository = "fanfury/merlin-e2e-init-chain"
+	previousVersionInitRepository = "fanmer/merlin-e2e-init-chain"
 	previousVersionInitTag        = "v15-fast-vote"
 	// Hermes repo/version for relayer
 	relayerRepository = "informalsystems/hermes"
@@ -46,8 +46,8 @@ func NewImageConfig(isUpgrade, isFork bool) ImageConfig {
 		// If upgrade is not tested, we do not need InitRepository and InitTag
 		// because we directly call the initialization logic without
 		// the need for Docker.
-		config.MerlinRepository = CurrentBranchFuryRepository
-		config.MerlinTag = CurrentBranchFuryTag
+		config.MerlinRepository = CurrentBranchMerRepository
+		config.MerlinTag = CurrentBranchMerTag
 		return config
 	}
 
@@ -61,16 +61,16 @@ func NewImageConfig(isUpgrade, isFork bool) ImageConfig {
 		// Normally, validators switch the binaries pre-fork height
 		// Then, once the fork height is reached, the state breaking-logic
 		// is run.
-		config.MerlinRepository = CurrentBranchFuryRepository
-		config.MerlinTag = CurrentBranchFuryTag
+		config.MerlinRepository = CurrentBranchMerRepository
+		config.MerlinTag = CurrentBranchMerTag
 	} else {
 		// Upgrades are run at the time when upgrade height is reached
 		// and are submitted via a governance proposal. Thefore, we
 		// must start running the previous Merlin version. Then, the node
 		// should auto-upgrade, at which point we can restart the updated
 		// Merlin validator container.
-		config.MerlinRepository = previousVersionFuryRepository
-		config.MerlinTag = previousVersionFuryTag
+		config.MerlinRepository = previousVersionMerRepository
+		config.MerlinTag = previousVersionMerTag
 	}
 
 	return config

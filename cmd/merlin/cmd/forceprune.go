@@ -30,7 +30,7 @@ const (
 	defaultMinHeight  = "1000"
 )
 
-// forceprune gets cmd to convert any bech32 address to an fury prefix.
+// forceprune gets cmd to convert any bech32 address to an mer prefix.
 func forceprune() *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   "forceprune",

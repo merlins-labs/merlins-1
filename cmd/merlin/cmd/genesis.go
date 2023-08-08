@@ -238,7 +238,7 @@ type GenesisParams struct {
 func MainnetGenesisParams() GenesisParams {
 	genParams := GenesisParams{}
 
-	genParams.AirdropSupply = sdk.NewIntWithDecimal(5, 13)                // 5*10^13 ufury, 5*10^7 (50 million) fury
+	genParams.AirdropSupply = sdk.NewIntWithDecimal(5, 13)                // 5*10^13 umer, 5*10^7 (50 million) mer
 	genParams.GenesisTime = time.Date(2021, 6, 18, 17, 0, 0, 0, time.UTC) // Jun 18, 2021 - 17:00 UTC
 
 	genParams.NativeCoinMetadatas = []banktypes.Metadata{
@@ -252,7 +252,7 @@ func MainnetGenesisParams() GenesisParams {
 				},
 				{
 					Denom:    appParams.HumanCoinUnit,
-					Exponent: appParams.FuryExponent,
+					Exponent: appParams.MerExponent,
 					Aliases:  nil,
 				},
 			},
@@ -280,15 +280,15 @@ func MainnetGenesisParams() GenesisParams {
 	genParams.StrategicReserveAccounts = []banktypes.Balance{
 		{
 			Address: "fury1el3aytvehpvxw2ymmya4kdyj9yndyy47fw5zh4",
-			Coins:   sdk.NewCoins(sdk.NewCoin(genParams.NativeCoinMetadatas[0].Base, sdk.NewInt(47_874_500_000_000))), // 47.8745 million FURY
+			Coins:   sdk.NewCoins(sdk.NewCoin(genParams.NativeCoinMetadatas[0].Base, sdk.NewInt(47_874_500_000_000))), // 47.8745 million MER
 		},
 		{
 			Address: "fury1g7rp8h6wzekjjy8n6my8za3vg3338eqz3v295v",
-			Coins:   sdk.NewCoins(sdk.NewCoin(genParams.NativeCoinMetadatas[0].Base, sdk.NewInt(500_000_000_000))), // 500 thousand FURY
+			Coins:   sdk.NewCoins(sdk.NewCoin(genParams.NativeCoinMetadatas[0].Base, sdk.NewInt(500_000_000_000))), // 500 thousand MER
 		},
 		{
 			Address: "fury1z7ql0vcjlznrruw3hwgm043w8yhzqmtpu5rlp9",
-			Coins:   sdk.NewCoins(sdk.NewCoin(genParams.NativeCoinMetadatas[0].Base, sdk.NewInt(1_000_000_000_000))), // 1 million FURY
+			Coins:   sdk.NewCoins(sdk.NewCoin(genParams.NativeCoinMetadatas[0].Base, sdk.NewInt(1_000_000_000_000))), // 1 million MER
 		},
 		{
 			Address: "fury1grgelyng2v6v3t8z87wu3sxgt9m5s03xytvfcl",
@@ -538,7 +538,7 @@ func TestnetGenesisParams() GenesisParams {
 
 	genParams.GovParams.DepositParams.MinDeposit = sdk.NewCoins(sdk.NewCoin(
 		genParams.NativeCoinMetadatas[0].Base,
-		sdk.NewInt(1000000), // 1 FURY
+		sdk.NewInt(1000000), // 1 MER
 	))
 	genParams.GovParams.TallyParams.Quorum = sdk.MustNewDecFromStr("0.0000000001") // 0.00000001%
 	genParams.GovParams.VotingParams.VotingPeriod = time.Second * 300              // 300 seconds

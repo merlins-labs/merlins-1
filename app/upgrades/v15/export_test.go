@@ -18,8 +18,8 @@ func MigrateNextPoolId(ctx sdk.Context, gammKeeper *gammkeeper.Keeper, poolmanag
 	migrateNextPoolId(ctx, gammKeeper, poolmanager)
 }
 
-func RegisterFuryIonMetadata(ctx sdk.Context, bankKeeper bankkeeper.Keeper) {
-	registerFuryIonMetadata(ctx, bankKeeper)
+func RegisterMerIonMetadata(ctx sdk.Context, bankKeeper bankkeeper.Keeper) {
+	registerMerIonMetadata(ctx, bankKeeper)
 }
 
 func SetICQParams(ctx sdk.Context, icqKeeper *icqkeeper.Keeper) {

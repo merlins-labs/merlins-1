@@ -27,7 +27,7 @@ var testGenesis = types.GenesisState{
 			AssetType: types.SuperfluidAssetTypeLPShare,
 		},
 	},
-	FuryEquivalentMultipliers: []types.FuryEquivalentMultiplierRecord{
+	MerEquivalentMultipliers: []types.MerEquivalentMultiplierRecord{
 		{
 			EpochNumber: 1,
 			Denom:       DefaultGammAsset,
@@ -83,8 +83,8 @@ func TestInitGenesis(t *testing.T) {
 	assets := app.SuperfluidKeeper.GetAllSuperfluidAssets(ctx)
 	require.Equal(t, assets, genesis.SuperfluidAssets)
 
-	multipliers := app.SuperfluidKeeper.GetAllFuryEquivalentMultipliers(ctx)
-	require.Equal(t, multipliers, genesis.FuryEquivalentMultipliers)
+	multipliers := app.SuperfluidKeeper.GetAllMerEquivalentMultipliers(ctx)
+	require.Equal(t, multipliers, genesis.MerEquivalentMultipliers)
 
 	accounts := app.SuperfluidKeeper.GetAllIntermediaryAccounts(ctx)
 	require.Equal(t, accounts, genesis.IntermediaryAccounts)
@@ -112,7 +112,7 @@ func TestExportGenesis(t *testing.T) {
 	genesisExported := app.SuperfluidKeeper.ExportGenesis(ctx)
 	require.Equal(t, genesisExported.Params, genesis.Params)
 	require.Equal(t, genesisExported.SuperfluidAssets, append(genesis.SuperfluidAssets, asset))
-	require.Equal(t, genesis.FuryEquivalentMultipliers, genesis.FuryEquivalentMultipliers)
+	require.Equal(t, genesis.MerEquivalentMultipliers, genesis.MerEquivalentMultipliers)
 	require.Equal(t, genesis.IntermediaryAccounts, genesis.IntermediaryAccounts)
 	require.Equal(t, genesis.IntemediaryAccountConnections, genesis.IntemediaryAccountConnections)
 }

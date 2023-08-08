@@ -6,12 +6,12 @@ import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	stakingtypes "github.com/cosmos/cosmos-sdk/x/staking/types"
 
-	furysimtypes "github.com/merlins-labs/merlin/simulation/simtypes"
+	mersimtypes "github.com/merlins-labs/merlin/simulation/simtypes"
 	valsetkeeper "github.com/merlins-labs/merlin/x/valset-pref"
 	"github.com/merlins-labs/merlin/x/valset-pref/types"
 )
 
-func RandomMsgSetValSetPreference(k valsetkeeper.Keeper, sim *furysimtypes.SimCtx, ctx sdk.Context) (*types.MsgSetValidatorSetPreference, error) {
+func RandomMsgSetValSetPreference(k valsetkeeper.Keeper, sim *mersimtypes.SimCtx, ctx sdk.Context) (*types.MsgSetValidatorSetPreference, error) {
 	// Start with a weight of 1
 	remainingWeight := sdk.NewDec(1)
 
@@ -26,7 +26,7 @@ func RandomMsgSetValSetPreference(k valsetkeeper.Keeper, sim *furysimtypes.SimCt
 	}, nil
 }
 
-func RandomMsgDelegateToValSet(k valsetkeeper.Keeper, sim *furysimtypes.SimCtx, ctx sdk.Context) (*types.MsgDelegateToValidatorSet, error) {
+func RandomMsgDelegateToValSet(k valsetkeeper.Keeper, sim *mersimtypes.SimCtx, ctx sdk.Context) (*types.MsgDelegateToValidatorSet, error) {
 	delegator := sim.RandomSimAccount()
 	// check if the delegator valset created
 	_, err := GetRandomDelegations(ctx, k, sim, delegator.Address)
@@ -49,7 +49,7 @@ func RandomMsgDelegateToValSet(k valsetkeeper.Keeper, sim *furysimtypes.SimCtx, 
 	}, nil
 }
 
-func RandomMsgUnDelegateFromValSet(k valsetkeeper.Keeper, sim *furysimtypes.SimCtx, ctx sdk.Context) (*types.MsgUndelegateFromValidatorSet, error) {
+func RandomMsgUnDelegateFromValSet(k valsetkeeper.Keeper, sim *mersimtypes.SimCtx, ctx sdk.Context) (*types.MsgUndelegateFromValidatorSet, error) {
 	// random delegator account
 	delegator := sim.RandomSimAccount()
 	delAddr := delegator.Address
@@ -92,7 +92,7 @@ func RandomMsgUnDelegateFromValSet(k valsetkeeper.Keeper, sim *furysimtypes.SimC
 	}, nil
 }
 
-func RandomMsgReDelegateToValSet(k valsetkeeper.Keeper, sim *furysimtypes.SimCtx, ctx sdk.Context) (*types.MsgRedelegateValidatorSet, error) {
+func RandomMsgReDelegateToValSet(k valsetkeeper.Keeper, sim *mersimtypes.SimCtx, ctx sdk.Context) (*types.MsgRedelegateValidatorSet, error) {
 	// random delegator account
 	delegator := sim.RandomSimAccount()
 	delAddr := delegator.Address
@@ -153,7 +153,7 @@ func RandomMsgReDelegateToValSet(k valsetkeeper.Keeper, sim *furysimtypes.SimCtx
 	}, nil
 }
 
-func RandomValidator(ctx sdk.Context, sim *furysimtypes.SimCtx) *stakingtypes.Validator {
+func RandomValidator(ctx sdk.Context, sim *mersimtypes.SimCtx) *stakingtypes.Validator {
 	rand := sim.GetRand()
 
 	validators := sim.StakingKeeper().GetAllValidators(ctx)
@@ -164,7 +164,7 @@ func RandomValidator(ctx sdk.Context, sim *furysimtypes.SimCtx) *stakingtypes.Va
 	return &validators[rand.Intn(len(validators))]
 }
 
-func GetRandomValAndWeights(ctx sdk.Context, k valsetkeeper.Keeper, sim *furysimtypes.SimCtx, remainingWeight sdk.Dec) ([]types.ValidatorPreference, error) {
+func GetRandomValAndWeights(ctx sdk.Context, k valsetkeeper.Keeper, sim *mersimtypes.SimCtx, remainingWeight sdk.Dec) ([]types.ValidatorPreference, error) {
 	var preferences []types.ValidatorPreference
 
 	// Generate random validators with random weights that sums to 1
@@ -198,7 +198,7 @@ func GetRandomValAndWeights(ctx sdk.Context, k valsetkeeper.Keeper, sim *furysim
 	return preferences, nil
 }
 
-func GetRandomDelegations(ctx sdk.Context, k valsetkeeper.Keeper, sim *furysimtypes.SimCtx, delegatorAddr sdk.AccAddress) ([]types.ValidatorPreference, error) {
+func GetRandomDelegations(ctx sdk.Context, k valsetkeeper.Keeper, sim *mersimtypes.SimCtx, delegatorAddr sdk.AccAddress) ([]types.ValidatorPreference, error) {
 	// Get Valset delegations
 	delegations, err := k.GetDelegationPreferences(ctx, delegatorAddr.String())
 	if err != nil {

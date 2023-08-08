@@ -22,15 +22,15 @@ import (
 )
 
 const (
-	// DAI/FURY pool ID
+	// DAI/MER pool ID
 	// https://app.merlin.zone/pool/674
 	// Note, new concentrated liquidity pool
 	// spread factor is initialized to be the same as the balancers pool spread factor of 0.2%.
-	DaiFuryPoolId = uint64(674)
+	DaiMerPoolId = uint64(674)
 	// Denom0 translates to a base asset while denom1 to a quote asset
 	// We want quote asset to be DAI so that when the limit orders on ticks
 	// are implemented, we have tick spacing in terms of DAI as the quote.
-	DesiredDenom0 = "ufury"
+	DesiredDenom0 = "umer"
 	TickSpacing   = 100
 
 	// isPermissionlessPoolCreationEnabledCL is a boolean that determines if
@@ -52,7 +52,7 @@ var (
 	// from tick to price conversion. These increments are in a human
 	// understandeable magnitude only for token1 as a quote.
 	authorizedQuoteDenoms []string = []string{
-		"ufury",
+		"umer",
 		ATOMIBCDenom,
 		DAIIBCDenom,
 		USDCIBCDenom,
@@ -121,9 +121,9 @@ func CreateUpgradeHandler(
 		defaultConcentratedLiquidityParams.IsPermissionlessPoolCreationEnabled = IsPermissionlessPoolCreationEnabledCL
 		keepers.ConcentratedLiquidityKeeper.SetParams(ctx, defaultConcentratedLiquidityParams)
 
-		// Create a concentrated liquidity pool for DAI/FURY.
-		// Link the DAI/FURY balancer pool to the cl pool.
-		clPool, err := createCanonicalConcentratedLiquidityPoolAndMigrationLink(ctx, DaiFuryPoolId, DesiredDenom0, keepers)
+		// Create a concentrated liquidity pool for DAI/MER.
+		// Link the DAI/MER balancer pool to the cl pool.
+		clPool, err := createCanonicalConcentratedLiquidityPoolAndMigrationLink(ctx, DaiMerPoolId, DesiredDenom0, keepers)
 		if err != nil {
 			return nil, err
 		}
@@ -132,23 +132,23 @@ func CreateUpgradeHandler(
 
 		// Create a position to initialize the balancerPool.
 
-		// Get community pool and DAI/FURY pool address.
+		// Get community pool and DAI/MER pool address.
 		communityPoolAddress := keepers.AccountKeeper.GetModuleAddress(distrtypes.ModuleName)
 
-		// Determine the amount of FURY that can be bought with 1 DAI.
+		// Determine the amount of MER that can be bought with 1 DAI.
 		oneDai := sdk.NewCoin(DAIIBCDenom, sdk.NewInt(1000000000000000000))
-		daiFuryGammPool, err := keepers.PoolManagerKeeper.GetPool(ctx, DaiFuryPoolId)
+		daiMerGammPool, err := keepers.PoolManagerKeeper.GetPool(ctx, DaiMerPoolId)
 		if err != nil {
 			return nil, err
 		}
-		respectiveFury, err := keepers.GAMMKeeper.CalcOutAmtGivenIn(ctx, daiFuryGammPool, oneDai, DesiredDenom0, sdk.ZeroDec())
+		respectiveMer, err := keepers.GAMMKeeper.CalcOutAmtGivenIn(ctx, daiMerGammPool, oneDai, DesiredDenom0, sdk.ZeroDec())
 		if err != nil {
 			return nil, err
 		}
 
 		// Create a full range position via the community pool with the funds that were swapped.
-		fullRangeFuryDaiCoins := sdk.NewCoins(respectiveFury, oneDai)
-		_, actualFuryAmtUsed, actualDaiAmtUsed, _, err := keepers.ConcentratedLiquidityKeeper.CreateFullRangePosition(ctx, clPoolId, communityPoolAddress, fullRangeFuryDaiCoins)
+		fullRangeMerDaiCoins := sdk.NewCoins(respectiveMer, oneDai)
+		_, actualMerAmtUsed, actualDaiAmtUsed, _, err := keepers.ConcentratedLiquidityKeeper.CreateFullRangePosition(ctx, clPoolId, communityPoolAddress, fullRangeMerDaiCoins)
 		if err != nil {
 			return nil, err
 		}
@@ -157,8 +157,8 @@ func CreateUpgradeHandler(
 
 		// Remove coins we used from the community pool to make the CL position
 		feePool := keepers.DistrKeeper.GetFeePool(ctx)
-		fulllRangeFuryDaiCoinsUsed := sdk.NewCoins(sdk.NewCoin(DesiredDenom0, actualFuryAmtUsed), sdk.NewCoin(DAIIBCDenom, actualDaiAmtUsed))
-		newPool, negative := feePool.CommunityPool.SafeSub(sdk.NewDecCoinsFromCoins(fulllRangeFuryDaiCoinsUsed...))
+		fulllRangeMerDaiCoinsUsed := sdk.NewCoins(sdk.NewCoin(DesiredDenom0, actualMerAmtUsed), sdk.NewCoin(DAIIBCDenom, actualDaiAmtUsed))
+		newPool, negative := feePool.CommunityPool.SafeSub(sdk.NewDecCoinsFromCoins(fulllRangeMerDaiCoinsUsed...))
 		if negative {
 			return nil, fmt.Errorf("community pool cannot be negative: %s", newPool)
 		}

@@ -32,7 +32,7 @@ func (s *KeeperTestSuite) TestUpgradeFeeTokenProposals() {
 		sdk.NewInt64Coin("uion", 500),
 	)
 
-	// Make pool with fee token but no FURY and make sure governance proposal fails
+	// Make pool with fee token but no MER and make sure governance proposal fails
 	noBasePoolId := s.PrepareBalancerPoolWithCoins(
 		sdk.NewInt64Coin("uion", 500),
 		sdk.NewInt64Coin("foo", 500),

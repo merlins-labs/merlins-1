@@ -369,7 +369,7 @@ func NewCreateFullRangePositionAndSuperfluidDelegateCmd() (*osmocli.TxCliDesc, *
 	return &osmocli.TxCliDesc{
 		Use:     "create-full-range-position-and-sf-delegate [coins] [val_addr] [pool-id]",
 		Short:   "creates a full range concentrated position and superfluid delegates it to the provided validator",
-		Example: "create-full-range-position-and-sf-delegate 100000000ufury,10000udai 45 --from val --chain-id merlin-1",
+		Example: "create-full-range-position-and-sf-delegate 100000000umer,10000udai 45 --from val --chain-id merlin-1",
 	}, &types.MsgCreateFullRangePositionAndSuperfluidDelegate{}
 }
 
@@ -412,7 +412,7 @@ func NewAddToConcentratedLiquiditySuperfluidPositionCmd() (*osmocli.TxCliDesc, *
 	return &osmocli.TxCliDesc{
 		Use:     "add-to-superfluid-cl-position [position-id] [token-0] [token-1]",
 		Short:   "add to an existing superfluid staked concentrated liquidity position",
-		Example: "add-to-superfluid-cl-position 10 1000000000ufury 10000000uion",
+		Example: "add-to-superfluid-cl-position 10 1000000000umer 10000000uion",
 	}, &types.MsgAddToConcentratedLiquiditySuperfluidPosition{}
 }
 
@@ -420,6 +420,6 @@ func NewUnlockAndMigrateSharesToFullRangeConcentratedPositionCmd() (*osmocli.TxC
 	return &osmocli.TxCliDesc{
 		Use:     "unlock-and-migrate-to-cl [lock-id] [shares-to-migrate] [token-out-mins]",
 		Short:   "unlock and migrate gamm shares to full range concentrated position",
-		Example: "unlock-and-migrate-cl 10 25000000000gamm/pool/2 1000000000ufury,10000000uion",
+		Example: "unlock-and-migrate-cl 10 25000000000gamm/pool/2 1000000000umer,10000000uion",
 	}, &types.MsgUnlockAndMigrateSharesToFullRangeConcentratedPosition{}
 }

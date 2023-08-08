@@ -28,15 +28,15 @@ func (k Keeper) IterateRoutes(ctx sdk.Context, routes []RouteMetaData, remaining
 			continue
 		}
 
-		// If the profit is greater than zero, then we convert the profits to ufury and compare profits in terms of ufury
+		// If the profit is greater than zero, then we convert the profits to umer and compare profits in terms of umer
 		if profit.GT(sdk.ZeroInt()) {
 			if inputCoin.Denom != types.MerlinDenomination {
-				ufuryProfit, err := k.ConvertProfits(ctx, inputCoin, profit)
+				umerProfit, err := k.ConvertProfits(ctx, inputCoin, profit)
 				if err != nil {
 					k.Logger(ctx).Error("Error converting profits: ", err)
 					continue
 				}
-				profit = ufuryProfit
+				profit = umerProfit
 			}
 
 			// Select the optimal route King of the Hill style (route with the highest profit will be executed)
@@ -51,9 +51,9 @@ func (k Keeper) IterateRoutes(ctx sdk.Context, routes []RouteMetaData, remaining
 	return maxProfitInputCoin, maxProfit, optimalRoute
 }
 
-// ConvertProfits converts the profit denom to ufury to allow for a fair comparison of profits
+// ConvertProfits converts the profit denom to umer to allow for a fair comparison of profits
 func (k Keeper) ConvertProfits(ctx sdk.Context, inputCoin sdk.Coin, profit sdk.Int) (sdk.Int, error) {
-	// Get highest liquidity pool ID for the input coin and ufury
+	// Get highest liquidity pool ID for the input coin and umer
 	conversionPoolID, err := k.GetPoolForDenomPair(ctx, types.MerlinDenomination, inputCoin.Denom)
 	if err != nil {
 		return profit, err
@@ -70,8 +70,8 @@ func (k Keeper) ConvertProfits(ctx sdk.Context, inputCoin sdk.Coin, profit sdk.I
 		return profit, err
 	}
 
-	// Calculate the amount of ufury that we can get if we swapped the
-	// profited amount of the orignal asset through the highest ufury liquidity pool
+	// Calculate the amount of umer that we can get if we swapped the
+	// profited amount of the orignal asset through the highest umer liquidity pool
 	conversionTokenOut, err := swapModule.CalcOutAmtGivenIn(
 		ctx,
 		conversionPool,
@@ -83,7 +83,7 @@ func (k Keeper) ConvertProfits(ctx sdk.Context, inputCoin sdk.Coin, profit sdk.I
 		return profit, err
 	}
 
-	// return the profit denominated in ufury
+	// return the profit denominated in umer
 	return conversionTokenOut.Amount, nil
 }
 

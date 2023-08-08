@@ -72,7 +72,7 @@ func (s *KeeperTestSuite) TestBuildRoutes() {
 			},
 		},
 		{
-			description:    "No route exists for swap in fury and swap out Atom",
+			description:    "No route exists for swap in mer and swap out Atom",
 			inputDenom:     types.MerlinDenomination,
 			outputDenom:    "Atom",
 			poolID:         25,
@@ -158,7 +158,7 @@ func (s *KeeperTestSuite) TestBuildHighestLiquidityRoute() {
 			expectedRoutePointPoints: 0,
 		},
 		{
-			description: "Route exists for swap in Fury and swap out Akash",
+			description: "Route exists for swap in Mer and swap out Akash",
 			swapDenom:   "Atom",
 			swapIn:      types.MerlinDenomination,
 			swapOut:     "akash",
@@ -172,7 +172,7 @@ func (s *KeeperTestSuite) TestBuildHighestLiquidityRoute() {
 			expectedRoutePointPoints: 6,
 		},
 		{
-			description: "Route exists for swap in Akash and swap out Fury",
+			description: "Route exists for swap in Akash and swap out Mer",
 			swapDenom:   "Atom",
 			swapIn:      "akash",
 			swapOut:     types.MerlinDenomination,
@@ -186,7 +186,7 @@ func (s *KeeperTestSuite) TestBuildHighestLiquidityRoute() {
 			expectedRoutePointPoints: 6,
 		},
 		{
-			description:              "Route does not exist for swap in Terra and swap out Fury because the pool does not exist",
+			description:              "Route does not exist for swap in Terra and swap out Mer because the pool does not exist",
 			swapDenom:                "Atom",
 			swapIn:                   "terra",
 			swapOut:                  types.MerlinDenomination,

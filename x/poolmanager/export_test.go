@@ -12,10 +12,10 @@ func (k Keeper) GetNextPoolIdAndIncrement(ctx sdk.Context) uint64 {
 	return k.getNextPoolIdAndIncrement(ctx)
 }
 
-func (k Keeper) GetFuryRoutedMultihopTotalSpreadFactor(ctx sdk.Context, route types.MultihopRoute) (
+func (k Keeper) GetMerRoutedMultihopTotalSpreadFactor(ctx sdk.Context, route types.MultihopRoute) (
 	totalPathSpreadFactor sdk.Dec, sumOfSpreadFactors sdk.Dec, err error,
 ) {
-	return k.getFuryRoutedMultihopTotalSpreadFactor(ctx, route)
+	return k.getMerRoutedMultihopTotalSpreadFactor(ctx, route)
 }
 
 // SetPoolRoutesUnsafe sets the given routes to the poolmanager keeper
@@ -42,8 +42,8 @@ func (k Keeper) ValidateCreatedPool(ctx sdk.Context, poolId uint64, pool types.P
 	return k.validateCreatedPool(ctx, poolId, pool)
 }
 
-func (k Keeper) IsFuryRoutedMultihop(ctx sdk.Context, route types.MultihopRoute, inDenom, outDenom string) (isRouted bool) {
-	return k.isFuryRoutedMultihop(ctx, route, inDenom, outDenom)
+func (k Keeper) IsMerRoutedMultihop(ctx sdk.Context, route types.MultihopRoute, inDenom, outDenom string) (isRouted bool) {
+	return k.isMerRoutedMultihop(ctx, route, inDenom, outDenom)
 }
 
 func (k Keeper) CreateMultihopExpectedSwapOuts(
@@ -54,11 +54,11 @@ func (k Keeper) CreateMultihopExpectedSwapOuts(
 	return k.createMultihopExpectedSwapOuts(ctx, route, tokenOut)
 }
 
-func (k Keeper) CreateFuryMultihopExpectedSwapOuts(
+func (k Keeper) CreateMerMultihopExpectedSwapOuts(
 	ctx sdk.Context,
 	route []types.SwapAmountOutRoute,
 	tokenOut sdk.Coin,
 	cumulativeRouteSwapFee, sumOfSwapFees sdk.Dec,
 ) ([]sdk.Int, error) {
-	return k.createFuryMultihopExpectedSwapOuts(ctx, route, tokenOut, cumulativeRouteSwapFee, sumOfSwapFees)
+	return k.createMerMultihopExpectedSwapOuts(ctx, route, tokenOut, cumulativeRouteSwapFee, sumOfSwapFees)
 }

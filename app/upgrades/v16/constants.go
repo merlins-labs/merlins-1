@@ -14,7 +14,7 @@ const UpgradeName = "v16"
 
 // new token factory parameters
 //
-// at the current gas price of 0.0025ufury, this corresponds to 0.1 FURY per
+// at the current gas price of 0.0025umer, this corresponds to 0.1 MER per
 // denom creation.
 const NewDenomCreationGasConsume uint64 = 40_000_000
 

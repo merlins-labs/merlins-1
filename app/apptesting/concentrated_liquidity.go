@@ -138,6 +138,6 @@ func (s *KeeperTestHelper) SetupConcentratedLiquidityDenomsAndPoolCreation() {
 	// modify authorized quote denoms to include test denoms.
 	defaultParams := types.DefaultParams()
 	defaultParams.IsPermissionlessPoolCreationEnabled = true
-	defaultParams.AuthorizedQuoteDenoms = append(defaultParams.AuthorizedQuoteDenoms, ETH, USDC, BAR, BAZ, FOO, UFURY, STAKE)
+	defaultParams.AuthorizedQuoteDenoms = append(defaultParams.AuthorizedQuoteDenoms, ETH, USDC, BAR, BAZ, FOO, UMER, STAKE)
 	s.App.ConcentratedLiquidityKeeper.SetParams(s.Ctx, defaultParams)
 }

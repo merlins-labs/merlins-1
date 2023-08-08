@@ -41,7 +41,7 @@ func (s *KeeperTestSuite) SetupTest(isCheckTx bool) {
 		s.FundAcc(acc,
 			sdk.NewCoins(
 				sdk.NewCoin(sdk.DefaultBondDenom, sdk.NewInt(10000000000)),
-				sdk.NewCoin("ufury", sdk.NewInt(100000000000000000)), // Needed for pool creation fee
+				sdk.NewCoin("umer", sdk.NewInt(100000000000000000)), // Needed for pool creation fee
 				sdk.NewCoin("uion", sdk.NewInt(10000000)),
 				sdk.NewCoin("atom", sdk.NewInt(10000000)),
 				sdk.NewCoin("ust", sdk.NewInt(10000000)),

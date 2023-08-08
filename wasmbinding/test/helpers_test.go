@@ -25,7 +25,7 @@ func CreateTestInput() (*app.MerlinApp, sdk.Context) {
 func FundAccount(t *testing.T, ctx sdk.Context, merlin *app.MerlinApp, acct sdk.AccAddress) {
 	t.Helper()
 	err := simapp.FundAccount(merlin.BankKeeper, ctx, acct, sdk.NewCoins(
-		sdk.NewCoin("ufury", sdk.NewInt(10000000000)),
+		sdk.NewCoin("umer", sdk.NewInt(10000000000)),
 	))
 	require.NoError(t, err)
 }

@@ -70,19 +70,19 @@ func (s *KeeperTestSuite) TestEnsureDenomInPool() {
 		expectedErr error
 	}{
 		"all of tokensIn is in pool asset map": {
-			poolAssets:  []balancer.PoolAsset{defaultFuryPoolAsset, defaultAtomPoolAsset},
+			poolAssets:  []balancer.PoolAsset{defaultMerPoolAsset, defaultAtomPoolAsset},
 			tokensIn:    sdk.NewCoins(sdk.NewCoin("uatom", sdk.OneInt())),
 			expectPass:  true,
 			expectedErr: nil,
 		},
 		"one of tokensIn is in pool asset map": {
-			poolAssets:  []balancer.PoolAsset{defaultFuryPoolAsset, defaultAtomPoolAsset},
+			poolAssets:  []balancer.PoolAsset{defaultMerPoolAsset, defaultAtomPoolAsset},
 			tokensIn:    sdk.NewCoins(sdk.NewCoin("uatom", sdk.OneInt()), sdk.NewCoin("foo", sdk.OneInt())),
 			expectPass:  false,
 			expectedErr: types.ErrDenomNotFoundInPool,
 		},
 		"none of tokensIn is in pool asset map": {
-			poolAssets:  []balancer.PoolAsset{defaultFuryPoolAsset, defaultAtomPoolAsset},
+			poolAssets:  []balancer.PoolAsset{defaultMerPoolAsset, defaultAtomPoolAsset},
 			tokensIn:    sdk.NewCoins(sdk.NewCoin("foo", sdk.OneInt())),
 			expectPass:  false,
 			expectedErr: types.ErrDenomNotFoundInPool,

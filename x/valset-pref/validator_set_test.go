@@ -34,7 +34,7 @@ func (s *KeeperTestSuite) TestValidateLockForForceUnlock() {
 			expectPass:    false,
 		},
 		{
-			name:          "Invalid Lock: contains non fury denom",
+			name:          "Invalid Lock: contains non mer denom",
 			lockID:        locks[1].ID,
 			delegatorAddr: "addr1---------------",
 			expectPass:    false,

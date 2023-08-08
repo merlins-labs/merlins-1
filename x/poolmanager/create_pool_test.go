@@ -311,7 +311,7 @@ func (s *KeeperTestSuite) TestCreatePoolZeroLiquidityNoCreationFee() {
 
 			// Note: this is necessary for gauge creation in the after pool created hook.
 			// There is a check requiring positive supply existing on-chain.
-			s.MintCoins(sdk.NewCoins(sdk.NewCoin("ufury", sdk.OneInt())))
+			s.MintCoins(sdk.NewCoins(sdk.NewCoin("umer", sdk.OneInt())))
 
 			pool, err := poolmanagerKeeper.CreateConcentratedPoolAsPoolManager(ctx, tc.msg)
 

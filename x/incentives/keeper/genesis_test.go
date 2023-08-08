@@ -9,7 +9,7 @@ import (
 	"github.com/stretchr/testify/require"
 	tmproto "github.com/tendermint/tendermint/proto/tendermint/types"
 
-	furyapp "github.com/merlins-labs/merlin/app"
+	merapp "github.com/merlins-labs/merlin/app"
 
 	"github.com/merlins-labs/merlin/x/incentives/types"
 	lockuptypes "github.com/merlins-labs/merlin/x/lockup/types"
@@ -19,7 +19,7 @@ import (
 func TestIncentivesExportGenesis(t *testing.T) {
 	// export genesis using default configurations
 	// ensure resulting genesis params match default params
-	app := furyapp.Setup(false)
+	app := merapp.Setup(false)
 	ctx := app.BaseApp.NewContext(false, tmproto.Header{})
 	genesis := app.IncentivesKeeper.ExportGenesis(ctx)
 	require.Equal(t, genesis.Params.DistrEpochIdentifier, "week")
@@ -68,7 +68,7 @@ func TestIncentivesExportGenesis(t *testing.T) {
 
 // TestIncentivesInitGenesis takes a genesis state and tests initializing that genesis for the incentives module.
 func TestIncentivesInitGenesis(t *testing.T) {
-	app := furyapp.Setup(false)
+	app := merapp.Setup(false)
 	ctx := app.BaseApp.NewContext(false, tmproto.Header{})
 
 	// checks that the default genesis parameters pass validation

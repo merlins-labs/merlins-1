@@ -12,7 +12,7 @@ func (k Keeper) BeforeEpochStart(ctx sdk.Context, epochIdentifier string, epochN
 	return nil
 }
 
-// at the end of each epoch, swap all non-FURY fees into FURY and transfer to fee module account
+// at the end of each epoch, swap all non-MER fees into MER and transfer to fee module account
 func (k Keeper) AfterEpochEnd(ctx sdk.Context, epochIdentifier string, epochNumber int64) error {
 	nonNativeFeeAddr := k.accountKeeper.GetModuleAddress(txfeestypes.NonNativeFeeCollectorName)
 	baseDenom, _ := k.GetBaseDenom(ctx)
@@ -31,7 +31,7 @@ func (k Keeper) AfterEpochEnd(ctx sdk.Context, epochIdentifier string, epochNumb
 		_ = osmoutils.ApplyFuncIfNoError(ctx, func(cacheCtx sdk.Context) error {
 			// We allow full slippage. Theres not really an effective way to bound slippage until TWAP's land,
 			// but even then the point is a bit moot.
-			// The only thing that could be done is a costly griefing attack to reduce the amount of fury given as tx fees.
+			// The only thing that could be done is a costly griefing attack to reduce the amount of mer given as tx fees.
 			// However the idea of the txfees FeeToken gating is that the pool is sufficiently liquid for that base token.
 			minAmountOut := sdk.ZeroInt()
 			_, err := k.poolManager.SwapExactAmountIn(cacheCtx, nonNativeFeeAddr, feetoken.PoolID, coinBalance, baseDenom, minAmountOut)

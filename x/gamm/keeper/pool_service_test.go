@@ -40,7 +40,7 @@ var (
 		sdk.NewCoin("bar", sdk.NewInt(10000)),
 	)
 	defaultAcctFunds sdk.Coins = sdk.NewCoins(
-		sdk.NewCoin("ufury", sdk.NewInt(10000000000)),
+		sdk.NewCoin("umer", sdk.NewInt(10000000000)),
 		sdk.NewCoin("foo", sdk.NewInt(10000000)),
 		sdk.NewCoin("bar", sdk.NewInt(10000000)),
 		sdk.NewCoin("baz", sdk.NewInt(10000000)),

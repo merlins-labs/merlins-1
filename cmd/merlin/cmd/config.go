@@ -148,7 +148,7 @@ broadcast-mode = "{{ .BroadcastMode }}"
 ###############################################################################
 # Amount of gas per transaction
 gas = "{{ .Gas }}"
-# Price per unit of gas (ex: 0.005ufury)
+# Price per unit of gas (ex: 0.005umer)
 gas-prices = "{{ .GasPrices }}"
 gas-adjustment = "{{ .GasAdjustment }}"
 fees = "{{ .Fees }}"
@@ -222,11 +222,11 @@ func SetCustomEnvVariablesFromClientToml(ctx client.Context) {
 
 	// Bound custom flags to environment variable
 	// gas
-	setEnvFromConfig("gas", "MERLIND_GAS")
-	setEnvFromConfig("gas-prices", "MERLIND_GAS_PRICES")
-	setEnvFromConfig("gas-adjustment", "MERLIND_GAS_ADJUSTMENT")
+	setEnvFromConfig("gas", "MERLIN_GAS")
+	setEnvFromConfig("gas-prices", "MERLIN_GAS_PRICES")
+	setEnvFromConfig("gas-adjustment", "MERLIN_GAS_ADJUSTMENT")
 	// fees
-	setEnvFromConfig("fees", "MERLIND_FEES")
+	setEnvFromConfig("fees", "MERLIN_FEES")
 }
 
 func errUnknownConfigKey(key string) error {

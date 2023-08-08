@@ -236,7 +236,7 @@ func (s *IntegrationTestSuite) ProtoRev() {
 	s.T().Logf("checking that the protorev module has only merlin as a supported base denom on init: %v", supportedBaseDenoms)
 	s.Require().NoError(err)
 	s.Require().Len(supportedBaseDenoms, 1)
-	s.Require().Equal(supportedBaseDenoms[0].Denom, "ufury")
+	s.Require().Equal(supportedBaseDenoms[0].Denom, "umer")
 
 	// --------------- Set up for a calculated backrun ---------------- //
 	// Create all of the pools that will be used in the test.
@@ -300,7 +300,7 @@ func (s *IntegrationTestSuite) ConcentratedLiquidity() {
 	chainA, chainANode := s.getChainACfgs()
 	var (
 		denom0                 = "uion"
-		denom1                 = "ufury"
+		denom1                 = "umer"
 		tickSpacing     uint64 = 100
 		spreadFactor           = "0.001" // 0.1%
 		spreadFactorDec        = sdk.MustNewDecFromStr("0.001")
@@ -341,7 +341,7 @@ func (s *IntegrationTestSuite) ConcentratedLiquidity() {
 	s.Require().Equal(concentratedPool.GetExponentAtPriceOne(), cltypes.ExponentAtPriceOne)
 	s.Require().Equal(concentratedPool.GetSpreadFactor(sdk.Context{}), sdk.MustNewDecFromStr(spreadFactor))
 
-	fundTokens := []string{"100000000ufury", "100000000uion", "100000000stake"}
+	fundTokens := []string{"100000000umer", "100000000uion", "100000000stake"}
 
 	// Get 3 addresses to create positions
 	address1 := chainANode.CreateWalletAndFund("addr1", fundTokens)
@@ -406,13 +406,13 @@ func (s *IntegrationTestSuite) ConcentratedLiquidity() {
 	// Asserts that spread rewards are correctly collected for non cross-tick swaps
 	var (
 		// Swap parameters
-		ufuryInDec_Swap1 = osmomath.NewBigDec(3465198)
-		ufuryIn_Swap1    = fmt.Sprintf("%sufury", ufuryInDec_Swap1.SDKDec().String())
+		umerInDec_Swap1 = osmomath.NewBigDec(3465198)
+		umerIn_Swap1    = fmt.Sprintf("%sumer", umerInDec_Swap1.SDKDec().String())
 	)
 	// Perform swap (not crossing initialized ticks)
-	chainANode.SwapExactAmountIn(ufuryIn_Swap1, outMinAmt, fmt.Sprintf("%d", poolID), denom0, initialization.ValidatorWalletName)
+	chainANode.SwapExactAmountIn(umerIn_Swap1, outMinAmt, fmt.Sprintf("%d", poolID), denom0, initialization.ValidatorWalletName)
 	// Calculate and track global spread reward growth for swap 1
-	spreadRewardGrowthGlobal.AddMut(calculateSpreadRewardGrowthGlobal(ufuryInDec_Swap1.SDKDec(), spreadFactorDec, concentratedPool.GetLiquidity()))
+	spreadRewardGrowthGlobal.AddMut(calculateSpreadRewardGrowthGlobal(umerInDec_Swap1.SDKDec(), spreadFactorDec, concentratedPool.GetLiquidity()))
 
 	// Update pool and track liquidity and sqrt price
 	liquidityBeforeSwap := concentratedPool.GetLiquidity()
@@ -427,7 +427,7 @@ func (s *IntegrationTestSuite) ConcentratedLiquidity() {
 	s.Require().Equal(liquidityAfterSwap.String(), liquidityBeforeSwap.String())
 
 	// Assert current sqrt price
-	inAmountSubSpreadReward := ufuryInDec_Swap1.Mul(osmomath.OneDec().Sub(osmomath.BigDecFromSDKDec(spreadFactorDec)))
+	inAmountSubSpreadReward := umerInDec_Swap1.Mul(osmomath.OneDec().Sub(osmomath.BigDecFromSDKDec(spreadFactorDec)))
 	expectedSqrtPriceDelta := inAmountSubSpreadReward.QuoTruncate(osmomath.BigDecFromSDKDec(concentratedPool.GetLiquidity())) // Δ(sqrtPrice) = Δy / L
 	expectedSqrtPrice := sqrtPriceBeforeSwap.Add(expectedSqrtPriceDelta)
 
@@ -440,7 +440,7 @@ func (s *IntegrationTestSuite) ConcentratedLiquidity() {
 	chainANode.CollectSpreadRewards(address1, fmt.Sprint(positionsAddress1[0].Position.PositionId))
 	addr1BalancesAfter := s.addrBalance(chainANode, address1)
 
-	// Assert that the balance changed only for tokenIn (ufury)
+	// Assert that the balance changed only for tokenIn (umer)
 	s.assertBalancesInvariants(addr1BalancesBefore, addr1BalancesAfter, false, true)
 
 	// Assert Balances: Swap 1
@@ -456,8 +456,8 @@ func (s *IntegrationTestSuite) ConcentratedLiquidity() {
 
 	// Assert
 	s.Require().Equal(
-		addr1BalancesBefore.AmountOf("ufury").Add(spreadRewardsUncollectedAddress1Position1_Swap1.TruncateInt()).String(),
-		addr1BalancesAfter.AmountOf("ufury").String(),
+		addr1BalancesBefore.AmountOf("umer").Add(spreadRewardsUncollectedAddress1Position1_Swap1.TruncateInt()).String(),
+		addr1BalancesAfter.AmountOf("umer").String(),
 	)
 
 	// Swap 2
@@ -491,7 +491,7 @@ func (s *IntegrationTestSuite) ConcentratedLiquidity() {
 	deltaSqrtPriceAfterNextInitializedTick := sqrtPriceAfterNextInitializedTickBigDec.Sub(sqrtPriceAtNextInitializedTickBigDec).SDKDec()
 	deltaSqrtPriceAtNextInitializedTick := sqrtPriceAtNextInitializedTickBigDec.Sub(sqrtPriceBeforeSwap).SDKDec()
 
-	// Calculate the amount of fury required to:
+	// Calculate the amount of mer required to:
 	// * amountInToGetToTickAfterInitialized - move price from next initialized tick (40000) to destination tick (40000 + tickOffset)
 	// * amountInToGetToNextInitTick - move price from current tick to next initialized tick
 	// Formula is as follows:
@@ -502,15 +502,15 @@ func (s *IntegrationTestSuite) ConcentratedLiquidity() {
 	var (
 		// Swap parameters
 
-		// ufuryInDec_Swap2_NoSpreadReward is calculated such that swapping this amount (not considering spread reward) moves the price over the next initialized tick
-		ufuryInDec_Swap2_NoSpreadReward = amountInToGetToNextInitTick.Add(amountInToGetToTickAfterInitialized)
-		ufuryInDec_Swap2                = ufuryInDec_Swap2_NoSpreadReward.Quo(sdk.OneDec().Sub(spreadFactorDec)).TruncateDec() // account for spread factor of 1%
-		ufuryIn_Swap2                   = fmt.Sprintf("%sufury", ufuryInDec_Swap2.String())
+		// umerInDec_Swap2_NoSpreadReward is calculated such that swapping this amount (not considering spread reward) moves the price over the next initialized tick
+		umerInDec_Swap2_NoSpreadReward = amountInToGetToNextInitTick.Add(amountInToGetToTickAfterInitialized)
+		umerInDec_Swap2                = umerInDec_Swap2_NoSpreadReward.Quo(sdk.OneDec().Sub(spreadFactorDec)).TruncateDec() // account for spread factor of 1%
+		umerIn_Swap2                   = fmt.Sprintf("%sumer", umerInDec_Swap2.String())
 
 		spreadRewardGrowthGlobal_Swap1 = spreadRewardGrowthGlobal.Clone()
 	)
 	// Perform a swap
-	chainANode.SwapExactAmountIn(ufuryIn_Swap2, outMinAmt, fmt.Sprintf("%d", poolID), denom0, initialization.ValidatorWalletName)
+	chainANode.SwapExactAmountIn(umerIn_Swap2, outMinAmt, fmt.Sprintf("%d", poolID), denom0, initialization.ValidatorWalletName)
 
 	// Calculate the amount of liquidity of the position that was kicked out during swap (address1 position1)
 	liquidityOfKickedOutPosition := positionsAddress1[0].Position.Liquidity
@@ -527,14 +527,14 @@ func (s *IntegrationTestSuite) ConcentratedLiquidity() {
 
 	// Calculate spread reward charges per each step
 
-	// Step1: amountIn is ufury tokens that are swapped + ufury tokens that are paid for spread reward
+	// Step1: amountIn is umer tokens that are swapped + umer tokens that are paid for spread reward
 	// hasReachedTarget in SwapStep is true, hence, to find spread rewards, calculate:
 	// spreadRewardCharge = amountIn * spreadFactor / (1 - spreadFactor)
 	spreadRewardCharge_Swap2_Step1 := amountInToGetToNextInitTick.Mul(spreadFactorDec).Quo(sdk.OneDec().Sub(spreadFactorDec))
 
 	// Step2: hasReachedTarget in SwapStep is false (nextTick is 120000), hence, to find spread rewards, calculate:
 	// spreadRewardCharge = amountRemaining - amountOne
-	amountRemainingAfterStep1 := ufuryInDec_Swap2.Sub(amountInToGetToNextInitTick).Sub(spreadRewardCharge_Swap2_Step1)
+	amountRemainingAfterStep1 := umerInDec_Swap2.Sub(amountInToGetToNextInitTick).Sub(spreadRewardCharge_Swap2_Step1)
 	spreadRewardCharge_Swap2_Step2 := amountRemainingAfterStep1.Sub(amountInToGetToTickAfterInitialized)
 
 	// per unit of virtual liquidity
@@ -553,7 +553,7 @@ func (s *IntegrationTestSuite) ConcentratedLiquidity() {
 	chainANode.CollectSpreadRewards(address1, fmt.Sprint(positionsAddress1[0].Position.PositionId))
 	addr1BalancesAfter = s.addrBalance(chainANode, address1)
 
-	// Assert that the balance changed only for tokenIn (ufury)
+	// Assert that the balance changed only for tokenIn (umer)
 	s.assertBalancesInvariants(addr1BalancesBefore, addr1BalancesAfter, false, true)
 
 	// Calculate uncollected spread rewards for position, which liquidity will only be live part of the swap
@@ -567,8 +567,8 @@ func (s *IntegrationTestSuite) ConcentratedLiquidity() {
 
 	// Assert
 	s.Require().Equal(
-		addr1BalancesBefore.AmountOf("ufury").Add(spreadRewardsUncollectedAddress1Position1_Swap2.TruncateInt()),
-		addr1BalancesAfter.AmountOf("ufury"),
+		addr1BalancesBefore.AmountOf("umer").Add(spreadRewardsUncollectedAddress1Position1_Swap2.TruncateInt()),
+		addr1BalancesAfter.AmountOf("umer"),
 	)
 
 	// Assert that address3 position2 earned rewards from first and second swaps
@@ -601,8 +601,8 @@ func (s *IntegrationTestSuite) ConcentratedLiquidity() {
 
 	// Assert
 	s.Require().Equal(
-		addr3BalancesBefore.AmountOf("ufury").Add(totalUncollectedSpreadRewardsAddress3Position2.TruncateInt()),
-		addr3BalancesAfter.AmountOf("ufury"),
+		addr3BalancesBefore.AmountOf("umer").Add(totalUncollectedSpreadRewardsAddress3Position2.TruncateInt()),
+		addr3BalancesAfter.AmountOf("umer"),
 	)
 
 	// Swap 3
@@ -874,7 +874,7 @@ func (s *IntegrationTestSuite) StableSwapPostUpgrade() {
 
 	const (
 		denomA = "stake"
-		denomB = "ufury"
+		denomB = "umer"
 
 		minAmountOut = "1"
 	)
@@ -913,14 +913,14 @@ func (s *IntegrationTestSuite) GeometricTwapMigration() {
 
 	chainA, chainANode := s.getChainACfgs()
 
-	ufuryIn := fmt.Sprintf("1000000%s", "ufury")
+	umerIn := fmt.Sprintf("1000000%s", "umer")
 
 	swapWalletAddr := chainANode.CreateWallet(migrationWallet)
 
-	chainANode.BankSend(ufuryIn, chainA.NodeConfigs[0].PublicAddress, swapWalletAddr)
+	chainANode.BankSend(umerIn, chainA.NodeConfigs[0].PublicAddress, swapWalletAddr)
 
 	// Swap to create new twap records on the pool that was created pre-upgrade.
-	chainANode.SwapExactAmountIn(ufuryIn, minAmountOut, fmt.Sprintf("%d", config.PreUpgradePoolId), otherDenom, swapWalletAddr)
+	chainANode.SwapExactAmountIn(umerIn, minAmountOut, fmt.Sprintf("%d", config.PreUpgradePoolId), otherDenom, swapWalletAddr)
 }
 
 // TestIBCTokenTransfer tests that IBC token transfers work as expected.
@@ -936,8 +936,8 @@ func (s *IntegrationTestSuite) IBCTokenTransferAndCreatePool() {
 	chainBNode, err := chainB.GetNodeAtIndex(1)
 	s.Require().NoError(err)
 
-	chainANode.SendIBC(chainB, chainB.NodeConfigs[1].PublicAddress, initialization.FuryToken)
-	chainBNode.SendIBC(chainA, chainA.NodeConfigs[1].PublicAddress, initialization.FuryToken)
+	chainANode.SendIBC(chainB, chainB.NodeConfigs[1].PublicAddress, initialization.MerToken)
+	chainBNode.SendIBC(chainA, chainA.NodeConfigs[1].PublicAddress, initialization.MerToken)
 	chainANode.SendIBC(chainB, chainB.NodeConfigs[1].PublicAddress, initialization.StakeToken)
 	chainBNode.SendIBC(chainA, chainA.NodeConfigs[1].PublicAddress, initialization.StakeToken)
 
@@ -1037,7 +1037,7 @@ func (s *IntegrationTestSuite) CreateConcentratedLiquidityPoolVoting_And_TWAP() 
 
 	var (
 		expectedDenom0       = "stake"
-		expectedDenom1       = "ufury"
+		expectedDenom1       = "umer"
 		expectedTickspacing  = uint64(100)
 		expectedSpreadFactor = "0.001000000000000000"
 	)
@@ -1059,7 +1059,7 @@ func (s *IntegrationTestSuite) CreateConcentratedLiquidityPoolVoting_And_TWAP() 
 		"create concentrated liquidity pool was not successful.",
 	)
 
-	fundTokens := []string{"100000000stake", "100000000ufury"}
+	fundTokens := []string{"100000000stake", "100000000umer"}
 
 	// Get address to create positions
 	address1 := chainANode.CreateWalletAndFund("address1", fundTokens)
@@ -1103,7 +1103,7 @@ func (s *IntegrationTestSuite) CreateConcentratedLiquidityPoolVoting_And_TWAP() 
 	afterSwapTwapBOverA, err := chainANode.QueryGeometricTwap(concentratedPool.GetId(), concentratedPool.GetToken0(), concentratedPool.GetToken1(), timeAfterSwap, timeAfterSwapPlus1Height)
 	s.Require().NoError(err)
 
-	// We swap stake so ufury's supply will decrease and stake will increase.
+	// We swap stake so umer's supply will decrease and stake will increase.
 	// The price after will be larger than the previous one.
 	s.Require().True(afterSwapTwapBOverA.GT(firstPositionTwapBOverA))
 
@@ -1143,19 +1143,19 @@ func (s *IntegrationTestSuite) IBCTokenTransferRateLimiting() {
 	param := chainANode.QueryParams(ibcratelimittypes.ModuleName, string(ibcratelimittypes.KeyContractAddress))
 	fmt.Println("param", param)
 
-	furySupply, err := chainANode.QuerySupplyOf("ufury")
+	merSupply, err := chainANode.QuerySupplyOf("umer")
 	s.Require().NoError(err)
 
-	f, err := furySupply.ToDec().Float64()
+	f, err := merSupply.ToDec().Float64()
 	s.Require().NoError(err)
 
 	over := f * 0.02
 
-	paths := fmt.Sprintf(`{"channel_id": "channel-0", "denom": "%s", "quotas": [{"name":"testQuota", "duration": 86400, "send_recv": [1, 1]}] }`, initialization.FuryToken.Denom)
+	paths := fmt.Sprintf(`{"channel_id": "channel-0", "denom": "%s", "quotas": [{"name":"testQuota", "duration": 86400, "send_recv": [1, 1]}] }`, initialization.MerToken.Denom)
 
 	// Sending >1%
 	fmt.Println("Sending >1%")
-	chainANode.SendIBC(chainB, chainB.NodeConfigs[0].PublicAddress, sdk.NewInt64Coin(initialization.FuryDenom, int64(over)))
+	chainANode.SendIBC(chainB, chainB.NodeConfigs[0].PublicAddress, sdk.NewInt64Coin(initialization.MerDenom, int64(over)))
 
 	contract, err := chainANode.SetupRateLimiting(paths, chainA.NodeConfigs[1].PublicAddress, chainA)
 	s.Require().NoError(err)
@@ -1172,13 +1172,13 @@ func (s *IntegrationTestSuite) IBCTokenTransferRateLimiting() {
 
 	// Sending <1%. Should work
 	fmt.Println("Sending <1%. Should work")
-	chainANode.SendIBC(chainB, chainB.NodeConfigs[0].PublicAddress, sdk.NewInt64Coin(initialization.FuryDenom, 1))
+	chainANode.SendIBC(chainB, chainB.NodeConfigs[0].PublicAddress, sdk.NewInt64Coin(initialization.MerDenom, 1))
 	// Sending >1%. Should fail
 	fmt.Println("Sending >1%. Should fail")
-	chainANode.FailIBCTransfer(initialization.ValidatorWalletName, chainB.NodeConfigs[1].PublicAddress, fmt.Sprintf("%dufury", int(over)))
+	chainANode.FailIBCTransfer(initialization.ValidatorWalletName, chainB.NodeConfigs[1].PublicAddress, fmt.Sprintf("%dumer", int(over)))
 
 	// Removing the rate limit so it doesn't affect other tests
-	chainANode.WasmExecute(contract, `{"remove_path": {"channel_id": "channel-0", "denom": "ufury"}}`, initialization.ValidatorWalletName)
+	chainANode.WasmExecute(contract, `{"remove_path": {"channel_id": "channel-0", "denom": "umer"}}`, initialization.ValidatorWalletName)
 	// reset the param to the original contract if it existed
 	if param != "" {
 		err = chainANode.ParamChangeProposal(
@@ -1217,17 +1217,17 @@ func (s *IntegrationTestSuite) IBCWasmHooks() {
 	transferAmount := int64(10)
 	validatorAddr := chainBNode.GetWallet(initialization.ValidatorWalletName)
 	fmt.Println("Sending IBC transfer IBCWasmHooks")
-	coin := sdk.NewCoin("ufury", sdk.NewInt(transferAmount))
+	coin := sdk.NewCoin("umer", sdk.NewInt(transferAmount))
 	chainBNode.SendIBCTransfer(chainA, validatorAddr, contractAddr,
 		fmt.Sprintf(`{"wasm":{"contract":"%s","msg": {"increment": {}} }}`, contractAddr), coin)
 
 	// check the balance of the contract
-	denomTrace := transfertypes.ParseDenomTrace(transfertypes.GetPrefixedDenom("transfer", "channel-0", "ufury"))
+	denomTrace := transfertypes.ParseDenomTrace(transfertypes.GetPrefixedDenom("transfer", "channel-0", "umer"))
 	ibcDenom := denomTrace.IBCDenom()
 	s.CheckBalance(chainANode, contractAddr, ibcDenom, transferAmount)
 
 	// sender wasm addr
-	senderBech32, err := ibchookskeeper.DeriveIntermediateSender("channel-0", validatorAddr, "fury")
+	senderBech32, err := ibchookskeeper.DeriveIntermediateSender("channel-0", validatorAddr, "mer")
 
 	var response map[string]interface{}
 	s.Require().Eventually(func() bool {
@@ -1256,7 +1256,7 @@ func (s *IntegrationTestSuite) IBCWasmHooks() {
 			return false
 		}
 
-		// check if denom contains "ufury"
+		// check if denom contains "umer"
 		return amount == strconv.FormatInt(transferAmount, 10) && strings.Contains(denom, "ibc")
 	},
 
@@ -1293,14 +1293,14 @@ func (s *IntegrationTestSuite) PacketForwarding() {
 	forwardMemo, err := json.Marshal(memoData)
 	s.NoError(err)
 	// Send the transfer from chainA to chainB. ChainB will parse the memo and forward the packet back to chainA
-	coin := sdk.NewCoin("ufury", sdk.NewInt(transferAmount))
+	coin := sdk.NewCoin("umer", sdk.NewInt(transferAmount))
 	chainANode.SendIBCTransfer(chainB, validatorAddr, validatorAddr, string(forwardMemo), coin)
 
 	// check the balance of the contract
-	s.CheckBalance(chainANode, contractAddr, "ufury", transferAmount)
+	s.CheckBalance(chainANode, contractAddr, "umer", transferAmount)
 
 	// sender wasm addr
-	senderBech32, err := ibchookskeeper.DeriveIntermediateSender("channel-0", validatorAddr, "fury")
+	senderBech32, err := ibchookskeeper.DeriveIntermediateSender("channel-0", validatorAddr, "mer")
 	s.Require().NoError(err)
 	s.Require().Eventually(func() bool {
 		response, err := chainANode.QueryWasmSmartObject(contractAddr, fmt.Sprintf(`{"get_count": {"addr": "%s"}}`, senderBech32))
@@ -1369,7 +1369,7 @@ func (s *IntegrationTestSuite) ArithmeticTWAP() {
 
 		denomA = "stake"
 		denomB = "uion"
-		denomC = "ufury"
+		denomC = "umer"
 
 		minAmountOut = "1"
 
@@ -1441,11 +1441,11 @@ func (s *IntegrationTestSuite) ArithmeticTWAP() {
 	twapFromBeforeSwapToAfterSwapCA, err := chainANode.QueryArithmeticTwapToNow(poolId, denomC, denomA, timeBeforeSwap)
 	s.Require().NoError(err)
 	// We had a swap of 2000000stake for some amount of uion,
-	// 2000000uion for some amount of ufury, and
-	// 2000000ufury for some amount of stake
+	// 2000000uion for some amount of umer, and
+	// 2000000umer for some amount of stake
 	// Because we traded the same amount of all three assets, we expect the asset with the greatest
 	// initial value (B, or uion) to have a largest negative price impact,
-	// to the benefit (positive price impact) of the other two assets (A&C, or stake and ufury)
+	// to the benefit (positive price impact) of the other two assets (A&C, or stake and umer)
 	s.Require().True(twapFromBeforeSwapToAfterSwapAB.GT(twapFromBeforeSwapToBeforeSwapOneAB))
 	s.Require().True(twapFromBeforeSwapToAfterSwapBC.LT(twapFromBeforeSwapToBeforeSwapOneBC))
 	s.Require().True(twapFromBeforeSwapToAfterSwapCA.GT(twapFromBeforeSwapToBeforeSwapOneCA))
@@ -1664,18 +1664,18 @@ func (s *IntegrationTestSuite) ExpeditedProposals() {
 // TestGeometricTWAP tests geometric twap.
 // It does the following:  creates a pool, queries twap, performs a swap , and queries twap again.
 // Twap is expected to change after the swap.
-// The pool is created with 1_000_000 ufury and 2_000_000 stake and equal weights.
-// Assuming base asset is ufury, the initial twap is 2
-// Upon swapping 1_000_000 ufury for stake, supply changes, making ufury less expensive.
+// The pool is created with 1_000_000 umer and 2_000_000 stake and equal weights.
+// Assuming base asset is umer, the initial twap is 2
+// Upon swapping 1_000_000 umer for stake, supply changes, making umer less expensive.
 // As a result of the swap, twap changes to 0.5.
 func (s *IntegrationTestSuite) GeometricTWAP() {
 	const (
-		// This pool contains 1_000_000 ufury and 2_000_000 stake.
+		// This pool contains 1_000_000 umer and 2_000_000 stake.
 		// Equals weights.
 		poolFile   = "geometricPool.json"
 		walletName = "geometric-twap-wallet"
 
-		denomA = "ufury" // 1_000_000 ufury
+		denomA = "umer" // 1_000_000 umer
 		denomB = "stake" // 2_000_000 stake
 
 		minAmountOut = "1"
@@ -1699,7 +1699,7 @@ func (s *IntegrationTestSuite) GeometricTWAP() {
 	chainA.WaitForNumHeights(2)
 
 	s.T().Log("querying for the first geometric TWAP to now (before swap)")
-	// Assume base = ufury, quote = stake
+	// Assume base = umer, quote = stake
 	// At pool creation time, the twap should be:
 	// quote assset supply / base asset supply = 2_000_000 / 1_000_000 = 2
 	curBlockTime := chainANode.QueryLatestBlockTime().Unix()
@@ -1709,7 +1709,7 @@ func (s *IntegrationTestSuite) GeometricTWAP() {
 	s.Require().NoError(err)
 	s.Require().Equal(sdk.NewDec(2), initialTwapBOverA)
 
-	// Assume base = stake, quote = ufury
+	// Assume base = stake, quote = umer
 	// At pool creation time, the twap should be:
 	// quote assset supply / base asset supply = 1_000_000 / 2_000_000 = 0.5
 	initialTwapAOverB, err := chainANode.QueryGeometricTwapToNow(poolId, denomB, denomA, timeBeforeSwapPlus5ms)
@@ -1721,7 +1721,7 @@ func (s *IntegrationTestSuite) GeometricTWAP() {
 
 	s.T().Logf("performing swap of %s for %s", coinAIn, denomB)
 
-	// stake out = stake supply * (1 - (ufury supply before / ufury supply after)^(ufury weight / stake weight))
+	// stake out = stake supply * (1 - (umer supply before / umer supply after)^(umer weight / stake weight))
 	//           = 2_000_000 * (1 - (1_000_000 / 2_000_000)^1)
 	//           = 2_000_000 * 0.5
 	//           = 1_000_000
@@ -1729,7 +1729,7 @@ func (s *IntegrationTestSuite) GeometricTWAP() {
 
 	// New supply post swap:
 	// stake = 2_000_000 - 1_000_000 - 1_000_000
-	// ufury = 1_000_000 + 1_000_000 = 2_000_000
+	// umer = 1_000_000 + 1_000_000 = 2_000_000
 
 	timeAfterSwap := chainANode.QueryLatestBlockTime()
 	chainA.WaitForNumHeights(1)
@@ -1739,22 +1739,22 @@ func (s *IntegrationTestSuite) GeometricTWAP() {
 	afterSwapTwapBOverA, err := chainANode.QueryGeometricTwap(poolId, denomA, denomB, timeAfterSwap, timeAfterSwapPlus1Height)
 	s.Require().NoError(err)
 
-	// We swap ufury so ufury's supply will increase and stake will decrease.
+	// We swap umer so umer's supply will increase and stake will decrease.
 	// The the price after will be smaller than the previous one.
 	s.Require().True(initialTwapBOverA.GT(afterSwapTwapBOverA))
 
-	// Assume base = ufury, quote = stake
+	// Assume base = umer, quote = stake
 	// At pool creation, we had:
 	// quote assset supply / base asset supply = 2_000_000 / 1_000_000 = 2
-	// Next, we swapped 1_000_000 ufury for stake.
+	// Next, we swapped 1_000_000 umer for stake.
 	// Now, we roughly have
 	// uatom = 1_000_000
-	// ufury = 2_000_000
+	// umer = 2_000_000
 	// quote assset supply / base asset supply = 1_000_000 / 2_000_000 = 0.5
 	osmoassert.DecApproxEq(s.T(), sdk.NewDecWithPrec(5, 1), afterSwapTwapBOverA, sdk.NewDecWithPrec(1, 2))
 }
 
-// Tests that v16 upgrade correctly creates the canonical FURY-DAI pool in the upgrade.
+// Tests that v16 upgrade correctly creates the canonical MER-DAI pool in the upgrade.
 // Prefixed with "A" to run before TestConcentratedLiquidity that resets the pool creation
 // parameter.
 func (s *IntegrationTestSuite) ConcentratedLiquidity_CanonicalPool_And_Parameters() {
@@ -1767,7 +1767,7 @@ func (s *IntegrationTestSuite) ConcentratedLiquidity_CanonicalPool_And_Parameter
 	_, chainANode := s.getChainACfgs()
 
 	// Taken from: https://app.merlin.zone/pool/674
-	concentratedPoolId := chainANode.QueryConcentratedPooIdLinkFromCFMM(config.DaiFuryPoolIdv16)
+	concentratedPoolId := chainANode.QueryConcentratedPooIdLinkFromCFMM(config.DaiMerPoolIdv16)
 
 	concentratedPool := s.updatedConcentratedPool(chainANode, concentratedPoolId)
 
@@ -1796,8 +1796,8 @@ func (s *IntegrationTestSuite) ConcentratedLiquidity_CanonicalPool_And_Parameter
 	s.Require().Len(positions, 1)
 
 	// This spot price is taken from the balancer pool that was initiated pre upgrade.
-	balancerDaiFuryPool := s.updatedCFMMPool(chainANode, config.DaiFuryPoolIdv16)
-	expectedSpotPrice, err := balancerDaiFuryPool.SpotPrice(sdk.Context{}, v16.DAIIBCDenom, v16.DesiredDenom0)
+	balancerDaiMerPool := s.updatedCFMMPool(chainANode, config.DaiMerPoolIdv16)
+	expectedSpotPrice, err := balancerDaiMerPool.SpotPrice(sdk.Context{}, v16.DAIIBCDenom, v16.DesiredDenom0)
 	s.Require().NoError(err)
 
 	// Allow 0.01% margin of error.

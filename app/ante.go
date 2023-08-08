@@ -11,7 +11,7 @@ import (
 	ante "github.com/cosmos/cosmos-sdk/x/auth/ante"
 	"github.com/cosmos/cosmos-sdk/x/auth/signing"
 
-	furyante "github.com/merlins-labs/merlin/ante"
+	merante "github.com/merlins-labs/merlin/ante"
 	v9 "github.com/merlins-labs/merlin/app/upgrades/v9"
 
 	txfeeskeeper "github.com/merlins-labs/merlin/x/txfees/keeper"
@@ -34,8 +34,8 @@ func NewAnteHandler(
 ) sdk.AnteHandler {
 	mempoolFeeOptions := txfeestypes.NewMempoolFeeOptions(appOpts)
 	mempoolFeeDecorator := txfeeskeeper.NewMempoolFeeDecorator(*txFeesKeeper, mempoolFeeOptions)
-	sendblockOptions := furyante.NewSendBlockOptions(appOpts)
-	sendblockDecorator := furyante.NewSendBlockDecorator(sendblockOptions)
+	sendblockOptions := merante.NewSendBlockOptions(appOpts)
+	sendblockDecorator := merante.NewSendBlockDecorator(sendblockOptions)
 	deductFeeDecorator := txfeeskeeper.NewDeductFeeDecorator(*txFeesKeeper, ak, bankKeeper, nil)
 	return sdk.ChainAnteDecorators(
 		ante.NewSetUpContextDecorator(), // outermost AnteDecorator. SetUpContext must be called first

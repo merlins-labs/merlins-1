@@ -29,9 +29,9 @@ type GenesisState struct {
 	// superfluid_assets defines the registered superfluid assets that have been
 	// registered via governance.
 	SuperfluidAssets []SuperfluidAsset `protobuf:"bytes,2,rep,name=superfluid_assets,json=superfluidAssets,proto3" json:"superfluid_assets"`
-	// fury_equivalent_multipliers is the records of fury equivalent amount of
+	// mer_equivalent_multipliers is the records of mer equivalent amount of
 	// each superfluid registered pool, updated every epoch.
-	FuryEquivalentMultipliers []FuryEquivalentMultiplierRecord `protobuf:"bytes,3,rep,name=fury_equivalent_multipliers,json=furyEquivalentMultipliers,proto3" json:"fury_equivalent_multipliers"`
+	MerEquivalentMultipliers []MerEquivalentMultiplierRecord `protobuf:"bytes,3,rep,name=mer_equivalent_multipliers,json=merEquivalentMultipliers,proto3" json:"mer_equivalent_multipliers"`
 	// intermediary_accounts is a secondary account for superfluid staking that
 	// plays an intermediary role between validators and the delegators.
 	IntermediaryAccounts          []SuperfluidIntermediaryAccount       `protobuf:"bytes,4,rep,name=intermediary_accounts,json=intermediaryAccounts,proto3" json:"intermediary_accounts"`
@@ -85,9 +85,9 @@ func (m *GenesisState) GetSuperfluidAssets() []SuperfluidAsset {
 	return nil
 }
 
-func (m *GenesisState) GetFuryEquivalentMultipliers() []FuryEquivalentMultiplierRecord {
+func (m *GenesisState) GetMerEquivalentMultipliers() []MerEquivalentMultiplierRecord {
 	if m != nil {
-		return m.FuryEquivalentMultipliers
+		return m.MerEquivalentMultipliers
 	}
 	return nil
 }
@@ -188,10 +188,10 @@ func (m *GenesisState) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 			dAtA[i] = 0x22
 		}
 	}
-	if len(m.FuryEquivalentMultipliers) > 0 {
-		for iNdEx := len(m.FuryEquivalentMultipliers) - 1; iNdEx >= 0; iNdEx-- {
+	if len(m.MerEquivalentMultipliers) > 0 {
+		for iNdEx := len(m.MerEquivalentMultipliers) - 1; iNdEx >= 0; iNdEx-- {
 			{
-				size, err := m.FuryEquivalentMultipliers[iNdEx].MarshalToSizedBuffer(dAtA[:i])
+				size, err := m.MerEquivalentMultipliers[iNdEx].MarshalToSizedBuffer(dAtA[:i])
 				if err != nil {
 					return 0, err
 				}
@@ -254,8 +254,8 @@ func (m *GenesisState) Size() (n int) {
 			n += 1 + l + sovGenesis(uint64(l))
 		}
 	}
-	if len(m.FuryEquivalentMultipliers) > 0 {
-		for _, e := range m.FuryEquivalentMultipliers {
+	if len(m.MerEquivalentMultipliers) > 0 {
+		for _, e := range m.MerEquivalentMultipliers {
 			l = e.Size()
 			n += 1 + l + sovGenesis(uint64(l))
 		}
@@ -379,7 +379,7 @@ func (m *GenesisState) Unmarshal(dAtA []byte) error {
 			iNdEx = postIndex
 		case 3:
 			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field FuryEquivalentMultipliers", wireType)
+				return fmt.Errorf("proto: wrong wireType = %d for field MerEquivalentMultipliers", wireType)
 			}
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
@@ -406,8 +406,8 @@ func (m *GenesisState) Unmarshal(dAtA []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.FuryEquivalentMultipliers = append(m.FuryEquivalentMultipliers, FuryEquivalentMultiplierRecord{})
-			if err := m.FuryEquivalentMultipliers[len(m.FuryEquivalentMultipliers)-1].Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+			m.MerEquivalentMultipliers = append(m.MerEquivalentMultipliers, MerEquivalentMultiplierRecord{})
+			if err := m.MerEquivalentMultipliers[len(m.MerEquivalentMultipliers)-1].Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
 				return err
 			}
 			iNdEx = postIndex

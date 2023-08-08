@@ -46,7 +46,7 @@ func (s *KeeperTestSuite) TestGenesis() {
 	tokenfactoryModuleAccount := app.AccountKeeper.GetAccount(s.Ctx, app.AccountKeeper.GetModuleAddress(types.ModuleName))
 	s.Require().Nil(tokenfactoryModuleAccount)
 
-	app.TokenFactoryKeeper.SetParams(s.Ctx, types.Params{DenomCreationFee: sdk.Coins{sdk.NewInt64Coin("ufury", 100)}})
+	app.TokenFactoryKeeper.SetParams(s.Ctx, types.Params{DenomCreationFee: sdk.Coins{sdk.NewInt64Coin("umer", 100)}})
 	app.TokenFactoryKeeper.InitGenesis(s.Ctx, genesisState)
 
 	// check that the module account is now initialized

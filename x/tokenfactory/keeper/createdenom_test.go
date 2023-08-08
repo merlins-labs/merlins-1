@@ -14,7 +14,7 @@ func (s *KeeperTestSuite) TestMsgCreateDenom() {
 	var (
 		tokenFactoryKeeper = s.App.TokenFactoryKeeper
 		bankKeeper         = s.App.BankKeeper
-		denomCreationFee   = sdk.NewCoins(sdk.NewCoin("ufury", sdk.NewInt(1000000)))
+		denomCreationFee   = sdk.NewCoins(sdk.NewCoin("umer", sdk.NewInt(1000000)))
 	)
 
 	// Set the denom creation fee. It is currently turned off in favor
@@ -75,7 +75,7 @@ func (s *KeeperTestSuite) TestMsgCreateDenom() {
 
 func (s *KeeperTestSuite) TestCreateDenom() {
 	var (
-		primaryDenom            = "ufury"
+		primaryDenom            = "umer"
 		secondaryDenom          = apptesting.SecondaryDenom
 		defaultDenomCreationFee = types.Params{DenomCreationFee: sdk.NewCoins(sdk.NewCoin(primaryDenom, sdk.NewInt(50000000)))}
 		twoDenomCreationFee     = types.Params{DenomCreationFee: sdk.NewCoins(sdk.NewCoin(primaryDenom, sdk.NewInt(50000000)), sdk.NewCoin(secondaryDenom, sdk.NewInt(50000000)))}

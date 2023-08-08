@@ -457,7 +457,7 @@ func (suite *HooksTestSuite) TestFundTracking() {
 		addr.String(),
 		fmt.Sprintf(`{"wasm": {"contract": "%s", "msg": {"increment": {} } } }`, addr))
 
-	senderLocalAcc, err := ibchookskeeper.DeriveIntermediateSender("channel-0", suite.chainB.SenderAccount.GetAddress().String(), "fury")
+	senderLocalAcc, err := ibchookskeeper.DeriveIntermediateSender("channel-0", suite.chainB.SenderAccount.GetAddress().String(), "mer")
 	suite.Require().NoError(err)
 
 	state := suite.chainA.QueryContract(
@@ -661,7 +661,7 @@ func (suite *HooksTestSuite) SetupPools(chainName Chain, multipliers []sdk.Dec) 
 	pools := []gammtypes.CFMMPoolI{}
 	for index, multiplier := range multipliers {
 		token := fmt.Sprintf("token%d", index)
-		ufuryAmount := gammtypes.InitPoolSharesSupply.ToDec().Mul(multiplier).RoundInt()
+		umerAmount := gammtypes.InitPoolSharesSupply.ToDec().Mul(multiplier).RoundInt()
 
 		var (
 			defaultFutureGovernor = ""
@@ -669,7 +669,7 @@ func (suite *HooksTestSuite) SetupPools(chainName Chain, multipliers []sdk.Dec) 
 			// pool assets
 			defaultFooAsset = balancer.PoolAsset{
 				Weight: sdk.NewInt(100),
-				Token:  sdk.NewCoin(bondDenom, ufuryAmount),
+				Token:  sdk.NewCoin(bondDenom, umerAmount),
 			}
 			defaultBarAsset = balancer.PoolAsset{
 				Weight: sdk.NewInt(100),
@@ -705,11 +705,11 @@ func (suite *HooksTestSuite) SetupCrosschainSwaps(chainName Chain) (sdk.AccAddre
 	suite.setChainChannelLinks(registryAddr, chainName)
 	fmt.Println("registryAddr", registryAddr)
 
-	// Fund the account with some ufury and some stake
+	// Fund the account with some umer and some stake
 	bankKeeper := chain.GetMerlinApp().BankKeeper
 	i, ok := sdk.NewIntFromString("20000000000000000000000")
 	suite.Require().True(ok)
-	amounts := sdk.NewCoins(sdk.NewCoin("ufury", i), sdk.NewCoin(sdk.DefaultBondDenom, i), sdk.NewCoin("token0", i), sdk.NewCoin("token1", i))
+	amounts := sdk.NewCoins(sdk.NewCoin("umer", i), sdk.NewCoin(sdk.DefaultBondDenom, i), sdk.NewCoin("token0", i), sdk.NewCoin("token1", i))
 	err := bankKeeper.MintCoins(chain.GetContext(), minttypes.ModuleName, amounts)
 	suite.Require().NoError(err)
 	err = bankKeeper.SendCoinsFromModuleToAccount(chain.GetContext(), minttypes.ModuleName, owner, amounts)
@@ -735,10 +735,10 @@ func (suite *HooksTestSuite) SetupCrosschainSwaps(chainName Chain) (sdk.AccAddre
 	msg := `{  
 		"modify_bech32_prefixes": {
 		  "operations": [
-			{"operation": "set", "chain_name": "merlin", "prefix": "fury"},
-			{"operation": "set", "chain_name": "chainB", "prefix": "fury"},
-			{"operation": "set", "chain_name": "chainB-cw20", "prefix": "fury"},
-			{"operation": "set", "chain_name": "chainC", "prefix": "fury"}
+			{"operation": "set", "chain_name": "merlin", "prefix": "mer"},
+			{"operation": "set", "chain_name": "chainB", "prefix": "mer"},
+			{"operation": "set", "chain_name": "chainB-cw20", "prefix": "mer"},
+			{"operation": "set", "chain_name": "chainC", "prefix": "mer"}
 		  ]
 		}
 	  }
@@ -769,7 +769,7 @@ func (suite *HooksTestSuite) fundAccount(chain *merlinibctesting.TestChain, owne
 	bankKeeper := chain.GetMerlinApp().BankKeeper
 	i, ok := sdk.NewIntFromString("20000000000000000000000")
 	suite.Require().True(ok)
-	amounts := sdk.NewCoins(sdk.NewCoin("ufury", i), sdk.NewCoin(sdk.DefaultBondDenom, i), sdk.NewCoin("token0", i), sdk.NewCoin("token1", i))
+	amounts := sdk.NewCoins(sdk.NewCoin("umer", i), sdk.NewCoin(sdk.DefaultBondDenom, i), sdk.NewCoin("token0", i), sdk.NewCoin("token1", i))
 	err := bankKeeper.MintCoins(chain.GetContext(), minttypes.ModuleName, amounts)
 	suite.Require().NoError(err)
 	err = bankKeeper.SendCoinsFromModuleToAccount(chain.GetContext(), minttypes.ModuleName, owner, amounts)
@@ -780,7 +780,7 @@ func (suite *HooksTestSuite) SetupCrosschainRegistry(chainName Chain) (sdk.AccAd
 	chain := suite.GetChain(chainName)
 	owner := chain.SenderAccount.GetAddress()
 
-	// Fund the account with some ufury and some stake.
+	// Fund the account with some umer and some stake.
 	for _, ch := range []*merlinibctesting.TestChain{suite.chainA, suite.chainB, suite.chainC} {
 		suite.fundAccount(ch, ch.SenderAccount.GetAddress())
 	}
@@ -791,7 +791,7 @@ func (suite *HooksTestSuite) SetupCrosschainRegistry(chainName Chain) (sdk.AccAd
 	// Setup contract
 	chain.StoreContractCode(&suite.Suite, "./bytecode/crosschain_registry.wasm")
 	registryAddr := chain.InstantiateContract(&suite.Suite, fmt.Sprintf(`{"owner": "%s"}`, owner), 1)
-	_, err := sdk.Bech32ifyAddressBytes("fury", registryAddr)
+	_, err := sdk.Bech32ifyAddressBytes("mer", registryAddr)
 	suite.Require().NoError(err)
 
 	// Send some token0 tokens from C to B
@@ -961,10 +961,10 @@ func (suite *HooksTestSuite) TestUnwrapToken() {
 	msg := `{
 		"modify_bech32_prefixes": {
 		  "operations": [
-			{"operation": "set", "chain_name": "merlin", "prefix": "fury"},
-			{"operation": "set", "chain_name": "chainA", "prefix": "fury"},
-			{"operation": "set", "chain_name": "chainB", "prefix": "fury"},
-			{"operation": "set", "chain_name": "chainC", "prefix": "fury"}
+			{"operation": "set", "chain_name": "merlin", "prefix": "mer"},
+			{"operation": "set", "chain_name": "chainA", "prefix": "mer"},
+			{"operation": "set", "chain_name": "chainB", "prefix": "mer"},
+			{"operation": "set", "chain_name": "chainC", "prefix": "mer"}
 		  ]
 		}
 	  }
@@ -1354,9 +1354,9 @@ func (suite *HooksTestSuite) CreateIBCNativePoolOnChain(chainName Chain, denom s
 
 	multiplier := sdk.NewDec(20)
 
-	ufuryAmount := gammtypes.InitPoolSharesSupply.ToDec().Mul(multiplier).RoundInt()
+	umerAmount := gammtypes.InitPoolSharesSupply.ToDec().Mul(multiplier).RoundInt()
 
-	return suite.CreateIBCPoolOnChain(chainName, bondDenom, denom, ufuryAmount)
+	return suite.CreateIBCPoolOnChain(chainName, bondDenom, denom, umerAmount)
 }
 
 func (suite *HooksTestSuite) SetupIBCRouteOnChain(swaprouterAddr, owner sdk.AccAddress, poolId uint64, chainName Chain, denom string) {
@@ -1667,7 +1667,7 @@ func (suite *HooksTestSuite) TestMultiHopXCS() {
 		},
 
 		{
-			name: "Native to FuryNative into same chain",
+			name: "Native to MerNative into same chain",
 			// This is currently failing when running all tests together but not individually. TODO: Figure out why
 			sender:        actorChainB,
 			swapFor:       "token0",
@@ -1688,7 +1688,7 @@ func (suite *HooksTestSuite) TestMultiHopXCS() {
 		},
 
 		{
-			name:          "FuryNative to Native into same chain",
+			name:          "MerNative to Native into same chain",
 			sender:        actorChainB,
 			swapFor:       transfertypes.DenomTrace{Path: suite.GetPath(ChainA, ChainB), BaseDenom: "token1"}.IBCDenom(),
 			receiver:      actorChainB,

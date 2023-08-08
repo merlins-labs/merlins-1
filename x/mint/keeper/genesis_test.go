@@ -12,7 +12,7 @@ import (
 var customGenesis = types.NewGenesisState(
 	types.NewMinter(sdk.ZeroDec()),
 	types.NewParams(
-		"ufury",                  // denom
+		"umer",                  // denom
 		sdk.NewDec(200),          // epoch provisions
 		"year",                   // epoch identifier
 		sdk.NewDecWithPrec(5, 1), // reduction factor
@@ -75,7 +75,7 @@ func (s *KeeperTestSuite) TestMintInitGenesis() {
 		},
 		"custom genesis": {
 			mintGenesis: customGenesis,
-			mintDenom:   "ufury",
+			mintDenom:   "umer",
 
 			expectedEpochProvisions:             sdk.NewDec(200),
 			expectedSupplyOffsetDelta:           sdk.NewInt(keeper.DeveloperVestingAmount).Neg(),

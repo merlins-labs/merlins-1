@@ -43,10 +43,10 @@ func (s *KeeperTestSuite) TestSuperfluidAssetSetGetDeleteFlow() {
 	s.Require().Len(assets, 0)
 }
 
-func (s *KeeperTestSuite) TestGetRiskAdjustedFuryValue() {
+func (s *KeeperTestSuite) TestGetRiskAdjustedMerValue() {
 	s.SetupTest()
 
-	adjustedValue := s.App.SuperfluidKeeper.GetRiskAdjustedFuryValue(
+	adjustedValue := s.App.SuperfluidKeeper.GetRiskAdjustedMerValue(
 		s.Ctx,
 		sdk.NewInt(100),
 	)

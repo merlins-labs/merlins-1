@@ -67,8 +67,8 @@ func (k Keeper) SetValidatorSetPreference(ctx sdk.Context, delegator string, pre
 
 // DelegateToValidatorSet delegates to a delegators existing validator-set.
 // If the valset does not exist, it delegates to existing staking position.
-// For ex: delegate 10fury with validator-set {ValA -> 0.5, ValB -> 0.3, ValC -> 0.2}
-// our delegate logic would attempt to delegate 5fury to A , 2fury to B, 3fury to C
+// For ex: delegate 10mer with validator-set {ValA -> 0.5, ValB -> 0.3, ValC -> 0.2}
+// our delegate logic would attempt to delegate 5mer to A , 2mer to B, 3mer to C
 // nolint: staticcheck
 func (k Keeper) DelegateToValidatorSet(ctx sdk.Context, delegatorAddr string, coin sdk.Coin) error {
 	// get valset formatted delegation either from existing val set preference or existing delegations
@@ -117,8 +117,8 @@ func (k Keeper) DelegateToValidatorSet(ctx sdk.Context, delegatorAddr string, co
 // UndelegateFromValidatorSet undelegates {coin} amount from the validator set.
 // If the valset does not exist, it undelegates from existing staking position.
 // For ex: userA has staked 10tokens with weight {Val->0.5, ValB->0.3, ValC->0.2}
-// undelegate 6fury with validator-set {ValA -> 0.5, ValB -> 0.3, ValC -> 0.2}
-// our undelegate logic would attempt to undelegate 3fury from A, 1.8fury from B, 1.2fury from C
+// undelegate 6mer with validator-set {ValA -> 0.5, ValB -> 0.3, ValC -> 0.2}
+// our undelegate logic would attempt to undelegate 3mer from A, 1.8mer from B, 1.2mer from C
 // nolint: staticcheck
 func (k Keeper) UndelegateFromValidatorSet(ctx sdk.Context, delegatorAddr string, coin sdk.Coin) error {
 	// get the existingValSet if it exists, if not check existingStakingPosition and return it
@@ -203,7 +203,7 @@ func (k Keeper) CheckUndelegateTotalAmount(tokenAmt sdk.Dec, existingSet []types
 //   - valB --redelegate--> valA	(ERROR: Redelegation to ValB is already in progress)
 //
 // 3. delegatorA attempts to redelegate while unbonding is in progress
-//   - unbond (10fury) from valA
+//   - unbond (10mer) from valA
 //   - valA --redelegate--> valB (ERROR: new redelegation while unbonding is in progress)
 func (k Keeper) PreformRedelegation(ctx sdk.Context, delegator sdk.AccAddress, existingSet []types.ValidatorPreference, newSet []types.ValidatorPreference) error {
 	var existingValSet []valSet
@@ -340,14 +340,14 @@ func (k Keeper) withdrawExistingValSetStakingPosition(ctx sdk.Context, delegator
 	return nil
 }
 
-// ForceUnlockBondedFury allows breaking of a bonded lockup (by ID) of fury, of length <= 2 weeks.
-// We want to later have fury incentives get auto-staked, we want people w/ no staking positions to
-// get their fury auto-locked. This function takes all that fury and stakes according to your
+// ForceUnlockBondedMer allows breaking of a bonded lockup (by ID) of mer, of length <= 2 weeks.
+// We want to later have mer incentives get auto-staked, we want people w/ no staking positions to
+// get their mer auto-locked. This function takes all that mer and stakes according to your
 // current validator set preference.
 // (Note: Noting that there is an implicit valset preference if you've already staked)
 // CONTRACT: This method should **never** be used alone.
-func (k Keeper) ForceUnlockBondedFury(ctx sdk.Context, lockID uint64, delegatorAddr string) (sdk.Coin, error) {
-	lock, lockedFuryAmount, err := k.validateLockForForceUnlock(ctx, lockID, delegatorAddr)
+func (k Keeper) ForceUnlockBondedMer(ctx sdk.Context, lockID uint64, delegatorAddr string) (sdk.Coin, error) {
+	lock, lockedMerAmount, err := k.validateLockForForceUnlock(ctx, lockID, delegatorAddr)
 	if err != nil {
 		return sdk.Coin{}, err
 	}
@@ -367,10 +367,10 @@ func (k Keeper) ForceUnlockBondedFury(ctx sdk.Context, lockID uint64, delegatorA
 		return sdk.Coin{}, err
 	}
 
-	// Takes unlocked fury, and delegate according to valset pref
-	unlockedFuryCoin := sdk.Coin{Denom: appParams.BaseCoinUnit, Amount: lockedFuryAmount}
+	// Takes unlocked mer, and delegate according to valset pref
+	unlockedMerCoin := sdk.Coin{Denom: appParams.BaseCoinUnit, Amount: lockedMerAmount}
 
-	return unlockedFuryCoin, nil
+	return unlockedMerCoin, nil
 }
 
 // GetValAddrAndVal checks if the validator address is valid and the validator provided exists on chain.
@@ -467,7 +467,7 @@ func (k Keeper) GetValSetStruct(validator types.ValidatorPreference, amountFromS
 	return val_struct, val_struct_zero_amount
 }
 
-// check if lock owner matches the delegator, contains only ufury and is bonded for <= 2weeks
+// check if lock owner matches the delegator, contains only umer and is bonded for <= 2weeks
 func (k Keeper) validateLockForForceUnlock(ctx sdk.Context, lockID uint64, delegatorAddr string) (*lockuptypes.PeriodLock, sdk.Int, error) {
 	// Checks if sender is lock ID owner
 	lock, err := k.lockupKeeper.GetLockByID(ctx, lockID)
@@ -478,7 +478,7 @@ func (k Keeper) validateLockForForceUnlock(ctx sdk.Context, lockID uint64, deleg
 		return nil, sdk.Int{}, fmt.Errorf("delegator (%s) and lock owner (%s) does not match", delegatorAddr, lock.Owner)
 	}
 
-	lockedFuryAmount := sdk.NewInt(0)
+	lockedMerAmount := sdk.NewInt(0)
 
 	// check that lock contains only 1 token
 	coin, err := lock.SingleCoin()
@@ -486,14 +486,14 @@ func (k Keeper) validateLockForForceUnlock(ctx sdk.Context, lockID uint64, deleg
 		return nil, sdk.Int{}, fmt.Errorf("lock fails to meet expected invariant, it contains multiple coins")
 	}
 
-	// check that the lock denom is ufury
+	// check that the lock denom is umer
 	if coin.Denom == appParams.BaseCoinUnit {
-		lockedFuryAmount = lockedFuryAmount.Add(coin.Amount)
+		lockedMerAmount = lockedMerAmount.Add(coin.Amount)
 	}
 
-	// check if there is enough ufury token in the lock
-	if lockedFuryAmount.LTE(sdk.NewInt(0)) {
-		return nil, sdk.Int{}, fmt.Errorf("lock does not contain fury denom, or there isn't enough fury to unbond")
+	// check if there is enough umer token in the lock
+	if lockedMerAmount.LTE(sdk.NewInt(0)) {
+		return nil, sdk.Int{}, fmt.Errorf("lock does not contain mer denom, or there isn't enough mer to unbond")
 	}
 
 	// Checks if lock ID is bonded and ensure that the duration is <= 2 weeks
@@ -501,5 +501,5 @@ func (k Keeper) validateLockForForceUnlock(ctx sdk.Context, lockID uint64, deleg
 		return nil, sdk.Int{}, fmt.Errorf("the tokens have to bonded and the duration has to be <= 2weeks")
 	}
 
-	return lock, lockedFuryAmount, nil
+	return lock, lockedMerAmount, nil
 }

@@ -13,9 +13,9 @@ import (
 
 const (
 	expectedPoolId          uint64 = 1
-	addressPrefix                  = "fury"
+	addressPrefix                  = "mer"
 	localmerlinFromHomePath        = "/.merlin-local"
-	consensusFee                   = "1500ufury"
+	consensusFee                   = "1500umer"
 	accountNamePrefix              = "lo-test"
 	numPositions                   = 1_000
 	randSeed                       = 1

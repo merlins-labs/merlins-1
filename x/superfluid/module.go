@@ -1,8 +1,8 @@
 /*
 The superfluid module handles all logic in relation to
 the superfluid staking feature on Merlin. Namely:
-- Methods to lock funds and mint synthetic fury for staking
-- Daily minting and burning of the purpose of adjusting synthetic fury lockups.
+- Methods to lock funds and mint synthetic mer for staking
+- Daily minting and burning of the purpose of adjusting synthetic mer lockups.
 - Staking reward distribution via the intermediary account.
 */
 package superfluid
@@ -26,7 +26,7 @@ import (
 	simtypes "github.com/cosmos/cosmos-sdk/types/simulation"
 	stakingtypes "github.com/cosmos/cosmos-sdk/x/staking/types"
 
-	furysimtypes "github.com/merlins-labs/merlin/simulation/simtypes"
+	mersimtypes "github.com/merlins-labs/merlin/simulation/simtypes"
 	"github.com/merlins-labs/merlin/x/mint/client/rest"
 	"github.com/merlins-labs/merlin/x/superfluid/client/cli"
 	"github.com/merlins-labs/merlin/x/superfluid/keeper"
@@ -109,7 +109,7 @@ type AppModule struct {
 
 	keeper             keeper.Keeper
 	accountKeeper      stakingtypes.AccountKeeper
-	bankKeeper         furysimtypes.BankKeeper
+	bankKeeper         mersimtypes.BankKeeper
 	stakingKeeper      types.StakingKeeper
 	lockupKeeper       types.LockupKeeper
 	gammKeeper         types.GammKeeper
@@ -118,7 +118,7 @@ type AppModule struct {
 }
 
 func NewAppModule(keeper keeper.Keeper,
-	accountKeeper stakingtypes.AccountKeeper, bankKeeper furysimtypes.BankKeeper,
+	accountKeeper stakingtypes.AccountKeeper, bankKeeper mersimtypes.BankKeeper,
 	stakingKeeper types.StakingKeeper,
 	lockupKeeper types.LockupKeeper,
 	gammKeeper types.GammKeeper,

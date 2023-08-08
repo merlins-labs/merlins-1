@@ -29,13 +29,13 @@ func (s *QueryTestSuite) TestQueriesNeverAlterState() {
 		fooDenom   = apptesting.DefaultPoolAssets[0].Token.Denom
 		barDenom   = apptesting.DefaultPoolAssets[1].Token.Denom
 		bazDenom   = apptesting.DefaultPoolAssets[2].Token.Denom
-		ufuryDenom = apptesting.DefaultPoolAssets[3].Token.Denom
+		umerDenom = apptesting.DefaultPoolAssets[3].Token.Denom
 
 		basicValidTokensIn = sdk.NewCoins(
 			sdk.NewCoin(fooDenom, sdk.OneInt()),
 			sdk.NewCoin(barDenom, sdk.OneInt()),
 			sdk.NewCoin(bazDenom, sdk.OneInt()),
-			sdk.NewCoin(ufuryDenom, sdk.OneInt()))
+			sdk.NewCoin(umerDenom, sdk.OneInt()))
 	)
 
 	testCases := []struct {

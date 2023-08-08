@@ -32,7 +32,7 @@ func NewCreateCWPoolCmd() (*osmocli.TxCliDesc, *model.MsgCreateCosmWasmPool) {
 	return &osmocli.TxCliDesc{
 		Use:              "create-pool [code-id] [instantiate-msg] [sender]",
 		Short:            "create a cosmwasm pool",
-		Example:          "merlin tx cosmwasmpool create-pool 1 uion,ufury --from lo-test1 --keyring-backend test --chain-id localmerlin --fees 875ufury -b=block",
+		Example:          "merlin tx cosmwasmpool create-pool 1 uion,umer --from lo-test1 --keyring-backend test --chain-id localmerlin --fees 875umer -b=block",
 		NumArgs:          2,
 		ParseAndBuildMsg: BuildCreatePoolMsg,
 	}, &model.MsgCreateCosmWasmPool{}
@@ -67,7 +67,7 @@ func NewCmdUploadCodeIdAndWhitelistProposal() *cobra.Command {
 		Use:     "upload-code-id-and-whitelist [wasm-file-path] [flags]",
 		Args:    cobra.ExactArgs(1),
 		Short:   "Submit an upload code id and whitelist proposal",
-		Example: "merlin tx gov submit-proposal upload-code-id-and-whitelist x/cosmwasmpool/bytecode/transmuter.wasm --from lo-test1 --keyring-backend test --title \"Test\" --description \"Test\" -b=block --chain-id localmerlin --fees=100000ufury --gas=20000000",
+		Example: "merlin tx gov submit-proposal upload-code-id-and-whitelist x/cosmwasmpool/bytecode/transmuter.wasm --from lo-test1 --keyring-backend test --title \"Test\" --description \"Test\" -b=block --chain-id localmerlin --fees=100000umer --gas=20000000",
 		RunE: func(cmd *cobra.Command, args []string) error {
 			clientCtx, err := client.GetClientTxContext(cmd)
 			if err != nil {

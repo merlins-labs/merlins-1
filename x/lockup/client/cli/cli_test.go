@@ -17,11 +17,11 @@ func TestLockTokensCmd(t *testing.T) {
 	desc, _ := NewLockTokensCmd()
 	tcs := map[string]osmocli.TxCliTestCase[*types.MsgLockTokens]{
 		"lock 201stake tokens for 1 day": {
-			Cmd: "201ufury --duration=24h --from=" + testAddresses[0].String(),
+			Cmd: "201umer --duration=24h --from=" + testAddresses[0].String(),
 			ExpectedMsg: &types.MsgLockTokens{
 				Owner:    testAddresses[0].String(),
 				Duration: time.Hour * 24,
-				Coins:    sdk.NewCoins(sdk.NewInt64Coin("ufury", 201)),
+				Coins:    sdk.NewCoins(sdk.NewInt64Coin("umer", 201)),
 			},
 		},
 	}
@@ -53,11 +53,11 @@ func TestBeginUnlockingByIDCmd(t *testing.T) {
 			},
 		},
 		"basic test w/ coins": {
-			Cmd: "10 --amount=5ufury --from=" + testAddresses[0].String(),
+			Cmd: "10 --amount=5umer --from=" + testAddresses[0].String(),
 			ExpectedMsg: &types.MsgBeginUnlocking{
 				Owner: testAddresses[0].String(),
 				ID:    10,
-				Coins: sdk.NewCoins(sdk.NewInt64Coin("ufury", 5)),
+				Coins: sdk.NewCoins(sdk.NewInt64Coin("umer", 5)),
 			},
 		},
 	}
@@ -120,9 +120,9 @@ func TestCmdTotalLockedByDenom(t *testing.T) {
 	desc, _ := GetCmdTotalLockedByDenom()
 	tcs := map[string]osmocli.QueryCliTestCase[*types.LockedDenomRequest]{
 		"basic test": {
-			Cmd: "ufury --min-duration=1s",
+			Cmd: "umer --min-duration=1s",
 			ExpectedQuery: &types.LockedDenomRequest{
-				Denom:    "ufury",
+				Denom:    "umer",
 				Duration: time.Second,
 			},
 		},

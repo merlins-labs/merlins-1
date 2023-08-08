@@ -10,13 +10,13 @@ import (
 
 var flagBech32Prefix = "prefix"
 
-// get cmd to convert any bech32 address to an fury prefix.
+// get cmd to convert any bech32 address to an mer prefix.
 func ConvertBech32Cmd() *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   "bech32-convert [bech32 string]",
-		Short: "Convert any bech32 string to the fury prefix",
-		Long: `Convert any bech32 string to the fury prefix
-Especially useful for converting cosmos addresses to fury addresses
+		Short: "Convert any bech32 string to the mer prefix",
+		Long: `Convert any bech32 string to the mer prefix
+Especially useful for converting cosmos addresses to mer addresses
 
 Example:
 	merlin bech32-convert cosmos1ey69r37gfxvxg62sh4r0ktpuc46pzjrmz29g45
@@ -44,7 +44,7 @@ Example:
 		},
 	}
 
-	cmd.Flags().StringP(flagBech32Prefix, "p", "fury", "Bech32 Prefix to encode to")
+	cmd.Flags().StringP(flagBech32Prefix, "p", "mer", "Bech32 Prefix to encode to")
 
 	return cmd
 }

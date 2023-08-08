@@ -57,7 +57,7 @@ func (k Keeper) CalcFeeSpotPrice(ctx sdk.Context, inputDenom string) (sdk.Dec, e
 }
 
 // GetFeeToken returns the fee token record for a specific denom,
-// In our case the baseDenom is ufury.
+// In our case the baseDenom is umer.
 func (k Keeper) GetBaseDenom(ctx sdk.Context) (denom string, err error) {
 	store := ctx.KVStore(k.storeKey)
 

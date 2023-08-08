@@ -3,7 +3,7 @@ package simulation
 import (
 	"math/rand"
 
-	furysimtypes "github.com/merlins-labs/merlin/simulation/simtypes"
+	mersimtypes "github.com/merlins-labs/merlin/simulation/simtypes"
 
 	"github.com/cosmos/cosmos-sdk/baseapp"
 
@@ -35,7 +35,7 @@ const (
 // WeightedOperations returns all the operations from the module with their respective weights.
 func WeightedOperations(
 	appParams simtypes.AppParams, cdc codec.JSONCodec, ak stakingtypes.AccountKeeper,
-	bk furysimtypes.BankKeeper, sk types.StakingKeeper, lk types.LockupKeeper, k keeper.Keeper,
+	bk mersimtypes.BankKeeper, sk types.StakingKeeper, lk types.LockupKeeper, k keeper.Keeper,
 ) simulation.WeightedOperations {
 	var (
 		weightMsgSuperfluidDelegate   int
@@ -78,7 +78,7 @@ func WeightedOperations(
 }
 
 // SimulateMsgSuperfluidDelegate generates a MsgSuperfluidDelegate with random values.
-func SimulateMsgSuperfluidDelegate(ak stakingtypes.AccountKeeper, bk furysimtypes.BankKeeper, sk types.StakingKeeper, lk types.LockupKeeper, k keeper.Keeper) simtypes.Operation {
+func SimulateMsgSuperfluidDelegate(ak stakingtypes.AccountKeeper, bk mersimtypes.BankKeeper, sk types.StakingKeeper, lk types.LockupKeeper, k keeper.Keeper) simtypes.Operation {
 	return func(
 		r *rand.Rand, app *baseapp.BaseApp, ctx sdk.Context, accs []simtypes.Account, chainID string,
 	) (simtypes.OperationMsg, []simtypes.FutureOperation, error) {
@@ -96,7 +96,7 @@ func SimulateMsgSuperfluidDelegate(ak stakingtypes.AccountKeeper, bk furysimtype
 				types.ModuleName, types.TypeMsgSuperfluidDelegate, "Account have no period lock"), nil, nil
 		}
 
-		multiplier := k.GetFuryEquivalentMultiplier(ctx, lock.Coins[0].Denom)
+		multiplier := k.GetMerEquivalentMultiplier(ctx, lock.Coins[0].Denom)
 		if multiplier.IsZero() {
 			return simtypes.NoOpMsg(
 				types.ModuleName, types.TypeMsgSuperfluidDelegate, "not able to do superfluid staking if asset Multiplier is zero"), nil, nil
@@ -114,12 +114,12 @@ func SimulateMsgSuperfluidDelegate(ak stakingtypes.AccountKeeper, bk furysimtype
 		}
 
 		txGen := simappparams.MakeTestEncodingConfig().TxConfig
-		return furysimtypes.GenAndDeliverTxWithRandFees(
+		return mersimtypes.GenAndDeliverTxWithRandFees(
 			r, app, txGen, &msg, nil, ctx, simAccount, ak, bk, types.ModuleName)
 	}
 }
 
-func SimulateMsgSuperfluidUndelegate(ak stakingtypes.AccountKeeper, bk furysimtypes.BankKeeper, lk types.LockupKeeper, k keeper.Keeper) simtypes.Operation {
+func SimulateMsgSuperfluidUndelegate(ak stakingtypes.AccountKeeper, bk mersimtypes.BankKeeper, lk types.LockupKeeper, k keeper.Keeper) simtypes.Operation {
 	return func(
 		r *rand.Rand, app *baseapp.BaseApp, ctx sdk.Context, accs []simtypes.Account, chainID string,
 	) (simtypes.OperationMsg, []simtypes.FutureOperation, error) {
@@ -140,12 +140,12 @@ func SimulateMsgSuperfluidUndelegate(ak stakingtypes.AccountKeeper, bk furysimty
 		}
 
 		txGen := simappparams.MakeTestEncodingConfig().TxConfig
-		return furysimtypes.GenAndDeliverTxWithRandFees(
+		return mersimtypes.GenAndDeliverTxWithRandFees(
 			r, app, txGen, &msg, nil, ctx, simAccount, ak, bk, types.ModuleName)
 	}
 }
 
-// func SimulateMsgSuperfluidRedelegate(ak stakingtypes.AccountKeeper, bk furysimtypes.BankKeeper, sk types.StakingKeeper, lk types.LockupKeeper, k keeper.Keeper) simtypes.Operation {
+// func SimulateMsgSuperfluidRedelegate(ak stakingtypes.AccountKeeper, bk mersimtypes.BankKeeper, sk types.StakingKeeper, lk types.LockupKeeper, k keeper.Keeper) simtypes.Operation {
 // 	return func(
 // 		r *rand.Rand, app *baseapp.BaseApp, ctx sdk.Context, accs []simtypes.Account, chainID string,
 // 	) (simtypes.OperationMsg, []simtypes.FutureOperation, error) {
@@ -176,7 +176,7 @@ func SimulateMsgSuperfluidUndelegate(ak stakingtypes.AccountKeeper, bk furysimty
 // 		}
 
 // 		txGen := simappparams.MakeTestEncodingConfig().TxConfig
-// 		return furysimtypes.GenAndDeliverTxWithRandFees(
+// 		return mersimtypes.GenAndDeliverTxWithRandFees(
 // 			r, app, txGen, &msg, nil, ctx, simAccount, ak, bk, types.ModuleName)
 // 	}
 // }

@@ -78,16 +78,16 @@ func (suite *UpgradeTestSuite) TestUpgrade() {
 				upgradeSetup()
 
 				// Create earlier pools
-				for i := uint64(1); i < v16.DaiFuryPoolId; i++ {
+				for i := uint64(1); i < v16.DaiMerPoolId; i++ {
 					suite.PrepareBalancerPoolWithCoins(desiredDenom0Coin, daiCoin)
 				}
 
-				// Create DAI / FURY pool
+				// Create DAI / MER pool
 				suite.PrepareBalancerPoolWithCoins(daiCoin, desiredDenom0Coin)
 			},
 			func() {
 				stakingParams := suite.App.StakingKeeper.GetParams(suite.Ctx)
-				stakingParams.BondDenom = "ufury"
+				stakingParams.BondDenom = "umer"
 				suite.App.StakingKeeper.SetParams(suite.Ctx, stakingParams)
 
 				oneDai := sdk.NewCoins(sdk.NewCoin(v16.DAIIBCDenom, sdk.NewInt(1000000000000000000)))
@@ -98,10 +98,10 @@ func (suite *UpgradeTestSuite) TestUpgrade() {
 				err := suite.App.DistrKeeper.FundCommunityPool(suite.Ctx, oneDai, suite.TestAccs[0])
 				suite.Require().NoError(err)
 
-				// Determine approx how much FURY will be used from community pool when 1 DAI used.
-				daiFuryGammPool, err := suite.App.PoolManagerKeeper.GetPool(suite.Ctx, v16.DaiFuryPoolId)
+				// Determine approx how much MER will be used from community pool when 1 DAI used.
+				daiMerGammPool, err := suite.App.PoolManagerKeeper.GetPool(suite.Ctx, v16.DaiMerPoolId)
 				suite.Require().NoError(err)
-				respectiveFury, err := suite.App.GAMMKeeper.CalcOutAmtGivenIn(suite.Ctx, daiFuryGammPool, oneDai[0], v16.DesiredDenom0, sdk.ZeroDec())
+				respectiveMer, err := suite.App.GAMMKeeper.CalcOutAmtGivenIn(suite.Ctx, daiMerGammPool, oneDai[0], v16.DesiredDenom0, sdk.ZeroDec())
 				suite.Require().NoError(err)
 
 				// Retrieve the community pool balance before the upgrade
@@ -117,21 +117,21 @@ func (suite *UpgradeTestSuite) TestUpgrade() {
 				communityPoolBalancePost := suite.App.BankKeeper.GetAllBalances(suite.Ctx, communityPoolAddress)
 				feePoolCommunityPoolPost := suite.App.DistrKeeper.GetFeePool(suite.Ctx).CommunityPool
 
-				// Validate that the community pool balance has been reduced by the amount of FURY that was used to create the pool
-				// Note we use all the fury, but a small amount of DAI is left over due to rounding when creating the first position.
-				suite.Require().Equal(communityPoolBalancePre.AmountOf("ufury").Sub(respectiveFury.Amount).String(), communityPoolBalancePost.AmountOf("ufury").String())
+				// Validate that the community pool balance has been reduced by the amount of MER that was used to create the pool
+				// Note we use all the mer, but a small amount of DAI is left over due to rounding when creating the first position.
+				suite.Require().Equal(communityPoolBalancePre.AmountOf("umer").Sub(respectiveMer.Amount).String(), communityPoolBalancePost.AmountOf("umer").String())
 				suite.Require().Equal(0, multiplicativeTolerance.Compare(communityPoolBalancePre.AmountOf(v16.DAIIBCDenom), oneDai[0].Amount.Sub(communityPoolBalancePost.AmountOf(v16.DAIIBCDenom))))
 
-				// Validate that the fee pool community pool balance has been decreased by the amount of FURY/DAI that was used to create the pool
-				suite.Require().Equal(communityPoolBalancePost.AmountOf("ufury").String(), feePoolCommunityPoolPost.AmountOf("ufury").TruncateInt().String())
+				// Validate that the fee pool community pool balance has been decreased by the amount of MER/DAI that was used to create the pool
+				suite.Require().Equal(communityPoolBalancePost.AmountOf("umer").String(), feePoolCommunityPoolPost.AmountOf("umer").TruncateInt().String())
 				suite.Require().Equal(communityPoolBalancePost.AmountOf(v16.DAIIBCDenom).String(), feePoolCommunityPoolPost.AmountOf(v16.DAIIBCDenom).TruncateInt().String())
 
 				// Get balancer pool's spot price.
-				balancerSpotPrice, err := suite.App.GAMMKeeper.CalculateSpotPrice(suite.Ctx, v16.DaiFuryPoolId, v16.DAIIBCDenom, v16.DesiredDenom0)
+				balancerSpotPrice, err := suite.App.GAMMKeeper.CalculateSpotPrice(suite.Ctx, v16.DaiMerPoolId, v16.DAIIBCDenom, v16.DesiredDenom0)
 				suite.Require().NoError(err)
 
 				// Validate CL pool was created.
-				concentratedPool, err := suite.App.PoolManagerKeeper.GetPool(suite.Ctx, v16.DaiFuryPoolId+1)
+				concentratedPool, err := suite.App.PoolManagerKeeper.GetPool(suite.Ctx, v16.DaiMerPoolId+1)
 				suite.Require().NoError(err)
 				suite.Require().Equal(poolmanagertypes.Concentrated, concentratedPool.GetType())
 
@@ -151,7 +151,7 @@ func (suite *UpgradeTestSuite) TestUpgrade() {
 
 				// Validate that the link is correct.
 				link := migrationInfo.BalancerToConcentratedPoolLinks[0]
-				suite.Require().Equal(v16.DaiFuryPoolId, link.BalancerPoolId)
+				suite.Require().Equal(v16.DaiMerPoolId, link.BalancerPoolId)
 				suite.Require().Equal(concentratedPool.GetId(), link.ClPoolId)
 
 				// Check authorized denoms are set correctly.
@@ -217,12 +217,12 @@ func upgradeProtorevSetup(suite *UpgradeTestSuite) error {
 	account := apptesting.CreateRandomAccounts(1)[0]
 	suite.App.ProtoRevKeeper.SetDeveloperAccount(suite.Ctx, account)
 
-	devFee := sdk.NewCoin("ufury", sdk.NewInt(1000000))
+	devFee := sdk.NewCoin("umer", sdk.NewInt(1000000))
 	if err := suite.App.ProtoRevKeeper.SetDeveloperFees(suite.Ctx, devFee); err != nil {
 		return err
 	}
 
-	fundCoin := sdk.NewCoins(sdk.NewCoin("ufury", sdk.NewInt(1000000)))
+	fundCoin := sdk.NewCoins(sdk.NewCoin("umer", sdk.NewInt(1000000)))
 
 	if err := suite.App.AppKeepers.BankKeeper.MintCoins(suite.Ctx, protorevtypes.ModuleName, fundCoin); err != nil {
 		return err
@@ -235,7 +235,7 @@ func verifyProtorevUpdateSuccess(suite *UpgradeTestSuite) {
 	// Ensure balance was transferred to the developer account
 	devAcc, err := suite.App.ProtoRevKeeper.GetDeveloperAccount(suite.Ctx)
 	suite.Require().NoError(err)
-	suite.Require().Equal(suite.App.BankKeeper.GetBalance(suite.Ctx, devAcc, "ufury"), sdk.NewCoin("ufury", sdk.NewInt(1000000)))
+	suite.Require().Equal(suite.App.BankKeeper.GetBalance(suite.Ctx, devAcc, "umer"), sdk.NewCoin("umer", sdk.NewInt(1000000)))
 
 	// Ensure developer fees are empty
 	coins, err := suite.App.ProtoRevKeeper.GetAllDeveloperFees(suite.Ctx)

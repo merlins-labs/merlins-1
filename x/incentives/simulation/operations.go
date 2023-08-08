@@ -4,7 +4,7 @@ import (
 	"math/rand"
 	"time"
 
-	furysimtypes "github.com/merlins-labs/merlin/simulation/simtypes"
+	mersimtypes "github.com/merlins-labs/merlin/simulation/simtypes"
 
 	"github.com/cosmos/cosmos-sdk/baseapp"
 
@@ -31,7 +31,7 @@ const (
 // WeightedOperations returns all the operations from the module with their respective weights.
 func WeightedOperations(
 	appParams simtypes.AppParams, cdc codec.JSONCodec, ak stakingTypes.AccountKeeper,
-	bk furysimtypes.BankKeeper, ek types.EpochKeeper, k keeper.Keeper,
+	bk mersimtypes.BankKeeper, ek types.EpochKeeper, k keeper.Keeper,
 ) simulation.WeightedOperations {
 	var (
 		weightMsgCreateGauge int
@@ -120,7 +120,7 @@ func Max(x, y int) int {
 }
 
 // SimulateMsgCreateGauge generates and executes a MsgCreateGauge with random parameters
-func SimulateMsgCreateGauge(ak stakingTypes.AccountKeeper, bk furysimtypes.BankKeeper, ek types.EpochKeeper, k keeper.Keeper) simtypes.Operation {
+func SimulateMsgCreateGauge(ak stakingTypes.AccountKeeper, bk mersimtypes.BankKeeper, ek types.EpochKeeper, k keeper.Keeper) simtypes.Operation {
 	return func(
 		r *rand.Rand, app *baseapp.BaseApp, ctx sdk.Context, accs []simtypes.Account, chainID string,
 	) (simtypes.OperationMsg, []simtypes.FutureOperation, error) {
@@ -153,13 +153,13 @@ func SimulateMsgCreateGauge(ak stakingTypes.AccountKeeper, bk furysimtypes.BankK
 		}
 
 		txGen := simappparams.MakeTestEncodingConfig().TxConfig
-		return furysimtypes.GenAndDeliverTxWithRandFees(
+		return mersimtypes.GenAndDeliverTxWithRandFees(
 			r, app, txGen, &msg, rewards, ctx, simAccount, ak, bk, types.ModuleName)
 	}
 }
 
 // SimulateMsgAddToGauge generates and executes a MsgAddToGauge with random parameters
-func SimulateMsgAddToGauge(ak stakingTypes.AccountKeeper, bk furysimtypes.BankKeeper, k keeper.Keeper) simtypes.Operation {
+func SimulateMsgAddToGauge(ak stakingTypes.AccountKeeper, bk mersimtypes.BankKeeper, k keeper.Keeper) simtypes.Operation {
 	return func(
 		r *rand.Rand, app *baseapp.BaseApp, ctx sdk.Context, accs []simtypes.Account, chainID string,
 	) (simtypes.OperationMsg, []simtypes.FutureOperation, error) {
@@ -188,7 +188,7 @@ func SimulateMsgAddToGauge(ak stakingTypes.AccountKeeper, bk furysimtypes.BankKe
 		}
 
 		txGen := simappparams.MakeTestEncodingConfig().TxConfig
-		return furysimtypes.GenAndDeliverTxWithRandFees(
+		return mersimtypes.GenAndDeliverTxWithRandFees(
 			r, app, txGen, &msg, rewards, ctx, simAccount, ak, bk, types.ModuleName,
 		)
 	}

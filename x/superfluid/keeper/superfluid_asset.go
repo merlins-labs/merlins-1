@@ -17,14 +17,14 @@ import (
 // See https://github.com/merlins-labs/merlin/issues/864
 func (k Keeper) BeginUnwindSuperfluidAsset(ctx sdk.Context, epochNum int64, asset types.SuperfluidAsset) {
 	// Right now set the TWAP to 0, and delete the asset.
-	k.SetFuryEquivalentMultiplier(ctx, epochNum, asset.Denom, sdk.ZeroDec())
+	k.SetMerEquivalentMultiplier(ctx, epochNum, asset.Denom, sdk.ZeroDec())
 	k.DeleteSuperfluidAsset(ctx, asset.Denom)
 }
 
 // Returns amount * (1 - k.RiskFactor(asset))
 // Fow now, the risk factor is a global constant.
 // It will move towards per pool functions.
-func (k Keeper) GetRiskAdjustedFuryValue(ctx sdk.Context, amount sdk.Int) sdk.Int {
+func (k Keeper) GetRiskAdjustedMerValue(ctx sdk.Context, amount sdk.Int) sdk.Int {
 	minRiskFactor := k.GetParams(ctx).MinimumRiskFactor
 	return amount.Sub(amount.ToDec().Mul(minRiskFactor).RoundInt())
 }
@@ -33,18 +33,18 @@ func (k Keeper) GetRiskAdjustedFuryValue(ctx sdk.Context, amount sdk.Int) sdk.In
 // y = x (1 - minRisk)
 // y / (1 - minRisk) = x
 
-func (k Keeper) UnriskAdjustFuryValue(ctx sdk.Context, amount sdk.Dec) sdk.Dec {
+func (k Keeper) UnriskAdjustMerValue(ctx sdk.Context, amount sdk.Dec) sdk.Dec {
 	minRiskFactor := k.GetParams(ctx).MinimumRiskFactor
 	return amount.Quo(sdk.OneDec().Sub(minRiskFactor))
 }
 
 func (k Keeper) AddNewSuperfluidAsset(ctx sdk.Context, asset types.SuperfluidAsset) error {
-	// initialize fury equivalent multipliers
+	// initialize mer equivalent multipliers
 	epochIdentifier := k.GetEpochIdentifier(ctx)
 	currentEpoch := k.ek.GetEpochInfo(ctx, epochIdentifier).CurrentEpoch
 	return osmoutils.ApplyFuncIfNoError(ctx, func(ctx sdk.Context) error {
 		k.SetSuperfluidAsset(ctx, asset)
-		err := k.UpdateFuryEquivalentMultipliers(ctx, asset, currentEpoch)
+		err := k.UpdateMerEquivalentMultipliers(ctx, asset, currentEpoch)
 		return err
 	})
 }

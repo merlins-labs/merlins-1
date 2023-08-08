@@ -38,8 +38,8 @@ var (
 	// It is limited by sdk.Dec's precision.
 	MinSpotPrice = sdk.SmallestDec()
 
-	// MultihopSpreadFactorMultiplierForFuryPools if a spread factor multiplier for trades consists of just two FURY pools during a single transaction.
-	MultihopSpreadFactorMultiplierForFuryPools = sdk.NewDecWithPrec(5, 1) // 0.5
+	// MultihopSpreadFactorMultiplierForMerPools if a spread factor multiplier for trades consists of just two MER pools during a single transaction.
+	MultihopSpreadFactorMultiplierForMerPools = sdk.NewDecWithPrec(5, 1) // 0.5
 
 	// Maximum amount per asset after the application of scaling factors should be 10e34.
 	StableswapMaxScaledAmtPerAsset = sdk.NewDec(10).Power(34).TruncateInt()

@@ -465,7 +465,7 @@ func (s *KeeperTestSuite) TestDecreaseConcentratedPoolTickSpacing() {
 			s.SetupTest()
 			owner := s.TestAccs[0]
 
-			// Create FURY <> USDC pool with tick spacing of 100
+			// Create MER <> USDC pool with tick spacing of 100
 			concentratedPool := s.PrepareConcentratedPoolWithCoinsAndFullRangePosition(ETH, USDC)
 
 			// Create a position in the pool that is divisible by the tick spacing
@@ -501,7 +501,7 @@ func (s *KeeperTestSuite) TestGetTotalPoolLiquidity() {
 	var (
 		defaultPoolCoinOne = sdk.NewCoin(USDC, sdk.OneInt())
 		defaultPoolCoinTwo = sdk.NewCoin(ETH, sdk.NewInt(2))
-		nonPoolCool        = sdk.NewCoin("ufury", sdk.NewInt(3))
+		nonPoolCool        = sdk.NewCoin("umer", sdk.NewInt(3))
 
 		defaultCoins = sdk.NewCoins(defaultPoolCoinOne, defaultPoolCoinTwo)
 	)

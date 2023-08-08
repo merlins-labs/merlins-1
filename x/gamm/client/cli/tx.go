@@ -52,8 +52,8 @@ func NewCreatePoolCmd() *osmocli.TxCliDesc {
 		Long: `Must provide path to a pool JSON file (--pool-file) describing the pool to be created
 Sample pool JSON file contents for balancer:
 {
-	"weights": "4uatom,4fury,2uakt",
-	"initial-deposit": "100uatom,5fury,20uakt",
+	"weights": "4uatom,4mer,2uakt",
+	"initial-deposit": "100uatom,5mer,20uakt",
 	"swap-fee": "0.01",
 	"exit-fee": "0.01",
 	"future-governor": "168h"

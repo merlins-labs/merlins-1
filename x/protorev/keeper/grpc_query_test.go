@@ -100,9 +100,9 @@ func (s *KeeperTestSuite) TestGetProtoRevAllProfits() {
 	res, err = s.queryClient.GetProtoRevAllProfits(sdk.WrapSDKContext(s.Ctx), req)
 	s.Require().NoError(err)
 	atom := sdk.NewCoin("Atom", sdk.NewInt(3000))
-	fury := sdk.NewCoin(types.MerlinDenomination, sdk.NewInt(9000))
+	mer := sdk.NewCoin(types.MerlinDenomination, sdk.NewInt(9000))
 	s.Require().Contains(res.Profits, atom)
-	s.Require().Contains(res.Profits, fury)
+	s.Require().Contains(res.Profits, mer)
 
 	// Pseudo execute more trades
 	err = s.App.AppKeepers.ProtoRevKeeper.UpdateStatistics(s.Ctx, poolmanagertypes.SwapAmountInRoutes{}, types.MerlinDenomination, sdk.NewInt(10000))
@@ -113,9 +113,9 @@ func (s *KeeperTestSuite) TestGetProtoRevAllProfits() {
 	res, err = s.queryClient.GetProtoRevAllProfits(sdk.WrapSDKContext(s.Ctx), req)
 	s.Require().NoError(err)
 	atom = sdk.NewCoin("Atom", sdk.NewInt(13000))
-	fury = sdk.NewCoin(types.MerlinDenomination, sdk.NewInt(19000))
+	mer = sdk.NewCoin(types.MerlinDenomination, sdk.NewInt(19000))
 	s.Require().Contains(res.Profits, atom)
-	s.Require().Contains(res.Profits, fury)
+	s.Require().Contains(res.Profits, mer)
 }
 
 // TestGetProtoRevStatisticsByRoute tests the query for statistics by route
@@ -163,9 +163,9 @@ func (s *KeeperTestSuite) TestGetProtoRevStatisticsByRoute() {
 	s.Require().Equal([]uint64{1, 2, 3}, res.Statistics.Route)
 	s.Require().Equal(sdk.NewInt(3), res.Statistics.NumberOfTrades)
 	atomCoin := sdk.NewCoin("Atom", sdk.NewInt(90000))
-	furyCoin := sdk.NewCoin(types.MerlinDenomination, sdk.NewInt(80000))
+	merCoin := sdk.NewCoin(types.MerlinDenomination, sdk.NewInt(80000))
 	s.Require().Contains(res.Statistics.Profits, atomCoin)
-	s.Require().Contains(res.Statistics.Profits, furyCoin)
+	s.Require().Contains(res.Statistics.Profits, merCoin)
 }
 
 // TestGetProtoRevAllRouteStatistics tests the query for all route statistics
@@ -186,8 +186,8 @@ func (s *KeeperTestSuite) TestGetProtoRevAllRouteStatistics() {
 	s.Require().Equal(1, len(res.Statistics))
 	s.Require().Equal([]uint64{1, 2, 3}, res.Statistics[0].Route)
 	s.Require().Equal(sdk.OneInt(), res.Statistics[0].NumberOfTrades)
-	furyCoin := sdk.NewCoin(types.MerlinDenomination, sdk.NewInt(10000))
-	s.Require().Contains(res.Statistics[0].Profits, furyCoin)
+	merCoin := sdk.NewCoin(types.MerlinDenomination, sdk.NewInt(10000))
+	s.Require().Contains(res.Statistics[0].Profits, merCoin)
 
 	// Pseudo execute another trade
 	err = s.App.AppKeepers.ProtoRevKeeper.UpdateStatistics(s.Ctx, poolmanagertypes.SwapAmountInRoutes{{TokenOutDenom: "", PoolId: 1}, {TokenOutDenom: "", PoolId: 2}, {TokenOutDenom: "", PoolId: 3}}, types.MerlinDenomination, sdk.NewInt(80000))
@@ -199,8 +199,8 @@ func (s *KeeperTestSuite) TestGetProtoRevAllRouteStatistics() {
 	s.Require().Equal(1, len(res.Statistics))
 	s.Require().Equal([]uint64{1, 2, 3}, res.Statistics[0].Route)
 	s.Require().Equal(sdk.NewInt(2), res.Statistics[0].NumberOfTrades)
-	furyCoin = sdk.NewCoin(types.MerlinDenomination, sdk.NewInt(90000))
-	s.Require().Contains(res.Statistics[0].Profits, furyCoin)
+	merCoin = sdk.NewCoin(types.MerlinDenomination, sdk.NewInt(90000))
+	s.Require().Contains(res.Statistics[0].Profits, merCoin)
 
 	// Pseudo execute another trade on a different route
 	err = s.App.AppKeepers.ProtoRevKeeper.UpdateStatistics(s.Ctx, poolmanagertypes.SwapAmountInRoutes{{TokenOutDenom: "", PoolId: 1}, {TokenOutDenom: "", PoolId: 2}, {TokenOutDenom: "", PoolId: 4}}, types.MerlinDenomination, sdk.NewInt(70000))
@@ -212,12 +212,12 @@ func (s *KeeperTestSuite) TestGetProtoRevAllRouteStatistics() {
 	s.Require().Equal(2, len(res.Statistics))
 	s.Require().Equal([]uint64{1, 2, 3}, res.Statistics[0].Route)
 	s.Require().Equal(sdk.NewInt(2), res.Statistics[0].NumberOfTrades)
-	s.Require().Contains(res.Statistics[0].Profits, furyCoin)
+	s.Require().Contains(res.Statistics[0].Profits, merCoin)
 
 	s.Require().Equal([]uint64{1, 2, 4}, res.Statistics[1].Route)
 	s.Require().Equal(sdk.OneInt(), res.Statistics[1].NumberOfTrades)
-	furyCoin = sdk.NewCoin(types.MerlinDenomination, sdk.NewInt(70000))
-	s.Require().Contains(res.Statistics[1].Profits, furyCoin)
+	merCoin = sdk.NewCoin(types.MerlinDenomination, sdk.NewInt(70000))
+	s.Require().Contains(res.Statistics[1].Profits, merCoin)
 
 	// Pseudo execute another trade on a different route and denom
 	err = s.App.AppKeepers.ProtoRevKeeper.UpdateStatistics(s.Ctx, poolmanagertypes.SwapAmountInRoutes{{TokenOutDenom: "", PoolId: 5}, {TokenOutDenom: "", PoolId: 2}, {TokenOutDenom: "", PoolId: 4}}, "Atom", sdk.NewInt(80000))
@@ -229,13 +229,13 @@ func (s *KeeperTestSuite) TestGetProtoRevAllRouteStatistics() {
 	s.Require().Equal(3, len(res.Statistics))
 	s.Require().Equal([]uint64{1, 2, 3}, res.Statistics[0].Route)
 	s.Require().Equal(sdk.NewInt(2), res.Statistics[0].NumberOfTrades)
-	furyCoin = sdk.NewCoin(types.MerlinDenomination, sdk.NewInt(90000))
-	s.Require().Contains(res.Statistics[0].Profits, furyCoin)
+	merCoin = sdk.NewCoin(types.MerlinDenomination, sdk.NewInt(90000))
+	s.Require().Contains(res.Statistics[0].Profits, merCoin)
 
 	s.Require().Equal([]uint64{1, 2, 4}, res.Statistics[1].Route)
 	s.Require().Equal(sdk.OneInt(), res.Statistics[1].NumberOfTrades)
-	furyCoin = sdk.NewCoin(types.MerlinDenomination, sdk.NewInt(70000))
-	s.Require().Contains(res.Statistics[1].Profits, furyCoin)
+	merCoin = sdk.NewCoin(types.MerlinDenomination, sdk.NewInt(70000))
+	s.Require().Contains(res.Statistics[1].Profits, merCoin)
 
 	s.Require().Equal([]uint64{5, 2, 4}, res.Statistics[2].Route)
 	s.Require().Equal(sdk.OneInt(), res.Statistics[2].NumberOfTrades)
@@ -359,7 +359,7 @@ func (s *KeeperTestSuite) TestGetProtoRevEnabledQuery() {
 func (s *KeeperTestSuite) TestGetProtoRevPool() {
 	// Request without setting pool for the base denom and other denom should return an error
 	req := &types.QueryGetProtoRevPoolRequest{
-		BaseDenom:  "ufury",
+		BaseDenom:  "umer",
 		OtherDenom: "atom",
 	}
 	res, err := s.queryClient.GetProtoRevPool(sdk.WrapSDKContext(s.Ctx), req)

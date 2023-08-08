@@ -57,9 +57,9 @@ func CreateUpgradeHandler(
 		// See RunMigrations() for details.
 		fromVM[ibcratelimittypes.ModuleName] = 0
 
-		// Metadata for ufury and uion were missing prior to this upgrade.
+		// Metadata for umer and uion were missing prior to this upgrade.
 		// They are added in this upgrade.
-		registerFuryIonMetadata(ctx, keepers.BankKeeper)
+		registerMerIonMetadata(ctx, keepers.BankKeeper)
 
 		// Stride stXXX/XXX pools are being migrated from the standard balancer curve to the
 		// solidly stable curve.
@@ -80,8 +80,8 @@ func setICQParams(ctx sdk.Context, icqKeeper *icqkeeper.Keeper) {
 }
 
 func migrateBalancerPoolsToSolidlyStable(ctx sdk.Context, gammKeeper *gammkeeper.Keeper, poolmanagerKeeper *poolmanager.Keeper, bankKeeper bankkeeper.Keeper) {
-	// migrate stFURY_FURYPoolId, stJUNO_JUNOPoolId, stSTARS_STARSPoolId
-	pools := []uint64{stFURY_FURYPoolId, stJUNO_JUNOPoolId, stSTARS_STARSPoolId}
+	// migrate stMER_MERPoolId, stJUNO_JUNOPoolId, stSTARS_STARSPoolId
+	pools := []uint64{stMER_MERPoolId, stJUNO_JUNOPoolId, stSTARS_STARSPoolId}
 	for _, poolId := range pools {
 		migrateBalancerPoolToSolidlyStable(ctx, gammKeeper, poolmanagerKeeper, bankKeeper, poolId)
 	}
@@ -252,8 +252,8 @@ func migrateNextPoolId(ctx sdk.Context, gammKeeper *gammkeeper.Keeper, poolmanag
 	}
 }
 
-func registerFuryIonMetadata(ctx sdk.Context, bankKeeper bankkeeper.Keeper) {
-	ufuryMetadata := banktypes.Metadata{
+func registerMerIonMetadata(ctx sdk.Context, bankKeeper bankkeeper.Keeper) {
+	umerMetadata := banktypes.Metadata{
 		Description: "The native token of Merlin",
 		DenomUnits: []*banktypes.DenomUnit{
 			{
@@ -263,7 +263,7 @@ func registerFuryIonMetadata(ctx sdk.Context, bankKeeper bankkeeper.Keeper) {
 			},
 			{
 				Denom:    appParams.HumanCoinUnit,
-				Exponent: appParams.FuryExponent,
+				Exponent: appParams.MerExponent,
 				Aliases:  nil,
 			},
 		},
@@ -288,6 +288,6 @@ func registerFuryIonMetadata(ctx sdk.Context, bankKeeper bankkeeper.Keeper) {
 		Display: "ion",
 	}
 
-	bankKeeper.SetDenomMetaData(ctx, ufuryMetadata)
+	bankKeeper.SetDenomMetaData(ctx, umerMetadata)
 	bankKeeper.SetDenomMetaData(ctx, uionMetadata)
 }

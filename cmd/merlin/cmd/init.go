@@ -220,7 +220,7 @@ func CreateEnvFile(cmd *cobra.Command) error {
 				fmt.Println("using mainnet environment")
 				nodeHome = EnvMainnet
 			}
-			_, err = envFile.WriteString(fmt.Sprintf("MERLIND_ENVIRONMENT=%s", nodeHome))
+			_, err = envFile.WriteString(fmt.Sprintf("MERLIN_ENVIRONMENT=%s", nodeHome))
 			if err != nil {
 				return err
 			}

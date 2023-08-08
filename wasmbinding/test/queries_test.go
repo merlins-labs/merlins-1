@@ -94,7 +94,7 @@ func TestDenomAdmin(t *testing.T) {
 		},
 		{
 			name:        "invalid token factory denom",
-			denom:       "ufury",
+			denom:       "umer",
 			expectErr:   false,
 			expectAdmin: "",
 		},

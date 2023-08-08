@@ -608,7 +608,7 @@ func (s *KeeperTestSuite) setUpPools() {
 		{ // Pool 29
 			PoolAssets: []balancer.PoolAsset{
 				{
-					Token:  sdk.NewCoin("ufury", sdk.NewInt(1000000000)),
+					Token:  sdk.NewCoin("umer", sdk.NewInt(1000000000)),
 					Weight: sdk.NewInt(1),
 				},
 				{
@@ -623,7 +623,7 @@ func (s *KeeperTestSuite) setUpPools() {
 		{ // Pool 30
 			PoolAssets: []balancer.PoolAsset{
 				{
-					Token:  sdk.NewCoin("ufury", sdk.NewInt(1000000000)),
+					Token:  sdk.NewCoin("umer", sdk.NewInt(1000000000)),
 					Weight: sdk.NewInt(1),
 				},
 				{
@@ -856,7 +856,7 @@ func (s *KeeperTestSuite) setUpPools() {
 		{ // Pool 46 - Used for epoch_hook UpdateHighestLiquidityPool testing
 			initialLiquidity: sdk.NewCoins(
 				sdk.NewCoin("epochOne", sdk.NewInt(1000)),
-				sdk.NewCoin("ufury", sdk.NewInt(1000)),
+				sdk.NewCoin("umer", sdk.NewInt(1000)),
 			),
 			poolParams: stableswap.PoolParams{
 				SwapFee: sdk.NewDecWithPrec(1, 4),
@@ -867,7 +867,7 @@ func (s *KeeperTestSuite) setUpPools() {
 		{ // Pool 47 - Used for epoch_hook UpdateHighestLiquidityPool testing
 			initialLiquidity: sdk.NewCoins(
 				sdk.NewCoin("epochOne", sdk.NewInt(1000)),
-				sdk.NewCoin("ufury", sdk.NewInt(2000)),
+				sdk.NewCoin("umer", sdk.NewInt(2000)),
 			),
 			poolParams: stableswap.PoolParams{
 				SwapFee: sdk.NewDecWithPrec(1, 4),
@@ -878,7 +878,7 @@ func (s *KeeperTestSuite) setUpPools() {
 		{ // Pool 48 - Used for epoch_hook UpdateHighestLiquidityPool testing
 			initialLiquidity: sdk.NewCoins(
 				sdk.NewCoin("epochTwo", sdk.NewInt(1000)),
-				sdk.NewCoin("ufury", sdk.NewInt(1000)),
+				sdk.NewCoin("umer", sdk.NewInt(1000)),
 			),
 			poolParams: stableswap.PoolParams{
 				SwapFee: sdk.NewDecWithPrec(1, 4),
@@ -894,7 +894,7 @@ func (s *KeeperTestSuite) setUpPools() {
 
 	// Create a concentrated liquidity pool for epoch_hook testing
 	// Pool 49
-	s.PrepareConcentratedPoolWithCoinsAndFullRangePosition("epochTwo", "ufury")
+	s.PrepareConcentratedPoolWithCoinsAndFullRangePosition("epochTwo", "umer")
 
 	// Set all of the pool info into the stores
 	err := s.App.ProtoRevKeeper.UpdatePools(s.Ctx)
@@ -949,9 +949,9 @@ func (s *KeeperTestSuite) setUpTokenPairRoutes() {
 	atomBitcoin := types.NewTrade(4, "bitcoin", "Atom")
 
 	// Stableswap Route
-	ufuryUSDC := types.NewTrade(0, types.MerlinDenomination, "usdc")
+	umerUSDC := types.NewTrade(0, types.MerlinDenomination, "usdc")
 	usdcBUSD := types.NewTrade(40, "usdc", "busd")
-	busdUFURY := types.NewTrade(30, "busd", types.MerlinDenomination)
+	busdUMER := types.NewTrade(30, "busd", types.MerlinDenomination)
 
 	// Atom Route
 	atomIBC1 := types.NewTrade(31, "Atom", "ibc/BE1BB42D4BE3C30D50B68D7C41DB4DFCE9678E8EF8C539F6E6A9345048894FCC")
@@ -992,7 +992,7 @@ func (s *KeeperTestSuite) setUpTokenPairRoutes() {
 			ArbRoutes: []types.Route{
 				{
 					StepSize: standardStepSize,
-					Trades:   []types.Trade{ufuryUSDC, usdcBUSD, busdUFURY},
+					Trades:   []types.Trade{umerUSDC, usdcBUSD, busdUMER},
 				},
 			},
 		},

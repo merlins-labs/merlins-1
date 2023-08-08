@@ -37,9 +37,9 @@ func (k Keeper) AfterEpochStartBeginBlock(ctx sdk.Context) {
 	// Update all LP tokens multipliers for the upcoming epoch.
 	// This affects staking reward distribution until the next epochs rewards.
 	// Exclusive of current epoch's rewards, inclusive of next epoch's rewards.
-	ctx.Logger().Info("Update all fury equivalency multipliers")
+	ctx.Logger().Info("Update all mer equivalency multipliers")
 	for _, asset := range k.GetAllSuperfluidAssets(ctx) {
-		err := k.UpdateFuryEquivalentMultipliers(ctx, asset, curEpoch)
+		err := k.UpdateMerEquivalentMultipliers(ctx, asset, curEpoch)
 		if err != nil {
 			// TODO: Revisit what we do here. (halt all distr, only skip this asset)
 			// Since at MVP of feature, we only have one pool of superfluid staking,
@@ -77,7 +77,7 @@ func (k Keeper) MoveSuperfluidDelegationRewardToGauges(ctx sdk.Context) {
 
 		// Send delegation rewards to gauges
 		_ = osmoutils.ApplyFuncIfNoError(ctx, func(cacheCtx sdk.Context) error {
-			// Note! We only send the bond denom (fury), to avoid attack vectors where people
+			// Note! We only send the bond denom (mer), to avoid attack vectors where people
 			// send many different denoms to the intermediary account, and make a resource exhaustion attack on end block.
 			bondDenom := k.sk.BondDenom(cacheCtx)
 			balance := k.bk.GetBalance(cacheCtx, addr, bondDenom)
@@ -108,9 +108,9 @@ func (k Keeper) distributeSuperfluidGauges(ctx sdk.Context) {
 	}
 }
 
-func (k Keeper) UpdateFuryEquivalentMultipliers(ctx sdk.Context, asset types.SuperfluidAsset, newEpochNumber int64) error {
+func (k Keeper) UpdateMerEquivalentMultipliers(ctx sdk.Context, asset types.SuperfluidAsset, newEpochNumber int64) error {
 	if asset.AssetType == types.SuperfluidAssetTypeLPShare {
-		// LP_token_Fury_equivalent = FURY_amount_on_pool / LP_token_supply
+		// LP_token_Mer_equivalent = MER_amount_on_pool / LP_token_supply
 		poolId := gammtypes.MustGetPoolIdFromShareDenom(asset.Denom)
 		pool, err := k.gk.GetPoolAndPoke(ctx, poolId)
 		if err != nil {
@@ -120,26 +120,26 @@ func (k Keeper) UpdateFuryEquivalentMultipliers(ctx sdk.Context, asset types.Sup
 			return err
 		}
 
-		// get FURY amount
+		// get MER amount
 		bondDenom := k.sk.BondDenom(ctx)
-		furyPoolAsset := pool.GetTotalPoolLiquidity(ctx).AmountOf(bondDenom)
-		if furyPoolAsset.IsZero() {
-			err := fmt.Errorf("pool %d has zero FURY amount", poolId)
-			// Pool has unexpectedly removed Fury from its assets.
+		merPoolAsset := pool.GetTotalPoolLiquidity(ctx).AmountOf(bondDenom)
+		if merPoolAsset.IsZero() {
+			err := fmt.Errorf("pool %d has zero MER amount", poolId)
+			// Pool has unexpectedly removed Mer from its assets.
 			k.Logger(ctx).Error(err.Error())
 			k.BeginUnwindSuperfluidAsset(ctx, 0, asset)
 			return err
 		}
 
-		multiplier := k.calculateFuryBackingPerShare(pool, furyPoolAsset)
-		k.SetFuryEquivalentMultiplier(ctx, newEpochNumber, asset.Denom, multiplier)
+		multiplier := k.calculateMerBackingPerShare(pool, merPoolAsset)
+		k.SetMerEquivalentMultiplier(ctx, newEpochNumber, asset.Denom, multiplier)
 	} else if asset.AssetType == types.SuperfluidAssetTypeConcentratedShare {
-		// LP_token_Fury_equivalent = FURY_amount_on_pool / LP_token_supply
+		// LP_token_Mer_equivalent = MER_amount_on_pool / LP_token_supply
 		poolId := cltypes.MustGetPoolIdFromShareDenom(asset.Denom)
 		pool, err := k.clk.GetConcentratedPoolById(ctx, poolId)
 		if err != nil {
 			k.Logger(ctx).Error(err.Error())
-			// Pool has unexpectedly removed Fury from its assets.
+			// Pool has unexpectedly removed Mer from its assets.
 			k.BeginUnwindSuperfluidAsset(ctx, 0, asset)
 			return err
 		}
@@ -168,19 +168,19 @@ func (k Keeper) UpdateFuryEquivalentMultipliers(ctx sdk.Context, asset types.Sup
 		}
 		assets := sdk.NewCoins(asset0, asset1)
 
-		// get FURY amount from underlying assets
-		furyPoolAsset := assets.AmountOf(bondDenom)
-		if furyPoolAsset.IsZero() {
-			// Pool has unexpectedly removed FURY from its assets.
-			err := errors.New("pool has unexpectedly removed FURY as one of its underlying assets")
+		// get MER amount from underlying assets
+		merPoolAsset := assets.AmountOf(bondDenom)
+		if merPoolAsset.IsZero() {
+			// Pool has unexpectedly removed MER from its assets.
+			err := errors.New("pool has unexpectedly removed MER as one of its underlying assets")
 			k.Logger(ctx).Error(err.Error())
 			k.BeginUnwindSuperfluidAsset(ctx, 0, asset)
 			return err
 		}
 
 		// calculate multiplier and set it
-		multiplier := furyPoolAsset.ToDec().Quo(fullRangeLiquidity)
-		k.SetFuryEquivalentMultiplier(ctx, newEpochNumber, asset.Denom, multiplier)
+		multiplier := merPoolAsset.ToDec().Quo(fullRangeLiquidity)
+		k.SetMerEquivalentMultiplier(ctx, newEpochNumber, asset.Denom, multiplier)
 	} else if asset.AssetType == types.SuperfluidAssetTypeNative {
 		// TODO: Consider deleting superfluid asset type native
 		k.Logger(ctx).Error("unsupported superfluid asset type")

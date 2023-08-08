@@ -96,7 +96,7 @@ func (suite *StrategyTestSuite) TestComputeSwapStepOutGivenIn_OneForZero() {
 			amountOneInRemaining: defaultAmountOne.Sub(sdk.NewDec(100)),
 			spreadFactor:         sdk.ZeroDec(),
 
-			// sqrtPriceCurrent + round_fury_prec_down(token_in / liquidity)
+			// sqrtPriceCurrent + round_mer_prec_down(token_in / liquidity)
 			// sqrtPriceCurrent + token_in / liquidity
 			expectedSqrtPriceNext:           osmomath.MustNewDecFromStr("70.710678085714122880779431539932994712"),
 			expectedAmountInConsumed:        defaultAmountOne.Sub(sdk.NewDec(100)).Ceil(),
@@ -123,7 +123,7 @@ func (suite *StrategyTestSuite) TestComputeSwapStepOutGivenIn_OneForZero() {
 			amountOneInRemaining: defaultAmountOne.Sub(sdk.NewDec(100)).QuoRoundUp(sdk.OneDec().Sub(defaultSpreadReward)),
 			spreadFactor:         defaultSpreadReward,
 
-			// sqrtPriceCurrent + round_fury_prec_down(round_fury_prec_down(round_sdk_prec_up(token_in / (1 - spreadFactor )) * (1 - spreadFactor)) / liquidity)
+			// sqrtPriceCurrent + round_mer_prec_down(round_mer_prec_down(round_sdk_prec_up(token_in / (1 - spreadFactor )) * (1 - spreadFactor)) / liquidity)
 			expectedSqrtPriceNext:    osmomath.MustNewDecFromStr("70.710678085714122880779431540005464097"),
 			expectedAmountInConsumed: defaultAmountOne.Sub(sdk.NewDec(100)).Ceil(),
 			expectedAmountOut:        actualAmountZeroTargetNotReachedBigDec.SDKDec(),
@@ -357,9 +357,9 @@ func (suite *StrategyTestSuite) TestComputeSwapStepInGivenOut_OneForZero() {
 			// sqrt price current and sqrt price next is smaller than 10^-36
 			// Let's compute next sqrt price without rounding:
 			// product_num = liquidity * sqrtPriceCurrent
-			// product_num = round_fury_prec_up(product_num)
+			// product_num = round_mer_prec_up(product_num)
 			// product_den =  tokenOut * sqrtPriceCurrent
-			// product_den = round_fury_prec_up(product_den)
+			// product_den = round_mer_prec_up(product_den)
 			// product_num / (liquidity - product_den)
 			// '0.00000100004999875000000000000000000000000000000001000075017501875'
 			// This can lead to negative amount zero in swaps.
@@ -382,8 +382,8 @@ func (suite *StrategyTestSuite) TestComputeSwapStepInGivenOut_OneForZero() {
 
 			// product_num = liquidity * sqrtPriceCurrent
 			// product_den =  tokenOut * sqrtPriceCurrent
-			// product_den = round_fury_prec_up(product_den)
-			// round_fury_prec_up(product_num / (liquidity - product_den))
+			// product_den = round_mer_prec_up(product_den)
+			// round_mer_prec_up(product_num / (liquidity - product_den))
 			expectedSqrtPriceNext: types.MaxSqrtPriceBigDec,
 
 			expectedAmountZeroOutConsumed: sdk.ZeroDec(),
@@ -403,8 +403,8 @@ func (suite *StrategyTestSuite) TestComputeSwapStepInGivenOut_OneForZero() {
 
 			// product_num = liquidity * sqrtPriceCurrent
 			// product_den =  tokenOut * sqrtPriceCurrent
-			// product_den = round_fury_prec_up(product_den)
-			// round_fury_prec_up(product_num / (liquidity - product_den))
+			// product_den = round_mer_prec_up(product_den)
+			// round_mer_prec_up(product_num / (liquidity - product_den))
 			expectedSqrtPriceNext: types.MaxSqrtPriceBigDec,
 
 			// product_num = liquidity * diff

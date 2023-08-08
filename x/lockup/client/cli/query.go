@@ -270,7 +270,7 @@ func GetCmdTotalLockedByDenom() (*osmocli.QueryDescriptor, *types.LockedDenomReq
 		Use:   "total-locked-of-denom <denom>",
 		Short: "Query locked amount for a specific denom bigger then duration provided",
 		Long: osmocli.FormatLongDescDirect(`{{.Short}}{{.ExampleHeader}}
-{{.CommandPrefix}} total-locked-of-denom ufury --min-duration=0s`, types.ModuleName),
+{{.CommandPrefix}} total-locked-of-denom umer --min-duration=0s`, types.ModuleName),
 		CustomFlagOverrides: map[string]string{
 			"duration": FlagMinDuration,
 		},

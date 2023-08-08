@@ -178,7 +178,7 @@ contain valid denominations. Accounts may optionally be supplied with vesting pa
 	return cmd
 }
 
-// func GetFurySnapshot(inputFile string) (Snapshot, error) {
+// func GetMerSnapshot(inputFile string) (Snapshot, error) {
 // 	snapshotJSON, err := os.Open(inputFile)
 // 	if err != nil {
 // 		return Snapshot{}, err
@@ -214,13 +214,13 @@ contain valid denominations. Accounts may optionally be supplied with vesting pa
 // 	return ionAmts, nil
 // }
 
-// func CosmosToFuryAddress(cosmosAddr string) (string, error) {
+// func CosmosToMerAddress(cosmosAddr string) (string, error) {
 // 	_, bz, err := bech32.DecodeAndConvert(cosmosAddr)
 // 	if err != nil {
 // 		return "", err
 // 	}
 
-// 	convertedAddr, err := bech32.ConvertAndEncode("fury", bz)
+// 	convertedAddr, err := bech32.ConvertAndEncode("mer", bz)
 // 	if err != nil {
 // 		panic(err)
 // 	}
@@ -233,7 +233,7 @@ contain valid denominations. Accounts may optionally be supplied with vesting pa
 // 		Use:   "get-airdrop-accounts [input-snapshot-file] [input-ions-file] [output-file]",
 // 		Short: "Get list of all accounts that are being airdropped to at genesis",
 // 		Long: `Get list of all accounts that are being airdropped to at genesis
-// Both FURY and ION recipients. If erroring, ensure to 'git lfs pull'
+// Both MER and ION recipients. If erroring, ensure to 'git lfs pull'
 
 // Example:
 // 	merlin import-genesis-accounts-from-snapshot networks/cosmoshub-3/snapshot.json networks/merlin-1/ions.json output_address.json
@@ -243,7 +243,7 @@ contain valid denominations. Accounts may optionally be supplied with vesting pa
 // 			airdropAddrs := map[string]bool{}
 
 // 			// Read snapshot file
-// 			snapshot, err := GetFurySnapshot(args[0])
+// 			snapshot, err := GetMerSnapshot(args[0])
 // 			if err != nil {
 // 				return err
 // 			}
@@ -255,18 +255,18 @@ contain valid denominations. Accounts may optionally be supplied with vesting pa
 // 			}
 
 // 			for _, acc := range snapshot.Accounts {
-// 				if !acc.FuryBalance.Equal(sdk.ZeroInt()) {
-// 					furyAddr, err := CosmosToFuryAddress(acc.AtomAddress)
+// 				if !acc.MerBalance.Equal(sdk.ZeroInt()) {
+// 					merAddr, err := CosmosToMerAddress(acc.AtomAddress)
 // 					if err != nil {
 // 						return err
 // 					}
 
-// 					airdropAddrs[furyAddr] = true
+// 					airdropAddrs[merAddr] = true
 // 				}
 // 			}
 
 // 			for addr := range ionAmts {
-// 				ionAddr, err := CosmosToFuryAddress(addr)
+// 				ionAddr, err := CosmosToMerAddress(addr)
 // 				if err != nil {
 // 					return err
 // 				}
@@ -328,7 +328,7 @@ contain valid denominations. Accounts may optionally be supplied with vesting pa
 // 			}
 
 // 			// Read snapshot file
-// 			snapshot, err := GetFurySnapshot(args[0])
+// 			snapshot, err := GetMerSnapshot(args[0])
 // 			if err != nil {
 // 				return err
 // 			}
@@ -356,7 +356,7 @@ contain valid denominations. Accounts may optionally be supplied with vesting pa
 // 			}
 
 // 			for addr, amt := range ionAmts {
-// 				address, err := CosmosToFuryAddress(addr)
+// 				address, err := CosmosToMerAddress(addr)
 // 				if err != nil {
 // 					return err
 // 				}
@@ -369,7 +369,7 @@ contain valid denominations. Accounts may optionally be supplied with vesting pa
 // 			}
 
 // 			// figure out normalizationFactor to normalize snapshot balances to desired airdrop supply
-// 			normalizationFactor := genesisParams.AirdropSupply.ToDec().QuoInt(snapshot.TotalFurysAirdropAmount)
+// 			normalizationFactor := genesisParams.AirdropSupply.ToDec().QuoInt(snapshot.TotalMersAirdropAmount)
 // 			fmt.Printf("normalization factor: %s\n", normalizationFactor)
 
 // 			bankGenState := banktypes.GetGenesisStateFromAppState(cdc, appState)
@@ -380,23 +380,23 @@ contain valid denominations. Accounts may optionally be supplied with vesting pa
 
 // 			// for each account in the snapshot
 // 			for _, acc := range snapshot.Accounts {
-// 				// convert cosmos address to fury address
-// 				address, err := CosmosToFuryAddress(acc.AtomAddress)
+// 				// convert cosmos address to mer address
+// 				address, err := CosmosToMerAddress(acc.AtomAddress)
 // 				if err != nil {
 // 					return err
 // 				}
 
 // 				// skip accounts with 0 balance
-// 				if !acc.FuryBalanceBase.IsPositive() {
+// 				if !acc.MerBalanceBase.IsPositive() {
 // 					continue
 // 				}
 
-// 				// get normalized fury balance for account
-// 				normalizedFuryBalance := acc.FuryBalance.ToDec().Mul(normalizationFactor)
+// 				// get normalized mer balance for account
+// 				normalizedMerBalance := acc.MerBalance.ToDec().Mul(normalizationFactor)
 
 // 				// initial liquid amounts
-// 				// We consistently round down to the nearest ufury
-// 				liquidAmount := normalizedFuryBalance.Mul(sdk.MustNewDecFromStr("0.2")).TruncateInt() // 20% of airdrop amount
+// 				// We consistently round down to the nearest umer
+// 				liquidAmount := normalizedMerBalance.Mul(sdk.MustNewDecFromStr("0.2")).TruncateInt() // 20% of airdrop amount
 // 				liquidCoins := sdk.NewCoins(sdk.NewCoin(genesisParams.NativeCoinMetadatas[0].Base, liquidAmount))
 
 // 				if coins, ok := nonAirdropAccs[address]; ok {
@@ -410,7 +410,7 @@ contain valid denominations. Accounts may optionally be supplied with vesting pa
 // 				})
 
 // 				// claimable balances
-// 				claimableAmount := normalizedFuryBalance.Mul(sdk.MustNewDecFromStr("0.8")).TruncateInt()
+// 				claimableAmount := normalizedMerBalance.Mul(sdk.MustNewDecFromStr("0.8")).TruncateInt()
 
 // 				claimRecords = append(claimRecords, claimtypes.ClaimRecord{
 // 					Address:                address,
@@ -486,9 +486,9 @@ contain valid denominations. Accounts may optionally be supplied with vesting pa
 // 			appState[claimtypes.ModuleName] = claimGenStateBz
 
 // 			// TODO: add remaining extra to community pool
-// 			// The total airdrop fury is a smidge short (~1 fury) short of the stated 50M supply.
+// 			// The total airdrop mer is a smidge short (~1 mer) short of the stated 50M supply.
 // 			// This is due to consistently rounding down.
-// 			// We place this remaining 1 fury into the community pool at genesis
+// 			// We place this remaining 1 mer into the community pool at genesis
 
 // 			// sumAirdrop := sdk.Coins{}
 // 			// for _, balance := range bankGenState.Balances {

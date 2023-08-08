@@ -335,7 +335,7 @@ func (m *PoolWeights) GetConcentratedWeight() uint64 {
 // arbitrage trades. It contains the denom name alongside the step size of the
 // binary search that is used to find the optimal swap amount
 type BaseDenom struct {
-	// The denom i.e. name of the base denom (ex. ufury)
+	// The denom i.e. name of the base denom (ex. umer)
 	Denom string `protobuf:"bytes,1,opt,name=denom,proto3" json:"denom,omitempty" yaml:"denom"`
 	// The step size of the binary search that is used to find the optimal swap
 	// amount

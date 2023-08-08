@@ -25,8 +25,8 @@ const _ = proto.GoGoProtoPackageIsVersion3 // please upgrade the proto package
 
 // FeeToken is a struct that specifies a coin denom, and pool ID pair.
 // This marks the token as eligible for use as a tx fee asset in Merlin.
-// Its price in fury is derived through looking at the provided pool ID.
-// The pool ID must have fury as one of its assets.
+// Its price in mer is derived through looking at the provided pool ID.
+// The pool ID must have mer as one of its assets.
 type FeeToken struct {
 	Denom  string `protobuf:"bytes,1,opt,name=denom,proto3" json:"denom,omitempty" yaml:"denom"`
 	PoolID uint64 `protobuf:"varint,2,opt,name=poolID,proto3" json:"poolID,omitempty" yaml:"pool_id"`

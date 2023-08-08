@@ -49,8 +49,8 @@ func TestLexicographicalOrderDenoms(t *testing.T) {
 		"basic":    {"A", "B", "A", "B", nil},
 		"basicRev": {"B", "A", "A", "B", nil},
 		"realDenoms": {
-			"ufury", "ibc/27394FB092D2ECCD56123C74F36E4C1F926001CEADA9CA97EA622B25F41E5EB2",
-			"ibc/27394FB092D2ECCD56123C74F36E4C1F926001CEADA9CA97EA622B25F41E5EB2", "ufury", nil,
+			"umer", "ibc/27394FB092D2ECCD56123C74F36E4C1F926001CEADA9CA97EA622B25F41E5EB2",
+			"ibc/27394FB092D2ECCD56123C74F36E4C1F926001CEADA9CA97EA622B25F41E5EB2", "umer", nil,
 		},
 		"sameDenom": {"A", "A", "", "", fmt.Errorf("both assets cannot be of the same denom: assetA: %s, assetB: %s", "A", "A")},
 	}

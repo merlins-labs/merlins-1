@@ -157,19 +157,19 @@ func TestTickToSqrtPrice(t *testing.T) {
 			tickIndex:     -29203900,
 			expectedPrice: sdk.MustNewDecFromStr("0.000779610000000000"),
 		},
-		"Atom <> Fury, tick -12150000 -> price 0.068500": {
+		"Atom <> Mer, tick -12150000 -> price 0.068500": {
 			tickIndex:     -12150000,
 			expectedPrice: sdk.MustNewDecFromStr("0.068500000000000000"),
 		},
-		"Atom <> Fury, tick -12150000 + 100 -> price 0.068501": {
+		"Atom <> Mer, tick -12150000 + 100 -> price 0.068501": {
 			tickIndex:     -12149900,
 			expectedPrice: sdk.MustNewDecFromStr("0.068501000000000000"),
 		},
-		"Boot <> Fury, tick 64576000 -> price 25760000": {
+		"Boot <> Mer, tick 64576000 -> price 25760000": {
 			tickIndex:     64576000,
 			expectedPrice: sdk.MustNewDecFromStr("25760000"),
 		},
-		"Boot <> Fury, tick 64576000 + 100 -> price 25760000": {
+		"Boot <> Mer, tick 64576000 + 100 -> price 25760000": {
 			tickIndex:     64576100,
 			expectedPrice: sdk.MustNewDecFromStr("25761000"),
 		},
@@ -363,19 +363,19 @@ func TestPriceToTick(t *testing.T) {
 			price:        sdk.MustNewDecFromStr("0.00077961"),
 			tickExpected: -29203900,
 		},
-		"Atom <> Fury, tick -12150000 -> price 0.068500": {
+		"Atom <> Mer, tick -12150000 -> price 0.068500": {
 			price:        sdk.MustNewDecFromStr("0.0685"),
 			tickExpected: -12150000,
 		},
-		"Atom <> Fury, tick -12150000 + 100 -> price 0.068501": {
+		"Atom <> Mer, tick -12150000 + 100 -> price 0.068501": {
 			price:        sdk.MustNewDecFromStr("0.068501"),
 			tickExpected: -12149900,
 		},
-		"Boot <> Fury, tick 64576000 -> price 25760000": {
+		"Boot <> Mer, tick 64576000 -> price 25760000": {
 			price:        sdk.MustNewDecFromStr("25760000"),
 			tickExpected: 64576000,
 		},
-		"Boot <> Fury, tick 64576000 + 100 -> price 25761000": {
+		"Boot <> Mer, tick 64576000 + 100 -> price 25761000": {
 			price:        sdk.MustNewDecFromStr("25761000"),
 			tickExpected: 64576100,
 		},

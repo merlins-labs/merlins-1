@@ -1031,7 +1031,7 @@ func (m *QuerySpotPriceRequest) GetQuoteAssetDenom() string {
 
 type QueryPoolsWithFilterRequest struct {
 	// String of the coins in single string seperated by comma. Ex)
-	// 10uatom,100ufury
+	// 10uatom,100umer
 	MinLiquidity string             `protobuf:"bytes,1,opt,name=min_liquidity,json=minLiquidity,proto3" json:"min_liquidity,omitempty" yaml:"min_liquidity"`
 	PoolType     string             `protobuf:"bytes,2,opt,name=pool_type,json=poolType,proto3" json:"pool_type,omitempty"`
 	Pagination   *query.PageRequest `protobuf:"bytes,3,opt,name=pagination,proto3" json:"pagination,omitempty"`
