@@ -23,7 +23,7 @@ require (
 	github.com/osmosis-labs/osmosis/osmomath v0.0.5
 	github.com/osmosis-labs/osmosis/osmoutils v0.0.5
 	github.com/osmosis-labs/osmosis/x/epochs v0.0.1
-	github.com/osmosis-labs/osmosis/x/ibc-hooks v0.0.7
+	github.com/osmosis-labs/osmosis/x/ibc-hooks v0.0.8
 	github.com/pkg/errors v0.9.1
 	github.com/rakyll/statik v0.1.7
 	github.com/spf13/cast v1.5.1
