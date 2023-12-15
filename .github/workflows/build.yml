@@ -74,7 +74,7 @@ jobs:
       -
         name: Upload merlin artifact
         if: env.GIT_DIFF
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: merlin-${{ matrix.targetos }}-${{ matrix.arch }}
           path: cmd/merlin/merlin
