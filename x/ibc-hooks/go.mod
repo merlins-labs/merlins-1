@@ -1,11 +1,11 @@
 module github.com/osmosis-labs/osmosis/x/ibc-hooks
 
-go 1.20
+go 1.23
 
 require (
 	cosmossdk.io/errors v1.0.0-beta.7
 	github.com/CosmWasm/wasmd v0.31.0
-	github.com/cosmos/cosmos-sdk v0.47.3
+	github.com/cosmos/cosmos-sdk v0.47.4
 	github.com/cosmos/ibc-go/v4 v4.3.1
 	github.com/gorilla/mux v1.8.0
 	github.com/grpc-ecosystem/grpc-gateway v1.16.0

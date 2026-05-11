@@ -1,9 +1,9 @@
 module github.com/osmosis-labs/osmosis/x/epochs
 
-go 1.20
+go 1.23
 
 require (
-	github.com/cosmos/cosmos-sdk v0.47.3
+	github.com/cosmos/cosmos-sdk v0.47.4
 	github.com/gogo/protobuf v1.3.3
 	github.com/golang/protobuf v1.5.3
 	github.com/gorilla/mux v1.8.0

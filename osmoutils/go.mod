@@ -1,9 +1,9 @@
 module github.com/osmosis-labs/osmosis/osmoutils
 
-go 1.20
+go 1.23
 
 require (
-	github.com/cosmos/cosmos-sdk v0.47.3
+	github.com/cosmos/cosmos-sdk v0.47.4
 	github.com/cosmos/iavl v0.19.5
 	github.com/cosmos/ibc-go/v4 v4.3.1
 	github.com/gogo/protobuf v1.3.3
